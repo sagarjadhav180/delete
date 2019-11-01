@@ -1,13 +1,10 @@
 package tests;
 
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import extentReport.ExtentReportsGenerator;
+
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
 
