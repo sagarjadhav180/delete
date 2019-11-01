@@ -35,8 +35,5 @@ public class ExecuteTests extends TestBase {
 	
 	}
 	
-	@Test(priority=2)
-	public void test2(){
-		
-	}
+	
 }
