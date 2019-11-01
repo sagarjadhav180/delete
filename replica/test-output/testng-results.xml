@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="39915" started-at="2019-11-01T12:10:00Z" finished-at="2019-11-01T12:10:40Z">
+    <groups>
+    </groups>
+    <test name="LoginAndCampaign" duration-ms="39915" started-at="2019-11-01T12:10:00Z" finished-at="2019-11-01T12:10:40Z">
+      <class name="tests.ExecuteTests">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.ExecuteTests@c540f5a]" name="setUp" is-config="true" duration-ms="27116" started-at="2019-11-01T12:10:00Z" finished-at="2019-11-01T12:10:28Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[https://stag-7-cmo-1.convirza.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="test1()[pri:1, instance:tests.ExecuteTests@c540f5a]" name="test1" duration-ms="9673" started-at="2019-11-01T12:10:28Z" finished-at="2019-11-01T12:10:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test1 -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.ExecuteTests@c540f5a]" name="tearDown" is-config="true" duration-ms="810" started-at="2019-11-01T12:10:37Z" finished-at="2019-11-01T12:10:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=test1 status=SUCCESS method=ExecuteTests.test1()[pri:1, instance:tests.ExecuteTests@c540f5a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="test2()[pri:2, instance:tests.ExecuteTests@c540f5a]" name="test2" duration-ms="1" started-at="2019-11-01T12:10:38Z" finished-at="2019-11-01T12:10:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test2 -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.ExecuteTests@c540f5a]" name="tearDown" is-config="true" duration-ms="103" started-at="2019-11-01T12:10:38Z" finished-at="2019-11-01T12:10:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=test2 status=SUCCESS method=ExecuteTests.test2()[pri:2, instance:tests.ExecuteTests@c540f5a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.ExecuteTests@c540f5a]" name="tearDown" is-config="true" duration-ms="2184" started-at="2019-11-01T12:10:38Z" finished-at="2019-11-01T12:10:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.ExecuteTests@c540f5a]" name="close_connection" is-config="true" duration-ms="7455" started-at="2019-11-01T12:10:40Z" finished-at="2019-11-01T12:10:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close_connection -->
+      </class> <!-- tests.ExecuteTests -->
+    </test> <!-- LoginAndCampaign -->
+  </suite> <!-- Suite -->
+</testng-results>

@@ -1,0 +1,21 @@
+
+1.go to campaign and tracking number page - UI verification
+2.campaign builder page - UI verification
+2.createCampaign with/without campaign external ID
+3.editTheCampaign
+4.DeleteTheCampaign
+5.createCampaignWithFutureStartDateAndNeverEndDate
+6.editCampaignWithFutureStartDateAndNeverEndDate
+7.deleteCampaignWithFutureStartDateAndNeverEndDate
+8.createCampaignWithFutureStartDateAndFutureEndDate
+9.editCampaignWithFutureStartDateAndFutureEndDate
+10.deleteCampaignWithFutureStartDateAndFutureEndDate
+11.createCampaignWithPastTime
+12.editCampaignWithPastTime
+13.deleteCampaignWithPastTime
+14.createCampaignWithFutureStartTime
+15.editCampaignWithFutureStartTime
+16.deleteCampaignWithFutureStartTime
+17.createCampaignWithStartAndEndDateAsNever
+18.editCampaignWithStartAndEndDateAsNever
+19.deleteCampaignWithStartAndEndDateAsNever
