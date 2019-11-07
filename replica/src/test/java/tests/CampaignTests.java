@@ -10,7 +10,7 @@ import pom.HomePage;
 import pom.campaignBuilderPage;
 
 
-public class ExecuteTests extends TestBase {
+public class CampaignTests extends TestBase {
 	
 	@Test(priority=1)
 	public void test1() throws InterruptedException{

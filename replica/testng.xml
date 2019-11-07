@@ -11,7 +11,7 @@
 
 		<classes>
 
-			<class name="tests.ExecuteTests">
+			<class name="tests.CampaignTests">
 				<methods>
 					<include name="test1" />
 					<include name="test2" /> 

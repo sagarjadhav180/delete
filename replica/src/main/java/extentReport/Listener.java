@@ -10,11 +10,11 @@ import org.testng.ITestResult;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import tests.ExecuteTests;
+import tests.CampaignTests;
 
 
 
-	public class Listener extends ExecuteTests implements ITestListener  {
+	public class Listener extends CampaignTests implements ITestListener  {
 		static List<ITestNGMethod> passedtests = new ArrayList<ITestNGMethod>();
 		static List<ITestNGMethod> failedtests = new ArrayList<ITestNGMethod>();
 		static List<ITestNGMethod> skippedtests = new ArrayList<ITestNGMethod>();
