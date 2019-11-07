@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
@@ -181,6 +182,11 @@ public class Util extends TestBase{
 		
 			 }
 	
+	public static int generateRandomNumber(){
+		Random randomNumber=new Random();
+		int number = randomNumber.nextInt();
+		return number;
+	}
 	
 			  
 			  

@@ -14,7 +14,8 @@
 			<class name="tests.ExecuteTests">
 				<methods>
 					<include name="test1" />
-					<include name="test2" />
+					<include name="test2" /> 
+				    
 					<!-- <exclude name="testMakeOrder" /> -->
 				</methods>
 

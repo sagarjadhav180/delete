@@ -7,6 +7,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
+import pom.campaignBuilderPage;
 
 
 public class ExecuteTests extends TestBase {
@@ -15,7 +16,7 @@ public class ExecuteTests extends TestBase {
 	public void test1() throws InterruptedException{
 		
 		HomePage hp=new HomePage(driver);
-		logger=extent.startTest("Campaign builder page UI verification..");
+		logger=extent.startTest("Campaign and tracking number page page UI verification..");
 		logger.assignCategory("Campaign Suite");
 		logger.log(LogStatus.INFO, "going to campaign builder page..");
 		hp.clickAction("Campaign");
@@ -24,6 +25,31 @@ public class ExecuteTests extends TestBase {
 		cp.campaignPageUIVerification();
 	
 	}
+	
+	@Test(priority=2)
+	public void test2() throws InterruptedException{
+		logger=extent.startTest("Campaign builder page UI verification..");
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		cp.clickAction("add");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		cb.campaignBuilderPageUIVerification();
+		cb.collapseExpand_collapsible_strip();
+		cb.clickAction("list");
+		
+	}
+	
+	@Test(priority=3)
+	public void test3(){
+		logger=extent.startTest("Campaign creation without external ID..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		cp.clickAction("add");
+		String campaign = cb.createCampaign_WithoutCampaignExternalID();
+		CampaignAndTrackingNumberPage ctp=new CampaignAndTrackingNumberPage(driver, wait);
+		ctp.campaignCreated(campaign);
+		cb.clickAction("list");
+	}
+	
 	
 	
 }

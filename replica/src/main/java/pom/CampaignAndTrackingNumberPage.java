@@ -63,7 +63,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//div[@class='text-right topPagination']//div//button[5]")
 	private static WebElement bottomFirstPagination_count;		
 	
-	@FindBy(xpath="	//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr")
+	@FindBy(xpath="//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr")
 	private static List<WebElement> countOfCamapign;
 			
 	@FindBy(xpath="//h1")
@@ -119,6 +119,8 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 	@FindBy(xpath="//ul[@id='columnpicker']/li/label")
 	private static List<WebElement> Column_Picker_options_labels;
+	
+	
 	
 	String[] Expected_Column_Picker_options_labels ={"Ad Source",
 			"Call Value",
@@ -209,7 +211,11 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	}
 
 	
-	
+	public void clickAction(String buttonName){
+		if(buttonName.contains("add")){
+			addCampaign_Button.click();
+		}
+	}
 	public void campaignPageUIVerification()
 	{
      
@@ -225,7 +231,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	//add campaign button text verification
 	logger.log(LogStatus.INFO, "Verifying text on addCampaign_Button");
-	Assert1.assertEquals(addCampaign_Button_text, addCampaign_Button.getText(),"text not present");	
+	Assert1.assertEquals(addCampaign_Button_text, addCampaign_Button.getText(),"addCampaign_Button text not present");	
 	
 	//export button verification
 	logger.log(LogStatus.INFO, "Verifying presence ExportButton");
@@ -370,36 +376,17 @@ public class CampaignAndTrackingNumberPage extends TestBase
     	
     Assert1.assertAll();
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	}
 	
 	
-	
+	public void campaignCreated(String campaignName){
+		
+		for(WebElement campaign:countOfCamapign){
+			Assert1.assertEquals(campaign, campaignName);
+			
+		}
+		Assert1.assertAll();
+	}
 	
 	
 	
