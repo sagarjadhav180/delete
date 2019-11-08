@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.Assert;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -52,6 +53,9 @@ public class CampaignTests extends TestBase {
 		
 	}
 	
-	
+	@Test(priority=4)
+	public void test4(){
+		Assert.fail();
+	}
 	
 }

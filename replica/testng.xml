@@ -16,6 +16,7 @@
 					<include name="test1" />
 					<include name="test2" /> 
 				    <include name="test3" />
+				    <include name="test4" />
 					<!-- <exclude name="testMakeOrder" /> -->
 				</methods>
 

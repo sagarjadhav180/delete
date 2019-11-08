@@ -79,7 +79,7 @@ public class Util extends TestBase{
 	
 	
 	public static String createScreenshot(WebDriver driver, String method_name) throws IOException {
-		String imageLocation = ".//Screenshots";
+		String imageLocation = "C:/Users/Preeti Kotnis/git/CFA_UI/replica/Screenshots/";
 		String image_path = imageLocation + method_name + ".png";
 		// generate screenshot as a file object
 		TakesScreenshot ts=(TakesScreenshot)driver;
