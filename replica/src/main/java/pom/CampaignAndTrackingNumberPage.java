@@ -124,7 +124,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//ul[@id='columnpicker']/li/label")
 	private static List<WebElement> Column_Picker_options_labels;
 	
-	@FindBy(xpath="//a[@class='btn btn-default hidden-xs']")
+	@FindBy(xpath="//button[@class='btn btn-block btn-default dropdown-toggle']")
 	private static WebElement campaignList;
 	
 	String[] Expected_Column_Picker_options_labels ={"Ad Source",
@@ -399,7 +399,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			Assert1.assertEquals(campaign.getText(), campaignName);
 			}
 		}
-		Assert1.assertAll();
+//		Assert1.assertAll();
 	}
 	
 	

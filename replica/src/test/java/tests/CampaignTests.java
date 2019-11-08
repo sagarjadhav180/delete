@@ -12,36 +12,40 @@ import pom.campaignBuilderPage;
 
 
 public class CampaignTests extends TestBase {
+
+	HomePage hp;
 	
 	@Test(priority=1)
-	public void test1() throws InterruptedException{
+	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
 		
-		HomePage hp=new HomePage(driver);
+        hp=new HomePage(driver);
 		logger=extent.startTest("Campaign and tracking number page page UI verification..");
 		logger.assignCategory("Campaign Suite");
-		logger.log(LogStatus.INFO, "going to campaign builder page..");
+		logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
 		hp.clickAction("Campaign");
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
-		logger.log(LogStatus.INFO, "verifying UI of campaign builder page..");
+		logger.log(LogStatus.INFO, "verifying UI of campaign and tracking number page..");
 		cp.campaignPageUIVerification();
-	
+		Thread.sleep(2000);
+		
 	}
-	
 	@Test(priority=2)
-	public void test2() throws InterruptedException{
+	public void campaignBuilderPage_UI_Verification() throws InterruptedException{
+		
 		logger=extent.startTest("Campaign builder page UI verification..");
+		logger.log(LogStatus.INFO, "going to campaign builder page..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 		cp.clickAction("add");
-		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		cb.campaignBuilderPageUIVerification();
 		cb.collapseExpand_collapsible_strip();
-		cp.clickAction("list");
-		
-		
+		cb.clickAction("list");	
+		Thread.sleep(2000);
+	
 	}
 	
 	@Test(priority=3)
-	public void test3() throws InterruptedException{
+	public void campaign_Creation_Without_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign creation without external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
@@ -50,12 +54,13 @@ public class CampaignTests extends TestBase {
 		CampaignAndTrackingNumberPage ctp=new CampaignAndTrackingNumberPage(driver, wait);
 		cb.clickAction("list");
 		ctp.campaignCreated(campaign);
+
+		
 		
 	}
 	
-	@Test(priority=4)
-	public void test4(){
-		Assert.fail();
-	}
+	
+	
+	
 	
 }

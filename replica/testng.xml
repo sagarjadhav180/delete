@@ -13,10 +13,10 @@
 
 			<class name="tests.CampaignTests">
 				<methods>
-					<include name="test1" />
-					<include name="test2" /> 
-				    <include name="test3" />
-				    <include name="test4" />
+					<include name="CampaignAndTrackingNumberPage_UI_Verification" />
+					<include name="campaignBuilderPage_UI_Verification" /> 
+				    <include name="campaign_Creation_Without_externalID" />
+
 					<!-- <exclude name="testMakeOrder" /> -->
 				</methods>
 

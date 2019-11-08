@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="4" passed="3">
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite" duration-ms="86077" started-at="2019-11-08T09:44:04Z" finished-at="2019-11-08T09:45:30Z">
+  <suite name="Automation Suite" duration-ms="70544" started-at="2019-11-08T12:39:27Z" finished-at="2019-11-08T12:40:37Z">
     <groups>
     </groups>
-    <test name="Campaign" duration-ms="86077" started-at="2019-11-08T09:44:04Z" finished-at="2019-11-08T09:45:30Z">
+    <test name="Campaign" duration-ms="70544" started-at="2019-11-08T12:39:27Z" finished-at="2019-11-08T12:40:37Z">
       <class name="tests.CampaignTests">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CampaignTests@c540f5a]" name="setUp" is-config="true" duration-ms="28674" started-at="2019-11-08T09:44:04Z" finished-at="2019-11-08T09:44:33Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CampaignTests@c540f5a]" name="setUp" is-config="true" duration-ms="25962" started-at="2019-11-08T12:39:27Z" finished-at="2019-11-08T12:39:53Z">
           <params>
             <param index="0">
               <value>
@@ -23,105 +23,56 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="test1()[pri:1, instance:tests.CampaignTests@c540f5a]" name="test1" duration-ms="9103" started-at="2019-11-08T09:44:33Z" finished-at="2019-11-08T09:44:42Z">
+        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CampaignTests@c540f5a]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="12552" started-at="2019-11-08T12:39:53Z" finished-at="2019-11-08T12:40:05Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test1 -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="470" started-at="2019-11-08T09:44:42Z" finished-at="2019-11-08T09:44:42Z">
+        </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="500" started-at="2019-11-08T12:40:05Z" finished-at="2019-11-08T12:40:06Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=test1 status=SUCCESS method=CampaignTests.test1()[pri:1, instance:tests.CampaignTests@c540f5a] output={null}]]]>
+                <![CDATA[[TestResult name=CampaignAndTrackingNumberPage_UI_Verification status=SUCCESS method=CampaignTests.CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CampaignTests@c540f5a] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="test2()[pri:2, instance:tests.CampaignTests@c540f5a]" name="test2" duration-ms="4916" started-at="2019-11-08T09:44:42Z" finished-at="2019-11-08T09:44:47Z">
+        <test-method status="PASS" signature="campaignBuilderPage_UI_Verification()[pri:2, instance:tests.CampaignTests@c540f5a]" name="campaignBuilderPage_UI_Verification" duration-ms="6623" started-at="2019-11-08T12:40:06Z" finished-at="2019-11-08T12:40:12Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test2 -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="186" started-at="2019-11-08T09:44:47Z" finished-at="2019-11-08T09:44:47Z">
+        </test-method> <!-- campaignBuilderPage_UI_Verification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="144" started-at="2019-11-08T12:40:12Z" finished-at="2019-11-08T12:40:12Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=test2 status=SUCCESS method=CampaignTests.test2()[pri:2, instance:tests.CampaignTests@c540f5a] output={null}]]]>
+                <![CDATA[[TestResult name=campaignBuilderPage_UI_Verification status=SUCCESS method=CampaignTests.campaignBuilderPage_UI_Verification()[pri:2, instance:tests.CampaignTests@c540f5a] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="test3()[pri:3, instance:tests.CampaignTests@c540f5a]" name="test3" duration-ms="21680" started-at="2019-11-08T09:44:47Z" finished-at="2019-11-08T09:45:09Z">
+        <test-method status="PASS" signature="campaign_Creation_Without_externalID()[pri:3, instance:tests.CampaignTests@c540f5a]" name="campaign_Creation_Without_externalID" duration-ms="20553" started-at="2019-11-08T12:40:12Z" finished-at="2019-11-08T12:40:33Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test3 -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="75" started-at="2019-11-08T09:45:09Z" finished-at="2019-11-08T09:45:09Z">
+        </test-method> <!-- campaign_Creation_Without_externalID -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="82" started-at="2019-11-08T12:40:33Z" finished-at="2019-11-08T12:40:33Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=test3 status=SUCCESS method=CampaignTests.test3()[pri:3, instance:tests.CampaignTests@c540f5a] output={null}]]]>
+                <![CDATA[[TestResult name=campaign_Creation_Without_externalID status=SUCCESS method=CampaignTests.campaign_Creation_Without_externalID()[pri:3, instance:tests.CampaignTests@c540f5a] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="FAIL" signature="test4()[pri:4, instance:tests.CampaignTests@c540f5a]" name="test4" duration-ms="6" started-at="2019-11-08T09:45:09Z" finished-at="2019-11-08T09:45:09Z">
-          <exception class="java.lang.AssertionError">
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError
-at org.junit.Assert.fail(Assert.java:92)
-at org.junit.Assert.fail(Assert.java:100)
-at tests.CampaignTests.test4(CampaignTests.java:58)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-at java.lang.reflect.Method.invoke(Unknown Source)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
-at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
-at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-at org.testng.TestRunner.privateRun(TestRunner.java:648)
-at org.testng.TestRunner.run(TestRunner.java:505)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
-at org.testng.SuiteRunner.run(SuiteRunner.java:364)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
-at org.testng.TestNG.runSuites(TestNG.java:1049)
-at org.testng.TestNG.run(TestNG.java:1017)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- test4 -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="16847" started-at="2019-11-08T09:45:09Z" finished-at="2019-11-08T09:45:26Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=test4 status=FAILURE method=CampaignTests.test4()[pri:4, instance:tests.CampaignTests@c540f5a] output={null}]]]>
-              </value>
-            </param>
-          </params>
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="4068" started-at="2019-11-08T12:40:33Z" finished-at="2019-11-08T12:40:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CampaignTests@c540f5a]" name="tearDown" is-config="true" duration-ms="4071" started-at="2019-11-08T09:45:26Z" finished-at="2019-11-08T09:45:30Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CampaignTests@c540f5a]" name="close_connection" is-config="true" duration-ms="7262" started-at="2019-11-08T09:45:30Z" finished-at="2019-11-08T09:45:38Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CampaignTests@c540f5a]" name="close_connection" is-config="true" duration-ms="7097" started-at="2019-11-08T12:40:37Z" finished-at="2019-11-08T12:40:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
