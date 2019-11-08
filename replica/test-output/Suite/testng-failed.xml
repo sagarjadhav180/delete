@@ -5,15 +5,15 @@
   <parameter name="url" value="https://stag-7-cmo-1.convirza.com"/>
   <test thread-count="5" name="LoginAndCampaign(failed)">
     <classes>
-      <class name="tests.ExecuteTests">
+      <class name="tests.CampaignTests">
         <methods>
-          <include name="test2"/>
+          <include name="test3"/>
           <include name="setUp"/>
           <include name="close_connection"/>
           <include name="tearDown"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- tests.ExecuteTests -->
+      </class> <!-- tests.CampaignTests -->
     </classes>
   </test> <!-- LoginAndCampaign(failed) -->
 </suite> <!-- Failed suite [Suite] -->

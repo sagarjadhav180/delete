@@ -19,8 +19,8 @@ public class campaignBuilderPage extends TestBase {
 	//labels
 	String[] all_labels={"Campaign Name","Campaign External ID","Campaign Owner","Active?","Start Date and Time (ET)","End Date and Time (ET)"};
 	static String label_name;
-	@FindBy(xpath="//label[contains(text(),label_name)]")
-	private static WebElement label;		
+	@FindBy(xpath="(//div[ @class='form-group row'])[1]/div/div/div/label")
+	private static List<WebElement> labels;		
 
 	//header 
 	@FindBy(xpath="//h1[contains(text(),'Campaign Builder')]")
@@ -41,7 +41,7 @@ public class campaignBuilderPage extends TestBase {
 
 	
 	
-	@FindBy(xpath="//div/a/span")
+	@FindBy(xpath="(//div/a/span)[1]")
 	private static WebElement campaignOwner_DropDown;	
 	
 	
@@ -96,7 +96,7 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="(//*[@id='End DatePicker']/div/md-content/div/div[3]/button)[1]")
 	private static WebElement enddatePicker_cancel_Button;
 	
-	@FindBy(xpath="//form/div/div[3]/button")
+	@FindBy(xpath="//button[contains(text(),'Save Campaign Details')]")
 	private static WebElement SaveCampaignDetails_Button;	
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
@@ -107,6 +107,10 @@ public class campaignBuilderPage extends TestBase {
 	
 	@FindBy(xpath="//a[@class='btn btn-default hidden-xs']")
 	private static WebElement campaignList;		
+	
+	@FindBy(xpath="//div[@class='alert ui-pnotify-container alert-success ui-pnotify-shadow']/div[contains(text(),'Campaign created successfully')]")
+	private static WebElement success_message;		
+	
 	
 	WebDriverWait wait;
 	SoftAssert Assert1=new SoftAssert();
@@ -120,7 +124,9 @@ public class campaignBuilderPage extends TestBase {
 	
 	public void clickAction(String buttonName){
 		if(buttonName.contains("list")){
-			campaignList.click();
+			wait.until(ExpectedConditions.elementToBeClickable(campaignList));
+			tests.Util.click(campaignList);
+			
 		}
 	}
 	
@@ -131,21 +137,25 @@ public class campaignBuilderPage extends TestBase {
 		//verification of header
 		logger.log(LogStatus.INFO, "verification of header");
 		wait.until(ExpectedConditions.visibilityOf(header));
-		Assert1.assertTrue(header.isDisplayed(),"header is not displayed");
+		Assert1.assertTrue(header.isDisplayed(),"header is not displayed or locator changed");
 		
 		//verification of collapsible_strip
 		logger.log(LogStatus.INFO, "verification of collapsible_strip");
-		Assert1.assertTrue(collapsible_strip.isDisplayed(),"collapsible_strip is not displayed");
+		Assert1.assertTrue(collapsible_strip.isDisplayed(),"collapsible_strip is not displayed or locator changed");
 		
 		//verification of labels
 		logger.log(LogStatus.INFO, "verification of labels");		
-		for(int i=0;i<all_labels.length;i++){
-			System.out.println("expected label is-- "+all_labels[i]);
-			label_name=all_labels[i];
-			
-			System.out.println("actual label--"+label);
+		for(int i=0;i<all_labels.length;){
 
-			Assert1.assertTrue(label.isDisplayed()," label-- "+all_labels[i]+" is not displayed");
+			label_name=all_labels[i];
+			for(int j=0;j<labels.size()-2;j++){
+				System.out.println("expected label is-- "+all_labels[i]);
+				System.out.println("actual label is-- "+labels.get(j).getText());
+				Assert1.assertTrue(labels.get(j).getText().equals(all_labels[i])," label-- "+all_labels[i]+" is not displayed or locator changed");
+				i++;
+			}
+
+//			Assert1.assertTrue(labels," label-- "+all_labels[i]+" is not displayed or locator changed");
 			
 		}
 
@@ -156,37 +166,37 @@ public class campaignBuilderPage extends TestBase {
 		
 		//verification of active/inactive toggle button
 		logger.log(LogStatus.INFO, "verification of active/inactive toggle button");				
-		Assert1.assertTrue(active_InactiveCampaign_Button.isDisplayed(),"active_InactiveCampaign_Button is not displayed");
+		Assert1.assertTrue(active_InactiveCampaign_Button.isDisplayed(),"active_InactiveCampaign_Button is not displayed or locator changed");
 		Assert1.assertTrue(active_InactiveCampaign_Button.isEnabled(),"active_InactiveCampaign_Button is not enabled");
 		
 		//verification of campaignOwner_DropDown
 		logger.log(LogStatus.INFO, "verification of campaignOwner_DropDown");
-		Assert1.assertTrue(campaignOwner_DropDown.isDisplayed(),"campaignOwner_DropDown is not displayed");
+		Assert1.assertTrue(campaignOwner_DropDown.isDisplayed(),"campaignOwner_DropDown is not displayed or locator changed");
 		Assert1.assertTrue(campaignOwner_DropDown.isEnabled(),"campaignOwner_DropDown is not enabled()");
 		
 		//verification of campaignName_TextBox
 		logger.log(LogStatus.INFO, "verification of campaignName_TextBox");
-		Assert1.assertTrue(campaignName_TextBox.isDisplayed(),"campaignName_TextBox is not displayed");
+		Assert1.assertTrue(campaignName_TextBox.isDisplayed(),"campaignName_TextBox is not displayed or locator changed");
 		
 		//verification of campaignName_TextBox placeholder
 		logger.log(LogStatus.INFO, "verification of campaignName_TextBox placeholder");
-		Assert1.assertEquals(campaignName_TextBox.getAttribute("placeholder"), campaignName_TextBox_placeholder,"campaignName_TextBox_placeholder is not displayed");
+		Assert1.assertEquals(campaignName_TextBox.getAttribute("placeholder"), campaignName_TextBox_placeholder,"campaignName_TextBox_placeholder is not displayed or locator changed");
 	
 		//verification of campaignID_TextBox
 		logger.log(LogStatus.INFO,"verification of campaignID_TextBox");
-		Assert1.assertTrue(campaignID_TextBox.isDisplayed(),"campaignID_TextBox is not displayed");
+		Assert1.assertTrue(campaignID_TextBox.isDisplayed(),"campaignID_TextBox is not displayed or locator changed");
 		
 		//verification of campaignID_TextBox placeholder
 		logger.log(LogStatus.INFO, "verification of campaignID_TextBox placeholder");
-		Assert1.assertEquals(campaignID_TextBox.getAttribute("placeholder"), "campaignID_TextBox_placeholder","campaignID_TextBox_placeholder is not displayed");
+		Assert1.assertEquals(campaignID_TextBox.getAttribute("placeholder"), campaignID_TextBox_placeholder,"campaignID_TextBox_placeholder is not displayed or locator changed");
 		
 		//verification of startDate_Calender
 		logger.log(LogStatus.INFO, "verification of startDate_Calender");
-		Assert1.assertTrue(startDate_Calender.isDisplayed(),"startDate_Calender is not displayed");
+		Assert1.assertTrue(startDate_Calender.isDisplayed(),"startDate_Calender is not displayed or locator changed");
 
 		//verification of endDate_Calender
 		logger.log(LogStatus.INFO, "verification of endDate_Calender");
-		Assert1.assertTrue(endDate_Calender.isDisplayed(),"endDate_Calender is not displayed");
+		Assert1.assertTrue(endDate_Calender.isDisplayed(),"endDate_Calender is not displayed or locator changed");
 		Assert1.assertAll();
 		
 	}
@@ -196,9 +206,9 @@ public class campaignBuilderPage extends TestBase {
 		
 		try{
 			collapsible_strip.click();
-			Assert1.assertFalse(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed");
+			Assert1.assertFalse(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed or locator changed");
 			collapsible_strip.click();			
-			Assert1.assertTrue(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed");
+			Assert1.assertTrue(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed or locator changed");
 		}
 		catch(Exception e){
 			System.out.println("collapsible_strip is not working..");
@@ -207,12 +217,18 @@ public class campaignBuilderPage extends TestBase {
 	}
 	
 	//to verify campaign is getting created without external id
-	public String createCampaign_WithoutCampaignExternalID(){
+	public String createCampaign_WithoutCampaignExternalID() throws InterruptedException{
 		
 		int number1 = tests.Util.generateRandomNumber();
 		String campaign = "campaign "+number1;
+		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
 		campaignName_TextBox.sendKeys(campaign);
+		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
 		SaveCampaignDetails_Button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(success_message));
+		Assert1.assertTrue(success_message.isDisplayed(),"campaign not created");
+		Thread.sleep(2000);
 		return campaign;
 		
 	}

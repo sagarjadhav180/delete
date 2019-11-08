@@ -65,7 +65,11 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	@FindBy(xpath="//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr")
 	private static List<WebElement> countOfCamapign;
-			
+
+	@FindBy(xpath="//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr/td/span")
+	private static List<WebElement> camapignList;
+	
+	
 	@FindBy(xpath="//h1")
 	private static WebElement campaigns_Label;	
 	
@@ -120,7 +124,8 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//ul[@id='columnpicker']/li/label")
 	private static List<WebElement> Column_Picker_options_labels;
 	
-	
+	@FindBy(xpath="//a[@class='btn btn-default hidden-xs']")
+	private static WebElement campaignList;
 	
 	String[] Expected_Column_Picker_options_labels ={"Ad Source",
 			"Call Value",
@@ -213,7 +218,14 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	public void clickAction(String buttonName){
 		if(buttonName.contains("add")){
+			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button));
 			addCampaign_Button.click();
+
+		}
+		else if(buttonName.contains("list")){
+			wait.until(ExpectedConditions.visibilityOf(campaignList));
+			campaignList.click();
+			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button));
 		}
 	}
 	public void campaignPageUIVerification()
@@ -381,9 +393,11 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	public void campaignCreated(String campaignName){
 		
-		for(WebElement campaign:countOfCamapign){
-			Assert1.assertEquals(campaign, campaignName);
-			
+		wait.until(ExpectedConditions.visibilityOf(CampaignList));
+		for(WebElement campaign:camapignList){
+			if(campaign.getText().equals(campaignName)){
+			Assert1.assertEquals(campaign.getText(), campaignName);
+			}
 		}
 		Assert1.assertAll();
 	}

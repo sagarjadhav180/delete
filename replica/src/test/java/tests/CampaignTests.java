@@ -34,20 +34,22 @@ public class CampaignTests extends TestBase {
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		cb.campaignBuilderPageUIVerification();
 		cb.collapseExpand_collapsible_strip();
-		cb.clickAction("list");
+		cp.clickAction("list");
+		
 		
 	}
 	
 	@Test(priority=3)
-	public void test3(){
+	public void test3() throws InterruptedException{
 		logger=extent.startTest("Campaign creation without external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 		cp.clickAction("add");
 		String campaign = cb.createCampaign_WithoutCampaignExternalID();
 		CampaignAndTrackingNumberPage ctp=new CampaignAndTrackingNumberPage(driver, wait);
-		ctp.campaignCreated(campaign);
 		cb.clickAction("list");
+		ctp.campaignCreated(campaign);
+		
 	}
 	
 	
