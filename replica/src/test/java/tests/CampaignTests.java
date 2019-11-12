@@ -14,7 +14,9 @@ import pom.campaignBuilderPage;
 public class CampaignTests extends TestBase {
 
 	HomePage hp;
-	
+	String campaign_name;
+	int number1; 
+	String campaign_name_updated;
 	@Test(priority=1)
 	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
 		
@@ -36,7 +38,8 @@ public class CampaignTests extends TestBase {
 		logger.log(LogStatus.INFO, "going to campaign builder page..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-		cp.clickAction("add");
+		
+		cp.clickAction("add","");
 		cb.campaignBuilderPageUIVerification();
 		cb.collapseExpand_collapsible_strip();
 		cb.clickAction("list");	
@@ -49,16 +52,56 @@ public class CampaignTests extends TestBase {
 		logger=extent.startTest("Campaign creation without external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-		cp.clickAction("add");
-		String campaign = cb.createCampaign_WithoutCampaignExternalID();
-		CampaignAndTrackingNumberPage ctp=new CampaignAndTrackingNumberPage(driver, wait);
+		
+		cp.clickAction("add","");
+		number1 = tests.Util.generateRandomNumber();
+		campaign_name = "campaign "+number1;
+		cb.createCampaign(campaign_name);
 		cb.clickAction("list");
-		ctp.campaignCreated(campaign);
-
-		
-		
+		cp.campaignCreated(campaign_name);
+	
 	}
 	
+	@Test(priority=4)
+	public void campaign_updation_Without_externalID() throws InterruptedException{
+		logger=extent.startTest("Campaign updation without external ID..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+	    cp.clickAction("update",campaign_name);
+	    campaign_name_updated=campaign_name+"-updated";
+	    cb.updateCampaign(campaign_name_updated);
+		cb.clickAction("list");
+		cp.campaignCreated(campaign_name_updated);
+	
+	}
+	
+	@Test(priority=5)
+	public void campaign_deletion_Without_externalID() throws InterruptedException{
+		logger=extent.startTest("Campaign deletion without external ID..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+	    cp.clickAction("archive",campaign_name);
+
+	
+	}
+	
+//	@Test(priority=6)
+//	public void campaign_Creation_With_externalID() throws InterruptedException{
+//		logger=extent.startTest("Campaign creation with external ID..");
+//		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+//		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+//		
+//		cp.clickAction("add");
+//		int number1 = tests.Util.generateRandomNumber();
+//		String campaign_name = "campaign "+number1;
+//		int number2 = tests.Util.generateRandomNumber();
+//		String external_id= "external_id "+number1;
+//		
+//		cb.createCampaign(campaign_name,external_id);
+//		cb.clickAction("list");
+//		cp.campaignCreated(campaign_name);
+//	
+//	}
 	
 	
 	

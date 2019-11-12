@@ -57,7 +57,7 @@ public class campaignBuilderPage extends TestBase {
 	
 
 	String campaignName_TextBox_placeholder="Type Campaign Name";
-	@FindBy(xpath="//input[@placeholder='Type Campaign Name']")
+	@FindBy(xpath="//label[contains(text(),'Campaign Name')]/..//following-sibling::div//input")
 	private static WebElement campaignName_TextBox;
 
 	String campaignID_TextBox_placeholder="Type Campaign External ID (Optional)";
@@ -109,9 +109,14 @@ public class campaignBuilderPage extends TestBase {
 	private static WebElement campaignList;		
 	
 	@FindBy(xpath="//div[@class='alert ui-pnotify-container alert-success ui-pnotify-shadow']/div[contains(text(),'Campaign created successfully')]")
-	private static WebElement success_message;		
+	private static WebElement createCampaign_success_message;		
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text' and contains(text(),'Campaign updated successfully.')]")
+	private static WebElement updateCampaign_success_message;	
+			
 	
-	
+			
+			
 	WebDriverWait wait;
 	SoftAssert Assert1=new SoftAssert();
 	
@@ -217,23 +222,92 @@ public class campaignBuilderPage extends TestBase {
 	}
 	
 	//to verify campaign is getting created without external id
-	public String createCampaign_WithoutCampaignExternalID() throws InterruptedException{
+	public void createCampaign(String campaign_name) throws InterruptedException{
 		
-		int number1 = tests.Util.generateRandomNumber();
-		String campaign = "campaign "+number1;
 		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-		campaignName_TextBox.sendKeys(campaign);
+		System.out.println("------------"+campaign_name+"----------");
+		campaignName_TextBox.sendKeys(campaign_name);
 		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
 		SaveCampaignDetails_Button.click();
 		
-		wait.until(ExpectedConditions.visibilityOf(success_message));
-		Assert1.assertTrue(success_message.isDisplayed(),"campaign not created");
+		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
 		Thread.sleep(2000);
-		return campaign;
-		
+				
 	}
 	
+	//to verify campaign is getting created without external id
+		public void updateCampaign(String campaign_name_updated) throws InterruptedException{
+			
+			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+
+		    Thread.sleep(5000);
+			System.out.println(campaignName_TextBox);
+			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			campaignName_TextBox.clear();
+			campaignName_TextBox.sendKeys(campaign_name_updated);
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+			Thread.sleep(2000);
+					
+		}
 	
 	
+	//to verify campaign is getting created with external id
+		public void createCampaign(StringBuilder campaign_name,String externalID) throws InterruptedException{
+			
+
+			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+			campaignName_TextBox.sendKeys(campaign_name);
+			campaignID_TextBox.sendKeys(externalID);
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Thread.sleep(2000);
+					
+		}
+
+		//to verify campaign is getting edited without external id
+		public void EditCampaign(String campaign_name) throws InterruptedException{
+			
+
+			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+			campaignName_TextBox.clear();
+
+			campaignName_TextBox.sendKeys(campaign_name);
+			
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated");
+			Thread.sleep(2000);
+					
+		}
+		
+		//to verify campaign is getting edited with external id
+		public void EditCampaign(String campaign_name,String externalID) throws InterruptedException{
+			
+
+			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+			campaignName_TextBox.sendKeys(campaign_name);
+			campaignID_TextBox.sendKeys(externalID);
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated");
+			Thread.sleep(2000);
+					
+		}
+		
+		
+		
+		
 	
 }

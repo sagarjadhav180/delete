@@ -27,8 +27,8 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	String addCampaign_Button_text="Add Campaign";
 
 	@FindBy(xpath="//h1")
-	private static WebElement campaignBuilder_Label;		
-	String campaignBuilder_Label_text="Campaign and Tracking Number";
+	private static WebElement campaignandTrackingNumberPage_Label;		
+	String campaignandTrackingNumberPage_Label_text="Campaign and Tracking Number";
 	
 	@FindBy(xpath="//form/div/div/h4")
 	private static WebElement campaignDetails_Label;		
@@ -66,7 +66,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr")
 	private static List<WebElement> countOfCamapign;
 
-	@FindBy(xpath="//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr/td/span")
+	@FindBy(xpath="//table[contains(@class,'table table-hover table-striped table-condensed table-responsive mt10 ng-isolate-scope')]/tbody/tr/td[3]/span[1]")
 	private static List<WebElement> camapignList;
 	
 	
@@ -80,11 +80,11 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//tr/td/span[contains(text(),'1234')]/ancestor::tr/td[9]/span[@class='actions-buttons']/button[1]")
 	private static WebElement Archive_Button;	
 	
-	@FindBy(xpath="//tr/td/span[contains(text(),'1234')]/ancestor::tr/td[9]/span[@class='actions-buttons']/button[2]")
-	private static WebElement Edit_Button;	
-	
-	@FindBy(xpath="//div[@class='bootbox-body' and contains(text(),campaign_to_be_archived)]")
-	private static WebElement archiveCampaign_Message;	
+//	@FindBy(xpath="//tr/td/span[contains(text(),'1234')]/ancestor::tr/td[9]/span[@class='actions-buttons']/button[2]")
+//	private static WebElement Edit_Button;	
+//	
+//	@FindBy(xpath="//div[@class='bootbox-body' and contains(text(),campaign_to_be_archived)]")
+//	private static WebElement archiveCampaign_Message;	
 	
 	@FindBy(xpath="//h1")
 	private static WebElement Campaigns_Label;	
@@ -95,10 +95,10 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	String ExportButton_text="Export"; 
 	
 
-	@FindBy(xpath="//div/div/div/div/h4[contains(text(),'Campaign List for Rajeev stag 7')]")
-	private static WebElement CampaignList;	
+	@FindBy(xpath="//div/div/div/div/h4[contains(text(),'Campaign List for')]")
+	private static WebElement CampaignList_Header;	
 
-	String CampaignList_text="CAMPAIGN LIST FOR RAJEEV STAG 7";
+	String CampaignList_text="CAMPAIGN LIST FOR";
 	
 	
 	@FindBy(xpath="//tr[1]//th")
@@ -126,6 +126,11 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	@FindBy(xpath="//button[@class='btn btn-block btn-default dropdown-toggle']")
 	private static WebElement campaignList;
+	
+	@FindBy(xpath="//button[@class='btn btn-primary']")
+	private static WebElement ok_button_in_archive_alert;	
+	
+
 	
 	String[] Expected_Column_Picker_options_labels ={"Ad Source",
 			"Call Value",
@@ -216,7 +221,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	}
 
 	
-	public void clickAction(String buttonName){
+	public void clickAction(String buttonName,String string) throws InterruptedException{
 		if(buttonName.contains("add")){
 			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button));
 			addCampaign_Button.click();
@@ -227,14 +232,46 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			campaignList.click();
 			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button));
 		}
+		else if(buttonName.contains("update")){
+			String campaignToBeEdited=string;
+
+			WebElement edit = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
+			
+			tests.Util.scrollFunction(edit);
+//			edit.click();
+			tests.Util.click(edit);
+		}
+		else if(buttonName.contains("archive")){
+			String campaignToBeEdited=string;
+	
+			WebElement archive = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
+		
+			tests.Util.scrollFunction(archive);
+//			edit.click();
+			
+			tests.Util.click(archive);
+			Thread.sleep(2000);
+			driver.switchTo().activeElement();
+			wait.until(ExpectedConditions.visibilityOf(ok_button_in_archive_alert)).click();
+			String archived_campaign="campaignToBeEdited";
+			WebElement deleted_campaign_xpath = driver.findElement(By.xpath("//div[@class='ui-pnotify-text']"));
+			
+			Assert1.assertTrue(deleted_campaign_xpath.getText().contains(archived_campaign),archived_campaign+"campaign not archived successfully");
+			
+		}
+		
 	}
+	
+	
+	
+	
 	public void campaignPageUIVerification()
 	{
      
     //label verification
 	logger.log(LogStatus.INFO, "Verifying presence campaignBuilder_Label");
-	wait.until(ExpectedConditions.visibilityOf(campaignBuilder_Label));
-	Assert1.assertEquals(campaignBuilder_Label_text, campaignBuilder_Label.getText(),"locator changed or label not present");
+	wait.until(ExpectedConditions.visibilityOf(campaignandTrackingNumberPage_Label));
+	Assert1.assertEquals(campaignandTrackingNumberPage_Label_text, campaignandTrackingNumberPage_Label.getText(),"locator changed or campaignandTrackingNumberPage_Label not present");
 	
 	//add campaign button verification
 	logger.log(LogStatus.INFO, "Verifying presence addCampaign_Button");
@@ -255,11 +292,13 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	//CampaignList title verification
 	logger.log(LogStatus.INFO, "Verifying presence CampaignList");
-	Assert1.assertTrue(CampaignList.isDisplayed(),"CampaignList header is not present or locator has been changed..");		
+	Assert1.assertTrue(CampaignList_Header.isDisplayed(),"CampaignList header is not present or locator has been changed..");		
 
 	//CampaignList title text verification	
 	logger.log(LogStatus.INFO, "Verifying text on CampaignList");
-	Assert1.assertTrue(CampaignList.getText().equals(CampaignList_text),"text not present");	
+	System.out.println("---"+CampaignList_text+"-----");
+	System.out.println("---"+CampaignList_Header.getText()+"-----");
+	Assert1.assertTrue(CampaignList_Header.getText().contains(CampaignList_text),"CampaignList title text not present");	
 
 	
 	
@@ -350,13 +389,13 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	Assert1.assertTrue(topLastPagination_count.isDisplayed(),"topLastPagination_count is not present or locator changed");	
 	
 	//verification of count in top pagination toolbox	
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=24921");
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=24921 AND campaign_status NOT IN ('deleted')" );
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
 	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
-	Assert1.assertEquals(dbCount, countOnUI_pagination);
+	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
 	
 	logger.log(LogStatus.INFO, "verifying count of listed campaigns");
-	Assert1.assertEquals(dbCount, String.valueOf(countOfCamapign.size()));
+	Assert1.assertEquals(dbCount, String.valueOf(countOfCamapign.size()),"count  of listed campaigns is mimatching with db count");
 	
 	//verification of bottom pagination toolbox
         if(countOfCamapign.size()>100){
@@ -391,12 +430,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	}
 	
 	
-	public void campaignCreated(String campaignName){
+	public void campaignCreated(String campaign_name){
 		
-		wait.until(ExpectedConditions.visibilityOf(CampaignList));
+		wait.until(ExpectedConditions.visibilityOf(CampaignList_Header));
 		for(WebElement campaign:camapignList){
-			if(campaign.getText().equals(campaignName)){
-			Assert1.assertEquals(campaign.getText(), campaignName);
+			if(campaign.getText().equals(campaign_name)){
+			Assert1.assertEquals(campaign.getText(), campaign_name,"campaignCreated is not present..");
 			}
 		}
 //		Assert1.assertAll();
