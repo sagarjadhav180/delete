@@ -223,8 +223,16 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	public void clickAction(String buttonName,String string) throws InterruptedException{
 		if(buttonName.contains("add")){
-			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button));
-			addCampaign_Button.click();
+
+			if(wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed()){
+                wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));
+				addCampaign_Button.click();
+			}
+			else{
+
+				tests.Util.scrollFunction(addCampaign_Button);			
+				addCampaign_Button.click();	
+			}
 
 		}
 		else if(buttonName.contains("list")){

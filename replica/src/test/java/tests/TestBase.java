@@ -64,7 +64,7 @@ public class TestBase
 			System.setProperty("webdriver.gecko.driver", ".//geckodriver.exe");
 			driver=new FirefoxDriver();
 		}
-		//to clear casche
+		//to clear cache
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -72,7 +72,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 		driver.get(url);
-		wait= new WebDriverWait(driver, 40);		
+		wait= new WebDriverWait(driver, 30);		
 		LoginPage lp=new LoginPage(driver,wait);
 //		logger=extent.startTest("Login with valid credentials");
 //		logger.assignCategory("Login Suite");

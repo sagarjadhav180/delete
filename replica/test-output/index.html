@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">5 methods,   5 passed</span>
+                    <span class="method-stats">8 methods,   8 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -112,12 +112,27 @@
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite" title="tests.CampaignTests" hash-for-method="campaign_Creation_With_externalID">campaign_Creation_With_externalID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite" title="tests.CampaignTests" hash-for-method="campaign_Creation_Without_externalID">campaign_Creation_Without_externalID</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite" title="tests.CampaignTests" hash-for-method="campaign_deletion_With_externalID">campaign_deletion_With_externalID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite" title="tests.CampaignTests" hash-for-method="campaign_deletion_Without_externalID">campaign_deletion_Without_externalID</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite" title="tests.CampaignTests" hash-for-method="campaign_updation_With_externalID">campaign_updation_With_externalID</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -159,6 +174,13 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
+                  <a name="campaign_Creation_With_externalID">
+                  </a> <!-- campaign_Creation_With_externalID -->
+                  <span class="method-name">campaign_Creation_With_externalID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
                   <a name="campaign_Creation_Without_externalID">
                   </a> <!-- campaign_Creation_Without_externalID -->
                   <span class="method-name">campaign_Creation_Without_externalID</span>
@@ -166,9 +188,23 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
+                  <a name="campaign_deletion_With_externalID">
+                  </a> <!-- campaign_deletion_With_externalID -->
+                  <span class="method-name">campaign_deletion_With_externalID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
                   <a name="campaign_deletion_Without_externalID">
                   </a> <!-- campaign_deletion_Without_externalID -->
                   <span class="method-name">campaign_deletion_Without_externalID</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="campaign_updation_With_externalID">
+                  </a> <!-- campaign_updation_With_externalID -->
+                  <span class="method-name">campaign_updation_With_externalID</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -194,15 +230,7 @@
   &lt;parameter name=&quot;url&quot; value=&quot;https://stag-7-cmo-1.convirza.com&quot;/&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Campaign&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;tests.CampaignTests&quot;&gt;
-        &lt;methods&gt;
-          &lt;include name=&quot;CampaignAndTrackingNumberPage_UI_Verification&quot;/&gt;
-          &lt;include name=&quot;campaignBuilderPage_UI_Verification&quot;/&gt;
-          &lt;include name=&quot;campaign_Creation_Without_externalID&quot;/&gt;
-          &lt;include name=&quot;campaign_updation_Without_externalID&quot;/&gt;
-          &lt;include name=&quot;campaign_deletion_Without_externalID&quot;/&gt;
-        &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- tests.CampaignTests --&gt;
+      &lt;class name=&quot;tests.CampaignTests&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Campaign --&gt;
 &lt;/suite&gt; &lt;!-- Automation Suite --&gt;
@@ -242,32 +270,44 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(5);
+data.addRows(8);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'campaign_updation_Without_externalID')
+data.setCell(0, 1, 'campaign_Creation_With_externalID')
 data.setCell(0, 2, 'tests.CampaignTests')
-data.setCell(0, 3, 13932);
+data.setCell(0, 3, 16945);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'campaign_Creation_Without_externalID')
+data.setCell(1, 1, 'campaign_updation_With_externalID')
 data.setCell(1, 2, 'tests.CampaignTests')
-data.setCell(1, 3, 11226);
+data.setCell(1, 3, 12331);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'CampaignAndTrackingNumberPage_UI_Verification')
+data.setCell(2, 1, 'campaign_updation_Without_externalID')
 data.setCell(2, 2, 'tests.CampaignTests')
-data.setCell(2, 3, 11104);
+data.setCell(2, 3, 12202);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'campaignBuilderPage_UI_Verification')
+data.setCell(3, 1, 'campaign_Creation_Without_externalID')
 data.setCell(3, 2, 'tests.CampaignTests')
-data.setCell(3, 3, 6620);
+data.setCell(3, 3, 11674);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'campaign_deletion_Without_externalID')
+data.setCell(4, 1, 'CampaignAndTrackingNumberPage_UI_Verification')
 data.setCell(4, 2, 'tests.CampaignTests')
-data.setCell(4, 3, 2335);
+data.setCell(4, 3, 11656);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'campaignBuilderPage_UI_Verification')
+data.setCell(5, 2, 'tests.CampaignTests')
+data.setCell(5, 3, 6523);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'campaign_deletion_With_externalID')
+data.setCell(6, 2, 'tests.CampaignTests')
+data.setCell(6, 3, 2428);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'campaign_deletion_Without_externalID')
+data.setCell(7, 2, 'tests.CampaignTests')
+data.setCell(7, 3, 2354);
 window.suiteTableData['Automation_Suite']= { tableData: data, tableDiv: 'times-div-Automation_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 45 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Automation_Suite">
               </div> <!-- times-div-Automation_Suite -->
             </div> <!-- times-div -->
@@ -300,51 +340,75 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="test-method">
                 <span class="method-name">CampaignAndTrackingNumberPage_UI_Verification</span>
-                <span class="method-start">28034 ms</span>
+                <span class="method-start">22165 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=CampaignAndTrackingNumberPage_UI_Verification status=SUCCESS method=CampaignTests.C...)</span>
-                <span class="method-start">39142 ms</span>
+                <span class="method-start">33829 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaignBuilderPage_UI_Verification</span>
-                <span class="method-start">39597 ms</span>
+                <span class="method-start">34305 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaignBuilderPage_UI_Verification status=SUCCESS method=CampaignTests.campaignBui...)</span>
-                <span class="method-start">46219 ms</span>
+                <span class="method-start">40830 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_Creation_Without_externalID</span>
-                <span class="method-start">46338 ms</span>
+                <span class="method-start">40948 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_Creation_Without_externalID status=SUCCESS method=CampaignTests.campaign_C...)</span>
-                <span class="method-start">57565 ms</span>
+                <span class="method-start">52623 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_updation_Without_externalID</span>
-                <span class="method-start">57740 ms</span>
+                <span class="method-start">52691 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_updation_Without_externalID status=SUCCESS method=CampaignTests.campaign_u...)</span>
-                <span class="method-start">71673 ms</span>
+                <span class="method-start">64895 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_deletion_Without_externalID</span>
-                <span class="method-start">71744 ms</span>
+                <span class="method-start">65047 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_deletion_Without_externalID status=SUCCESS method=CampaignTests.campaign_d...)</span>
-                <span class="method-start">74080 ms</span>
+                <span class="method-start">67402 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">campaign_Creation_With_externalID</span>
+                <span class="method-start">67505 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=campaign_Creation_With_externalID status=SUCCESS method=CampaignTests.campaign_Crea...)</span>
+                <span class="method-start">84451 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">campaign_updation_With_externalID</span>
+                <span class="method-start">84532 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=campaign_updation_With_externalID status=SUCCESS method=CampaignTests.campaign_upda...)</span>
+                <span class="method-start">96864 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">campaign_deletion_With_externalID</span>
+                <span class="method-start">96930 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=campaign_deletion_With_externalID status=SUCCESS method=CampaignTests.campaign_dele...)</span>
+                <span class="method-start">99360 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-test after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">74184 ms</span>
+                <span class="method-start">99485 ms</span>
               </div> <!-- configuration-test after -->
               <div class="configuration-suite after">
                 <span class="method-name">close_connection</span>
-                <span class="method-start">78381 ms</span>
+                <span class="method-start">103665 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
