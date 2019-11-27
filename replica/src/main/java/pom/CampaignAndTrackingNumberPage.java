@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -223,16 +224,14 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	public void clickAction(String buttonName,String string) throws InterruptedException{
 		if(buttonName.contains("add")){
-
-			if(wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed()){
-                wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));
+//            Thread.sleep(10000);
+			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
+			
 				addCampaign_Button.click();
-			}
-			else{
-
-				tests.Util.scrollFunction(addCampaign_Button);			
-				addCampaign_Button.click();	
-			}
+			
+			
+			
+			
 
 		}
 		else if(buttonName.contains("list")){
@@ -265,7 +264,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			WebElement deleted_campaign_xpath = driver.findElement(By.xpath("//div[@class='ui-pnotify-text']"));
 			
 			Assert1.assertTrue(deleted_campaign_xpath.getText().contains(archived_campaign),archived_campaign+"campaign not archived successfully");
-			
+			Thread.sleep(2000);
 		}
 		
 	}

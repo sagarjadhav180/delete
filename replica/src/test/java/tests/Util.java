@@ -46,7 +46,7 @@ public class Util extends TestBase{
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;
 	static Statement stmpt=null;
-	
+//	static Actions actions;
 	
 	public static void elementHighlight(WebElement element){
 	
@@ -150,8 +150,9 @@ public class Util extends TestBase{
 	}
 	
 	
-	public static void Action(){
+	public static Actions Action(){
 		Actions actions=new Actions(driver);
+		return actions;
 	}
 	public static String readingFromDB(String query){
 		

@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -86,13 +87,16 @@ public class CampaignTests extends TestBase {
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
-
-	
+//		Thread.sleep(10000);
+	    driver.navigate().refresh();
 	}
 	
 	@Test(priority=6)
 	public void campaign_Creation_With_externalID() throws InterruptedException{
-		driver.navigate().refresh();
+
+//		try{
+//		tests.Util.Action().clickAndHold().sendKeys(Keys.CONTROL).sendKeys(Keys.SHIFT).sendKeys("R");
+//		}catch(Exception e){e.printStackTrace();}
 		logger=extent.startTest("Campaign creation with external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
