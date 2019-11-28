@@ -1,5 +1,4 @@
 package tests;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -188,6 +187,8 @@ public class Util extends TestBase{
 		int number = randomNumber.nextInt();
 		return number;
 	}
+	
+
 	
 			  
 			  

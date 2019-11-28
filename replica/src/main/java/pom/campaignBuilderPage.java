@@ -2,6 +2,7 @@ package pom;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,7 @@ import org.testng.asserts.SoftAssert;
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
+import tests.Util;
 
 public class campaignBuilderPage extends TestBase {
 
@@ -253,6 +255,76 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
 			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Thread.sleep(2000);
+					
+		}
+		//createCampaignWithFutureStartDateAndNeverEndDate
+		public void createCampaign(String campaign_name,String externalID,int futureStartDate) throws InterruptedException{
+			
+            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+			campaignName_TextBox.sendKeys(campaign_name);
+			campaignID_TextBox.sendKeys(externalID);
+			startDate_Calender.click();
+			WebElement element;
+			int date;
+			String dateToBeSelected;
+			if(futureStartDate<26){
+			date =futureStartDate+2;
+			dateToBeSelected=String.valueOf(date);
+			element=driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+			
+			}else {
+				StartCalender_rightArrow.click();
+				date=2;
+				dateToBeSelected=String.valueOf(date);
+				element = driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+			}
+			Util.Action().moveToElement(element).click().perform();
+			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Thread.sleep(2000);
+					
+		}
+		public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate) throws InterruptedException{
+			
+
+			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+
+		    Thread.sleep(3000);
+			System.out.println(campaignName_TextBox);
+			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			campaignName_TextBox.clear();
+			campaignName_TextBox.sendKeys(campaign_name_updated);
+			campaignID_TextBox.clear();
+			campaignID_TextBox.sendKeys(externalID);
+			
+			WebElement element;
+			int date;
+			String dateToBeSelected;
+			if(futureStartDate<26){
+			date =futureStartDate+2;
+			dateToBeSelected=String.valueOf(date);
+			element=driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+			
+			}else {
+				StartCalender_rightArrow.click();
+				date=2;
+				dateToBeSelected=String.valueOf(date);
+				element = driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+			}
+			Util.Action().moveToElement(element).click().perform();
+			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+
+			
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
 			Thread.sleep(2000);
 					
 		}
