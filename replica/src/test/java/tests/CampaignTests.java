@@ -65,7 +65,7 @@ public class CampaignTests extends TestBase {
 		cb.createCampaign(campaign_name);
 		cb.clickAction("list");
 		cp.campaignCreated(campaign_name);
-	
+		Thread.sleep(2000);
 	}
 	
 	@Test(priority=4)
@@ -78,7 +78,7 @@ public class CampaignTests extends TestBase {
 	    cb.EditCampaign(campaign_name_updated);
 		cb.clickAction("list");
 		cp.campaignCreated(campaign_name_updated);
-	
+		Thread.sleep(2000);
 	}
 	
 	@Test(priority=5)
@@ -88,7 +88,7 @@ public class CampaignTests extends TestBase {
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
 //		Thread.sleep(10000);
-	    driver.navigate().refresh();
+//	    driver.navigate().refresh();
 	}
 	
 	@Test(priority=6)
@@ -110,7 +110,7 @@ public class CampaignTests extends TestBase {
 		cb.createCampaign(campaign_name,external_id);
 		cb.clickAction("list");
 		cp.campaignCreated(campaign_name);
-	
+		Thread.sleep(2000);
 	}
 	
 	@Test(priority=7)
@@ -124,7 +124,7 @@ public class CampaignTests extends TestBase {
 	    cb.EditCampaign(campaign_name_updated,external_id_updated);
 		cb.clickAction("list");
 		cp.campaignCreated(campaign_name_updated);
-	
+		Thread.sleep(2000);
 	}
 	
 	@Test(priority=8)
@@ -133,9 +133,112 @@ public class CampaignTests extends TestBase {
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
+//	    driver.navigate().refresh();
 
 	
 	}
 	
+	@Test(priority=9)
+	public void createCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
+
+		logger=extent.startTest("Campaign creation with future start date..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		
+		cp.clickAction("add", "");
+		 number1 = tests.Util.generateRandomNumber();
+		 campaign_name = "campaign "+number1;
+		 System.out.println("++++++++++++++++++++++++++++++");
+		 System.err.println(campaign_name);
+		 System.out.println("++++++++++++++++++++++++++++++");		 
+		 number2 = tests.Util.generateRandomNumber();
+		 external_id= "external_id "+number2;
+		
+		cb.createCampaign(campaign_name,external_id,Util.getDate());
+		cb.clickAction("list");
+		cp.campaignCreated(campaign_name);
+		Thread.sleep(2000);
+	}	
+	
+	@Test(priority=10)
+	public void updateCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
+
+		logger=extent.startTest("Campaign updation with future start date..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		cp.clickAction("update",campaign_name);
+	    campaign_name_updated=campaign_name+"-updated";
+		 System.out.println("++++++++++++++++++++++++++++++");
+		 System.err.println(campaign_name_updated);
+		 System.out.println("++++++++++++++++++++++++++++++");
+	    external_id_updated=external_id+"-updated";
+	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate());
+		cb.clickAction("list");
+		cp.campaignCreated(campaign_name_updated);
+		
+		Thread.sleep(2000);
+	}
+	
+	@Test(priority=11)
+	public void campaign_deletion_With_futureStartDate() throws InterruptedException{
+		logger=extent.startTest("Campaign deletion with future start date..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+	    cp.clickAction("archive",campaign_name);
+//	    driver.navigate().refresh();
+	 
+	}
+	
+	@Test(priority=12)
+	public void createCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
+
+		logger=extent.startTest("Campaign creation with future start date and future end date..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		
+		cp.clickAction("add", "");
+		 number1 = tests.Util.generateRandomNumber();
+		 campaign_name = "campaign "+number1;
+		 System.out.println("++++++++++++++++++++++++++++++");
+		 System.err.println(campaign_name);
+		 System.out.println("++++++++++++++++++++++++++++++");		 
+		 number2 = tests.Util.generateRandomNumber();
+		 external_id= "external_id "+number2;
+		
+		cb.createCampaign(campaign_name,external_id,Util.getDate());
+		cb.clickAction("list");
+		cp.campaignCreated(campaign_name);
+		Thread.sleep(2000);
+	}	
+	
+	
+	@Test(priority=13)
+	public void updateCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
+
+		logger=extent.startTest("Campaign updation with future start date And FutureEndDate..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		cp.clickAction("update",campaign_name);
+	    campaign_name_updated=campaign_name+"-updated";
+		 System.out.println("++++++++++++++++++++++++++++++");
+		 System.err.println(campaign_name_updated);
+		 System.out.println("++++++++++++++++++++++++++++++");
+	    external_id_updated=external_id+"-updated";
+	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate());
+		cb.clickAction("list");
+		cp.campaignCreated(campaign_name_updated);
+		
+		Thread.sleep(2000);
+	}
+	
+	@Test(priority=14)
+	public void campaign_deletion_With_futureStartDateAndFutureEndDate() throws InterruptedException{
+		logger=extent.startTest("Campaign deletion with future start date And Future EndDate ..");
+		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+	    cp.clickAction("archive",campaign_name);
+//	    driver.navigate().refresh();
+	 
+	}
 	
 }

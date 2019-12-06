@@ -248,7 +248,9 @@ public class campaignBuilderPage extends TestBase {
 			
 
 			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+			campaignName_TextBox.clear();
 			campaignName_TextBox.sendKeys(campaign_name);
+			campaignID_TextBox.clear();
 			campaignID_TextBox.sendKeys(externalID);
 			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
 			SaveCampaignDetails_Button.click();
@@ -258,26 +260,30 @@ public class campaignBuilderPage extends TestBase {
 			Thread.sleep(2000);
 					
 		}
+		
 		//createCampaignWithFutureStartDateAndNeverEndDate
 		public void createCampaign(String campaign_name,String externalID,int futureStartDate) throws InterruptedException{
 			
             wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-			campaignName_TextBox.sendKeys(campaign_name);
-			campaignID_TextBox.sendKeys(externalID);
+            wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
+            campaignName_TextBox.clear();
+            campaignName_TextBox.sendKeys(campaign_name);
+            campaignID_TextBox.clear();
+            campaignID_TextBox.sendKeys(externalID);
 			startDate_Calender.click();
 			WebElement element;
-			int date;
-			String dateToBeSelected;
+			int startdate;
+			String startDateToBeSelected;
 			if(futureStartDate<26){
-			date =futureStartDate+2;
-			dateToBeSelected=String.valueOf(date);
-			element=driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+			startdate =futureStartDate+2;
+			startDateToBeSelected=String.valueOf(startdate);
+			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
 			
 			}else {
-				StartCalender_rightArrow.click();
-				date=2;
-				dateToBeSelected=String.valueOf(date);
-				element = driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+                startdate=2;
+				startDateToBeSelected=String.valueOf(startdate);
+				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
 			}
 			Util.Action().moveToElement(element).click().perform();
 			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
@@ -289,6 +295,132 @@ public class campaignBuilderPage extends TestBase {
 			Thread.sleep(2000);
 					
 		}
+		
+		//createCampaignWithFutureStartDateAndFutureEndDate
+		public void createCampaign(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
+			
+            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+            campaignName_TextBox.clear();
+            campaignName_TextBox.sendKeys(campaign_name);
+            campaignID_TextBox.clear();
+            campaignID_TextBox.sendKeys(externalID);
+			startDate_Calender.click();
+			
+			WebElement element;
+			int startDate;
+			String startDateToBeSelected;
+			if(futureStartDate<26){
+			startDate =futureStartDate+2;
+			startDateToBeSelected=String.valueOf(startDate);
+			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+			
+			
+			}else {
+                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+                startDate=2;
+                startDateToBeSelected=String.valueOf(startDate);
+				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+			}
+			Util.Action().moveToElement(element).click().perform();
+			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+			
+			wait.until(ExpectedConditions.visibilityOf(endDate_Calender));
+			Util.click(endDate_Calender);
+			
+			WebElement element1;
+			int endDate = 0;
+			String endDateToBeSelected;
+			if(futureEndDate<26){
+			endDate =futureEndDate+2;
+			endDateToBeSelected=String.valueOf(endDate);
+			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+			
+			
+			}else {
+                Util.Action().moveToElement(endCalender_rightArrow).click().perform();
+                endDate=2;
+                endDateToBeSelected=String.valueOf(endDate);
+				element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+			}
+			Util.Action().moveToElement(element1).click().perform();
+			Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
+			
+			
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Thread.sleep(2000);
+					
+		}
+
+           public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
+			
+
+			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+
+		    Thread.sleep(3000);
+			System.out.println(campaignName_TextBox);
+			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			campaignName_TextBox.clear();
+			campaignName_TextBox.sendKeys(campaign_name_updated);
+			campaignID_TextBox.clear();
+			campaignID_TextBox.sendKeys(externalID);
+			
+			startDate_Calender.click();
+			WebElement element;
+			int startDate;
+			String startDateToBeSelected;
+			if(futureStartDate<26){
+			startDate =futureStartDate+3;
+			startDateToBeSelected=String.valueOf(startDate);
+			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+			
+			
+			}else {
+                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+                startDate=3;
+                startDateToBeSelected=String.valueOf(startDate);
+				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+			}
+			Util.Action().moveToElement(element).click().perform();
+			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+			
+			Util.click(endDate_Calender);
+			WebElement element1;
+			int endDate = 0;
+			String endDateToBeSelected;
+			if(futureEndDate<26){
+			endDate =futureEndDate+1;
+			endDateToBeSelected=String.valueOf(endDate);
+			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+			
+			
+			}else {
+                Util.Action().moveToElement(endCalender_rightArrow).click().perform();
+                endDate=4;
+                endDateToBeSelected=String.valueOf(endDate);
+				element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+			}
+			Util.Action().moveToElement(element1).click().perform();
+			Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
+			
+            
+			
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+			Thread.sleep(2000);
+					
+		}
+
+		
+		
+		
+		
 		public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate) throws InterruptedException{
 			
 
@@ -302,23 +434,24 @@ public class campaignBuilderPage extends TestBase {
 			campaignID_TextBox.clear();
 			campaignID_TextBox.sendKeys(externalID);
 			
+			startDate_Calender.click();
 			WebElement element;
 			int date;
 			String dateToBeSelected;
 			if(futureStartDate<26){
-			date =futureStartDate+2;
+			date =futureStartDate+1;
 			dateToBeSelected=String.valueOf(date);
-			element=driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+dateToBeSelected+"])"));
 			
 			}else {
 				StartCalender_rightArrow.click();
-				date=2;
+				date=4;
 				dateToBeSelected=String.valueOf(date);
-				element = driver.findElement(By.xpath("//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][contains(text(),dateToBeSelected)]"));
+				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+dateToBeSelected+"])"));
 			}
 			Util.Action().moveToElement(element).click().perform();
 			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
-
+            
 			
 			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
 			SaveCampaignDetails_Button.click();

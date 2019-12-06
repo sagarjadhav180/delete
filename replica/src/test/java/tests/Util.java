@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
@@ -30,11 +31,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.googlecode.charts4j.Color;
 import com.googlecode.charts4j.GCharts;
 import com.googlecode.charts4j.PieChart;
 import com.googlecode.charts4j.Slice;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Util extends TestBase{
 	
@@ -126,7 +129,7 @@ public class Util extends TestBase{
 	        int passed_percentage = (passed == 0) ? 0 : (passed * 100 / total);
 	        int failed_percentage = (failed == 0) ? 0 : (failed * 100 / total);
 	        int skipped_percentage = (skipped == 0) ? 0 : (skipped * 100 / total);
-	        Slice s1 = Slice.newSlice(passed_percentage, Color.BLUE, "Passed", "Passed");
+	        Slice s1 = Slice.newSlice(passed_percentage, Color.FORESTGREEN, "Passed", "Passed");
 	        Slice s2 = Slice.newSlice(failed_percentage, Color.RED, "Failed", "Failed");
 	        Slice s3 = Slice.newSlice(skipped_percentage, Color.newColor("CACACA"), "Skipped", "Skipped");
 	        PieChart chart = GCharts.newPieChart(s1, s2, s3);
@@ -140,6 +143,7 @@ public class Util extends TestBase{
 	
 	
 	public static void scrollFunction(WebElement element){
+        System.out.println("scrolling function called..");
 		jse.executeScript("arguments[0].scrollIntoView(true)", element);
 		
 	}
@@ -153,6 +157,7 @@ public class Util extends TestBase{
 		Actions actions=new Actions(driver);
 		return actions;
 	}
+	
 	public static String readingFromDB(String query){
 		
 		String campaign_count = null;
@@ -188,8 +193,24 @@ public class Util extends TestBase{
 		return number;
 	}
 	
-
+	public static int getDate(){
+		Date date=new Date();
+		int currentDate = date.getDate();
+		return currentDate;
+	}
 	
-			  
+	public static JavascriptExecutor getJavascriptExecutor(){
+		return jse;
+		
+	}
+	
+//	public static void waitTillPageLoad(){
+//	    wait.until(jse.executeScript("return document.readyState").equals("complete"));
+//	    wait.until(ExpectedConditions.jsReturnsValue(javaScript));
+//		
+//	}
+	
+
+
 			  
 	}

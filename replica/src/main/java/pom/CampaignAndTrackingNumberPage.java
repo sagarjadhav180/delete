@@ -226,13 +226,9 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		if(buttonName.contains("add")){
 //            Thread.sleep(10000);
 			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-			
+//			wait.until(ExpectedConditions.stalenessOf(addCampaign_Button));			
 				addCampaign_Button.click();
-			
-			
-			
-			
-
+		
 		}
 		else if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.visibilityOf(campaignList));
@@ -264,7 +260,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			WebElement deleted_campaign_xpath = driver.findElement(By.xpath("//div[@class='ui-pnotify-text']"));
 			
 			Assert1.assertTrue(deleted_campaign_xpath.getText().contains(archived_campaign),archived_campaign+"campaign not archived successfully");
-			Thread.sleep(2000);
+		    wait.until(ExpectedConditions.invisibilityOf(deleted_campaign_xpath));
+//			driver.navigate().refresh();
+//          Thread.sleep(3000);
+//            Util.scrollFunction(addCampaign_Button);
+            Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
+            Thread.sleep(2000);    
 		}
 		
 	}

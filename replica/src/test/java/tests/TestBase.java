@@ -40,7 +40,7 @@ public class TestBase
 	public static ExtentTest logger;
 	public  ExtentReports extent = ExtentReportsGenerator.getInstance(true);
 	public static WebDriver driver;
-	public  WebDriverWait wait;
+	public static  WebDriverWait wait;
 	static int totalFailedTestCases;
 	static int totalPassedTestCases;
 	static int totalSkipedTestCases;
