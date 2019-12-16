@@ -1,5 +1,7 @@
 package pom;
 
+import static org.testng.Assert.fail;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -325,20 +327,20 @@ public class campaignBuilderPage extends TestBase {
 			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
 			
 			wait.until(ExpectedConditions.visibilityOf(endDate_Calender));
-			Util.click(endDate_Calender);
+				endDate_Calender.click();
 			
 			WebElement element1;
 			int endDate = 0;
 			String endDateToBeSelected;
 			if(futureEndDate<26){
-			endDate =futureEndDate+2;
+			endDate =futureEndDate+3;
 			endDateToBeSelected=String.valueOf(endDate);
 			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
 			
 			
 			}else {
                 Util.Action().moveToElement(endCalender_rightArrow).click().perform();
-                endDate=2;
+                endDate=3;
                 endDateToBeSelected=String.valueOf(endDate);
 				element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
 			}
@@ -373,7 +375,7 @@ public class campaignBuilderPage extends TestBase {
 			int startDate;
 			String startDateToBeSelected;
 			if(futureStartDate<26){
-			startDate =futureStartDate+3;
+			startDate =futureStartDate+2;
 			startDateToBeSelected=String.valueOf(startDate);
 			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
 			
@@ -387,19 +389,23 @@ public class campaignBuilderPage extends TestBase {
 			Util.Action().moveToElement(element).click().perform();
 			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
 			
-			Util.click(endDate_Calender);
+			try{
+				endDate_Calender.click();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			WebElement element1;
-			int endDate = 0;
+			int endDate;
 			String endDateToBeSelected;
 			if(futureEndDate<26){
-			endDate =futureEndDate+1;
+			endDate =futureEndDate+2;
 			endDateToBeSelected=String.valueOf(endDate);
 			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
 			
 			
 			}else {
                 Util.Action().moveToElement(endCalender_rightArrow).click().perform();
-                endDate=4;
+                endDate=6;
                 endDateToBeSelected=String.valueOf(endDate);
 				element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
 			}

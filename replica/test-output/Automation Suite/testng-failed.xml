@@ -9,11 +9,7 @@
         <methods>
           <include name="campaign_deletion_With_futureStartDateAndFutureEndDate"/>
           <include name="updateCampaignWithFutureStartDateAndFutureEndDate"/>
-          <include name="campaign_deletion_With_futureStartDate"/>
-          <include name="updateCampaignWithFutureStartDateAndNeverEndDate"/>
           <include name="setUp"/>
-          <include name="createCampaignWithFutureStartDateAndNeverEndDate"/>
-          <include name="createCampaignWithFutureStartDateAndFutureEndDate"/>
           <include name="close_connection"/>
           <include name="tearDown"/>
           <include name="tearDown"/>

@@ -226,7 +226,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		if(buttonName.contains("add")){
 //            Thread.sleep(10000);
 			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-//			wait.until(ExpectedConditions.stalenessOf(addCampaign_Button));			
+			wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));
 				addCampaign_Button.click();
 		
 		}

@@ -12,7 +12,11 @@
 		<classes>
 
 			<class name="tests.CampaignTests">
-				
+			<methods>
+				<include name="createCampaignWithFutureStartDateAndFutureEndDate"/>
+				<include name="updateCampaignWithFutureStartDateAndFutureEndDate"/>
+				<include name="campaign_deletion_With_futureStartDateAndFutureEndDate"/>								
+			</methods>
 
 			</class>
 		</classes>

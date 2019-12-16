@@ -191,7 +191,8 @@ public class CampaignTests extends TestBase {
 	
 	@Test(priority=12)
 	public void createCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
-
+		hp=new HomePage(driver);
+		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign creation with future start date and future end date..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
@@ -205,7 +206,7 @@ public class CampaignTests extends TestBase {
 		 number2 = tests.Util.generateRandomNumber();
 		 external_id= "external_id "+number2;
 		
-		cb.createCampaign(campaign_name,external_id,Util.getDate());
+		cb.createCampaign(campaign_name,external_id,Util.getDate(),Util.getDate());
 		cb.clickAction("list");
 		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
@@ -224,7 +225,7 @@ public class CampaignTests extends TestBase {
 		 System.err.println(campaign_name_updated);
 		 System.out.println("++++++++++++++++++++++++++++++");
 	    external_id_updated=external_id+"-updated";
-	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate());
+	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate(),Util.getDate());
 		cb.clickAction("list");
 		cp.campaignCreated(campaign_name_updated);
 		
