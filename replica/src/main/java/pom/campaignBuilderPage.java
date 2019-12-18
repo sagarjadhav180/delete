@@ -118,9 +118,15 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify-text' and contains(text(),'Campaign updated successfully.')]")
 	private static WebElement updateCampaign_success_message;	
 			
-	
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'Campaign start date should not be before current time')]")
+	private static WebElement alertForPastDateCampaign;	
 			
-			
+
+	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
+	private WebElement pendo_close_button;	
+
+	@FindBy(xpath="//div[@class='guide-header']")
+	private WebElement pendo_popup;	
 	WebDriverWait wait;
 	SoftAssert Assert1=new SoftAssert();
 	
@@ -238,6 +244,7 @@ public class campaignBuilderPage extends TestBase {
 		
 		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
 		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+		Assert1.assertAll();
 		Thread.sleep(2000);
 				
 	}
@@ -250,6 +257,7 @@ public class campaignBuilderPage extends TestBase {
 			
 
 			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+			Thread.sleep(1000);
 			campaignName_TextBox.clear();
 			campaignName_TextBox.sendKeys(campaign_name);
 			campaignID_TextBox.clear();
@@ -259,6 +267,7 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
 			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
@@ -294,6 +303,7 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
 			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
@@ -353,6 +363,7 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
 			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
@@ -419,6 +430,7 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
@@ -433,8 +445,6 @@ public class campaignBuilderPage extends TestBase {
 			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
 
 		    Thread.sleep(3000);
-			System.out.println(campaignName_TextBox);
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			campaignName_TextBox.clear();
 			campaignName_TextBox.sendKeys(campaign_name_updated);
 			campaignID_TextBox.clear();
@@ -464,6 +474,7 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
@@ -484,6 +495,7 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
@@ -506,11 +518,39 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+			Assert1.assertAll();
 			Thread.sleep(2000);
 					
 		}
 		
-		
+            public void createPastDateCampaign(String campaign_name,int pastStartDate) throws InterruptedException{
+			
+            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+            wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
+            campaignName_TextBox.clear();
+            campaignName_TextBox.sendKeys(campaign_name);
+            
+			startDate_Calender.click();
+			WebElement element;
+			int startdate;
+			String startDateToBeSelected;
+			
+			startdate =pastStartDate-1;
+			startDateToBeSelected=String.valueOf(startdate);
+			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+			
+			
+			Util.Action().moveToElement(element).click().perform();
+			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			SaveCampaignDetails_Button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(alertForPastDateCampaign));
+			Assert1.assertTrue(alertForPastDateCampaign.isDisplayed(),"campaign not created");
+			Assert1.assertAll();
+			Thread.sleep(2000);
+					
+		}
 		
 		
 	

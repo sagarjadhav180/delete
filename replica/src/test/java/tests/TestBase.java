@@ -72,7 +72,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 		driver.get(url);
-		wait= new WebDriverWait(driver,40);		
+		wait= new WebDriverWait(driver,30);		
 		LoginPage lp=new LoginPage(driver,wait);
 //		logger=extent.startTest("Login with valid credentials");
 //		logger.assignCategory("Login Suite");
@@ -126,7 +126,7 @@ public class TestBase
 	}
 	
 	@AfterTest
-	public void tearDown(){
+	public void tearDown() throws Exception{
 		
 		driver.close();
 	}

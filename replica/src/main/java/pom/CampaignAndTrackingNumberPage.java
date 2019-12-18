@@ -203,6 +203,14 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	int Expected_Column_Picker_options_count=32;
 	
+	@FindBy(xpath="//tbody[@ id='progressLoader']")
+	private WebElement loading_wheel;	
+	
+	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
+	private WebElement pendo_close_button;	
+
+	@FindBy(xpath="//div[@class='guide-header']")
+	private WebElement pendo_popup;	
 	public static WebDriverWait wait1;
 	
 	SoftAssert Assert1=new SoftAssert();
@@ -225,11 +233,17 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	public void clickAction(String buttonName,String string) throws InterruptedException{
 		if(buttonName.contains("add")){
 //            Thread.sleep(10000);
-			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-			wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));
-				addCampaign_Button.click();
+//			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
+//			wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));
+				
+					wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
+					wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));					
+//					Util.getJavascriptExecutor().executeScript("window.scrollTo(0,"+addCampaign_Button.getLocation().y+")");
+					addCampaign_Button.click();
+				
+				}
 		
-		}
+		
 		else if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.visibilityOf(campaignList));
 			campaignList.click();
@@ -243,6 +257,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			tests.Util.scrollFunction(edit);
 //			edit.click();
 			tests.Util.click(edit);
+//			try{
+//				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//			
+//			}catch(Exception e){
+//			Thread.sleep(1000);	
+//			}
 		}
 		else if(buttonName.contains("archive")){
 			String campaignToBeEdited=string;
@@ -253,7 +273,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 //			edit.click();
 			
 			tests.Util.click(archive);
+//			try{
+//				driver.switchTo().activeElement();
+//				Util.click(pendo_close_button);
+//				}catch(Exception e){}
 			Thread.sleep(2000);
+			
 			driver.switchTo().activeElement();
 			wait.until(ExpectedConditions.visibilityOf(ok_button_in_archive_alert)).click();
 			String archived_campaign="campaignToBeEdited";
@@ -263,9 +288,9 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		    wait.until(ExpectedConditions.invisibilityOf(deleted_campaign_xpath));
 //			driver.navigate().refresh();
 //          Thread.sleep(3000);
-//            Util.scrollFunction(addCampaign_Button);
+
             Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
-            Thread.sleep(2000);    
+//            Thread.sleep(2000);    
 		}
 		
 	}

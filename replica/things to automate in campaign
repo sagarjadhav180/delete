@@ -10,15 +10,8 @@
 8.createCampaignWithFutureStartDateAndFutureEndDate
 9.editCampaignWithFutureStartDateAndFutureEndDate
 10.deleteCampaignWithFutureStartDateAndFutureEndDate
-11.createCampaignWithPastTime
-12.editCampaignWithPastTime
-13.deleteCampaignWithPastTime
-14.createCampaignWithFutureStartTime
-15.editCampaignWithFutureStartTime
-16.deleteCampaignWithFutureStartTime
-17.createCampaignWithStartAndEndDateAsNever
-18.editCampaignWithStartAndEndDateAsNever
-19.deleteCampaignWithStartAndEndDateAsNever
+11.createCampaignWithPastTime--negative scenario
+
 
 
 
