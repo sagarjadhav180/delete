@@ -125,10 +125,18 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private WebElement pendo_close_button;	
 
+	@FindBy(xpath="//tbody[@ id='progressLoader']")
+	private WebElement loading_wheel_for_list;
+
+	
+	
 	@FindBy(xpath="//div[@class='guide-header']")
 	private WebElement pendo_popup;	
 	WebDriverWait wait;
 	SoftAssert Assert1=new SoftAssert();
+	
+	
+	
 	
 	public campaignBuilderPage(WebDriver driver,WebDriverWait wait1){
 		PageFactory.initElements(driver, this);
@@ -141,6 +149,7 @@ public class campaignBuilderPage extends TestBase {
 		if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.elementToBeClickable(campaignList));
 			tests.Util.click(campaignList);
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_list));
 			
 		}
 	}

@@ -213,6 +213,10 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	private WebElement pendo_popup;	
 	public static WebDriverWait wait1;
 	
+
+	@FindBy(xpath="//div[@class='pageProgressLoader']")
+	private WebElement loading_wheel_for_add_campaign;
+	
 	SoftAssert Assert1=new SoftAssert();
 	
 	//db variables
@@ -240,14 +244,14 @@ public class CampaignAndTrackingNumberPage extends TestBase
 					wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));					
 //					Util.getJavascriptExecutor().executeScript("window.scrollTo(0,"+addCampaign_Button.getLocation().y+")");
 					addCampaign_Button.click();
-				
+					wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
 				}
 		
 		
 		else if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.visibilityOf(campaignList));
 			campaignList.click();
-			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button));
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 		}
 		else if(buttonName.contains("update")){
 			String campaignToBeEdited=string;
@@ -277,7 +281,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 //				driver.switchTo().activeElement();
 //				Util.click(pendo_close_button);
 //				}catch(Exception e){}
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			
 			driver.switchTo().activeElement();
 			wait.until(ExpectedConditions.visibilityOf(ok_button_in_archive_alert)).click();
@@ -290,7 +294,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 //          Thread.sleep(3000);
 
             Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
-//            Thread.sleep(2000);    
+            Thread.sleep(2000);    
 		}
 		
 	}
