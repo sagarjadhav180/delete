@@ -428,7 +428,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	Assert1.assertTrue(topLastPagination_count.isDisplayed(),"topLastPagination_count is not present or locator changed");	
 	
 	//verification of count in top pagination toolbox	
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=24921 AND campaign_status NOT IN ('deleted')" );
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=70135 AND campaign_status NOT IN ('deleted')" );
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
 	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
 	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");

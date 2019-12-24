@@ -30,7 +30,7 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="//h1[contains(text(),'Campaign Builder')]")
 	private static WebElement header;
 	
-	@FindBy(xpath="//h4[contains(text(),' Rajeev stag 7')]")
+	@FindBy(xpath="//h4[contains(text(),'Ganesh 5')]")
 	private static WebElement collapsible_strip;
 	
 	//active/inactive toggle

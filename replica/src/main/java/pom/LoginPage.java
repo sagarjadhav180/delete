@@ -35,8 +35,13 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath="//a[@class='pull-left']")
 	private static WebElement forgotPassword_link;	
 	
-	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'s j')]")
+	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'Ganesh 5')]")
 	private static WebElement userprofile_link;
+	
+	@FindBy(xpath="//button[@id='pendo-close-guide-7438aaa2']")
+	private static WebElement pendo_popup_close_button;
+	
+	
 	
     public static WebDriverWait wait;
 	
@@ -92,7 +97,10 @@ public class LoginPage extends TestBase {
 		password_Field.clear();
 		password_Field.sendKeys(password);
 		login_button.click();
-		
+		try{
+		driver.switchTo().activeElement();
+		pendo_popup_close_button.click();
+		}catch(Exception e){}
 		try{
 			wait.until(ExpectedConditions.visibilityOf(userprofile_link));
 		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");

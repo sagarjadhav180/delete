@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" ignored="0" total="15" passed="15">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite" duration-ms="253210" started-at="2019-12-19T13:58:38Z" finished-at="2019-12-19T14:02:51Z">
+  <suite name="Automation Suite" duration-ms="206660" started-at="2019-12-24T12:26:44Z" finished-at="2019-12-24T12:30:11Z">
     <groups>
     </groups>
-    <test name="Campaign" duration-ms="253210" started-at="2019-12-19T13:58:38Z" finished-at="2019-12-19T14:02:51Z">
+    <test name="Campaign" duration-ms="206660" started-at="2019-12-24T12:26:44Z" finished-at="2019-12-24T12:30:11Z">
       <class name="tests.CampaignTests">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="setUp" is-config="true" duration-ms="55452" started-at="2019-12-19T13:58:38Z" finished-at="2019-12-19T13:59:33Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="setUp" is-config="true" duration-ms="56971" started-at="2019-12-24T12:26:44Z" finished-at="2019-12-24T12:27:41Z">
           <params>
             <param index="0">
               <value>
@@ -16,18 +16,18 @@
             </param>
             <param index="1">
               <value>
-                <![CDATA[https://stag-7-cmo-1.convirza.com]]>
+                <![CDATA[https://stag-5-cmo-1.convirza.com]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CampaignTests@7bb58ca3]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="10819" started-at="2019-12-19T13:59:33Z" finished-at="2019-12-19T13:59:44Z">
+        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CampaignTests@7bb58ca3]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="9861" started-at="2019-12-24T12:27:41Z" finished-at="2019-12-24T12:27:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="669" started-at="2019-12-19T13:59:44Z" finished-at="2019-12-19T13:59:45Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="1122" started-at="2019-12-24T12:27:51Z" finished-at="2019-12-24T12:27:52Z">
           <params>
             <param index="0">
               <value>
@@ -38,11 +38,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaignBuilderPage_UI_Verification()[pri:2, instance:tests.CampaignTests@7bb58ca3]" name="campaignBuilderPage_UI_Verification" duration-ms="5043" started-at="2019-12-19T13:59:45Z" finished-at="2019-12-19T13:59:50Z">
+        <test-method status="PASS" signature="campaignBuilderPage_UI_Verification()[pri:2, instance:tests.CampaignTests@7bb58ca3]" name="campaignBuilderPage_UI_Verification" duration-ms="6172" started-at="2019-12-24T12:27:52Z" finished-at="2019-12-24T12:27:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaignBuilderPage_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="175" started-at="2019-12-19T13:59:50Z" finished-at="2019-12-19T13:59:50Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="211" started-at="2019-12-24T12:27:59Z" finished-at="2019-12-24T12:27:59Z">
           <params>
             <param index="0">
               <value>
@@ -53,11 +53,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_Creation_Without_externalID()[pri:3, instance:tests.CampaignTests@7bb58ca3]" name="campaign_Creation_Without_externalID" duration-ms="15290" started-at="2019-12-19T13:59:50Z" finished-at="2019-12-19T14:00:05Z">
+        <test-method status="PASS" signature="campaign_Creation_Without_externalID()[pri:3, instance:tests.CampaignTests@7bb58ca3]" name="campaign_Creation_Without_externalID" duration-ms="11433" started-at="2019-12-24T12:27:59Z" finished-at="2019-12-24T12:28:10Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_Creation_Without_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="413" started-at="2019-12-19T14:00:05Z" finished-at="2019-12-19T14:00:06Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="150" started-at="2019-12-24T12:28:10Z" finished-at="2019-12-24T12:28:10Z">
           <params>
             <param index="0">
               <value>
@@ -68,11 +68,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_updation_Without_externalID()[pri:4, instance:tests.CampaignTests@7bb58ca3]" name="campaign_updation_Without_externalID" duration-ms="14443" started-at="2019-12-19T14:00:06Z" finished-at="2019-12-19T14:00:20Z">
+        <test-method status="PASS" signature="campaign_updation_Without_externalID()[pri:4, instance:tests.CampaignTests@7bb58ca3]" name="campaign_updation_Without_externalID" duration-ms="12078" started-at="2019-12-24T12:28:10Z" finished-at="2019-12-24T12:28:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_updation_Without_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="83" started-at="2019-12-19T14:00:20Z" finished-at="2019-12-19T14:00:20Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="233" started-at="2019-12-24T12:28:23Z" finished-at="2019-12-24T12:28:23Z">
           <params>
             <param index="0">
               <value>
@@ -83,11 +83,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_Without_externalID()[pri:5, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_Without_externalID" duration-ms="3825" started-at="2019-12-19T14:00:20Z" finished-at="2019-12-19T14:00:24Z">
+        <test-method status="PASS" signature="campaign_deletion_Without_externalID()[pri:5, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_Without_externalID" duration-ms="5282" started-at="2019-12-24T12:28:23Z" finished-at="2019-12-24T12:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_deletion_Without_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="220" started-at="2019-12-19T14:00:24Z" finished-at="2019-12-19T14:00:24Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="153" started-at="2019-12-24T12:28:28Z" finished-at="2019-12-24T12:28:28Z">
           <params>
             <param index="0">
               <value>
@@ -98,11 +98,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_Creation_With_externalID()[pri:6, instance:tests.CampaignTests@7bb58ca3]" name="campaign_Creation_With_externalID" duration-ms="14950" started-at="2019-12-19T14:00:24Z" finished-at="2019-12-19T14:00:39Z">
+        <test-method status="PASS" signature="campaign_Creation_With_externalID()[pri:6, instance:tests.CampaignTests@7bb58ca3]" name="campaign_Creation_With_externalID" duration-ms="12254" started-at="2019-12-24T12:28:28Z" finished-at="2019-12-24T12:28:40Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_Creation_With_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="153" started-at="2019-12-19T14:00:39Z" finished-at="2019-12-19T14:00:39Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="119" started-at="2019-12-24T12:28:40Z" finished-at="2019-12-24T12:28:41Z">
           <params>
             <param index="0">
               <value>
@@ -113,11 +113,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_updation_With_externalID()[pri:7, instance:tests.CampaignTests@7bb58ca3]" name="campaign_updation_With_externalID" duration-ms="15602" started-at="2019-12-19T14:00:39Z" finished-at="2019-12-19T14:00:55Z">
+        <test-method status="PASS" signature="campaign_updation_With_externalID()[pri:7, instance:tests.CampaignTests@7bb58ca3]" name="campaign_updation_With_externalID" duration-ms="12185" started-at="2019-12-24T12:28:41Z" finished-at="2019-12-24T12:28:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_updation_With_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="134" started-at="2019-12-19T14:00:55Z" finished-at="2019-12-19T14:00:55Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="107" started-at="2019-12-24T12:28:53Z" finished-at="2019-12-24T12:28:53Z">
           <params>
             <param index="0">
               <value>
@@ -128,11 +128,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_With_externalID()[pri:8, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_With_externalID" duration-ms="12776" started-at="2019-12-19T14:00:55Z" finished-at="2019-12-19T14:01:08Z">
+        <test-method status="PASS" signature="campaign_deletion_With_externalID()[pri:8, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_With_externalID" duration-ms="4898" started-at="2019-12-24T12:28:53Z" finished-at="2019-12-24T12:28:58Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_deletion_With_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="68" started-at="2019-12-19T14:01:08Z" finished-at="2019-12-19T14:01:08Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="107" started-at="2019-12-24T12:28:58Z" finished-at="2019-12-24T12:28:58Z">
           <params>
             <param index="0">
               <value>
@@ -143,11 +143,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="createCampaignWithFutureStartDateAndNeverEndDate()[pri:9, instance:tests.CampaignTests@7bb58ca3]" name="createCampaignWithFutureStartDateAndNeverEndDate" duration-ms="15149" started-at="2019-12-19T14:01:08Z" finished-at="2019-12-19T14:01:23Z">
+        <test-method status="PASS" signature="createCampaignWithFutureStartDateAndNeverEndDate()[pri:9, instance:tests.CampaignTests@7bb58ca3]" name="createCampaignWithFutureStartDateAndNeverEndDate" duration-ms="11641" started-at="2019-12-24T12:28:58Z" finished-at="2019-12-24T12:29:10Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createCampaignWithFutureStartDateAndNeverEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="72" started-at="2019-12-19T14:01:23Z" finished-at="2019-12-19T14:01:23Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="163" started-at="2019-12-24T12:29:10Z" finished-at="2019-12-24T12:29:10Z">
           <params>
             <param index="0">
               <value>
@@ -158,11 +158,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="updateCampaignWithFutureStartDateAndNeverEndDate()[pri:10, instance:tests.CampaignTests@7bb58ca3]" name="updateCampaignWithFutureStartDateAndNeverEndDate" duration-ms="16249" started-at="2019-12-19T14:01:23Z" finished-at="2019-12-19T14:01:39Z">
+        <test-method status="PASS" signature="updateCampaignWithFutureStartDateAndNeverEndDate()[pri:10, instance:tests.CampaignTests@7bb58ca3]" name="updateCampaignWithFutureStartDateAndNeverEndDate" duration-ms="13290" started-at="2019-12-24T12:29:10Z" finished-at="2019-12-24T12:29:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- updateCampaignWithFutureStartDateAndNeverEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="76" started-at="2019-12-19T14:01:39Z" finished-at="2019-12-19T14:01:39Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="73" started-at="2019-12-24T12:29:23Z" finished-at="2019-12-24T12:29:23Z">
           <params>
             <param index="0">
               <value>
@@ -173,11 +173,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_With_futureStartDate()[pri:11, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_With_futureStartDate" duration-ms="12772" started-at="2019-12-19T14:01:39Z" finished-at="2019-12-19T14:01:52Z">
+        <test-method status="PASS" signature="campaign_deletion_With_futureStartDate()[pri:11, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_With_futureStartDate" duration-ms="5001" started-at="2019-12-24T12:29:23Z" finished-at="2019-12-24T12:29:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_deletion_With_futureStartDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="104" started-at="2019-12-19T14:01:52Z" finished-at="2019-12-19T14:01:52Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="100" started-at="2019-12-24T12:29:28Z" finished-at="2019-12-24T12:29:28Z">
           <params>
             <param index="0">
               <value>
@@ -188,11 +188,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="createCampaignWithFutureStartDateAndFutureEndDate()[pri:12, instance:tests.CampaignTests@7bb58ca3]" name="createCampaignWithFutureStartDateAndFutureEndDate" duration-ms="16016" started-at="2019-12-19T14:01:52Z" finished-at="2019-12-19T14:02:08Z">
+        <test-method status="PASS" signature="createCampaignWithFutureStartDateAndFutureEndDate()[pri:12, instance:tests.CampaignTests@7bb58ca3]" name="createCampaignWithFutureStartDateAndFutureEndDate" duration-ms="12582" started-at="2019-12-24T12:29:28Z" finished-at="2019-12-24T12:29:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createCampaignWithFutureStartDateAndFutureEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="89" started-at="2019-12-19T14:02:08Z" finished-at="2019-12-19T14:02:08Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="109" started-at="2019-12-24T12:29:41Z" finished-at="2019-12-24T12:29:41Z">
           <params>
             <param index="0">
               <value>
@@ -203,11 +203,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="updateCampaignWithFutureStartDateAndFutureEndDate()[pri:13, instance:tests.CampaignTests@7bb58ca3]" name="updateCampaignWithFutureStartDateAndFutureEndDate" duration-ms="16549" started-at="2019-12-19T14:02:08Z" finished-at="2019-12-19T14:02:25Z">
+        <test-method status="PASS" signature="updateCampaignWithFutureStartDateAndFutureEndDate()[pri:13, instance:tests.CampaignTests@7bb58ca3]" name="updateCampaignWithFutureStartDateAndFutureEndDate" duration-ms="14067" started-at="2019-12-24T12:29:41Z" finished-at="2019-12-24T12:29:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- updateCampaignWithFutureStartDateAndFutureEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="56" started-at="2019-12-19T14:02:25Z" finished-at="2019-12-19T14:02:25Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="138" started-at="2019-12-24T12:29:55Z" finished-at="2019-12-24T12:29:55Z">
           <params>
             <param index="0">
               <value>
@@ -218,11 +218,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_With_futureStartDateAndFutureEndDate()[pri:14, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_With_futureStartDateAndFutureEndDate" duration-ms="12787" started-at="2019-12-19T14:02:25Z" finished-at="2019-12-19T14:02:38Z">
+        <test-method status="PASS" signature="campaign_deletion_With_futureStartDateAndFutureEndDate()[pri:14, instance:tests.CampaignTests@7bb58ca3]" name="campaign_deletion_With_futureStartDateAndFutureEndDate" duration-ms="4089" started-at="2019-12-24T12:29:55Z" finished-at="2019-12-24T12:29:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- campaign_deletion_With_futureStartDateAndFutureEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="129" started-at="2019-12-19T14:02:38Z" finished-at="2019-12-19T14:02:38Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="175" started-at="2019-12-24T12:29:59Z" finished-at="2019-12-24T12:29:59Z">
           <params>
             <param index="0">
               <value>
@@ -233,11 +233,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="createCampaignWithPastTime()[pri:15, instance:tests.CampaignTests@7bb58ca3]" name="createCampaignWithPastTime" duration-ms="8831" started-at="2019-12-19T14:02:38Z" finished-at="2019-12-19T14:02:47Z">
+        <test-method status="PASS" signature="createCampaignWithPastTime()[pri:15, instance:tests.CampaignTests@7bb58ca3]" name="createCampaignWithPastTime" duration-ms="7448" started-at="2019-12-24T12:29:59Z" finished-at="2019-12-24T12:30:07Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createCampaignWithPastTime -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="78" started-at="2019-12-19T14:02:47Z" finished-at="2019-12-19T14:02:47Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="129" started-at="2019-12-24T12:30:07Z" finished-at="2019-12-24T12:30:07Z">
           <params>
             <param index="0">
               <value>
@@ -248,11 +248,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="4076" started-at="2019-12-19T14:02:47Z" finished-at="2019-12-19T14:02:51Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="tearDown" is-config="true" duration-ms="4178" started-at="2019-12-24T12:30:07Z" finished-at="2019-12-24T12:30:11Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="close_connection" is-config="true" duration-ms="7286" started-at="2019-12-19T14:02:51Z" finished-at="2019-12-19T14:02:58Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CampaignTests@7bb58ca3]" name="close_connection" is-config="true" duration-ms="8245" started-at="2019-12-24T12:30:12Z" finished-at="2019-12-24T12:30:20Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
