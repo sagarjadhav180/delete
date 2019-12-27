@@ -2,22 +2,34 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Automation Suite">
+<suite name="Automation Suite-1"   parallel="tests" thread-count="2" preserve-order="true">
 
+
+
+<test name="chrome test-Campaign" preserve-order="true">
             <parameter name="browser" value="chrome"/>
   <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-<test name="Campaign">
-
 
 		<classes>
 
-			<class name="tests.CampaignTests">
-			
-
-			</class>
+		<class name="tests.LoginTest"/>
+			<class name="tests.CampaignTests"/>
 		</classes>
+
 	</test>
 
+<test name="firefox test-Campaign" preserve-order="true">
+            <parameter name="browser" value="firefox"/>
+  <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
 
+		<classes>
+
+		<class name="tests.LoginTest"/>
+			<class name="tests.CampaignTests"/>
+		</classes>
+
+	</test>
 
 </suite> <!-- Suite -->
+
+
