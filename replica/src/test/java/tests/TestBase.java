@@ -21,6 +21,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -49,37 +50,43 @@ public class TestBase
 	List<ITestNGMethod> failedtests = new ArrayList<ITestNGMethod>();
 	List<ITestNGMethod> skippedtests = new ArrayList<ITestNGMethod>();
 	public static String methodName;
-
+	String url_to_hit;
+	
 	@Parameters({"browser","url"})
-	@BeforeTest()
+	@BeforeTest
 	public void setUp(String browser,String url) throws IOException{
-		
 
+        
+		
+		url_to_hit=url;
 		if(browser.contains("chrome")){
 			
 			System.setProperty("webdriver.chrome.driver",".//chromedriver.exe");
 		    driver=new ChromeDriver();
+		    wait= new WebDriverWait(driver,30);
+		    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			//to delete cookies
+		    driver.manage().deleteAllCookies();
+		    driver.get(url_to_hit);
 		}
 		else if(browser.contains("firefox")){
 			System.setProperty("webdriver.gecko.driver", ".//geckodriver.exe");
 			driver=new FirefoxDriver();
+			wait= new WebDriverWait(driver,30);
+			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			//to delete cookies
+		    driver.manage().deleteAllCookies();
+		    driver.get(url_to_hit);
 		}
-		//to clear cache
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		//to delete cookies
-	    driver.manage().deleteAllCookies();
-		driver.get(url);
-		wait= new WebDriverWait(driver,30);		
-		LoginPage lp=new LoginPage(driver,wait);
-//		logger=extent.startTest("Login with valid credentials");
-//		logger.assignCategory("Login Suite");
-//		logger.log(LogStatus.INFO, "valid login test case running..");
-		lp.validLogin();
 		
 	}
+
 
 	@AfterMethod
 	public void tearDown(ITestResult result) throws Exception {
@@ -127,12 +134,13 @@ public class TestBase
 	
 	@AfterTest
 	public void tearDown() throws Exception{
-		
-		driver.close();
+		if(driver!=null){
+		driver.quit();
+		}
 	}
 	
 
-	@AfterSuite()
+	@AfterSuite
 	public void close_connection() throws Exception {
 
 		int[] result = extentReport.Listener.count_of_test();
