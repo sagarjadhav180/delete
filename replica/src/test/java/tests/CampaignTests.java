@@ -1,6 +1,8 @@
 package tests;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -35,21 +37,54 @@ public class CampaignTests extends TestBase {
 //		   hp.clickAction("Campaign");
 //	}	
 	
-	@Test(priority=1)
-	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
+//	@Test(priority=1)
+//	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
+//		
+//        hp=new HomePage(driver);
+//		logger=extent.startTest("Campaign and tracking number page page UI verification..");
+//		logger.assignCategory("Campaign Suite");
+//		logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
+//		hp.clickAction("Campaign");
+//		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
+//		logger.log(LogStatus.INFO, "verifying UI of campaign and tracking number page..");
+//		cp.campaignPageUIVerification();
+////		Thread.sleep(2000);
+//		
+//	}
+//	@Test(priority=2)
+//	public void campaignBuilderPage_UI_Verification() throws InterruptedException{
+//		
+////		hp=new HomePage(driver);
+////		hp.clickAction("Home");
+////		hp.clickAction("Campaign");
+//		logger=extent.startTest("Campaign builder page UI verification..");
+//		logger.log(LogStatus.INFO, "going to campaign builder page..");
+//		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+//		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+//		
+//		cp.clickAction("add","");
+//		cb.campaignBuilderPageUIVerification();
+//		cb.collapseExpand_collapsible_strip();
+//		cb.clickAction("list");	
+////		Thread.sleep(2000);
+//
+//	}
+	
+	@BeforeClass
+	public void goToCampaignPage(){
+		hp=new HomePage(driver);
 		
-        hp=new HomePage(driver);
-		logger=extent.startTest("Campaign and tracking number page page UI verification..");
-		logger.assignCategory("Campaign Suite");
-		logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
-		hp.clickAction("Campaign");
-		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
-		logger.log(LogStatus.INFO, "verifying UI of campaign and tracking number page..");
-		cp.campaignPageUIVerification();
-//		Thread.sleep(2000);
+		
+		try {
+			hp.clickAction("Campaign");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		
 	}
-	@Test(priority=2)
+	
+	@Test(priority=1)
 	public void campaignBuilderPage_UI_Verification() throws InterruptedException{
 		
 //		hp=new HomePage(driver);
@@ -57,8 +92,9 @@ public class CampaignTests extends TestBase {
 //		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign builder page UI verification..");
 		logger.log(LogStatus.INFO, "going to campaign builder page..");
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		
 		
 		cp.clickAction("add","");
 		cb.campaignBuilderPageUIVerification();
@@ -68,7 +104,7 @@ public class CampaignTests extends TestBase {
 
 	}
 	
-	@Test(priority=3)
+	@Test(priority=1)
 	public void campaign_Creation_Without_externalID() throws InterruptedException{
 		
 //		hp=new HomePage(driver);
@@ -86,7 +122,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=4)
+	@Test(priority=2)
 	public void campaign_updation_Without_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign updation without external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -99,7 +135,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=5)
+	@Test(priority=3)
 	public void campaign_deletion_Without_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion without external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -109,7 +145,7 @@ public class CampaignTests extends TestBase {
 //	    driver.navigate().refresh();
 	}
 	
-	@Test(priority=6)
+	@Test(priority=4)
 	public void campaign_Creation_With_externalID() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -130,7 +166,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=7)
+	@Test(priority=5)
 	public void campaign_updation_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -144,7 +180,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=8)
+	@Test(priority=6)
 	public void campaign_deletion_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion without external ID..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -155,7 +191,7 @@ public class CampaignTests extends TestBase {
 	
 	}
 	
-	@Test(priority=9)
+	@Test(priority=7)
 	public void createCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 		
 //		hp=new HomePage(driver);
@@ -180,7 +216,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}	
 	
-	@Test(priority=10)
+	@Test(priority=8)
 	public void updateCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 
 		logger=extent.startTest("Campaign updation with future start date..");
@@ -199,7 +235,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=11)
+	@Test(priority=9)
 	public void campaign_deletion_With_futureStartDate() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion with future start date..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -209,7 +245,7 @@ public class CampaignTests extends TestBase {
 	 
 	}
 	
-	@Test(priority=12)
+	@Test(priority=10)
 	public void createCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -234,7 +270,7 @@ public class CampaignTests extends TestBase {
 	}	
 	
 	
-	@Test(priority=13)
+	@Test(priority=11)
 	public void updateCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 
 		logger=extent.startTest("Campaign updation with future start date And FutureEndDate..");
@@ -253,7 +289,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=14)
+	@Test(priority=12)
 	public void campaign_deletion_With_futureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion with future start date And Future EndDate ..");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -263,7 +299,7 @@ public class CampaignTests extends TestBase {
 	 
 	}
 	
-	@Test(priority=15)
+	@Test(priority=13)
 	public void createCampaignWithPastTime() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -280,6 +316,18 @@ public class CampaignTests extends TestBase {
 		cb.createPastDateCampaign(campaign_name,Util.getDate());
 		
 		Thread.sleep(2000);
+	}
+	
+	@AfterClass
+	public void goToHomePage(){
+
+        Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
+        try {
+			hp.clickAction("Home");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
