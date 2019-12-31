@@ -64,50 +64,31 @@ public class LoginPage extends TestBase {
 		String username=prop.getProperty("username");
 		String password=prop.getProperty("password");
 		
-      try{
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
 		Util.elementHighlight(username_Field);
 		Util.removeElementHighlight(username_Field);
-      }
-      catch(Exception e){
-			e.printStackTrace();
-			System.out.println("username field not present or locator has been changed..");
-		}
-		try{
+    	
 		wait.until(ExpectedConditions.visibilityOf(password_Field));
 		Util.elementHighlight(password_Field);
 		Util.removeElementHighlight(password_Field);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			System.out.println("password field not present or locator has been changed..");
-		}
 		
-		  try{
-				wait.until(ExpectedConditions.visibilityOf(login_button));
-				Util.elementHighlight(login_button);
-				Util.removeElementHighlight(login_button);
-		      }
-		      catch(Exception e){
-					e.printStackTrace();
-					System.out.println("login_button not present or locator has been changed..");
-				}
+		wait.until(ExpectedConditions.visibilityOf(login_button));
+		Util.elementHighlight(login_button);
+		Util.removeElementHighlight(login_button);
+		
 		username_Field.clear();
 		username_Field.sendKeys(username);
+		
 		password_Field.clear();
 		password_Field.sendKeys(password);
 		login_button.click();
-		try{
-		driver.switchTo().activeElement();
-		pendo_popup_close_button.click();
-		}catch(Exception e){}
-		try{
-			wait.until(ExpectedConditions.visibilityOf(userprofile_link));
+		
+//		driver.switchTo().activeElement();
+//		pendo_popup_close_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
 		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
-		}
-		catch(Exception e){
-			System.out.println("userprofile_link not displayed..");
-		}
+		
 	}
 	
 	public void logOut(){

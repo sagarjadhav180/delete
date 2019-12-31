@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -149,8 +150,9 @@ public class campaignBuilderPage extends TestBase {
 		if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.elementToBeClickable(campaignList));
 			tests.Util.click(campaignList);
+			try{
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_list));
-			
+			}catch(Exception e){}
 		}
 	}
 	
@@ -395,7 +397,7 @@ public class campaignBuilderPage extends TestBase {
 			int startDate;
 			String startDateToBeSelected;
 			
-			startDate =futureStartDate+2;
+			startDate =futureStartDate;
 			startDateToBeSelected=String.valueOf(startDate);
 			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
 			
@@ -413,7 +415,7 @@ public class campaignBuilderPage extends TestBase {
 			int endDate;
 			String endDateToBeSelected;
 			
-			endDate =futureEndDate+2;
+			endDate =futureEndDate;
 			endDateToBeSelected=String.valueOf(endDate);
 			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
 			
@@ -544,6 +546,5 @@ public class campaignBuilderPage extends TestBase {
 					
 		}
 		
-		
-	
+          
 }

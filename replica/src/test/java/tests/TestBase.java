@@ -11,25 +11,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import extentReport.Listener;
-import extentReport.SendEmail;
 import extentReport.ExtentReportsGenerator;
+import extentReport.SendEmail;
 import pom.LoginPage;
 
 @Listeners(extentReport.Listener.class)
@@ -59,32 +57,47 @@ public class TestBase
         
 		
 		url_to_hit=url;
+		String sf = null;
+		String sc = null ;
 		if(browser.contains("chrome")){
 			
 			System.setProperty("webdriver.chrome.driver",".//chromedriver.exe");
 		    driver=new ChromeDriver();
-		    wait= new WebDriverWait(driver,30);
+
+		    
 		    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
-			//to delete cookies
-		    driver.manage().deleteAllCookies();
-		    driver.get(url_to_hit);
+			SessionId session = ((ChromeDriver)driver).getSessionId();
+			 sc = session.toString();
+			System.out.println("Session id of ChromeDriver: " + session.toString());
+		    
 		}
 		else if(browser.contains("firefox")){
 			System.setProperty("webdriver.gecko.driver", ".//geckodriver.exe");
 			driver=new FirefoxDriver();
-			wait= new WebDriverWait(driver,30);
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
-			//to delete cookies
-		    driver.manage().deleteAllCookies();
-		    driver.get(url_to_hit);
+//			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+			SessionId session = ((FirefoxDriver)driver).getSessionId();
+			sf = session.toString();
+			System.out.println("Session id of FirefoxDriver: " + session.toString());
+			
+		    
 		}
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("Session id of FirefoxDriver: " + sf);
+
+		System.out.println("Session id of ChromeDriver: " + sc);
 		
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+		wait= new WebDriverWait(driver,30);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		//to delete cookies
+	    driver.manage().deleteAllCookies();
+	    driver.get(url_to_hit);
+	    
+	   
+	    
 	}
 
 
@@ -105,9 +118,11 @@ public class TestBase
 				System.out.println("Failure Method" + methodName);
 				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
 				driver.navigate().refresh();
-				Thread.sleep(10000);
+				Thread.sleep(3000);
 				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
 				Thread.sleep(2000);
+				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
+				
 			} catch (Exception e) {
 				System.out.println("In Catch");
 				e.printStackTrace();

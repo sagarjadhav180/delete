@@ -245,13 +245,23 @@ public class CampaignAndTrackingNumberPage extends TestBase
 //					Util.getJavascriptExecutor().executeScript("window.scrollTo(0,"+addCampaign_Button.getLocation().y+")");
 					addCampaign_Button.click();
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
-				}
+				
+		}
 		
 		
 		else if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.visibilityOf(campaignList));
 			campaignList.click();
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+			try{
+				driver.switchTo().activeElement();
+			Util.click(pendo_close_button);
+			Thread.sleep(3000);
+			}
+			catch(Exception e){			
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));}
+//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+			
+			
 		}
 		else if(buttonName.contains("update")){
 			String campaignToBeEdited=string;
@@ -357,7 +367,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
     	}
     }
 
-//    Column_Picker_options - verifications of by default checked options
+    //Column_Picker_options - verifications of by default checked options
 
  	logger.log(LogStatus.INFO, "verifying by default checked options..");
 

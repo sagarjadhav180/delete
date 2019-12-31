@@ -41,25 +41,33 @@ public class HomePage extends TestBase {
 				
 				if(link.getText().contains("Campaign")){
 					link.click();
+//					try{
+//						driver.switchTo().activeElement();
+//					Util.click(pendo_close_button);
+//					Thread.sleep(3000);
+//					}
+//					catch(Exception e){}
+						
+					try{
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+					
+					}catch(Exception e){}
 					
 				}
 				else{
 				link.click();
 				}
-//				try{
-//				driver.switchTo().activeElement();
-//				Util.click(pendo_close_button);
-//				}catch(Exception e){}
+
 //				try{
 //					if(loading_wheel.isDisplayed()){
 //					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //					}
 //				}catch(Exception e){
 //				Thread.sleep(1000);	
-				}
+//				}
 			}
 		}
+		
 //		if(pendo_popup.isDisplayed()==true){
 //			driver.switchTo().activeElement();
 //			Util.click(pendo_close_button);
@@ -70,3 +78,4 @@ public class HomePage extends TestBase {
 	}
 	
 
+}
