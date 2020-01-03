@@ -73,7 +73,8 @@ public class CampaignTests extends TestBase {
 	@BeforeClass
 	public void goToCampaignPage(){
 		hp=new HomePage(driver);
-		
+		logger=extent.startTest("Campaign builder tests ..");
+		logger.assignCategory("Campaign Suite");	
 		
 		try {
 			hp.clickAction("Campaign");

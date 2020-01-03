@@ -337,8 +337,8 @@
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Automation Suite-1&quot;&gt;
-  &lt;test thread-count=&quot;5&quot; name=&quot;chrome test&quot;&gt;
+&lt;suite thread-count=&quot;2&quot; guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Automation Suite-1&quot; parallel=&quot;tests&quot;&gt;
+  &lt;test thread-count=&quot;2&quot; name=&quot;chrome test&quot; parallel=&quot;tests&quot;&gt;
     &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
     &lt;parameter name=&quot;url&quot; value=&quot;https://stag-5-cmo-1.convirza.com&quot;/&gt;
     &lt;classes&gt;
@@ -388,67 +388,67 @@ data.addRows(16);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'updateCampaignWithFutureStartDateAndFutureEndDate')
 data.setCell(0, 2, 'tests.CampaignTests')
-data.setCell(0, 3, 16497);
+data.setCell(0, 3, 25090);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'updateCampaignWithFutureStartDateAndNeverEndDate')
 data.setCell(1, 2, 'tests.CampaignTests')
-data.setCell(1, 3, 13799);
+data.setCell(1, 3, 14267);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'createCampaignWithFutureStartDateAndFutureEndDate')
+data.setCell(2, 1, 'campaign_updation_With_externalID')
 data.setCell(2, 2, 'tests.CampaignTests')
-data.setCell(2, 3, 13792);
+data.setCell(2, 3, 14000);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'campaign_updation_With_externalID')
+data.setCell(3, 1, 'createCampaignWithFutureStartDateAndFutureEndDate')
 data.setCell(3, 2, 'tests.CampaignTests')
-data.setCell(3, 3, 13424);
+data.setCell(3, 3, 13987);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'createCampaignWithFutureStartDateAndNeverEndDate')
+data.setCell(4, 1, 'campaign_Creation_With_externalID')
 data.setCell(4, 2, 'tests.CampaignTests')
-data.setCell(4, 3, 12991);
+data.setCell(4, 3, 13435);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'campaign_Creation_With_externalID')
+data.setCell(5, 1, 'createCampaignWithFutureStartDateAndNeverEndDate')
 data.setCell(5, 2, 'tests.CampaignTests')
-data.setCell(5, 3, 12743);
+data.setCell(5, 3, 13157);
 data.setCell(6, 0, 6)
 data.setCell(6, 1, 'campaign_updation_Without_externalID')
 data.setCell(6, 2, 'tests.CampaignTests')
-data.setCell(6, 3, 12559);
+data.setCell(6, 3, 13152);
 data.setCell(7, 0, 7)
 data.setCell(7, 1, 'campaign_Creation_Without_externalID')
 data.setCell(7, 2, 'tests.CampaignTests')
-data.setCell(7, 3, 12255);
+data.setCell(7, 3, 12780);
 data.setCell(8, 0, 8)
 data.setCell(8, 1, 'CampaignAndTrackingNumberPage_UI_Verification')
 data.setCell(8, 2, 'tests.CamapignUIVerificationTest')
-data.setCell(8, 3, 7566);
+data.setCell(8, 3, 8491);
 data.setCell(9, 0, 9)
 data.setCell(9, 1, 'createCampaignWithPastTime')
 data.setCell(9, 2, 'tests.CampaignTests')
-data.setCell(9, 3, 7450);
+data.setCell(9, 3, 7888);
 data.setCell(10, 0, 10)
 data.setCell(10, 1, 'campaignBuilderPage_UI_Verification')
 data.setCell(10, 2, 'tests.CampaignTests')
-data.setCell(10, 3, 5730);
+data.setCell(10, 3, 6051);
 data.setCell(11, 0, 11)
-data.setCell(11, 1, 'campaign_deletion_Without_externalID')
+data.setCell(11, 1, 'campaign_deletion_With_futureStartDate')
 data.setCell(11, 2, 'tests.CampaignTests')
-data.setCell(11, 3, 4953);
+data.setCell(11, 3, 5199);
 data.setCell(12, 0, 12)
-data.setCell(12, 1, 'campaign_deletion_With_futureStartDate')
+data.setCell(12, 1, 'campaign_deletion_With_futureStartDateAndFutureEndDate')
 data.setCell(12, 2, 'tests.CampaignTests')
-data.setCell(12, 3, 4843);
+data.setCell(12, 3, 5089);
 data.setCell(13, 0, 13)
-data.setCell(13, 1, 'campaign_deletion_With_externalID')
+data.setCell(13, 1, 'campaign_deletion_Without_externalID')
 data.setCell(13, 2, 'tests.CampaignTests')
-data.setCell(13, 3, 4840);
+data.setCell(13, 3, 5052);
 data.setCell(14, 0, 14)
-data.setCell(14, 1, 'campaign_deletion_With_futureStartDateAndFutureEndDate')
+data.setCell(14, 1, 'campaign_deletion_With_externalID')
 data.setCell(14, 2, 'tests.CampaignTests')
-data.setCell(14, 3, 3768);
+data.setCell(14, 3, 4964);
 data.setCell(15, 0, 15)
 data.setCell(15, 1, 'login')
 data.setCell(15, 2, 'tests.LoginTest')
-data.setCell(15, 3, 3436);
+data.setCell(15, 3, 3227);
 window.suiteTableData['Automation_Suite-1']= { tableData: data, tableDiv: 'times-div-Automation_Suite-1'}
 return data;
 }
@@ -508,164 +508,164 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="test-method">
                 <span class="method-name">login</span>
-                <span class="method-start">56575 ms</span>
+                <span class="method-start">44756 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=login status=SUCCESS method=LoginTest.login()[pri:0, instance:tests.LoginTest@4d826...)</span>
-                <span class="method-start">60015 ms</span>
+                <span class="method-start">47986 ms</span>
               </div> <!-- configuration-method after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">tests.CamapignUIVerificationTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">goToCampaignPage</span>
-                <span class="method-start">60586 ms</span>
+                <span class="method-start">48758 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">CampaignAndTrackingNumberPage_UI_Verification</span>
-                <span class="method-start">62281 ms</span>
+                <span class="method-start">50629 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=CampaignAndTrackingNumberPage_UI_Verification status=SUCCESS method=CamapignUIVerif...)</span>
-                <span class="method-start">69849 ms</span>
+                <span class="method-start">59122 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">goToHomePage</span>
-                <span class="method-start">69962 ms</span>
+                <span class="method-start">59258 ms</span>
               </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">tests.CampaignTests</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">goToCampaignPage</span>
-                <span class="method-start">70700 ms</span>
+                <span class="method-start">60091 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">campaignBuilderPage_UI_Verification</span>
-                <span class="method-start">71636 ms</span>
+                <span class="method-start">61051 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaignBuilderPage_UI_Verification status=SUCCESS method=CampaignTests.campaignBui...)</span>
-                <span class="method-start">77368 ms</span>
+                <span class="method-start">67104 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_Creation_Without_externalID</span>
-                <span class="method-start">77479 ms</span>
+                <span class="method-start">67239 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_Creation_Without_externalID status=SUCCESS method=CampaignTests.campaign_C...)</span>
-                <span class="method-start">89740 ms</span>
+                <span class="method-start">80026 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_updation_Without_externalID</span>
-                <span class="method-start">89843 ms</span>
+                <span class="method-start">80124 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_updation_Without_externalID status=SUCCESS method=CampaignTests.campaign_u...)</span>
-                <span class="method-start">102407 ms</span>
+                <span class="method-start">93279 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_deletion_Without_externalID</span>
-                <span class="method-start">102509 ms</span>
+                <span class="method-start">93410 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_deletion_Without_externalID status=SUCCESS method=CampaignTests.campaign_d...)</span>
-                <span class="method-start">107464 ms</span>
+                <span class="method-start">98463 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_Creation_With_externalID</span>
-                <span class="method-start">107547 ms</span>
+                <span class="method-start">98567 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_Creation_With_externalID status=SUCCESS method=CampaignTests.campaign_Crea...)</span>
-                <span class="method-start">120293 ms</span>
+                <span class="method-start">112004 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_updation_With_externalID</span>
-                <span class="method-start">120374 ms</span>
+                <span class="method-start">112103 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_updation_With_externalID status=SUCCESS method=CampaignTests.campaign_upda...)</span>
-                <span class="method-start">133803 ms</span>
+                <span class="method-start">126107 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_deletion_With_externalID</span>
-                <span class="method-start">133890 ms</span>
+                <span class="method-start">126222 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_deletion_With_externalID status=SUCCESS method=CampaignTests.campaign_dele...)</span>
-                <span class="method-start">138731 ms</span>
+                <span class="method-start">131190 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">createCampaignWithFutureStartDateAndNeverEndDate</span>
-                <span class="method-start">138801 ms</span>
+                <span class="method-start">131294 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=createCampaignWithFutureStartDateAndNeverEndDate status=SUCCESS method=CampaignTest...)</span>
-                <span class="method-start">151795 ms</span>
+                <span class="method-start">144454 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">updateCampaignWithFutureStartDateAndNeverEndDate</span>
-                <span class="method-start">151871 ms</span>
+                <span class="method-start">144559 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=updateCampaignWithFutureStartDateAndNeverEndDate status=SUCCESS method=CampaignTest...)</span>
-                <span class="method-start">165671 ms</span>
+                <span class="method-start">158829 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_deletion_With_futureStartDate</span>
-                <span class="method-start">165761 ms</span>
+                <span class="method-start">158950 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_deletion_With_futureStartDate status=SUCCESS method=CampaignTests.campaign...)</span>
-                <span class="method-start">170607 ms</span>
+                <span class="method-start">164151 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">createCampaignWithFutureStartDateAndFutureEndDate</span>
-                <span class="method-start">170675 ms</span>
+                <span class="method-start">164244 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=createCampaignWithFutureStartDateAndFutureEndDate status=SUCCESS method=CampaignTes...)</span>
-                <span class="method-start">184469 ms</span>
+                <span class="method-start">178233 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">updateCampaignWithFutureStartDateAndFutureEndDate</span>
-                <span class="method-start">184539 ms</span>
+                <span class="method-start">178326 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=updateCampaignWithFutureStartDateAndFutureEndDate status=SUCCESS method=CampaignTes...)</span>
-                <span class="method-start">201038 ms</span>
+                <span class="method-start">203418 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">campaign_deletion_With_futureStartDateAndFutureEndDate</span>
-                <span class="method-start">201143 ms</span>
+                <span class="method-start">203599 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=campaign_deletion_With_futureStartDateAndFutureEndDate status=SUCCESS method=Campai...)</span>
-                <span class="method-start">204912 ms</span>
+                <span class="method-start">208688 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">createCampaignWithPastTime</span>
-                <span class="method-start">205013 ms</span>
+                <span class="method-start">208775 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=createCampaignWithPastTime status=SUCCESS method=CampaignTests.createCampaignWithPa...)</span>
-                <span class="method-start">212464 ms</span>
+                <span class="method-start">216666 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">goToHomePage</span>
-                <span class="method-start">212534 ms</span>
+                <span class="method-start">216821 ms</span>
               </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">tests.LoginTest</div> <!-- chronological-class-name -->
               <div class="configuration-test after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">213383 ms</span>
+                <span class="method-start">217739 ms</span>
               </div> <!-- configuration-test after -->
               <div class="configuration-suite after">
                 <span class="method-name">close_connection</span>
-                <span class="method-start">214396 ms</span>
+                <span class="method-start">218629 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
