@@ -1,3 +1,5 @@
+##campaign
+existing test cases
 
 1.go to campaign and tracking number page - UI verification
 2.campaign builder page - UI verification
@@ -22,8 +24,6 @@ UI verification
 2.edit
 3.delete
 
-##campaign
-existing test cases
 
 ##user
 UI verification

@@ -119,8 +119,8 @@ public class TestBase
 				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
 				driver.navigate().refresh();
 				Thread.sleep(3000);
-				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
-				Thread.sleep(2000);
+//				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
+//				Thread.sleep(2000);
 				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
 				
 			} catch (Exception e) {

@@ -185,13 +185,15 @@ public class Util extends TestBase{
 		}
 		return campaign_count;
 		
-			 }
+    }
+	
 	
 	public static int generateRandomNumber(){
 		Random randomNumber=new Random();
 		int number = randomNumber.nextInt();
 		return number;
 	}
+	
 	
 	public static int getDate(){
 		Date date=new Date();
