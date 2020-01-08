@@ -489,18 +489,5 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 //		Assert1.assertAll();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

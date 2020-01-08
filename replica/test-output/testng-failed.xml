@@ -7,24 +7,11 @@
     <classes>
       <class name="tests.CampaignTests">
         <methods>
-          <include name="campaignBuilderPage_UI_Verification"/>
-          <include name="updateCampaignWithFutureStartDateAndFutureEndDate"/>
-          <include name="campaign_deletion_With_futureStartDate"/>
-          <include name="updateCampaignWithFutureStartDateAndNeverEndDate"/>
-          <include name="setUp"/>
-          <include name="campaign_Creation_Without_externalID"/>
-          <include name="createCampaignWithFutureStartDateAndNeverEndDate"/>
-          <include name="campaign_deletion_With_externalID"/>
-          <include name="createCampaignWithFutureStartDateAndFutureEndDate"/>
-          <include name="close_connection"/>
-          <include name="campaign_Creation_With_externalID"/>
           <include name="goToHomePage"/>
-          <include name="campaign_updation_Without_externalID"/>
-          <include name="campaign_deletion_With_futureStartDateAndFutureEndDate"/>
-          <include name="createCampaignWithPastTime"/>
+          <include name="campaignBuilderPage_UI_Verification"/>
+          <include name="setUp"/>
           <include name="goToCampaignPage"/>
-          <include name="campaign_deletion_Without_externalID"/>
-          <include name="campaign_updation_With_externalID"/>
+          <include name="close_connection"/>
           <include name="tearDown"/>
           <include name="tearDown"/>
         </methods>

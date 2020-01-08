@@ -16,8 +16,7 @@ public class CamapignUIVerificationTest extends TestBase{
 	@BeforeClass
 	public void goToCampaignPage() throws InterruptedException{
 		hp=new HomePage(driver);
-		logger=extent.startTest("Campaign and tracking number page page UI verification..");
-		logger.assignCategory("Campaign Suite");
+		
 		logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
 	hp.clickAction("Campaign");
 		
@@ -26,8 +25,8 @@ public class CamapignUIVerificationTest extends TestBase{
 	
 	@Test(priority=1)
 	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
-		
-        
+		logger=extent.startTest("Campaign and tracking number page page UI verification..");
+		logger.assignCategory("Campaign Suite");
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
 		logger.log(LogStatus.INFO, "verifying UI of campaign and tracking number page..");
 		cp.campaignPageUIVerification();
@@ -60,7 +59,6 @@ public class CamapignUIVerificationTest extends TestBase{
 	@AfterClass
 	public void goToHomePage(){
 
-		System.out.println("in goToHomePage()");
         Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
         try {
 			hp.clickAction("Home");
