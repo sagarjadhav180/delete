@@ -7,6 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.relevantcodes.extentreports.LogStatus;
+
+import tests.Util;
 
 public class GroupsAndUserPage {
 	
@@ -39,6 +44,9 @@ public class GroupsAndUserPage {
 	
 	@FindBy(xpath="//select[@id='source'][contains(@validate-blur-forza,'State')]")
 	private WebElement state_dropdown;	
+
+	String[] states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
+	
 	
 	@FindBy(xpath="//select[@ng-model='industry']")
 	private WebElement industry_dropdown;
@@ -97,6 +105,8 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="//label[text()='DNI Type']//parent::*//select")
 	private WebElement dni_type_dropdown;
 
+	String[] dni_types={"URL","Source"};
+	
 	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div")
 	private WebElement custom_parameters;
 	
@@ -134,6 +144,9 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="//label[text()='Number of Digits in Agent Id']//parent::div//following-sibling::div//select")
 	private WebElement number_of_digits_in_agent_Id_dropdown;
 	
+	String[] number_of_digits_in_agent_Id_list={"1","2","3","4","5","6","7","8","9"};
+	
+	
 	@FindBy(xpath="//label[contains(text(),'Call Value')]//parent::*//following-sibling::div//input")
 	private WebElement call_value_textbox;
 
@@ -152,6 +165,7 @@ public class GroupsAndUserPage {
 
 	@FindBy(xpath="(//label[contains(text(),'Ring-to Phone Number')]//parent::*//following-sibling::div//input)")
 	private WebElement ringtonumber_textbox;
+	
 	
 	//Custom Sources Section
 	
@@ -196,25 +210,34 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="//button[contains(text(),'Selected')]")
 	private WebElement custom_source_delete_button;	
 	
+	
 	//Call Action Settings Section
 	//all xpaths are written for first call action
 	@FindBy(xpath="//li[1]//div[2]//div[2]//div[1]//div[2]//div[1]//div[2]//div[1]//select[1]")
 	private WebElement if_condtion_dropdown;		
 
+	String[] if_condtion_list={"repeat call","duration","disposition","caller id","missed opportunity","sales inquiry","conversion","lead quality","referring source","referring type","UTM Campaign","UTM Source","UTM Medium","Send to Voicemail"};
+	
 	@FindBy(xpath="//li[1]//div[2]//div[2]//div[1]//div[2]//div[1]//div[2]//div[2]//select[1]")
 	private WebElement operator_dropdown;
 
+	String[] operator_list={"is","is not"};
+	
 	@FindBy(xpath="//li[1]//div[2]//div[2]//div[1]//div[2]//div[1]//div[2]//div[3]//select[1]")
 	private WebElement if_condtion_dropdown_value;
 
+	String[] if_condtion_dropdown_list={"true","false"};
+	
 	@FindBy(xpath="//div[@class='col-lg-2 col-md-2 col-sm-2 col-xs-2 col-sm-offset-1']//div//select[@class='form-control ng-pristine ng-untouched ng-valid ng-isolate-scope']")
 	private WebElement and_or_dropdown;
 
+	String[] and_or_list={"AND","OR"};
+	
 	@FindBy(xpath="//li[1]//div[@ class='col-sm-4 col-xs-3 callactionresponsive']//select")
 	private WebElement then_condition_dropdown;
 
-
-	//pending
+    String[] then_condition_list={"Send email alert to","Send SMS to","Tag call as","Trigger the webhook","Flag for call back","Send call for Google Analytics"};
+	
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//span//preceding-sibling::input")
 	private WebElement then_condition_for_email;
 	
@@ -231,9 +254,103 @@ public class GroupsAndUserPage {
 	private WebElement jump_to_webhook_settings_link;
 
 	
-	//wherever select class is used need to write values in it to use select.selectbyname
-	//whereever select class is used from dropdown store all options in string for verification purposecmd
+	//sub group section
+	@FindBy(xpath="(//button[text()=' Add Sub-Group'])[1]")
+	private WebElement add_subgroup_button;	
+
+	@FindBy(xpath="(//span[text()='Export Groups'])[1]//parent::button")
+	private WebElement export_groups_button;	
+
+	@FindBy(xpath="//table[@ id='table_sub_group']//th")
+	private List<WebElement> sub_group_columns;
 	
+	String[] sub_group_columns_names={"OUID","Group Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code","Actions"};
+	
+	@FindBy(xpath="(//button[4])[1]")
+	private static WebElement groups_topNextPagination_Button;	
+
+	@FindBy(xpath="(//button[contains(text(),'Prev 100')])[1]")
+	private static WebElement groups_topPrevPagination_Button;	
+	
+	@FindBy(xpath="(//button[contains(text(),'First')])[1]")
+	private static WebElement groups_topFirstPagination_Button;		
+
+	@FindBy(xpath="(//button[contains(text(),'Last')])[1]")
+	private static WebElement groups_topLastPagination_Button;
+	
+	@FindBy(xpath="(//button[contains(text(),'Showing')])[1]")
+	private static WebElement groups_topPagination_count;
+
+	@FindBy(xpath="//table[@id='table_sub_group']//tbody//tr")
+	private static WebElement groups_countOf_groups;
+	
+	//verification of buttons in top pagination toolbox
+//		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+//		wait.until(ExpectedConditions.visibilityOf(groups_topNextPagination_Button));
+//		Assert1.assertTrue(groups_topNextPagination_Button.isDisplayed(),"groups_topNextPagination_Button is not present or locator changed");
+//		Assert1.assertTrue(groups_topPrevPagination_Button.isDisplayed(),"groups_topPrevPagination_Button is not present or locator changed");	
+//		Assert1.assertTrue(groups_topFirstPagination_Button.isDisplayed(),"groups_topFirstPagination_count is not present or locator changed");	
+//		Assert1.assertTrue(groups_topLastPagination_Button.isDisplayed(),"groups_topLastPagination_count is not present or locator changed");	
+		
+		//verification of count in top pagination toolbox	
+//		dbCount = Util.readingFromDB("SELECT count(*) as count FROM org_unit WHERE org_unit_parent_id=70135" );
+//		countOnUI_pagination=groups_topPagination_count.getText().substring(groups_topPagination_count.getText().indexOf('f')+2);
+//		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+//		Assert1.assertEquals(dbCount, groups_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+//		
+//		logger.log(LogStatus.INFO, "verifying count of listed groups");
+//		Assert1.assertEquals(dbCount, String.valueOf(groups_countOf_groups.size()),"count  of listed groups is mismatching with db count");
+	
+
+	//users section
+	@FindBy(xpath="(//button[text()=' Add User'])[1]")
+	private WebElement add_user_button;	
+
+	@FindBy(xpath="(//span[text()='Export Users'])[1]//parent::button")
+	private WebElement export_users_button;	
+
+	@FindBy(xpath="//table[@ id='table_group_user']//th")
+	private List<WebElement> users_columns;
+
+        String[] users_names={"First Name","Last Name","Email","Agent Ring-to","Agent ID","Role","Status","Actions"};
+
+	@FindBy(xpath="(//button[4])[3]")
+	private static WebElement users_topNextPagination_Button;
+
+	@FindBy(xpath="(//button[contains(text(),'Prev 100')])[3]")
+	private static WebElement users_topPrevPagination_Button;
+
+	@FindBy(xpath="(//button[contains(text(),'First')])[3]")
+	private static WebElement users_topFirstPagination_Button;
+
+	@FindBy(xpath="(//button[contains(text(),'Last')])[3]")
+	private static WebElement users_topLastPagination_Button;
+
+	@FindBy(xpath="(//button[contains(text(),'Showing')])[3]")
+	private static WebElement users_topPagination_count;
+
+	@FindBy(xpath="//table[@id='table_group_user']//tbody//tr")
+	private static WebElement users_countOf_groups;
+		
+
+//verification of buttons in top pagination toolbox
+//		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+//		wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
+//		Assert1.assertTrue(users_topNextPagination_Button.isDisplayed(),"users_topNextPagination_Button is not present or locator changed");
+//		Assert1.assertTrue(users_topPrevPagination_Button.isDisplayed(),"users_topPrevPagination_Button is not present or locator changed");	
+//		Assert1.assertTrue(users_topFirstPagination_Button.isDisplayed(),"users_topFirstPagination_count is not present or locator changed");	
+//		Assert1.assertTrue(users_topLastPagination_Button.isDisplayed(),"users_topLastPagination_count is not present or locator changed");	
+		
+		//verification of count in top pagination toolbox	
+//		dbCount = Util.readingFromDB("SELECT * FROM ct_user WHERE ct_user_ou_id=70135 AND role_id !=4" );
+//		countOnUI_pagination=users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
+//		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+//		Assert1.assertEquals(dbCount, users_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+//		
+//		logger.log(LogStatus.INFO, "verifying count of listed groups");
+//		Assert1.assertEquals(dbCount, String.valueOf(users_countOf_groups.size()),"count  of listed users is mismatching with db count");
+
+
 	
 	WebDriver driver;	
 	
@@ -241,10 +358,27 @@ public class GroupsAndUserPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	
+	//to get checkbox of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
 		
 		WebElement webelement = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+csa+"]/..//preceding-sibling::input"));
 		return webelement;
 	}
 	
+	
+	//to get action button of desired group
+    public WebElement getgroup(String group_name,String button_name){
+		
+		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		return webelement;
+	}
+	
+  //to get action button of desired user
+    public WebElement getUser(String user_email,String button_name){
+		
+		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		return webelement;
+	}
+    
 }
