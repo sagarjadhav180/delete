@@ -35,7 +35,7 @@ public class SendEmail extends TestBase {
 		// "surajm@alohatechnology.com","ahrarh@alohatechnology.com" "
 		String[] to = { "sagar.j@moentek.com" };
 		String[] cc = {"sagar.jadhav180@gmail.com","sagar.jadhav2343@gmail.com" };
-		String[] bcc = {};
+		String[] bcc = {"jitesh.a@moentek.com"};
 //
 //		String[] to = { "rahilaloha@gmail.com" };
 //		String[] cc = {};

@@ -5,17 +5,15 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
-      <class name="tests.CampaignTests">
+      <class name="tests.LoginTest">
         <methods>
-          <include name="goToHomePage"/>
-          <include name="campaignBuilderPage_UI_Verification"/>
           <include name="setUp"/>
-          <include name="goToCampaignPage"/>
+          <include name="rememeber_me_functinonality"/>
           <include name="close_connection"/>
           <include name="tearDown"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- tests.CampaignTests -->
+      </class> <!-- tests.LoginTest -->
     </classes>
   </test> <!-- chrome test(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

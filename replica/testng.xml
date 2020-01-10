@@ -12,8 +12,6 @@
 		<classes >
 
 		<class name="tests.LoginTest"/>
-		<class name="tests.CamapignUIVerificationTest"/>
-		<class name="tests.CampaignTests"/>
 		
 		</classes>
 
