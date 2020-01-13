@@ -312,7 +312,7 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="//table[@ id='table_group_user']//th")
 	private List<WebElement> users_columns;
 
-        String[] users_names={"First Name","Last Name","Email","Agent Ring-to","Agent ID","Role","Status","Actions"};
+    String[] users_names={"First Name","Last Name","Email","Agent Ring-to","Agent ID","Role","Status","Actions"};
 
 	@FindBy(xpath="(//button[4])[3]")
 	private static WebElement users_topNextPagination_Button;
@@ -342,7 +342,7 @@ public class GroupsAndUserPage {
 //		Assert1.assertTrue(users_topLastPagination_Button.isDisplayed(),"users_topLastPagination_count is not present or locator changed");	
 		
 		//verification of count in top pagination toolbox	
-//		dbCount = Util.readingFromDB("SELECT * FROM ct_user WHERE ct_user_ou_id=70135 AND role_id !=4" );
+//		dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70135 AND role_id !=4" );
 //		countOnUI_pagination=users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
 //		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
 //		Assert1.assertEquals(dbCount, users_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");

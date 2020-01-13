@@ -138,7 +138,6 @@ public class campaignBuilderPage extends TestBase {
 	
 	
 	
-	
 	public campaignBuilderPage(WebDriver driver,WebDriverWait wait1){
 		PageFactory.initElements(driver, this);
 		wait=wait1;

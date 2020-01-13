@@ -11,6 +11,7 @@ import pom.LoginPage;
 public class LoginTest extends TestBase
 {
 
+	//Login page UI verification
 	@Test(priority=1)
 	public void login_page_UI_Verification() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -21,6 +22,7 @@ public class LoginTest extends TestBase
      
 	}
 
+	//Validate login funcutonality with invalidate cred.
 	@Test(priority=2)
 	public void login_with_invalidate_cred() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -31,6 +33,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Validate log in with blank user name 
 	@Test(priority=3)
 	public void login_with_blank_username() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -41,6 +44,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Validate log in with blank password
 	@Test(priority=4)
 	public void login_with_blank_password() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -51,6 +55,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Check if inactive user is not able to login 
 	@Test(priority=5)
 	public void login_with_inactive_user() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -61,6 +66,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Check if deleted user is not able to login
 	@Test(priority=6)
 	public void login_with_deleted_user() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -71,6 +77,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Validate log in with blank password and username
 	@Test(priority=7)
 	public void login_with_blank_username_and_password() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -81,6 +88,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Verify UI of forgot passowrd page
 	@Test(priority=8)
 	public void UIVerification_forgot_passowrd_page() throws IOException, InterruptedException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -91,6 +99,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Validate Next button with no email id
 	@Test(priority=9)
 	public void next_button_with_no_email_ID() throws IOException, InterruptedException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -101,6 +110,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Check if user is able to reset password
 	@Test(priority=10)
 	public void reset_password() throws IOException, InterruptedException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -111,6 +121,7 @@ public class LoginTest extends TestBase
      
 	}
 	
+	//Validate remember me functionality 
 	@Test(priority=11)
 	public void rememeber_me_functinonality() throws IOException, InterruptedException{
         LoginPage lp=new LoginPage(driver,wait);
@@ -121,7 +132,7 @@ public class LoginTest extends TestBase
      
 	}
 	
-	
+	//check if user is able to login with valid credentials
 	@Test(priority=12)
 	public void validLogin() throws IOException{
         LoginPage lp=new LoginPage(driver,wait);
