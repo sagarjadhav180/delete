@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
@@ -89,12 +91,16 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath="//div[contains(text(),'Email field can not be empty.. Please enter your e-mail')]")
 	private static WebElement resetPasswordFailureMessage;
 	
-    public static WebDriverWait wait;
-	
-	public LoginPage (WebDriver driver,WebDriverWait wait1){
+//    public static WebDriverWait wait;
+//    public static ExtentTest logger;
+//    public  static ExtentReports extent;
+    
+	public LoginPage (WebDriver driver){
 		
 		PageFactory.initElements(driver, this);
-        this.wait=wait1;	
+//        this.wait=wait1;	
+//        this.logger=logger1;
+//        this.extent=extent;
 	}
 	
 

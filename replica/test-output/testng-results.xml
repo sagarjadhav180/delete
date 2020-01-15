@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="12" passed="12">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="67648" started-at="2020-01-10T09:26:33Z" finished-at="2020-01-10T09:27:41Z">
+  <suite name="Automation Suite-1" duration-ms="203223" started-at="2020-01-15T06:13:54Z" finished-at="2020-01-15T06:17:17Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="67648" started-at="2020-01-10T09:26:33Z" finished-at="2020-01-10T09:27:41Z">
-      <class name="tests.LoginTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="setUp" is-config="true" duration-ms="44825" started-at="2020-01-10T09:26:33Z" finished-at="2020-01-10T09:27:18Z">
+    <test name="chrome test" duration-ms="203223" started-at="2020-01-15T06:13:54Z" finished-at="2020-01-15T06:17:17Z">
+      <class name="tests.HomeTest">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.HomeTest@7bb58ca3]" name="setUp" is-config="true" duration-ms="184252" started-at="2020-01-15T06:13:54Z" finished-at="2020-01-15T06:16:59Z">
           <params>
             <param index="0">
               <value>
@@ -23,195 +23,34 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="login_page_UI_Verification()[pri:1, instance:tests.LoginTest@7bb58ca3]" name="login_page_UI_Verification" duration-ms="589" started-at="2020-01-10T09:27:18Z" finished-at="2020-01-10T09:27:19Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_page_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="808" started-at="2020-01-10T09:27:19Z" finished-at="2020-01-10T09:27:20Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_page_UI_Verification status=SUCCESS method=LoginTest.login_page_UI_Verification()[pri:1, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_invalidate_cred()[pri:2, instance:tests.LoginTest@7bb58ca3]" name="login_with_invalidate_cred" duration-ms="2050" started-at="2020-01-10T09:27:20Z" finished-at="2020-01-10T09:27:22Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_invalidate_cred -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="181" started-at="2020-01-10T09:27:22Z" finished-at="2020-01-10T09:27:22Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_invalidate_cred status=SUCCESS method=LoginTest.login_with_invalidate_cred()[pri:2, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_username()[pri:3, instance:tests.LoginTest@7bb58ca3]" name="login_with_blank_username" duration-ms="439" started-at="2020-01-10T09:27:22Z" finished-at="2020-01-10T09:27:22Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_blank_username -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="175" started-at="2020-01-10T09:27:22Z" finished-at="2020-01-10T09:27:22Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_blank_username status=SUCCESS method=LoginTest.login_with_blank_username()[pri:3, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_password()[pri:4, instance:tests.LoginTest@7bb58ca3]" name="login_with_blank_password" duration-ms="629" started-at="2020-01-10T09:27:22Z" finished-at="2020-01-10T09:27:23Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_blank_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="137" started-at="2020-01-10T09:27:23Z" finished-at="2020-01-10T09:27:23Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_blank_password status=SUCCESS method=LoginTest.login_with_blank_password()[pri:4, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_inactive_user()[pri:5, instance:tests.LoginTest@7bb58ca3]" name="login_with_inactive_user" duration-ms="680" started-at="2020-01-10T09:27:23Z" finished-at="2020-01-10T09:27:24Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_inactive_user -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="383" started-at="2020-01-10T09:27:24Z" finished-at="2020-01-10T09:27:24Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_inactive_user status=SUCCESS method=LoginTest.login_with_inactive_user()[pri:5, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_deleted_user()[pri:6, instance:tests.LoginTest@7bb58ca3]" name="login_with_deleted_user" duration-ms="879" started-at="2020-01-10T09:27:24Z" finished-at="2020-01-10T09:27:25Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_deleted_user -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="141" started-at="2020-01-10T09:27:25Z" finished-at="2020-01-10T09:27:25Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_deleted_user status=SUCCESS method=LoginTest.login_with_deleted_user()[pri:6, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_username_and_password()[pri:7, instance:tests.LoginTest@7bb58ca3]" name="login_with_blank_username_and_password" duration-ms="221" started-at="2020-01-10T09:27:25Z" finished-at="2020-01-10T09:27:25Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_blank_username_and_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="111" started-at="2020-01-10T09:27:25Z" finished-at="2020-01-10T09:27:26Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_blank_username_and_password status=SUCCESS method=LoginTest.login_with_blank_username_and_password()[pri:7, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="UIVerification_forgot_passowrd_page()[pri:8, instance:tests.LoginTest@7bb58ca3]" name="UIVerification_forgot_passowrd_page" duration-ms="3626" started-at="2020-01-10T09:27:26Z" finished-at="2020-01-10T09:27:29Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- UIVerification_forgot_passowrd_page -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="108" started-at="2020-01-10T09:27:29Z" finished-at="2020-01-10T09:27:29Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=UIVerification_forgot_passowrd_page status=SUCCESS method=LoginTest.UIVerification_forgot_passowrd_page()[pri:8, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="next_button_with_no_email_ID()[pri:9, instance:tests.LoginTest@7bb58ca3]" name="next_button_with_no_email_ID" duration-ms="485" started-at="2020-01-10T09:27:29Z" finished-at="2020-01-10T09:27:30Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- next_button_with_no_email_ID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="139" started-at="2020-01-10T09:27:30Z" finished-at="2020-01-10T09:27:30Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=next_button_with_no_email_ID status=SUCCESS method=LoginTest.next_button_with_no_email_ID()[pri:9, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="reset_password()[pri:10, instance:tests.LoginTest@7bb58ca3]" name="reset_password" duration-ms="1086" started-at="2020-01-10T09:27:30Z" finished-at="2020-01-10T09:27:31Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- reset_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="98" started-at="2020-01-10T09:27:31Z" finished-at="2020-01-10T09:27:31Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=reset_password status=SUCCESS method=LoginTest.reset_password()[pri:10, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="rememeber_me_functinonality()[pri:11, instance:tests.LoginTest@7bb58ca3]" name="rememeber_me_functinonality" duration-ms="6694" started-at="2020-01-10T09:27:31Z" finished-at="2020-01-10T09:27:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- rememeber_me_functinonality -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="191" started-at="2020-01-10T09:27:38Z" finished-at="2020-01-10T09:27:38Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=rememeber_me_functinonality status=SUCCESS method=LoginTest.rememeber_me_functinonality()[pri:11, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="validLogin()[pri:12, instance:tests.LoginTest@7bb58ca3]" name="validLogin" duration-ms="1926" started-at="2020-01-10T09:27:38Z" finished-at="2020-01-10T09:27:40Z">
+        <test-method status="PASS" signature="validLogin()[pri:0, instance:tests.HomeTest@7bb58ca3]" name="validLogin" is-config="true" duration-ms="5603" started-at="2020-01-15T06:16:59Z" finished-at="2020-01-15T06:17:04Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validLogin -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="99" started-at="2020-01-10T09:27:40Z" finished-at="2020-01-10T09:27:40Z">
+        <test-method status="PASS" signature="ui_verification()[pri:1, instance:tests.HomeTest@7bb58ca3]" name="ui_verification" duration-ms="12118" started-at="2020-01-15T06:17:04Z" finished-at="2020-01-15T06:17:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ui_verification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomeTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="486" started-at="2020-01-15T06:17:16Z" finished-at="2020-01-15T06:17:17Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=validLogin status=SUCCESS method=LoginTest.validLogin()[pri:12, instance:tests.LoginTest@7bb58ca3] output={null}]]]>
+                <![CDATA[[TestResult name=ui_verification status=SUCCESS method=HomeTest.ui_verification()[pri:1, instance:tests.HomeTest@7bb58ca3] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.LoginTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="885" started-at="2020-01-10T09:27:40Z" finished-at="2020-01-10T09:27:41Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.HomeTest@7bb58ca3]" name="tearDown" is-config="true" duration-ms="725" started-at="2020-01-15T06:17:17Z" finished-at="2020-01-15T06:17:17Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.LoginTest@7bb58ca3]" name="close_connection" is-config="true" duration-ms="6682" started-at="2020-01-10T09:27:41Z" finished-at="2020-01-10T09:27:48Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.HomeTest@7bb58ca3]" name="close_connection" is-config="true" duration-ms="12289" started-at="2020-01-15T06:17:18Z" finished-at="2020-01-15T06:17:30Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
-      </class> <!-- tests.LoginTest -->
+      </class> <!-- tests.HomeTest -->
     </test> <!-- chrome test -->
   </suite> <!-- Automation Suite-1 -->
 </testng-results>
