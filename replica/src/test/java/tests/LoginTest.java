@@ -2,6 +2,7 @@ package tests;
 
 import java.io.IOException;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -142,7 +143,15 @@ public class LoginTest extends TestBase
         lp.validLogin();		
 	}
 
-	
+	//loging out -tear down
+		@AfterClass
+		public void tearDown() throws IOException{
+	        LoginPage lp=new LoginPage(driver);
+	        logger=extent.startTest("LogOut"); 
+	        logger.log(LogStatus.INFO, "loggin out.. ");
+	        lp.logOut();
+	        		
+		}
 	
 	
 	

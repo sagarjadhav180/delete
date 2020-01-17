@@ -60,7 +60,7 @@ public class TestBase
 		String sf = null;
 		String sc = null ;
 		if(browser.contains("chrome")){
-			
+
 			System.setProperty("webdriver.chrome.driver",".//chromedriver.exe");
 		    driver=new ChromeDriver();
 
@@ -76,21 +76,12 @@ public class TestBase
 			System.setProperty("webdriver.gecko.driver", ".//geckodriver.exe");
 			driver=new FirefoxDriver();
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-//			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-			SessionId session = ((FirefoxDriver)driver).getSessionId();
-			sf = session.toString();
-			System.out.println("Session id of FirefoxDriver: " + session.toString());
-			
+			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 		    
 		}
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("Session id of FirefoxDriver: " + sf);
 
-		System.out.println("Session id of ChromeDriver: " + sc);
-		
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-		wait= new WebDriverWait(driver,30);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wait= new WebDriverWait(driver,60);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		//to delete cookies
 	    driver.manage().deleteAllCookies();

@@ -370,7 +370,12 @@ public class LoginPage extends TestBase {
 	}
 	
 	public void logOut(){
-		
+		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
+		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
+		profileButton.click();
+		Util.click(logoutLink);
+		wait.until(ExpectedConditions.visibilityOf(username_Field));
+
 	}
 	
 	
