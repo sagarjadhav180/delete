@@ -30,16 +30,16 @@ public class HomeTest extends TestBase
 		hp=new HomePage(driver);
 		logger=extent.startTest("ui_verification");
 		logger.log(LogStatus.INFO, "verifying UI of the Home page..");
-		logger.assignCategory("Home Page");
+		logger.assignCategory("Home page Suite");
 		hp.UIVerification();
 	} 
 	
 	@Test(priority=2)
-	public void count_verification_UI() throws InterruptedException{
+	public void tiles_count_verification_UI() throws InterruptedException{
 		hp=new HomePage(driver);
 		logger=extent.startTest("count_verification_UI");
 		logger.log(LogStatus.INFO, "verifying count displayed on UI..");
-		logger.assignCategory("Home Page");
+		logger.assignCategory("Home page Suite");
 		hp.tilesCount();
 	}
 	
