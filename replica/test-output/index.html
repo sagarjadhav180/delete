@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Automation_Suite-1">
-              <span class="suite-name border-passed">Automation Suite-1</span>
+              <span class="suite-name border-failed">Automation Suite-1</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,7 +91,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Automation_Suite-1" class="hide-methods failed suite-Automation_Suite-1"> (hide)</a> <!-- hide-methods failed suite-Automation_Suite-1 -->
+                      <a href="#" panel-name="suite-Automation_Suite-1" class="show-methods failed suite-Automation_Suite-1"> (show)</a> <!-- show-methods failed suite-Automation_Suite-1 -->
+                    </span>
+                    <div class="method-list-content failed suite-Automation_Suite-1">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.HomeTest" hash-for-method="count_verification_UI">count_verification_UI</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Automation_Suite-1 -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -117,6 +131,31 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Automation_Suite-1" class="panel Automation_Suite-1">
+          <div class="suite-Automation_Suite-1-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">tests.HomeTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="count_verification_UI">
+                  </a> <!-- count_verification_UI -->
+                  <span class="method-name">count_verification_UI</span>
+                  <div class="stack-trace">java.lang.AssertionError: The following asserts failed:
+	conversion rate is incorrect.. expected [true] but found [false]
+	at pom.HomePage.tilesCount(HomePage.java:403)
+	at tests.HomeTest.count_verification_UI(HomeTest.java:43)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 17 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Automation_Suite-1-class-failed -->
           <div class="suite-Automation_Suite-1-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -186,16 +225,20 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'ui_verification')
 data.setCell(0, 2, 'tests.HomeTest')
-data.setCell(0, 3, 12118);
+data.setCell(0, 3, 45985);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'count_verification_UI')
+data.setCell(1, 2, 'tests.HomeTest')
+data.setCell(1, 3, 7897);
 window.suiteTableData['Automation_Suite-1']= { tableData: data, tableDiv: 'times-div-Automation_Suite-1'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 12 seconds</span>
+              <span class="suite-total-time">Total running time: 53 seconds</span>
               <div id="times-div-Automation_Suite-1">
               </div> <!-- times-div-Automation_Suite-1 -->
             </div> <!-- times-div -->
@@ -228,23 +271,33 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">validLogin</span>
-                <span class="method-start">184265 ms</span>
+                <span class="method-start">71415 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">ui_verification</span>
-                <span class="method-start">189882 ms</span>
+                <span class="method-start">76632 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=ui_verification status=SUCCESS method=HomeTest.ui_verification()[pri:1, instance:te...)</span>
-                <span class="method-start">202004 ms</span>
+                <span class="method-start">122620 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">count_verification_UI</span>
+                <span class="method-start">123469 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=count_verification_UI status=FAILURE method=HomeTest.count_verification_UI()[pri:2,...)</span>
+                <span class="method-start">131372 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-test after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">202490 ms</span>
+                <span class="method-start">148634 ms</span>
               </div> <!-- configuration-test after -->
               <div class="configuration-suite after">
                 <span class="method-name">close_connection</span>
-                <span class="method-start">203285 ms</span>
+                <span class="method-start">149449 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

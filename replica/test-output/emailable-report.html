@@ -9,10 +9,19 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="7">Automation Suite-1</th></tr>
-<tr><td><a href="#t0">chrome test</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">203,223</td><td></td><td></td></tr>
+<tr><td><a href="#t0">chrome test</a></td><td class="num">1</td><td class="num">0</td><td class="num attn">1</td><td class="num">149,374</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Automation Suite-1</th></tr></tbody><tbody id="t0"><tr><th colspan="4">chrome test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">tests.HomeTest</td><td><a href="#m0">ui_verification</a></td><td rowspan="1">1579069024640</td><td rowspan="1">12118</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Automation Suite-1</th></tr></tbody><tbody id="t0"><tr><th colspan="4">chrome test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.HomeTest</td><td><a href="#m0">count_verification_UI</a></td><td rowspan="1">1579192318679</td><td rowspan="1">7897</td></tr><tr><th colspan="4">chrome test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">tests.HomeTest</td><td><a href="#m1">ui_verification</a></td><td rowspan="1">1579192271842</td><td rowspan="1">45985</td></tr></tbody>
 </table>
-<h2>chrome test</h2><h3 id="m0">tests.HomeTest#ui_verification</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>chrome test</h2><h3 id="m0">tests.HomeTest#count_verification_UI</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: The following asserts failed:
+	conversion rate is incorrect.. expected [true] but found [false]
+	at pom.HomePage.tilesCount(HomePage.java:403)
+	at tests.HomeTest.count_verification_UI(HomeTest.java:43)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 17 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">tests.HomeTest#ui_verification</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

@@ -340,7 +340,6 @@ public class LoginPage extends TestBase {
     
 	public void validLogin() throws IOException{
 		
-		logger.log(LogStatus.INFO, "valid login test case running..");
 		
 		Properties prop=new Properties();
 		

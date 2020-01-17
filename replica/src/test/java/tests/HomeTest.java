@@ -33,5 +33,15 @@ public class HomeTest extends TestBase
 		logger.assignCategory("Home Page");
 		hp.UIVerification();
 	} 
+	
+	@Test(priority=2)
+	public void count_verification_UI() throws InterruptedException{
+		hp=new HomePage(driver);
+		logger=extent.startTest("count_verification_UI");
+		logger.log(LogStatus.INFO, "verifying count displayed on UI..");
+		logger.assignCategory("Home Page");
+		hp.tilesCount();
+	}
+	
 
 }

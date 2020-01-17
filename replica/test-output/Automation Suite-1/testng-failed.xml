@@ -8,7 +8,7 @@
       <class name="tests.HomeTest">
         <methods>
           <include name="validLogin"/>
-          <include name="ui_verification"/>
+          <include name="count_verification_UI"/>
           <include name="setUp"/>
           <include name="close_connection"/>
           <include name="tearDown"/>
