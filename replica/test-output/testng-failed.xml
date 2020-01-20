@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Automation Suite-1]" parallel="methods">
-  <parameter name="browser" value="firefox"/>
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Automation Suite-1]" parallel="tests">
+  <parameter name="browser" value="chrome"/>
   <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
   <test name="chrome test">
     <parameter name="browser" value="chrome"/>
@@ -13,80 +13,4 @@
       <class name="tests.CampaignTests"/>
     </classes>
   </test> <!-- chrome test -->
-  <test name="firefox test">
-    <parameter name="browser" value="firefox"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.LoginTest"/>
-      <class name="tests.HomeTest"/>
-      <class name="tests.CamapignUIVerificationTest"/>
-      <class name="tests.CampaignTests"/>
-    </classes>
-  </test> <!-- firefox test -->
-  <test name="firefox test(failed)">
-    <parameter name="browser" value="firefox"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.CamapignUIVerificationTest">
-        <methods>
-          <include name="CampaignAndTrackingNumberPage_UI_Verification"/>
-          <include name="goToCampaignPage"/>
-          <include name="goToCampaignPage"/>
-          <include name="goToHomePage"/>
-          <include name="goToHomePage"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.CamapignUIVerificationTest -->
-      <class name="tests.LoginTest">
-        <methods>
-          <include name="validLogin"/>
-          <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="next_button_with_no_email_ID"/>
-          <include name="reset_password"/>
-          <include name="UIVerification_forgot_passowrd_page"/>
-          <include name="rememeber_me_functinonality"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.LoginTest -->
-      <class name="tests.CampaignTests">
-        <methods>
-          <include name="campaignBuilderPage_UI_Verification"/>
-          <include name="updateCampaignWithFutureStartDateAndFutureEndDate"/>
-          <include name="campaign_deletion_With_futureStartDate"/>
-          <include name="updateCampaignWithFutureStartDateAndNeverEndDate"/>
-          <include name="campaign_Creation_Without_externalID"/>
-          <include name="createCampaignWithFutureStartDateAndNeverEndDate"/>
-          <include name="campaign_deletion_With_externalID"/>
-          <include name="createCampaignWithFutureStartDateAndFutureEndDate"/>
-          <include name="campaign_Creation_With_externalID"/>
-          <include name="goToHomePage"/>
-          <include name="goToHomePage"/>
-          <include name="campaign_updation_Without_externalID"/>
-          <include name="campaign_deletion_With_futureStartDateAndFutureEndDate"/>
-          <include name="createCampaignWithPastTime"/>
-          <include name="goToCampaignPage"/>
-          <include name="goToCampaignPage"/>
-          <include name="campaign_deletion_Without_externalID"/>
-          <include name="campaign_updation_With_externalID"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.CampaignTests -->
-      <class name="tests.HomeTest">
-        <methods>
-          <include name="validLogin"/>
-          <include name="validLogin"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.HomeTest -->
-    </classes>
-  </test> <!-- firefox test(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Automation Suite-1" parallel="instances" thread-count="2" >
+<suite name="Automation Suite-1" parallel="tests" thread-count="2" >
   
   
 	
@@ -18,18 +18,7 @@
 		</classes>
 	</test>
 	
-	<test name="firefox test" preserve-order="true" parallel="false" >
-    <parameter name="browser" value="firefox"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-		<classes>
-			
-		<class name="tests.LoginTest"/>	
-		<class name="tests.HomeTest"/>	
-		<class name="tests.CamapignUIVerificationTest"/>
-		<class name="tests.CampaignTests"/>
-		
-		</classes>
-	</test>
+	
 	
 	
 </suite> <!-- Suite -->

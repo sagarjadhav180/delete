@@ -164,23 +164,27 @@ public class campaignBuilderPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(header));
 		Assert1.assertTrue(header.isDisplayed(),"header is not displayed or locator changed");
 		
-		//verification of collapsible_strip
+		//verifying if collapsible_strip is displayed
 		logger.log(LogStatus.INFO, "verification of collapsible_strip");
 		Assert1.assertTrue(collapsible_strip.isDisplayed(),"collapsible_strip is not displayed or locator changed");
+
+		//verifying if collapsible_strip is enabled
+		logger.log(LogStatus.INFO, "verifying if collapsible_strip is enabled");
+		Assert1.assertTrue(collapsible_strip.isEnabled(),"collapsible_strip is not enabled");
 		
 		//verification of labels
-		logger.log(LogStatus.INFO, "verification of labels");		
+		
 		for(int i=0;i<all_labels.length;){
 
 			label_name=all_labels[i];
 			for(int j=0;j<labels.size()-2;j++){
 				System.out.println("expected label is-- "+all_labels[i]);
 				System.out.println("actual label is-- "+labels.get(j).getText());
+				logger.log(LogStatus.INFO, "verifying if "+all_labels[i]+" is present..");
 				Assert1.assertTrue(labels.get(j).getText().equals(all_labels[i])," label-- "+all_labels[i]+" is not displayed or locator changed");
 				i++;
 			}
 
-//			Assert1.assertTrue(labels," label-- "+all_labels[i]+" is not displayed or locator changed");
 			
 		}
 
@@ -189,39 +193,45 @@ public class campaignBuilderPage extends TestBase {
 		
 		
 		
-		//verification of active/inactive toggle button
-		logger.log(LogStatus.INFO, "verification of active/inactive toggle button");				
+		//verifying if active/inactive toggle button is displayed and its enabled
+		logger.log(LogStatus.INFO, "verifying if active/inactive toggle button is displayed");				
 		Assert1.assertTrue(active_InactiveCampaign_Button.isDisplayed(),"active_InactiveCampaign_Button is not displayed or locator changed");
+		logger.log(LogStatus.INFO, "verifying if active/inactive toggle button is enabled");	
 		Assert1.assertTrue(active_InactiveCampaign_Button.isEnabled(),"active_InactiveCampaign_Button is not enabled");
 		
-		//verification of campaignOwner_DropDown
-		logger.log(LogStatus.INFO, "verification of campaignOwner_DropDown");
+		//verifying if campaignOwner_DropDown is displayed and its enabled 
+		logger.log(LogStatus.INFO, "verifying if campaignOwner_DropDown is displayed");
 		Assert1.assertTrue(campaignOwner_DropDown.isDisplayed(),"campaignOwner_DropDown is not displayed or locator changed");
+		logger.log(LogStatus.INFO, "verifying if campaignOwner_DropDown is enabled");
 		Assert1.assertTrue(campaignOwner_DropDown.isEnabled(),"campaignOwner_DropDown is not enabled()");
 		
-		//verification of campaignName_TextBox
-		logger.log(LogStatus.INFO, "verification of campaignName_TextBox");
+		//verifying if campaignName_TextBox is present
+		logger.log(LogStatus.INFO, "verifying if campaignName_TextBox is present");
 		Assert1.assertTrue(campaignName_TextBox.isDisplayed(),"campaignName_TextBox is not displayed or locator changed");
 		
-		//verification of campaignName_TextBox placeholder
-		logger.log(LogStatus.INFO, "verification of campaignName_TextBox placeholder");
+		//verifying if campaignName_TextBox placeholder is present
+		logger.log(LogStatus.INFO, "verifying if campaignName_TextBox placeholder is present");
 		Assert1.assertEquals(campaignName_TextBox.getAttribute("placeholder"), campaignName_TextBox_placeholder,"campaignName_TextBox_placeholder is not displayed or locator changed");
 	
-		//verification of campaignID_TextBox
-		logger.log(LogStatus.INFO,"verification of campaignID_TextBox");
+		//verifying if campaignID_TextBox is displayed
+		logger.log(LogStatus.INFO,"verifying if campaignID_TextBox is displayed");
 		Assert1.assertTrue(campaignID_TextBox.isDisplayed(),"campaignID_TextBox is not displayed or locator changed");
 		
-		//verification of campaignID_TextBox placeholder
-		logger.log(LogStatus.INFO, "verification of campaignID_TextBox placeholder");
+		//verifying if campaignID_TextBox placeholder
+		logger.log(LogStatus.INFO, "verifying if campaignID_TextBox placeholder");
 		Assert1.assertEquals(campaignID_TextBox.getAttribute("placeholder"), campaignID_TextBox_placeholder,"campaignID_TextBox_placeholder is not displayed or locator changed");
 		
-		//verification of startDate_Calender
-		logger.log(LogStatus.INFO, "verification of startDate_Calender");
+		//verifying if startDate_Calender is displayed and its enabled
+		logger.log(LogStatus.INFO, "verifying if startDate_Calender is displayed..");
 		Assert1.assertTrue(startDate_Calender.isDisplayed(),"startDate_Calender is not displayed or locator changed");
-
-		//verification of endDate_Calender
-		logger.log(LogStatus.INFO, "verification of endDate_Calender");
+		logger.log(LogStatus.INFO, "verifying if startDate_Calender is enabled..");
+		Assert1.assertTrue(startDate_Calender.isEnabled(),"startDate_Calender is not enabled");
+		
+		//verifying if endDate_Calender is displayed and its enabled
+		logger.log(LogStatus.INFO, "verifying if endDate_Calender is displayed");
 		Assert1.assertTrue(endDate_Calender.isDisplayed(),"endDate_Calender is not displayed or locator changed");
+		logger.log(LogStatus.INFO, "verifying if endDate_Calender is enabled");
+		Assert1.assertTrue(endDate_Calender.isEnabled(),"endDate_Calender is not enabled");
 		Assert1.assertAll();
 		
 	}
