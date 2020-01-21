@@ -28,6 +28,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import extentReport.ExtentReportsGenerator;
 import extentReport.SendEmail;
+import pom.HomePage;
 import pom.LoginPage;
 
 @Listeners(extentReport.Listener.class)
@@ -110,6 +111,8 @@ public class TestBase
 				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
 				driver.navigate().refresh();
 				Thread.sleep(3000);
+				HomePage hp=new HomePage(driver);
+				hp.left_hand_navigation_bar_click();
 //				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
 //				Thread.sleep(2000);
 				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	

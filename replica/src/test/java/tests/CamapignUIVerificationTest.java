@@ -23,6 +23,8 @@ public class CamapignUIVerificationTest extends TestBase{
 		
 	}
 	
+	
+	//Campaign and tracking number page - UI verification
 	@Test(priority=1)
 	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
 		logger=extent.startTest("Campaign and tracking number page page UI verification..");

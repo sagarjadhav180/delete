@@ -1,5 +1,7 @@
 package tests;
 
+import java.io.IOException;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -70,6 +72,8 @@ public class CampaignTests extends TestBase {
 //
 //	}
 	
+	
+	//navigating to Campaign builder page
 	@BeforeClass
 	public void goToCampaignPage(){
 		hp=new HomePage(driver);
@@ -84,6 +88,10 @@ public class CampaignTests extends TestBase {
 		
 	}
 	
+	
+	
+	
+	//Campaign builder page - UI verification
 	@Test(priority=1)
 	public void campaignBuilderPage_UI_Verification() throws InterruptedException{
 		
@@ -102,7 +110,22 @@ public class CampaignTests extends TestBase {
 
 	}
 	
-	@Test(priority=2)
+	//To check if logged in user is displayed in campaign owner dropdown by default
+		@Test(priority=2)
+		public void defaultCampaignOwnerValidation() throws InterruptedException, IOException{
+			logger=extent.startTest("Check if logged in user is displayed in campaign owner dropdown by default");
+			logger.assignAuthor("Campaign Suite");
+			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+			
+			cp.clickAction("add","");
+			cb.defaultCampaignOwner();
+			
+			cb.clickAction("list");
+		}
+	
+	//Create Campaign without campaign external ID
+	@Test(priority=3)
 	public void campaign_Creation_Without_externalID() throws InterruptedException{
 		
 //		hp=new HomePage(driver);
@@ -121,7 +144,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=3)
+	//Edit Campaign without campaign external ID
+	@Test(priority=4)
 	public void campaign_updation_Without_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign updation without external ID..");
 		logger.assignCategory("Campaign Suite");
@@ -135,7 +159,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=4)
+	//Delete Campaign without campaign external ID
+	@Test(priority=5)
 	public void campaign_deletion_Without_externalID() throws InterruptedException{
 	
 		logger=extent.startTest("Campaign deletion without external ID..");
@@ -147,7 +172,8 @@ public class CampaignTests extends TestBase {
 //	    driver.navigate().refresh();
 	}
 	
-	@Test(priority=5)
+	//CreateCampaign with campaign external ID
+	@Test(priority=6)
 	public void campaign_Creation_With_externalID() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -169,7 +195,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=6)
+	//Edit Campaign with campaign external ID
+	@Test(priority=7)
 	public void campaign_updation_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with external ID..");
 		logger.assignCategory("Campaign Suite");
@@ -184,7 +211,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=7)
+	//Delete Campaign with campaign external ID
+	@Test(priority=8)
 	public void campaign_deletion_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion without external ID..");
 		logger.assignCategory("Campaign Suite");
@@ -196,7 +224,8 @@ public class CampaignTests extends TestBase {
 	
 	}
 	
-	@Test(priority=8)
+	//CreateCampaignWithFutureStartDateAndNeverEndDate
+	@Test(priority=9)
 	public void createCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 		
 //		hp=new HomePage(driver);
@@ -222,7 +251,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}	
 	
-	@Test(priority=9)
+	//Edit campaignWithFutureStartDateAndNeverEndDate
+	@Test(priority=10)
 	public void updateCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with future start date..");
 		logger.assignCategory("Campaign Suite");
@@ -241,7 +271,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=10)
+	//Delete campaignWithFutureStartDateAndNeverEndDate
+	@Test(priority=11)
 	public void campaign_deletion_With_futureStartDate() throws InterruptedException{
      	logger=extent.startTest("Campaign deletion with future start date..");
 		logger.assignCategory("Campaign Suite");
@@ -252,7 +283,8 @@ public class CampaignTests extends TestBase {
 	 
 	}
 	
-	@Test(priority=11)
+	//Create CampaignWithFutureStartDateAndFutureEndDate
+	@Test(priority=12)
 	public void createCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -277,8 +309,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}	
 	
-	
-	@Test(priority=12)
+	//Edit CampaignWithFutureStartDateAndFutureEndDate
+	@Test(priority=13)
 	public void updateCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with future start date And FutureEndDate..");
 		logger.assignCategory("Campaign Suite");
@@ -297,7 +329,8 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=13)
+	//Delete CampaignWithFutureStartDateAndFutureEndDate
+	@Test(priority=14)
 	public void campaign_deletion_With_futureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion with future start date And Future EndDate ..");
 		logger.assignCategory("Campaign Suite");
@@ -308,7 +341,8 @@ public class CampaignTests extends TestBase {
 	 
 	}
 	
-	@Test(priority=14)
+	//Check if appropriate alert is displayed while creating CampaignWithPastTime--negative scenario
+	@Test(priority=15)
 	public void createCampaignWithPastTime() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -328,6 +362,7 @@ public class CampaignTests extends TestBase {
 		Thread.sleep(2000);
 	}
 	
+	//Navigating back to Home page
 	@AfterClass
 	public void goToHomePage(){
 

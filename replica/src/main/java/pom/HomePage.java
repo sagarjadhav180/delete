@@ -134,6 +134,7 @@ public class HomePage extends TestBase {
 					}catch(Exception e){}
 					
 				}
+				
 				else{
 				link.click();
 				}
@@ -157,6 +158,19 @@ public class HomePage extends TestBase {
 //		}
 	}
 	
+	public void default_collpased_left_hand_navigation_bar_click(){
+		logger.log(LogStatus.INFO,"Verifying if left_hand_navigation_bar is by default collapsed ");
+		softassert.assertTrue(left_hand_navigation_bar_links.isEmpty(),"left_hand_navigation_bar_collapsible_button is not by default collapsed..");
+		
+		
+	}
+	
+	public void left_hand_navigation_bar_click(){
+
+		left_hand_navigation_bar_collapsible_button.click();
+		
+	}
+	
 	//UI Verification of Home page
 	public void UIVerification() throws InterruptedException{
 		
@@ -172,6 +186,7 @@ public class HomePage extends TestBase {
 		//To check if left_hand_navigation_bar is collapsible
 		left_hand_navigation_bar_collapsible_button.click();
 		Thread.sleep(1000);
+
 		
 		//To check if logo is present
 		logger.log(LogStatus.INFO, "verifying if logo is displayed");

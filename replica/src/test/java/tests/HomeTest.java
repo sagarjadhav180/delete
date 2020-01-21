@@ -20,10 +20,20 @@ public class HomeTest extends TestBase
         logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
         logger.assignCategory("Login Suite");
-        lp.validLogin();		
+        lp.validLogin();
+        hp=new HomePage(driver);
+
+         
 	}
 
-	
+//	@Test(priority=1)
+//	public void default_state_left_hand_navigation_bar() throws InterruptedException{
+//		hp=new HomePage(driver);
+//		logger=extent.startTest("default_state_left_hand_navigation_bar");
+//		logger.log(LogStatus.INFO, "verifying if left_hand_navigation_bar is by clickable..");
+//		logger.assignCategory("Home page Suite");
+//		hp.default_collpased_left_hand_navigation_bar_click();
+//	}
 	
 	@Test(priority=1)
 	public void ui_verification() throws InterruptedException{

@@ -2,7 +2,11 @@ package pom;
 
 import static org.testng.Assert.fail;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +28,7 @@ public class campaignBuilderPage extends TestBase {
 	//labels
 	String[] all_labels={"Campaign Name","Campaign External ID","Campaign Owner","Active?","Start Date and Time (ET)","End Date and Time (ET)"};
 	static String label_name;
+	
 	@FindBy(xpath="(//div[ @class='form-group row'])[1]/div/div/div/label")
 	private static List<WebElement> labels;		
 
@@ -44,8 +49,6 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="(//span[@class='switch-left ng-binding ng-scope' and contains(text(),'Yes')])[2]")
 	private static WebElement Yes;
 
-	
-	
 	@FindBy(xpath="//label[contains(text(),'Campaign Owner')]/..//following-sibling::div//span[contains(@class,'select2-chosen')]")
 	private static WebElement campaignOwner_DropDown;	
 	
@@ -59,8 +62,6 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(id="s2id_autogen4")
 	private static WebElement assignUser_Section;		
 		
-	
-
 	String campaignName_TextBox_placeholder="Type Campaign Name";
 	@FindBy(xpath="//label[contains(text(),'Campaign Name')]/..//following-sibling::div//input")
 	private static WebElement campaignName_TextBox;
@@ -129,6 +130,11 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="//tbody[@ id='progressLoader']")
 	private WebElement loading_wheel_for_list;
 
+	@FindBy(xpath="/html/body/div[4]/div/div[1]")
+	private WebElement campaign_success_msg_close_button;
+
+	@FindBy(xpath="/html/body/div[4]/div/div[2]")
+	private WebElement campaign_success_msg_pause_button;
 	
 	
 	@FindBy(xpath="//div[@class='guide-header']")
@@ -158,6 +164,15 @@ public class campaignBuilderPage extends TestBase {
 	
 	
 	public void campaignBuilderPageUIVerification() throws InterruptedException{
+		
+		//Verifying if campaignList button present at top right corner is displayed and its enabled
+		logger.log(LogStatus.INFO, "verification of campaignList");
+		wait.until(ExpectedConditions.visibilityOf(campaignList));
+		Assert1.assertTrue(campaignList.isDisplayed(),"campaignList is not displayed or locator changed");
+		logger.log(LogStatus.INFO, "verifying if campaignList button is enabled..");
+		wait.until(ExpectedConditions.visibilityOf(campaignList));
+		Assert1.assertTrue(campaignList.isDisplayed(),"campaignList button is not enabled");
+		
 		
 		//verification of header
 		logger.log(LogStatus.INFO, "verification of header");
@@ -251,11 +266,29 @@ public class campaignBuilderPage extends TestBase {
 		Assert1.assertAll();
 	}
 	
+
+	public void defaultCampaignOwner() throws IOException, InterruptedException{
+		
+		wait.until(ExpectedConditions.visibilityOf(campaignOwner_DropDown));
+		String actual_campaign_owner = campaignOwner_DropDown.getText();
+        
+		Properties prop=new Properties();
+		FileInputStream file=new FileInputStream(".//property");
+		prop.load(file);
+		String expected_username=prop.getProperty("username");
+		
+		logger.log(LogStatus.INFO, "Verifying if logged in user is displayed by defeult in campaign owner dropdown");
+		Assert1.assertEquals(actual_campaign_owner, expected_username,"logged in user is displayed by defeult in campaign owner dropdown");
+	    Thread.sleep(1000);
+	}
+	
+	
+	
 	//to verify campaign is getting created without external id
 	public void createCampaign(String campaign_name) throws InterruptedException{
 		
 		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-		System.out.println("------------"+campaign_name+"----------");
+		
 		wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
 		campaignName_TextBox.clear();
 		campaignName_TextBox.sendKeys(campaign_name);
@@ -263,10 +296,16 @@ public class campaignBuilderPage extends TestBase {
 		SaveCampaignDetails_Button.click();
 		
 		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
+
 		Assert1.assertAll();
-		Thread.sleep(2000);
-				
+//		driver.switchTo().activeElement();
+//		Util.Action().moveToElement(campaign_success_msg_pause_button).click().perform();
+//		Util.Action().moveToElement(campaign_success_msg_close_button).click().perform();
+		
+		
+		Thread.sleep(1000);
+
 	}
 	
 	
@@ -286,9 +325,13 @@ public class campaignBuilderPage extends TestBase {
 			SaveCampaignDetails_Button.click();
 			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 		
@@ -322,9 +365,13 @@ public class campaignBuilderPage extends TestBase {
 			SaveCampaignDetails_Button.click();
 			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 		
@@ -370,7 +417,11 @@ public class campaignBuilderPage extends TestBase {
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 
@@ -405,7 +456,7 @@ public class campaignBuilderPage extends TestBase {
 			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
 			
 			wait.until(ExpectedConditions.visibilityOf(endDate_Calender));
-				endDate_Calender.click();
+			endDate_Calender.click();
 			
 			WebElement element1;
 			int endDate = 0;
@@ -428,11 +479,15 @@ public class campaignBuilderPage extends TestBase {
 			
 			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
 			SaveCampaignDetails_Button.click();
-			
+//			
 			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),"campaign not created");
+			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 
@@ -507,7 +562,11 @@ public class campaignBuilderPage extends TestBase {
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 
@@ -533,7 +592,11 @@ public class campaignBuilderPage extends TestBase {
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 		
@@ -556,7 +619,11 @@ public class campaignBuilderPage extends TestBase {
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
 			Assert1.assertAll();
-			Thread.sleep(2000);
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
+			
+			Thread.sleep(1000);
 					
 		}
 		
@@ -583,9 +650,12 @@ public class campaignBuilderPage extends TestBase {
 			SaveCampaignDetails_Button.click();
 			
 			wait.until(ExpectedConditions.visibilityOf(alertForPastDateCampaign));
-			Assert1.assertTrue(alertForPastDateCampaign.isDisplayed(),"campaign not created");
+			Assert1.assertTrue(alertForPastDateCampaign.isDisplayed(),campaign_name+" campaign not created");
+//			driver.switchTo().activeElement();
+//			campaign_success_msg_pause_button.click();
+//			campaign_success_msg_close_button.click();
 			Assert1.assertAll();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 					
 		}
 		

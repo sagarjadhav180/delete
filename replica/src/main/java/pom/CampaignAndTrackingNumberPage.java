@@ -288,7 +288,15 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			driver.switchTo().activeElement();
 			wait.until(ExpectedConditions.visibilityOf(ok_button_in_archive_alert)).click();
 			String archived_campaign="campaignToBeEdited";
-			WebElement deleted_campaign_xpath = driver.findElement(By.xpath("//div[@class='ui-pnotify-text']"));
+			WebElement deleted_campaign_xpath = null;
+			
+			try{
+			deleted_campaign_xpath= driver.findElement(By.xpath("//div[@class='ui-pnotify-text']"));
+			}
+			catch(Exception e){
+				Thread.sleep(2000);
+				deleted_campaign_xpath= driver.findElement(By.xpath("//div[@class='ui-pnotify-text']"));				
+			}
 			
 			Assert1.assertTrue(deleted_campaign_xpath.getText().contains(archived_campaign),archived_campaign+"campaign not archived successfully");
 		    wait.until(ExpectedConditions.invisibilityOf(deleted_campaign_xpath));
