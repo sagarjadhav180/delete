@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import tests.TestBase;
+import tests.Util;
 
 public class SelectAndScorePage extends TestBase {
 
@@ -47,9 +48,102 @@ public class SelectAndScorePage extends TestBase {
 	
 	String[] expected_table_headers={"Play Call ","Status ","Date/Time ","Duration ","Group ","Identified Agent ","Call Title ","Scorecard ","Score Date ","Score ","Actions "};
 	
+	@FindBy(xpath="//button[@ class='iconButton play']")
+	private WebElement play_pause_audio_button;	
+
+	@FindBy(xpath="//button[@class='iconButton level3']")
+	private WebElement mute_unmute_audio_button;
+	
+	//advanced filter
+	@FindBy(xpath="//button[text()='Advanced filter']")
+	private WebElement advanced_filter_button;
+	
+	@FindBy(xpath="//div[@class='advancedf']//select[1]")
+	private WebElement include_exclude_dropdown;
 	
 	
+	//need to handle it when there are multiple conditions in filter
+	@FindBy(xpath="//div[@class='advancedf']//select[2]")
+	private WebElement filter_element_dropdown;
+
+	@FindBy(xpath="//div[@class='advancedf']//select[3]")
+	private WebElement filter_operator_dropdown;
+
+	@FindBy(xpath="//div[@class='advancedf']//select[3]//following-sibling::input[1]")
+	private WebElement filter_value_textbox;
+
+	@FindBy(xpath="//span[@id='select2-chosen-4'][contains(text(),'-- Select --')]")
+	private WebElement identified_agent_dropdown;
+
+	@FindBy(xpath="//span[@id='select2-chosen-4'][contains(text(),'-- Select --')]")
+	private WebElement scorecard_dropdown;
+
+	@FindBy(xpath="//button[@class='btn btn-gray'][text()=' Add an Advanced Filter']")
+	private WebElement add_an_advanced_filter_button;
 	
+	//pagination toolbox
+		//top
+		@FindBy(xpath="(//button[contains(text(),'First')])[1]")
+		private static WebElement top_first_button;	
+		
+		@FindBy(xpath="(//button[contains(text(),'Last')])[1]")
+		private static WebElement top_last_button;
+		
+		@FindBy(xpath="(//button[contains(text(),'Prev')])[1]")
+		private static WebElement top_prev_button;	
+		
+		@FindBy(xpath="(//button[contains(text(),'Next')])[1]")
+		private static WebElement top_next_button;
+		
+		@FindBy(xpath="(//button[contains(text(),'Showing')])[1]")
+		private static WebElement top_pagination_count;
+	
+		//bottom
+		@FindBy(xpath="(//button[contains(text(),'First')])[2]")
+		private static WebElement bottom_first_button;	
+
+		@FindBy(xpath="(//button[contains(text(),'Last')])[2]")
+		private static WebElement bottom_last_button;	
+
+		@FindBy(xpath="(//button[contains(text(),'Prev')])[2]")
+		private static WebElement bottom_prev_button;	
+
+		@FindBy(xpath="(//button[contains(text(),'Next')])[2]")
+		private static WebElement bottom_next_button;
+
+		@FindBy(xpath="(//button[contains(text(),'Showing')])[2]")
+		private static WebElement bottom_pagination_count;
+
+		@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr")
+		private static List<WebElement> call_count_in_table;
+		
+	//  verification of buttons in top pagination toolbox
+		
+//		int currentDate = Util.getDate();
+//		   String startDateToBeUsed = String.valueOf(currentDate-7);
+//		   String endDateToBeUsed = String.valueOf(currentDate);
+//		   System.out.println("startDateToBeUsed is "+startDateToBeUsed);
+//		   System.out.println("endDateToBeUsed is "+endDateToBeUsed);
+		
+		
+//		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+//		wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
+//		Assert1.assertTrue(top_first_button.isDisplayed(),"top_first_button is not present or locator changed");
+//		Assert1.assertTrue(top_last_button.isDisplayed(),"top_last_button is not present or locator changed");	
+//		Assert1.assertTrue(top_next_button.isDisplayed(),"top_next_button is not present or locator changed");	
+//		Assert1.assertTrue(top_prev_button.isDisplayed(),"top_prev_button is not present or locator changed");	
+	
+//		dbCount = Util.readingFromDB("SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit 
+//      WHERE top_ou_id='70135') AND call_started BETWEEN '2020-01-15 23:59' AND '2020-01-22 23:59'" );
+//	
+//      countOnUI_pagination=top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+2);
+//	logger.log(LogStatus.INFO, "verifying count of calls in top pagination toolbox");
+//	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+//	
+//	logger.log(LogStatus.INFO, "verifying count of listed calls");
+//	Assert1.assertEquals(dbCount, String.valueOf(call_count_in_table.size()),"count of listed calls is mismatching with db count");
+		
+		
 	public SelectAndScorePage(WebDriver driver){
 		PageFactory.initElements(driver,this);
 	}
