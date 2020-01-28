@@ -117,7 +117,7 @@ public class HomePage extends TestBase {
 		
 		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
 		WebElement link = left_hand_navigation_bar_links.get(i);
-			if(link.getText().contains(linkToBeClicked)){
+			if(link.getText().equals(linkToBeClicked)){
 				
 				if(link.getText().contains("Campaign")){
 					link.click();
@@ -134,6 +134,8 @@ public class HomePage extends TestBase {
 					}catch(Exception e){}
 					
 				}
+				
+				
 				
 				else{
 				link.click();

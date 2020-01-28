@@ -80,42 +80,103 @@ public class SelectAndScorePage extends TestBase {
 
 	@FindBy(xpath="//button[@class='btn btn-gray'][text()=' Add an Advanced Filter']")
 	private WebElement add_an_advanced_filter_button;
+
+	@FindBy(xpath="//div[text()='Identified Agent is added successfully.']")
+	private WebElement success_msg_for_agent_assigned;
+
+	@FindBy(xpath="//div[text()='Identified Agent is updated successfully.']")
+	private WebElement success_msg_for_agent_updated;
+
+	@FindBy(xpath="//button[@class='btn btn-primary'][contains(text(),'OK')]")
+	private WebElement ok_button_for_agent_update;
+
+	@FindBy(xpath="//button[@class='btn btn-default'][contains(text(),'cancel')]")
+	private WebElement cancel_button_for_agent_update;
+	
+	@FindBy(xpath="//div[text()='Call Title is added successfully.']")
+	private WebElement success_msg_for_call_title_added;
+
+	@FindBy(xpath="//div[text()='Call Title is updated successfully.']")
+	private WebElement success_msg_for_call_title_updated;
+	
+	@FindBy(xpath="//div[text()='Scorecard is added successfully.']")
+	private WebElement success_msg_for_scorecard_assignment;
+
+	@FindBy(xpath="//div[text()='Scorecard is updated successfully.']")
+	private WebElement success_msg_for_scorecard_update;
+	
+	//scoring section
+	@FindBy(xpath="//strong[contains(text(),'Score :')]")
+	private WebElement score;		
+
+	@FindBy(xpath="//strong[contains(text(),'Score :')]//parent::span//i")
+	private WebElement pdf_link;
+	
+	@FindBy(xpath="//h2[@class='critreriaclass ng-binding']")
+	private WebElement scorecard_title;	
+
+	@FindBy(xpath="//strong[contains(text(),'Criteria :')]")
+	private WebElement criteria_label;	
+
+	@FindBy(xpath="//label[text()='Pass:']//parent::div//input")
+	private List<WebElement> pass_checkbox;	
+
+	@FindBy(xpath="//label[text()='Fail:']//parent::div//input")
+	private List<WebElement> fail_checkbox;
+
+	@FindBy(xpath="//input[contains(@id,'radioOption_3')]")
+	private List<WebElement> checkbox_3;
+
+	@FindBy(xpath="//strong[contains(text(),'test outcome')]")
+	private WebElement outcome_label;
+
+	@FindBy(xpath="//div[@id='scorecardarea2']//input[1]")
+	private WebElement outcome_yes_checkbox;
+
+	@FindBy(xpath="//div[@id='scorecardarea2']//input[2]")
+	private WebElement outcome_no_checkbox;
+	
+	@FindBy(xpath="//button[text()='Done']")
+	private WebElement done_button;
+
+	@FindBy(xpath="//button[text()='Done']//preceding-sibling::button")
+	private WebElement cancel_button;
 	
 	//pagination toolbox
-		//top
-		@FindBy(xpath="(//button[contains(text(),'First')])[1]")
-		private static WebElement top_first_button;	
+	//top
+	@FindBy(xpath="(//button[contains(text(),'First')])[1]")
+	private static WebElement top_first_button;	
 		
-		@FindBy(xpath="(//button[contains(text(),'Last')])[1]")
-		private static WebElement top_last_button;
+	@FindBy(xpath="(//button[contains(text(),'Last')])[1]")
+	private static WebElement top_last_button;
 		
-		@FindBy(xpath="(//button[contains(text(),'Prev')])[1]")
-		private static WebElement top_prev_button;	
+	@FindBy(xpath="(//button[contains(text(),'Prev')])[1]")
+	private static WebElement top_prev_button;	
 		
-		@FindBy(xpath="(//button[contains(text(),'Next')])[1]")
-		private static WebElement top_next_button;
+	@FindBy(xpath="(//button[contains(text(),'Next')])[1]")
+	private static WebElement top_next_button;
 		
-		@FindBy(xpath="(//button[contains(text(),'Showing')])[1]")
-		private static WebElement top_pagination_count;
+	@FindBy(xpath="(//button[contains(text(),'Showing')])[1]")
+	private static WebElement top_pagination_count;
 	
-		//bottom
-		@FindBy(xpath="(//button[contains(text(),'First')])[2]")
-		private static WebElement bottom_first_button;	
+	//bottom
+	@FindBy(xpath="(//button[contains(text(),'First')])[2]")
+	private static WebElement bottom_first_button;	
 
-		@FindBy(xpath="(//button[contains(text(),'Last')])[2]")
-		private static WebElement bottom_last_button;	
+	@FindBy(xpath="(//button[contains(text(),'Last')])[2]")
+	private static WebElement bottom_last_button;	
 
-		@FindBy(xpath="(//button[contains(text(),'Prev')])[2]")
-		private static WebElement bottom_prev_button;	
+	@FindBy(xpath="(//button[contains(text(),'Prev')])[2]")
+	private static WebElement bottom_prev_button;	
 
-		@FindBy(xpath="(//button[contains(text(),'Next')])[2]")
-		private static WebElement bottom_next_button;
+	@FindBy(xpath="(//button[contains(text(),'Next')])[2]")
+	private static WebElement bottom_next_button;
 
-		@FindBy(xpath="(//button[contains(text(),'Showing')])[2]")
-		private static WebElement bottom_pagination_count;
+	@FindBy(xpath="(//button[contains(text(),'Showing')])[2]")
+	private static WebElement bottom_pagination_count;
 
-		@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr")
-		private static List<WebElement> call_count_in_table;
+	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr")
+	private static List<WebElement> call_count_in_table;
 		
 	//  verification of buttons in top pagination toolbox
 		
@@ -155,7 +216,7 @@ public class SelectAndScorePage extends TestBase {
 		return webelement;
 	}
     
-  ///to get action button of required call  
+  //to get action button of required call  
     public WebElement getActionButton(String button_name){
     	WebElement webelement = null;
     	

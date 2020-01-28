@@ -31,6 +31,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.googlecode.charts4j.Color;
@@ -147,6 +148,14 @@ public class Util extends TestBase{
 		jse.executeScript("arguments[0].scrollIntoView(true)", element);
 		
 	}
+	
+	public static void scrollFunctionForWebElement(WebElement element){
+        System.out.println("scrolling function called..");
+		EventFiringWebDriver event=new EventFiringWebDriver(driver);
+		event.executeScript("document.querySelector(element).scrollTop=500");
+		
+	}
+	
 	
 	public static void click(WebElement elementToBeClicked){
 		jse.executeScript("arguments[0].click();",elementToBeClicked );

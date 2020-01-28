@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -22,14 +21,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+import com.relevantcodes.extentreports.*;
 
-import extentReport.ExtentReportsGenerator;
-import extentReport.SendEmail;
+import extentReport.*;
 import pom.HomePage;
-import pom.LoginPage;
 
 @Listeners(extentReport.Listener.class)
 public class TestBase
