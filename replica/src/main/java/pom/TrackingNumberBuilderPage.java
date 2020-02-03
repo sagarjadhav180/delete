@@ -1,16 +1,23 @@
 package pom;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import tests.TestBase;
+import tests.Util;
 
 public class TrackingNumberBuilderPage extends TestBase {
     
@@ -106,11 +113,23 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//label[text()='Tracking Number Name']//parent::div//following-sibling::div//input")
 	private static WebElement tracking_number_name_textbox;
 
+	@FindBy(xpath="//a[contains(text(),'ALPINE,UT')]")
+	private static WebElement area_code_385;
+
+	@FindBy(xpath="//ul[@class='dropdown-menu ng-isolate-scope']//li//a")
+	private static List<WebElement> area_codes_list_for_385;
+	
+	@FindBy(xpath="//div[@class='col-lg-6 col-md-6 col-sm-12 mt20 mb20 pull-left']//div//div//div[contains(@class,'col-lg-6 col-md-6 col-sm-12')]//select[@id='source']//option")
+	private static List<WebElement> tn_list_for_385;	
+	
 	@FindBy(xpath="(//label[text()='Ring to Phone Number']//parent::div//following-sibling::div//input)[3]")
 	private static WebElement ring_to_phone_number_textbox;
 
 	@FindBy(xpath="//label[text()='Tracking Number']//parent::div//following-sibling::div//child::select")
 	private static WebElement tracking_number_dropdown;
+	
+	@FindBy(xpath="(//div[@class='input-icon right'])[4]")
+	private static WebElement tracking_number_dropdown_button;	
 
 	@FindBy(xpath="(//label[text()='Route Calls By']//parent::div//following-sibling::div//child::select[@id='source'])[1]")
 	private static WebElement route_calls_by_dropdown;
@@ -121,6 +140,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="(//label[contains(text(),'Set Caller Id To')]//parent::div//following-sibling::div//child::select)[2]")
 	private static WebElement set_caller_id_dropdown;
 
+	@FindBy(xpath="//div[text()='Tracking Number created successfully.']")
+	private static WebElement tn_creation_success_message;
+	
 	
 	//Add tracking number page-advanced section
 	
@@ -270,9 +292,17 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="(//span[text()='  Overflow to'])[1]//parent::div//following-sibling::div//a")
 	private WebElement delete_overflow_number_button;		
 	
-	public static WebDriver wait;
+	@FindBy(xpath="//div[@class='pageProgressLoader']")
+	private WebElement loading_wheel;
+
+	@FindBy(xpath="//i[@class='fa fa-refresh fa-spin ng-hide']")
+	private WebElement loading_wheel_for_area_code;
+
+	@FindBy(xpath="//i[@id='LoadTrackingNumber']")
+	private WebElement loading_wheel_for_tn;
 	
-	public TrackingNumberBuilderPage(WebDriver driver,WebDriverWait wait1){
+	
+	public TrackingNumberBuilderPage(WebDriver driver){
 		PageFactory.initElements(driver,this);
 	}
 	
@@ -284,7 +314,56 @@ public class TrackingNumberBuilderPage extends TestBase {
 	}
     
  
+    public void createSimpleNumber(String tracking_number_name) throws InterruptedException{
+    	
+
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//    		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
+    		
+       Util.scrollFunction(add_tracking_number_button);  
+        	add_tracking_number_button.click();
+    	
+    	
+    	
+
     
+//    	tn_list_for_385
+    	
+    	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+    	tracking_number_name_textbox.sendKeys(tracking_number_name);
+    	
+    	Select selct_ad_source=new Select(ad_source_dropdown);
+    	selct_ad_source.selectByIndex(2);
+    	
+    	ring_to_phone_number_textbox.clear();
+    	ring_to_phone_number_textbox.sendKeys("8018786943");
+
+    	area_code_textbox.sendKeys("385");
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+    	
+    	for(int i=0;i<area_codes_list_for_385.size();i++){
+    		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+    			area_codes_list_for_385.get(i).click();
+    			
+    		}
+    		
+    	}
+    	
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        
+//        Util.click(tracking_number_dropdown);
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+    	Util.scrollFunction(save_button);
+      
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+    	logger.log(LogStatus.INFO, "tracking number created sucessfully");
+    	
+ }
 	
 //  verification of buttons in top pagination toolbox
 //	logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");

@@ -45,6 +45,9 @@ public class Call_Logs_Report_Page extends TestBase {
 	
 	@FindBy(xpath="//div[@class='ag-header-row']//strong")
 	private List<WebElement> table_column_labels;	
+
+//	@FindBy(xpath="//*[@id='dashboard']/div/div[2]/div/div/div/div/div[2]/div[10]/div/lk-vis-element/div/div/div[2]/div/div/div/lk-visualization-container/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div/div//div")
+//	private List<WebElement> table_column_labels;	
 	
 	String[] expeted_table_column_labels={"Hunt Type","Ad Source","Tracking Number Type","Campaign","Tracking Number Name","Tracking Number","Ring-to Name","Ring to Phone Number","Caller ID","Disposition","Tags","Comments","Identified Agent","Voicemail","Group","Play Call","Duration","Date/Time"};
 	
@@ -154,6 +157,7 @@ public class Call_Logs_Report_Page extends TestBase {
 			i++;
 
 		}
+		Util.getJavascriptExecutor().executeScript("window.scrollBy(500,0)","");
 
 
 		

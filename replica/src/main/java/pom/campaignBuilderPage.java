@@ -49,6 +49,9 @@ public class campaignBuilderPage extends TestBase {
 	@FindBy(xpath="(//span[@class='switch-left ng-binding ng-scope' and contains(text(),'Yes')])[2]")
 	private static WebElement Yes;
 
+	@FindBy(xpath="//button[contains(text(),'OK')]")
+	private static WebElement Ok_button_campaign_deactivate_confirmation_msg;
+	
 	@FindBy(xpath="//label[contains(text(),'Campaign Owner')]/..//following-sibling::div//span[contains(@class,'select2-chosen')]")
 	private static WebElement campaignOwner_DropDown;	
 	
@@ -158,6 +161,9 @@ public class campaignBuilderPage extends TestBase {
 			try{
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_list));
 			}catch(Exception e){}
+		}
+		else if(buttonName.contains("list")){
+			
 		}
 	}
 	
@@ -587,7 +593,12 @@ public class campaignBuilderPage extends TestBase {
 			campaignName_TextBox.clear();
 			campaignName_TextBox.sendKeys(campaign_name_updated);
 			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+			active_InactiveCampaign_Button.click();
 			SaveCampaignDetails_Button.click();
+			
+            Thread.sleep(2000);
+			driver.switchTo().activeElement();
+			wait.until(ExpectedConditions.visibilityOf(Ok_button_campaign_deactivate_confirmation_msg)).click();
 			
 			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
 			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");

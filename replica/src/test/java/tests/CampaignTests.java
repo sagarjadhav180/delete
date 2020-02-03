@@ -13,6 +13,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
+import pom.LoginPage;
+import pom.TrackingNumberBuilderPage;
 import pom.campaignBuilderPage;
 
 
@@ -26,61 +28,21 @@ public class CampaignTests extends TestBase {
 	int number1; 
 	int number2;
 	
-
-//	@AfterMethod
-//	public void after() throws Exception  {
-//        hp=new HomePage(driver);
-//        hp.clickAction("Home");
-//	}
-//	
-//	@BeforeMethod
-//	public void before()throws Exception{
-//		   hp=new HomePage(driver);
-//		   hp.clickAction("Campaign");
-//	}	
-	
-//	@Test(priority=1)
-//	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
-//		
-//        hp=new HomePage(driver);
-//		logger=extent.startTest("Campaign and tracking number page page UI verification..");
-//		logger.assignCategory("Campaign Suite");
-//		logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
-//		hp.clickAction("Campaign");
-//		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
-//		logger.log(LogStatus.INFO, "verifying UI of campaign and tracking number page..");
-//		cp.campaignPageUIVerification();
-////		Thread.sleep(2000);
-//		
-//	}
-//	@Test(priority=2)
-//	public void campaignBuilderPage_UI_Verification() throws InterruptedException{
-//		
-////		hp=new HomePage(driver);
-////		hp.clickAction("Home");
-////		hp.clickAction("Campaign");
-//		logger=extent.startTest("Campaign builder page UI verification..");
-//		logger.log(LogStatus.INFO, "going to campaign builder page..");
-//		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-//		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		
-//		cp.clickAction("add","");
-//		cb.campaignBuilderPageUIVerification();
-//		cb.collapseExpand_collapsible_strip();
-//		cb.clickAction("list");	
-////		Thread.sleep(2000);
-//
-//	}
-	
 	
 	//navigating to Campaign builder page
 	@BeforeClass
-	public void goToCampaignPage(){
-		hp=new HomePage(driver);
-
-			
+	public void goToCampaignPage() throws IOException, InterruptedException{
+		
+		LoginPage lp=new LoginPage(driver);
+        logger=extent.startTest("validLogin"); 
+        logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
+        logger.assignCategory("Login Suite");
+        lp.validLogin();
+        HomePage hp=new HomePage(driver);
+        hp.left_hand_navigation_bar_click();
+		
 		try {
-			hp.clickAction("Campaign");
+			hp.clickAction("Campaign & Tracking Number");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -128,8 +90,6 @@ public class CampaignTests extends TestBase {
 	@Test(priority=3)
 	public void campaign_Creation_Without_externalID() throws InterruptedException{
 		
-//		hp=new HomePage(driver);
-//		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign creation without external ID..");
 		logger.assignCategory("Campaign Suite");
 		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
@@ -143,7 +103,7 @@ public class CampaignTests extends TestBase {
 		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
 	}
-	
+		
 	//Edit Campaign without campaign external ID
 	@Test(priority=4)
 	public void campaign_updation_Without_externalID() throws InterruptedException{
@@ -158,6 +118,7 @@ public class CampaignTests extends TestBase {
 		cp.campaignCreated(campaign_name_updated);
 		Thread.sleep(2000);
 	}
+	
 	
 	//Delete Campaign without campaign external ID
 	@Test(priority=5)

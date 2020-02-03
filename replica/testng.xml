@@ -12,6 +12,7 @@
 			
 		<class name="tests.Call_Logs_Test"/>	
 	
+	
 		
 		</classes>
 	</test>

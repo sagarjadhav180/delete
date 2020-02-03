@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="179295" started-at="2020-01-28T10:37:15Z" finished-at="2020-01-28T10:40:14Z">
+  <suite name="Automation Suite-1" duration-ms="186073" started-at="2020-01-31T11:56:56Z" finished-at="2020-01-31T12:00:02Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="179295" started-at="2020-01-28T10:37:15Z" finished-at="2020-01-28T10:40:14Z">
+    <test name="chrome test" duration-ms="186073" started-at="2020-01-31T11:56:56Z" finished-at="2020-01-31T12:00:02Z">
       <class name="tests.Call_Logs_Test">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.Call_Logs_Test@16267862]" name="setUp" is-config="true" duration-ms="50646" started-at="2020-01-28T16:07:15Z" finished-at="2020-01-28T16:08:05Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.Call_Logs_Test@16267862]" name="setUp" is-config="true" duration-ms="55146" started-at="2020-01-31T17:26:56Z" finished-at="2020-01-31T17:27:52Z">
           <params>
             <param index="0">
               <value>
@@ -23,15 +23,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="goToLookerReports()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="goToLookerReports" is-config="true" duration-ms="5336" started-at="2020-01-28T16:08:05Z" finished-at="2020-01-28T16:08:11Z">
+        <test-method status="PASS" signature="goToLookerReports()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="goToLookerReports" is-config="true" duration-ms="5178" started-at="2020-01-31T17:27:52Z" finished-at="2020-01-31T17:27:57Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToLookerReports -->
-        <test-method status="PASS" signature="UI_Verification()[pri:1, instance:tests.Call_Logs_Test@16267862]" name="UI_Verification" duration-ms="61357" started-at="2020-01-28T16:08:11Z" finished-at="2020-01-28T16:09:12Z">
+        <test-method status="PASS" signature="UI_Verification()[pri:1, instance:tests.Call_Logs_Test@16267862]" name="UI_Verification" duration-ms="63616" started-at="2020-01-31T17:27:57Z" finished-at="2020-01-31T17:29:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.Call_Logs_Test@16267862]" name="tearDown" is-config="true" duration-ms="1124" started-at="2020-01-28T16:09:12Z" finished-at="2020-01-28T16:09:13Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.Call_Logs_Test@16267862]" name="tearDown" is-config="true" duration-ms="1207" started-at="2020-01-31T17:29:00Z" finished-at="2020-01-31T17:29:02Z">
           <params>
             <param index="0">
               <value>
@@ -42,15 +42,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="goBackToHomePage()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="goBackToHomePage" is-config="true" duration-ms="60011" started-at="2020-01-28T16:09:13Z" finished-at="2020-01-28T16:10:13Z">
+        <test-method status="PASS" signature="goBackToHomePage()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="goBackToHomePage" is-config="true" duration-ms="60038" started-at="2020-01-31T17:29:02Z" finished-at="2020-01-31T17:30:02Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goBackToHomePage -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="tearDown" is-config="true" duration-ms="793" started-at="2020-01-28T16:10:13Z" finished-at="2020-01-28T16:10:14Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="tearDown" is-config="true" duration-ms="853" started-at="2020-01-31T17:30:02Z" finished-at="2020-01-31T17:30:02Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="close_connection" is-config="true" duration-ms="7254" started-at="2020-01-28T16:10:15Z" finished-at="2020-01-28T16:10:22Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.Call_Logs_Test@16267862]" name="close_connection" is-config="true" duration-ms="8360" started-at="2020-01-31T17:30:03Z" finished-at="2020-01-31T17:30:12Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
