@@ -10,7 +10,7 @@
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
 		<classes>
 			
-		<class name="tests.Call_Logs_Test"/>	
+		<class name="tests.CamapignUIVerificationTest"/>	
 	
 	
 		

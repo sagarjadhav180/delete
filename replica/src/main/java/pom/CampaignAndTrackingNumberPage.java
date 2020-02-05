@@ -116,9 +116,15 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//ul[@id='columnpicker']/li/label")
 	private static List<WebElement> Column_Picker_options_checkbox_labels;
 	
-
 	@FindBy(xpath="//ul[@id='columnpicker']/li/label")
 	private static List<WebElement> Column_Picker_options_labels;
+
+	@FindBy(xpath="//tr[@class='subrowheader803 ng-scope']//tbody//tr[1]//th")
+	private static List<WebElement> tracking_number_list_columns;
+	
+	String[] by_default_displayed_tracking_number_list_columns={"Tracking Number ","Tracking Number Name ","Ring-to Phone Number ","Tracking Number Type ","Spam Guard ","Tracking Number Status ","Actions "}; 
+
+	String[] all_tracking_number_list_columns={"Tracking Number ","Tracking Number Name ","Ring-to Phone Number ","Tracking Number Type ","Spam Guard ","Tracking Number Status ","Call Value ","Repeat Interval ","Ad Source ","Voicemail ","Custom Source 1 ","Custom Source 2 ","Custom Source 3 ","Custom Source 4 ","Custom Source 5 ","Record Call ","Play Disclaimer ","Voice Prompt ","Whisper Message ","DNI ","DNI Type ","Host Domain ","Referring Website ","HTML Class ","Custom Parameters "," Pre-call Webhook ","Actions "};
 	
 	@FindBy(xpath="//button[@class='btn btn-block btn-default dropdown-toggle']")
 	private static WebElement campaignList;
@@ -229,7 +235,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	}
 
 	
-	public void clickAction(String buttonName,String string) throws InterruptedException{
+	public void clickAction(String buttonName,String campaignToBeEdited) throws InterruptedException{
 		if(buttonName.contains("add")){
 				
 					wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
@@ -244,19 +250,20 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		else if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.visibilityOf(campaignList));
 			campaignList.click();
-			try{
-				driver.switchTo().activeElement();
-			Util.click(pendo_close_button);
-			Thread.sleep(3000);
-			}
-			catch(Exception e){			
-				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));}
+//			try{
+//				driver.switchTo().activeElement();
+//			Util.click(pendo_close_button);
+//			Thread.sleep(3000);
+//			}
+//			catch(Exception e){			
+//				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//				}
 //			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 			
 			
 		}
 		else if(buttonName.contains("update")){
-			String campaignToBeEdited=string;
+			
 
 			WebElement edit = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
 			
@@ -270,8 +277,19 @@ public class CampaignAndTrackingNumberPage extends TestBase
 //			Thread.sleep(1000);	
 //			}
 		}
+		else if(buttonName.contains("expand")){
+			
+
+			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
+			
+			tests.Util.scrollFunction(expand_campaign);
+			tests.Util.click(expand_campaign);
+			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)" );
+
+		}
+		
 		else if(buttonName.contains("archive")){
-			String campaignToBeEdited=string;
+			
 	
 			WebElement archive = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
 		
@@ -513,5 +531,95 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 		Assert1.assertAll();
 	}
+	
+	public void selectAllColumnPickerOptions() throws InterruptedException{
+        
+		logger.log(LogStatus.INFO, "expanding column picker..");
+		Util.click(Column_Picker_button);
+		
+	 	for(int i=0;i<Column_Picker_options_checkbox.size();){
+
+	 		for(int j=0;j<Column_Picker_options_checkbox_labels.size();){
+
+	 			for(int k=0;k<default_selected_Expected_Column_Picker_options.length;k++){
+
+	 				if(!Column_Picker_options_checkbox_labels.get(j).getText().equals(default_selected_Expected_Column_Picker_options[k])){
+	 					Util.click(Column_Picker_options_checkbox_labels.get(i));
+	 				}
+	 				
+	 				
+	 					
+	 			}
+	 			j++;
+	 		}
+	 		i++;
+	 	}
+	 	
+		logger.log(LogStatus.INFO, "collapsing column picker..");
+		Thread.sleep(2000);
+		Util.click(Column_Picker_button);
+	 	
+	}
+	
+	public void defaultDisplayedTrackingNumberColumns(){
+		
+		for(int i=0;i<by_default_displayed_tracking_number_list_columns.length;){
+			
+
+			for(int j=0;j<tracking_number_list_columns.size();){
+				System.out.println("tracking_number_list_columns "+tracking_number_list_columns.get(j).getText());					
+				System.out.println("by_default_displayed_tracking_number_list_columns "+by_default_displayed_tracking_number_list_columns[i]);
+				
+				if(tracking_number_list_columns.get(j).getText().equals(by_default_displayed_tracking_number_list_columns[i])){
+					System.out.println("tracking_number_list_columns "+tracking_number_list_columns.get(j).getText());					
+					System.out.println("by_default_displayed_tracking_number_list_columns "+by_default_displayed_tracking_number_list_columns[i]);
+					logger.log(LogStatus.INFO, "verifying if "+by_default_displayed_tracking_number_list_columns[i]+" is displayed");
+					Assert1.assertTrue(tracking_number_list_columns.get(j).getText().equals(by_default_displayed_tracking_number_list_columns[i]));			
+				    Assert1.assertAll();
+				}
+				
+ 				j++;
+			}
+			i++;
+		}
+	 	
+	}
+	
+	public void allDisplayedTrackingNumberColumns(){
+        
+		for(int i=0;i<tracking_number_list_columns.size();){
+			
+			for(int j=0;j<all_tracking_number_list_columns.length;j++){
+				if(tracking_number_list_columns.get(i).getText().equals(all_tracking_number_list_columns[j])){
+					
+					logger.log(LogStatus.INFO, "verifying if "+all_tracking_number_list_columns[j]+" is displayed");
+					Assert1.assertTrue(tracking_number_list_columns.get(i).getText().equals(all_tracking_number_list_columns[j]));			
+				}
+			}
+			i++;
+		}
+	 	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 }
