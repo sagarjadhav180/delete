@@ -24,7 +24,7 @@ public class CamapignUIVerificationTest extends TestBase{
         logger.assignCategory("Login Suite");
         lp.validLogin();
         HomePage hp=new HomePage(driver);
-        hp.left_hand_navigation_bar_click();
+//        hp.left_hand_navigation_bar_click();
 		
 		try {
 			hp.clickAction("Campaign & Tracking Number");
@@ -66,6 +66,7 @@ public class CamapignUIVerificationTest extends TestBase{
 	campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
     cp.clickAction("expand", campaignToBeEdited);	
     cp.defaultDisplayedTrackingNumberColumns();
+    cp.clickAction("collapse",campaignToBeEdited);
     Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)");
     
 
@@ -84,6 +85,7 @@ public class CamapignUIVerificationTest extends TestBase{
     cp.selectAllColumnPickerOptions();
 	cp.clickAction("expand", campaignToBeEdited);	
     cp.allDisplayedTrackingNumberColumns();
+    cp.clickAction("collapse",campaignToBeEdited);
     Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)");
     
 

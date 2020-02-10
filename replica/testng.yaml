@@ -1,0 +1,10 @@
+name: Automation Suite-1
+threadCount: 2
+parallel: tests
+configFailurePolicy: skip
+tests:
+  - name: chrome test
+    parameters: { browser: chrome, url: https://stag-5-cmo-1.convirza.com }
+    classes:
+      - tests.CamapignUIVerificationTest
+

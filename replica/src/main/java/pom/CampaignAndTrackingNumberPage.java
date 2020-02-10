@@ -288,21 +288,25 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 		}
 		
+		else if(buttonName.contains("collapse")){
+			
+
+			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
+			
+			tests.Util.scrollFunction(collapse);
+			tests.Util.click(collapse);
+			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)" );
+
+		}
+		
 		else if(buttonName.contains("archive")){
 			
 	
 			WebElement archive = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
 		
 			tests.Util.scrollFunction(archive);
-//			edit.click();
-			
 			tests.Util.click(archive);
-//			try{
-//				driver.switchTo().activeElement();
-//				Util.click(pendo_close_button);
-//				}catch(Exception e){}
-//			Thread.sleep(2000);
-			
+
 			driver.switchTo().activeElement();
 			wait.until(ExpectedConditions.visibilityOf(ok_button_in_archive_alert)).click();
 			String archived_campaign="campaignToBeEdited";
@@ -318,9 +322,6 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			
 			Assert1.assertTrue(deleted_campaign_xpath.getText().contains(archived_campaign),archived_campaign+"campaign not archived successfully");
 		    wait.until(ExpectedConditions.invisibilityOf(deleted_campaign_xpath));
-//			driver.navigate().refresh();
-//          Thread.sleep(3000);
-
             Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
             Thread.sleep(2000);    
 		}
