@@ -110,8 +110,11 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	private static WebElement Column_Picker_button;		
 	
 //	String Column_Picker_options_selected;
-	@FindBy(xpath="//ul[@id='columnpicker']/li/label/preceding-sibling::div/input")
+	@FindBy(xpath="//ul[@id='columnpicker']/li/label/preceding-sibling::div//input")
 	private static List<WebElement> Column_Picker_options_checkbox;	
+
+	@FindBy(xpath="//ul[@id='columnpicker']/li/label/preceding-sibling::div")
+	private static List<WebElement> Column_Picker_options_checkbox_tocheck;	
 	
 	@FindBy(xpath="//ul[@id='columnpicker']/li/label")
 	private static List<WebElement> Column_Picker_options_checkbox_labels;
@@ -127,6 +130,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	private static WebElement ok_button_in_archive_alert;	
 	
 
+	@FindBy(xpath="//table[@class='table']//tbody//tr[1]//th")
+	private static List<WebElement> tracking_number_table_column_headers;
+	
+	String[] default_displayed_expected_tracking_number_table_column_headers={"Tracking Number","Tracking Number Name","Ring-to Phone Number","Tracking Number Type","Spam Guard","Tracking Number Status","Actions"};
+
+	String[] all_expected_tracking_number_table_column_headers={"Tracking Number","Tracking Number Name","Ring-to Phone Number","Tracking Number Type","Spam Guard","Tracking Number Status","Call Value","Repeat Interval","Ad Source","Voicemail","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Record Call","Play Disclaimer","Voice Prompt","Whisper Message","DNI","DNI Type","Host Domain","Referring Website","HTML Class","Custom Parameters","Pre-call Webhook","Actions"};
 	
 	String[] Expected_Column_Picker_options_labels ={"Ad Source",
 			"Call Value",
@@ -229,7 +238,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	}
 
 	
-	public void clickAction(String buttonName,String string) throws InterruptedException{
+	public void clickAction(String buttonName,String campaignToBeEdited) throws InterruptedException{
 		if(buttonName.contains("add")){
 				
 					wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
@@ -256,8 +265,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			
 		}
 		else if(buttonName.contains("update")){
-			String campaignToBeEdited=string;
-
+			
 			WebElement edit = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
 			
 			tests.Util.scrollFunction(edit);
@@ -271,7 +279,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 //			}
 		}
 		else if(buttonName.contains("archive")){
-			String campaignToBeEdited=string;
+			
 	
 			WebElement archive = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
 		
@@ -307,13 +315,107 @@ public class CampaignAndTrackingNumberPage extends TestBase
             Thread.sleep(2000);    
 		}
 		
+		else if(buttonName.contains("expand")){
+			
+
+			WebElement expand = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
+//			wait.until(ExpectedConditions.visibilityOf(expand));
+			tests.Util.scrollFunction(expand);
+			Thread.sleep(1000);
+			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)","");
+			
+			tests.Util.click(expand);
+			
+		}
+		
+	      else if(buttonName.contains("collapse")){
+			
+
+			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
+//			wait.until(ExpectedConditions.visibilityOf(expand));
+			
+			Thread.sleep(1000);
+			
+			tests.Util.click(collapse);
+			
+		}
+		
 	}
 	
-	   
+	public void toCheckDefaultDisplayedColumns(){
+
+		
+		for(int i=0;i<default_displayed_expected_tracking_number_table_column_headers.length;){
+			
+			for(int j=0;j<tracking_number_table_column_headers.size();j++){
+				if(default_displayed_expected_tracking_number_table_column_headers[i].equals(tracking_number_table_column_headers.get(j).getText())){
+					System.out.println(default_displayed_expected_tracking_number_table_column_headers[i]);
+					System.out.println(tracking_number_table_column_headers.get(j).getText());
+					logger.log(LogStatus.INFO, "verifying if column "+default_displayed_expected_tracking_number_table_column_headers[i]+"is present..");
+					Assert1.assertTrue(default_displayed_expected_tracking_number_table_column_headers[i].equals(tracking_number_table_column_headers.get(j).getText()),default_displayed_expected_tracking_number_table_column_headers[i]+" is not displayed..");
+				    Assert1.assertAll();
+				}
+			}
+			i++;
+		}
+		
+	}
 	
+	public void toCheckAllDisplayedColumns(){
+		
+		for(int j=0;j<tracking_number_table_column_headers.size();){
+			
+			for(int i=0;i<all_expected_tracking_number_table_column_headers.length;i++){
+				if(all_expected_tracking_number_table_column_headers[i].equals(tracking_number_table_column_headers.get(j).getText())){
+					System.out.println(all_expected_tracking_number_table_column_headers[i]);
+					System.out.println(tracking_number_table_column_headers.get(j).getText());
+					logger.log(LogStatus.INFO, "verifying if column "+all_expected_tracking_number_table_column_headers[i]+" is present..");
+					try{
+					Assert1.assertTrue(all_expected_tracking_number_table_column_headers[i].equals(tracking_number_table_column_headers.get(j).getText()),default_displayed_expected_tracking_number_table_column_headers[i]+" is not displayed..");
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					Assert1.assertAll();
+				}
+			}
+			j++;
+		}
+		
+	}
 	
+	public void toCheckOptionsFromColumnPicker(){
 	
+		logger.log(LogStatus.INFO, "Checking all options from column picker..");
+	    Util.click(Column_Picker_button);		
+		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,200)");
+	    for(int i=0;i<Column_Picker_options_checkbox_tocheck.size();){
+                
+	    
+	    	for(int j=0;j<Column_Picker_options_checkbox.size();j++){
+	    	
+          	if(!Column_Picker_options_checkbox.get(i).getAttribute("aria-checked").equals("true")){
+ 					System.out.println(Column_Picker_options_checkbox_tocheck.get(i));
+                    Util.Action().moveToElement(Column_Picker_options_checkbox_tocheck.get(i)).click().perform();
+// 					break;
+                               
+ 				}
+ 				
+	    	
+	    	
+	    }
+
+           
+	    	i++; 
+//	    break;
+	    }
+
+		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)");
+	    Util.click(Column_Picker_button);
+	    
+	    
+	}
 	
+
 	public void campaignPageUIVerification()
 	{
      

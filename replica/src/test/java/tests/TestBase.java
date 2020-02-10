@@ -107,7 +107,7 @@ public class TestBase
 				driver.navigate().refresh();
 				Thread.sleep(3000);
 				HomePage hp=new HomePage(driver);
-				hp.left_hand_navigation_bar_click();
+//				hp.left_hand_navigation_bar_click();
 //				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
 //				Thread.sleep(2000);
 				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
