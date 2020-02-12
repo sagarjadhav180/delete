@@ -5,3 +5,4 @@ Things to change while changing environment
 4.Change dbURl variable in Util class
 5.Change campaign_ou_id in Campaign and Tracking number page
 6.Change collapsible_strip variable in Campaign_builder page
+7.Change campaignToBeEdited variable value in CamapignUIVerificationTest class
