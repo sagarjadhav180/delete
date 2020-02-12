@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results skipped="0" failed="1" total="3" passed="2">
   <reporter-output>
   </reporter-output>
@@ -8,6 +9,17 @@
     <test name="chrome test" duration-ms="246379" started-at="2020-02-10T15:41:04Z" finished-at="2020-02-10T15:45:11Z">
       <class name="tests.CamapignUIVerificationTest">
         <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="setUp" is-config="true" duration-ms="47447" started-at="2020-02-10T21:11:04Z" finished-at="2020-02-10T21:11:52Z">
+=======
+<testng-results skipped="0" failed="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Automation Suite-1" duration-ms="149067" started-at="2020-02-12T08:38:19Z" finished-at="2020-02-12T08:40:48Z">
+    <groups>
+    </groups>
+    <test name="chrome test" duration-ms="149067" started-at="2020-02-12T08:38:19Z" finished-at="2020-02-12T08:40:48Z">
+      <class name="tests.CamapignUIVerificationTest">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="setUp" is-config="true" duration-ms="51046" started-at="2020-02-12T14:08:19Z" finished-at="2020-02-12T14:09:10Z">
+>>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
           <params>
             <param index="0">
               <value>
@@ -23,6 +35,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
+<<<<<<< HEAD
         <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToCampaignPage" is-config="true" duration-ms="5495" started-at="2020-02-10T21:11:52Z" finished-at="2020-02-10T21:11:57Z">
           <reporter-output>
           </reporter-output>
@@ -32,6 +45,17 @@
           </reporter-output>
         </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
         <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="434" started-at="2020-02-10T21:12:05Z" finished-at="2020-02-10T21:12:05Z">
+=======
+        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToCampaignPage" is-config="true" duration-ms="5134" started-at="2020-02-12T14:09:10Z" finished-at="2020-02-12T14:09:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToCampaignPage -->
+        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CamapignUIVerificationTest@16267862]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="8854" started-at="2020-02-12T14:09:15Z" finished-at="2020-02-12T14:09:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="623" started-at="2020-02-12T14:09:24Z" finished-at="2020-02-12T14:09:25Z">
+>>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
           <params>
             <param index="0">
               <value>
@@ -42,6 +66,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
+<<<<<<< HEAD
         <test-method status="PASS" signature="defaultTrackingNumberColumnLabels()[pri:2, instance:tests.CamapignUIVerificationTest@16267862]" name="defaultTrackingNumberColumnLabels" duration-ms="12665" started-at="2020-02-10T21:12:05Z" finished-at="2020-02-10T21:12:18Z">
           <reporter-output>
           </reporter-output>
@@ -51,12 +76,24 @@
             <param index="0">
               <value>
                 <![CDATA[[TestResult name=defaultTrackingNumberColumnLabels status=SUCCESS method=CamapignUIVerificationTest.defaultTrackingNumberColumnLabels()[pri:2, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
+=======
+        <test-method status="PASS" signature="defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@16267862]" name="defaultColumnsDisplayed" duration-ms="10446" started-at="2020-02-12T14:09:25Z" finished-at="2020-02-12T14:09:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- defaultColumnsDisplayed -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="239" started-at="2020-02-12T14:09:35Z" finished-at="2020-02-12T14:09:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=defaultColumnsDisplayed status=SUCCESS method=CamapignUIVerificationTest.defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
+>>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="allTrackingNumberColumnLabels()[pri:3, instance:tests.CamapignUIVerificationTest@16267862]" name="allTrackingNumberColumnLabels" duration-ms="171159" started-at="2020-02-10T21:12:18Z" finished-at="2020-02-10T21:15:10Z">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
@@ -94,12 +131,24 @@
             <param index="0">
               <value>
                 <![CDATA[[TestResult name=allTrackingNumberColumnLabels status=FAILURE method=CamapignUIVerificationTest.allTrackingNumberColumnLabels()[pri:3, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
+=======
+        <test-method status="PASS" signature="allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@16267862]" name="allColumnsDisplayed" duration-ms="71108" started-at="2020-02-12T14:09:35Z" finished-at="2020-02-12T14:10:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- allColumnsDisplayed -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="117" started-at="2020-02-12T14:10:46Z" finished-at="2020-02-12T14:10:47Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=allColumnsDisplayed status=SUCCESS method=CamapignUIVerificationTest.allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
+>>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="goToHomePage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToHomePage" is-config="true" duration-ms="0" started-at="2020-02-10T21:15:11Z" finished-at="2020-02-10T21:15:11Z">
           <exception class="org.openqa.selenium.NoSuchWindowException">
             <message>
@@ -170,6 +219,17 @@ Session ID: db4612ad7f2c41eebeaf28849724f408
           </reporter-output>
         </test-method> <!-- tearDown -->
         <test-method status="SKIP" signature="close_connection()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="close_connection" is-config="true" duration-ms="0" started-at="2020-02-10T21:15:11Z" finished-at="2020-02-10T21:15:11Z">
+=======
+        <test-method status="PASS" signature="goToHomePage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToHomePage" is-config="true" duration-ms="753" started-at="2020-02-12T14:10:47Z" finished-at="2020-02-12T14:10:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToHomePage -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="716" started-at="2020-02-12T14:10:47Z" finished-at="2020-02-12T14:10:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="close_connection" is-config="true" duration-ms="7054" started-at="2020-02-12T14:10:48Z" finished-at="2020-02-12T14:10:55Z">
+>>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
