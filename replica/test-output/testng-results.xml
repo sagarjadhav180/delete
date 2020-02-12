@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testng-results skipped="0" failed="1" total="3" passed="2">
+<testng-results skipped="0" failed="0" total="4" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="246379" started-at="2020-02-10T15:41:04Z" finished-at="2020-02-10T15:45:11Z">
+  <suite name="Automation Suite-1" duration-ms="157098" started-at="2020-02-12T10:47:59Z" finished-at="2020-02-12T10:50:36Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="246379" started-at="2020-02-10T15:41:04Z" finished-at="2020-02-10T15:45:11Z">
+    <test name="chrome test" duration-ms="157098" started-at="2020-02-12T10:47:59Z" finished-at="2020-02-12T10:50:36Z">
       <class name="tests.CamapignUIVerificationTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="setUp" is-config="true" duration-ms="47447" started-at="2020-02-10T21:11:04Z" finished-at="2020-02-10T21:11:52Z">
-=======
-<testng-results skipped="0" failed="0" total="3" passed="3">
-  <reporter-output>
-  </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="149067" started-at="2020-02-12T08:38:19Z" finished-at="2020-02-12T08:40:48Z">
-    <groups>
-    </groups>
-    <test name="chrome test" duration-ms="149067" started-at="2020-02-12T08:38:19Z" finished-at="2020-02-12T08:40:48Z">
-      <class name="tests.CamapignUIVerificationTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="setUp" is-config="true" duration-ms="51046" started-at="2020-02-12T14:08:19Z" finished-at="2020-02-12T14:09:10Z">
->>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="setUp" is-config="true" duration-ms="43173" started-at="2020-02-12T16:17:59Z" finished-at="2020-02-12T16:18:42Z">
           <params>
             <param index="0">
               <value>
@@ -35,27 +23,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-<<<<<<< HEAD
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToCampaignPage" is-config="true" duration-ms="5495" started-at="2020-02-10T21:11:52Z" finished-at="2020-02-10T21:11:57Z">
+        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToCampaignPage" is-config="true" duration-ms="4488" started-at="2020-02-12T16:18:42Z" finished-at="2020-02-12T16:18:47Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CamapignUIVerificationTest@16267862]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="7598" started-at="2020-02-10T21:11:57Z" finished-at="2020-02-10T21:12:05Z">
+        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CamapignUIVerificationTest@16267862]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="9537" started-at="2020-02-12T16:18:47Z" finished-at="2020-02-12T16:18:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="434" started-at="2020-02-10T21:12:05Z" finished-at="2020-02-10T21:12:05Z">
-=======
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToCampaignPage" is-config="true" duration-ms="5134" started-at="2020-02-12T14:09:10Z" finished-at="2020-02-12T14:09:15Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CamapignUIVerificationTest@16267862]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="8854" started-at="2020-02-12T14:09:15Z" finished-at="2020-02-12T14:09:24Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="623" started-at="2020-02-12T14:09:24Z" finished-at="2020-02-12T14:09:25Z">
->>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="426" started-at="2020-02-12T16:18:56Z" finished-at="2020-02-12T16:18:57Z">
           <params>
             <param index="0">
               <value>
@@ -66,170 +42,60 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-<<<<<<< HEAD
-        <test-method status="PASS" signature="defaultTrackingNumberColumnLabels()[pri:2, instance:tests.CamapignUIVerificationTest@16267862]" name="defaultTrackingNumberColumnLabels" duration-ms="12665" started-at="2020-02-10T21:12:05Z" finished-at="2020-02-10T21:12:18Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- defaultTrackingNumberColumnLabels -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="202" started-at="2020-02-10T21:12:18Z" finished-at="2020-02-10T21:12:18Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=defaultTrackingNumberColumnLabels status=SUCCESS method=CamapignUIVerificationTest.defaultTrackingNumberColumnLabels()[pri:2, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
-=======
-        <test-method status="PASS" signature="defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@16267862]" name="defaultColumnsDisplayed" duration-ms="10446" started-at="2020-02-12T14:09:25Z" finished-at="2020-02-12T14:09:35Z">
+        <test-method status="PASS" signature="defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@16267862]" name="defaultColumnsDisplayed" duration-ms="9479" started-at="2020-02-12T16:18:57Z" finished-at="2020-02-12T16:19:06Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- defaultColumnsDisplayed -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="239" started-at="2020-02-12T14:09:35Z" finished-at="2020-02-12T14:09:35Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="192" started-at="2020-02-12T16:19:06Z" finished-at="2020-02-12T16:19:06Z">
           <params>
             <param index="0">
               <value>
                 <![CDATA[[TestResult name=defaultColumnsDisplayed status=SUCCESS method=CamapignUIVerificationTest.defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
->>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-<<<<<<< HEAD
-        <test-method status="FAIL" signature="allTrackingNumberColumnLabels()[pri:3, instance:tests.CamapignUIVerificationTest@16267862]" name="allTrackingNumberColumnLabels" duration-ms="171159" started-at="2020-02-10T21:12:18Z" finished-at="2020-02-10T21:15:10Z">
-          <exception class="java.lang.NullPointerException">
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-	at pom.CampaignAndTrackingNumberPage.selectAllColumnPickerOptions(CampaignAndTrackingNumberPage.java:547)
-	at tests.CamapignUIVerificationTest.allTrackingNumberColumnLabels(CamapignUIVerificationTest.java:85)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
-	at org.testng.TestRunner.privateRun(TestRunner.java:782)
-	at org.testng.TestRunner.run(TestRunner.java:632)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
-	at org.testng.SuiteRunner.access$000(SuiteRunner.java:39)
-	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:400)
-	at org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+        <test-method status="PASS" signature="defaultTrackingNumberColumnLabels()[pri:2, instance:tests.CamapignUIVerificationTest@16267862]" name="defaultTrackingNumberColumnLabels" duration-ms="15328" started-at="2020-02-12T16:19:06Z" finished-at="2020-02-12T16:19:22Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- allTrackingNumberColumnLabels -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="1323" started-at="2020-02-10T21:15:10Z" finished-at="2020-02-10T21:15:11Z">
+        </test-method> <!-- defaultTrackingNumberColumnLabels -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="144" started-at="2020-02-12T16:19:22Z" finished-at="2020-02-12T16:19:22Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=allTrackingNumberColumnLabels status=FAILURE method=CamapignUIVerificationTest.allTrackingNumberColumnLabels()[pri:3, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
-=======
-        <test-method status="PASS" signature="allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@16267862]" name="allColumnsDisplayed" duration-ms="71108" started-at="2020-02-12T14:09:35Z" finished-at="2020-02-12T14:10:46Z">
+                <![CDATA[[TestResult name=defaultTrackingNumberColumnLabels status=SUCCESS method=CamapignUIVerificationTest.defaultTrackingNumberColumnLabels()[pri:2, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@16267862]" name="allColumnsDisplayed" duration-ms="72584" started-at="2020-02-12T16:19:22Z" finished-at="2020-02-12T16:20:34Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- allColumnsDisplayed -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="117" started-at="2020-02-12T14:10:46Z" finished-at="2020-02-12T14:10:47Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="104" started-at="2020-02-12T16:20:34Z" finished-at="2020-02-12T16:20:34Z">
           <params>
             <param index="0">
               <value>
                 <![CDATA[[TestResult name=allColumnsDisplayed status=SUCCESS method=CamapignUIVerificationTest.allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@16267862] output={null}]]]>
->>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-<<<<<<< HEAD
-        <test-method status="FAIL" signature="goToHomePage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToHomePage" is-config="true" duration-ms="0" started-at="2020-02-10T21:15:11Z" finished-at="2020-02-10T21:15:11Z">
-          <exception class="org.openqa.selenium.NoSuchWindowException">
-            <message>
-              <![CDATA[no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=80.0.3987.87)
-  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.18362 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
-System info: host: 'LAPTOP-Q18VUQ5U', ip: '5.5.25.8', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_201'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.36.540470 (e522d04694c7eb..., userDataDir: C:\Users\PREETI~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 80.0.3987.87, webStorageEnabled: true}
-Session ID: db4612ad7f2c41eebeaf28849724f408]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=80.0.3987.87)
-  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.18362 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
-System info: host: 'LAPTOP-Q18VUQ5U', ip: '5.5.25.8', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_201'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.36.540470 (e522d04694c7eb..., userDataDir: C:\Users\PREETI~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 80.0.3987.87, webStorageEnabled: true}
-Session ID: db4612ad7f2c41eebeaf28849724f408
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
-	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
-	at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:482)
-	at tests.CamapignUIVerificationTest.goToHomePage(CamapignUIVerificationTest.java:99)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
-	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:514)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:215)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
-	at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:232)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:115)
-	at org.testng.TestRunner.privateRun(TestRunner.java:782)
-	at org.testng.TestRunner.run(TestRunner.java:632)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
-	at org.testng.SuiteRunner.access$000(SuiteRunner.java:39)
-	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:400)
-	at org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
+        <test-method status="PASS" signature="goToHomePage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToHomePage" is-config="true" duration-ms="813" started-at="2020-02-12T16:20:34Z" finished-at="2020-02-12T16:20:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToHomePage -->
-        <test-method status="SKIP" signature="tearDown()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-02-10T21:15:11Z" finished-at="2020-02-10T21:15:11Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="800" started-at="2020-02-12T16:20:35Z" finished-at="2020-02-12T16:20:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="close_connection()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="close_connection" is-config="true" duration-ms="0" started-at="2020-02-10T21:15:11Z" finished-at="2020-02-10T21:15:11Z">
-=======
-        <test-method status="PASS" signature="goToHomePage()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="goToHomePage" is-config="true" duration-ms="753" started-at="2020-02-12T14:10:47Z" finished-at="2020-02-12T14:10:47Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToHomePage -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="tearDown" is-config="true" duration-ms="716" started-at="2020-02-12T14:10:47Z" finished-at="2020-02-12T14:10:48Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="close_connection" is-config="true" duration-ms="7054" started-at="2020-02-12T14:10:48Z" finished-at="2020-02-12T14:10:55Z">
->>>>>>> 2b7f7eba56b8c80a41f87a89f2a50266adb8c918
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.CamapignUIVerificationTest@16267862]" name="close_connection" is-config="true" duration-ms="7243" started-at="2020-02-12T16:20:36Z" finished-at="2020-02-12T16:20:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->

@@ -635,34 +635,34 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		Assert1.assertAll();
 	}
 	
-	public void selectAllColumnPickerOptions() throws InterruptedException{
-        
-		logger.log(LogStatus.INFO, "expanding column picker..");
-		Util.click(Column_Picker_button);
-		
-	 	for(int i=0;i<Column_Picker_options_checkbox.size();){
-
-	 		for(int j=0;j<Column_Picker_options_checkbox_labels.size();){
-
-	 			for(int k=0;k<default_selected_Expected_Column_Picker_options.length;k++){
-
-	 				if(!Column_Picker_options_checkbox_labels.get(j).getText().equals(default_selected_Expected_Column_Picker_options[k])){
-	 					Util.click(Column_Picker_options_checkbox_labels.get(i));
-	 				}
-	 				
-	 				
-	 					
-	 			}
-	 			j++;
-	 		}
-	 		i++;
-	 	}
-	 	
-		logger.log(LogStatus.INFO, "collapsing column picker..");
-		Thread.sleep(2000);
-		Util.click(Column_Picker_button);
-	 	
-	}
+//	public void selectAllColumnPickerOptions() throws InterruptedException{
+//        
+//		logger.log(LogStatus.INFO, "expanding column picker..");
+//		Util.click(Column_Picker_button);
+//		
+//	 	for(int i=0;i<Column_Picker_options_checkbox.size();){
+//
+//	 		for(int j=0;j<Column_Picker_options_checkbox_labels.size();){
+//
+//	 			for(int k=0;k<default_selected_Expected_Column_Picker_options.length;k++){
+//
+//	 				if(!Column_Picker_options_checkbox_labels.get(j).getText().equals(default_selected_Expected_Column_Picker_options[k])){
+//	 					Util.click(Column_Picker_options_checkbox_labels.get(i));
+//	 				}
+//	 				
+//	 				
+//	 					
+//	 			}
+//	 			j++;
+//	 		}
+//	 		i++;
+//	 	}
+//	 	
+//		logger.log(LogStatus.INFO, "collapsing column picker..");
+//		Thread.sleep(2000);
+//		Util.click(Column_Picker_button);
+//	 	
+//	}
 	
 	public void defaultDisplayedTrackingNumberColumns(){
 		

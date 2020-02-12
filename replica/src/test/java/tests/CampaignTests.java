@@ -39,7 +39,7 @@ public class CampaignTests extends TestBase {
         logger.assignCategory("Login Suite");
         lp.validLogin();
         HomePage hp=new HomePage(driver);
-        hp.left_hand_navigation_bar_click();
+//        hp.left_hand_navigation_bar_click();
 		
 		try {
 			hp.clickAction("Campaign & Tracking Number");

@@ -19,24 +19,9 @@ public class CamapignUIVerificationTest extends TestBase{
 	@BeforeClass
 	public void goToCampaignPage() throws InterruptedException, IOException{
 
-		LoginPage lp=new LoginPage(driver);
-        logger=extent.startTest("validLogin"); 
-        logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-        logger.assignCategory("Login Suite");
-        lp.validLogin();
-        HomePage hp=new HomePage(driver);
-//        hp.left_hand_navigation_bar_click();
-		
-		try {
-			hp.clickAction("Campaign & Tracking Number");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-		
-		
-	logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
-	hp.clickAction("Campaign");
+	LoginPage lp=new LoginPage(driver);
+
+	
 
 	
 //	LoginPage lp=new LoginPage(driver);
@@ -95,24 +80,6 @@ public class CamapignUIVerificationTest extends TestBase{
 	}
 
 	//To check all tracking number columns are displayed after checking them from column picker
-	@Test(priority=3)
-	public void allTrackingNumberColumnLabels() throws InterruptedException{
-			
-	String campaignToBeEdited="Do not delete--expand scenario";	
-	logger=extent.startTest("all Tracking Number Column Labels..");
-    logger.assignCategory("Campaign Suite");
-
-    CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
-	campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-    cp.selectAllColumnPickerOptions();
-	cp.clickAction("expand", campaignToBeEdited);	
-    cp.allDisplayedTrackingNumberColumns();
-    cp.clickAction("collapse",campaignToBeEdited);
-    Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)");
-    
-
-	}
-
 	@Test(priority=3)
 	public void allColumnsDisplayed() throws InterruptedException {
 		logger=extent.startTest("all columns displayed");
