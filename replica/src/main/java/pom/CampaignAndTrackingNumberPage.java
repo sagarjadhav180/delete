@@ -248,8 +248,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		if(buttonName.contains("add")){
 				
 					wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-					wait.until(ExpectedConditions.elementToBeClickable(addCampaign_Button));					
-
+					Thread.sleep(2000);					
 					addCampaign_Button.click();
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
 				
@@ -585,7 +584,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	Assert1.assertTrue(topLastPagination_count.isDisplayed(),"topLastPagination_count is not present or locator changed");	
 	
 	//verification of count in top pagination toolbox	
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=70135 AND campaign_status NOT IN ('deleted')" );
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=8664 AND campaign_status NOT IN ('deleted')" );
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
 	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
 	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
@@ -635,35 +634,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		Assert1.assertAll();
 	}
 	
-//	public void selectAllColumnPickerOptions() throws InterruptedException{
-//        
-//		logger.log(LogStatus.INFO, "expanding column picker..");
-//		Util.click(Column_Picker_button);
-//		
-//	 	for(int i=0;i<Column_Picker_options_checkbox.size();){
-//
-//	 		for(int j=0;j<Column_Picker_options_checkbox_labels.size();){
-//
-//	 			for(int k=0;k<default_selected_Expected_Column_Picker_options.length;k++){
-//
-//	 				if(!Column_Picker_options_checkbox_labels.get(j).getText().equals(default_selected_Expected_Column_Picker_options[k])){
-//	 					Util.click(Column_Picker_options_checkbox_labels.get(i));
-//	 				}
-//	 				
-//	 				
-//	 					
-//	 			}
-//	 			j++;
-//	 		}
-//	 		i++;
-//	 	}
-//	 	
-//		logger.log(LogStatus.INFO, "collapsing column picker..");
-//		Thread.sleep(2000);
-//		Util.click(Column_Picker_button);
-//	 	
-//	}
-	
+
 	public void defaultDisplayedTrackingNumberColumns(){
 		
 		for(int i=0;i<by_default_displayed_tracking_number_list_columns.length;){

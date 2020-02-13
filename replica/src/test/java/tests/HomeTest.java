@@ -2,6 +2,7 @@ package tests;
 
 import java.io.IOException;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -22,6 +23,7 @@ public class HomeTest extends TestBase
         logger.assignCategory("Login Suite");
         lp.validLogin();
         hp=new HomePage(driver);
+        hp.left_hand_navigation_bar_click();
 
          
 	}
@@ -52,6 +54,20 @@ public class HomeTest extends TestBase
 		logger.assignCategory("Home page Suite");
 		hp.tilesCount();
 	}
+	
+	//loging out -tear down
+			@AfterClass
+			public void tearDown() throws IOException{
+		        LoginPage lp=new LoginPage(driver);
+		        logger=extent.startTest("LogOut"); 
+		        logger.log(LogStatus.INFO, "loggin out.. ");
+		        lp.logOut();
+		        		
+			}
+		
+		
+		
+	
 	
 
 }

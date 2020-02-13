@@ -283,11 +283,16 @@ public class LoginPage extends TestBase {
     
     
     
-    public void resetPasswordFeature(){
+    public void resetPasswordFeature() throws IOException{
     	logger.log(LogStatus.INFO,"navigating to reset password page");
     	forgotPassword_link.click();
     	wait.until(ExpectedConditions.visibilityOf(email_textbox));
-    	email_textbox.sendKeys("ganesh5@yopmail.com");
+Properties prop=new Properties();
+		
+		FileInputStream file=new FileInputStream(".//property");
+		prop.load(file);
+		String username=prop.getProperty("username");
+    	email_textbox.sendKeys(username);
     	Util.click(nextButton);
     	logger.log(LogStatus.INFO, "Verifying if reset password mail is trigerred");
     	wait.until(ExpectedConditions.visibilityOf(resetPasswordSuccessMessage));

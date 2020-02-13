@@ -44,7 +44,7 @@ public class Util extends TestBase{
 	
 	static JsonNode rootNode;
 	static JavascriptExecutor jse = (JavascriptExecutor)driver;
-	static String dbUrl="jdbc:postgresql://stag-5-pg-1.convirza.com:5432/ct_stg";
+	static String dbUrl="jdbc:postgresql://stag-6-pg-1.convirza.com:5432/ct_stg";
 	static String username="moentekdbrw";
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;
@@ -169,7 +169,7 @@ public class Util extends TestBase{
 	
 	public static String readingFromDB(String query){
 		
-		String campaign_count = null;
+		String count = null;
 		try{
 			
 			Class.forName("org.postgresql.Driver");
@@ -182,7 +182,7 @@ public class Util extends TestBase{
 		
 		while(result.next()){
 //			Array campaign_count = result.getArray("count");
-			campaign_count = result.getString("count");
+			count = result.getString("count");
 			
 		}
 		
@@ -192,7 +192,7 @@ public class Util extends TestBase{
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		return campaign_count;
+		return count;
 		
     }
 	

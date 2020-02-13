@@ -16,6 +16,8 @@ import pom.campaignBuilderPage;
 public class CamapignUIVerificationTest extends TestBase{
 
 	HomePage hp;
+	String campaignToBeEdited="agencycamp";	
+	
 	@BeforeClass
 	public void goToCampaignPage() throws InterruptedException, IOException{
 
@@ -30,7 +32,7 @@ public class CamapignUIVerificationTest extends TestBase{
     logger.assignCategory("Login Suite");
     lp.validLogin();		
 	hp=new HomePage(driver);
-//   hp.left_hand_navigation_bar_click();
+    hp.left_hand_navigation_bar_click();
 	logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
 	hp.clickAction("Campaign & Tracking Number");
 
@@ -54,30 +56,30 @@ public class CamapignUIVerificationTest extends TestBase{
 		logger=extent.startTest("Default columns displayed");
 		logger.assignCategory("Campaign Suite");
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
-		cp.clickAction("expand", "Do not delete--expand scenario");
+		cp.clickAction("expand", campaignToBeEdited);
 		cp.toCheckDefaultDisplayedColumns();
-		cp.clickAction("collapse", "Do not delete--expand scenario");
+		cp.clickAction("collapse", campaignToBeEdited);
 		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)","");
 		
 	}
 	
 	//To check by default displayed tracking number columns
-	@Test(priority=2)
-	public void defaultTrackingNumberColumnLabels() throws InterruptedException{
-			
-	String campaignToBeEdited="Do not delete--expand scenario";	
-	logger=extent.startTest("default Tracking Number Column Labels..");
-    logger.assignCategory("Campaign Suite");
-
-    CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
-	campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-    cp.clickAction("expand", campaignToBeEdited);	
-    cp.defaultDisplayedTrackingNumberColumns();
-    cp.clickAction("collapse",campaignToBeEdited);
-    Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)");
-    
-
-	}
+//	@Test(priority=2)
+//	public void defaultTrackingNumberColumnLabels() throws InterruptedException{
+//			
+//
+//	logger=extent.startTest("default Tracking Number Column Labels..");
+//    logger.assignCategory("Campaign Suite");
+//
+//    CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
+//	campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+//    cp.clickAction("expand", campaignToBeEdited);	
+//    cp.defaultDisplayedTrackingNumberColumns();
+//    cp.clickAction("collapse",campaignToBeEdited);
+//    Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)");
+//    
+//
+//	}
 
 	//To check all tracking number columns are displayed after checking them from column picker
 	@Test(priority=3)
@@ -89,10 +91,10 @@ public class CamapignUIVerificationTest extends TestBase{
 		
 		Thread.sleep(2000);
 
-		cp.clickAction("expand", "Do not delete--expand scenario");
+		cp.clickAction("expand",campaignToBeEdited);
 		Thread.sleep(10000);
 		cp.toCheckAllDisplayedColumns();
-		cp.clickAction("collapse", "Do not delete--expand scenario");
+		cp.clickAction("collapse", campaignToBeEdited);
 		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1500)","");
 		
 	}
@@ -112,6 +114,12 @@ public class CamapignUIVerificationTest extends TestBase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        LoginPage lp=new LoginPage(driver);
+        logger=extent.startTest("LogOut"); 
+        logger.log(LogStatus.INFO, "loggin out.. ");
+        lp.logOut();
+        
 	}
 	
 	

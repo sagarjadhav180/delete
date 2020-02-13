@@ -39,7 +39,7 @@ public class CampaignTests extends TestBase {
         logger.assignCategory("Login Suite");
         lp.validLogin();
         HomePage hp=new HomePage(driver);
-//        hp.left_hand_navigation_bar_click();
+        hp.left_hand_navigation_bar_click();
 		
 		try {
 			hp.clickAction("Campaign & Tracking Number");
@@ -329,7 +329,8 @@ public class CampaignTests extends TestBase {
 	//Navigating back to Home page
 	@AfterClass
 	public void goToHomePage(){
-
+        
+		HomePage hp=new HomePage(driver);
         Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
         try {
 			hp.clickAction("Home");
@@ -337,6 +338,11 @@ public class CampaignTests extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        LoginPage lp=new LoginPage(driver);
+        logger=extent.startTest("LogOut"); 
+        logger.log(LogStatus.INFO, "loggin out.. ");
+        lp.logOut();
+        
 	}
 	
 	
