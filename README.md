@@ -2,7 +2,7 @@ Things to change while changing environment
 -------------------------------------------------
 1.Change url in testNG.xml 
 
-2.Change in xpath of userprofile_link in LoginPage class
+2.Change first name last name in xpath of userprofile_link in LoginPage class
 
 3.Change uername and password and url property file
 
@@ -10,7 +10,7 @@ Things to change while changing environment
 
 5.Change campaign_ou_id in Campaign and Tracking number page
 
-6.Change collapsible_strip variable in Campaign_builder page
+6.Change campaign_name variable in Campaign_builder page
 
 7.Change campaignToBeEdited variable value in CamapignUIVerificationTest class
 
