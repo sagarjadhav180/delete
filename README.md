@@ -10,7 +10,7 @@ Things to change while changing environment
 
 5.Change campaign_ou_id in Campaign and Tracking number page
 
-6.Change campaign_name variable in Campaign_builder page
+6.Change collapsible_strip variable in Campaign_builder page
 
 7.Change campaignToBeEdited variable value in CamapignUIVerificationTest class
 
