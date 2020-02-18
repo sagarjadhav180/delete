@@ -12,10 +12,14 @@
     		<classes>
 
 	    <class name="tests.LoginTest"/>	
-		
+	    <class name="tests.HomeTest"/>	    
+	    <class name="tests.CamapignUIVerificationTest"/>	
+	    <class name="tests.CampaignTests"/>
+	    <class name="tests.TrackingNumberTest"/>	 
 	
 		
 		</classes>
+		
 	</test>
 	
 	
