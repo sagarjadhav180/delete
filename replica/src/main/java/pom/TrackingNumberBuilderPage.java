@@ -96,7 +96,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	private static WebElement number_pool_button;
 
 	@FindBy(xpath="//label[text()='Quantity']//parent::div//following-sibling::div//input")
-	private static WebElement number_pool_quantity;
+	private static WebElement number_pool_quantity_textbox;
 	
 	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']")
 	private static WebElement reserved_number_label;
@@ -166,9 +166,15 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	@FindBy(xpath="//label[contains(text(),'Repeat Interval (hours)')]//parent::*//following-sibling::div//input")
 	private WebElement repeat_interval_textbox;
+
+	@FindBy(xpath="(//label[text()='Play a voice prompt'])[2]//..//following-sibling::div//md-checkbox")
+	private WebElement play_voice_prompt_checkbox;
 	
 	@FindBy(xpath="(//label[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[2]")
 	private WebElement play_voice_prompt_textbox;
+
+	@FindBy(xpath="(//label[text()='Play whisper message before connecting'])[1]//..//following-sibling::div//md-checkbox")
+	private WebElement play_whisper_message_checkbox;
 	
 	@FindBy(xpath="(//label[contains(text(),'Play whisper message before connecting')]//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement play_whisper_message_textbox;
@@ -178,6 +184,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	@FindBy(xpath="//label[contains(text(),'Dynamic Number')]")
 	private static WebElement dynamic_number_label;
+
+	@FindBy(xpath="//label[contains(text(),'Dynamic Number')]/../following-sibling::div//md-checkbox")
+	private static WebElement dynamic_number_checkbox;
 	
 	@FindBy(xpath="//label//parent::*//input[@id='showDNI']")
 	private WebElement hostDomain_textbox;	
@@ -193,7 +202,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	String[] dni_types={"URL","Source"};
 	
 	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div")
-	private WebElement custom_parameters;
+	private WebElement custom_parameters_button;
 	
 	//Custom source section
 	String[] customsources_labels={"Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5"};
@@ -230,6 +239,12 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	
 	//Instant insights section 
+
+	@FindBy(xpath="//label[contains(text(),'Instant Insights')]/..//following-sibling::div//md-checkbox")
+	private WebElement instant_insights_checkbox;
+	
+	@FindBy(xpath="//div[@class='col-lg-8 col-md-8 col-sm-12 mt10 mb10']//select[@id='source']")
+	private WebElement instant_insights_dropdown;
 	
 	@FindBy(xpath="(//label[text()='Voice prompt for Call outcome']//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement voice_prompt_for_call_outcome_textbox;	
@@ -251,7 +266,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	@FindBy(xpath="//label[text()='Agent ID voice prompt']//parent::div//following-sibling::div//textarea")
 	private WebElement agent_ID_voice_prompt_textbox;
-	
+
 	@FindBy(xpath="((//label[text()='Agent ID voice prompt']//parent::div//following-sibling::div)[3]//a)[1]")
 	private WebElement agent_ID_voice_prompt_addfile_button;
 
@@ -360,7 +375,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
     	
     	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
-    	softassert.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()),"count  of listed tracking numbers is mismatching with db count");
+    	softassert.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()-1),"count  of listed tracking numbers is mismatching with db count");
         
         
         
@@ -380,7 +395,193 @@ public class TrackingNumberBuilderPage extends TestBase {
         			softassert.assertTrue(labels.get(i).getText().equals(label_names[j]),"label "+label_names[j]+" is not present");
         		}
         	}
+        	i++;
         }
+        
+        //basic section 
+        logger.log(LogStatus.INFO, "Verifying if activate_voicemail field is present");
+        softassert.assertTrue(activate_voicemail_checkbox_label.isDisplayed(),"activate_voicemail field is not displayed or locator chenged");
+        
+        logger.log(LogStatus.INFO, "Verifying if activate_voicemail_checkbox is present");
+        softassert.assertTrue(activate_voicemail_checkbox.isDisplayed(),"activate_voicemail_checkbox is not displayed or locator chenged");
+        
+        logger.log(LogStatus.INFO, "Verifying if activate_voicemail_checkbox is enabled");
+        softassert.assertTrue(activate_voicemail_checkbox.isEnabled(),"activate_voicemail_checkbox is not enabled");
+
+        logger.log(LogStatus.INFO, "Verifying if activate_voicemail_note is displayed");
+        softassert.assertTrue(activate_voicemail_note.isDisplayed(),"activate_voicemail_checkbox is not displayed or locator changed");
+        
+        logger.log(LogStatus.INFO, "Verifying if active_label is displayed");
+        softassert.assertTrue(active_label.isDisplayed(),"active_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if active_label_checkbox is displayed");
+        softassert.assertTrue(active_label_checkbox.isDisplayed(),"active_label_checkbox is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if active_label_checkbox is enabled");
+        softassert.assertTrue(active_label_checkbox.isEnabled(),"active_label_checkbox is not enabled");
+        
+        logger.log(LogStatus.INFO, "Verifying if set_caller_id_label is displayed");
+        softassert.assertTrue(set_caller_id_label.isDisplayed(),"set_caller_id_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if single_number_label is displayed");
+        softassert.assertTrue(single_number_label.isDisplayed(),"single_number_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if single_number_button is displayed");
+        softassert.assertTrue(single_number_button.isDisplayed(),"single_number_button is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if single_number_button is enabled");
+        softassert.assertTrue(single_number_button.isEnabled(),"single_number_button is not enabled");
+
+        logger.log(LogStatus.INFO, "Verifying if number_pool_label is displayed");
+        softassert.assertTrue(number_pool_label.isDisplayed(),"number_pool_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if number_pool_button is displayed");
+        softassert.assertTrue(number_pool_button.isDisplayed(),"number_pool_button is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if number_pool_button is enabled");
+        softassert.assertTrue(number_pool_button.isEnabled(),"number_pool_button is not enabled");
+
+        Util.Action().moveToElement(number_pool_button).click().perform();
+        logger.log(LogStatus.INFO, "Verifying if number_pool_quantity_textbox is displayed");
+        softassert.assertTrue(number_pool_quantity_textbox.isDisplayed(),"number_pool_quantity_textbox is not displayed or locator changed");        
+        Util.Action().moveToElement(single_number_button).click().perform();
+        
+        logger.log(LogStatus.INFO, "Verifying if reserved_number_label is displayed");
+        softassert.assertTrue(reserved_number_label.isDisplayed(),"reserved_number_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if area_code_textbox is displayed");
+        softassert.assertTrue(area_code_textbox.isDisplayed(),"area_code_textbox is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if tracking_number_name_textbox is displayed");
+        softassert.assertTrue(tracking_number_name_textbox.isDisplayed(),"tracking_number_name_textbox is not displayed or locator changed");
+        
+        logger.log(LogStatus.INFO, "Verifying if ring_to_phone_number_textbox is displayed");
+        softassert.assertTrue(ring_to_phone_number_textbox.isDisplayed(),"ring_to_phone_number_textbox is not displayed or locator changed");
+        
+        //advanced section
+       
+        Util.getJavascriptExecutor().executeScript("window.scrollBy(0,500)","");
+        
+        for(int i=0;i<labels.size();){
+        	
+        	for(int j=0;j<trackingNumberLabels.length;j++){
+        		if(labels.get(i).getText().equals(trackingNumberLabels[j])){
+        			System.out.println("we "+labels.get(i).getText());
+        			System.out.println("array "+trackingNumberLabels[j]);
+        			logger.log(LogStatus.INFO, "Verifying if "+trackingNumberLabels[j]+" is displayed");
+        			softassert.assertTrue(labels.get(i).getText().equals(trackingNumberLabels[j]),trackingNumberLabels[j]+" is not displayed");
+        			
+        		}
+        	}
+        	i++;
+        }
+        logger.log(LogStatus.INFO, "Verifying if play_a_voice_prompt_label is displayed");
+        softassert.assertTrue(play_a_voice_prompt_label.isDisplayed(),"play_a_voice_prompt_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if call_value_textbox is displayed");
+        softassert.assertTrue(call_value_textbox.isDisplayed(),"call_value_textbox is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if configure_voicemail_greetings_textbox is displayed");
+        softassert.assertTrue(configure_voicemail_greetings_textbox.isDisplayed(),"configure_voicemail_greetings_textbox is not displayed or locator changed");
+        
+        logger.log(LogStatus.INFO, "Verifying if repeat_interval_textbox is displayed");
+        softassert.assertTrue(repeat_interval_textbox.isDisplayed(),"repeat_interval_textbox is not displayed or locator changed");
+
+        Util.Action().moveToElement(play_voice_prompt_checkbox).click().perform();
+        logger.log(LogStatus.INFO, "Verifying if play_voice_prompt_textbox is displayed");
+        softassert.assertTrue(play_voice_prompt_textbox.isDisplayed(),"play_voice_prompt_textbox is not displayed or locator changed");
+
+        Util.Action().moveToElement(play_whisper_message_checkbox).click().perform();
+        logger.log(LogStatus.INFO, "Verifying if play_whisper_message_textbox is displayed");
+        softassert.assertTrue(play_whisper_message_textbox.isDisplayed(),"play_whisper_message_textbox is not displayed or locator changed");
+
+      
+       //DNI section
+        Util.Action().moveToElement(dynamic_number_checkbox).click().perform();
+        logger.log(LogStatus.INFO, "Verifying if dynamic_number_label is displayed");
+        softassert.assertTrue(dynamic_number_label.isDisplayed(),"dynamic_number_label is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if hostDomain_textbox is displayed");
+        softassert.assertTrue(hostDomain_textbox.isDisplayed(),"hostDomain_textbox is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if htmlclass_textbox is displayed");
+        softassert.assertTrue(htmlclass_textbox.isDisplayed(),"htmlclass_textbox is not displayed or locator changed");
+        
+        Select select=new Select(dni_type_dropdown);
+        for(int i=0;i<select.getOptions().size();){
+        	for(int j=0;j<dni_types.length;j++){
+        		if(select.getOptions().get(i).getText().equals(dni_types[j])){
+        			System.out.println("we "+select.getOptions().get(i).getText());
+        			System.out.println("array "+dni_types[j]);
+        			logger.log(LogStatus.INFO, "Verifying if "+select.getOptions().get(i).getText().equals(dni_types[j]));
+        			softassert.assertTrue(select.getOptions().get(i).getText().equals(dni_types[j]),dni_types[j]+" is not present");
+        		}
+        		i++;
+        	}
+        }
+        logger.log(LogStatus.INFO, "Verifying if custom_parameters_button is displayed");
+        softassert.assertTrue(custom_parameters_button.isDisplayed(),"custom_parameters_button is not displayed or locator changed");        
+        
+        logger.log(LogStatus.INFO, "Verifying if custom_parameters_button is enabled");
+        softassert.assertTrue(custom_parameters_button.isEnabled(),"custom_parameters_button is not enabled");         
+      
+        //custom source section
+        
+        for(int i=0;i<labels.size();){
+        	
+        	for(int j=0;j<customsources_labels.length;j++){
+        		if(labels.get(i).getText().equals(customsources_labels[j])){
+        			System.out.println("we "+labels.get(i).getText());
+        			System.out.println("array "+customsources_labels[j]);
+        			logger.log(LogStatus.INFO, "Verifying if "+customsources_labels[j]+" is displayed");
+        			softassert.assertTrue(labels.get(i).getText().equals(customsources_labels[j]),customsources_labels[j]+" is not displayed");
+        			
+        		}
+        	}
+        	i++;
+        }
+        
+    	//Instant insights section -- call outcome
+        Util.Action().moveToElement(instant_insights_checkbox).click().perform();
+        logger.log(LogStatus.INFO, "Verifying if voice_prompt_for_call_outcome_textbox is displayed");
+        softassert.assertTrue(voice_prompt_for_call_outcome_textbox.isDisplayed(),"voice_prompt_for_call_outcome_textbox is not displayed or locator changed");  
+
+        logger.log(LogStatus.INFO, "Verifying if voice_prompt_for_call_outcome_addfile_button is displayed");
+        softassert.assertTrue(voice_prompt_for_call_outcome_addfile_button.isDisplayed(),"voice_prompt_for_call_outcome_addfile_button is not displayed or locator changed");  
+
+        logger.log(LogStatus.INFO, "Verifying if voice_prompt_for_call_outcome_play_button is displayed");
+        softassert.assertTrue(voice_prompt_for_call_outcome_play_button.isDisplayed(),"voice_prompt_for_call_outcome_play_button is not displayed or locator changed");  
+        
+        logger.log(LogStatus.INFO, "Verifying if sale_amount_voice_prompt_textbox is displayed");
+        softassert.assertTrue(sale_amount_voice_prompt_textbox.isDisplayed(),"sale_amount_voice_prompt_textbox is not displayed or locator changed");          
+        
+        logger.log(LogStatus.INFO, "Verifying if sale_amount_voice_prompt_addfile_button is displayed");
+        softassert.assertTrue(sale_amount_voice_prompt_addfile_button.isDisplayed(),"sale_amount_voice_prompt_addfile_button is not displayed or locator changed");          
+
+        logger.log(LogStatus.INFO, "Verifying if sale_amount_voice_prompt_play_button is displayed");
+        softassert.assertTrue(sale_amount_voice_prompt_play_button.isDisplayed(),"sale_amount_voice_prompt_play_button is not displayed or locator changed");          
+   
+    	//Instant insights section -- agent id
+        Select select1=new Select(instant_insights_dropdown);
+        select1.selectByVisibleText("Agent ID");
+        
+        logger.log(LogStatus.INFO, "Verifying if agent_ID_voice_prompt_textbox is displayed");
+        softassert.assertTrue(agent_ID_voice_prompt_textbox.isDisplayed(),"agent_ID_voice_prompt_textbox is not displayed or locator changed");          
+
+        logger.log(LogStatus.INFO, "Verifying if agent_ID_voice_prompt_addfile_button is displayed");
+        softassert.assertTrue(agent_ID_voice_prompt_addfile_button.isDisplayed(),"agent_ID_voice_prompt_addfile_button is not displayed or locator changed");          
+
+        logger.log(LogStatus.INFO, "Verifying if agent_ID_voice_prompt_play_button is displayed");
+        softassert.assertTrue(agent_ID_voice_prompt_play_button.isDisplayed(),"agent_ID_voice_prompt_play_button is not displayed or locator changed");          
+
+        
+        Select select2=new Select(number_of_digits_in_agent_Id_dropdown);
+        System.out.println("size is "+select2.getOptions().size()); 
+        logger.log(LogStatus.INFO, "Verifying if number_of_digits_in_agent_Id_dropdown has 1 to 9 digits");
+        softassert.assertTrue(select2.getOptions().size()==10,"number_of_digits_in_agent_Id_dropdown does not have 1 to 9 digits");
+        
+        
+        softassert.assertAll();
         
     }
     

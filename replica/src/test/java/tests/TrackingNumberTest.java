@@ -41,19 +41,20 @@ public class TrackingNumberTest extends TestBase{
 	//create simple tracking number
 	@Test(priority=1)
 	public void trakingNumberPageUIVerification() throws InterruptedException{
-	   logger=extent.startTest("Tracking number creation..");
+	   logger=extent.startTest("Tracking number UI Verification..");
        logger.assignCategory("Tracking number suite");
 					
 	   campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 	   CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
        cp.clickAction("update","SJC-1");
        TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+       tn.uiVerification();
 				    
 	}		
 		
 		
 	//create simple tracking number
-		@Test(priority=2)
+//		@Test(priority=2)
 		public void simpleTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("Tracking number creation..");
 			logger.assignCategory("Tracking number suite");
