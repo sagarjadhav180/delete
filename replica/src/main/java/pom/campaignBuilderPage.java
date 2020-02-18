@@ -594,6 +594,7 @@ public class campaignBuilderPage extends TestBase {
 			campaignName_TextBox.sendKeys(campaign_name_updated);
 			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
 			active_InactiveCampaign_Button.click();
+			Thread.sleep(2000);
 			SaveCampaignDetails_Button.click();
 			
             Thread.sleep(2000);

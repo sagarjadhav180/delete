@@ -25,7 +25,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	//Tracking number list
 	
-	@FindBy(xpath="//h4[contains(text(),'TRACKING NUMBERS FOR test_automation_campaign')]")
+	@FindBy(xpath="//h4[contains(text(),'TRACKING NUMBERS FOR SJC-1')]")
 	private static WebElement header;
 
 	@FindBy(xpath="//button[@class='btn btn-info'][contains(text(),'Add Tracking Number')]")
@@ -61,7 +61,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	//Add tracking number page-basic section
 
 	@FindBy(xpath="//label")
-	private static WebElement labels;	
+	private static List<WebElement> labels;	
 	
 	String[] label_names={"CONFIGURE NUMBER","NPA-NXX (Area Code)","Tracking Number Name","Ad Source","Tracking Number","CONFIGURE ROUTING OPTIONS"};
 	
@@ -313,20 +313,88 @@ public class TrackingNumberBuilderPage extends TestBase {
 		return webelement;
 	}
     
- 
+    
+    public void uiVerification(){
+    	SoftAssert softassert=new SoftAssert();
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    	Util.scrollFunction(add_tracking_number_button);
+        
+        logger.log(LogStatus.INFO, "Verifying if add_tracking_number_button is present");
+        softassert.assertTrue(add_tracking_number_button.isDisplayed(),"add_tracking_number_button is not displayed or locator changed");
+        
+        logger.log(LogStatus.INFO, "Verifying if add_tracking_number_button is enabled");
+        softassert.assertTrue(add_tracking_number_button.isEnabled(),"add_tracking_number_button is not enabled");
+
+        logger.log(LogStatus.INFO, "Verifying if export_button is displayed");
+        softassert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
+
+        logger.log(LogStatus.INFO, "Verifying if export_button is enabled");
+        softassert.assertTrue(export_button.isEnabled(),"export_button is not enabled");
+        
+        
+        
+        for(int i=0;i<tracking_number_list_column_headers.size();){
+        	
+        	for(int j=0;j<tracking_number_list_column_header_name.length;j++){
+        		if(tracking_number_list_column_headers.get(i).getText().equals(tracking_number_list_column_header_name[j])){
+        			logger.log(LogStatus.INFO, "verifying if "+tracking_number_list_column_header_name[j]+" is present");
+        			softassert.assertTrue(tracking_number_list_column_headers.get(i).getText().equals(tracking_number_list_column_header_name[j]),"header "+tracking_number_list_column_header_name[j]+" is not present");
+        		}
+        	}
+        	i++;
+        }
+        
+
+    //  verification of buttons in top pagination toolbox
+    	logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+    	wait.until(ExpectedConditions.visibilityOf(top_first_button));
+    	softassert.assertTrue(top_first_button.isDisplayed(),"top_first_button is not present or locator changed");
+    	softassert.assertTrue(top_last_button.isDisplayed(),"top_last_button is not present or locator changed");	
+    	softassert.assertTrue(top_next_button.isDisplayed(),"top_next_button is not present or locator changed");	
+    	softassert.assertTrue(top_prev_button.isDisplayed(),"top_prev_button is not present or locator changed");	
+    	
+    	//verification of count in top pagination toolbox	
+    	String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='17225') AND status NOT IN ('suspended')" );
+        String countOnUI_pagination = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+2);
+    	logger.log(LogStatus.INFO, "verifying count tracking numbers in top pagination toolbox");
+    	softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+    	
+    	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
+    	softassert.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()),"count  of listed tracking numbers is mismatching with db count");
+        
+        
+        
+        
+        //opening tracking number builder page
+        add_tracking_number_button.click();
+        
+        wait.until(ExpectedConditions.visibilityOf(header));
+        logger.log(LogStatus.INFO, "verifying if header is displayed");
+        softassert.assertTrue(header.isDisplayed(),"header is not displayed");
+        
+        for(int i=0;i<labels.size();){
+        	
+        	for(int j=0;j<label_names.length;j++){
+        		if(labels.get(i).getText().equals(label_names[j])){
+        			logger.log(LogStatus.INFO, "Verifying if "+label_names[j]+" is present");
+        			softassert.assertTrue(labels.get(i).getText().equals(label_names[j]),"label "+label_names[j]+" is not present");
+        		}
+        	}
+        }
+        
+    }
+    
+    
+    
     public void createSimpleNumber(String tracking_number_name) throws InterruptedException{
     	
 
-     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//    		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
+       wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//     Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
     		
        Util.scrollFunction(add_tracking_number_button);  
-        	add_tracking_number_button.click();
+       add_tracking_number_button.click();
     	
-    	
-    	
-
-    
 //    	tn_list_for_385
     	
     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
@@ -365,23 +433,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	
  }
 	
-//  verification of buttons in top pagination toolbox
-//	logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
-//	wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
-//	Assert1.assertTrue(top_first_button.isDisplayed(),"top_first_button is not present or locator changed");
-//	Assert1.assertTrue(top_last_button.isDisplayed(),"top_last_button is not present or locator changed");	
-//	Assert1.assertTrue(top_next_button.isDisplayed(),"top_next_button is not present or locator changed");	
-//	Assert1.assertTrue(top_prev_button.isDisplayed(),"top_prev_button is not present or locator changed");	
-	
-	//verification of count in top pagination toolbox	
-//	dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='404') AND status NOT IN ('suspended')" );
-//	
-//          countOnUI_pagination=top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+2);
-//	logger.log(LogStatus.INFO, "verifying count tracking numbers in top pagination toolbox");
-//	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
-//	
-//	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
-//	Assert1.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()),"count  of listed tracking numbers is mismatching with db count");
+
 
     
 }
