@@ -142,6 +142,10 @@ public class TrackingNumberBuilderPage extends TestBase {
 
 	@FindBy(xpath="//div[text()='Tracking Number created successfully.']")
 	private static WebElement tn_creation_success_message;
+
+	@FindBy(xpath="//div[text()='Tracking Number updated successfully.']")
+	private static WebElement tn_updation_success_message;
+	
 	
 	
 	//Add tracking number page-advanced section
@@ -322,10 +326,11 @@ public class TrackingNumberBuilderPage extends TestBase {
 	}
 	
 	//to get action button of desired tracking number
-    public WebElement getgroup(String tracking_number_name,String button_name){
+    public void clickAction(String tracking_number_name,String button_name){
 		
-		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+tracking_number_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
-		return webelement;
+		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+tracking_number_name+"')]//ancestor::tr//div//button[contains(text(),'"+button_name+"')]"));
+		Util.scrollFunction(webelement);
+		webelement.click();
 	}
     
     
@@ -630,10 +635,33 @@ public class TrackingNumberBuilderPage extends TestBase {
     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
         wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
-    	logger.log(LogStatus.INFO, "tracking number created sucessfully");
     	
  }
-	
+    public void editSimpleNumber(String updated_tracking_number_name) throws InterruptedException{
+    	
+        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+     	
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.sendKeys(updated_tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(3);
+     	
+     	ring_to_phone_number_textbox.clear();
+     	ring_to_phone_number_textbox.sendKeys("8018786944");
+
+     	 
+     	Util.scrollFunction(save_button);
+       
+     	save_button.click();
+     	
+     	logger.log(LogStatus.INFO, "Verifying if tracking number is updated");
+         wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+     	softassert.assertTrue(tn_updation_success_message.isDisplayed(),"tracking number is not updated successfully..");
+     	
+     	softassert.assertAll();
+     	
+  }
 
 
     
