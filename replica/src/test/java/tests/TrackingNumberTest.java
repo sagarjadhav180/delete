@@ -15,6 +15,8 @@ import pom.campaignBuilderPage;
 
 public class TrackingNumberTest extends TestBase{
 	
+	String tracking_number_name;
+	String updated_tracking_number_name;
 	
 	//navigating to Campaign builder page
 		@BeforeClass
@@ -38,8 +40,8 @@ public class TrackingNumberTest extends TestBase{
 		}
 	
 
-	//create simple tracking number
-	@Test(priority=1)
+	//Tracking number page UI verification
+//	@Test(priority=1)
 	public void trakingNumberPageUIVerification() throws InterruptedException{
 	   logger=extent.startTest("Tracking number UI Verification..");
        logger.assignCategory("Tracking number suite");
@@ -54,7 +56,7 @@ public class TrackingNumberTest extends TestBase{
 		
 		
 	//create simple tracking number
-//		@Test(priority=2)
+     	@Test(priority=2)
 		public void simpleTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("Tracking number creation..");
 			logger.assignCategory("Tracking number suite");
@@ -64,11 +66,29 @@ public class TrackingNumberTest extends TestBase{
 		    cp.clickAction("update","SJC-1");
 		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
 		    int number1 = tests.Util.generateRandomNumber();
-		    String tracking_number_name="SJ TN-"+String.valueOf(number1);
+		    tracking_number_name="SJ TN-"+String.valueOf(number1);
 		    tn.createSimpleNumber(tracking_number_name);
 		    Thread.sleep(2000);
 		    cb.clickAction("list");
 		}
 		
-
+		//edit simple tracking number
+		@Test(priority=3)
+		public void simpleTrakingNumberUpdation() throws InterruptedException{
+			logger=extent.startTest("Tracking number update..");
+			logger.assignCategory("Tracking number suite");
+			
+			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		    cp.clickAction("update","SJC-1");
+		    
+		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+		    tn.clickAction(updated_tracking_number_name, "Edit");
+		    updated_tracking_number_name=tracking_number_name.concat(" updated");
+		    tn.editSimpleNumber(updated_tracking_number_name);
+		    
+		    cb.clickAction("list");
+		}
+		
+		
 }
