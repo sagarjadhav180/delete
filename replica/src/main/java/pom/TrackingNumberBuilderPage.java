@@ -3,6 +3,7 @@ package pom;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -92,7 +93,10 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//md-radio-button[@id='optionsRadios2']")
 	private static WebElement number_pool_label;
 
-	@FindBy(xpath="//md-radio-button[@id='optionsRadios2']/div[2]")
+	@FindBy(xpath="//button[contains(text(),'OK')]")
+	private static WebElement ok_button_number_pool_label_create_alert;	
+	
+	@FindBy(xpath="//md-radio-button[@id='optionsRadios2']/div[1]")
 	private static WebElement number_pool_button;
 
 	@FindBy(xpath="//label[text()='Quantity']//parent::div//following-sibling::div//input")
@@ -101,7 +105,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']")
 	private static WebElement reserved_number_label;
 
-	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']/div[2]")
+	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']/div[2]//preceding-sibling::div")
 	private static WebElement reserved_number_button;
 	
 	@FindBy(xpath="//label[text()='Reserved Number']//parent::div//following-sibling::div//select")
@@ -146,7 +150,14 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//div[text()='Tracking Number updated successfully.']")
 	private static WebElement tn_updation_success_message;
 	
-	
+	@FindBy(xpath="//div[text()='Tracking Number removed successfully.']")
+	private static WebElement tn_deletion_success_message;	
+
+	@FindBy(xpath="//button[contains(text(),'OK')]")
+	private static WebElement ok_button_tn_deletion_alert;
+
+	@FindBy(xpath="//button[contains(text(),'Cancel')]")
+	private static WebElement cancel_button_tn_deletion_alert;
 	
 	//Add tracking number page-advanced section
 	
@@ -329,8 +340,24 @@ public class TrackingNumberBuilderPage extends TestBase {
     public void clickAction(String tracking_number_name,String button_name){
 		
 		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+tracking_number_name+"')]//ancestor::tr//div//button[contains(text(),'"+button_name+"')]"));
+		System.out.println(webelement);
 		Util.scrollFunction(webelement);
-		webelement.click();
+		
+		if(button_name.contains("Delete")){
+			wait.until(ExpectedConditions.visibilityOf(webelement));
+			Util.click(webelement);
+			driver.switchTo().activeElement();
+            wait.until(ExpectedConditions.visibilityOf(ok_button_tn_deletion_alert));
+			Util.Action().moveToElement(ok_button_tn_deletion_alert).click().perform();
+			wait.until(ExpectedConditions.visibilityOf(tn_deletion_success_message));
+			logger.log(LogStatus.INFO, "Verifying if tracking number is deleted successfully..");
+			softassert.assertTrue(tn_deletion_success_message.isDisplayed(),"tracking number not deleted successfully");
+            softassert.assertAll();
+			
+		}
+		else{
+			webelement.click();
+		}
 	}
     
     
@@ -598,7 +625,7 @@ public class TrackingNumberBuilderPage extends TestBase {
        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //     Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
     		
-       Util.scrollFunction(add_tracking_number_button);  
+       Util.scrollFunction(header);  
        add_tracking_number_button.click();
     	
 //    	tn_list_for_385
@@ -607,7 +634,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	tracking_number_name_textbox.sendKeys(tracking_number_name);
     	
     	Select selct_ad_source=new Select(ad_source_dropdown);
-    	selct_ad_source.selectByIndex(2);
+    	selct_ad_source.selectByIndex(4);
     	
     	ring_to_phone_number_textbox.clear();
     	ring_to_phone_number_textbox.sendKeys("8018786943");
@@ -627,7 +654,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         
 //        Util.click(tracking_number_dropdown);
         Select select_tracking_number=new Select(tracking_number_dropdown);
-        select_tracking_number.selectByIndex(4);
+        select_tracking_number.selectByIndex(20);
     	Util.scrollFunction(save_button);
       
     	save_button.click();
@@ -637,11 +664,14 @@ public class TrackingNumberBuilderPage extends TestBase {
     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
     	
  }
+    
+    
     public void editSimpleNumber(String updated_tracking_number_name) throws InterruptedException{
     	
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
      	
      	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.clear();
      	tracking_number_name_textbox.sendKeys(updated_tracking_number_name);
      	
      	Select selct_ad_source=new Select(ad_source_dropdown);
@@ -662,7 +692,109 @@ public class TrackingNumberBuilderPage extends TestBase {
      	softassert.assertAll();
      	
   }
+    public void createNumberPool(String tracking_number_name) throws InterruptedException{
+    	
 
+        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
+     		
+        Util.scrollFunction(header);  
+        add_tracking_number_button.click();
+        
+        wait.until(ExpectedConditions.visibilityOf(number_pool_button));
+        try{
+        Util.click(number_pool_button);
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
+//     	tn_list_for_385
+    	area_code_textbox.sendKeys("385");
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+     	
+     	for(int i=0;i<area_codes_list_for_385.size();i++){
+     		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+     			area_codes_list_for_385.get(i).click();
+     			
+     		}
+     		
+     	}
+      
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.sendKeys(tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(4);
+     	
+     	ring_to_phone_number_textbox.clear();
+     	ring_to_phone_number_textbox.sendKeys("8018786943");
 
+//     	number_pool_quantity_textbox.clear();
+     	number_pool_quantity_textbox.sendKeys("1");     
+     	
+     	Util.scrollFunction(save_button);
+       
+     	save_button.click();
+     	
+     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        try{
+     	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+        }catch(Exception e){
+        	driver.switchTo().activeElement();
+            Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
+         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));        	
+        }
+
+     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"number pool is not created successfully..");
+     	
+  }
+
+    
+
+    public void editNumberPool(String updated_tracking_number_name) throws InterruptedException{
+    	
+        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+     	
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.clear();
+     	tracking_number_name_textbox.sendKeys(updated_tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(3);
+     	
+     	ring_to_phone_number_textbox.clear();
+     	ring_to_phone_number_textbox.sendKeys("8018786944");
+
+     	 
+     	Util.scrollFunction(save_button);
+       
+     	save_button.click();
+     	
+     	logger.log(LogStatus.INFO, "Verifying if tracking number is updated");
+     	try{
+         wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+     	}catch(Exception e){
+     		driver.switchTo().activeElement();
+            Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
+         	wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+     	}
+     	softassert.assertTrue(tn_updation_success_message.isDisplayed(),"tracking number is not updated successfully..");
+     	
+     	softassert.assertAll();
+     	
+  }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
