@@ -130,7 +130,7 @@ public class TrackingNumberTest extends TestBase{
 
 		}
 		
-//		//delete simple tracking number
+		//delete simple tracking number
 		@Test(priority=6)
 		public void numberPoolDeletion() throws InterruptedException{
 			logger=extent.startTest("Tracking number deletion..");
