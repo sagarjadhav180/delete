@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test verbose="2" name="Default test">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Automation Suite-1]" parallel="tests">
+  <parameter name="browser" value="chrome"/>
+  <parameter name="url" value="https://stag-6-cmo-1.convirza.com"/>
+  <test name="chrome test">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="https://stag-6-cmo-1.convirza.com"/>
     <classes>
-      <class name="reservenumber.ReserveNumber"/>
+      <class name="tests.TrackingNumberTest"/>
     </classes>
-  </test> <!-- Default test -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- chrome test -->
+</suite> <!-- Failed suite [Automation Suite-1] -->

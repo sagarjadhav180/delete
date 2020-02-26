@@ -1,10 +1,12 @@
 package reservenumber;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -22,14 +24,21 @@ import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 public class ReserveNumber {
-
+ 
 	
-	@Test
-	public void makeNumberReseve() throws ClientProtocolException, IOException, EncryptedDocumentException, InvalidFormatException, JSONException
+     
+	public static String makeNumberReseve() throws ClientProtocolException, IOException, EncryptedDocumentException, InvalidFormatException, JSONException
 	{
 		
 		String access_token = GetAuthToken.authToken();
 		List<String> numbers = GetNumber.getNumberToReserve(access_token);
+		String number1 = null ; 
+		for(int i=0;i<numbers.size();i++){
+			 String number=numbers.get(0);
+			 number1=number;
+			 
+			}
+		 
 		
 		System.out.println("compiler entered into request method");
 		
@@ -38,12 +47,19 @@ public class ReserveNumber {
 		CloseableHttpClient httpclients = HttpClients.createDefault();
 		
 		//posting URL
-		HttpPost httppost=new HttpPost("https://stag-6-cfaapi-1.convirza.com/v2/number/reserve");
+		Properties prop=new Properties();
+		FileInputStream file=new FileInputStream(".//property"); 
+		prop.load(file);
+		String url = prop.getProperty("reservenumberendpoint");
+		
+		HttpPost httppost=new HttpPost(url); 
 
 		
 		JSONObject jo=new JSONObject();
-		for(int i=0;i<numbers.size();i++){
-		jo.put("number", Integer.valueOf(numbers.get(0)));
+		try{
+		jo.put("number", Integer.valueOf(number1));
+		}catch(NumberFormatException n){
+			n.printStackTrace();
 		}
 		jo.put("source", 10001);
 		
@@ -82,6 +98,8 @@ public class ReserveNumber {
 		
 		System.out.println("error is "+utilresponse);
 //		
+		return number1;
+
 	}
 	
 }

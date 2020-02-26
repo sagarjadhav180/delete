@@ -1,10 +1,12 @@
 package reservenumber;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
@@ -32,7 +34,12 @@ public class GetNumber {
 		CloseableHttpClient httpclients = HttpClients.createDefault();
 		
 		//posting URL
-		HttpGet httpget=new HttpGet("https://stag-6-cfaapi-1.convirza.com/v2/number/search");
+		Properties prop=new Properties();
+		FileInputStream file=new FileInputStream(".//property");
+		prop.load(file);
+		String url = prop.getProperty("getnumberendpoint");
+		
+		HttpGet httpget=new HttpGet(url);
 
 		
 				
