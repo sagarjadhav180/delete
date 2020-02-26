@@ -2,3 +2,9 @@ url=https://stag-6-cmo-1.convirza.com
 username=newac@yopmail.com
 password=lmc2demo
 Environment=Staging 6
+
+
+
+reservenumberendpoint=https://stag-6-cfaapi-1.convirza.com/v2/number/reserve
+authtokenendpoint=https://stag-6-cfaapi-1.convirza.com/oauth/token
+getnumberendpoint=https://stag-6-cfaapi-1.convirza.com/v2/number/search

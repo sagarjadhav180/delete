@@ -1,10 +1,12 @@
 package reservenumber;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
@@ -39,15 +41,22 @@ public class GetAuthToken{
 		CloseableHttpClient httpclients = HttpClients.createDefault();
 		
 		//posting URL
-		HttpPost httppost=new HttpPost("https://stag-6-cfaapi-1.convirza.com/oauth/token");
+		
+		Properties prop=new Properties();
+		FileInputStream file=new FileInputStream(".//property");
+		prop.load(file);
+		String url = prop.getProperty("authtokenendpoint");
+		String username = prop.getProperty("username");
+		String password = prop.getProperty("password");		
+		HttpPost httppost=new HttpPost(url);
 
 		
 		JSONObject ja=new JSONObject();
 		ja.put("client_id", "system");
 		ja.put("client_secret", "f558ba166258089b2ef322c340554c");
 		ja.put("grant_type", "password");
-		ja.put("password", "lmc2demo");
-		ja.put("username", "newac@yopmail.com");
+		ja.put("password", password);
+		ja.put("username", username);
 		
 		
 		httppost.setEntity(new StringEntity(ja.toString()));

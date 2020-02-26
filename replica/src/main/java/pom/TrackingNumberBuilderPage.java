@@ -105,7 +105,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']")
 	private static WebElement reserved_number_label;
 
-	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']/div[2]//preceding-sibling::div")
+	@FindBy(xpath="//md-radio-button[@id='optionsRadios3']")
 	private static WebElement reserved_number_button;
 	
 	@FindBy(xpath="//label[text()='Reserved Number']//parent::div//following-sibling::div//select")
@@ -692,6 +692,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	softassert.assertAll();
      	
   }
+    
     public void createNumberPool(String tracking_number_name) throws InterruptedException{
     	
 
@@ -785,11 +786,89 @@ public class TrackingNumberBuilderPage extends TestBase {
     
     
     
+       public void createReserveNumber(String tracking_number_name,String tn) throws InterruptedException{
+    	
+
+        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
+     		
+        Util.scrollFunction(header);  
+        add_tracking_number_button.click();
+        
+        wait.until(ExpectedConditions.visibilityOf(reserved_number_button));
+        try{
+        Util.click(reserved_number_button);
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
+
+        Select select=new Select(reserved_number_dropdown);
+        select.selectByValue(tn);
+        
+        
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.sendKeys(tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(4);
+     	
+     	ring_to_phone_number_textbox.clear();
+     	ring_to_phone_number_textbox.sendKeys("8018786943");
+  
+     	
+     	Util.scrollFunction(save_button);
+       
+     	save_button.click();
+     	
+     	logger.log(LogStatus.INFO, "Verifying if reserve number is created");
+        try{
+        	driver.switchTo().activeElement();
+            Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
+         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));  
+     	
+        }catch(Exception e){
+        	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+        }
+
+     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"reserve number is not created successfully..");
+     	
+  } 
     
     
     
-    
-    
+       public void editReserveNumber(String updated_tracking_number_name) throws InterruptedException{
+       	
+           wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+        	
+        	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+        	tracking_number_name_textbox.clear();
+        	tracking_number_name_textbox.sendKeys(updated_tracking_number_name);
+        	
+        	Select selct_ad_source=new Select(ad_source_dropdown);
+        	selct_ad_source.selectByIndex(3);
+        	
+        	ring_to_phone_number_textbox.clear();
+        	ring_to_phone_number_textbox.sendKeys("8018786944");
+
+        	 
+        	Util.scrollFunction(save_button);
+          
+        	save_button.click();
+        	
+        	logger.log(LogStatus.INFO, "Verifying if reserve number is updated");
+        	try{
+        		driver.switchTo().activeElement();
+                Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
+             	wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+            
+        	}catch(Exception e){
+        		wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+        	}
+        	softassert.assertTrue(tn_updation_success_message.isDisplayed(),"reserve number is not updated successfully..");
+        	
+        	softassert.assertAll();
+        	
+     }
     
     
     
