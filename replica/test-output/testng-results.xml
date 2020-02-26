@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" total="9" passed="9">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="255208" started-at="2020-02-26T07:40:47Z" finished-at="2020-02-26T07:45:02Z">
+  <suite name="Automation Suite-1" duration-ms="483973" started-at="2020-02-26T15:51:46Z" finished-at="2020-02-26T15:59:50Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="255208" started-at="2020-02-26T07:40:47Z" finished-at="2020-02-26T07:45:02Z">
+    <test name="chrome test" duration-ms="483973" started-at="2020-02-26T15:51:46Z" finished-at="2020-02-26T15:59:50Z">
       <class name="tests.TrackingNumberTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="setUp" is-config="true" duration-ms="60963" started-at="2020-02-26T13:10:47Z" finished-at="2020-02-26T13:11:48Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="setUp" is-config="true" duration-ms="42663" started-at="2020-02-26T21:21:46Z" finished-at="2020-02-26T21:22:29Z">
           <params>
             <param index="0">
               <value>
@@ -23,60 +23,150 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="goToCampaignPage" is-config="true" duration-ms="7278" started-at="2020-02-26T13:11:48Z" finished-at="2020-02-26T13:11:55Z">
+        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="goToCampaignPage" is-config="true" duration-ms="4414" started-at="2020-02-26T21:22:29Z" finished-at="2020-02-26T21:22:33Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="reserveNumberCreation()[pri:4, instance:tests.TrackingNumberTest@453da22c]" name="reserveNumberCreation" duration-ms="162106" started-at="2020-02-26T13:11:55Z" finished-at="2020-02-26T13:14:37Z">
+        <test-method status="PASS" signature="simpleTrakingNumberCreation()[pri:1, instance:tests.TrackingNumberTest@71248c21]" name="simpleTrakingNumberCreation" duration-ms="93737" started-at="2020-02-26T21:22:33Z" finished-at="2020-02-26T21:24:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- simpleTrakingNumberCreation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="527" started-at="2020-02-26T21:24:07Z" finished-at="2020-02-26T21:24:07Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=simpleTrakingNumberCreation status=SUCCESS method=TrackingNumberTest.simpleTrakingNumberCreation()[pri:1, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="simpleTrakingNumberUpdation()[pri:2, instance:tests.TrackingNumberTest@71248c21]" name="simpleTrakingNumberUpdation" duration-ms="8798" started-at="2020-02-26T21:24:07Z" finished-at="2020-02-26T21:24:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- simpleTrakingNumberUpdation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="116" started-at="2020-02-26T21:24:16Z" finished-at="2020-02-26T21:24:16Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=simpleTrakingNumberUpdation status=SUCCESS method=TrackingNumberTest.simpleTrakingNumberUpdation()[pri:2, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="simpleTrakingNumberDeletion()[pri:3, instance:tests.TrackingNumberTest@71248c21]" name="simpleTrakingNumberDeletion" duration-ms="5730" started-at="2020-02-26T21:24:16Z" finished-at="2020-02-26T21:24:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- simpleTrakingNumberDeletion -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="96" started-at="2020-02-26T21:24:22Z" finished-at="2020-02-26T21:24:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=simpleTrakingNumberDeletion status=SUCCESS method=TrackingNumberTest.simpleTrakingNumberDeletion()[pri:3, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="numberPoolCreation()[pri:4, instance:tests.TrackingNumberTest@71248c21]" name="numberPoolCreation" duration-ms="92364" started-at="2020-02-26T21:24:22Z" finished-at="2020-02-26T21:25:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- numberPoolCreation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="88" started-at="2020-02-26T21:25:54Z" finished-at="2020-02-26T21:25:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=numberPoolCreation status=SUCCESS method=TrackingNumberTest.numberPoolCreation()[pri:4, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="numberPoolUpdation()[pri:5, instance:tests.TrackingNumberTest@71248c21]" name="numberPoolUpdation" duration-ms="117268" started-at="2020-02-26T21:25:55Z" finished-at="2020-02-26T21:27:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- numberPoolUpdation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="112" started-at="2020-02-26T21:27:52Z" finished-at="2020-02-26T21:27:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=numberPoolUpdation status=SUCCESS method=TrackingNumberTest.numberPoolUpdation()[pri:5, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="numberPoolDeletion()[pri:6, instance:tests.TrackingNumberTest@71248c21]" name="numberPoolDeletion" duration-ms="5485" started-at="2020-02-26T21:27:52Z" finished-at="2020-02-26T21:27:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- numberPoolDeletion -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="69" started-at="2020-02-26T21:27:57Z" finished-at="2020-02-26T21:27:57Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=numberPoolDeletion status=SUCCESS method=TrackingNumberTest.numberPoolDeletion()[pri:6, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="reserveNumberCreation()[pri:7, instance:tests.TrackingNumberTest@71248c21]" name="reserveNumberCreation" duration-ms="42172" started-at="2020-02-26T21:27:57Z" finished-at="2020-02-26T21:28:40Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- reserveNumberCreation -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="tearDown" is-config="true" duration-ms="563" started-at="2020-02-26T13:14:37Z" finished-at="2020-02-26T13:14:38Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="96" started-at="2020-02-26T21:28:40Z" finished-at="2020-02-26T21:28:40Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=reserveNumberCreation status=SUCCESS method=TrackingNumberTest.reserveNumberCreation()[pri:4, instance:tests.TrackingNumberTest@453da22c] output={null}]]]>
+                <![CDATA[[TestResult name=reserveNumberCreation status=SUCCESS method=TrackingNumberTest.reserveNumberCreation()[pri:7, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="reserveNumberUpdation()[pri:5, instance:tests.TrackingNumberTest@453da22c]" name="reserveNumberUpdation" duration-ms="17144" started-at="2020-02-26T13:14:38Z" finished-at="2020-02-26T13:14:55Z">
+        <test-method status="PASS" signature="reserveNumberUpdation()[pri:8, instance:tests.TrackingNumberTest@71248c21]" name="reserveNumberUpdation" duration-ms="63165" started-at="2020-02-26T21:28:40Z" finished-at="2020-02-26T21:29:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- reserveNumberUpdation -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="tearDown" is-config="true" duration-ms="117" started-at="2020-02-26T13:14:55Z" finished-at="2020-02-26T13:14:55Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="132" started-at="2020-02-26T21:29:43Z" finished-at="2020-02-26T21:29:43Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=reserveNumberUpdation status=SUCCESS method=TrackingNumberTest.reserveNumberUpdation()[pri:5, instance:tests.TrackingNumberTest@453da22c] output={null}]]]>
+                <![CDATA[[TestResult name=reserveNumberUpdation status=SUCCESS method=TrackingNumberTest.reserveNumberUpdation()[pri:8, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="reserveNumberDeletion()[pri:6, instance:tests.TrackingNumberTest@453da22c]" name="reserveNumberDeletion" duration-ms="6032" started-at="2020-02-26T13:14:55Z" finished-at="2020-02-26T13:15:01Z">
+        <test-method status="PASS" signature="reserveNumberDeletion()[pri:9, instance:tests.TrackingNumberTest@71248c21]" name="reserveNumberDeletion" duration-ms="5861" started-at="2020-02-26T21:29:43Z" finished-at="2020-02-26T21:29:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- reserveNumberDeletion -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="tearDown" is-config="true" duration-ms="98" started-at="2020-02-26T13:15:01Z" finished-at="2020-02-26T13:15:01Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="97" started-at="2020-02-26T21:29:49Z" finished-at="2020-02-26T21:29:49Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=reserveNumberDeletion status=SUCCESS method=TrackingNumberTest.reserveNumberDeletion()[pri:6, instance:tests.TrackingNumberTest@453da22c] output={null}]]]>
+                <![CDATA[[TestResult name=reserveNumberDeletion status=SUCCESS method=TrackingNumberTest.reserveNumberDeletion()[pri:9, instance:tests.TrackingNumberTest@71248c21] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="tearDown" is-config="true" duration-ms="869" started-at="2020-02-26T13:15:01Z" finished-at="2020-02-26T13:15:02Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="tearDown" is-config="true" duration-ms="930" started-at="2020-02-26T21:29:49Z" finished-at="2020-02-26T21:29:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.TrackingNumberTest@453da22c]" name="close_connection" is-config="true" duration-ms="6891" started-at="2020-02-26T13:15:02Z" finished-at="2020-02-26T13:15:09Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.TrackingNumberTest@71248c21]" name="close_connection" is-config="true" duration-ms="6700" started-at="2020-02-26T21:29:50Z" finished-at="2020-02-26T21:29:57Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->

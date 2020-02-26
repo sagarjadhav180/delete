@@ -34,9 +34,10 @@ public class ReserveNumber {
 		List<String> numbers = GetNumber.getNumberToReserve(access_token);
 		String number1 = null ; 
 		for(int i=0;i<numbers.size();i++){
-			 String number=numbers.get(0);
+			if(numbers.get(i).startsWith("2")){ 
+			String number=numbers.get(i);
 			 number1=number;
-			 
+			}
 			}
 		 
 		
