@@ -1,8 +1,8 @@
 Things to change while changing environment 
 -------------------------------------------------
-1.url in testNG.xml 
+1.Change url in testNG.xml 
 
-2.Change in xpath of userprofile_link in LoginPage class
+2.Change first name last name in xpath of userprofile_link in LoginPage class
 
 3.Change uername and password and url property file
 
