@@ -1,11 +1,13 @@
 package tests;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.json.JSONException;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -22,6 +24,7 @@ public class TrackingNumberTest extends TestBase{
 	
 	String tracking_number_name;
 	String updated_tracking_number_name;
+	
 	
 	//navigating to Campaign builder page
 		@BeforeClass
@@ -61,48 +64,48 @@ public class TrackingNumberTest extends TestBase{
 		
 		
 	//create simple tracking number
-     	@Test(priority=1)
-		public void simpleTrakingNumberCreation() throws InterruptedException{
-			logger=extent.startTest("Tracking number creation..");
-			logger.assignCategory("Tracking number suite");
-			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-		    cp.clickAction("update","SJC-1");
-		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
-		    int number1 = tests.Util.generateRandomNumber();
-		    tracking_number_name="SJ TN-"+String.valueOf(number1);
-		    tn.createSimpleNumber(tracking_number_name);
-		    Thread.sleep(2000);
-//		    cb.clickAction("list");
-	
-		}
+//     	@Test(priority=1)
+//		public void simpleTrakingNumberCreation() throws InterruptedException{
+//			logger=extent.startTest("Tracking number creation..");
+//			logger.assignCategory("Tracking number suite");
+//			
+//			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+//			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+//		    cp.clickAction("update","SJC-1");
+//		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+//		    int number1 = tests.Util.generateRandomNumber();
+//		    tracking_number_name="SJ TN-"+String.valueOf(number1);
+//		    tn.createSimpleNumber(tracking_number_name);
+//		    Thread.sleep(2000);
+////		    cb.clickAction("list");
+//	
+//		}
 		
 		//edit simple tracking number
-		@Test(priority=2)
-		public void simpleTrakingNumberUpdation() throws InterruptedException{
-			logger=extent.startTest("Tracking number update..");
-			logger.assignCategory("Tracking number suite");
-			    
-		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
-		    tn.clickAction(tracking_number_name, "Edit");
-		    updated_tracking_number_name=tracking_number_name.concat(" updated");
-		    tn.editSimpleNumber(updated_tracking_number_name);
-		    Thread.sleep(2000);
-
-		}
-		
-		//delete simple tracking number
-		@Test(priority=3)
-		public void simpleTrakingNumberDeletion() throws InterruptedException{
-			logger=extent.startTest("Tracking number deletion..");
-			logger.assignCategory("Tracking number suite");
-			    
-		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
-		    tn.clickAction(updated_tracking_number_name, "Delete");
-		    Thread.sleep(2000);
-		}		
-		
+//		@Test(priority=2)
+//		public void simpleTrakingNumberUpdation() throws InterruptedException{
+//			logger=extent.startTest("Tracking number update..");
+//			logger.assignCategory("Tracking number suite");
+//			    
+//		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+//		    tn.clickAction(tracking_number_name, "Edit");
+//		    updated_tracking_number_name=tracking_number_name.concat(" updated");
+//		    tn.editSimpleNumber(updated_tracking_number_name);
+//		    Thread.sleep(2000);
+//
+//		}
+//		
+//		//delete simple tracking number
+//		@Test(priority=3)
+//		public void simpleTrakingNumberDeletion() throws InterruptedException{
+//			logger=extent.startTest("Tracking number deletion..");
+//			logger.assignCategory("Tracking number suite");
+//			    
+//		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+//		    tn.clickAction(updated_tracking_number_name, "Delete");
+//		    Thread.sleep(2000);
+//		}		
+//		
 		//create number pool
      	@Test(priority=4)
 		public void numberPoolCreation() throws InterruptedException{
@@ -111,7 +114,7 @@ public class TrackingNumberTest extends TestBase{
 			
 			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+		    cp.clickAction("update","SJC-1");
 		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
 		    int number1 = tests.Util.generateRandomNumber();
 		    tracking_number_name="SJ TN-"+String.valueOf(number1);
@@ -120,8 +123,8 @@ public class TrackingNumberTest extends TestBase{
 //		    cb.clickAction("list");
 	
 		}
-		
-//		//edit simple tracking number
+//		
+////		//edit simple tracking number
 		@Test(priority=5)
 		public void numberPoolUpdation() throws InterruptedException{
 			logger=extent.startTest("Number pool update..");
@@ -145,49 +148,57 @@ public class TrackingNumberTest extends TestBase{
 		    tn.clickAction(updated_tracking_number_name, "Delete");
 		    Thread.sleep(2000);
 		}	
+//		
+//		//create reserve number
+//     	@Test(priority=7)
+//		public void reserveNumberCreation() throws Exception{
+//			logger=extent.startTest("Reserve Number creation..");
+//			logger.assignCategory("Tracking number suite");
+//			String number = ReserveNumber.makeNumberReseve();
+//			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+//			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+////		    cp.clickAction("update","SJC-1");
+//		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+//		    int number1 = tests.Util.generateRandomNumber();
+//		    tracking_number_name="SJ TN-"+String.valueOf(number1);
+//		    tn.createReserveNumber(tracking_number_name,number);
+//		    Thread.sleep(2000);
+////		    cb.clickAction("list");
+//	
+//		}
+//		
+////		//edit reserve number
+//		@Test(priority=8)
+//		public void reserveNumberUpdation() throws InterruptedException{
+//			logger=extent.startTest("reserve number number update..");
+//			logger.assignCategory("Tracking number suite");
+//			    
+//		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+//		    tn.clickAction(tracking_number_name, "Edit");
+//		    updated_tracking_number_name=tracking_number_name.concat(" updated");
+//		    tn.editNumberPool(updated_tracking_number_name);
+//		    Thread.sleep(2000);
+//
+//		}
+//		
+//		//delete simple tracking number
+//		@Test(priority=9)
+//		public void reserveNumberDeletion() throws InterruptedException{
+//			logger=extent.startTest("reserve number deletion..");
+//			logger.assignCategory("Tracking number suite");
+//			    
+//		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+//		    tn.clickAction(updated_tracking_number_name, "Delete");
+//		    Thread.sleep(2000);
+//		}	
 		
-		//create reserve number
-     	@Test(priority=7)
-		public void reserveNumberCreation() throws Exception{
-			logger=extent.startTest("Reserve Number creation..");
-			logger.assignCategory("Tracking number suite");
-			String number = ReserveNumber.makeNumberReseve();
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
-		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
-		    int number1 = tests.Util.generateRandomNumber();
-		    tracking_number_name="SJ TN-"+String.valueOf(number1);
-		    tn.createReserveNumber(tracking_number_name,number);
-		    Thread.sleep(2000);
-//		    cb.clickAction("list");
-	
-		}
-		
-//		//edit reserve number
-		@Test(priority=8)
-		public void reserveNumberUpdation() throws InterruptedException{
-			logger=extent.startTest("reserve number number update..");
-			logger.assignCategory("Tracking number suite");
-			    
-		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
-		    tn.clickAction(tracking_number_name, "Edit");
-		    updated_tracking_number_name=tracking_number_name.concat(" updated");
-		    tn.editNumberPool(updated_tracking_number_name);
-		    Thread.sleep(2000);
 
-		}
-		
-		//delete simple tracking number
-		@Test(priority=9)
-		public void reserveNumberDeletion() throws InterruptedException{
-			logger=extent.startTest("reserve number deletion..");
-			logger.assignCategory("Tracking number suite");
-			    
+	    @AfterClass
+	    public void cleanUp(){
+	    	
 		    TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
-		    tn.clickAction(updated_tracking_number_name, "Delete");
-		    Thread.sleep(2000);
-		}	
-		
-		
+		    tn.unprovisionNumbers();
+	    	
+	    	
+	    	}
 }

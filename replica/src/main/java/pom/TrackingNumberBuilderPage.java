@@ -1,7 +1,10 @@
 package pom;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -13,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -23,6 +27,9 @@ import tests.Util;
 public class TrackingNumberBuilderPage extends TestBase {
     
 	SoftAssert softassert=new SoftAssert();
+	
+	Set<String> set=new HashSet<String>();
+	
 	
 	//Tracking number list
 	
@@ -420,7 +427,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	softassert.assertTrue(top_prev_button.isDisplayed(),"top_prev_button is not present or locator changed");	
     	
     	//verification of count in top pagination toolbox	
-    	String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='17225') AND status NOT IN ('suspended')" );
+    	String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='17267') AND status NOT IN ('suspended')" );
         String countOnUI_pagination = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+2);
     	logger.log(LogStatus.INFO, "verifying count tracking numbers in top pagination toolbox");
     	softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
@@ -672,6 +679,12 @@ public class TrackingNumberBuilderPage extends TestBase {
         Select select_tracking_number=new Select(tracking_number_dropdown);
         select_tracking_number.selectByIndex(4);
       
+        String number = select_tracking_number.getFirstSelectedOption().getText();
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println(number);
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        set.add(number);
+        
   	    Util.scrollFunction(play_voice_prompt_checkbox);
         Util.click(activate_voicemail_checkbox);
       
@@ -792,7 +805,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         	e.printStackTrace();
         }
 //     	tn_list_for_385
-    	area_code_textbox.sendKeys("201");
+    	area_code_textbox.sendKeys("256");
      	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
      	
      	for(int i=0;i<area_codes_list_for_385.size();i++){
@@ -902,6 +915,14 @@ public class TrackingNumberBuilderPage extends TestBase {
 
      	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"number pool is not created successfully..");
      	
+     	String pool_id = Util.readingFromDB("SELECT pool_id as count FROM phone_pool WHERE pool_name LIKE '"+tracking_number_name+"'");
+     	String number_pool = Util.readingFromDB("SELECT phone_number as count FROM phone_pool_number WHERE pool_id='"+pool_id+"'");
+     	System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println(number_pool);
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+     	set.add(number_pool);
+
+     	
   }
 
     
@@ -927,17 +948,30 @@ public class TrackingNumberBuilderPage extends TestBase {
      	
      	logger.log(LogStatus.INFO, "Verifying if tracking number is updated");
      	try{
+     		wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));     		
      		
+
+     	}catch(Exception e){
      		driver.switchTo().activeElement();
             Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
          	wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
-
-     	}catch(Exception e){
-     		wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
      	}
      	softassert.assertTrue(tn_updation_success_message.isDisplayed(),"tracking number is not updated successfully..");
      	
      	softassert.assertAll();
+     	
+    	System.out.println("------------------------------------------------------------------------------------");
+    	Iterator<String> itr = set.iterator();
+    	
+    	while(itr.hasNext()){
+    		System.out.println(itr.next());
+
+    	}
+    
+
+    	System.out.println("------------------------------------------------------------------------------------");
+    	
+     	
      	
   }
     
@@ -945,7 +979,10 @@ public class TrackingNumberBuilderPage extends TestBase {
     
        public void createReserveNumber(String tracking_number_name,String tn) throws InterruptedException{
     	
-
+    	   System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+           System.out.println(tn);
+           System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");    	   
+    	set.add(tn);
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
@@ -1048,13 +1085,14 @@ public class TrackingNumberBuilderPage extends TestBase {
      	Thread.sleep(2000);
      	logger.log(LogStatus.INFO, "Verifying if reserve number is created");
         try{
+        	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));  
+     	
+        }catch(Exception e){
+
         	driver.switchTo().activeElement();
         	wait.until(ExpectedConditions.visibilityOf(ok_button_number_pool_label_create_alert));
         	Util.click(ok_button_number_pool_label_create_alert);
-         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));  
-     	
-        }catch(Exception e){
-        	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
         }
 
      	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"reserve number is not created successfully..");
@@ -1083,16 +1121,16 @@ public class TrackingNumberBuilderPage extends TestBase {
         	save_button.click();
         	Thread.sleep(2000);
         	logger.log(LogStatus.INFO, "Verifying if reserve number is updated");
+        	
         	try{
-        		driver.switchTo().activeElement();
-        		
-            	wait.until(ExpectedConditions.visibilityOf(ok_button_number_pool_label_create_alert));
+        		wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message)); 
+        	}catch(Exception e){
+                driver.switchTo().activeElement();
+        		wait.until(ExpectedConditions.visibilityOf(ok_button_number_pool_label_create_alert));
                 Util.click(ok_button_number_pool_label_create_alert);
              	wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
-            
-        	}catch(Exception e){
-        		wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
         	}
+        	
         	softassert.assertTrue(tn_updation_success_message.isDisplayed(),"reserve number is not updated successfully..");
         	
         	softassert.assertAll();
@@ -1101,7 +1139,19 @@ public class TrackingNumberBuilderPage extends TestBase {
     
     
     
+    public void unprovisionNumbers(){
+    	System.out.println("------------------------------------------------------------------------------------");
+    	Iterator<String> itr = set.iterator();
+    	
+    	while(itr.hasNext()){
+    		System.out.println(itr.next());
+            Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str IN ('"+itr.next()+"') AND number_status IN ('suspended')");     		
+    	}
     
+
+    	System.out.println("------------------------------------------------------------------------------------");
+    	
+    }
     
     
     
