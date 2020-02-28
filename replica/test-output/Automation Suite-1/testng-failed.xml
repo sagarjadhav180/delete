@@ -10,19 +10,4 @@
       <class name="tests.TrackingNumberTest"/>
     </classes>
   </test> <!-- chrome test -->
-  <test name="chrome test(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-6-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.TrackingNumberTest">
-        <methods>
-          <include name="numberPoolUpdation"/>
-          <include name="numberPoolDeletion"/>
-          <include name="goToCampaignPage"/>
-          <include name="setUp"/>
-          <include name="numberPoolCreation"/>
-        </methods>
-      </class> <!-- tests.TrackingNumberTest -->
-    </classes>
-  </test> <!-- chrome test(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

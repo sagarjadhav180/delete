@@ -12,21 +12,10 @@
 		<classes>
 
 	     
-	    <class name="tests.TrackingNumberTest">
+	    <class name="tests.TrackingNumberTest"/>
 	    
-
-	    
-	    
-	    </class>
-	    	
-	   		
 	
-		
 		</classes>
 	</test>
-	
-	
-	
-	
+		
 </suite> <!-- Suite -->
-

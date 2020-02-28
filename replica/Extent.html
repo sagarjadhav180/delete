@@ -43,6 +43,7 @@
 			</div>
 			<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
 				<li class='analysis waves-effect active'><a href='#!' class='test-view' onclick="_updateCurrentStage(0)"><i class='mdi-action-dashboard'></i>Test Details</a></li>
+					<li class='analysis waves-effect'><a href='#!' class='categories-view' onclick="_updateCurrentStage(1)"><i class='mdi-maps-local-offer'></i>Categories</a></li>
 				<li class='analysis waves-effect'>
 					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>Analysis</a>
 				</li>
@@ -53,7 +54,7 @@
 					<i class='mdi-hardware-desktop-windows'></i>
 				</li>
 				<li>
-					<span class='suite-started-time'>2020-02-27 21:38:41</span>
+					<span class='suite-started-time'>2020-02-28 20:48:09</span>
 				</li>
 				<li>
 					<span>v2.41.1</span>
@@ -83,25 +84,25 @@
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-current'> 
 							<span class='panel-name'>Total Time Taken (Current Run)</span> 
-							<span class='suite-total-time-current-value panel-lead'>0h 3m 48s+778ms</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 5m 15s+341ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-overall'> 
 							<span class='panel-name'>Total Time Taken (Overall)</span> 
-							<span class='suite-total-time-overall-value panel-lead'>0h 3m 48s+778ms</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 5m 15s+341ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-start-time'>
 						<div class='card accent green-accent'> 
 							<span class='panel-name'>Start</span> 
-							<span class='panel-lead suite-started-time'>2020-02-27 21:34:53</span> 
+							<span class='panel-lead suite-started-time'>2020-02-28 20:42:54</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-end-time'>
 						<div class='card accent pink-accent'> 
 							<span class='panel-name'>End</span> 
-							<span class='panel-lead suite-ended-time'>2020-02-27 21:38:41</span> 
+							<span class='panel-lead suite-ended-time'>2020-02-28 20:48:09</span> 
 						</div> 
 					</div>
 				</div>
@@ -195,6 +196,27 @@
 						</div>
 					</div>
 				</div>
+					<div class='category-summary-view'>
+						<div class='col l4 m6 s12'>
+							<div class='card-panel'>
+								<span class='label info outline right'>Categories</span>
+								<table>
+									<thead>
+										<tr>
+											<th>Name</th>
+										</tr>
+									</thead>
+									<tbody>
+											<tr>
+												<td>
+													Tracking number suite
+												</td>
+											</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 			</div>
 			<!-- /dashboard -->
 			
@@ -218,6 +240,16 @@
 									<li class='clear'><a href='#!'>Clear Filters</a></li>
 								</ul>
 							</div>
+								<div>
+									<a class='dropdown-button btn-floating btn-small waves-effect waves-light grey category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+										<i class='mdi-maps-local-offer'></i>
+									</a>
+									<ul id='category-toggle' class='dropdown-content'>
+											<li class='Tracking number suite'><a href='#!'>Tracking number suite</a></li>
+										<li class='divider'></li>
+										<li class='clear'><a href='#!'>Clear Filters</a></li>
+									</ul>
+								</div>
 							<div>
 								<a class='btn-floating btn-small waves-effect waves-light grey' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
 									<i class='mdi-navigation-close'></i>
@@ -245,7 +277,7 @@
 						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
 							<div class='wrapper'>
 								<ul id='test-collection' class='test-collection'>
-										<li class='collection-item test displayed active pass ' extentid='648be1f5-ffca-40b8-bef4-ea1dcc011a1d'>
+										<li class='collection-item test displayed active pass ' extentid='0b2f8fbd-72fe-43be-86df-12873c4a2f13'>
 											<div class='test-head'>
 												<span class='test-name'>validLogin </span>
 												<span class='test-status label right outline capitalize pass'>pass</span>
@@ -253,7 +285,7 @@
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-27 21:35:36</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:43:34</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -275,7 +307,7 @@
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:35:36</td>
+																	<td class='timestamp'>20:43:34</td>
 																	<td class='step-details'>verifying login with valid username_and_password.</td>
 																</tr>
 														</tbody>
@@ -285,20 +317,23 @@
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='54d5d413-999c-4861-9bcb-c032e629d176'>
+										<li class='collection-item test displayed active pass ' extentid='583db197-0ea4-4a17-b262-fa1e33941cbc'>
 											<div class='test-head'>
-												<span class='test-name'>numberPoolCreation </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
+												<span class='test-name'>Tracking number creation.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-27 21:38:41</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-27 21:38:41</span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 0s+1ms</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:43:39</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:45:13</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 34s+251ms</span>
 												</div>
 												<div class='test-desc'></div>
 												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
 												</div>
 												<div class='test-steps'>
 													<table class='bordered table-results'>
@@ -311,14 +346,14 @@
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>21:38:41</td>
-																	<td class='step-details'>This method is get skipped because the <span class='red label'>null</span> test case got failed.</td>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:45:04</td>
+																	<td class='step-details'>Verifying if tracking number is created</td>
 																</tr>
 																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>21:38:41</td>
-																	<td class='step-details'>numberPoolCreation</td>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:45:13</td>
+																	<td class='step-details'>Success.</td>
 																</tr>
 														</tbody>
 													</table>
@@ -327,20 +362,23 @@
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='1cc92b25-e8fd-41ac-877f-075cf378d6f4'>
+										<li class='collection-item test displayed active pass ' extentid='d9151272-9e1c-4f50-a0ab-a14948ff5926'>
 											<div class='test-head'>
-												<span class='test-name'>numberPoolUpdation </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
+												<span class='test-name'>Tracking number update.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-27 21:38:41</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-27 21:38:41</span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 0s+0ms</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:45:14</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:45:22</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 7s+789ms</span>
 												</div>
 												<div class='test-desc'></div>
 												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
 												</div>
 												<div class='test-steps'>
 													<table class='bordered table-results'>
@@ -353,14 +391,14 @@
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>21:38:41</td>
-																	<td class='step-details'>This method is get skipped because the <span class='red label'>null</span> test case got failed.</td>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:45:16</td>
+																	<td class='step-details'>Verifying if tracking number is updated</td>
 																</tr>
 																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>21:38:41</td>
-																	<td class='step-details'>numberPoolUpdation</td>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:45:22</td>
+																	<td class='step-details'>Success.</td>
 																</tr>
 														</tbody>
 													</table>
@@ -369,20 +407,23 @@
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='7176ad3d-f335-423c-b924-aba6b05e6a7e'>
+										<li class='collection-item test displayed active pass ' extentid='d198387c-16d7-44f8-b822-ccc62e07e71f'>
 											<div class='test-head'>
-												<span class='test-name'>numberPoolDeletion </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
+												<span class='test-name'>Tracking number deletion.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-27 21:38:41</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-27 21:38:41</span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 0s+0ms</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:45:22</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:45:27</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 5s+472ms</span>
 												</div>
 												<div class='test-desc'></div>
 												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
 												</div>
 												<div class='test-steps'>
 													<table class='bordered table-results'>
@@ -395,14 +436,284 @@
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>21:38:41</td>
-																	<td class='step-details'>This method is get skipped because the <span class='red label'>null</span> test case got failed.</td>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:45:25</td>
+																	<td class='step-details'>Verifying if tracking number is deleted successfully..</td>
 																</tr>
 																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>21:38:41</td>
-																	<td class='step-details'>numberPoolDeletion</td>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:45:27</td>
+																	<td class='step-details'>Success.</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='69ccb14d-ea36-4798-9b94-25e2aae3c2e8'>
+											<div class='test-head'>
+												<span class='test-name'>Number Pool creation.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:45:27</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:47:01</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 34s+113ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:46:39</td>
+																	<td class='step-details'>Verifying if tracking number is created</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:47:01</td>
+																	<td class='step-details'>Success.</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='19eb2742-53a8-42ac-a0ff-b8f196672376'>
+											<div class='test-head'>
+												<span class='test-name'>Number pool update.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:47:01</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:47:10</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 8s+247ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:47:04</td>
+																	<td class='step-details'>Verifying if tracking number is updated</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:47:10</td>
+																	<td class='step-details'>Success.</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='87e16b5b-7748-44b3-ad23-d5b87e1ad056'>
+											<div class='test-head'>
+												<span class='test-name'>Number pool deletion.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:47:10</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:47:16</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 5s+829ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:47:14</td>
+																	<td class='step-details'>Verifying if tracking number is deleted successfully..</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:47:16</td>
+																	<td class='step-details'>Success.</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='ace10b84-4345-4b9e-b0eb-52b879f61603'>
+											<div class='test-head'>
+												<span class='test-name'>Reserve Number creation.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:47:16</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:47:56</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 40s+172ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:47:50</td>
+																	<td class='step-details'>Verifying if reserve number is created</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:47:56</td>
+																	<td class='step-details'>Success.</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='69a6add3-0ee1-409a-99e4-a7aae9d0f900'>
+											<div class='test-head'>
+												<span class='test-name'>reserve number number update.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:47:56</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:48:04</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 7s+640ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:47:59</td>
+																	<td class='step-details'>Verifying if tracking number is updated</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:48:04</td>
+																	<td class='step-details'>Success.</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='7f6964a5-0b31-4b93-95c3-612d169340b6'>
+											<div class='test-head'>
+												<span class='test-name'>reserve number deletion.. </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide  trackingnumbersuite'></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-02-28 20:48:04</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-02-28 20:48:09</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 5s+635ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+														<div class='categories'>
+																<span class='category text-white'>Tracking number suite</span>
+														</div>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:48:07</td>
+																	<td class='step-details'>Verifying if tracking number is deleted successfully..</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>20:48:09</td>
+																	<td class='step-details'>Success.</td>
 																</tr>
 														</tbody>
 													</table>
@@ -439,6 +750,115 @@
 			<!-- /tests -->
 			
 			<!-- categories -->
+				<div id='categories-view' class='row _addedTable hide'>
+					<div class='col _addedCell1'>
+						<div class='contents'>
+							<div class='card-panel heading'>
+								<h5>Categories</h5>
+							</div>
+							<div class='card-panel filters'>
+								<div class='search' alt='Search tests' title='Search tests'>
+									<div class='input-field left'>
+										<input id='searchTests' type='text' class='validate' placeholder='Search...'>
+									</div>
+									<a href="#" class='btn-floating btn-small waves-effect waves-light blue lighten-1'>
+										<i class='mdi-action-search'></i>
+									</a>
+								</div>
+							</div>
+							<div class='card-panel no-padding-h no-padding-v'>
+								<div class='wrapper'>
+									<ul id='cat-collection' class='cat-collection'>
+											<li class='category-item displayed'>
+												<div class='cat-head'>
+													<span class='category-name'>Tracking number suite</span>
+												</div>
+												<div class='category-status-counts'>
+														<span class='pass label dot'>Pass: 9</span>
+												</div>
+												<div class='cat-body'>
+													<div class='category-status-counts'>
+														<div class='button-group'>
+															<a href='#!' class='pass label filter'>Pass <span class='icon'>9</span></a>
+															<a href='#!' class='fail label filter'>Fail <span class='icon'>0</span></a>
+															<a href='#!' class='other label filter'>Others <span class='icon'>0</span></a>
+														</div>
+													</div>
+													<div class='cat-tests'>
+														<table class='bordered'>
+															<thead>
+																<tr>
+																	<th>RunDate</th>
+																	<th>Test Name</th>
+																	<th>Status</th>
+																</tr>
+															</thead>
+															<tbody>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:43:39</td>
+																		<td><span class='category-link linked' extentid='583db197-0ea4-4a17-b262-fa1e33941cbc'>Tracking number creation..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:45:14</td>
+																		<td><span class='category-link linked' extentid='d9151272-9e1c-4f50-a0ab-a14948ff5926'>Tracking number update..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:45:22</td>
+																		<td><span class='category-link linked' extentid='d198387c-16d7-44f8-b822-ccc62e07e71f'>Tracking number deletion..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:45:27</td>
+																		<td><span class='category-link linked' extentid='69ccb14d-ea36-4798-9b94-25e2aae3c2e8'>Number Pool creation..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:47:01</td>
+																		<td><span class='category-link linked' extentid='19eb2742-53a8-42ac-a0ff-b8f196672376'>Number pool update..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:47:10</td>
+																		<td><span class='category-link linked' extentid='87e16b5b-7748-44b3-ad23-d5b87e1ad056'>Number pool deletion..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:47:16</td>
+																		<td><span class='category-link linked' extentid='ace10b84-4345-4b9e-b0eb-52b879f61603'>Reserve Number creation..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:47:56</td>
+																		<td><span class='category-link linked' extentid='69a6add3-0ee1-409a-99e4-a7aae9d0f900'>reserve number number update..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+																	<tr class='pass'>
+																		<td>2020-02-28 20:48:04</td>
+																		<td><span class='category-link linked' extentid='7f6964a5-0b31-4b93-95c3-612d169340b6'>reserve number deletion..</span></td>
+																		<td><div class='status label capitalize pass'>pass</div></td>
+																	</tr>
+															<tbody>
+														</table>
+													</div>
+												</div> 
+											</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id='cat-details-wrapper' class='col _addedCell2'>
+						<div class='contents'>
+							<div class='card-panel details-view'>
+								<h5 class='cat-name'></h5>
+								<div class='cat-container'>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			<!-- /categories -->
 			
 			<!-- exceptions -->
