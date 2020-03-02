@@ -2,6 +2,7 @@ package tests;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.poi.EncryptedDocumentException;
@@ -60,7 +61,7 @@ public class TrackingNumberTest extends TestBase{
 		
 		
 	//Tracking number page UI verification
-//	@Test(priority=1)
+	@Test(priority=1)
 	public void trakingNumberPageUIVerification() throws InterruptedException{
 	   logger=extent.startTest("Tracking number UI Verification..");
        logger.assignCategory("Tracking number suite");
@@ -129,7 +130,7 @@ public class TrackingNumberTest extends TestBase{
 			logger.assignCategory("Tracking number suite");
 			
 			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+		    cp.clickAction("update","SJC-1");
 
 		    int number1 = tests.Util.generateRandomNumber();
 		    tracking_number_name="SJ TN-"+String.valueOf(number1);
@@ -222,6 +223,7 @@ public class TrackingNumberTest extends TestBase{
 	    	tn = createInstance();
 		    tn.unprovisionNumbers();
 	    	
+	   	
 	    	
 	    	}
 }

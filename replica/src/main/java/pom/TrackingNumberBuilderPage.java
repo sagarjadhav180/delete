@@ -31,10 +31,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	Set<String> set=new HashSet<String>();
 	
-	List<String> list=new ArrayList<String>();
-	
-	
-	
+	List<String> list=new ArrayList<String>(); ;
 	
 	//Tracking number list
 	
@@ -338,14 +335,18 @@ public class TrackingNumberBuilderPage extends TestBase {
 	//hunting section
 	  //need to handle required_overflow_textbox
 	
-	@FindBy(xpath="(//button[contains(text(),'Add Overflow Number')])[2]")
+	@FindBy(xpath="(//div[@id='routingDiv']//button[contains(text(),'Add Overflow Number')])[2]")
 	private WebElement add_overflow_button_in_hunt_section;	
-
+	
+	
+	@FindBy(xpath="(//div[@id='routingDiv']//button[contains(text(),'Add Overflow Number')])[1]")
+	private WebElement add_overflow_button_beside_primary_rinto_number;		
+	
 	@FindBy(xpath="(//label[contains(text(),'Simultaneous Ring')])[1]//parent::div//following-sibling::div//md-checkbox")
 	private WebElement simultaneous_ring_checkbox;	
 	
-	@FindBy(xpath="(//span[text()='  Overflow to'])[1]//parent::div//following-sibling::div//input")
-	private WebElement add_overflow_textbox;
+	@FindBy(xpath="(//span[text()='  Overflow to'])//parent::div//following-sibling::div//input")
+	private List<WebElement> add_overflow_textbox;
 
 	@FindBy(xpath="(//span[text()='  Overflow to'])[1]//parent::div//following-sibling::div//select")
 	private WebElement overflow_rings_dropdown;
@@ -385,6 +386,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 			softassert.assertTrue(tn_deletion_success_message.isDisplayed(),"tracking number not deleted successfully");
             softassert.assertAll();
 
+           
 			
 		}
 		else{
@@ -521,6 +523,9 @@ public class TrackingNumberBuilderPage extends TestBase {
         
         logger.log(LogStatus.INFO, "Verifying if ring_to_phone_number_textbox is displayed");
         softassert.assertTrue(ring_to_phone_number_textbox.isDisplayed(),"ring_to_phone_number_textbox is not displayed or locator changed");
+        
+        //hunting section
+        
         
         //advanced section
        
@@ -773,9 +778,10 @@ public class TrackingNumberBuilderPage extends TestBase {
         wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
 
-//    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
-//    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
-//        set.add(dnis);
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+        set.add(dnis);
+        System.out.println("simple "+dnis);
 //    	list.add(dnis);
     }
     
@@ -933,13 +939,14 @@ public class TrackingNumberBuilderPage extends TestBase {
 
      	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"number pool is not created successfully..");
      	
-//     	String pool_id = Util.readingFromDB("SELECT pool_id as count FROM phone_pool WHERE pool_name LIKE '"+tracking_number_name+"'");
-//     	String number_pool = Util.readingFromDB("SELECT phone_number as count FROM phone_pool_number WHERE pool_id='"+pool_id+"'");
-//     	
+     	String pool_id = Util.readingFromDB("SELECT pool_id as count FROM phone_pool WHERE pool_name LIKE '"+tracking_number_name+"'");
+     	String number_pool = Util.readingFromDB("SELECT phone_number as count FROM phone_pool_number WHERE pool_id='"+pool_id+"'");
+     	
 //     	set.add(number_pool);
-//        list.add(number_pool);
-//     	System.out.println(number_pool);
-     
+        list.add(number_pool);
+     	System.out.println("number pool "+number_pool);
+
+     	    
 
     }
 
@@ -979,18 +986,15 @@ public class TrackingNumberBuilderPage extends TestBase {
      	softassert.assertTrue(tn_updation_success_message.isDisplayed(),"tracking number is not updated successfully..");
      	
      	softassert.assertAll();
-     	
-
-    	
-     	
-     	
+   
   }
     
     
     
        public void createReserveNumber(String tracking_number_name,String tn) throws InterruptedException{
     	   	   
-//    	set.add(tn);
+
+    	System.out.println("reserve number "+tn);
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
@@ -1102,12 +1106,16 @@ public class TrackingNumberBuilderPage extends TestBase {
         	Util.click(ok_button_number_pool_label_create_alert);
          	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
         }
-
+//    	set.add(tn);
      	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"reserve number is not created successfully..");
 //    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
 //    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
-//        set.add(dnis);
-//    	list.add(dnis);
+//      set.add(dnis);
+     	
+    	list.add(tn);
+ 
+     	System.out.println("-----rn create------");
+    	
   } 
     
     
@@ -1146,20 +1154,31 @@ public class TrackingNumberBuilderPage extends TestBase {
         	
         	softassert.assertAll();
         	
+       
      }
     
     
     
     public void unprovisionNumbers(){
-    	System.out.println("----------------------------------unprovision-------------------------------------------------");
+    		
+		System.out.println("------------------------unprovision--------------");       	
+    	Iterator<String> its = set.iterator();
 
+		for( String one:list){
+    		System.out.println(one);
+    	}
     	
-        Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str IN (SELECT number_str FROM phone_number WHERE number_str LIKE '20%' AND number_status IN ('suspended')) AND number_status IN ('suspended')");    	
+    	
+//		while(its.hasNext()){
+//			System.out.println(its.next());
+//		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
+		System.out.println("---------------------------------------unprovision---------------------------------------------");
+	    
+		}	
+	
     
-
-    	System.out.println("---------------------------------------unprovision---------------------------------------------");
-    	
-    }
+    
+  
     
     
     

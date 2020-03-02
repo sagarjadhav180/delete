@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-
 <suite name="Automation Suite-1" parallel="tests" thread-count="2" >
   
   
@@ -12,7 +11,13 @@
 		<classes>
 
 	     
-	    <class name="tests.TrackingNumberTest"/>
+	    <class name="tests.TrackingNumberTest">
+	    
+	    <methods>
+	    <include name="trakingNumberPageUIVerification"/>
+	    </methods>
+	    
+	    </class>
 	    
 	
 		</classes>
