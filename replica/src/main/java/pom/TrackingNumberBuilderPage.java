@@ -138,6 +138,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="(//label[text()='Ring to Phone Number']//parent::div//following-sibling::div//input)[3]")
 	private static WebElement ring_to_phone_number_textbox;
 
+	@FindBy(xpath="(//label[text()='Ring to Phone Number']//parent::div//following-sibling::div//input)[2]")
+	private static WebElement ring_to_phone_number_textbox_for_geo;	
+	
 	@FindBy(xpath="//label[text()='Tracking Number']//parent::div//following-sibling::div//child::select")
 	private static WebElement tracking_number_dropdown;
 	
@@ -146,7 +149,17 @@ public class TrackingNumberBuilderPage extends TestBase {
 
 	@FindBy(xpath="(//label[text()='Route Calls By']//parent::div//following-sibling::div//child::select[@id='source'])[1]")
 	private static WebElement route_calls_by_dropdown;
+	
+	String[] expected_routes={"Forwarding to a phone number","Interactive Voice Response","GeoRoute to a location","Based on a percentage","Send directly to voicemail","Send directly to voicemail","Outbound","Follow a schedule","Hangup"};
 
+	@FindBy(xpath="(//label[contains(text(),'Route By')]//parent::div//following-sibling::div//select)[1]")
+	private static WebElement georoute_sub_type_dropdown;	
+
+	@FindBy(xpath="(//label[contains(text(),'Route By')]//parent::div//following-sibling::div//select)[2]")
+	private static WebElement location_list_dropdown;	
+	
+	String location_name="do_not_delete_location(automation)";
+	
 	@FindBy(xpath="//label[text()='Ad Source']//parent::div//following-sibling::div//child::select[@id='source']")
 	private static WebElement ad_source_dropdown;
 
@@ -333,18 +346,22 @@ public class TrackingNumberBuilderPage extends TestBase {
 
 	
 	//hunting section
-	  //need to handle required_overflow_textbox
 	
 	@FindBy(xpath="(//div[@id='routingDiv']//button[contains(text(),'Add Overflow Number')])[2]")
 	private WebElement add_overflow_button_in_hunt_section;	
 	
+	@FindBy(xpath="//div[@id='routingDiv']//div[contains(@class,'col-lg-12 col-md-12 col-sm-12 mt20 dynamicNumber')]//div[1]//div[1]//span[1]")
+	private WebElement overflow_to_arrow;	
 	
 	@FindBy(xpath="(//div[@id='routingDiv']//button[contains(text(),'Add Overflow Number')])[1]")
 	private WebElement add_overflow_button_beside_primary_rinto_number;		
 	
 	@FindBy(xpath="(//label[contains(text(),'Simultaneous Ring')])[1]//parent::div//following-sibling::div//md-checkbox")
 	private WebElement simultaneous_ring_checkbox;	
-	
+
+	@FindBy(xpath="(//label[contains(text(),'Simultaneous Ring')])[1]")
+	private WebElement simultaneous_ring_label;	
+
 	@FindBy(xpath="(//span[text()='  Overflow to'])//parent::div//following-sibling::div//input")
 	private List<WebElement> add_overflow_textbox;
 
@@ -465,6 +482,24 @@ public class TrackingNumberBuilderPage extends TestBase {
         }
         
         //basic section 
+        
+        Select routes=new Select(route_calls_by_dropdown); 
+        List<WebElement> options = routes.getOptions();
+        
+        for(int i=1;i<options.size();i++){
+        	for(int j=0;j<expected_routes.length;j++){
+        		System.out.println(options.get(i).getText());
+        		System.out.println(expected_routes[j]);
+        		if(options.get(i).getText().equals(expected_routes[j])){
+        			logger.log(LogStatus.INFO, "verifying if route - "+expected_routes[j]+" is present in route call by listbox");
+        			softassert.assertTrue(options.get(i).getText().equals(expected_routes[j]),"route - "+expected_routes[j]+"is not present");
+        			break;
+        		}
+        		
+        	}
+        	
+        }
+        
         logger.log(LogStatus.INFO, "Verifying if activate_voicemail field is present");
         softassert.assertTrue(activate_voicemail_checkbox_label.isDisplayed(),"activate_voicemail field is not displayed or locator chenged");
         
@@ -525,7 +560,43 @@ public class TrackingNumberBuilderPage extends TestBase {
         softassert.assertTrue(ring_to_phone_number_textbox.isDisplayed(),"ring_to_phone_number_textbox is not displayed or locator changed");
         
         //hunting section
+        ring_to_phone_number_textbox.clear();
+        ring_to_phone_number_textbox.sendKeys("8018786943");
+        wait.until(ExpectedConditions.elementToBeClickable(add_overflow_button_beside_default_ringto));
+        Util.click(add_overflow_button_beside_default_ringto);
         
+        logger.log(LogStatus.INFO, "verifying if overflow to label is present");
+        softassert.assertTrue(overflow_to_arrow.isDisplayed(),"overflow_to_arrow is not displayed or locator changed");
+        
+        logger.log(LogStatus.INFO, "verifying if delete overflow button is present");
+        softassert.assertTrue(delete_overflow_number_button.isDisplayed(),"delete_overflow_number_button is not displayed or locator changed");
+        
+        logger.log(LogStatus.INFO, "verifying if overflow rings listbox is displayed");
+        softassert.assertTrue(overflow_rings_dropdown.isDisplayed(),"overflow_rings_dropdown is not displayed or locator changed");
+        
+        for(int i=0;i<12;i++){
+        	logger.log(LogStatus.INFO, "verifying if overflow textbox is present");
+        	softassert.assertTrue(add_overflow_textbox.get(i).isDisplayed(),"add_overflow_textbox is not displayed or locator changed");
+
+        	add_overflow_textbox.get(i).sendKeys("111111111"+i);
+        	
+        	logger.log(LogStatus.INFO, "verifying if add overflow button is present");
+        	softassert.assertTrue(add_overflow_button_in_hunt_section.isDisplayed(),"add_overflow_button_in_hunt_section is not diplayed or locator changed");
+//        	Util.scrollFunction(add_overflow_button_in_hunt_section);
+        	if(i<11){
+            wait.until(ExpectedConditions.elementToBeClickable(add_overflow_button_in_hunt_section));
+        	add_overflow_button_in_hunt_section.click();   
+        	}
+        
+        }
+        logger.log(LogStatus.INFO, "verifying if simultaneous ring label is present");
+        softassert.assertTrue(simultaneous_ring_label.isDisplayed(),"simultaneous_ring_label is not displayed or locator changed");
+        	
+        logger.log(LogStatus.INFO, "verifying if simultaneous_chckbox is present");
+        softassert.assertTrue(simultaneous_ring_checkbox.isDisplayed(),"simultaneous_ring_checkbox is not displayed or locator changed");        
+
+        logger.log(LogStatus.INFO, "verifying if simultaneous_chckbox is enabled");
+        softassert.assertTrue(simultaneous_ring_checkbox.isEnabled(),"simultaneous_ring_checkbox is not enabled");        
         
         //advanced section
        
@@ -656,11 +727,132 @@ public class TrackingNumberBuilderPage extends TestBase {
     
     
     
+    public void createGeoRoute(String tracking_number_name){
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+		
+        Util.scrollFunction(header);  
+        add_tracking_number_button.click();
+     	
+
+         //BASIC SECTION       
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.sendKeys(tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(4);
+     	
+     	Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("GeoRoute to a location");
+        
+        Select sub_type=new Select(georoute_sub_type_dropdown);
+        sub_type.selectByIndex(2);
+        
+        Select locations=new Select(location_list_dropdown);
+        locations.selectByVisibleText("do_not_delete_location(automation)");
+        
+        area_code_textbox.sendKeys("201");
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+    	
+    	for(int i=0;i<area_codes_list_for_385.size();i++){
+    		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+    			area_codes_list_for_385.get(i).click();
+    			
+    		}
+    		
+    	}
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+        
+        ring_to_phone_number_textbox_for_geo.clear();
+        ring_to_phone_number_textbox_for_geo.sendKeys("1234567890");
+    	
+    	Util.scrollFunction(play_voice_prompt_checkbox);
+        Util.click(activate_voicemail_checkbox);
+      
+       
+    	//ADVANCED SECTION
+        call_value_textbox.clear();
+    	call_value_textbox.sendKeys("32");
+    	repeat_interval_textbox.clear();
+    	repeat_interval_textbox.sendKeys("72");
+    	Select select=new Select(voicemail_dropdown);
+    	select.selectByValue("4");
+    	configure_voicemail_greetings_textbox.sendKeys("Please record your voicemail");
+    	Util.click(record_call_checkbox);
+    	Util.click(record_call_checkbox);
+    	Util.click(play_voice_prompt_checkbox);
+    	play_voice_prompt_textbox.sendKeys("test prompt");
+        Util.click(play_whisper_message_checkbox);
+        play_whisper_message_textbox.sendKeys("test whisper");
+        Util.click(webhook_checkbox);
+        Select we=new Select(webhook_dropdown);
+        we.selectByVisibleText(webhook);
+        
+        
+        //DNI SECTION
+        Util.click(dynamic_number_checkbox);
+        hostDomain_textbox.clear();
+        hostDomain_textbox.sendKeys("*.*");
+    	
+        Select select1 =new Select(reffering_website_dropdown);
+    	select1.selectByVisibleText("Any");
+        
+    	Select select2=new Select(dni_type_dropdown);
+    	select2.selectByValue("url");
+    	
+    	htmlclass_textbox.sendKeys("lmc_track");
+    	
+   
+    	//CUSTOM SOURCE SECTION
+    	Util.scrollFunction(save_button);
+   
+    	Select cs1=new Select(custom_source1_dropdown);
+//    	cs1.selectByVisibleText(custom_source1); 
+    	cs1.selectByIndex(1);
+
+    	Select cs2=new Select(custom_source2_dropdown);
+//    	cs2.selectByVisibleText(custom_source2);
+        cs2.selectByIndex(1); 
+    	
+        Select cs3=new Select(custom_source3_dropdown);
+//    	cs3.selectByVisibleText(custom_source3);
+    	cs3.selectByIndex(1);
+    	
+    	Select cs4=new Select(custom_source4_dropdown);
+//    	cs4.selectByVisibleText(custom_source4);
+    	cs4.selectByIndex(1);
+    	
+    	Select cs5=new Select(custom_source5_dropdown);
+//    	cs5.selectByVisibleText(custom_source5);
+    	cs5.selectByIndex(1);
+    	
+    	
+    	//INSTANT INSIGHTS SECTION
+    	Util.click(instant_insights_checkbox);
+    	voice_prompt_for_call_outcome_textbox.sendKeys("test tn");
+    	
+    	sale_amount_voice_prompt_textbox.sendKeys("test sale");
+    	
+    
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+//      set.add(dnis);
+        System.out.println("simple "+dnis);
+    	list.add(dnis);
+    	
+    	
+    }
+    
     public void createSimpleNumber(String tracking_number_name) throws InterruptedException{
     	
-
        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//     Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
     		
        Util.scrollFunction(header);  
        add_tracking_number_button.click();
@@ -780,9 +972,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 
     	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
     	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
-        set.add(dnis);
+//      set.add(dnis);
         System.out.println("simple "+dnis);
-//    	list.add(dnis);
+    	list.add(dnis);
     }
     
     
@@ -1166,7 +1358,8 @@ public class TrackingNumberBuilderPage extends TestBase {
 
 		for( String one:list){
     		System.out.println(one);
-    	}
+    		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
+		}
     	
     	
 //		while(its.hasNext()){

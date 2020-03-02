@@ -9,7 +9,8 @@
     <classes>
       <class name="tests.TrackingNumberTest">
         <methods>
-          <include name="trakingNumberPageUIVerification"/>
+          <include name="GeoRouteTrakingNumberCreation"/>
+          <include name="GeoRouteTrakingNumberDeletion"/>
         </methods>
       </class> <!-- tests.TrackingNumberTest -->
     </classes>

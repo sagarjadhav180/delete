@@ -217,7 +217,37 @@ public class TrackingNumberTest extends TestBase{
 		    Thread.sleep(2000);
 		}	
 		
+        //GeoRoute creation
+		@Test(priority=10)
+		public void GeoRouteTrakingNumberCreation() throws InterruptedException{
+			logger=extent.startTest("GeoRoute number creation..");
+			logger.assignCategory("Tracking number suite");
+			
+			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		    cp.clickAction("update","SJC-1");
 
+            tn=createInstance();
+		    int number1 = tests.Util.generateRandomNumber();
+		    tracking_number_name="SJ TN-"+String.valueOf(number1);
+		    tn.createGeoRoute(tracking_number_name);
+		    Thread.sleep(2000);
+
+	
+		}
+		
+		//GeoRoute deletion
+		@Test(priority=11)
+		public void GeoRouteTrakingNumberDeletion() throws InterruptedException{
+
+			logger=extent.startTest("geo route number deletion..");
+			logger.assignCategory("Tracking number suite");
+			    
+		    tn=new TrackingNumberBuilderPage(driver);
+		    tn.clickAction(tracking_number_name, "Delete");
+		    Thread.sleep(2000);
+		}
+		
 	    @AfterClass
 	    public void cleanUp(){
 	    	tn = createInstance();

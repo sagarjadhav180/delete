@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">2 methods,   2 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -102,7 +102,12 @@
                     <div class="method-list-content passed suite-Automation_Suite-1">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.TrackingNumberTest" hash-for-method="trakingNumberPageUIVerification">trakingNumberPageUIVerification</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.TrackingNumberTest" hash-for-method="GeoRouteTrakingNumberCreation">GeoRouteTrakingNumberCreation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.TrackingNumberTest" hash-for-method="GeoRouteTrakingNumberDeletion">GeoRouteTrakingNumberDeletion</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Automation_Suite-1 -->
@@ -125,9 +130,16 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="trakingNumberPageUIVerification">
-                  </a> <!-- trakingNumberPageUIVerification -->
-                  <span class="method-name">trakingNumberPageUIVerification</span>
+                  <a name="GeoRouteTrakingNumberCreation">
+                  </a> <!-- GeoRouteTrakingNumberCreation -->
+                  <span class="method-name">GeoRouteTrakingNumberCreation</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="GeoRouteTrakingNumberDeletion">
+                  </a> <!-- GeoRouteTrakingNumberDeletion -->
+                  <span class="method-name">GeoRouteTrakingNumberDeletion</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -148,7 +160,8 @@
     &lt;classes&gt;
       &lt;class name=&quot;tests.TrackingNumberTest&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;trakingNumberPageUIVerification&quot;/&gt;
+          &lt;include name=&quot;GeoRouteTrakingNumberCreation&quot;/&gt;
+          &lt;include name=&quot;GeoRouteTrakingNumberDeletion&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- tests.TrackingNumberTest --&gt;
     &lt;/classes&gt;
@@ -190,11 +203,15 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'trakingNumberPageUIVerification')
+data.setCell(0, 1, 'GeoRouteTrakingNumberCreation')
 data.setCell(0, 2, 'tests.TrackingNumberTest')
-data.setCell(0, 3, 117201);
+data.setCell(0, 3, 89989);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'GeoRouteTrakingNumberDeletion')
+data.setCell(1, 2, 'tests.TrackingNumberTest')
+data.setCell(1, 3, 5561);
 window.suiteTableData['Automation_Suite-1']= { tableData: data, tableDiv: 'times-div-Automation_Suite-1'}
 return data;
 }
@@ -214,7 +231,7 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Automation_Suite-1" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">9 ignored methods</span>
+            <span class="header-content">10 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
@@ -222,21 +239,23 @@ return data;
               <div class="ignored-methods-div">
                 <span class="ignored-method-name">reserveNumberUpdation</span>
                 <br/>
-                <span class="ignored-method-name">simpleTrakingNumberDeletion</span>
-                <br/>
                 <span class="ignored-method-name">numberPoolUpdation</span>
                 <br/>
-                <span class="ignored-method-name">reserveNumberDeletion</span>
+                <span class="ignored-method-name">simpleTrakingNumberDeletion</span>
                 <br/>
                 <span class="ignored-method-name">numberPoolDeletion</span>
+                <br/>
+                <span class="ignored-method-name">reserveNumberDeletion</span>
                 <br/>
                 <span class="ignored-method-name">simpleTrakingNumberUpdation</span>
                 <br/>
                 <span class="ignored-method-name">simpleTrakingNumberCreation</span>
                 <br/>
+                <span class="ignored-method-name">reserveNumberCreation</span>
+                <br/>
                 <span class="ignored-method-name">numberPoolCreation</span>
                 <br/>
-                <span class="ignored-method-name">reserveNumberCreation</span>
+                <span class="ignored-method-name">trakingNumberPageUIVerification</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -255,27 +274,35 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">goToCampaignPage</span>
-                <span class="method-start">43487 ms</span>
+                <span class="method-start">49565 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">trakingNumberPageUIVerification</span>
-                <span class="method-start">48048 ms</span>
+                <span class="method-name">GeoRouteTrakingNumberCreation</span>
+                <span class="method-start">54773 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDown([TestResult name=trakingNumberPageUIVerification status=SUCCESS method=TrackingNumberTest.trakingNum...)</span>
-                <span class="method-start">165251 ms</span>
+                <span class="method-name">tearDown([TestResult name=GeoRouteTrakingNumberCreation status=SUCCESS method=TrackingNumberTest.GeoRouteTrak...)</span>
+                <span class="method-start">144764 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">GeoRouteTrakingNumberDeletion</span>
+                <span class="method-start">145238 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=GeoRouteTrakingNumberDeletion status=SUCCESS method=TrackingNumberTest.GeoRouteTrak...)</span>
+                <span class="method-start">150801 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">cleanUp</span>
-                <span class="method-start">165768 ms</span>
+                <span class="method-start">150888 ms</span>
               </div> <!-- configuration-class after -->
               <div class="configuration-test after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">165769 ms</span>
+                <span class="method-start">150891 ms</span>
               </div> <!-- configuration-test after -->
               <div class="configuration-suite after">
                 <span class="method-name">close_connection</span>
-                <span class="method-start">166753 ms</span>
+                <span class="method-start">151892 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
