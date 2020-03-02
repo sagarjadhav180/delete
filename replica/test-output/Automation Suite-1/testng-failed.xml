@@ -9,8 +9,8 @@
     <classes>
       <class name="tests.TrackingNumberTest">
         <methods>
-          <include name="GeoRouteTrakingNumberCreation"/>
-          <include name="GeoRouteTrakingNumberDeletion"/>
+          <include name="percentTrakingNumberCreation"/>
+          <include name="percentTrakingNumberDeletion"/>
         </methods>
       </class> <!-- tests.TrackingNumberTest -->
     </classes>

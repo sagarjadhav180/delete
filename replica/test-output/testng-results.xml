@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="151808" started-at="2020-03-02T14:03:38Z" finished-at="2020-03-02T14:06:10Z">
+  <suite name="Automation Suite-1" duration-ms="142013" started-at="2020-03-02T15:10:09Z" finished-at="2020-03-02T15:12:31Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="151808" started-at="2020-03-02T14:03:38Z" finished-at="2020-03-02T14:06:10Z">
+    <test name="chrome test" duration-ms="142013" started-at="2020-03-02T15:10:09Z" finished-at="2020-03-02T15:12:31Z">
       <class name="tests.TrackingNumberTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="setUp" is-config="true" duration-ms="49556" started-at="2020-03-02T19:33:38Z" finished-at="2020-03-02T19:34:28Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="setUp" is-config="true" duration-ms="39904" started-at="2020-03-02T20:40:09Z" finished-at="2020-03-02T20:40:49Z">
           <params>
             <param index="0">
               <value>
@@ -23,49 +23,49 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="goToCampaignPage" is-config="true" duration-ms="5199" started-at="2020-03-02T19:34:28Z" finished-at="2020-03-02T19:34:33Z">
+        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="goToCampaignPage" is-config="true" duration-ms="4226" started-at="2020-03-02T20:40:49Z" finished-at="2020-03-02T20:40:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="GeoRouteTrakingNumberCreation()[pri:10, instance:tests.TrackingNumberTest@6b0c2d26]" name="GeoRouteTrakingNumberCreation" duration-ms="89989" started-at="2020-03-02T19:34:33Z" finished-at="2020-03-02T19:36:03Z">
+        <test-method status="PASS" signature="percentTrakingNumberCreation()[pri:12, instance:tests.TrackingNumberTest@6b0c2d26]" name="percentTrakingNumberCreation" duration-ms="90297" started-at="2020-03-02T20:40:54Z" finished-at="2020-03-02T20:42:24Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- GeoRouteTrakingNumberCreation -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="473" started-at="2020-03-02T19:36:03Z" finished-at="2020-03-02T19:36:04Z">
+        </test-method> <!-- percentTrakingNumberCreation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="622" started-at="2020-03-02T20:42:24Z" finished-at="2020-03-02T20:42:25Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=GeoRouteTrakingNumberCreation status=SUCCESS method=TrackingNumberTest.GeoRouteTrakingNumberCreation()[pri:10, instance:tests.TrackingNumberTest@6b0c2d26] output={null}]]]>
+                <![CDATA[[TestResult name=percentTrakingNumberCreation status=SUCCESS method=TrackingNumberTest.percentTrakingNumberCreation()[pri:12, instance:tests.TrackingNumberTest@6b0c2d26] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="GeoRouteTrakingNumberDeletion()[pri:11, instance:tests.TrackingNumberTest@6b0c2d26]" name="GeoRouteTrakingNumberDeletion" duration-ms="5561" started-at="2020-03-02T19:36:04Z" finished-at="2020-03-02T19:36:09Z">
+        <test-method status="PASS" signature="percentTrakingNumberDeletion()[pri:13, instance:tests.TrackingNumberTest@6b0c2d26]" name="percentTrakingNumberDeletion" duration-ms="5937" started-at="2020-03-02T20:42:25Z" finished-at="2020-03-02T20:42:30Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- GeoRouteTrakingNumberDeletion -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="87" started-at="2020-03-02T19:36:09Z" finished-at="2020-03-02T19:36:09Z">
+        </test-method> <!-- percentTrakingNumberDeletion -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="109" started-at="2020-03-02T20:42:30Z" finished-at="2020-03-02T20:42:31Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=GeoRouteTrakingNumberDeletion status=SUCCESS method=TrackingNumberTest.GeoRouteTrakingNumberDeletion()[pri:11, instance:tests.TrackingNumberTest@6b0c2d26] output={null}]]]>
+                <![CDATA[[TestResult name=percentTrakingNumberDeletion status=SUCCESS method=TrackingNumberTest.percentTrakingNumberDeletion()[pri:13, instance:tests.TrackingNumberTest@6b0c2d26] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="cleanUp()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="cleanUp" is-config="true" duration-ms="1" started-at="2020-03-02T19:36:09Z" finished-at="2020-03-02T19:36:09Z">
+        <test-method status="PASS" signature="cleanUp()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="cleanUp" is-config="true" duration-ms="0" started-at="2020-03-02T20:42:31Z" finished-at="2020-03-02T20:42:31Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanUp -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="913" started-at="2020-03-02T19:36:09Z" finished-at="2020-03-02T19:36:10Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="887" started-at="2020-03-02T20:42:31Z" finished-at="2020-03-02T20:42:31Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="close_connection" is-config="true" duration-ms="7456" started-at="2020-03-02T19:36:10Z" finished-at="2020-03-02T19:36:18Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="close_connection" is-config="true" duration-ms="7577" started-at="2020-03-02T20:42:32Z" finished-at="2020-03-02T20:42:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->

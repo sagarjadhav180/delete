@@ -160,6 +160,19 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	String location_name="do_not_delete_location(automation)";
 	
+	
+	@FindBy(xpath="(//b[contains(text(),'Percent of Calls')]//../../..//following-sibling::div//input)[1]")
+	private static WebElement percent_textbox_1;	
+
+	@FindBy(xpath="(//b[contains(text(),'Percent of Calls')]//../../..//following-sibling::div//input)[4]")
+	private static WebElement percent_textbox_2;
+	
+	@FindBy(xpath="(//b[contains(text(),'Percent of Calls')]//../../..//following-sibling::div//input)[2]")
+	private static WebElement ring_to_phone_number_textbox_for_percent_1;	
+	
+	@FindBy(xpath="(//b[contains(text(),'Percent of Calls')]//../../..//following-sibling::div//input)[5]")
+	private static WebElement ring_to_phone_number_textbox_for_percent_2;	
+	
 	@FindBy(xpath="//label[text()='Ad Source']//parent::div//following-sibling::div//child::select[@id='source']")
 	private static WebElement ad_source_dropdown;
 
@@ -726,6 +739,133 @@ public class TrackingNumberBuilderPage extends TestBase {
     }
     
     
+    
+    public void createPercentRoute(String tracking_number_name){
+        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+		
+        Util.scrollFunction(header);  
+        add_tracking_number_button.click();
+     	
+
+         //BASIC SECTION       
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.sendKeys(tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(4);
+     	
+     	Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("Based on a percentage");
+
+        wait.until(ExpectedConditions.visibilityOf(percent_textbox_1));
+        percent_textbox_1.clear();
+        percent_textbox_1.sendKeys("90");
+        ring_to_phone_number_textbox_for_percent_1.clear();
+        ring_to_phone_number_textbox_for_percent_1.sendKeys("1111111111");
+
+        wait.until(ExpectedConditions.visibilityOf(percent_textbox_2));
+        percent_textbox_2.clear();
+        percent_textbox_2.sendKeys("10");
+        ring_to_phone_number_textbox_for_percent_2.clear();
+        ring_to_phone_number_textbox_for_percent_2.sendKeys("2222222222");
+        
+        area_code_textbox.sendKeys("201");
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+    	
+    	for(int i=0;i<area_codes_list_for_385.size();i++){
+    		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+    			area_codes_list_for_385.get(i).click();
+    			
+    		}
+    		
+    	}
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+        
+        Util.scrollFunction(play_voice_prompt_checkbox);
+        Util.click(activate_voicemail_checkbox);
+      
+       
+    	//ADVANCED SECTION
+        call_value_textbox.clear();
+    	call_value_textbox.sendKeys("32");
+    	repeat_interval_textbox.clear();
+    	repeat_interval_textbox.sendKeys("72");
+    	Select select=new Select(voicemail_dropdown);
+    	select.selectByValue("4");
+    	configure_voicemail_greetings_textbox.sendKeys("Please record your voicemail");
+    	Util.click(record_call_checkbox);
+    	Util.click(record_call_checkbox);
+    	Util.click(play_voice_prompt_checkbox);
+    	play_voice_prompt_textbox.sendKeys("test prompt");
+        Util.click(play_whisper_message_checkbox);
+        play_whisper_message_textbox.sendKeys("test whisper");
+        Util.click(webhook_checkbox);
+        Select we=new Select(webhook_dropdown);
+        we.selectByVisibleText(webhook);
+        
+        
+        //DNI SECTION
+        Util.click(dynamic_number_checkbox);
+        hostDomain_textbox.clear();
+        hostDomain_textbox.sendKeys("*.*");
+    	
+        Select select1 =new Select(reffering_website_dropdown);
+    	select1.selectByVisibleText("Any");
+        
+    	Select select2=new Select(dni_type_dropdown);
+    	select2.selectByValue("url");
+    	
+    	htmlclass_textbox.sendKeys("lmc_track");
+    	
+   
+    	//CUSTOM SOURCE SECTION
+    	Util.scrollFunction(save_button);
+   
+    	Select cs1=new Select(custom_source1_dropdown);
+//    	cs1.selectByVisibleText(custom_source1); 
+    	cs1.selectByIndex(1);
+
+    	Select cs2=new Select(custom_source2_dropdown);
+//    	cs2.selectByVisibleText(custom_source2);
+        cs2.selectByIndex(1); 
+    	
+        Select cs3=new Select(custom_source3_dropdown);
+//    	cs3.selectByVisibleText(custom_source3);
+    	cs3.selectByIndex(1);
+    	
+    	Select cs4=new Select(custom_source4_dropdown);
+//    	cs4.selectByVisibleText(custom_source4);
+    	cs4.selectByIndex(1);
+    	
+    	Select cs5=new Select(custom_source5_dropdown);
+//    	cs5.selectByVisibleText(custom_source5);
+    	cs5.selectByIndex(1);
+    	
+    	
+    	//INSTANT INSIGHTS SECTION
+    	Util.click(instant_insights_checkbox);
+    	voice_prompt_for_call_outcome_textbox.sendKeys("test tn");
+    	
+    	sale_amount_voice_prompt_textbox.sendKeys("test sale");
+    	
+    
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+//      set.add(dnis);
+        System.out.println("simple "+dnis);
+    	list.add(dnis);
+    	
+        
+        
+    }
     
     public void createGeoRoute(String tracking_number_name){
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));

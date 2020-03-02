@@ -248,7 +248,39 @@ public class TrackingNumberTest extends TestBase{
 		    Thread.sleep(2000);
 		}
 		
-	    @AfterClass
+        //percent route creation
+		@Test(priority=12)
+		public void percentTrakingNumberCreation() throws InterruptedException{
+			logger=extent.startTest("percentRoute number creation..");
+			logger.assignCategory("Tracking number suite");
+			
+			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+		    cp.clickAction("update","SJC-1");
+
+            tn=createInstance();
+		    int number1 = tests.Util.generateRandomNumber();
+		    tracking_number_name="SJ TN-"+String.valueOf(number1);
+		    tn.createPercentRoute(tracking_number_name);
+		    Thread.sleep(2000);
+
+	
+		}
+		
+		//percent route deletion
+		@Test(priority=13)
+		public void percentTrakingNumberDeletion() throws InterruptedException{
+
+			logger=extent.startTest("percent route number deletion..");
+			logger.assignCategory("Tracking number suite");
+			    
+		    tn=new TrackingNumberBuilderPage(driver);
+		    tn.clickAction(tracking_number_name, "Delete");
+		    Thread.sleep(2000);
+		}
+		
+		
+		@AfterClass
 	    public void cleanUp(){
 	    	tn = createInstance();
 		    tn.unprovisionNumbers();
