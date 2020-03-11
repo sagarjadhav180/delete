@@ -84,6 +84,27 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//label[@class='control-label'][contains(text(),'Activate Voicemail ?')]//parent::div//following-sibling::div//child::p")
 	private static WebElement activate_voicemail_note;
 	
+	@FindBy(xpath="//label[contains(text(),'Time Zone')]//parent::div//following-sibling::div//select")
+	private static WebElement time_zone_listbox;
+
+	@FindBy(xpath="//button[@class='dropdown-toggle ng-binding btn btn-default']")
+	private static WebElement schedule_days_dropdown_button;
+
+	@FindBy(xpath="//button[@class='dropdown-toggle ng-binding btn btn-default']//following-sibling::ul//li//span[@class='ng-binding ng-scope']")
+	private static List<WebElement> schedule_days_options;
+	
+	@FindBy(xpath="(//select)[12]")
+	private static WebElement schedule_from_time_listbox;	
+
+	@FindBy(xpath="(//select)[13]")
+	private static WebElement schedule_to_time_listbox;
+
+	@FindBy(xpath="//input[contains(@name,'scheduleRingtoNumber0')]")
+	private static WebElement ring_to_number_for_schedule;
+
+	@FindBy(xpath="//input[contains(@name,'pin')]")
+	private static WebElement auth_pin_textbox;
+	
 	@FindBy(xpath="//label[@class='control-label'][contains(text(),'Active?')]")
 	private static WebElement active_label;
 
@@ -437,7 +458,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 			softassert.assertTrue(tn_deletion_success_message.isDisplayed(),"tracking number not deleted successfully");
             softassert.assertAll();
 
-           
+            Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str LIKE ('2%') AND number_status='suspended'");
 			
 		}
 		else{
@@ -755,12 +776,54 @@ public class TrackingNumberBuilderPage extends TestBase {
         logger.log(LogStatus.INFO, "Verifying if number_of_digits_in_agent_Id_dropdown has 1 to 9 digits");
         softassert.assertTrue(select2.getOptions().size()==10,"number_of_digits_in_agent_Id_dropdown does not have 1 to 9 digits");
         
-        
+        select1.selectByVisibleText("Call Outcome (Conversion type)");
+        Util.Action().moveToElement(instant_insights_checkbox).click().perform();
         softassert.assertAll();
         
     }
     
+<<<<<<< HEAD
     public void createScheduleRoute(String tracking_number_name){
+=======
+
+    public void createIVRRoute(String tracking_number_name){
+    	 wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+ 		
+         Util.scrollFunction(header);  
+         add_tracking_number_button.click();
+      	
+
+          //BASIC SECTION       
+      	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+      	tracking_number_name_textbox.sendKeys(tracking_number_name);
+      	
+      	Select selct_ad_source=new Select(ad_source_dropdown);
+      	selct_ad_source.selectByIndex(4);
+      	
+      	 area_code_textbox.sendKeys("201");
+      	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+      	
+      	for(int i=0;i<area_codes_list_for_385.size();i++){
+      		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+      			area_codes_list_for_385.get(i).click();
+      			
+      		}
+      		
+      	}
+      	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+         
+        Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("Interactive Voice Response");
+        
+        
+         
+    }
+    
+    public void createHangupRoute(String tracking_number_name){
+
+>>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 		
         Util.scrollFunction(header);  
@@ -773,6 +836,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	
      	Select selct_ad_source=new Select(ad_source_dropdown);
      	selct_ad_source.selectByIndex(4);
+<<<<<<< HEAD
 
      	ring_to_phone_number_textbox.clear(); 
     	ring_to_phone_number_textbox.sendKeys("1234567890");
@@ -884,6 +948,27 @@ public class TrackingNumberBuilderPage extends TestBase {
     	sale_amount_voice_prompt_textbox.sendKeys("test sale");
     	
     
+=======
+     	
+     	 area_code_textbox.sendKeys("201");
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+     	
+     	for(int i=0;i<area_codes_list_for_385.size();i++){
+     		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+     			area_codes_list_for_385.get(i).click();
+     			
+     		}
+     		
+     	}
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+        
+        Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("Hangup");
+
+        Util.scrollFunction(save_button);    
+>>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
     	save_button.click();
     	
     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
@@ -895,11 +980,19 @@ public class TrackingNumberBuilderPage extends TestBase {
 //      set.add(dnis);
         System.out.println("simple "+dnis);
     	list.add(dnis);
+<<<<<<< HEAD
      	
      
     }
     
     public void createHangupRoute(String tracking_number_name){
+=======
+
+    }
+    
+    public void createVoicemailRoute(String tracking_number_name){
+    	
+>>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 		
         Util.scrollFunction(header);  
@@ -913,6 +1006,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	Select selct_ad_source=new Select(ad_source_dropdown);
      	selct_ad_source.selectByIndex(4);
      	
+<<<<<<< HEAD
      	Select routes=new Select(route_calls_by_dropdown); 
         routes.selectByVisibleText("Hangup");
         
@@ -939,6 +1033,45 @@ public class TrackingNumberBuilderPage extends TestBase {
     
     public void createVoicemailRoute(String tracking_number_name){
 
+=======
+     	 area_code_textbox.sendKeys("201");
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+     	
+     	for(int i=0;i<area_codes_list_for_385.size();i++){
+     		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+     			area_codes_list_for_385.get(i).click();
+     			
+     		}
+     		
+     	}
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+        
+        Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("Send directly to voicemail");
+
+        Util.scrollFunction(save_button);    
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+//      set.add(dnis);
+        System.out.println("simple "+dnis);
+    	list.add(dnis);
+        
+    	
+    	
+    }
+    
+    
+	public void createOutboundRoute(String tracking_number_name) {
+		
+>>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 		
         Util.scrollFunction(header);  
@@ -952,6 +1085,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	Select selct_ad_source=new Select(ad_source_dropdown);
      	selct_ad_source.selectByIndex(4);
      	
+<<<<<<< HEAD
      	Select routes=new Select(route_calls_by_dropdown); 
         routes.selectByVisibleText("Send directly to voicemail");
         
@@ -1017,8 +1151,189 @@ public class TrackingNumberBuilderPage extends TestBase {
         wait.until(ExpectedConditions.elementToBeClickable(save_button));
         save_button.click();
     }
+=======
+     	 area_code_textbox.sendKeys("201");
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+     	
+     	for(int i=0;i<area_codes_list_for_385.size();i++){
+     		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+     			area_codes_list_for_385.get(i).click();
+     			
+     		}
+     		
+     	}
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+        Select select_tracking_number=new Select(tracking_number_dropdown);
+        select_tracking_number.selectByIndex(4);
+        
+        Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("Outbound");
+        
+        wait.until(ExpectedConditions.visibilityOf(auth_pin_textbox));
+        auth_pin_textbox.clear();
+        auth_pin_textbox.sendKeys("2343");
+        
+        
+        Util.scrollFunction(save_button);    
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+//      set.add(dnis);
+        System.out.println("simple "+dnis);
+    	list.add(dnis);
+         
+	}	
+>>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
     
     
+    public void createScheduleRoute(String tracking_number_name){
+        wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+		
+        Util.scrollFunction(header);  
+        add_tracking_number_button.click();
+     	
+
+         //BASIC SECTION       
+     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
+     	tracking_number_name_textbox.sendKeys(tracking_number_name);
+     	
+     	Select selct_ad_source=new Select(ad_source_dropdown);
+     	selct_ad_source.selectByIndex(4);
+     	
+     	 area_code_textbox.sendKeys("201");
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
+     	
+     	for(int i=0;i<area_codes_list_for_385.size();i++){
+     		if(area_codes_list_for_385.get(i).getText().contains("ALPINE")){
+     			area_codes_list_for_385.get(i).click();
+     			
+     		}
+     		
+     	}
+     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
+         Select select_tracking_number=new Select(tracking_number_dropdown);
+         select_tracking_number.selectByIndex(4);
+     	
+         wait.until(ExpectedConditions.elementToBeClickable(ring_to_phone_number_textbox));
+         ring_to_phone_number_textbox.clear();
+     	ring_to_phone_number_textbox.sendKeys("1234567890");
+     	
+     	
+     	Select routes=new Select(route_calls_by_dropdown); 
+        routes.selectByVisibleText("Follow a schedule");
+        
+        Select timezone=new Select(time_zone_listbox);
+        timezone.selectByIndex(2);
+        
+        schedule_days_dropdown_button.click();
+        
+        for(WebElement option:schedule_days_options){
+        	if(option.getText().equals("All Days")){
+        		option.click();
+        	}
+        }
+        
+        System.out.println(schedule_from_time_listbox);
+        Select from=new Select(schedule_from_time_listbox);
+        from.selectByVisibleText("12:00 AM");
+
+        System.out.println(schedule_to_time_listbox);
+        Select to=new Select(schedule_to_time_listbox);
+        to.selectByVisibleText("02:00 AM");
+        
+        ring_to_number_for_schedule.clear();
+        ring_to_number_for_schedule.sendKeys("1111111111");
+        
+        
+       
+        
+        Util.scrollFunction(play_voice_prompt_checkbox);
+        Util.click(activate_voicemail_checkbox);
+      
+       
+    	//ADVANCED SECTION
+        call_value_textbox.clear();
+    	call_value_textbox.sendKeys("32");
+    	repeat_interval_textbox.clear();
+    	repeat_interval_textbox.sendKeys("72");
+    	Select select=new Select(voicemail_dropdown);
+    	select.selectByValue("4");
+    	configure_voicemail_greetings_textbox.sendKeys("Please record your voicemail");
+    	Util.click(record_call_checkbox);
+    	Util.click(record_call_checkbox);
+    	Util.click(play_voice_prompt_checkbox);
+    	play_voice_prompt_textbox.sendKeys("test prompt");
+        Util.click(play_whisper_message_checkbox);
+        play_whisper_message_textbox.sendKeys("test whisper");
+        Util.click(webhook_checkbox);
+        Select we=new Select(webhook_dropdown);
+        we.selectByVisibleText(webhook);
+        
+        
+        //DNI SECTION
+        Util.click(dynamic_number_checkbox);
+        hostDomain_textbox.clear();
+        hostDomain_textbox.sendKeys("*.*");
+    	
+        Select select1 =new Select(reffering_website_dropdown);
+    	select1.selectByVisibleText("Any");
+        
+    	Select select2=new Select(dni_type_dropdown);
+    	select2.selectByValue("url");
+    	
+    	htmlclass_textbox.sendKeys("lmc_track");
+    	
+   
+    	//CUSTOM SOURCE SECTION
+    	Util.scrollFunction(save_button);
+   
+    	Select cs1=new Select(custom_source1_dropdown);
+//    	cs1.selectByVisibleText(custom_source1); 
+    	cs1.selectByIndex(1);
+
+    	Select cs2=new Select(custom_source2_dropdown);
+//    	cs2.selectByVisibleText(custom_source2);
+        cs2.selectByIndex(1); 
+    	
+        Select cs3=new Select(custom_source3_dropdown);
+//    	cs3.selectByVisibleText(custom_source3);
+    	cs3.selectByIndex(1);
+    	
+    	Select cs4=new Select(custom_source4_dropdown);
+//    	cs4.selectByVisibleText(custom_source4);
+    	cs4.selectByIndex(1);
+    	
+    	Select cs5=new Select(custom_source5_dropdown);
+//    	cs5.selectByVisibleText(custom_source5);
+    	cs5.selectByIndex(1);
+    	
+    	
+    	//INSTANT INSIGHTS SECTION
+    	Util.click(instant_insights_checkbox);
+    	voice_prompt_for_call_outcome_textbox.sendKeys("test tn");
+    	
+    	sale_amount_voice_prompt_textbox.sendKeys("test sale");
+    	
+    
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+//      set.add(dnis);
+        System.out.println("simple "+dnis);
+    	list.add(dnis);
+        
+    	
+    }
     
     public void createPercentRoute(String tracking_number_name){
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
@@ -1790,7 +2105,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 //		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
 		System.out.println("---------------------------------------unprovision---------------------------------------------");
 	    
-		}	
+		}
+
+
 	
     
     

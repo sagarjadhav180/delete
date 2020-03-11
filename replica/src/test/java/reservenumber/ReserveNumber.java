@@ -34,7 +34,7 @@ public class ReserveNumber {
 		List<String> numbers = GetNumber.getNumberToReserve(access_token);
 		String number1 = null ; 
 		for(int i=0;i<numbers.size();i++){
-			if(numbers.get(i).startsWith("2")){ 
+			if(!numbers.get(i).startsWith("3")){ 
 			String number=numbers.get(i);
 			 number1=number;
 			 break;
@@ -60,7 +60,7 @@ public class ReserveNumber {
 		JSONObject jo=new JSONObject();
 		try{
 		jo.put("number", Integer.valueOf(number1));
-		}catch(NumberFormatException n){
+		}catch(Exception n){
 			n.printStackTrace();
 		}
 		jo.put("source", 10001);
