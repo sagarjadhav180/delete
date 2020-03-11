@@ -37,6 +37,7 @@ public class ReserveNumber {
 			if(numbers.get(i).startsWith("2")){ 
 			String number=numbers.get(i);
 			 number1=number;
+			 break;
 			}
 			}
 		 
