@@ -10,7 +10,6 @@ import org.testng.ITestResult;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import tests.CampaignTests;
 import tests.TestBase;
 
 

@@ -157,6 +157,40 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//input[contains(@name,'scheduleRingtoNumber0')]")
 	private static WebElement ring_to_number_for_schedule_days;
 	
+	
+	//IVR
+	@FindBy(xpath="(//label[text()='Play a voice prompt']//parent::div//following-sibling::div//textarea)[1]")
+	private static WebElement default_play_voice_prompt_ivr;	
+
+	@FindBy(xpath="(//label[text()='Play a voice prompt'])[1]//parent::div//following-sibling::div//a[1]")
+	private static WebElement default_play_voice_prompt_ivr_add_file_button;	
+
+	@FindBy(xpath="(//label[text()='Play a voice prompt'])[1]//parent::div//following-sibling::div//a[3]")
+	private static WebElement default_play_voice_prompt_ivr_play_button;	
+	
+	@FindBy(xpath="//label[text()='Play a voice prompt on selection']//parent::div//following-sibling::div//textarea")
+	private static List<WebElement> play_voice_prompt_ivr;		
+	
+	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
+	private static List<WebElement> keypress_textbox;	
+	
+	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
+	private static List<WebElement> destination_textbox;	
+	
+	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
+	private static List<WebElement> routes_listbox;	
+	
+	@FindBy(xpath="//label[contains(text(),'Ring to Phone Number')][@class='ng-binding']//parent::div//following-sibling::div[@class='col-lg-4 col-md-4 col-sm-12']//input")
+	private static List<WebElement> ringto_textbox;	
+	
+	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[text()='Play whisper message before connecting']//parent::div//following-sibling::div//md-checkbox")
+	private static List<WebElement> play_whisper_checkbox;		
+	
+	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[contains(text(),'Activate Voicemail ')]//parent::div//following-sibling::div[@class='col-lg-1 col-md-1 col-sm-12 mt20 checkbox']//md-checkbox")
+	private static List<WebElement> voicemail_checkbox;		
+	
+	
+	
 	@FindBy(xpath="//label[text()='NPA-NXX (Area Code)']//parent::div//following-sibling::div//input")
 	private static WebElement area_code_textbox;
 	
@@ -809,7 +843,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         Select routes=new Select(route_calls_by_dropdown); 
         routes.selectByVisibleText("Interactive Voice Response");
         
-        
+        ,,
          
     }
     

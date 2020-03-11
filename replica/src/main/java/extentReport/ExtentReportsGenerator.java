@@ -18,7 +18,6 @@ public class ExtentReportsGenerator {
 	
 	
 	private static ExtentReports extent;
-	private static ExtentTest logger;
 
 	public static ExtentReports getInstance(Boolean replace_existing)   {
 		
