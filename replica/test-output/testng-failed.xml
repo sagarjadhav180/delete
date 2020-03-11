@@ -7,19 +7,15 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
-<<<<<<< HEAD
       <class name="tests.LoginTest"/>
       <class name="tests.HomeTest"/>
       <class name="tests.CamapignUIVerificationTest"/>
       <class name="tests.CampaignTests"/>
-=======
->>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
       <class name="tests.TrackingNumberTest"/>
     </classes>
   </test> <!-- chrome test -->
   <test name="chrome test(failed)">
     <parameter name="browser" value="chrome"/>
-<<<<<<< HEAD
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
       <class name="tests.LoginTest">
@@ -35,19 +31,6 @@
           <include name="goToCampaignPage"/>
           <include name="cleanUp"/>
           <include name="tearDown"/>
-=======
-    <parameter name="url" value="https://stag-6-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.TrackingNumberTest">
-        <methods>
-          <include name="percentTrakingNumberDeletion"/>
-          <include name="goToCampaignPage"/>
-          <include name="setUp"/>
-          <include name="cleanUp"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="close_connection"/>
->>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
         </methods>
       </class> <!-- tests.TrackingNumberTest -->
       <class name="tests.CamapignUIVerificationTest">

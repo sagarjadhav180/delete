@@ -24,7 +24,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 {
 	
-	String campaign_ou_id_id="70045";
+	String campaign_ou_id="70045";
 	
 	@FindBy(xpath="//a[@class='btn btn-sm btn-default addcamp ng-scope']")
 	private static WebElement addCampaign_Button;
@@ -588,11 +588,9 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 
 	//verification of count in top pagination toolbox	
-<<<<<<< HEAD
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id="+campaign_ou_id_id+" AND campaign_status NOT IN ('deleted')" );
-=======
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=1633 AND campaign_status NOT IN ('deleted')" );
->>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id='"+campaign_ou_id+"' AND campaign_status NOT IN ('deleted')" );
+
+
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
 	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
 	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
@@ -682,24 +680,6 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 	 	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
