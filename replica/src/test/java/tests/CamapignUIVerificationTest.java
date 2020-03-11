@@ -16,7 +16,7 @@ import pom.campaignBuilderPage;
 public class CamapignUIVerificationTest extends TestBase{
 
 	HomePage hp;
-	String campaignToBeEdited="agencycamp";	
+	String campaignToBeEdited="SJC-1";	
 	
 	@BeforeClass
 	public void goToCampaignPage() throws InterruptedException, IOException{

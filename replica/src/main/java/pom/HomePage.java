@@ -101,7 +101,7 @@ public class HomePage extends TestBase {
 	@FindBy(xpath="	//a[contains(text(),'Sign Out')]")
 	private WebElement logout_link;
 
-	String org_unit_id="8664";
+	String org_unit_id="70045";
 
 	
 //	WebDriverWait wait;
@@ -355,17 +355,20 @@ public class HomePage extends TestBase {
 	//To check Tile count
 	public void tilesCount(){
 		
-		   int currentDate = Util.getDate();
-		   String startDateToBeUsed = String.valueOf(currentDate-8);
-		   String endDateToBeUsed = String.valueOf(currentDate-1);
+		   String endDateToBeUsed = Util.getcurrentdate();
+
+		   
+		   String startDateToBeUsed = Util.getLastDate();
+
+		   
 		   System.out.println("startDateToBeUsed is "+startDateToBeUsed);
 		   System.out.println("endDateToBeUsed is "+endDateToBeUsed);
 		for(int i=0;i<dashboard_tiles_values.size();i++){
 			
 			//total calls count
 			String total_call_count_from_ui = dashboard_tiles_values.get(0).getText();
-			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59'");
-			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59'");
+			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			System.out.println("total_count_from_ui is "+total_call_count_from_ui);
 			System.out.println("total_count_from_db "+total_call_count_from_db);
 			logger.log(LogStatus.INFO, "verifying total calls count..");
@@ -373,7 +376,7 @@ public class HomePage extends TestBase {
 			
 			//total unique calls count
 			String unique_calls_count_from_ui = dashboard_tiles_values.get(1).getText();
-			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
 			System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
 			System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying unique calls count..");
@@ -381,7 +384,7 @@ public class HomePage extends TestBase {
 
 			//total answered calls calls count
 			String answered_calls_count_from_ui = dashboard_tiles_values.get(2).getText();
-			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
+			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
 			System.out.println("answered_calls_count_from_ui is "+answered_calls_count_from_ui);
 			System.out.println("answered_calls_count_from_db "+answered_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying answered calls count..");
@@ -389,11 +392,11 @@ public class HomePage extends TestBase {
 
 			//AVG CALL DURATION
 			String avg_call_duration__from_ui = dashboard_tiles_values.get(3).getText();
-			String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59'");
+			String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			if(avg_call_duration_from_db==null){
 				avg_call_duration_from_db="0";
 			}
-			System.out.println("avg_call_duration__from_ui is "+avg_call_duration__from_ui.substring(5,6));
+			System.out.println("avg_call_duration__from_ui is "+avg_call_duration__from_ui.substring(5,7));
 			System.out.println("avg_call_duration_from_db "+avg_call_duration_from_db);
 			logger.log(LogStatus.INFO, "verifying average call dusration..");
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -408,12 +411,16 @@ public class HomePage extends TestBase {
 			
 			//TOTAL LEADS
 			String total_leads__from_ui = dashboard_tiles_values.get(4).getText();
-			String total_leads_from_db = Util.readingFromDB("SELECT count(*) FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+			String total_leads_from_db = Util.readingFromDB("SELECT count(*) FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
 			System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 			System.out.println("total_leads_from_db "+total_leads_from_db);
 			logger.log(LogStatus.INFO, "verifying total leads..");
-			softassert.assertTrue(total_leads_from_db.equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
-
+			if(total_leads_from_db==null){
+			softassert.assertTrue("0".equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
+			}
+			else{
+			softassert.assertTrue(total_leads_from_db.equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");				
+			}
 			//% LEADS
 			String leads;
 			try{
@@ -430,7 +437,7 @@ public class HomePage extends TestBase {
 			
 			//TOTAL CONVERSIONS
 			String total_conversion__from_ui = dashboard_tiles_values.get(6).getText();
-			String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '2020-01-"+startDateToBeUsed+" 23:59' AND '2020-01-"+endDateToBeUsed+" 23:59') AND indicator_id='18'");
+			String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'') AND indicator_id='18'");
 			if(total_conversion_from_db==null){
 				total_conversion_from_db="0";
 			}

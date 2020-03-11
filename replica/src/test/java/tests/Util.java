@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -44,7 +47,7 @@ public class Util extends TestBase{
 	
 	static JsonNode rootNode;
 	static JavascriptExecutor jse = (JavascriptExecutor)driver;
-	static String dbUrl="jdbc:postgresql://stag-6-pg-1.convirza.com:5432/ct_stg";
+	static String dbUrl="jdbc:postgresql://stag-5-pg-1.convirza.com:5432/ct_stg";
 	static String username="moentekdbrw";
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;
@@ -204,14 +207,48 @@ public class Util extends TestBase{
 	}
 	
 	
-	public static int getDate(){
-		Date date=new Date();
-		int currentDate = date.getDate();
-		return currentDate;
+	public static String getcurrentdate(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+	    
+		Date todate1 = cal.getTime();
+	    String startdate = dateFormat.format(todate1);
+
+	    System.out.println(startdate);
+	    return startdate;
 	}
+	
+	public static String getLastDate(){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -8);
+	    
+		Date todate1 = cal.getTime();
+	    String enddate = dateFormat.format(todate1);
+
+	    System.out.println(enddate);
+	    return enddate;
+		
+	}
+	
 	
 	public static JavascriptExecutor getJavascriptExecutor(){
 		return jse;
+		
+	}
+
+
+	public static int getDate() {
+		
+		Date date=new Date();
+		DateFormat dateFormat = new SimpleDateFormat();
+		int currentDate = date.getDate();
+		return currentDate;
+		
+		
 		
 	}
 	
