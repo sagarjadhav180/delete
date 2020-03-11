@@ -3,9 +3,8 @@ package tests;
 import java.io.IOException;
 
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -14,7 +13,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
 import pom.LoginPage;
-import pom.TrackingNumberBuilderPage;
 import pom.campaignBuilderPage;
 
 
@@ -129,7 +127,7 @@ public class CampaignTests extends TestBase {
 	
 		logger=extent.startTest("Campaign deletion without external ID..");
 		logger.assignCategory("Campaign Suite");
-		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
+		
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
 //		Thread.sleep(10000);
@@ -180,7 +178,6 @@ public class CampaignTests extends TestBase {
 	public void campaign_deletion_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion without external ID..");
 		logger.assignCategory("Campaign Suite");
-		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
 //	    driver.navigate().refresh();
@@ -240,8 +237,7 @@ public class CampaignTests extends TestBase {
 	public void campaign_deletion_With_futureStartDate() throws InterruptedException{
      	logger=extent.startTest("Campaign deletion with future start date..");
 		logger.assignCategory("Campaign Suite");
-     	campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+     	CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
 //	    driver.navigate().refresh();
 	 
@@ -298,7 +294,6 @@ public class CampaignTests extends TestBase {
 	public void campaign_deletion_With_futureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion with future start date And Future EndDate ..");
 		logger.assignCategory("Campaign Suite");
-		campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 	    cp.clickAction("archive",campaign_name);
 //	    driver.navigate().refresh();

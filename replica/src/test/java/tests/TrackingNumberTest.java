@@ -1,13 +1,6 @@
 package tests;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Set;
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.json.JSONException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,7 +11,6 @@ import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
 import pom.LoginPage;
 import pom.TrackingNumberBuilderPage;
-import pom.campaignBuilderPage;
 import reservenumber.ReserveNumber;
 
 public class TrackingNumberTest extends TestBase{
@@ -43,7 +35,7 @@ public class TrackingNumberTest extends TestBase{
 			try {
 				hp.clickAction("Campaign & Tracking Number");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}		
 			
@@ -66,7 +58,6 @@ public class TrackingNumberTest extends TestBase{
 	   logger=extent.startTest("Tracking number UI Verification..");
        logger.assignCategory("Tracking number suite");
 					
-	   campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
 	   CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
        cp.clickAction("update","SJC-1");
        tn=createInstance();
@@ -81,8 +72,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("Tracking number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 
             tn=createInstance();
@@ -129,7 +118,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("Number Pool creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 
 		    int number1 = tests.Util.generateRandomNumber();
@@ -180,8 +168,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("Reserve Number creation..");
 			logger.assignCategory("Tracking number suite");
 			String number = ReserveNumber.makeNumberReseve();
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 			tn = createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -223,8 +209,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("GeoRoute number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 
             tn=createInstance();
@@ -254,8 +238,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("percentRoute number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 
             tn=createInstance();
@@ -284,8 +266,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("outbound number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 
             tn=createInstance();
@@ -315,8 +295,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("hangup number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+			
 //		    cp.clickAction("update","SJC-1");
 
             tn=createInstance();
@@ -345,8 +324,6 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("voicemail number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //		    cp.clickAction("update","SJC-1");
 
             tn=createInstance();
@@ -378,7 +355,6 @@ public class TrackingNumberTest extends TestBase{
 				logger=extent.startTest("scheduleRoute number creation..");
 				logger.assignCategory("Tracking number suite");
 				
-				CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
 //			    cp.clickAction("update","SJC-1");
 
 	            tn=createInstance();

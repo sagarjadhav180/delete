@@ -11,7 +11,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
 import pom.LoginPage;
-import pom.campaignBuilderPage;
 
 public class CamapignUIVerificationTest extends TestBase{
 
