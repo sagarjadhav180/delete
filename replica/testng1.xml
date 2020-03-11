@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Automation Suite-1" parallel="tests" thread-count="2" >
+  	
+	<test name="chrome test" preserve-order="true" parallel="false" >
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+		<classes>
+
+     
+	    <class name="tests.TrackingNumberTest"/>
+	
+		</classes>
+	</test>
+		
+</suite> <!-- Suite -->
