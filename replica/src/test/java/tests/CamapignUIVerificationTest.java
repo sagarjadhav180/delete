@@ -44,7 +44,7 @@ public class CamapignUIVerificationTest extends TestBase{
 	public void CampaignAndTrackingNumberPage_UI_Verification() throws InterruptedException{
 		logger=extent.startTest("Campaign and tracking number page page UI verification..");
 		logger.assignCategory("Campaign Suite");
-		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);	
 		logger.log(LogStatus.INFO, "verifying UI of campaign and tracking number page..");
 		cp.campaignPageUIVerification();
 		
@@ -54,7 +54,7 @@ public class CamapignUIVerificationTest extends TestBase{
 	public void defaultColumnsDisplayed() throws InterruptedException {
 		logger=extent.startTest("Default columns displayed");
 		logger.assignCategory("Campaign Suite");
-		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);	
 		cp.clickAction("expand", campaignToBeEdited);
 		cp.toCheckDefaultDisplayedColumns();
 		cp.clickAction("collapse", campaignToBeEdited);
@@ -85,7 +85,7 @@ public class CamapignUIVerificationTest extends TestBase{
 	public void allColumnsDisplayed() throws InterruptedException {
 		logger=extent.startTest("all columns displayed");
 		logger.assignCategory("Campaign Suite");
-		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);	
+		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);	
 		cp.toCheckOptionsFromColumnPicker();
 		
 		Thread.sleep(2000);

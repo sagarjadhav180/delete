@@ -17,8 +17,10 @@ public class TrackingNumberTest extends TestBase{
 	
 	String tracking_number_name;
 	String updated_tracking_number_name;
-	int counter=0;
+	int counter_a=0;
+	int counter_b=0;
 	TrackingNumberBuilderPage tn;
+	CampaignAndTrackingNumberPage cp;
 	
 	//navigating to Campaign builder page
 		@BeforeClass
@@ -42,11 +44,20 @@ public class TrackingNumberTest extends TestBase{
 		}
 	
 
-		  public TrackingNumberBuilderPage createInstance(){
+		  public CampaignAndTrackingNumberPage createInstanceCampaignAndTrackingNumberPage(){
                 
-			  if(counter==0){
+			  if(counter_b==0){
+			    cp=new CampaignAndTrackingNumberPage(driver);
+			    counter_b++;
+			  }
+			    return cp;		  
+		  }
+		  
+		  public TrackingNumberBuilderPage createInstance(){
+              
+			  if(counter_a==0){
 			    tn=new TrackingNumberBuilderPage(driver);
-			    counter++;
+			    counter_a++;
 			  }
 			    return tn;		  
 		  }
@@ -58,7 +69,7 @@ public class TrackingNumberTest extends TestBase{
 	   logger=extent.startTest("Tracking number UI Verification..");
        logger.assignCategory("Tracking number suite");
 					
-	   CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
+	   cp=createInstanceCampaignAndTrackingNumberPage();	
        cp.clickAction("update","SJC-1");
        tn=createInstance();
        tn.uiVerification();
@@ -378,10 +389,36 @@ public class TrackingNumberTest extends TestBase{
 		    Thread.sleep(2000);
 		}
 		
-	    
+		 //IVR route creation
+		@Test(priority=22)
+		public void IVRCreation() throws InterruptedException{
+				logger=extent.startTest("IVR r creation..");
+				logger.assignCategory("Tracking number suite");
+				
+				cp=createInstanceCampaignAndTrackingNumberPage();
+			    cp.clickAction("update","SJC-1");
+
+	            tn=createInstance();
+			    int number1 = tests.Util.generateRandomNumber();
+			    tracking_number_name="SJ TN-"+String.valueOf(number1);
+			    tn.createIVRRoute(tracking_number_name);
+			    Thread.sleep(2000);
+
+		
+		} 
 			
 		
+		//IVR route deletion
+		@Test(priority=23)
+		public void IVRDeletion() throws InterruptedException{
 
+					logger=extent.startTest("IVR route number deletion..");
+					logger.assignCategory("Tracking number suite");
+					    
+				    tn=new TrackingNumberBuilderPage(driver);
+				    tn.clickAction(tracking_number_name, "Delete");
+				    Thread.sleep(2000);
+		}
 			
 		@AfterClass
 	    public void cleanUp(){

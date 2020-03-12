@@ -239,10 +239,10 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	
 	
-	public CampaignAndTrackingNumberPage(WebDriver driver,WebDriverWait wait1){
+	public CampaignAndTrackingNumberPage(WebDriver driver){
 		
 		PageFactory.initElements(driver, this);
-        wait=wait1;
+        
 		
 	}
 

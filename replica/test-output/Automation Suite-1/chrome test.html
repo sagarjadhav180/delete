@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>chrome test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>53/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Mar 11 17:56:09 IST 2020</td>
+<td>Started on:</td><td>Thu Mar 12 16:43:37 IST 2020</td>
 </tr>
-<tr><td>Total time:</td><td>1293 seconds (1293224 ms)</td>
+<tr><td>Total time:</td><td>145 seconds (145418 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,57 +67,6 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-failed'>
-<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
-<tr><td><b>Test method</b></td>
-<td width="30%"><b>Exception</b></td>
-<td width="10%"><b>Time (seconds)</b></td>
-<td><b>Instance</b></td>
-</tr>
-<tr>
-<td title='tests.HomeTest.tiles_count_verification_UI()'><b>tiles_count_verification_UI</b><br>Test class: tests.HomeTest</td>
-<td><div><pre>java.lang.AssertionError: The following asserts failed:
-	total_call_count_from_ui is not matching with db expected [true] but found [false],
-	answered_calls_count_from_ui is not matching with db expected [true] but found [false],
-	AVG CALL DURATION from ui is not matching with db expected [true] but found [false]
-	at pom.HomePage.tilesCount(HomePage.java:469)
-	at tests.HomeTest.tiles_count_verification_UI(HomeTest.java:55)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 17 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace55494953", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace55494953'><pre>java.lang.AssertionError: The following asserts failed:
-	total_call_count_from_ui is not matching with db expected [true] but found [false],
-	answered_calls_count_from_ui is not matching with db expected [true] but found [false],
-	AVG CALL DURATION from ui is not matching with db expected [true] but found [false]
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
-	at pom.HomePage.tilesCount(HomePage.java:469)
-	at tests.HomeTest.tiles_count_verification_UI(HomeTest.java:55)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
-	at org.testng.TestRunner.privateRun(TestRunner.java:782)
-	at org.testng.TestRunner.run(TestRunner.java:632)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
-	at org.testng.SuiteRunner.access$000(SuiteRunner.java:39)
-	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:400)
-	at org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-</pre></div></td>
-<td>7</td>
-<td>tests.HomeTest@3d3fcdb0</td></tr>
-</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -126,270 +75,15 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.CamapignUIVerificationTest.CampaignAndTrackingNumberPage_UI_Verification()'><b>CampaignAndTrackingNumberPage_UI_Verification</b><br>Test class: tests.CamapignUIVerificationTest</td>
+<td title='tests.TrackingNumberTest.IVRCreation()'><b>IVRCreation</b><br>Test class: tests.TrackingNumberTest</td>
 <td></td>
-<td>8</td>
-<td>tests.CamapignUIVerificationTest@641147d0</td></tr>
+<td>91</td>
+<td>tests.TrackingNumberTest@6b0c2d26</td></tr>
 <tr>
-<td title='tests.TrackingNumberTest.GeoRouteTrakingNumberCreation()'><b>GeoRouteTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>84</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.GeoRouteTrakingNumberDeletion()'><b>GeoRouteTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
+<td title='tests.TrackingNumberTest.IVRDeletion()'><b>IVRDeletion</b><br>Test class: tests.TrackingNumberTest</td>
 <td></td>
 <td>6</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.LoginTest.UIVerification_forgot_passowrd_page()'><b>UIVerification_forgot_passowrd_page</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>3</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.CamapignUIVerificationTest.allColumnsDisplayed()'><b>allColumnsDisplayed</b><br>Test class: tests.CamapignUIVerificationTest</td>
-<td></td>
-<td>74</td>
-<td>tests.CamapignUIVerificationTest@641147d0</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaignBuilderPage_UI_Verification()'><b>campaignBuilderPage_UI_Verification</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>8</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_Creation_With_externalID()'><b>campaign_Creation_With_externalID</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>13</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_Creation_Without_externalID()'><b>campaign_Creation_Without_externalID</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>11</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_deletion_With_externalID()'><b>campaign_deletion_With_externalID</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>5</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_deletion_With_futureStartDate()'><b>campaign_deletion_With_futureStartDate</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>5</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_deletion_With_futureStartDateAndFutureEndDate()'><b>campaign_deletion_With_futureStartDateAndFutureEndDate</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>4</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_deletion_Without_externalID()'><b>campaign_deletion_Without_externalID</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>4</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_updation_With_externalID()'><b>campaign_updation_With_externalID</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>12</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.campaign_updation_Without_externalID()'><b>campaign_updation_Without_externalID</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>16</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.createCampaignWithFutureStartDateAndFutureEndDate()'><b>createCampaignWithFutureStartDateAndFutureEndDate</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>14</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.createCampaignWithFutureStartDateAndNeverEndDate()'><b>createCampaignWithFutureStartDateAndNeverEndDate</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>13</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.createCampaignWithPastTime()'><b>createCampaignWithPastTime</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>9</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.defaultCampaignOwnerValidation()'><b>defaultCampaignOwnerValidation</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>6</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CamapignUIVerificationTest.defaultColumnsDisplayed()'><b>defaultColumnsDisplayed</b><br>Test class: tests.CamapignUIVerificationTest</td>
-<td></td>
-<td>9</td>
-<td>tests.CamapignUIVerificationTest@641147d0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.hangupTrakingNumberCreation()'><b>hangupTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>67</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.hangupTrakingNumberDeletion()'><b>hangupTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>12</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.LoginTest.login_page_UI_Verification()'><b>login_page_UI_Verification</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>1</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.login_with_blank_password()'><b>login_with_blank_password</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>0</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.login_with_blank_username()'><b>login_with_blank_username</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>0</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.login_with_blank_username_and_password()'><b>login_with_blank_username_and_password</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>0</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.login_with_deleted_user()'><b>login_with_deleted_user</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>0</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.login_with_inactive_user()'><b>login_with_inactive_user</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>0</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.login_with_invalidate_cred()'><b>login_with_invalidate_cred</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>2</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.LoginTest.next_button_with_no_email_ID()'><b>next_button_with_no_email_ID</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>0</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.numberPoolCreation()'><b>numberPoolCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>95</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.numberPoolDeletion()'><b>numberPoolDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>6</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.numberPoolUpdation()'><b>numberPoolUpdation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>8</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.outboundTrakingNumberCreation()'><b>outboundTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>73</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.outboundTrakingNumberDeletion()'><b>outboundTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>11</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.percentTrakingNumberCreation()'><b>percentTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>84</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.percentTrakingNumberDeletion()'><b>percentTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>6</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.LoginTest.rememeber_me_functinonality()'><b>rememeber_me_functinonality</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>6</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.reserveNumberCreation()'><b>reserveNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>22</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.reserveNumberDeletion()'><b>reserveNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>6</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.reserveNumberUpdation()'><b>reserveNumberUpdation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>7</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.LoginTest.reset_password()'><b>reset_password</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>1</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.scheduleTrakingNumberCreation()'><b>scheduleTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>86</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.scheduleTrakingNumberDeletion()'><b>scheduleTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>6</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.simpleTrakingNumberCreation()'><b>simpleTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>84</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.simpleTrakingNumberDeletion()'><b>simpleTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>6</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.simpleTrakingNumberUpdation()'><b>simpleTrakingNumberUpdation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>7</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.trakingNumberPageUIVerification()'><b>trakingNumberPageUIVerification</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>146</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.HomeTest.ui_verification()'><b>ui_verification</b><br>Test class: tests.HomeTest</td>
-<td></td>
-<td>9</td>
-<td>tests.HomeTest@3d3fcdb0</td></tr>
-<tr>
-<td title='tests.CampaignTests.updateCampaignWithFutureStartDateAndFutureEndDate()'><b>updateCampaignWithFutureStartDateAndFutureEndDate</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>13</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.CampaignTests.updateCampaignWithFutureStartDateAndNeverEndDate()'><b>updateCampaignWithFutureStartDateAndNeverEndDate</b><br>Test class: tests.CampaignTests</td>
-<td></td>
-<td>12</td>
-<td>tests.CampaignTests@6e38921c</td></tr>
-<tr>
-<td title='tests.LoginTest.validLogin()'><b>validLogin</b><br>Test class: tests.LoginTest</td>
-<td></td>
-<td>1</td>
-<td>tests.LoginTest@6b0c2d26</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.voicemailTrakingNumberCreation()'><b>voicemailTrakingNumberCreation</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>67</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
-<tr>
-<td title='tests.TrackingNumberTest.voicemailTrakingNumberDeletion()'><b>voicemailTrakingNumberDeletion</b><br>Test class: tests.TrackingNumberTest</td>
-<td></td>
-<td>13</td>
-<td>tests.TrackingNumberTest@64d7f7e0</td></tr>
+<td>tests.TrackingNumberTest@6b0c2d26</td></tr>
 </table><p>
 </body>
 </html>

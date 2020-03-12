@@ -160,7 +160,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	//IVR
 	@FindBy(xpath="(//label[text()='Play a voice prompt']//parent::div//following-sibling::div//textarea)[1]")
-	private static WebElement default_play_voice_prompt_ivr;	
+	private static WebElement default_play_voice_prompt_textbox_ivr;	
 
 	@FindBy(xpath="(//label[text()='Play a voice prompt'])[1]//parent::div//following-sibling::div//a[1]")
 	private static WebElement default_play_voice_prompt_ivr_add_file_button;	
@@ -169,15 +169,15 @@ public class TrackingNumberBuilderPage extends TestBase {
 	private static WebElement default_play_voice_prompt_ivr_play_button;	
 	
 	@FindBy(xpath="//label[text()='Play a voice prompt on selection']//parent::div//following-sibling::div//textarea")
-	private static List<WebElement> play_voice_prompt_ivr;		
+	private static List<WebElement> play_voice_prompt_textbox_ivr;		
 	
 	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
 	private static List<WebElement> keypress_textbox;	
 	
-	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
+	@FindBy(xpath="//label[contains(text(),'Destination:')]//parent::div//following-sibling::div//input")
 	private static List<WebElement> destination_textbox;	
 	
-	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
+	@FindBy(xpath="//label[contains(text(),'Action')]//parent::div//following-sibling::div//select")
 	private static List<WebElement> routes_listbox;	
 	
 	@FindBy(xpath="//label[contains(text(),'Ring to Phone Number')][@class='ng-binding']//parent::div//following-sibling::div[@class='col-lg-4 col-md-4 col-sm-12']//input")
@@ -185,9 +185,23 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[text()='Play whisper message before connecting']//parent::div//following-sibling::div//md-checkbox")
 	private static List<WebElement> play_whisper_checkbox;		
+
+	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[text()='Play whisper message before connecting']//parent::div//following-sibling::div//md-checkbox//parent::div//following-sibling::div//textarea")
+	private static List<WebElement> play_whisper_textkbox;
 	
 	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[contains(text(),'Activate Voicemail ')]//parent::div//following-sibling::div[@class='col-lg-1 col-md-1 col-sm-12 mt20 checkbox']//md-checkbox")
-	private static List<WebElement> voicemail_checkbox;		
+	private static List<WebElement> voicemail_checkboxes_level_1;		
+	
+	@FindBy(xpath="//div[@class='row secondIvr mb20 ng-scope']//div[@class=' col-lg-2 col-md-2 col-sm-12 mt15']//label[contains(text(),'Activate Voicemail ')]")
+	private static List<WebElement> voicemail_checkboxes_level_2;
+	
+	@FindBy(xpath="//a[@class='btn btn-primary btn-sm pull-left']")
+	private static WebElement add_keypress_button;			
+	
+	@FindBy(xpath="//label[text()='Go Back to the previous menu']//parent::div//preceding-sibling::div//input")
+	private static WebElement go_back_button;	
+	
+	
 	
 	
 	
@@ -843,7 +857,130 @@ public class TrackingNumberBuilderPage extends TestBase {
         Select routes=new Select(route_calls_by_dropdown); 
         routes.selectByVisibleText("Interactive Voice Response");
         
-        ,,
+        default_play_voice_prompt_textbox_ivr.sendKeys("default prompt");
+        
+        //keypress
+        for(int i=0;i<keypress_textbox.size();i++){
+        	if(i==(keypress_textbox.size()-1)){
+        		keypress_textbox.get(i).sendKeys(String.valueOf(Util.generateRandomNumber()).substring(2, 5));
+        	}
+        }
+        
+        
+        //destination
+        for(int i=0;i<destination_textbox.size();i++){
+        	if(i==(destination_textbox.size()-1)){
+        		destination_textbox.get(i).sendKeys("keypress-"+String.valueOf(Util.generateRandomNumber()).substring(0, 3));
+        	}
+        }
+        
+        
+        //voice prompt
+        for(int i=0;i<play_voice_prompt_textbox_ivr.size();i++){
+        	if(i==(play_voice_prompt_textbox_ivr.size()-1)){
+        		play_voice_prompt_textbox_ivr.get(i).sendKeys("test prompt");
+        	}
+        }
+        //ring to phone number
+        
+        for(int i=0;i<ringto_textbox.size();i++){
+        	if(i==(ringto_textbox.size()-1)){
+        		ringto_textbox.get(i).sendKeys("1234567891");
+        	}
+        }
+       
+        //whisper message checkbox
+        for(int i=0;i<play_whisper_checkbox.size();i++){
+        	if(i==(play_whisper_checkbox.size()-1)){
+        		Util.click(play_whisper_checkbox.get(i));		;
+        	}
+        }
+        
+        //whisper message textbox
+        for(int i=0;i<play_whisper_checkbox.size();i++){
+        	if(i==(play_whisper_checkbox.size()-1)){
+        		play_whisper_checkbox.get(i).sendKeys("test whisper");
+        	}
+        }
+        
+        //voicemail checkbox
+        for(int i=0;i<voicemail_checkboxes_level_1.size();i++){
+        	if(i==(voicemail_checkboxes_level_1.size()-1)){
+        		Util.click(voicemail_checkboxes_level_1.get(i));		;
+        	}
+        }
+        
+      //ADVANCED SECTION
+        call_value_textbox.clear();
+    	call_value_textbox.sendKeys("32");
+    	repeat_interval_textbox.clear();
+    	repeat_interval_textbox.sendKeys("72");
+    	Select select=new Select(voicemail_dropdown);
+    	select.selectByValue("4");
+    	configure_voicemail_greetings_textbox.sendKeys("Please record your voicemail");
+    	Util.click(webhook_checkbox);
+        Select we=new Select(webhook_dropdown);
+        we.selectByVisibleText(webhook);
+        
+        
+        //DNI SECTION
+        Util.click(dynamic_number_checkbox);
+        hostDomain_textbox.clear();
+        hostDomain_textbox.sendKeys("*.*");
+    	
+        Select select1 =new Select(reffering_website_dropdown);
+    	select1.selectByVisibleText("Any");
+        
+    	Select select2=new Select(dni_type_dropdown);
+    	select2.selectByValue("url");
+    	
+    	htmlclass_textbox.sendKeys("lmc_track");
+    	
+   
+    	//CUSTOM SOURCE SECTION
+    	Util.scrollFunction(save_button);
+   
+    	Select cs1=new Select(custom_source1_dropdown);
+//    	cs1.selectByVisibleText(custom_source1); 
+    	cs1.selectByIndex(1);
+
+    	Select cs2=new Select(custom_source2_dropdown);
+//    	cs2.selectByVisibleText(custom_source2);
+        cs2.selectByIndex(1); 
+    	
+        Select cs3=new Select(custom_source3_dropdown);
+//    	cs3.selectByVisibleText(custom_source3);
+    	cs3.selectByIndex(1);
+    	
+    	Select cs4=new Select(custom_source4_dropdown);
+//    	cs4.selectByVisibleText(custom_source4);
+    	cs4.selectByIndex(1);
+    	
+    	Select cs5=new Select(custom_source5_dropdown);
+//    	cs5.selectByVisibleText(custom_source5);
+    	cs5.selectByIndex(1);
+    	
+    	
+    	//INSTANT INSIGHTS SECTION
+    	Util.click(instant_insights_checkbox);
+    	voice_prompt_for_call_outcome_textbox.sendKeys("test tn");
+    	
+    	sale_amount_voice_prompt_textbox.sendKeys("test sale");
+    	
+    
+    	save_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+
+    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
+    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
+//      set.add(dnis);
+//      System.out.println("ivr "+dnis);
+    	list.add(dnis);
+       
+        
          
     }
     
@@ -1884,7 +2021,7 @@ public void createVoicemailRoute(String tracking_number_name) {
     	Iterator<String> its = set.iterator();
 
 		for( String one:list){
-    		System.out.println(one);
+//    		System.out.println(one);
     		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
 		}
     	
