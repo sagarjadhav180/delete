@@ -158,7 +158,8 @@ public class TrackingNumberBuilderPage extends TestBase {
 	private static WebElement ring_to_number_for_schedule_days;
 	
 	
-	//IVR
+    //------------------------IVR ----------------------------------------------------------------------------------------------
+	
 	@FindBy(xpath="(//label[text()='Play a voice prompt']//parent::div//following-sibling::div//textarea)[1]")
 	private static WebElement default_play_voice_prompt_textbox_ivr;	
 
@@ -171,7 +172,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="//label[text()='Play a voice prompt on selection']//parent::div//following-sibling::div//textarea")
 	private static List<WebElement> play_voice_prompt_textbox_ivr;		
 	
-	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//div[@class='col-sm-2']//input")
+	@FindBy(xpath="//label[contains(text(),'Destination:')]//parent::div//preceding-sibling::div//input")
 	private static List<WebElement> keypress_textbox;	
 	
 	@FindBy(xpath="//label[contains(text(),'Destination:')]//parent::div//following-sibling::div//input")
@@ -187,23 +188,24 @@ public class TrackingNumberBuilderPage extends TestBase {
 	private static List<WebElement> play_whisper_checkbox;		
 
 	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[text()='Play whisper message before connecting']//parent::div//following-sibling::div//md-checkbox//parent::div//following-sibling::div//textarea")
-	private static List<WebElement> play_whisper_textkbox;
+	private static List<WebElement> play_whisper_textbox;
 	
 	@FindBy(xpath="//div[@class='row multilevel mb20 ng-scope']//label[contains(text(),'Activate Voicemail ')]//parent::div//following-sibling::div[@class='col-lg-1 col-md-1 col-sm-12 mt20 checkbox']//md-checkbox")
 	private static List<WebElement> voicemail_checkboxes_level_1;		
 	
-	@FindBy(xpath="//div[@class='row secondIvr mb20 ng-scope']//div[@class=' col-lg-2 col-md-2 col-sm-12 mt15']//label[contains(text(),'Activate Voicemail ')]")
+	@FindBy(xpath="//div[@class='row secondIvr mb20 ng-scope']//div[@class=' col-lg-2 col-md-2 col-sm-12 mt15']//label[contains(text(),'Activate Voicemail ')]//parent::div//following-sibling::div//md-checkbox")
 	private static List<WebElement> voicemail_checkboxes_level_2;
+
+	@FindBy(xpath="//label[contains(text(),'Activate Voicemail ')]//parent::div//following-sibling::div//md-checkbox")
+	private static List<WebElement> voicemail_checkboxes_level_common;
 	
 	@FindBy(xpath="//a[@class='btn btn-primary btn-sm pull-left']")
 	private static WebElement add_keypress_button;			
 	
 	@FindBy(xpath="//label[text()='Go Back to the previous menu']//parent::div//preceding-sibling::div//input")
-	private static WebElement go_back_button;	
+	private static List<WebElement> go_back_textbox;	
 	
-	
-	
-	
+//------------------------------------------------------------------------------------------------------------------------
 	
 	@FindBy(xpath="//label[text()='NPA-NXX (Area Code)']//parent::div//following-sibling::div//input")
 	private static WebElement area_code_textbox;
@@ -859,57 +861,17 @@ public class TrackingNumberBuilderPage extends TestBase {
         
         default_play_voice_prompt_textbox_ivr.sendKeys("default prompt");
         
-        //keypress
-        for(int i=0;i<keypress_textbox.size();i++){
-        	if(i==(keypress_textbox.size()-1)){
-        		keypress_textbox.get(i).sendKeys(String.valueOf(Util.generateRandomNumber()).substring(2, 5));
-        	}
-        }
-        
-        
-        //destination
-        for(int i=0;i<destination_textbox.size();i++){
-        	if(i==(destination_textbox.size()-1)){
-        		destination_textbox.get(i).sendKeys("keypress-"+String.valueOf(Util.generateRandomNumber()).substring(0, 3));
-        	}
-        }
-        
-        
-        //voice prompt
-        for(int i=0;i<play_voice_prompt_textbox_ivr.size();i++){
-        	if(i==(play_voice_prompt_textbox_ivr.size()-1)){
-        		play_voice_prompt_textbox_ivr.get(i).sendKeys("test prompt");
-        	}
-        }
-        //ring to phone number
-        
-        for(int i=0;i<ringto_textbox.size();i++){
-        	if(i==(ringto_textbox.size()-1)){
-        		ringto_textbox.get(i).sendKeys("1234567891");
-        	}
-        }
-       
-        //whisper message checkbox
-        for(int i=0;i<play_whisper_checkbox.size();i++){
-        	if(i==(play_whisper_checkbox.size()-1)){
-        		Util.click(play_whisper_checkbox.get(i));		;
-        	}
-        }
-        
-        //whisper message textbox
-        for(int i=0;i<play_whisper_checkbox.size();i++){
-        	if(i==(play_whisper_checkbox.size()-1)){
-        		play_whisper_checkbox.get(i).sendKeys("test whisper");
-        	}
-        }
-        
-        //voicemail checkbox
-        for(int i=0;i<voicemail_checkboxes_level_1.size();i++){
-        	if(i==(voicemail_checkboxes_level_1.size()-1)){
-        		Util.click(voicemail_checkboxes_level_1.get(i));		;
-        	}
-        }
-        
+        //inserting ivr keypress data for level 1
+        ivrKeyperssData();
+        //going to second level
+        goToNextLevel();
+        //inserting ivr keypress data for level 2
+        ivrKeyperssData();
+        //going to third level
+        goToNextLevel();
+        //inserting ivr keypress data for level 3
+        ivrKeyperssData();
+                
       //ADVANCED SECTION
         call_value_textbox.clear();
     	call_value_textbox.sendKeys("32");
@@ -980,12 +942,98 @@ public class TrackingNumberBuilderPage extends TestBase {
 //      System.out.println("ivr "+dnis);
     	list.add(dnis);
        
-        
+            
          
     }
     
-public void createVoicemailRoute(String tracking_number_name) {
-	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    
+    public void ivrKeyperssData(){
+    	 for(int j=1;j<11;j++){
+     	//keypress
+          for(int i=0;i<keypress_textbox.size();i++){
+          	if(i==(keypress_textbox.size()-1)){
+          		keypress_textbox.get(i).sendKeys(String.valueOf(j));
+          	}
+          }
+          
+          
+          //destination
+          for(int i=0;i<destination_textbox.size();i++){
+          	if(i==(destination_textbox.size()-1)){
+          		destination_textbox.get(i).sendKeys("keypress-"+String.valueOf(Util.generateRandomNumber()).substring(0, 3));
+          	}
+          }
+          
+          
+          //voice prompt
+          for(int i=0;i<play_voice_prompt_textbox_ivr.size();i++){
+          	if(i==(play_voice_prompt_textbox_ivr.size()-1)){
+          		play_voice_prompt_textbox_ivr.get(i).sendKeys("test prompt");
+          	}
+          }
+          //ring to phone number
+          
+          for(int i=0;i<ringto_textbox.size();i++){
+          	if(i==(ringto_textbox.size()-1)){
+          		ringto_textbox.get(i).sendKeys("1234567891");
+          	}
+          }
+         
+          //whisper message checkbox
+          for(int i=0;i<play_whisper_checkbox.size();i++){
+          	if(i==(play_whisper_checkbox.size()-1)){
+          		Util.click(play_whisper_checkbox.get(i));		
+          		break;
+          	}
+          }
+          
+          //whisper message textbox
+          for(int i=0;i<play_whisper_textbox.size();i++){
+          	if(i==(play_whisper_textbox.size()-1)){
+          		play_whisper_textbox.get(i).sendKeys("test whisper");
+          	}
+          }
+          
+          //voicemail checkbox
+          for(int i=0;i<voicemail_checkboxes_level_common.size();i++){
+          	if(i==(voicemail_checkboxes_level_common.size()-1)){
+          		Util.click(voicemail_checkboxes_level_common.get(i));		;
+          	}
+          }
+          if(j<10){
+          	add_keypress_button.click();
+          
+          }    
+      }
+    }
+    
+    
+    public void goToNextLevel(){
+          for(int i=0;i<routes_listbox.size();i++){
+              	if(i==(routes_listbox.size()-1)){
+              		
+              		Select select =new Select(routes_listbox.get(i));
+              		select.selectByVisibleText("Interactive Voice Response");
+              		
+              		for(int m=go_back_textbox.size()-1;m>=0;m--){
+              			
+              			if(go_back_textbox.get(m).isDisplayed()){
+              			go_back_textbox.get(m).clear();
+              				go_back_textbox.get(m).sendKeys("99");
+              			}
+                   }
+              		
+              		break;
+                   		
+              	}
+              }  
+      
+    }
+    
+    
+    public void createVoicemailRoute(String tracking_number_name) {
+	
+    wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 	
     Util.scrollFunction(header);  
     add_tracking_number_button.click();

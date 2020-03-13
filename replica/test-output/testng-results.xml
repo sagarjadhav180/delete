@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="145418" started-at="2020-03-12T11:13:37Z" finished-at="2020-03-12T11:16:02Z">
+  <suite name="Automation Suite-1" duration-ms="437426" started-at="2020-03-13T10:36:22Z" finished-at="2020-03-13T10:43:39Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="145418" started-at="2020-03-12T11:13:37Z" finished-at="2020-03-12T11:16:02Z">
+    <test name="chrome test" duration-ms="437426" started-at="2020-03-13T10:36:22Z" finished-at="2020-03-13T10:43:39Z">
       <class name="tests.TrackingNumberTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="setUp" is-config="true" duration-ms="41075" started-at="2020-03-12T16:43:37Z" finished-at="2020-03-12T16:44:18Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="setUp" is-config="true" duration-ms="41473" started-at="2020-03-13T16:06:22Z" finished-at="2020-03-13T16:07:03Z">
           <params>
             <param index="0">
               <value>
@@ -23,15 +23,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="goToCampaignPage" is-config="true" duration-ms="4580" started-at="2020-03-12T16:44:18Z" finished-at="2020-03-12T16:44:22Z">
+        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="goToCampaignPage" is-config="true" duration-ms="3894" started-at="2020-03-13T16:07:03Z" finished-at="2020-03-13T16:07:07Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="IVRCreation()[pri:22, instance:tests.TrackingNumberTest@6b0c2d26]" name="IVRCreation" duration-ms="91480" started-at="2020-03-12T16:44:22Z" finished-at="2020-03-12T16:45:54Z">
+        <test-method status="PASS" signature="IVRCreation()[pri:22, instance:tests.TrackingNumberTest@6b0c2d26]" name="IVRCreation" duration-ms="383750" started-at="2020-03-13T16:07:07Z" finished-at="2020-03-13T16:13:31Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- IVRCreation -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="465" started-at="2020-03-12T16:45:54Z" finished-at="2020-03-12T16:45:54Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="567" started-at="2020-03-13T16:13:31Z" finished-at="2020-03-13T16:13:32Z">
           <params>
             <param index="0">
               <value>
@@ -42,11 +42,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="IVRDeletion()[pri:23, instance:tests.TrackingNumberTest@6b0c2d26]" name="IVRDeletion" duration-ms="6728" started-at="2020-03-12T16:45:54Z" finished-at="2020-03-12T16:46:01Z">
+        <test-method status="PASS" signature="IVRDeletion()[pri:23, instance:tests.TrackingNumberTest@6b0c2d26]" name="IVRDeletion" duration-ms="6663" started-at="2020-03-13T16:13:32Z" finished-at="2020-03-13T16:13:38Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- IVRDeletion -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="91" started-at="2020-03-12T16:46:01Z" finished-at="2020-03-12T16:46:01Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="110" started-at="2020-03-13T16:13:38Z" finished-at="2020-03-13T16:13:38Z">
           <params>
             <param index="0">
               <value>
@@ -57,15 +57,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="cleanUp()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="cleanUp" is-config="true" duration-ms="0" started-at="2020-03-12T16:46:01Z" finished-at="2020-03-12T16:46:01Z">
+        <test-method status="PASS" signature="cleanUp()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="cleanUp" is-config="true" duration-ms="1" started-at="2020-03-13T16:13:38Z" finished-at="2020-03-13T16:13:38Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanUp -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="962" started-at="2020-03-12T16:46:01Z" finished-at="2020-03-12T16:46:02Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="932" started-at="2020-03-13T16:13:38Z" finished-at="2020-03-13T16:13:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="close_connection" is-config="true" duration-ms="7296" started-at="2020-03-12T16:46:02Z" finished-at="2020-03-12T16:46:09Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.TrackingNumberTest@6b0c2d26]" name="close_connection" is-config="true" duration-ms="7216" started-at="2020-03-13T16:13:39Z" finished-at="2020-03-13T16:13:47Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
