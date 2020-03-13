@@ -356,10 +356,10 @@ public class HomePage extends TestBase {
 	//To check Tile count
 	public void tilesCount(){
 		
-		   String endDateToBeUsed = Util.getcurrentdate();
+		   String endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 
 		   
-		   String startDateToBeUsed = Util.getLastDate();
+		   String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-8");
 
 		   
 		   System.out.println("startDateToBeUsed is "+startDateToBeUsed);
