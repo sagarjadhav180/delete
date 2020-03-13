@@ -396,7 +396,7 @@ public class TrackingNumberTest extends TestBase{
 				logger.assignCategory("Tracking number suite");
 				
 				cp=createInstanceCampaignAndTrackingNumberPage();
-			    cp.clickAction("update","SJC-1");
+//			    cp.clickAction("update","SJC-1");
 
 	            tn=createInstance();
 			    int number1 = tests.Util.generateRandomNumber();
@@ -412,12 +412,12 @@ public class TrackingNumberTest extends TestBase{
 		@Test(priority=23)
 		public void IVRDeletion() throws InterruptedException{
 
-					logger=extent.startTest("IVR route number deletion..");
-					logger.assignCategory("Tracking number suite");
+			logger=extent.startTest("IVR route number deletion..");
+			logger.assignCategory("Tracking number suite");
 					    
-				    tn=new TrackingNumberBuilderPage(driver);
-				    tn.clickAction(tracking_number_name, "Delete");
-				    Thread.sleep(2000);
+		    tn=new TrackingNumberBuilderPage(driver);
+		    tn.clickAction(tracking_number_name, "Delete");
+		    Thread.sleep(2000);
 		}
 			
 		@AfterClass

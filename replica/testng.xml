@@ -5,13 +5,12 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="tests.LoginTest"/>
-      <class name="tests.CampaignTests"/>
-      <class name="tests.TestBase"/>
-      <class name="tests.TrackingNumberTest"/>
-      <class name="tests.Call_Logs_Test"/>
       <class name="tests.HomeTest"/>
       <class name="tests.CamapignUIVerificationTest"/>
-      <class name="extentReport.SendEmail"/>
+      
+      <class name="tests.CampaignTests"/>
+      
+      <class name="tests.TrackingNumberTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
