@@ -206,24 +206,17 @@ public class Util extends TestBase{
 	}
 	
 	
-	public static String getcurrentdate(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, -1);
-	    
-		Date todate1 = cal.getTime();
-	    String startdate = dateFormat.format(todate1);
 
-	    System.out.println(startdate);
-	    return startdate;
-	}
 	
-	public static String getLastDate(){
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	public static String getDate(String Format,String days){
+		DateFormat dateFormat = new SimpleDateFormat(Format);
 		
+		System.out.println("--------------------------------------------------------------------------------------------------------");
+        System.out.println("Format "+Format);
+        System.out.println("days "+Integer.valueOf(days));
+		System.out.println("--------------------------------------------------------------------------------------------------------");
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, -8);
+		cal.add(Calendar.DATE, Integer.valueOf(days));
 	    
 		Date todate1 = cal.getTime();
 	    String enddate = dateFormat.format(todate1);
