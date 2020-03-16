@@ -205,16 +205,10 @@ public class Util extends TestBase{
 		return number;
 	}
 	
-	
-
-	
+		
 	public static String getDate(String Format,String days){
 		DateFormat dateFormat = new SimpleDateFormat(Format);
 		
-		System.out.println("--------------------------------------------------------------------------------------------------------");
-        System.out.println("Format "+Format);
-        System.out.println("days "+Integer.valueOf(days));
-		System.out.println("--------------------------------------------------------------------------------------------------------");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, Integer.valueOf(days));
 	    

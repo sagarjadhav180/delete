@@ -80,7 +80,7 @@ public class TrackingNumberTest extends TestBase{
 	//create simple tracking number
      	@Test(priority=1)
 		public void simpleTrakingNumberCreation() throws InterruptedException{
-			logger=extent.startTest("Tracking number creation..");
+			logger=extent.startTest("Simple Tracking number creation..");
 			logger.assignCategory("Tracking number suite");
 			
 //		    cp.clickAction("update","SJC-1");
@@ -97,7 +97,7 @@ public class TrackingNumberTest extends TestBase{
 		//edit simple tracking number
 		@Test(priority=2)
 		public void simpleTrakingNumberUpdation() throws InterruptedException{
-			logger=extent.startTest("Tracking number update..");
+			logger=extent.startTest("Simple Tracking number update..");
 			logger.assignCategory("Tracking number suite");
 			    
 		    tn=createInstance();
@@ -111,7 +111,7 @@ public class TrackingNumberTest extends TestBase{
 		//delete simple tracking number
 		@Test(priority=3)
 		public void simpleTrakingNumberDeletion() throws InterruptedException{
-			logger=extent.startTest("Tracking number deletion..");
+			logger=extent.startTest("Simple Tracking number deletion..");
 			logger.assignCategory("Tracking number suite");
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
@@ -392,7 +392,7 @@ public class TrackingNumberTest extends TestBase{
 		 //IVR route creation
 		@Test(priority=22)
 		public void IVRCreation() throws InterruptedException{
-				logger=extent.startTest("IVR r creation..");
+				logger=extent.startTest("IVR route creation..");
 				logger.assignCategory("Tracking number suite");
 				
 				cp=createInstanceCampaignAndTrackingNumberPage();
