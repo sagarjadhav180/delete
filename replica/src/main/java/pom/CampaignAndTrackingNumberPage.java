@@ -240,11 +240,8 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	
 	public CampaignAndTrackingNumberPage(WebDriver driver){
-		
 		PageFactory.initElements(driver, this);
-        
-		
-	}
+      }
 
 	
 	public void clickAction(String buttonName,String campaignToBeEdited) throws InterruptedException{
@@ -418,22 +415,17 @@ public class CampaignAndTrackingNumberPage extends TestBase
  					System.out.println(Column_Picker_options_checkbox_tocheck.get(i));
                     Util.Action().moveToElement(Column_Picker_options_checkbox_tocheck.get(i)).click().perform();
 // 					break;
-                               
- 				}
+           	}
  				
+	      }    
 	    	
-	    	
-	    }
-
-           
 	    	i++; 
 //	    break;
 	    }
 
 		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)");
 	    Util.click(Column_Picker_button);
-	    
-	    
+	   
 	}
 	
 
