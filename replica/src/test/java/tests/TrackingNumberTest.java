@@ -22,7 +22,7 @@ public class TrackingNumberTest extends TestBase{
 	TrackingNumberBuilderPage tn;
 	CampaignAndTrackingNumberPage cp;
 	
-	//navigating to Campaign builder page
+	    //navigating to Campaign builder page
 		@BeforeClass
 		public void goToCampaignPage() throws IOException, InterruptedException{
 			
