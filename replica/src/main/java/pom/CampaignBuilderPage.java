@@ -23,7 +23,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import tests.TestBase;
 import tests.Util;
 
-public class campaignBuilderPage extends TestBase {
+public class CampaignBuilderPage extends TestBase {
 
 	//labels
 	String[] all_labels={"Campaign Name","Campaign External ID","Campaign Owner","Active?","Start Date and Time (ET)","End Date and Time (ET)"};
@@ -147,7 +147,7 @@ public class campaignBuilderPage extends TestBase {
 	
 	
 	
-	public campaignBuilderPage(WebDriver driver,WebDriverWait wait1){
+	public CampaignBuilderPage(WebDriver driver,WebDriverWait wait1){
 		PageFactory.initElements(driver, this);
 		wait=wait1;
 	}
