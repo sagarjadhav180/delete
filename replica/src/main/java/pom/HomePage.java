@@ -115,6 +115,15 @@ public class HomePage extends TestBase {
 		
 	}
 	
+	public void click_subLink(String linkToBeClicked){
+		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
+			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
+				left_hand_navigation_bar_sub_links.get(i).click();
+				break;
+			}
+		}
+	}
+	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
 		
 		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
