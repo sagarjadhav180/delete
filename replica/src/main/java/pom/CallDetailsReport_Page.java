@@ -229,8 +229,8 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "verifying if email_button is displayed");
 		softassert.assertTrue(email_button.isDisplayed(),"email_button is not displayed or locator changed");
 			
-	}
-	
+	}  
+
 	public void pagination(){
 
 		//verifying if all buttons are displayed in pagination toolbox 
