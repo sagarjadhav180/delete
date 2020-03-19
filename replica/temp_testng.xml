@@ -8,15 +8,8 @@
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
 		<classes>
 
-       <class name="tests.LoginTest"/>
-      <class name="tests.HomeTest"/>
-      <class name="tests.CamapignUIVerificationTest"/>
-      
-      <class name="tests.CampaignTests"/>
-      
-      <class name="tests.TrackingNumberTest"/>
+       <class name="tests.CallDetailReportTest"/>
 
-      
 		</classes>
 	</test>
 		
