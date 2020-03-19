@@ -220,20 +220,19 @@ public class Util extends TestBase{
 		
 	}
 	
-	
 	public static JavascriptExecutor getJavascriptExecutor(){
 		return jse;
 		
 	}
 
 
-//	public static int getDate() {
-//		
-//		Date date=new Date();
-//		DateFormat dateFormat = new SimpleDateFormat();
-//		int currentDate = date.getDate();
-//		return currentDate;
-//	}
+	public static int getDate() {
+		
+		Date date=new Date();
+		DateFormat dateFormat = new SimpleDateFormat();
+		int currentDate = date.getDate();
+		return currentDate;
+	}
 	
 //	public static void waitTillPageLoad(){
 //	    wait.until(jse.executeScript("return document.readyState").equals("complete"));
