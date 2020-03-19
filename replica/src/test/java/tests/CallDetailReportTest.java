@@ -73,6 +73,16 @@ public class CallDetailReportTest extends TestBase{
 		cdr=CallDetailsReport_Page.instance();
 		cdr.tableCallCount();
 	} 
+
+	//To verify by default displayed column picker options
+	@Test(priority=5)
+	public void defaultColumnPickerOptions(){
+		logger=extent.startTest("default column picker options Test");
+		logger.assignCategory("Call Details Test");
+			
+		cdr=CallDetailsReport_Page.instance();
+		cdr.allColumnPickerOptions();
+	}
 	
 	//loging out -tear down
 	@AfterClass

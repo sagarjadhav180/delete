@@ -38,7 +38,7 @@ public class CallDetailsReport_Page extends TestBase{
     @FindBy(xpath="//div[6]//button[1][text()='OK']")
 	private static WebElement ok_button_dateRange_filter;
 
-    @FindBy(xpath="//div[6]//button[2][text()='Cancel']")
+    @FindBy(xpath="//button[2][text()='Cancel']")
 	private static WebElement cancel_button_dateRange_filter;
     
     String[] expected_dateRange_filter_elements={"Today","Yesterday","Last 7 Days","Last 30 Days","This Month","Last Month","Custom Range"};
@@ -64,7 +64,7 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-default btn-block btn-adv'][text()='Advanced Filter']")
 	private static WebElement advanced_filter_button;	
 	
-	@FindBy(xpath="//button[@class='btn btn-block btn-default pulse dropdown-toggle']")
+	@FindBy(xpath="//i[@class='fa fa-columns']")
 	private static WebElement column_Picker_button;
 
 	@FindBy(xpath="//table[@id='calldetailstable']//thead//tr//th")
@@ -127,7 +127,7 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//ul[@id='columnpicker']//li//input")
 	private static List<WebElement> column_picker_options_checkboxes;
 
-	String[] expected_all_column_picker_options={"Date/Time","Group Name","Campaign","Ad Source","Caller ID","Tracking Number","Destination Name | No.","Duration","Disposition","Line Type","Agent","Actions"};
+	String[] expected_all_column_picker_options={"Date/Time","Group Name","Campaign","Ad Source","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Caller ID","Tracking Number","Hunt Type","Number Type","Destination Name | No.","Duration","Caller Name","Company Name","Address","City","State/Province","Disposition","Line Type","Sent to Voicemail","Agent","Actions"};
 	
 	String[] expected_default_checked_column_picker_options={"Date/Time","Group Name","Campaign","Ad Source","Caller ID","Tracking Number","Destination Name | No.","Duration","Disposition","Line Type","Agent","Actions"};
 	
@@ -172,7 +172,7 @@ public class CallDetailsReport_Page extends TestBase{
 		}
 
 
-		Util.click(dateRange_filter);
+		Util.click(cancel_button_dateRange_filter);
 		Thread.sleep(2000);
 		
 		logger.log(LogStatus.INFO, "verifying if scheduleReport_button is displayed");
@@ -228,7 +228,7 @@ public class CallDetailsReport_Page extends TestBase{
 		
 		logger.log(LogStatus.INFO, "verifying if email_button is displayed");
 		softassert.assertTrue(email_button.isDisplayed(),"email_button is not displayed or locator changed");
-			
+		softassert.assertAll();	
 	}  
 
 	public void paginationButtons(){
@@ -244,7 +244,7 @@ public class CallDetailsReport_Page extends TestBase{
 		softassert.assertTrue(first_button.isDisplayed(),"first button is not present or locator changed");	
 		logger.log(LogStatus.INFO, "verifying if last_button is present");
 		softassert.assertTrue(last_button.isDisplayed(),"last button is not present or locator changed");	
-		
+		softassert.assertAll();
 
 	}
 	
@@ -261,7 +261,7 @@ public class CallDetailsReport_Page extends TestBase{
 
 		logger.log(LogStatus.INFO, "verifying count in  pagination toolbox");
 		softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
-				
+		softassert.assertAll();		
 
 	}
 	
@@ -277,8 +277,23 @@ public class CallDetailsReport_Page extends TestBase{
 				
 		logger.log(LogStatus.INFO, "verifying count of listed calls");
 		softassert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
+		softassert.assertAll();
 	}
 	
-	
+	public void allColumnPickerOptions(){
+		Util.click(column_Picker_button);
+		
+		for(int i=0;i<all_actual_column_picker_options_labels.size();i++){
+			for(int j=0;j<expected_all_column_picker_options.length;j++){
+				
+				if(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j])){
+					logger.log(LogStatus.INFO, "Verifying if "+expected_all_column_picker_options[j]+" is present ");
+					softassert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
+				}
+			}
+		}
+		softassert.assertAll();
+		Util.click(column_Picker_button);
+	}
 	
 }
