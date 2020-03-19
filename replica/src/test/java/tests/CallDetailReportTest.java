@@ -44,16 +44,35 @@ public class CallDetailReportTest extends TestBase{
 	    cdr.UIVerification();
 	}
 	
+	//To verify pagination toolbox call count
 	@Test(priority=2)
-	public void pagination(){
-		logger=extent.startTest("pagination Test");
+	public void paginationUI(){
+	    logger=extent.startTest("pagination toolbox UI Test");
+		logger.assignCategory("Call Details Test");
+			
+		cdr=CallDetailsReport_Page.instance();
+		cdr.paginationButtons();
+	}
+	
+	//To verify pagination toolbox call count
+	@Test(priority=3)
+	public void paginationCount(){
+		logger=extent.startTest("pagination toolbox call count Test");
 		logger.assignCategory("Call Details Test");
 		
 		cdr=CallDetailsReport_Page.instance();
-		cdr.pagination();
+		cdr.paginationCallCount();
 	}
 	  
-	 
+	//To verify table call count
+	@Test(priority=4)
+	public void tableCount(){
+		logger=extent.startTest("table call count Test");
+		logger.assignCategory("Call Details Test");
+			
+		cdr=CallDetailsReport_Page.instance();
+		cdr.tableCallCount();
+	} 
 	
 	//loging out -tear down
 	@AfterClass

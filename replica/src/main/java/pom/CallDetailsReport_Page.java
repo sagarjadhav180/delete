@@ -231,7 +231,7 @@ public class CallDetailsReport_Page extends TestBase{
 			
 	}  
 
-	public void pagination(){
+	public void paginationButtons(){
 
 		//verifying if all buttons are displayed in pagination toolbox 
 		logger.log(LogStatus.INFO, "verifying presence of buttons in pagination toolbox");
@@ -246,8 +246,11 @@ public class CallDetailsReport_Page extends TestBase{
 		softassert.assertTrue(last_button.isDisplayed(),"last button is not present or locator changed");	
 		
 
+	}
+	
+	public void paginationCallCount(){
 		//verification of count in pagination toolbox	
-		String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
@@ -255,15 +258,27 @@ public class CallDetailsReport_Page extends TestBase{
 		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("countOnUI_pagination is "+countOnUI_pagination);
-		System.out.println("table_call_count is "+table_call_count.size());
+
 		logger.log(LogStatus.INFO, "verifying count in  pagination toolbox");
 		softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
-		
+				
+
+	}
+	
+	public void tableCallCount(){
+		//verification of count in pagination toolbox	
+	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+
+		System.out.println("dbCount is "+dbCount);
+		System.out.println("table_call_count is "+table_call_count.size());
+				
 		logger.log(LogStatus.INFO, "verifying count of listed calls");
 		softassert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
 	}
 	
-
 	
 	
 }
