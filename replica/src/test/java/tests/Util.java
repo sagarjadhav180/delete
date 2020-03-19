@@ -213,10 +213,10 @@ public class Util extends TestBase{
 		cal.add(Calendar.DATE, Integer.valueOf(days));
 	    
 		Date todate1 = cal.getTime();
-	    String enddate = dateFormat.format(todate1);
+	    String date = dateFormat.format(todate1);
 
-	    System.out.println(enddate);
-	    return enddate;
+	    System.out.println(date);
+	    return date;
 		
 	}
 	
@@ -227,16 +227,13 @@ public class Util extends TestBase{
 	}
 
 
-	public static int getDate() {
-		
-		Date date=new Date();
-		DateFormat dateFormat = new SimpleDateFormat();
-		int currentDate = date.getDate();
-		return currentDate;
-		
-		
-		
-	}
+//	public static int getDate() {
+//		
+//		Date date=new Date();
+//		DateFormat dateFormat = new SimpleDateFormat();
+//		int currentDate = date.getDate();
+//		return currentDate;
+//	}
 	
 //	public static void waitTillPageLoad(){
 //	    wait.until(jse.executeScript("return document.readyState").equals("complete"));
