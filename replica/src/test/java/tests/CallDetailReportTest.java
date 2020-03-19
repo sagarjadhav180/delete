@@ -84,7 +84,24 @@ public class CallDetailReportTest extends TestBase{
 		cdr.allColumnPickerOptions();
 	}
 	
-	//loging out -tear down
+	@Test(priority=6)
+	public void defaultColumnsDisplayed(){
+		logger=extent.startTest("default columns Test");
+		logger.assignCategory("Call Details Test");
+			
+		cdr=CallDetailsReport_Page.instance();
+		cdr.defaultColumns();
+	}
+	
+	@Test(priority=7)
+	public void allColumnPickerCheckboxesClickable(){
+		logger=extent.startTest("Enability of all column picker checkboxes");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.allColumnPickerCheckboxes();
+	}
+	
+	//logging out -tear down
 	@AfterClass
 	public void tearDown() throws IOException{
 		LoginPage lp=new LoginPage(driver);

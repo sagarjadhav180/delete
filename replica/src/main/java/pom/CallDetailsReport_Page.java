@@ -16,12 +16,9 @@ import tests.Util;
 
 public class CallDetailsReport_Page extends TestBase{
 
-	
     SoftAssert softassert=new SoftAssert();
-
 	String org_unit_id = "70045";
-	
-	
+		
     @FindBy(xpath="//h1[contains(text(),'Call Details')]")
 	private static WebElement callDetails_header;
 	
@@ -199,21 +196,6 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "Verifying if column_Picker_button is present");
 		softassert.assertTrue(column_Picker_button.isDisplayed(),"column_Picker_button is not displayed or locator changed");
 		
-
-		logger.log(LogStatus.INFO, "verifying column names in call detail table");
-		
-		for(int i=0;i<actual_column_names.size();i++){
-			
-			for(int j=0;j<expected_column_names.length;j++){
-				if(actual_column_names.get(i).getText().equals(expected_column_names[j])){
-					logger.log(LogStatus.INFO, "verifying if "+expected_column_names[j]+" is displayed");
-					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_column_names[j]),"column "+expected_column_names[j]+" is not present");
-					break;
-				}
-			}
-		}
-
-		
 		logger.log(LogStatus.INFO, "verifying play_call_button is present");
 		softassert.assertTrue(play_call_button.isDisplayed(),"play_call_button is not displayed or locator changed");
         
@@ -294,6 +276,32 @@ public class CallDetailsReport_Page extends TestBase{
 		}
 		softassert.assertAll();
 		Util.click(column_Picker_button);
+	}
+	
+	public void defaultColumns(){
+	
+        logger.log(LogStatus.INFO, "verifying column names in call detail table");
+		
+		for(int i=0;i<actual_column_names.size();i++){
+			
+			for(int j=0;j<expected_column_names.length;j++){
+				if(actual_column_names.get(i).getText().equals(expected_column_names[j])){
+					logger.log(LogStatus.INFO, "verifying if "+expected_column_names[j]+" is displayed");
+					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_column_names[j]),"column "+expected_column_names[j]+" is not present");
+					break;
+				}
+			}
+		}
+	}
+	
+	public void allColumnPickerCheckboxes(){
+		
+		for(int i=0;i<column_picker_options_checkboxes.size();i++){
+			
+			logger.log(LogStatus.INFO, "verifying if "+column_picker_options_checkboxes.get(i)+" is enabled");
+			softassert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),column_picker_options_checkboxes.get(i) +" is not enabled");
+			
+		}
 	}
 	
 }
