@@ -91,6 +91,7 @@ public class CallDetailReportTest extends TestBase{
 			
 		cdr=CallDetailsReport_Page.instance();
 		cdr.defaultColumns();
+		
 	}
 	
 	@Test(priority=7)
@@ -99,6 +100,15 @@ public class CallDetailReportTest extends TestBase{
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
 		cdr.allColumnPickerCheckboxes();
+	}
+	
+	@Test(priority=8)
+	public void columnPickerFeature(){
+		logger=extent.startTest("Column Picker feature");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.checkAllColumnPickerOptions();
+		cdr.allColumns();
 	}
 	
 	//logging out -tear down

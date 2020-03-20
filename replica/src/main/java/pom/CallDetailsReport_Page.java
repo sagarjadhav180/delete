@@ -292,16 +292,56 @@ public class CallDetailsReport_Page extends TestBase{
 				}
 			}
 		}
+		softassert.assertAll();
 	}
+	
+	public void allColumns(){
+		
+        logger.log(LogStatus.INFO, "verifying column names in call detail table");
+		
+		for(int i=0;i<actual_column_names.size();i++){
+			
+			for(int j=0;j<expected_all_column_picker_options.length;j++){
+
+	
+				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
+					System.out.println(actual_column_names.get(i).getText());
+					System.out.println(expected_all_column_picker_options[j]);
+					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
+					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
+					break;					
+				}
+
+			}
+		}
+		softassert.assertAll();
+	}
+	
+	
 	
 	public void allColumnPickerCheckboxes(){
 		
+		Util.click(column_Picker_button);
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
 			
 			logger.log(LogStatus.INFO, "verifying if "+column_picker_options_checkboxes.get(i)+" is enabled");
 			softassert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),column_picker_options_checkboxes.get(i) +" is not enabled");
 			
 		}
+		softassert.assertAll();
+		Util.click(column_Picker_button);
+	}
+	
+	public void checkAllColumnPickerOptions(){
+		
+		Util.click(column_Picker_button);
+		for(int i=0;i<column_picker_options_checkboxes.size();i++){
+			
+			if(!(column_picker_options_checkboxes.get(i).isSelected())){
+				Util.click(column_picker_options_checkboxes.get(i));
+			}
+		}
+		Util.click(column_Picker_button);
 	}
 	
 }
