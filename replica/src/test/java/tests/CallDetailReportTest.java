@@ -111,6 +111,15 @@ public class CallDetailReportTest extends TestBase{
 		cdr.allColumns();
 	}
 	
+	@Test(priority=9)
+	public void advancedFilterUI(){
+		
+		logger=extent.startTest("Advanced Filter section UI");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.advancedFilter();
+	}
+	
 	//logging out -tear down
 	@AfterClass
 	public void tearDown() throws IOException{

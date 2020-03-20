@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -105,9 +106,11 @@ public class CallDetailsReport_Page extends TestBase{
 
 	@FindBy(xpath="//div[@class='advancedf']//select[1]")
 	private static WebElement include_exclude_listbox;
+	String[] expected_include_exclude_listbox={"Include","Exclude"};
 	
-	@FindBy(xpath="//div[@class='advancedf']//select[1]")
+	@FindBy(xpath="//div[@class='advancedf']//select[2]")
 	private static WebElement advance_filter_elements_listbox;
+	String[] expected_advance_filter_elements={"Call ID","Date","Group Name","Campaign Name","Ad Source","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Caller ID","Tracking Number","Destination Name","Destination Number","Duration","Route Name","Tag","Caller/Company Name","Address","City","State/Province","Zip/Postal Code","Disposition","Line Type","Sent to Voicemail","Hunt Type","Tracking Number Type"};
 
 	@FindBy(xpath="//button[@class='btn btn-gray']")
 	private static WebElement add_advance_filter_button;
@@ -305,8 +308,7 @@ public class CallDetailsReport_Page extends TestBase{
 
 	
 				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
-					System.out.println(actual_column_names.get(i).getText());
-					System.out.println(expected_all_column_picker_options[j]);
+					
 					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
 					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
 					break;					
@@ -324,7 +326,7 @@ public class CallDetailsReport_Page extends TestBase{
 		Util.click(column_Picker_button);
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
 			
-			logger.log(LogStatus.INFO, "verifying if "+column_picker_options_checkboxes.get(i)+" is enabled");
+			logger.log(LogStatus.INFO, "verifying if "+column_picker_options_checkboxes.get(i).getText()+" is enabled");
 			softassert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),column_picker_options_checkboxes.get(i) +" is not enabled");
 			
 		}
@@ -342,6 +344,59 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 		}
 		Util.click(column_Picker_button);
+	}
+	
+	public void advancedFilter(){
+		
+		Util.click(advanced_filter_button);
+		
+		logger.log(LogStatus.INFO, "Verifying if include/exclude listbox displayed");
+		softassert.assertTrue(include_exclude_listbox.isDisplayed(),"include/exclude listbox not displayed or locator changed");
+		
+		logger.log(LogStatus.INFO, "verifying options displayed in include/exclude listbox");
+		Select select=new Select(include_exclude_listbox);
+		
+		for(int i=0;i<select.getOptions().size();i++){
+			
+			for(int j=0;j<expected_include_exclude_listbox.length;j++){
+				if(select.getOptions().get(i).getText().equals(expected_include_exclude_listbox[j])){
+					
+					logger.log(LogStatus.INFO, "verifying if "+expected_include_exclude_listbox[j]+" is displayed");
+					softassert.assertTrue(select.getOptions().get(i).getText().equals(expected_include_exclude_listbox[j]),"element "+expected_include_exclude_listbox[j]+"is not present");
+					break;
+				}
+			}
+			
+		}
+		
+		logger.log(LogStatus.INFO, "verifying if filter elements listbox is displayed");
+		softassert.assertTrue(advance_filter_elements_listbox.isDisplayed(),"filter element listbox is not displayed or locator changed");
+		
+		Select select1=new Select(advance_filter_elements_listbox);
+		
+		for(int i=0;i<select1.getOptions().size();i++){
+			
+			for(int j=0;j<expected_advance_filter_elements.length;j++){
+				if(select1.getOptions().get(i).getText().equals(expected_advance_filter_elements[j])){
+					System.out.println(expected_advance_filter_elements[j]);
+					System.out.println(select1.getOptions().get(i).getText());
+					logger.log(LogStatus.INFO, "verifying if "+expected_advance_filter_elements[j]+" is present");
+					softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_advance_filter_elements[j]),"filter element "+expected_advance_filter_elements[j]+" is not present or locator changed");
+				}
+			}
+		}
+		
+		logger.log(LogStatus.INFO, "Verifying if add advanced filter button is present");
+		softassert.assertTrue(add_advance_filter_button.isDisplayed(),"add advanced filter button is not displayed or locator changed");
+		
+		logger.log(LogStatus.INFO, "Verifying if ok button is displayed");
+		softassert.assertTrue(apply_button.isDisplayed(),"apply button is not displayed or locator chaanged");
+
+		logger.log(LogStatus.INFO, "Verifying if cancel button is displayed");
+		softassert.assertTrue(cancel_button.isDisplayed(),"cancel button is not displayed or locator chaanged");
+		Util.click(advanced_filter_button);
+
+		softassert.assertAll();
 	}
 	
 }
