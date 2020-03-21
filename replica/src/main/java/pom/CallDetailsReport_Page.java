@@ -2,6 +2,7 @@ package pom;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -394,9 +395,59 @@ public class CallDetailsReport_Page extends TestBase{
 
 		logger.log(LogStatus.INFO, "Verifying if cancel button is displayed");
 		softassert.assertTrue(cancel_button.isDisplayed(),"cancel button is not displayed or locator chaanged");
-		Util.click(advanced_filter_button);
+		Util.click(cancel_button);
 
 		softassert.assertAll();
 	}
+	
+	public void filterFeature(String filterelement){
+		
+		int index = 0;
+		String filter_value="";
+		
+		for(int i=0;i<actual_column_names.size();i++){
+		
+			if(actual_column_names.get(i).getText().equals(filterelement)){
+				index=i;
+			}
+		}
+		
+		List<WebElement> values = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr[1]//td"));
+		for(int j=0;j<values.size();j++){
+			if(index==j){
+				filter_value=values.get(j).getText();
+			}
+		}
+		
+		basic_search_textbox.sendKeys(filter_value);
+		Util.click(basic_search_button);
+		wait.until(ExpectedConditions.visibilityOf(showing_label));
+		
+		String xPath="//table[@id='calldetailstable']//tbody//tr";
+		List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		
+		for(int k=0;k<rows.size();k++){
+			
+			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+			for(int l=0;l<filtered_value.size();l++){
+				String actual_value = filtered_value.get(l).getText();
+				String expected_value=filter_value;
+				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+			}		
+		}
+	
+		softassert.assertAll();
+		}
+			
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

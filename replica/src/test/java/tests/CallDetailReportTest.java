@@ -120,6 +120,16 @@ public class CallDetailReportTest extends TestBase{
 		cdr.advancedFilter();
 	}
 	
+	@Test(priority=10)
+	public void filterForCampaign(){
+		
+		logger=extent.startTest("Basic Filter for caller ID");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.filterFeature("Campaign");
+		
+	}
+	
 	//logging out -tear down
 	@AfterClass
 	public void tearDown() throws IOException{
