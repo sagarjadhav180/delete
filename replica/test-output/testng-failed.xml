@@ -7,55 +7,7 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
-      <class name="tests.LoginTest"/>
-      <class name="tests.HomeTest"/>
-      <class name="tests.CamapignUIVerificationTest"/>
-      <class name="tests.CampaignTests"/>
-      <class name="tests.TrackingNumberTest"/>
+      <class name="tests.CallDetailReportTest"/>
     </classes>
   </test> <!-- chrome test -->
-  <test name="chrome test(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.LoginTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="close_connection"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.LoginTest -->
-      <class name="tests.TrackingNumberTest">
-        <methods>
-          <include name="goToCampaignPage"/>
-          <include name="cleanUp"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.TrackingNumberTest -->
-      <class name="tests.CamapignUIVerificationTest">
-        <methods>
-          <include name="goToCampaignPage"/>
-          <include name="goToHomePage"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.CamapignUIVerificationTest -->
-      <class name="tests.CampaignTests">
-        <methods>
-          <include name="goToHomePage"/>
-          <include name="goToCampaignPage"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.CampaignTests -->
-      <class name="tests.HomeTest">
-        <methods>
-          <include name="validLogin"/>
-          <include name="tiles_count_verification_UI"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.HomeTest -->
-    </classes>
-  </test> <!-- chrome test(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

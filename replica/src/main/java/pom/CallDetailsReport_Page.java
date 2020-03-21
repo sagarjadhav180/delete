@@ -132,7 +132,7 @@ public class CallDetailsReport_Page extends TestBase{
 	
 	String[] expected_default_checked_column_picker_options={"Date/Time","Group Name","Campaign","Ad Source","Caller ID","Tracking Number","Destination Name | No.","Duration","Disposition","Line Type","Agent","Actions"};
 	
-	public CallDetailsReport_Page(WebDriver driver){
+	private CallDetailsReport_Page(WebDriver driver){
 	  PageFactory.initElements(driver, this);
     }
 	
