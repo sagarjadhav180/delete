@@ -140,12 +140,19 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
-	
-	
+	@Test(priority=12)
+	public void filterForTrackingNumber(){
+		
+		logger=extent.startTest("Basic Filter for Tracking Number");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.filterFeature("Tracking Number");
+		
+	}
 	
 	//logging out -tear down
 	@AfterClass
-	public void tearDown() throws IOException{
+	public void logOut() throws IOException{
 		LoginPage lp=new LoginPage(driver);
 		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");

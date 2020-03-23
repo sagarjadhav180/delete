@@ -405,6 +405,7 @@ public class CallDetailsReport_Page extends TestBase{
 		int index = 0;
 		String filter_value="";
 		
+
 		for(int i=0;i<actual_column_names.size();i++){
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
@@ -436,7 +437,7 @@ public class CallDetailsReport_Page extends TestBase{
 				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
 			}		
 		}
-	
+        logger.log(LogStatus.INFO, "Verifying if filter feture is working for "+filter_value);	
 		softassert.assertAll();
 		}
 			
