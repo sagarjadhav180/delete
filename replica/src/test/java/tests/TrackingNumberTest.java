@@ -424,6 +424,11 @@ public class TrackingNumberTest extends TestBase{
 	    public void cleanUp(){
 	    	tn = createInstance();
 		    tn.unprovisionNumbers();
-	    	   	
+		    LoginPage lp=new LoginPage(driver);
+			logger=extent.startTest("LogOut"); 
+			logger.log(LogStatus.INFO, "loggin out.. ");
+			lp.logOut();   	
+		    
+		    
 	    	}
 }

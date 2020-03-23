@@ -15,7 +15,7 @@
       <class name="tests.CampaignTests"/>
       
       <class name="tests.TrackingNumberTest"/>
-
+      <class name="tests.CallDetailReportTest"/>
       
 		</classes>
 	</test>
