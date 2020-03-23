@@ -210,6 +210,16 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
+    @Test(priority=19)
+	public void advancedFilterForCampaign(){
+		
+		logger=extent.startTest("Advanced Filter for Campaign");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.advancedFilterFeature("Campaign Name");
+		
+	}
+    
 	//logging out -tear down
 	@AfterClass
 	public void logOut() throws IOException{
