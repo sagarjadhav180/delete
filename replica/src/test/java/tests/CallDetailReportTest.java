@@ -170,6 +170,18 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
+	@Test(priority=15)
+	public void filterForDisposition(){
+		
+		logger=extent.startTest("Basic Filter for Disposition");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.filterFeature("Disposition");
+		
+	}
+	
+	
+	
 	//logging out -tear down
 	@AfterClass
 	public void logOut() throws IOException{
