@@ -419,6 +419,7 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 		}
 		
+		basic_search_textbox.clear();
 		basic_search_textbox.sendKeys(filter_value);
 		Util.click(basic_search_button);
 		wait.until(ExpectedConditions.visibilityOf(showing_label));
