@@ -476,7 +476,7 @@ public class CallDetailsReport_Page extends TestBase{
 		advanced_filter_button.click();
 		Select select=new Select(advance_filter_elements_listbox);
 		select.selectByVisibleText(filterelement);
-		advance_filter_textbox.clear();
+//		advance_filter_textbox.clear();
 		advance_filter_textbox.sendKeys(filter_value);
 		Util.click(apply_button);
 		

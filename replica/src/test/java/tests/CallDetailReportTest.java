@@ -38,7 +38,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=1)
 	public void uiVerification() throws InterruptedException{
 		logger=extent.startTest("uiVerification Test");
-		logger.assignCategory("Call Details Suite");
+		logger.assignCategory("Call Details Test");
 		
 		cdr=CallDetailsReport_Page.instance();
 	    cdr.UIVerification();
@@ -183,13 +183,32 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=16)
 	public void advancedFilterForCallerID(){
 		
-		logger=extent.startTest("Advanced Filter for Disposition");
+		logger=extent.startTest("Advanced Filter for Caller ID");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
 		cdr.advancedFilterFeature("Caller ID");
 		
 	}
+    
+    @Test(priority=17)
+	public void advancedFilterForDuration(){
+		
+		logger=extent.startTest("Advanced Filter for Duration");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.advancedFilterFeature("Duration");
+		
+	}
 	
+    @Test(priority=18)
+	public void advancedFilterForGroupName(){
+		
+		logger=extent.startTest("Advanced Filter for Group Name");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.advancedFilterFeature("Group Name");
+		
+	}
 	
 	//logging out -tear down
 	@AfterClass
