@@ -437,7 +437,12 @@ public class CallDetailsReport_Page extends TestBase{
 				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
 			}		
 		}
-        logger.log(LogStatus.INFO, "Verifying if filter feture is working for "+filter_value);	
+
+		basic_search_textbox.clear();
+		Util.click(basic_search_button);
+		wait.until(ExpectedConditions.visibilityOf(showing_label));
+		
+		logger.log(LogStatus.INFO, "Verifying if filter feture is working for "+filter_value);	
 		softassert.assertAll();
 		}
 			
