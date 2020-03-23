@@ -150,6 +150,16 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
+	@Test(priority=13)
+	public void filterForDuration(){
+		
+		logger=extent.startTest("Basic Filter for Duration");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.filterFeature("Duration");
+		
+	}
+	
 	//logging out -tear down
 	@AfterClass
 	public void logOut() throws IOException{

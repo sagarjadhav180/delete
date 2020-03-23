@@ -424,8 +424,6 @@ public class TrackingNumberTest extends TestBase{
 	    public void cleanUp(){
 	    	tn = createInstance();
 		    tn.unprovisionNumbers();
-	    	
-	   	
-	    	
+	    	   	
 	    	}
 }
