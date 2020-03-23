@@ -121,65 +121,74 @@ public class CallDetailReportTest extends TestBase{
 	}
 	
 	@Test(priority=10)
-	public void filterForCampaign(){
+	public void basicFilterForCampaign(){
 		
 		logger=extent.startTest("Basic Filter for campaign");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.filterFeature("Campaign");
+		cdr.basicFilterFeature("Campaign");
 		
 	}
 	
 	@Test(priority=11)
-	public void filterForCaller_ID(){
+	public void basicFilterForCaller_ID(){
 		
 		logger=extent.startTest("Basic Filter for caller ID");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.filterFeature("Caller ID");
+		cdr.basicFilterFeature("Caller ID");
 		
 	}
 	
 	@Test(priority=12)
-	public void filterForTrackingNumber(){
+	public void basicFilterForTrackingNumber(){
 		
 		logger=extent.startTest("Basic Filter for Tracking Number");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.filterFeature("Tracking Number");
+		cdr.basicFilterFeature("Tracking Number");
 		
 	}
 	
 	@Test(priority=13)
-	public void filterForDuration(){
+	public void basicFilterForDuration(){
 		
 		logger=extent.startTest("Basic Filter for Duration");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.filterFeature("Duration");
+		cdr.basicFilterFeature("Duration");
 		
 	}
 	
 	@Test(priority=14)
-	public void filterForGroupName(){
+	public void basicFilterForGroupName(){
 		
 		logger=extent.startTest("Basic Filter for Group Name");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.filterFeature("Group Name");
+		cdr.basicFilterFeature("Group Name");
 		
 	}
 	
 	@Test(priority=15)
-	public void filterForDisposition(){
+	public void basicFilterForDisposition(){
 		
 		logger=extent.startTest("Basic Filter for Disposition");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.filterFeature("Disposition");
+		cdr.basicFilterFeature("Disposition");
 		
 	}
 	
+    @Test(priority=16)
+	public void advancedFilterForCallerID(){
+		
+		logger=extent.startTest("Advanced Filter for Disposition");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.advancedFilterFeature("Caller ID");
+		
+	}
 	
 	
 	//logging out -tear down

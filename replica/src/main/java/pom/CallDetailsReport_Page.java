@@ -116,6 +116,9 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-gray']")
 	private static WebElement add_advance_filter_button;
 
+	@FindBy(xpath="//div[@class='advancedf']//select[3]//following-sibling::input[1]")
+	private static WebElement advance_filter_textbox;
+	
 	@FindBy(xpath="//button[@class='btn btn-primary'][contains(text(),'Apply')]")
 	private static WebElement apply_button;
 
@@ -400,12 +403,11 @@ public class CallDetailsReport_Page extends TestBase{
 		softassert.assertAll();
 	}
 	
-	public void filterFeature(String filterelement){
+	public void basicFilterFeature(String filterelement){
 		
 		int index = 0;
 		String filter_value="";
 		
-
 		for(int i=0;i<actual_column_names.size();i++){
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
@@ -439,16 +441,69 @@ public class CallDetailsReport_Page extends TestBase{
 		}
 
 		basic_search_textbox.clear();
-		Util.click(basic_search_button);
+//		Util.click(basic_search_button);
 		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
-		logger.log(LogStatus.INFO, "Verifying if filter feture is working for "+filter_value);	
+		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
 		softassert.assertAll();
 		}
 			
 	
 
-	
+	public void advancedFilterFeature(String filterelement){
+
+		int index = 0;
+		String filter_value="";
+		
+		for(int i=0;i<actual_column_names.size();i++){
+		
+			if(actual_column_names.get(i).getText().equals(filterelement)){
+				index=i;
+			}
+		}
+		
+		List<WebElement> values = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr[1]//td"));
+		for(int j=0;j<values.size();j++){
+			if(index==j){
+				filter_value=values.get(j).getText();
+			}
+		}
+		
+//		basic_search_textbox.clear();
+//		basic_search_textbox.sendKeys(filter_value);
+//		Util.click(basic_search_button);
+
+		advanced_filter_button.click();
+		Select select=new Select(advance_filter_elements_listbox);
+		select.selectByVisibleText(filterelement);
+		advance_filter_textbox.clear();
+		advance_filter_textbox.sendKeys(filter_value);
+		Util.click(apply_button);
+		
+		wait.until(ExpectedConditions.visibilityOf(showing_label));
+		
+		String xPath="//table[@id='calldetailstable']//tbody//tr";
+		List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		
+		for(int k=0;k<rows.size();k++){
+			
+			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+			for(int l=0;l<filtered_value.size();l++){
+				String actual_value = filtered_value.get(l).getText();
+				String expected_value=filter_value;
+				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+			}		
+		}
+
+
+//		Util.click(cancel_button);
+//		wait.until(ExpectedConditions.visibilityOf(showing_label));
+		
+		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
+		softassert.assertAll();
+
+		
+	}
 	
 	
 	
