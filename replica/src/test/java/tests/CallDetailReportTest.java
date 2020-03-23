@@ -160,6 +160,16 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
+	@Test(priority=14)
+	public void filterForGroupName(){
+		
+		logger=extent.startTest("Basic Filter for Group Name");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.filterFeature("Group Name");
+		
+	}
+	
 	//logging out -tear down
 	@AfterClass
 	public void logOut() throws IOException{
