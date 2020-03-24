@@ -121,12 +121,12 @@ public class CallDetailReportTest extends TestBase{
 	}
 	
 	@Test(priority=10)
-	public void basicFilterForCampaign(){
+	public void basicFilterForAdSource(){
 		
-		logger=extent.startTest("Basic Filter for campaign");
+		logger=extent.startTest("Basic Filter for Ad Source");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Campaign");
+		cdr.basicFilterFeature("Ad Source");
 		
 	}
 	
@@ -211,14 +211,35 @@ public class CallDetailReportTest extends TestBase{
 	}
 	
     @Test(priority=19)
-	public void advancedFilterForCampaign(){
+	public void advancedFilterForLineType(){
 		
-		logger=extent.startTest("Advanced Filter for Campaign");
+		logger=extent.startTest("Advanced Filter for Line Type");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.advancedFilterFeature("Campaign Name");
+		cdr.advancedFilterFeature("Line Type");
 		
 	}
+    
+    @Test(priority=20)
+	public void dateRangeFilterForToday(){
+		
+		logger=extent.startTest("Date Range filter for today");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.dateRangeFilter("today");
+		
+	}
+    
+    @Test(priority=21)
+	public void dateRangeFilterForYesterday(){
+		
+		logger=extent.startTest("Date Range filter for yesterday");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.dateRangeFilter("yesterday");
+		
+	}
+    
     
 	//logging out -tear down
 	@AfterClass

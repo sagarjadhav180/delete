@@ -26,6 +26,9 @@ public class CallDetailsReport_Page extends TestBase{
 	
     @FindBy(xpath="//div[contains(text(),'Loading Data...')]")
 	private static WebElement loading_data_label;
+
+    @FindBy(xpath="//div[contains(text(),'No Data Found')]")
+	private static WebElement no_data_found_label;
     
 	//date range
     @FindBy(xpath="//button[@class='btn btn-lg btn-default ng-isolate-scope']")
@@ -418,6 +421,7 @@ public class CallDetailsReport_Page extends TestBase{
 		List<WebElement> values = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr[1]//td"));
 		for(int j=0;j<values.size();j++){
 			if(index==j){
+				
 				filter_value=values.get(j).getText();
 			}
 		}
@@ -440,9 +444,9 @@ public class CallDetailsReport_Page extends TestBase{
 			}		
 		}
 
-		basic_search_textbox.clear();
+//		basic_search_textbox.clear();
 //		Util.click(basic_search_button);
-		wait.until(ExpectedConditions.visibilityOf(showing_label));
+//		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
 		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
 		softassert.assertAll();
@@ -469,10 +473,6 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 		}
 		
-//		basic_search_textbox.clear();
-//		basic_search_textbox.sendKeys(filter_value);
-//		Util.click(basic_search_button);
-
 		advanced_filter_button.click();
 		Select select=new Select(advance_filter_elements_listbox);
 		select.selectByVisibleText(filterelement);
@@ -499,13 +499,66 @@ public class CallDetailsReport_Page extends TestBase{
 //		Util.click(cancel_button);
 //		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
+
 		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
 		softassert.assertAll();
 
-		
 	}
 	
-	
+	public void dateRangeFilter(String dateRange){
+		
+		String endDateToBeUsed ="";
+		String startDateToBeUsed ="";
+		
+		if(dateRange.endsWith("last 7 days")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		}
+		else if(dateRange.equals("today")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		}
+		else if(dateRange.equals("yesterday")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
+		}
+		else if(dateRange.equals("last 30 days")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-31");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		}
+		
+		Util.click(dateRange_filter);
+		
+		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
+			
+			if(dateRange.equalsIgnoreCase(actual_dateRange_filter_elements.get(i).getText())){
+				
+				Util.Action().moveToElement(actual_dateRange_filter_elements.get(i)).click().perform();
+			}
+		}
+		
+		try{
+		wait.until(ExpectedConditions.visibilityOf(loading_data_label));
+		}catch(Exception e){
+		wait.until(ExpectedConditions.visibilityOf(no_data_found_label));			
+		}
+		
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+
+		System.out.println("dbCount is "+dbCount);
+		System.out.println("table_call_count is "+table_call_count.size());
+		
+		if(!(dbCount.equals("0") || dbCount.equalsIgnoreCase("null"))){
+		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
+		softassert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
+		}
+		else{
+		logger.log(LogStatus.INFO, "verifying if no data found label displayed since no call count is there for date range "+dateRange);			
+		softassert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
+		}
+		softassert.assertAll();
+		
+	}
 	
 	
 	
