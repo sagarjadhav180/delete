@@ -264,6 +264,7 @@ public class CallDetailReportTest extends TestBase{
 	//logging out -tear down
 	@AfterClass
 	public void logOut() throws IOException{
+		
 		LoginPage lp=new LoginPage(driver);
 		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");

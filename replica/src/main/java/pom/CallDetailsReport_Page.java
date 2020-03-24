@@ -20,7 +20,10 @@ public class CallDetailsReport_Page extends TestBase{
 
     SoftAssert softassert=new SoftAssert();
 	String org_unit_id = "70045";
-		
+
+    @FindBy(xpath="//div[@class='pageProgressLoader']")
+	private static WebElement loading_wheel;
+	
     @FindBy(xpath="//h1[contains(text(),'Call Details')]")
 	private static WebElement callDetails_header;
 	
@@ -526,31 +529,30 @@ public class CallDetailsReport_Page extends TestBase{
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-31");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
+
+//		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 		
+        try{
 		wait.until(ExpectedConditions.visibilityOf(showing_label));
+        }catch(Exception e){
+    	wait.until(ExpectedConditions.visibilityOf(no_data_found_label));        	
+        }
 		Util.click(dateRange_filter);
 		
 		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
 			
 			if(dateRange.equalsIgnoreCase(actual_dateRange_filter_elements.get(i).getText())){
-		        
-				System.out.println("actual date range "+actual_dateRange_filter_elements.get(i).getText());
-				System.out.println("db date range "+dateRange);
+		
 				Util.Action().moveToElement(actual_dateRange_filter_elements.get(i)).click().perform();
-			    break;
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				break;
 			}
 		}
 		
-		try{
-		wait.until(ExpectedConditions.visibilityOf(loading_data_label));
-		}catch(Exception e){
-		wait.until(ExpectedConditions.visibilityOf(no_data_found_label));			
-		}
-
 		
+
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 
-	
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+table_call_count.size());
 		
