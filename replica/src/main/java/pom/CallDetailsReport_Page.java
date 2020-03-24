@@ -527,13 +527,17 @@ public class CallDetailsReport_Page extends TestBase{
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
 		
+		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		Util.click(dateRange_filter);
 		
 		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
 			
 			if(dateRange.equalsIgnoreCase(actual_dateRange_filter_elements.get(i).getText())){
-				
+		        
+				System.out.println("actual date range "+actual_dateRange_filter_elements.get(i).getText());
+				System.out.println("db date range "+dateRange);
 				Util.Action().moveToElement(actual_dateRange_filter_elements.get(i)).click().perform();
+			    break;
 			}
 		}
 		
