@@ -510,7 +510,7 @@ public class CallDetailsReport_Page extends TestBase{
 		String endDateToBeUsed ="";
 		String startDateToBeUsed ="";
 		
-		if(dateRange.endsWith("last 7 days")){
+		if(dateRange.equals("Last 7 days")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
@@ -542,9 +542,11 @@ public class CallDetailsReport_Page extends TestBase{
 		}catch(Exception e){
 		wait.until(ExpectedConditions.visibilityOf(no_data_found_label));			
 		}
+
 		
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 
+	
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+table_call_count.size());
 		

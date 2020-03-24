@@ -240,6 +240,16 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
     
+    @Test(priority=22)
+	public void dateRangeFilterForLast7days(){
+		
+		logger=extent.startTest("Date Range filter for Last 7 days");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.dateRangeFilter("Last 7 days");
+		
+	}
+    
     
 	//logging out -tear down
 	@AfterClass
