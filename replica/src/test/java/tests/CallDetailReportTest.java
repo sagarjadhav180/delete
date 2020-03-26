@@ -17,11 +17,14 @@ public class CallDetailReportTest extends TestBase{
 	CallDetailsReport_Page cdr;
 	HomePage hp;
 	
-	public final String play_button="Listen to call";
-	public final String inforamtion_icon_button="Toggle Call Info";
-	public final String block_number="Block Number";
-	public final String download_audio="Download Audio File";
-	public final String email_call="Email Call";
+	public static final String play_button="Listen to call";
+	public static final String inforamtion_icon_button="Toggle Call Info";
+	public static final String block_number="Block Number";
+	public static final String download_audio="Download Audio File";
+	public static final String email_call="Email Call";
+	public static final String default_mail_id_from="no-reply@messages.services";
+	public static final String default_mail_id_to="sagar.j@yopmail.com";
+	public static final String default_mail_id_message="Test Automation call mail";
 	
 	@BeforeClass
 	public void goToCallDetailsReportPage() throws InterruptedException, IOException{
@@ -283,12 +286,48 @@ public class CallDetailReportTest extends TestBase{
 		cdr.actionSectionVerification("inforamtion_icon_button", "complete info section");
     }
     
+    @Test(priority=26)
     public void infoSectionUIVerification(){
     	logger=extent.startTest("info section ");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-    	
+    	cdr.actionSectionVerification("inforamtion_icon_button", "info section");
     }
+    
+    @Test(priority=27)
+    public void commentSectionUIVerification(){
+    	logger=extent.startTest("comments section ");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+    	cdr.actionSectionVerification("inforamtion_icon_button", "comments");
+    }
+    
+    @Test(priority=28)
+    public void tagSectionUIVerification(){
+    	logger=extent.startTest("tags section ");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+    	cdr.actionSectionVerification("inforamtion_icon_button", "tags");
+    }
+    
+    @Test(priority=29)
+    public void emailCallSectionUIVerification(){
+    	logger=extent.startTest("email call section ");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.actionButtonClick(email_call);
+		cdr.actionSectionVerification("email_call", "mail call UI");
+    }
+    
+    @Test(priority=30)
+    public void emailCallFeature(){
+    	logger=extent.startTest("email call feature ");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.actionButtonClick(email_call);
+		cdr.actionSectionVerification("email_call", "mail feature");
+    }
+    
     
 	//logging out -tear down
 	@AfterClass

@@ -13,6 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import tests.CallDetailReportTest;
 import tests.TestBase;
 import tests.Util;
 
@@ -32,6 +33,42 @@ public class CallDetailsReport_Page extends TestBase{
 
     @FindBy(xpath="//div[contains(text(),'No Data Found')]")
 	private static WebElement no_data_found_label;
+
+    
+    //Email call section
+
+    @FindBy(xpath="//div[contains(text(),'Successfully emailed call')]")
+	private static WebElement success_message_for_mail_call;
+    
+    @FindBy(xpath="//div[@class='modal-content']")
+	private static WebElement email_this_call_window;
+    
+    @FindBy(xpath="//div[@class='modal-content']//h3[text()='Email this call']")
+ 	private static WebElement email_this_call_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='To']")
+ 	private static WebElement email_this_call_to_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='To']//parent::div//following-sibling::div//input")
+ 	private static WebElement email_this_call_to_textbox;
+    
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='From']")
+ 	private static WebElement email_this_call_from_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='From']//parent::div//following-sibling::div//input")
+ 	private static WebElement email_this_call_from_textbox;
+    
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='Message']")
+ 	private static WebElement email_this_call_message_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='Message']//parent::div//following-sibling::div//textarea")
+ 	private static WebElement email_this_call_message_textbox;
+
+    @FindBy(xpath="//div[@class='modal-content']//button[text()='Send Now']")
+ 	private static WebElement send_now_mail_button;
+
+    @FindBy(xpath="//div[@class='modal-content']//button[text()='Cancel']")
+ 	private static WebElement cancel_mail_button;
     
 	//date range
     @FindBy(xpath="//button[@class='btn btn-lg btn-default ng-isolate-scope']")
@@ -496,7 +533,7 @@ public class CallDetailsReport_Page extends TestBase{
 			for(int l=0;l<filtered_value.size();l++){
 				String actual_value = filtered_value.get(l).getText();
 				String expected_value=filter_value;
-				Assert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+				Assert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
 			}		
 		}
 
@@ -590,6 +627,9 @@ public class CallDetailsReport_Page extends TestBase{
         }catch(Exception e){
     	wait.until(ExpectedConditions.visibilityOf(no_data_found_label));        	
         }
+        
+        
+        
 		Util.click(dateRange_filter);
 		
 		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
@@ -622,14 +662,15 @@ public class CallDetailsReport_Page extends TestBase{
 	}
 	
 	
-public void actionButtonClick(String actionButton){
+    public void actionButtonClick(String actionButton){
         
 		List<WebElement> buttons = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr//td//button[@title='"+actionButton+"']"));
 		
 		for(int i=0;i<buttons.size();i++){
 			
 			if(buttons.get(i).isEnabled()){
-				buttons.get(i).click();
+				
+				Util.click(buttons.get(i));
 				break;
 			}
 		}
@@ -641,6 +682,52 @@ public void actionButtonClick(String actionButton){
 			
 			logger.log(LogStatus.INFO, "Verifying if audio player is displayed");
 			Assert.assertTrue(audio_player.isDisplayed(),"audio player is dnot displayed or locator changed");
+			
+		}
+		
+		else if(button.contains("email_call")){
+			
+			if(sectionToVerify.equals("mail feature")){
+				
+				wait.until(ExpectedConditions.visibilityOf(email_this_call_to_textbox));
+				email_this_call_to_textbox.sendKeys(CallDetailReportTest.default_mail_id_to);
+				email_this_call_message_textbox.sendKeys(CallDetailReportTest.default_mail_id_message);
+				Util.click(send_now_mail_button);
+				wait.until(ExpectedConditions.visibilityOf(success_message_for_mail_call));
+				logger.log(LogStatus.INFO, "Verifying if mail is sent successfully");
+				Assert.assertTrue(success_message_for_mail_call.isDisplayed(),"mail was not sent");
+				
+			}
+			else if(sectionToVerify.equals("mail call UI")){
+				logger.log(LogStatus.INFO, "Verifyinf if email this call window is opened");
+				Assert.assertTrue(email_this_call_window.isDisplayed(),"email thius call window is not opened or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if To label is present");
+				Assert.assertTrue(email_this_call_to_label.isDisplayed(),"email this call to label is not present or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if from label is present");
+				Assert.assertTrue(email_this_call_from_label.isDisplayed(),"Email this call from label is not present");
+				
+				logger.log(LogStatus.INFO, "Verifying if Message label is displayed");
+				Assert.assertTrue(email_this_call_message_label.isDisplayed(),"email this call message label is not present or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if To textbox is present");
+				Assert.assertTrue(email_this_call_to_textbox.isDisplayed(),"Email this call to text box is not present or locator changed");
+		
+				logger.log(LogStatus.INFO, "Verifying if Message textbox is present");
+				Assert.assertTrue(email_this_call_message_textbox.isDisplayed(),"Email this call Message text box is not present or locator changed");
+
+				logger.log(LogStatus.INFO, "Verifying default from mail id");
+				Assert.assertTrue(email_this_call_from_textbox.getText().equals(CallDetailReportTest.default_mail_id_from),"default mail id is incorrect");
+				
+				logger.log(LogStatus.INFO, "Verifying if Send now button is present");
+				Assert.assertTrue(send_now_mail_button.isDisplayed(),"Email this call send now button is not present or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if cancel button is present");
+				Assert.assertTrue(cancel_mail_button.isDisplayed(),"Email this call cancel button is not present or locator changed");				
+				Util.click(cancel_mail_button);			
+			}
+
 		}
 		
 		else if(button.contains("inforamtion_icon_button")){
@@ -693,12 +780,13 @@ public void actionButtonClick(String actionButton){
 				
 			}
 			
-			
 		}
 		
 		
 		
-//		//Assert.assertAll();
+		
+		
+//		Assert.assertAll();
 	}
 
 	
