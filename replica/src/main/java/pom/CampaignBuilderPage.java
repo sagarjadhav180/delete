@@ -286,7 +286,8 @@ public class CampaignBuilderPage extends TestBase {
 		
 		logger.log(LogStatus.INFO, "Verifying if logged in user is displayed by defeult in campaign owner dropdown");
 		Assert1.assertEquals(actual_campaign_owner, expected_username,"logged in user is displayed by defeult in campaign owner dropdown");
-	    Thread.sleep(1000);
+		Assert1.assertAll();
+		Thread.sleep(1000);
 	}
 	
 	
