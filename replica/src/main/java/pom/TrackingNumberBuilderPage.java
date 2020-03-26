@@ -1068,7 +1068,10 @@ public class TrackingNumberBuilderPage extends TestBase {
     Util.scrollFunction(save_button);
     wait.until(ExpectedConditions.elementToBeClickable(save_button));
     save_button.click();
-		
+	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+    wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+    softassert.assertAll();	
 	}
     
  
@@ -1110,6 +1113,10 @@ public class TrackingNumberBuilderPage extends TestBase {
         Util.scrollFunction(save_button);
         wait.until(ExpectedConditions.elementToBeClickable(save_button));
         save_button.click();
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+        softassert.assertAll();
     }
     
     
@@ -1154,6 +1161,10 @@ public class TrackingNumberBuilderPage extends TestBase {
         Util.scrollFunction(save_button);
         wait.until(ExpectedConditions.elementToBeClickable(save_button));
         save_button.click();
+    	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
+        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+    	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+        softassert.assertAll();
         String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
     	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
 //      set.add(dnis);
@@ -1427,7 +1438,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
         wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
-
+        softassert.assertAll();
     	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
     	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
 //      set.add(dnis);
@@ -1573,6 +1584,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
     	tracking_number_name_textbox.sendKeys(tracking_number_name);
     	
+    	wait.until(ExpectedConditions.visibilityOf(ad_source_dropdown));
     	Select selct_ad_source=new Select(ad_source_dropdown);
     	selct_ad_source.selectByIndex(4);
     	
@@ -1619,12 +1631,15 @@ public class TrackingNumberBuilderPage extends TestBase {
     	repeat_interval_textbox.sendKeys("72");
     	Select select=new Select(voicemail_dropdown);
     	select.selectByValue("4");
+    	configure_voicemail_greetings_textbox.clear();
     	configure_voicemail_greetings_textbox.sendKeys("Please record your voicemail");
     	Util.click(record_call_checkbox);
     	Util.click(record_call_checkbox);
     	Util.click(play_voice_prompt_checkbox);
+    	play_voice_prompt_textbox.clear();
     	play_voice_prompt_textbox.sendKeys("test prompt");
         Util.click(play_whisper_message_checkbox);
+        play_whisper_message_textbox.clear();
         play_whisper_message_textbox.sendKeys("test whisper");
         Util.click(webhook_checkbox);
         Select we=new Select(webhook_dropdown);

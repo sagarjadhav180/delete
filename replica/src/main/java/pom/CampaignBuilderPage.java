@@ -221,6 +221,7 @@ public class CampaignBuilderPage extends TestBase {
 		Assert1.assertTrue(active_InactiveCampaign_Button.isEnabled(),"active_InactiveCampaign_Button is not enabled");
 		
 		//verifying if campaignOwner_DropDown is displayed and its enabled 
+		wait.until(ExpectedConditions.visibilityOf(campaignOwner_DropDown));
 		logger.log(LogStatus.INFO, "verifying if campaignOwner_DropDown is displayed");
 		Assert1.assertTrue(campaignOwner_DropDown.isDisplayed(),"campaignOwner_DropDown is not displayed or locator changed");
 		logger.log(LogStatus.INFO, "verifying if campaignOwner_DropDown is enabled");
