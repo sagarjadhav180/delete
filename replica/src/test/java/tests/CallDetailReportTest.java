@@ -17,6 +17,11 @@ public class CallDetailReportTest extends TestBase{
 	CallDetailsReport_Page cdr;
 	HomePage hp;
 	
+	public final String play_button="Listen to call";
+	public final String inforamtion_icon_button="Toggle Call Info";
+	public final String block_number="Block Number";
+	public final String download_audio="Download Audio File";
+	public final String email_call="Email Call";
 	
 	@BeforeClass
 	public void goToCallDetailsReportPage() throws InterruptedException, IOException{
@@ -260,6 +265,30 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
     
+    @Test(priority=24)    
+    public void audioPlayerOpen(){
+    	logger=extent.startTest("aaudio player opening");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.actionButtonClick(play_button);
+		cdr.actionSectionVerification("play_button", "");
+    }
+    
+    @Test(priority=25)
+    public void informationTagOpen(){
+    	logger=extent.startTest("information tag opening");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+		cdr.actionButtonClick(inforamtion_icon_button);
+		cdr.actionSectionVerification("inforamtion_icon_button", "complete info section");
+    }
+    
+    public void infoSectionUIVerification(){
+    	logger=extent.startTest("info section ");
+		logger.assignCategory("Call Details Test");
+		cdr=CallDetailsReport_Page.instance();
+    	
+    }
     
 	//logging out -tear down
 	@AfterClass

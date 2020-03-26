@@ -18,10 +18,10 @@ import tests.Util;
 
 public class CallDetailsReport_Page extends TestBase{
 
-    SoftAssert softassert=new SoftAssert();
+    SoftAssert Assert=new SoftAssert();
 	String org_unit_id = "70045";
 
-    @FindBy(xpath="//div[@class='pageProgressLoader']")
+	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private static WebElement loading_wheel;
 	
     @FindBy(xpath="//h1[contains(text(),'Call Details')]")
@@ -81,7 +81,7 @@ public class CallDetailsReport_Page extends TestBase{
 	private static WebElement play_call_button;	
 	
 	@FindBy(xpath="(//table[@id='calldetailstable']//tbody//tr[1]//td//button)[2]")
-	private static WebElement information_button;		
+	private static WebElement i_button;		
 
 	@FindBy(xpath="(//table[@id='calldetailstable']//tbody//tr[1]//td//button)[3]")
 	private static WebElement blockcall_button;		
@@ -108,6 +108,59 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//button[contains(text(),'Showing')]")
 	private static WebElement pagination_call_count_label;
 
+	@FindBy(xpath="//div[@class='player-container']")
+	private static WebElement audio_player;	
+
+	@FindBy(xpath="//div[@class='tab-content']")
+	private static WebElement inforamtion_tab;	
+
+	@FindBy(xpath="//div[@class='tab-content']//strong")
+	private static List<WebElement> inforamtion_section_labels;
+
+	@FindBy(xpath="(//ul[@class='nav nav-tabs']//div)[1]")
+	private static WebElement inforamtion_button;	
+		
+	@FindBy(xpath="(//ul[@class='nav nav-tabs']//div)[2]")
+	private static WebElement comments_button;	
+
+	@FindBy(xpath="(//ul[@class='nav nav-tabs']//div)[3]")
+	private static WebElement tags_button;	
+	
+	String[] expected_inforamtion_section={"Name and Address","Conversation","Session"};
+	
+	@FindBy(xpath="//form[@id='commentForm']")
+	private static WebElement comment_section;		
+
+	@FindBy(xpath="//form[@id='commentForm']//div//label[contains(text(),'Comment:')]")
+	private static WebElement comment_label;			
+
+	@FindBy(xpath="//form[@id='commentForm']//div//textarea[@name='commenttext']")
+	private static WebElement comment_textbox;
+	
+	@FindBy(xpath="//form[@id='commentForm']//div//input")
+	private static WebElement add_comment_button;
+
+	@FindBy(xpath="//form[@name='calltagForm']")
+	private static WebElement tag_section;
+
+	@FindBy(xpath="//form[@name='calltagForm']//div//label[contains(text(),'Select Tags:')]")
+	private static WebElement select_tags_label;
+
+	@FindBy(xpath="//form[@name='calltagForm']//div//input[@title='Save Call Tag Button']")
+	private static WebElement save_tag_button;
+
+	@FindBy(xpath="//form[@name='calltagForm']//div//ul[@class='select2-choices']")
+	private static WebElement tag_textbox;
+	
+	@FindBy(xpath="//table[@id='calldetailstable']//tbody//tr//td//button[@title='Toggle Call Info']")
+	private static List<WebElement> information_icon_button;
+
+	@FindBy(xpath="//table[@id='calldetailstable']//tbody//tr//td//button[@title='Listen to call']")
+	private static List<WebElement> play_audio_button;
+
+	@FindBy(xpath="//table[@id='calldetailstable']//tbody//tr//td//button[@title='Email Call']")
+	private static List<WebElement> email_call_button;
+	
 	@FindBy(xpath="//table[@id='calldetailstable']//tbody//tr")
 	private static List<WebElement> table_call_count;	
 
@@ -161,10 +214,10 @@ public class CallDetailsReport_Page extends TestBase{
 		
 		wait.until(ExpectedConditions.visibilityOf(callDetails_header));
 		logger.log(LogStatus.INFO, "verifying if callDetails_header is displayed");
-		softassert.assertTrue(callDetails_header.isDisplayed(),"callDetails_header is not displayed or locator changed");
+		Assert.assertTrue(callDetails_header.isDisplayed(),"callDetails_header is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "Verifying if dateRange_filter is displayed");
-		softassert.assertTrue(dateRange_filter.isDisplayed(),"dateRange_filter is not displayed or locator changed");
+		Assert.assertTrue(dateRange_filter.isDisplayed(),"dateRange_filter is not displayed or locator changed");
 		
 		Util.click(dateRange_filter);
 		logger.log(LogStatus.INFO, "verifying if daterange filter elements are present");
@@ -175,7 +228,7 @@ public class CallDetailsReport_Page extends TestBase{
 				if(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j])){
 					
 					logger.log(LogStatus.INFO, "Verifying if "+expected_dateRange_filter_elements[j]+" is present");
-					softassert.assertTrue(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j]),"filter element "+expected_dateRange_filter_elements[j]+" is not present or locator changed");
+					Assert.assertTrue(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j]),"filter element "+expected_dateRange_filter_elements[j]+" is not present or locator changed");
 					break;
 				}
 			}
@@ -186,44 +239,44 @@ public class CallDetailsReport_Page extends TestBase{
 		Thread.sleep(2000);
 		
 		logger.log(LogStatus.INFO, "verifying if scheduleReport_button is displayed");
-		softassert.assertTrue(scheduleReport_button.isDisplayed(),"scheduleReport_button is not displayed or locator changed");
+		Assert.assertTrue(scheduleReport_button.isDisplayed(),"scheduleReport_button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if export_button is displayed");
-		softassert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
+		Assert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if showing_label is present");
-		softassert.assertTrue(showing_label.isDisplayed(),"showing_label is not displayed or locator changed");
+		Assert.assertTrue(showing_label.isDisplayed(),"showing_label is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if basic_search_textbox is displayed");
-		softassert.assertTrue(basic_search_textbox.isDisplayed(),"basic_search_textbox is not displayed or locator changed");
+		Assert.assertTrue(basic_search_textbox.isDisplayed(),"basic_search_textbox is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if basic_search_button is presnet");
-		softassert.assertTrue(basic_search_button.isDisplayed(),"basic_search_button is not present or locator changed");
+		Assert.assertTrue(basic_search_button.isDisplayed(),"basic_search_button is not present or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if basic_search_cancel_button is present");
-		softassert.assertTrue(basic_search_cancel_button.isDisplayed(),"basic_search_cancel_button is not displayed or locator changed");
+		Assert.assertTrue(basic_search_cancel_button.isDisplayed(),"basic_search_cancel_button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if advanced_filter_button is present");
-		softassert.assertTrue(advanced_filter_button.isDisplayed(),"advanced_filter_button is not displayed or locator chnaged");
+		Assert.assertTrue(advanced_filter_button.isDisplayed(),"advanced_filter_button is not displayed or locator chnaged");
 		
 		logger.log(LogStatus.INFO, "Verifying if column_Picker_button is present");
-		softassert.assertTrue(column_Picker_button.isDisplayed(),"column_Picker_button is not displayed or locator changed");
+		Assert.assertTrue(column_Picker_button.isDisplayed(),"column_Picker_button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying play_call_button is present");
-		softassert.assertTrue(play_call_button.isDisplayed(),"play_call_button is not displayed or locator changed");
+		Assert.assertTrue(play_call_button.isDisplayed(),"play_call_button is not displayed or locator changed");
         
 		logger.log(LogStatus.INFO, "verifying if information_button is displayed");
-		softassert.assertTrue(information_button.isDisplayed(),"information_button is not displayed or locator changed");
+		Assert.assertTrue(i_button.isDisplayed(),"information_button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying blockcall_button is displayed");
-		softassert.assertTrue(blockcall_button.isDisplayed(),"blockcall_button is not displayed or locator changed");
+		Assert.assertTrue(blockcall_button.isDisplayed(),"blockcall_button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if downloadcall_button is displayed");
-		softassert.assertTrue(downloadcall_button.isDisplayed(),"downloadcall_button is not displayedd or locator changed");
+		Assert.assertTrue(downloadcall_button.isDisplayed(),"downloadcall_button is not displayedd or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying if email_button is displayed");
-		softassert.assertTrue(email_button.isDisplayed(),"email_button is not displayed or locator changed");
-		softassert.assertAll();	
+		Assert.assertTrue(email_button.isDisplayed(),"email_button is not displayed or locator changed");
+		Assert.assertAll();	
 	}  
 
 	public void paginationButtons(){
@@ -232,14 +285,14 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "verifying presence of buttons in pagination toolbox");
 		wait.until(ExpectedConditions.visibilityOf(first_button));
         logger.log(LogStatus.INFO, "verifying if next_100_button is present"); 
-		softassert.assertTrue(next_100_button.isDisplayed(),"next 100 button is not present or locator changed");
+		Assert.assertTrue(next_100_button.isDisplayed(),"next 100 button is not present or locator changed");
         logger.log(LogStatus.INFO, "verifying if prev_100_button is present");
-		softassert.assertTrue(prev_100_button.isDisplayed(),"prev 100 button is not present or locator changed");	
+		Assert.assertTrue(prev_100_button.isDisplayed(),"prev 100 button is not present or locator changed");	
 		logger.log(LogStatus.INFO, "verifying if prev_100_button is present");
-		softassert.assertTrue(first_button.isDisplayed(),"first button is not present or locator changed");	
+		Assert.assertTrue(first_button.isDisplayed(),"first button is not present or locator changed");	
 		logger.log(LogStatus.INFO, "verifying if last_button is present");
-		softassert.assertTrue(last_button.isDisplayed(),"last button is not present or locator changed");	
-		softassert.assertAll();
+		Assert.assertTrue(last_button.isDisplayed(),"last button is not present or locator changed");	
+		Assert.assertAll();
 
 	}
 	
@@ -255,8 +308,8 @@ public class CallDetailsReport_Page extends TestBase{
 		System.out.println("countOnUI_pagination is "+countOnUI_pagination);
 
 		logger.log(LogStatus.INFO, "verifying count in  pagination toolbox");
-		softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
-		softassert.assertAll();		
+		Assert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
+		Assert.assertAll();		
 
 	}
 	
@@ -271,8 +324,8 @@ public class CallDetailsReport_Page extends TestBase{
 		System.out.println("table_call_count is "+table_call_count.size());
 				
 		logger.log(LogStatus.INFO, "verifying count of listed calls");
-		softassert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
-		softassert.assertAll();
+		Assert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
+		Assert.assertAll();
 	}
 	
 	public void allColumnPickerOptions(){
@@ -283,11 +336,11 @@ public class CallDetailsReport_Page extends TestBase{
 				
 				if(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_all_column_picker_options[j]+" is present ");
-					softassert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
+					Assert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
 				}
 			}
 		}
-		softassert.assertAll();
+//		Assert.assertAll();
 		Util.click(column_Picker_button);
 	}
 	
@@ -300,12 +353,12 @@ public class CallDetailsReport_Page extends TestBase{
 			for(int j=0;j<expected_column_names.length;j++){
 				if(actual_column_names.get(i).getText().equals(expected_column_names[j])){
 					logger.log(LogStatus.INFO, "verifying if "+expected_column_names[j]+" is displayed");
-					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_column_names[j]),"column "+expected_column_names[j]+" is not present");
+					Assert.assertTrue(actual_column_names.get(i).getText().equals(expected_column_names[j]),"column "+expected_column_names[j]+" is not present");
 					break;
 				}
 			}
 		}
-		softassert.assertAll();
+//		Assert.assertAll();
 	}
 	
 	public void allColumns(){
@@ -320,13 +373,13 @@ public class CallDetailsReport_Page extends TestBase{
 				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
 					
 					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
-					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
+					Assert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
 					break;					
 				}
 
 			}
 		}
-		softassert.assertAll();
+//		Assert.assertAll();
 	}
 	
 	
@@ -337,10 +390,10 @@ public class CallDetailsReport_Page extends TestBase{
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
 			
 			logger.log(LogStatus.INFO, "verifying if "+column_picker_options_checkboxes.get(i).getText()+" is enabled");
-			softassert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),column_picker_options_checkboxes.get(i) +" is not enabled");
+			Assert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),column_picker_options_checkboxes.get(i) +" is not enabled");
 			
 		}
-		softassert.assertAll();
+//		Assert.assertAll();
 		Util.click(column_Picker_button);
 	}
 	
@@ -361,7 +414,7 @@ public class CallDetailsReport_Page extends TestBase{
 		Util.click(advanced_filter_button);
 		
 		logger.log(LogStatus.INFO, "Verifying if include/exclude listbox displayed");
-		softassert.assertTrue(include_exclude_listbox.isDisplayed(),"include/exclude listbox not displayed or locator changed");
+		Assert.assertTrue(include_exclude_listbox.isDisplayed(),"include/exclude listbox not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "verifying options displayed in include/exclude listbox");
 		Select select=new Select(include_exclude_listbox);
@@ -372,7 +425,7 @@ public class CallDetailsReport_Page extends TestBase{
 				if(select.getOptions().get(i).getText().equals(expected_include_exclude_listbox[j])){
 					
 					logger.log(LogStatus.INFO, "verifying if "+expected_include_exclude_listbox[j]+" is displayed");
-					softassert.assertTrue(select.getOptions().get(i).getText().equals(expected_include_exclude_listbox[j]),"element "+expected_include_exclude_listbox[j]+"is not present");
+					Assert.assertTrue(select.getOptions().get(i).getText().equals(expected_include_exclude_listbox[j]),"element "+expected_include_exclude_listbox[j]+"is not present");
 					break;
 				}
 			}
@@ -380,7 +433,7 @@ public class CallDetailsReport_Page extends TestBase{
 		}
 		
 		logger.log(LogStatus.INFO, "verifying if filter elements listbox is displayed");
-		softassert.assertTrue(advance_filter_elements_listbox.isDisplayed(),"filter element listbox is not displayed or locator changed");
+		Assert.assertTrue(advance_filter_elements_listbox.isDisplayed(),"filter element listbox is not displayed or locator changed");
 		
 		Select select1=new Select(advance_filter_elements_listbox);
 		
@@ -391,22 +444,22 @@ public class CallDetailsReport_Page extends TestBase{
 					System.out.println(expected_advance_filter_elements[j]);
 					System.out.println(select1.getOptions().get(i).getText());
 					logger.log(LogStatus.INFO, "verifying if "+expected_advance_filter_elements[j]+" is present");
-					softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_advance_filter_elements[j]),"filter element "+expected_advance_filter_elements[j]+" is not present or locator changed");
+					Assert.assertTrue(select1.getOptions().get(i).getText().equals(expected_advance_filter_elements[j]),"filter element "+expected_advance_filter_elements[j]+" is not present or locator changed");
 				}
 			}
 		}
 		
 		logger.log(LogStatus.INFO, "Verifying if add advanced filter button is present");
-		softassert.assertTrue(add_advance_filter_button.isDisplayed(),"add advanced filter button is not displayed or locator changed");
+		Assert.assertTrue(add_advance_filter_button.isDisplayed(),"add advanced filter button is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "Verifying if ok button is displayed");
-		softassert.assertTrue(apply_button.isDisplayed(),"apply button is not displayed or locator chaanged");
+		Assert.assertTrue(apply_button.isDisplayed(),"apply button is not displayed or locator chaanged");
 
 		logger.log(LogStatus.INFO, "Verifying if cancel button is displayed");
-		softassert.assertTrue(cancel_button.isDisplayed(),"cancel button is not displayed or locator chaanged");
+		Assert.assertTrue(cancel_button.isDisplayed(),"cancel button is not displayed or locator chaanged");
 		Util.click(cancel_button);
 
-		softassert.assertAll();
+//		Assert.assertAll();
 	}
 	
 	public void basicFilterFeature(String filterelement){
@@ -443,7 +496,7 @@ public class CallDetailsReport_Page extends TestBase{
 			for(int l=0;l<filtered_value.size();l++){
 				String actual_value = filtered_value.get(l).getText();
 				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+				Assert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
 			}		
 		}
 
@@ -452,7 +505,7 @@ public class CallDetailsReport_Page extends TestBase{
 //		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
 		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
-		softassert.assertAll();
+//		Assert.assertAll();
 		}
 			
 	
@@ -494,7 +547,7 @@ public class CallDetailsReport_Page extends TestBase{
 			for(int l=0;l<filtered_value.size();l++){
 				String actual_value = filtered_value.get(l).getText();
 				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+				Assert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
 			}		
 		}
 
@@ -504,7 +557,7 @@ public class CallDetailsReport_Page extends TestBase{
 		
 
 		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
-		softassert.assertAll();
+//		Assert.assertAll();
 
 	}
 	
@@ -558,18 +611,96 @@ public class CallDetailsReport_Page extends TestBase{
 		
 		if(!(dbCount.equals("0") || dbCount.equalsIgnoreCase("null"))){
 		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
-		softassert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
+		Assert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
 		}
 		else{
 		logger.log(LogStatus.INFO, "verifying if no data found label displayed since no call count is there for date range "+dateRange);			
-		softassert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
+		Assert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
 		}
-		softassert.assertAll();
+//		Assert.assertAll();
 		
 	}
 	
 	
+public void actionButtonClick(String actionButton){
+        
+		List<WebElement> buttons = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr//td//button[@title='"+actionButton+"']"));
+		
+		for(int i=0;i<buttons.size();i++){
+			
+			if(buttons.get(i).isEnabled()){
+				buttons.get(i).click();
+				break;
+			}
+		}
+	}
 	
+	public void actionSectionVerification(String button,String sectionToVerify){
+		
+		if(button.contains("play_button")){
+			
+			logger.log(LogStatus.INFO, "Verifying if audio player is displayed");
+			Assert.assertTrue(audio_player.isDisplayed(),"audio player is dnot displayed or locator changed");
+		}
+		
+		else if(button.contains("inforamtion_icon_button")){
+				
+			if(sectionToVerify.contains("complete info section")){
+			   logger.log(LogStatus.INFO, "Verifying if information section is displayed");
+			   Assert.assertTrue(inforamtion_tab.isDisplayed(),"information section is not displayed or locator changed");
+			}
+			else if(sectionToVerify.contains("info section")){
+				inforamtion_button.click();
+				for(int i=0;i<inforamtion_section_labels.size();i++){
+					for(int j=0;j<expected_inforamtion_section.length;j++){
+						
+						if(inforamtion_section_labels.get(i).getText().contains(expected_inforamtion_section[j])){
+							logger.log(LogStatus.INFO, "Verifying if "+expected_inforamtion_section[j]+" is present");
+							Assert.assertTrue(inforamtion_section_labels.get(i).getText().contains(expected_inforamtion_section[j]),"info label "+expected_inforamtion_section[j]+" is not present or locator changed");
+						}
+					}
+				}			
+			}
+			else if(sectionToVerify.contains("comments")){
+				comments_button.click();
+				logger.log(LogStatus.INFO, "Verifying if Comments sectionis opened");
+				Assert.assertTrue(comment_section.isDisplayed(),"comment section not displayed or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if comment label is displayed");
+				Assert.assertTrue(comment_label.isDisplayed(),"comment label not displayed or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if add comment button is displayed");
+				Assert.assertTrue(add_comment_button.isDisplayed(),"add comment button is not displayed or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if comment textbox is present");
+				Assert.assertTrue(comment_textbox.isDisplayed(),"comment textbox is not displayed or locator changed");
+				
+			}
+			else if(sectionToVerify.contains("tags")){
+				tags_button.click();
+				
+				logger.log(LogStatus.INFO, "Verifyig if tags section is opened");
+				Assert.assertTrue(tag_section.isDisplayed(),"tags section is not displayed or locator changed");
+				
+				logger.log(LogStatus.INFO, "verifying if select tag label is displayed");
+				Assert.assertTrue(select_tags_label.isDisplayed(),"select tag label is not displayed or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if tags textbox is displayed");
+				Assert.assertTrue(tag_textbox.isDisplayed(),"tag textbox is not displayed or locator changed");
+				
+				logger.log(LogStatus.INFO, "Verifying if add tag button is displayed");
+				Assert.assertTrue(save_tag_button.isDisplayed(),"add tag button is not displayed or locator changed");
+				
+			}
+			
+			
+		}
+		
+		
+		
+//		//Assert.assertAll();
+	}
+
 	
 	
 	
