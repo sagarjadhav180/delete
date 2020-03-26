@@ -390,7 +390,6 @@ public class CampaignBuilderPage extends TestBase {
 
 			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
 
-		    Thread.sleep(3000);
 			campaignName_TextBox.clear();
 			campaignName_TextBox.sendKeys(campaign_name_updated);
 			campaignID_TextBox.clear();
@@ -619,8 +618,6 @@ public class CampaignBuilderPage extends TestBase {
 			
 
 			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-
-		    Thread.sleep(3000);
 			System.out.println(campaignName_TextBox);
 			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			campaignName_TextBox.clear();

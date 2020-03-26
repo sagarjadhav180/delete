@@ -216,7 +216,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	int Expected_Column_Picker_options_count=32;
 	
-	@FindBy(xpath="//tbody[@ id='progressLoader']")
+	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private WebElement loading_wheel;	
 	
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
@@ -272,18 +272,13 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			
 		}
 		else if(buttonName.contains("update")){
-
+            Thread.sleep(30000);
 			WebElement edit = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
 			
 			tests.Util.scrollFunction(edit);
-//			edit.click();
 			tests.Util.click(edit);
-//			try{
-//				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//			
-//			}catch(Exception e){
-//			Thread.sleep(1000);	
-//			}
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+
 		}
 		else if(buttonName.contains("expand")){
 			

@@ -1767,6 +1767,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	Select selct_ad_source=new Select(ad_source_dropdown);
      	selct_ad_source.selectByIndex(4);
      	
+     	wait.until(ExpectedConditions.visibilityOf(ring_to_phone_number_textbox));
      	ring_to_phone_number_textbox.clear();
      	ring_to_phone_number_textbox.sendKeys("1234567890");
 

@@ -76,8 +76,8 @@ public class TestBase
 		    
 		}
 
-		wait= new WebDriverWait(driver,30);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wait= new WebDriverWait(driver,60);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
