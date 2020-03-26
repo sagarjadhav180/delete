@@ -5,7 +5,7 @@
   	
 	<test name="chrome test" preserve-order="true" parallel="false" >
     <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+    <parameter name="url" value="https://stag-4-cmo-1.convirza.com"/>
 		<classes>
 
       <class name="tests.LoginTest"/>

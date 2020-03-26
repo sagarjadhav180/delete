@@ -26,7 +26,10 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	Set<String> set=new HashSet<String>();
 	
-	List<String> list=new ArrayList<String>(); ;
+	List<String> list=new ArrayList<String>(); 
+	
+	String campaign_id = "7653";
+	
 	
 	//Tracking number list
 	
@@ -551,15 +554,21 @@ public class TrackingNumberBuilderPage extends TestBase {
     	softassert.assertTrue(top_next_button.isDisplayed(),"top_next_button is not present or locator changed");	
     	softassert.assertTrue(top_prev_button.isDisplayed(),"top_prev_button is not present or locator changed");	
     	
-    	//verification of count in top pagination toolbox	
-    	String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='46') AND status NOT IN ('suspended')" );
+
+		//verification of count in top pagination toolbox	
+    	String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='"+campaign_id+"') AND status NOT IN ('suspended')" );
         String countOnUI_pagination = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+2);
     	logger.log(LogStatus.INFO, "verifying count tracking numbers in top pagination toolbox");
     	softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
     	
+    	if(!(dbCount=="0" || dbCount=="null")){
     	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
     	softassert.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()-1),"count  of listed tracking numbers is mismatching with db count");
-        
+    	}
+    	else{
+        	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
+        	softassert.assertEquals("0", String.valueOf(tracking_numbers_count_in_table.size()),"count  of listed tracking numbers is mismatching with db count");    		
+    	}
         
         
         

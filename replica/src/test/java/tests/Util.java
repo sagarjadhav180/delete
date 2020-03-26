@@ -46,7 +46,7 @@ public class Util extends TestBase{
 	
 	static JsonNode rootNode;
 	static JavascriptExecutor jse = (JavascriptExecutor)driver;
-	static String dbUrl="jdbc:postgresql://stag-5-pg-1.convirza.com:5432/ct_stg";
+	static String dbUrl="jdbc:postgresql://stag-4-pg-1.convirza.com:5432/ct_stg";
 	static String username="moentekdbrw";
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;

@@ -20,6 +20,8 @@ import tests.Util;
 
 public class HomePage extends TestBase {
 	
+	String org_unit_id="4189";
+	
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private WebElement pendo_close_button;	
 
@@ -101,7 +103,7 @@ public class HomePage extends TestBase {
 	@FindBy(xpath="	//a[contains(text(),'Sign Out')]")
 	private WebElement logout_link;
 
-	String org_unit_id="70045";
+
 
 
 	

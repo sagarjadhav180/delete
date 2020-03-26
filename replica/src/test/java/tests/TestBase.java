@@ -31,7 +31,7 @@ public class TestBase
 {
 
 
-	public static String Base_Url = "https://stag-5-cmo-1.convirza.com";
+	public static String Base_Url = "https://stag-4-cmo-1.convirza.com";
 	public static ExtentTest logger;
 	public  static ExtentReports extent = ExtentReportsGenerator.getInstance(true);
 	public static WebDriver driver;
