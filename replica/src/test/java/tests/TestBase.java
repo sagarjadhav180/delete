@@ -32,7 +32,7 @@ public class TestBase
 
 	public static final String campaign_id = "7653";
 	public static final String campaign_ou_id="70045";
-	public static final String org_unit_id="70048"; 
+	public static final String org_unit_id="70045"; 
 	public static final String first_last_name="new ac";
 	public static final String env="stag-5";
 	public static final String account="Automation Account";
