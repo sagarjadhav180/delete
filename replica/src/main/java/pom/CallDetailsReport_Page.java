@@ -281,8 +281,6 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "verifying if export_button is displayed");
 		Assert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
 	
-		if(!(no_data_found_label.isDisplayed())){
-
 		logger.log(LogStatus.INFO, "verifying if showing_label is present");
 		Assert.assertTrue(showing_label.isDisplayed(),"showing_label is not displayed or locator changed");
 		
@@ -300,10 +298,7 @@ public class CallDetailsReport_Page extends TestBase{
 		
 		logger.log(LogStatus.INFO, "verifying if email_button is displayed");
 		Assert.assertTrue(email_button.isDisplayed(),"email_button is not displayed or locator changed");
-	}
-		else{
-			logger.log(LogStatus.INFO, "Since there is no data can not verify action section");
-		}
+	
 		
 		logger.log(LogStatus.INFO, "verifying if basic_search_textbox is displayed");
 		Assert.assertTrue(basic_search_textbox.isDisplayed(),"basic_search_textbox is not displayed or locator changed");
@@ -326,7 +321,6 @@ public class CallDetailsReport_Page extends TestBase{
 
 	public void paginationButtons(){
         
-		if(!(no_data_found_label.isDisplayed())){
 
 			//verifying if all buttons are displayed in pagination toolbox 
 			logger.log(LogStatus.INFO, "verifying presence of buttons in pagination toolbox");
@@ -341,18 +335,13 @@ public class CallDetailsReport_Page extends TestBase{
 			Assert.assertTrue(last_button.isDisplayed(),"last button is not present or locator changed");	
 			Assert.assertAll();
 		
-		}
-		else{
-			logger.log(LogStatus.INFO, "Veifying if there is no data there is no pagination toolbox");
-			Assert.assertTrue(!(first_button.isDisplayed()),"pagination toolbox is displayed even if no data found");
-		}
+		
 
 	}
 	
 	public void paginationCallCount(){
 		//verification of count in pagination toolbox	
-	    if(!(no_data_found_label.isDisplayed())){
-		String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
@@ -363,20 +352,14 @@ public class CallDetailsReport_Page extends TestBase{
 
 		logger.log(LogStatus.INFO, "verifying count in  pagination toolbox");
 		Assert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
-	    }
-	    else{
-	    	logger.log(LogStatus.INFO, "since no data displayed cant verify pagination toolbox");
-	    }
-
-		
+	
 		//		Assert.assertAll();		
 
 	}
 	
 	public void tableCallCount(){
 		//verification of count in pagination toolbox	
-	    if(!(no_data_found_label.isDisplayed())){
-		String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
@@ -387,10 +370,8 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "verifying count of listed calls");
 		Assert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
 //		Assert.assertAll();
-	    }
-	    else{
-	    	logger.log(LogStatus.INFO, "since no data displayed cant verify call count");
-	    }
+	    
+	    
 	}
 	
 	public void allColumnPickerOptions(){
@@ -529,7 +510,6 @@ public class CallDetailsReport_Page extends TestBase{
 	
 	public void basicFilterFeature(String filterelement){
 		
-		if(!(no_data_found_label.isDisplayed())){		
 		int index = 0;
 		String filter_value="";
 		
@@ -574,17 +554,13 @@ public class CallDetailsReport_Page extends TestBase{
 		
 		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
 //		Assert.assertAll();
-		}
-		else {
-			logger.log(LogStatus.INFO, "There is no data to filter on call details report page");
-		}	
+			
 		
 	}	
 	
 
 	public void advancedFilterFeature(String filterelement){
 
-		if(!(no_data_found_label.isDisplayed())){
 		int index = 0;
 		String filter_value="";
 		
@@ -631,16 +607,12 @@ public class CallDetailsReport_Page extends TestBase{
 
 		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
 //		Assert.assertAll();
-		}
-		else{
-			logger.log(LogStatus.INFO, "since there is no data cant verify advance filter feture");
-		}
+		
 
 	}
 	
 	public void dateRangeFilter(String dateRange){
 		
-		if(!(no_data_found_label.isDisplayed())){
 		String endDateToBeUsed ="";
 		String startDateToBeUsed ="";
 		
@@ -700,18 +672,14 @@ public class CallDetailsReport_Page extends TestBase{
 		Assert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
 		}
 //		Assert.assertAll();
-		}
-		else{
-			logger.log(LogStatus.INFO, "since there is no data cant verify date range filter");
-		}
+		
 		
 	}
 	
 	
     public void actionButtonClick(String actionButton){
         
-    	if(!(no_data_found_label.isDisplayed())){
-		List<WebElement> buttons = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr//td//button[@title='"+actionButton+"']"));
+    	List<WebElement> buttons = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr//td//button[@title='"+actionButton+"']"));
 		
 		for(int i=0;i<buttons.size();i++){
 			
@@ -721,16 +689,12 @@ public class CallDetailsReport_Page extends TestBase{
 				break;
 			}
 		}
-    	}
-    	else{
-    		logger.log(LogStatus.INFO, "since there is no data cant perform action button click");
-    	}
+    	
 	}
     	
 	
 	public void actionSectionVerification(String button,String sectionToVerify){
 		
-		if(!(no_data_found_label.isDisplayed())){
 		if(button.contains("play_button")){
 			
 			logger.log(LogStatus.INFO, "Verifying if audio player is displayed");
@@ -841,10 +805,9 @@ public class CallDetailsReport_Page extends TestBase{
 		
 //		Assert.assertAll();
 	}
-		else{
-			logger.log(LogStatus.INFO, "since there is no data cant verify action secction");
-		}
-	}
+		
+		
+		
 	
 	
 	

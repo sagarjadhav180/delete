@@ -5,19 +5,17 @@
   	
 	<test name="chrome test" preserve-order="true" parallel="false" >
     <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-4-cmo-1.convirza.com"/>
-		<classes>
+    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+	<classes>
 
       <class name="tests.LoginTest"/>
       <class name="tests.HomeTest"/>
       <class name="tests.CamapignUIVerificationTest"/>
-      
       <class name="tests.CampaignTests"/>
-      
       <class name="tests.TrackingNumberTest"/>
       <class name="tests.CallDetailReportTest"/>
       
-		</classes>
+	</classes>
 	</test>
 		
 </suite> <!-- Suite -->

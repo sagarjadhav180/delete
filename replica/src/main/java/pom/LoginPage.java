@@ -50,7 +50,7 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath="//a[@class='pull-left']")
 	private static WebElement forgotPassword_link;	
 	
-	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'new ac')]")
+	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'"+first_last_name+"')]")
 	private static WebElement userprofile_link;
 	
 	@FindBy(xpath="//button[@id='pendo-close-guide-7438aaa2']")

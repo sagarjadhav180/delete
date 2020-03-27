@@ -20,7 +20,7 @@ import tests.Util;
 
 public class HomePage extends TestBase {
 	
-	String org_unit_id="4189";
+	
 	
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private WebElement pendo_close_button;	

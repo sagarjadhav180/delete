@@ -24,7 +24,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 {
 	
-	String campaign_ou_id="4189";
+	
 	
 	@FindBy(xpath="//a[@class='btn btn-sm btn-default addcamp ng-scope']")
 	private static WebElement addCampaign_Button;

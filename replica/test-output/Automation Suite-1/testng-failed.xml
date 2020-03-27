@@ -11,7 +11,6 @@
       <class name="tests.HomeTest"/>
       <class name="tests.CamapignUIVerificationTest"/>
       <class name="tests.CampaignTests"/>
-      <class name="tests.TrackingNumberTest"/>
       <class name="tests.CallDetailReportTest"/>
     </classes>
   </test> <!-- chrome test -->
@@ -19,14 +18,6 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
-      <class name="tests.CallDetailReportTest">
-        <methods>
-          <include name="logOut"/>
-          <include name="goToCallDetailsReportPage"/>
-          <include name="uiVerification"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- tests.CallDetailReportTest -->
       <class name="tests.LoginTest">
         <methods>
           <include name="setUp"/>
@@ -35,17 +26,13 @@
           <include name="tearDown"/>
         </methods>
       </class> <!-- tests.LoginTest -->
-      <class name="tests.TrackingNumberTest">
+      <class name="tests.CallDetailReportTest">
         <methods>
-          <include name="scheduleTrakingNumberDeletion"/>
-          <include name="goToCampaignPage"/>
-          <include name="hangupTrakingNumberDeletion"/>
-          <include name="hangupTrakingNumberCreation"/>
-          <include name="cleanUp"/>
-          <include name="voicemailTrakingNumberDeletion"/>
+          <include name="logOut"/>
+          <include name="goToCallDetailsReportPage"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- tests.TrackingNumberTest -->
+      </class> <!-- tests.CallDetailReportTest -->
       <class name="tests.CamapignUIVerificationTest">
         <methods>
           <include name="goToCampaignPage"/>

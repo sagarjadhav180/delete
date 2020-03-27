@@ -28,7 +28,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	
 	List<String> list=new ArrayList<String>(); 
 	
-	String campaign_id = "7653";
+	
 	
 	
 	//Tracking number list
