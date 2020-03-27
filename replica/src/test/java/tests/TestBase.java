@@ -30,8 +30,16 @@ import pom.HomePage;
 public class TestBase
 {
 
-
-	public static String Base_Url = "https://stag-4-cmo-1.convirza.com";
+	public static final String campaign_id = "7653";
+	public static final String campaign_ou_id="70045";
+	public static final String org_unit_id="70048"; 
+	public static final String first_last_name="new ac";
+	public static final String env="stag-5";
+	public static final String account="Automation Account";
+	public static final String campaignToBeEdited="SJC-1";
+	
+	
+	public static String Base_Url = "https://"+env+"-cmo-1.convirza.com";
 	public static ExtentTest logger;
 	public  static ExtentReports extent = ExtentReportsGenerator.getInstance(true);
 	public static WebDriver driver;
