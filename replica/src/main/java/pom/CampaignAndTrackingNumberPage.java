@@ -581,11 +581,8 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
 	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
-	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
-	
-	logger.log(LogStatus.INFO, "verifying count of listed campaigns");
-	Assert1.assertEquals(dbCount, String.valueOf(countOfCamapign.size()),"count  of listed campaigns is mimatching with db count");
-	
+	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+		
 	//verification of bottom pagination toolbox
         if(countOfCamapign.size()>100){
 		Util.scrollFunction(bottomNextPagination_Button);
@@ -610,9 +607,22 @@ public class CampaignAndTrackingNumberPage extends TestBase
     	Assert1.assertTrue(topFirstPagination_count.isEnabled(),"topFirstPagination_count is not clickable");	
     	Assert1.assertTrue(topLastPagination_count.isEnabled(),"topLastPagination_count is not clickable");    	
 
-
+    	logger.log(LogStatus.INFO, "verifying count of listed campaigns");
+    	
+    	int final_count=countOfCamapign.size()+0;
+    	if(bottomNextPagination_Button.isEnabled()){
+    		Util.click(bottomNextPagination_Button);
+    		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    		final_count=final_count+countOfCamapign.size();
+    	}
+    	System.out.println("dbCount "+dbCount);
+    	System.out.println("final_count "+final_count);
+    	Assert1.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mismtching with db count");
     	
     Assert1.assertAll();
+    Util.scrollFunction(topPrevPagination_Button);
+    Util.click(topPrevPagination_Button);
+    wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 	
 	}
 	
