@@ -60,7 +60,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	@FindBy(xpath="(//button[contains(text(),'Showing')])[1]")
 	private static WebElement top_pagination_count;
 	
-	@FindBy(xpath="(//table)[4]//tr//form")
+	@FindBy(xpath="((//table)[4]//tbody//tr//div[@aria-hidden='false']//button[@class='btn btn-sm btn-primary'][contains(text(),'Edit')])")
 	private static List<WebElement> tracking_numbers_count_in_table;	
 	
 	//Add tracking number page-basic section
