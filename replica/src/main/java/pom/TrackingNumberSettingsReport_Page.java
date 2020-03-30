@@ -18,7 +18,7 @@ import tests.Util;
 
 public class TrackingNumberSettingsReport_Page extends TestBase{
 	
-	SoftAssert softassert=new SoftAssert();
+
 	
 	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private static WebElement loading_wheel;
@@ -124,7 +124,8 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}
 	
     public void uiVerification() throws InterruptedException{
-		
+
+    	SoftAssert softassert=new SoftAssert();
 		wait.until(ExpectedConditions.visibilityOf(trackingNumberSettings_header));
 		logger.log(LogStatus.INFO, "verifying if trackingNumberSettings_header is displayed");
 		softassert.assertTrue(trackingNumberSettings_header.isDisplayed(),"trackingNumberSettings_header is not displayed or locator changed");
@@ -153,13 +154,14 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 		
 		logger.log(LogStatus.INFO, "Verifying if column_Picker_button is present");
 		softassert.assertTrue(column_Picker_button.isDisplayed(),"column_Picker_button is not displayed or locator changed");
-		softassert.fail();
+		
 		softassert.assertAll();
 		
 	}  
     
     public void paginationButtons(){
         
+    	SoftAssert softassert=new SoftAssert();
     	//verifying if all buttons are displayed in pagination toolbox 
 		logger.log(LogStatus.INFO, "verifying presence of buttons in pagination toolbox");
 		wait.until(ExpectedConditions.visibilityOf(first_button));
@@ -176,12 +178,11 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 }
 
     public void paginationTrackingNumbersCount(){
-		
+    	SoftAssert softassert=new SoftAssert();
     	//verification of count in pagination toolbox	
-	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+org_unit_id+"') AND status='active'");
+
 
 		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
 		System.out.println("dbCount is "+dbCount);
@@ -196,22 +197,28 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 
     public void tableTrackingNumbersCount(){
 		//verification of count in pagination toolbox	
-	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+    	SoftAssert softassert=new SoftAssert();
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+org_unit_id+"') AND status='active'");
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-
+		int final_count=table_call_count.size()+0;
+		Util.scrollFunction(next_100_button);
+		if(next_100_button.isEnabled()){
+			Util.click(next_100_button);
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+			final_count=final_count+table_call_count.size();
+		}
 		System.out.println("dbCount is "+dbCount);
-		System.out.println("table_call_count is "+table_call_count.size());
+		System.out.println("table_call_count is "+final_count);
 				
 		logger.log(LogStatus.INFO, "verifying count of tracking numbers in table");
-		softassert.assertEquals(dbCount, String.valueOf(table_call_count.size()),"count  of listed campaigns is mimatching with db count");
+		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed tracking numbers is mismatching with db count");
 		softassert.assertAll();
 	    	    
 	}
 
     public void allColumnPickerOptions(){
 		Util.click(column_Picker_button);
+		SoftAssert softassert=new SoftAssert();
 		
 		for(int i=0;i<all_actual_column_picker_options_labels.size();i++){
 			for(int j=0;j<expected_all_column_picker_options.length;j++){
@@ -228,7 +235,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 
     
     public void defaultColumns(){
-    	
+    	SoftAssert softassert=new SoftAssert();
         logger.log(LogStatus.INFO, "verifying column names in Tracking Number Settings report table");
 		
 		for(int i=0;i<actual_column_names.size();i++){
@@ -245,7 +252,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}
     
     public void allColumns(){
-		
+    	SoftAssert softassert=new SoftAssert();
         logger.log(LogStatus.INFO, "verifying column names in Tracking Number Settings Report table");
 		
 		for(int i=0;i<actual_column_names.size();i++){
@@ -266,7 +273,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}
     
     public void allColumnPickerCheckboxes(){
-		
+    	SoftAssert softassert=new SoftAssert();
 		Util.click(column_Picker_button);
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
 			
@@ -279,7 +286,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}
     
     public void checkAllColumnPickerOptions(){
-		
+    	SoftAssert softassert=new SoftAssert();
 		Util.click(column_Picker_button);
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
 			
@@ -291,7 +298,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}    
     
     public void advancedFilter(){
-		
+    	SoftAssert softassert=new SoftAssert();
 		Util.click(advanced_filter_button);
 		
 		logger.log(LogStatus.INFO, "Verifying if include/exclude listbox displayed");
@@ -344,7 +351,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}
     
     public void basicFilterFeature(String filterelement){
-		
+    	SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
 		
@@ -394,6 +401,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     
     public void advancedFilterFeature(String filterelement){
 
+    	SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
 		
