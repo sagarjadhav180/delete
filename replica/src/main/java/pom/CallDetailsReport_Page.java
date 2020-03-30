@@ -20,7 +20,7 @@ import tests.Util;
 public class CallDetailsReport_Page extends TestBase{
 
     SoftAssert Assert=new SoftAssert();
-	String org_unit_id = "70045";
+	
 
 	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private static WebElement loading_wheel;
@@ -114,6 +114,7 @@ public class CallDetailsReport_Page extends TestBase{
 
 	String[] expected_column_names={"Date/Time","Group Name","Campaign","Ad Source","Caller ID","Tracking Number","Destination Name | No.","Duration","Disposition","Line Type","Agent","Actions"};
 
+	//action buttons
 	@FindBy(xpath="(//table[@id='calldetailstable']//tbody//tr[1]//td//button)[1]")
 	private static WebElement play_call_button;	
 	
@@ -201,6 +202,7 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//table[@id='calldetailstable']//tbody//tr")
 	private static List<WebElement> table_call_count;	
 
+	//advance filter
 	@FindBy(xpath="//div[@class='advancedf']//select[1]")
 	private static WebElement include_exclude_listbox;
 	String[] expected_include_exclude_listbox={"Include","Exclude"};
@@ -633,17 +635,16 @@ public class CallDetailsReport_Page extends TestBase{
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
 
-//		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-		
-        try{
-        	wait.until(ExpectedConditions.visibilityOf(no_data_found_label));        	
-        	
-        }catch(Exception e){
-        	wait.until(ExpectedConditions.visibilityOf(showing_label));
-        }
+//        try{
+//        	wait.until(ExpectedConditions.visibilityOf(showing_label));
+//        	
+//        	
+//        }catch(Exception e){
+//        	wait.until(ExpectedConditions.visibilityOf(no_data_found_label));
+//        }
         
         
-        
+        wait.until(ExpectedConditions.visibilityOf(dateRange_filter));
 		Util.click(dateRange_filter);
 		
 		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
@@ -659,7 +660,8 @@ public class CallDetailsReport_Page extends TestBase{
 		
 
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-
+        
+		logger.log(LogStatus.INFO, "SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+table_call_count.size());
 		
