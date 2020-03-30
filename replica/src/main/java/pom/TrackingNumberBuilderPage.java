@@ -941,7 +941,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
         wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
     	softassert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
-
+    	softassert.assertAll();
     }
     
     public void createIVRRoute(String tracking_number_name){
