@@ -414,12 +414,12 @@ public class HomePage extends TestBase {
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("softassert "+softassert);
 			System.out.println("avg_call_duration_from_db "+avg_call_duration_from_db);
-			System.out.println("avg_call_duration__from_ui "+avg_call_duration__from_ui.substring(5,6));
+			System.out.println("avg_call_duration__from_ui "+avg_call_duration__from_ui.substring(5,avg_call_duration__from_ui.indexOf('s')));
 			System.out.println();
 			
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			
-			softassert.assertTrue(avg_call_duration_from_db.equals(avg_call_duration__from_ui.substring(5,6)),"AVG CALL DURATION from ui is not matching with db");
+			softassert.assertTrue(avg_call_duration_from_db.equals(avg_call_duration__from_ui.substring(5,avg_call_duration__from_ui.indexOf('s'))),"AVG CALL DURATION from ui is not matching with db");
 			
 			//TOTAL LEADS
 			String total_leads__from_ui = dashboard_tiles_values.get(4).getText();
