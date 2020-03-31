@@ -522,7 +522,13 @@ public class CallDetailsReport_Page extends TestBase{
 	}
 	
 	public void basicFilterFeature(String filterelement){
-	    SoftAssert softassert=new SoftAssert();
+	    
+    	try{
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    	}catch(Exception e){
+ 		   	}
+
+		SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
 		
@@ -573,7 +579,12 @@ public class CallDetailsReport_Page extends TestBase{
 	
 
 	public void advancedFilterFeature(String filterelement){
-	    SoftAssert softassert=new SoftAssert();
+    	try{
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    	}catch(Exception e){
+ 		   	}
+
+		SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
 		
@@ -588,6 +599,11 @@ public class CallDetailsReport_Page extends TestBase{
 		for(int j=0;j<values.size();j++){
 			if(index==j){
 				filter_value=values.get(j).getText();
+				if(filterelement.equals("Line Type")){
+					if(filter_value.equals("") || filter_value.equals("null")){
+					filter_value="NonFixedVOIP";
+					}
+				}
 			}
 		}
 		
@@ -685,7 +701,7 @@ public class CallDetailsReport_Page extends TestBase{
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+final_count);	
 		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
-		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mimatching with db count");
+		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed calls is mismatching with db count");
 		}
 		else{
 		logger.log(LogStatus.INFO, "verifying if no data found label displayed since no call count is there for date range "+dateRange);			
@@ -754,7 +770,7 @@ public class CallDetailsReport_Page extends TestBase{
 				logger.log(LogStatus.INFO, "Verifying if Message textbox is present");
 				softassert.assertTrue(email_this_call_message_textbox.isDisplayed(),"Email this call Message text box is not present or locator changed");
 
-				logger.log(LogStatus.INFO, "Verifying default from mail id");
+				logger.log(LogStatus.INFO, "Verifying default from mail id is "+email_this_call_from_textbox.getText());
 				softassert.assertTrue(email_this_call_from_textbox.getText().equals(CallDetailReportTest.default_mail_id_from),"default mail id is incorrect");
 				
 				logger.log(LogStatus.INFO, "Verifying if Send now button is present");
