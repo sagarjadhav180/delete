@@ -31,6 +31,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 		hp.clickAction("Legacy Reports");
 		
 		hp.click_subLink("Tracking Number Settings");
+		
 	}
 	
 	//ui verification of call details page
@@ -118,6 +119,56 @@ public class TrackingNumberSettingsTest extends TestBase{
 		logger.assignCategory(category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.advancedFilter();
+	}
+	
+	@Test(priority=11,groups="basic_filters")
+	public void basicFilterFeatureForType(){
+		
+		logger=extent.startTest("Basic filter feature for Status");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.basicFilterFeature("Status");
+		 
+	}
+	
+	@Test(priority=10,groups="basic_filters")
+	public void basicFilterFeatureForTrackingNumber(){
+		
+		logger=extent.startTest("Basic filter feature for Tracking Number");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.basicFilterFeature("Tracking Number");
+		 
+	}
+	
+	@Test(priority=12,groups="basic_filters")
+	public void basicFilterFeatureForGroupName(){
+		
+		logger=extent.startTest("Basic filter feature for Group Name");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.basicFilterFeature("Group Name");
+		 
+	}
+	
+	@Test(priority=13,groups="basic_filters")
+	public void basicFilterFeatureForAdSource(){
+		
+		logger=extent.startTest("Basic filter feature for Ad source");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.basicFilterFeature("Ad Source");
+		 
+	}
+	
+	@Test(priority=14,groups="basic_filters")
+	public void basicFilterFeatureForCampaignName(){
+		
+		logger=extent.startTest("Basic filter feature for Campaign Name");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.basicFilterFeature("Campaign name");
+		 
 	}
 	
 }

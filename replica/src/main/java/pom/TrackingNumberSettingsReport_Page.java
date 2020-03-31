@@ -351,14 +351,24 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}
     
     public void basicFilterFeature(String filterelement){
+    	try{
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    	}catch(Exception e){
+ 		   	}
+    	
     	SoftAssert softassert=new SoftAssert();
-		int index = 0;
+		int index =0;
 		String filter_value="";
-		
+		System.out.println("----------------------------------");		
 		for(int i=0;i<actual_column_names.size();i++){
-		
+			System.out.println("actual_column_names "+actual_column_names.get(i));
+			System.out.println("actual_column_names --"+actual_column_names.get(i).getText()+"--");
 			if(actual_column_names.get(i).getText().equals(filterelement)){
+				System.out.println("actual_column_names in loop "+actual_column_names.get(i).getText());
+				
 				index=i;
+				break;
+	
 			}
 		}
 		
@@ -370,10 +380,21 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 				filter_value=values.get(j).getText();
 			}
 		}
+
+		System.out.println("index is "+index);
+		System.out.println("filter_value "+filter_value);
 		
+		System.out.println("----------------------------------");	
 		basic_search_textbox.clear();
+		if(filterelement.equals("Tracking Number") ){
+		driver.navigate().refresh();
 		basic_search_textbox.sendKeys(filter_value);
 		Util.click(basic_search_button);
+		}
+		else{
+			basic_search_textbox.sendKeys(filter_value);
+			Util.click(basic_search_button);
+		}
 		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
 		String xPath="//table[@id='classflowDataTable']//tbody//tr";
@@ -400,6 +421,10 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	}	
     
     public void advancedFilterFeature(String filterelement){
+    	try{
+    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    	}catch(Exception e){
+ 		   	}
 
     	SoftAssert softassert=new SoftAssert();
 		int index = 0;
