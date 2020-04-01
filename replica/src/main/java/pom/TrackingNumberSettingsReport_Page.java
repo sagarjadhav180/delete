@@ -88,8 +88,11 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-gray']")
 	private static WebElement add_advance_filter_button;
 
+	@FindBy(xpath="//div[@class='advancedf']//select[3]//following-sibling::input[2]")
+	private static WebElement advance_filter_textbox_for_trackingNumber;
+
 	@FindBy(xpath="//div[@class='advancedf']//select[3]//following-sibling::input[1]")
-	private static WebElement advance_filter_textbox;
+	private static WebElement advance_filter_textbox_for_rest_elements;
 	
 	@FindBy(xpath="//button[@class='btn btn-primary'][contains(text(),'Apply')]")
 	private static WebElement apply_button;
@@ -432,7 +435,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 		
 		for(int i=0;i<actual_column_names.size();i++){
 		
-			if(actual_column_names.get(i).getText().equals(filterelement)){
+			if(actual_column_names.get(i).getText().equalsIgnoreCase(filterelement)){
 				index=i;
 			}
 		}
@@ -443,12 +446,21 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 				filter_value=values.get(j).getText();
 			}
 		}
-		
+		if(filterelement.equals("Ad Source")){
+			driver.navigate().refresh();
+	    	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+		}
 		advanced_filter_button.click();
 		Select select=new Select(advance_filter_elements_listbox);
 		select.selectByVisibleText(filterelement);
+
 //		advance_filter_textbox.clear();
-		advance_filter_textbox.sendKeys(filter_value);
+        if(filterelement.equals("Tracking Number")){
+		advance_filter_textbox_for_trackingNumber.sendKeys(filter_value);
+        }
+        else{
+        advance_filter_textbox_for_rest_elements.sendKeys(filter_value);
+        }
 		Util.click(apply_button);
 		
 		wait.until(ExpectedConditions.visibilityOf(showing_label));
@@ -462,7 +474,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 			for(int l=0;l<filtered_value.size();l++){
 				String actual_value = filtered_value.get(l).getText();
 				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
 			}		
 		}
 

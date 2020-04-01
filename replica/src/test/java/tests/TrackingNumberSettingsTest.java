@@ -2,6 +2,7 @@ package tests;
 
 import java.io.IOException;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -169,6 +170,53 @@ public class TrackingNumberSettingsTest extends TestBase{
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.basicFilterFeature("Campaign name");
 		 
+	}
+	
+	@Test(priority=15)
+	public void advancedFilterForTrackingNumber(){
+		
+		logger=extent.startTest("Advanced Filter for Tracking Number");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.advancedFilterFeature("Tracking Number");
+	}
+	
+	@Test(priority=16)
+	public void advancedFilterForGroupName(){
+		
+		logger=extent.startTest("Advanced Filter for Group Name");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.advancedFilterFeature("Group name");
+	}
+	
+	@Test(priority=16)
+	public void advancedFilterForCampaignName(){
+		
+		logger=extent.startTest("Advanced Filter for Campaig Name");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.advancedFilterFeature("Campaign Name");
+	}
+	
+	@Test(priority=17)
+	public void advancedFilterForTrackingNumberName(){
+		
+		logger=extent.startTest("Advanced Filter for Tracking Number Name");
+		logger.assignCategory(category);
+		tn=TrackingNumberSettingsReport_Page.instance();
+		tn.advancedFilterFeature("Tracking Number Name");
+	}
+	
+	//logging out -tear down
+	@AfterClass
+	public void logOut() throws IOException{
+			
+		LoginPage lp=new LoginPage(driver);
+		logger=extent.startTest("LogOut"); 
+		logger.log(LogStatus.INFO, "loggin out.. ");
+		lp.logOut();
+			        		
 	}
 	
 }
