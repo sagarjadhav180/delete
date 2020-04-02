@@ -30,6 +30,7 @@ import pom.HomePage;
 public class TestBase
 {
 
+	//Environment Variables
 	public static final String campaign_id = "46";
 	public static final String campaign_ou_id="70045";
 	public static final String org_unit_id="70045"; 
