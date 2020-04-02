@@ -152,12 +152,5 @@ public class LoginTest extends TestBase
 	        lp.logOut();
 	        		
 		}
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }
