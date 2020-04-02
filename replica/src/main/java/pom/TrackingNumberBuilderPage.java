@@ -560,7 +560,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	
     	if(!(dbCount=="0" || dbCount=="null")){
     	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
-    	softassert.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()-1),"count  of listed tracking numbers is mismatching with db count");
+    	softassert.assertEquals(dbCount, String.valueOf(tracking_numbers_count_in_table.size()),"count  of listed tracking numbers is mismatching with db count");
     	}
     	else{
         	logger.log(LogStatus.INFO, "verifying count of listed tracking numbers");
