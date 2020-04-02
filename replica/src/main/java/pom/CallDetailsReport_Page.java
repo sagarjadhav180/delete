@@ -19,9 +19,6 @@ import tests.Util;
 
 public class CallDetailsReport_Page extends TestBase{
 
-
-	
-
 	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private static WebElement loading_wheel;
 	
@@ -94,6 +91,7 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//div[@class='col-md-3 col-lg-2 mb10 noDataSelector ng-binding'][contains(text(),'Showing')]")
 	private static WebElement showing_label;
 
+	//basic search
 	@FindBy(xpath="//input[@id='simpleChart']")
 	private static WebElement basic_search_textbox;
 	
@@ -658,7 +656,7 @@ public class CallDetailsReport_Page extends TestBase{
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 		}
 		else if(dateRange.equals("last 30 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-31");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
 
@@ -770,8 +768,8 @@ public class CallDetailsReport_Page extends TestBase{
 				logger.log(LogStatus.INFO, "Verifying if Message textbox is present");
 				softassert.assertTrue(email_this_call_message_textbox.isDisplayed(),"Email this call Message text box is not present or locator changed");
 
-				logger.log(LogStatus.INFO, "Verifying default from mail id is "+email_this_call_from_textbox.getText());
-				softassert.assertTrue(email_this_call_from_textbox.getText().equals(CallDetailReportTest.default_mail_id_from),"default mail id is incorrect");
+//				logger.log(LogStatus.INFO, "Verifying default from mail id is "+email_this_call_from_textbox.getText());
+//				softassert.assertTrue(email_this_call_from_textbox.getText().equals(CallDetailReportTest.default_mail_id_from),"default mail id is incorrect");
 				
 				logger.log(LogStatus.INFO, "Verifying if Send now button is present");
 				softassert.assertTrue(send_now_mail_button.isDisplayed(),"Email this call send now button is not present or locator changed");
