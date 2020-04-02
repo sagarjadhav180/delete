@@ -610,8 +610,8 @@ public class CampaignAndTrackingNumberPage extends TestBase
     	logger.log(LogStatus.INFO, "verifying count of listed campaigns");
     	
     	int final_count=countOfCamapign.size()+0;
-    	if(bottomNextPagination_Button.isEnabled()){
-    		Util.click(bottomNextPagination_Button);
+    	if(!(topNextPagination_Button.getAttribute("class").endsWith("disabled"))){
+    		Util.click(topNextPagination_Button);
     		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
     		final_count=final_count+countOfCamapign.size();
     	}
