@@ -20,8 +20,7 @@ import tests.Util;
 
 public class HomePage extends TestBase {
 	
-	
-	
+
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private WebElement pendo_close_button;	
 
@@ -45,7 +44,6 @@ public class HomePage extends TestBase {
 	
 	
 	//dashboard 
-
 	@FindBy(xpath="//canvas[@ class='flot-overlay']")
 	private WebElement unique_calls_graph;
 
@@ -102,10 +100,6 @@ public class HomePage extends TestBase {
 
 	@FindBy(xpath="	//a[contains(text(),'Sign Out')]")
 	private WebElement logout_link;
-
-
-
-
 	
 //	WebDriverWait wait;
 //	ExtentTest logger;
@@ -219,7 +213,8 @@ public class HomePage extends TestBase {
 		logger.log(LogStatus.INFO, "verifying if profile_link is displayed");
 		softassert.assertTrue(profile_link.isDisplayed(),"profile_link is not displayed or locator has been changed..");
 		
-		profile_link.click();
+		Util.click(profile_link);
+		
 		//To check if edit_profile_link is displayed
 		logger.log(LogStatus.INFO, "verifying if edit_profile_link is displayed");
 		softassert.assertTrue(edit_profile_link.isDisplayed(),"edit_profile_link is not displayed or locator has been changed..");
@@ -368,18 +363,15 @@ public class HomePage extends TestBase {
 	public void tilesCount(){
 		
 		   String endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
-
-		   
 		   String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-8");
 
-		   
 		   System.out.println("startDateToBeUsed is "+startDateToBeUsed);
 		   System.out.println("endDateToBeUsed is "+endDateToBeUsed);
 		for(int i=0;i<dashboard_tiles_values.size();i++){
 			
 			//total calls count
 			String total_call_count_from_ui = dashboard_tiles_values.get(0).getText();
-			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			System.out.println("total_count_from_ui is "+total_call_count_from_ui);
 			System.out.println("total_count_from_db "+total_call_count_from_db);
@@ -388,7 +380,7 @@ public class HomePage extends TestBase {
 			
 			//total unique calls count
 			String unique_calls_count_from_ui = dashboard_tiles_values.get(1).getText();
-			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
 			System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
 			System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying unique calls count..");
@@ -396,7 +388,7 @@ public class HomePage extends TestBase {
 
 			//total answered calls calls count
 			String answered_calls_count_from_ui = dashboard_tiles_values.get(2).getText();
-			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
+			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
 			System.out.println("answered_calls_count_from_ui is "+answered_calls_count_from_ui);
 			System.out.println("answered_calls_count_from_db "+answered_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying answered calls count..");
@@ -423,11 +415,11 @@ public class HomePage extends TestBase {
 			
 			//TOTAL LEADS
 			String total_leads__from_ui = dashboard_tiles_values.get(4).getText();
-			String total_leads_from_db = Util.readingFromDB("SELECT count(*) FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+			String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
 			System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 			System.out.println("total_leads_from_db "+total_leads_from_db);
 			logger.log(LogStatus.INFO, "verifying total leads..");
-			if(total_leads_from_db==null){
+			if(total_leads_from_db=="null" || total_leads_from_db=="0"){
 			softassert.assertTrue("0".equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
 			}
 			else{
