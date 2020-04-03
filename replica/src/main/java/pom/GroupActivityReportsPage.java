@@ -146,7 +146,8 @@ public class GroupActivityReportsPage extends TestBase {
 	public void UIVerification() throws InterruptedException{
 	    SoftAssert softassert=new SoftAssert();		
 		wait.until(ExpectedConditions.visibilityOf(groupactivity_report_header));
-		logger.log(LogStatus.INFO, "verifying if callDetails_header is displayed");
+		
+		logger.log(LogStatus.INFO, "verifying if groupaactivity_header is displayed");
 		softassert.assertTrue(groupactivity_report_header.isDisplayed(),"callDetails_header is not displayed or locator changed");
 		
 		logger.log(LogStatus.INFO, "Verifying if dateRange_filter is displayed");
@@ -177,8 +178,6 @@ public class GroupActivityReportsPage extends TestBase {
 		logger.log(LogStatus.INFO, "verifying if export_button is displayed");
 		softassert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
 	
-	
-		
 		logger.log(LogStatus.INFO, "verifying if basic_search_textbox is displayed");
 		softassert.assertTrue(basic_search_textbox.isDisplayed(),"basic_search_textbox is not displayed or locator changed");
 		
@@ -197,9 +196,12 @@ public class GroupActivityReportsPage extends TestBase {
 		//tiles
 		for(int i=0;i<tiles_heading.size();i++){
 			for(int j=0;j<expected_tiles_heading.length;j++){
-				if(tiles_heading.get(i).getText().equals(expected_tiles_heading[j])){
+
+				if(tiles_heading.get(i).getText().equalsIgnoreCase(expected_tiles_heading[j])){
+					System.out.println(tiles_heading.get(i).getText());
+					System.out.println(expected_tiles_heading[j]);
 					logger.log(LogStatus.INFO, "Verifying if "+expected_tiles_heading[j]+" tile is present");
-					softassert.assertTrue(tiles_heading.get(i).getText().equals(expected_tiles_heading[j]),expected_tiles_heading[j]+" tile is not present");
+					softassert.assertTrue(tiles_heading.get(i).getText().equalsIgnoreCase(expected_tiles_heading[j]),expected_tiles_heading[j]+" tile is not present");
 					break;
 				}
 			}
@@ -213,67 +215,84 @@ public class GroupActivityReportsPage extends TestBase {
 		
 		SoftAssert softassert=new SoftAssert();
 		String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-8");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 		
-		for(int i=0;i<dashboard_tiles_values.size();i++){
+		for(int i=0;i<tiles_heading.size();i++){
 			
-			if((!(dashboard_tiles_values.get(i).getText().endsWith("Value")))|| (!(dashboard_tiles_values.get(i).getText().startsWith("Billable")))){
+			for(int j=i;j<dashboard_tiles_values.size();j++){
 				
-				if(dashboard_tiles_values.get(i).getText().startsWith("Total Calls")){
-					String total_call_count_from_ui = dashboard_tiles_values.get(i).getText();
-					String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-					System.out.println("SELECT count(*) as count FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-					System.out.println("total_count_from_ui is "+total_call_count_from_ui);
-					System.out.println("total_count_from_db "+total_call_count_from_db);
-					logger.log(LogStatus.INFO, "verifying total calls count..");
-					softassert.assertTrue(total_call_count_from_ui.equals(total_call_count_from_db),"total_call_count_from_ui is not matching with db");
 
-				}
-				else if(dashboard_tiles_values.get(i).getText().endsWith("Leads")){
-					String total_leads__from_ui = dashboard_tiles_values.get(i).getText();
-					String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
-					System.out.println("total_leads__from_ui is "+total_leads__from_ui);
-					System.out.println("total_leads_from_db "+total_leads_from_db);
-					logger.log(LogStatus.INFO, "verifying total leads..");
-					if(total_leads_from_db=="null" || total_leads_from_db=="0"){
-					softassert.assertTrue("0".equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
+				
+				if((!(tiles_heading.get(i).getText().endsWith("VALUE")))|| (!(dashboard_tiles_values.get(i).getText().startsWith("BILLABLE")))){
+					
+					if(tiles_heading.get(i).getText().startsWith("TOTAL CALLS")){
+						String total_call_count_from_ui = dashboard_tiles_values.get(j).getText();
+						String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+						System.out.println("SELECT count(*) as count FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+						System.out.println("total_count_from_ui is "+total_call_count_from_ui);
+						System.out.println("total_count_from_db "+total_call_count_from_db);
+						logger.log(LogStatus.INFO, "verifying total calls count..");
+						if(!((total_call_count_from_db==null)||(total_call_count_from_db.equals("0")))){
+							softassert.assertTrue(total_call_count_from_ui.equals(total_call_count_from_db),"total_call_count_from_ui is not matching with db");						
+						}
+						else{
+							softassert.assertTrue(total_call_count_from_ui.equals("0"),"total_call_count_from_ui is not matching with db");												
+						}
+						break;
+
+
 					}
-					else{
-					softassert.assertTrue(total_leads_from_db.equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");				
+					else if(tiles_heading.get(i).getText().endsWith("LEADS")){
+						String total_leads__from_ui = dashboard_tiles_values.get(j).getText();
+						String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+						System.out.println("total_leads__from_ui is "+total_leads__from_ui);
+						System.out.println("total_leads_from_db "+total_leads_from_db);
+						logger.log(LogStatus.INFO, "verifying total leads..");
+						if(total_leads_from_db==null || total_leads_from_db=="0"){
+						softassert.assertTrue("0".equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
+						}
+						else{
+						softassert.assertTrue(total_leads_from_db.equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");				
+						}
+						break;
 					}
-				}
-				else if(dashboard_tiles_values.get(i).getText().startsWith("Conversions")){
-					String total_conversion__from_ui = dashboard_tiles_values.get(i).getText();
-					String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'') AND indicator_id='18'");
-					System.out.println("total_conversion__from_ui is "+total_conversion__from_ui);
-					System.out.println("total_conversion_from_db "+total_conversion_from_db);
-					logger.log(LogStatus.INFO, "verifying total conversion..");
-					if(total_conversion_from_db=="null" || total_conversion_from_db.equals("0")){
-						softassert.assertTrue(total_conversion__from_ui.equals("0"),"total_conversion__from_ui is not matching with db");	
+					else if(tiles_heading.get(i).getText().startsWith("CONVERSIONS")){
+						String total_conversion_from_ui = dashboard_tiles_values.get(j).getText();
+						String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");
+						System.out.println("total_conversion__from_ui is "+total_conversion_from_ui);
+						System.out.println("total_conversion_from_db "+total_conversion_from_db);
+						logger.log(LogStatus.INFO, "verifying total conversion..");
+						if(total_conversion_from_db==(null) || total_conversion_from_db=="0"){
+							softassert.assertTrue(total_conversion_from_ui.equals("0"),"total_conversion__from_ui is not matching with db");	
+						}
+						else{
+							softassert.assertTrue(total_conversion_from_ui.equals(total_conversion_from_db),"total_conversion__from_ui is not matching with db");
+						}
+						break;
 					}
-					else{
-						softassert.assertTrue(total_conversion__from_ui.equals(total_conversion_from_db),"total_conversion__from_ui is not matching with db");
+					else if(tiles_heading.get(i).getText().startsWith("UNIQUE")){
+						String unique_calls_count_from_ui = dashboard_tiles_values.get(j).getText();
+						String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+						System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
+						System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
+						logger.log(LogStatus.INFO, "verifying unique calls count..");
+						if((unique_calls_count_from_db==null) || (unique_calls_count_from_db.equals("0"))){
+							softassert.assertTrue(unique_calls_count_from_db.equals("0"),"unique_calls_count_from_ui is not matching with db");											
+						}
+						else{
+
+							softassert.assertTrue(unique_calls_count_from_ui.equals(unique_calls_count_from_db),"unique_calls_count_from_ui is not matching with db");						
+						}
+						break;
+
 					}
 					
+					
 				}
-				else if(dashboard_tiles_values.get(i).getText().startsWith("Unique")){
-					String unique_calls_count_from_ui = dashboard_tiles_values.get(1).getText();
-					String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
-					System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
-					System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
-					logger.log(LogStatus.INFO, "verifying unique calls count..");
-					if(!(unique_calls_count_from_db.equals("null") || unique_calls_count_from_db.equals("0"))){
-					  softassert.assertTrue(unique_calls_count_from_db.equals(unique_calls_count_from_db),"unique_calls_count_from_ui is not matching with db");						
-					}
-					else{
-						  softassert.assertTrue(unique_calls_count_from_db.equals("0"),"unique_calls_count_from_ui is not matching with db");												
-					}
-
-				}
-				
-				
-			}
+			  
+			}	
 		}
+		softassert.assertAll();
 	}
 	
 	public void paginationUI(){
@@ -327,11 +346,8 @@ public class GroupActivityReportsPage extends TestBase {
     public void tableCount(){
     	
     	SoftAssert softassert=new SoftAssert();
-		//verification of count in pagination toolbox	
-	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT(provisioned_route_ou_id)) as count FROM provisioned_route WHERE provisioned_route_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND provisioned_route_status='active'");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
