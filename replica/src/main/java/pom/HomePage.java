@@ -419,7 +419,7 @@ public class HomePage extends TestBase {
 			System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 			System.out.println("total_leads_from_db "+total_leads_from_db);
 			logger.log(LogStatus.INFO, "verifying total leads..");
-			if(total_leads_from_db=="null" || total_leads_from_db=="0"){
+			if(total_leads_from_db==null || total_leads_from_db=="0"){
 			softassert.assertTrue("0".equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
 			}
 			else{
