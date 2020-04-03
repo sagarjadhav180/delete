@@ -32,16 +32,16 @@ public class CallDetailReportTest extends TestBase{
         
         hp=new HomePage(driver);
         hp.left_hand_navigation_bar_click();
-		hp.clickAction("Legacy Reports");
+		hp.clickAction(Constants.HomePage.legacy_reports);
 		
-		hp.click_subLink("Call Details");
+		hp.click_subLink(Constants.HomePage.call_details_report);
 	}
 	
 	//ui verification of call details page
 	@Test(priority=1)
 	public void uiVerification() throws InterruptedException{
 		logger=extent.startTest("uiVerification Test");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		
 		cdr=CallDetailsReport_Page.instance();
 	    cdr.UIVerification();
@@ -51,7 +51,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=2)
 	public void paginationUI(){
 	    logger=extent.startTest("pagination toolbox UI Test");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 			
 		cdr=CallDetailsReport_Page.instance();
 		cdr.paginationButtons();
@@ -61,7 +61,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=3)
 	public void paginationCount(){
 		logger=extent.startTest("pagination toolbox call count Test");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		
 		cdr=CallDetailsReport_Page.instance();
 		cdr.paginationCallCount();
@@ -71,7 +71,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=4)
 	public void tableCount(){
 		logger=extent.startTest("table call count Test");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 			
 		cdr=CallDetailsReport_Page.instance();
 		cdr.tableCallCount();
@@ -81,7 +81,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=5)
 	public void defaultColumnPickerOptions(){
 		logger=extent.startTest("default column picker options Test");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 			
 		cdr=CallDetailsReport_Page.instance();
 		cdr.allColumnPickerOptions();
@@ -90,7 +90,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=6)
 	public void defaultColumnsDisplayed(){
 		logger=extent.startTest("default columns Test");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 			
 		cdr=CallDetailsReport_Page.instance();
 		cdr.defaultColumns();
@@ -100,7 +100,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=7)
 	public void allColumnPickerCheckboxesClickable(){
 		logger=extent.startTest("Enability of all column picker checkboxes");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.allColumnPickerCheckboxes();
 	}
@@ -108,7 +108,7 @@ public class CallDetailReportTest extends TestBase{
 	@Test(priority=8)
 	public void columnPickerFeature(){
 		logger=extent.startTest("Column Picker feature");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.checkAllColumnPickerOptions();
 		cdr.allColumns();
@@ -118,7 +118,7 @@ public class CallDetailReportTest extends TestBase{
 	public void advancedFilterUI(){
 		
 		logger=extent.startTest("Advanced Filter section UI");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.advancedFilter();
 	}
@@ -127,7 +127,7 @@ public class CallDetailReportTest extends TestBase{
 	public void basicFilterForAdSource(){
 		
 		logger=extent.startTest("Basic Filter for Ad Source");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.basicFilterFeature(Constants.LegacyReports.ad_source);
 		
@@ -137,7 +137,7 @@ public class CallDetailReportTest extends TestBase{
 	public void basicFilterForCaller_ID(){
 		
 		logger=extent.startTest("Basic Filter for caller ID");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.basicFilterFeature(Constants.LegacyReports.caller_id);
 		
@@ -147,7 +147,7 @@ public class CallDetailReportTest extends TestBase{
 	public void basicFilterForTrackingNumber(){
 		
 		logger=extent.startTest("Basic Filter for Tracking Number");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.basicFilterFeature(Constants.LegacyReports.tracking_number);
 		
@@ -157,7 +157,7 @@ public class CallDetailReportTest extends TestBase{
 	public void basicFilterForDuration(){
 		
 		logger=extent.startTest("Basic Filter for Duration");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.basicFilterFeature(Constants.LegacyReports.duration);
 		
@@ -167,7 +167,7 @@ public class CallDetailReportTest extends TestBase{
 	public void basicFilterForGroupName(){
 		
 		logger=extent.startTest("Basic Filter for Group Name");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.basicFilterFeature(Constants.LegacyReports.group_name);
 		
@@ -177,7 +177,7 @@ public class CallDetailReportTest extends TestBase{
 	public void basicFilterForDisposition(){
 		
 		logger=extent.startTest("Basic Filter for Disposition");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.basicFilterFeature(Constants.LegacyReports.disposition);
 		
@@ -187,7 +187,7 @@ public class CallDetailReportTest extends TestBase{
 	public void advancedFilterForCallerID(){
 		
 		logger=extent.startTest("Advanced Filter for Caller ID");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.advancedFilterFeature(Constants.LegacyReports.caller_id);
 		
@@ -197,7 +197,7 @@ public class CallDetailReportTest extends TestBase{
 	public void advancedFilterForDuration(){
 		
 		logger=extent.startTest("Advanced Filter for Duration");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.advancedFilterFeature(Constants.LegacyReports.duration);
 		
@@ -207,7 +207,7 @@ public class CallDetailReportTest extends TestBase{
 	public void advancedFilterForGroupName(){
 		
 		logger=extent.startTest("Advanced Filter for Group Name");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.advancedFilterFeature(Constants.LegacyReports.group_name);
 		
@@ -217,7 +217,7 @@ public class CallDetailReportTest extends TestBase{
 	public void advancedFilterForLineType(){
 		
 		logger=extent.startTest("Advanced Filter for Line Type");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.advancedFilterFeature(Constants.LegacyReports.line_type);
 		
@@ -227,7 +227,7 @@ public class CallDetailReportTest extends TestBase{
 	public void dateRangeFilterForToday(){
 		
 		logger=extent.startTest("Date Range filter for today");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.dateRangeFilter(Constants.LegacyReports.today);
 		
@@ -237,7 +237,7 @@ public class CallDetailReportTest extends TestBase{
 	public void dateRangeFilterForYesterday(){
 		
 		logger=extent.startTest("Date Range filter for yesterday");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.dateRangeFilter(Constants.LegacyReports.yesterday);
 		
@@ -247,7 +247,7 @@ public class CallDetailReportTest extends TestBase{
 	public void dateRangeFilterForLast7days(){
 		
 		logger=extent.startTest("Date Range filter for Last 7 days");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.dateRangeFilter(Constants.LegacyReports.last_7_days);
 		
@@ -257,7 +257,7 @@ public class CallDetailReportTest extends TestBase{
 	public void dateRangeFilterForLast30days(){
 		
 		logger=extent.startTest("Date Range filter for Last 30 days");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.dateRangeFilter(Constants.LegacyReports.last_30_days);
 		
@@ -266,7 +266,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=24)    
     public void audioPlayerOpen(){
     	logger=extent.startTest("aaudio player opening");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.actionButtonClick(Constants.LegacyReports.play_button);
 		cdr.actionSectionVerification("play_button", "");
@@ -275,7 +275,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=25)
     public void informationTagOpen(){
     	logger=extent.startTest("information tag opening");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.actionButtonClick(Constants.LegacyReports.inforamtion_icon_button);
 		cdr.actionSectionVerification("inforamtion_icon_button", "complete info section");
@@ -284,7 +284,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=26)
     public void infoSectionUIVerification(){
     	logger=extent.startTest("info section ");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
     	cdr.actionSectionVerification("inforamtion_icon_button", "info section");
     }
@@ -292,7 +292,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=27)
     public void commentSectionUIVerification(){
     	logger=extent.startTest("comments section ");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
     	cdr.actionSectionVerification("inforamtion_icon_button", "comments");
     }
@@ -300,7 +300,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=28)
     public void tagSectionUIVerification(){
     	logger=extent.startTest("tags section ");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
     	cdr.actionSectionVerification("inforamtion_icon_button", "tags");
     }
@@ -308,7 +308,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=29)
     public void emailCallSectionUIVerification(){
     	logger=extent.startTest("email call section ");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.actionButtonClick(Constants.LegacyReports.email_call);
 		cdr.actionSectionVerification("email_call", "mail call UI");
@@ -317,7 +317,7 @@ public class CallDetailReportTest extends TestBase{
     @Test(priority=30)
     public void emailCallFeature(){
     	logger=extent.startTest("email call feature ");
-		logger.assignCategory("Call Details Test");
+		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.actionButtonClick(Constants.LegacyReports.email_call);
 		cdr.actionSectionVerification("email_call", "mail feature");
