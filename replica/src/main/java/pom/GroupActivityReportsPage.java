@@ -599,5 +599,76 @@ public class GroupActivityReportsPage extends TestBase {
 	}
 
     
+    public void dateRangeFilter(String dateRange){
+	    SoftAssert softassert=new SoftAssert();
+		String endDateToBeUsed ="";
+		String startDateToBeUsed ="";
+		
+		if(dateRange.equals("Last 7 days")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		}
+		else if(dateRange.equals("today")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		}
+		else if(dateRange.equals("yesterday")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
+		}
+		else if(dateRange.equals("last 30 days")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		}
+
+        
+        wait.until(ExpectedConditions.visibilityOf(dateRange_filter));
+		Util.click(dateRange_filter);
+		
+		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
+			
+			if(dateRange.equalsIgnoreCase(actual_dateRange_filter_elements.get(i).getText())){
+		
+				Util.Action().moveToElement(actual_dateRange_filter_elements.get(i)).click().perform();
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				break;
+			}
+		}
+		
+		
+
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+        
+		if(!(dbCount.equals("0") || dbCount.equalsIgnoreCase("null"))){
+			int final_count=table_call_count.size()+0;
+			
+			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
+				Util.scrollFunction(next_100_button);
+				Util.click(next_100_button);
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				final_count=final_count+table_call_count.size();
+				
+		}
+		System.out.println("dbCount is "+dbCount);
+		System.out.println("table_call_count is "+final_count);	
+		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
+		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed calls is mismatching with db count");
+		}
+		else{
+		logger.log(LogStatus.INFO, "There is no data found");			
+		}
+		softassert.assertAll();
+		
+		
+	}
+
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
