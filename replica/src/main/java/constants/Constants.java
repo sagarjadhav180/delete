@@ -2,6 +2,10 @@ package constants;
 
 public class Constants {
 
+	public static final String home_page_category="";
+	public static final String group_activity_report_category="Group Activity Reports";	
+	public static final String call_details_report_category="Call Details Test";		
+	
 	
 	public static class LegacyReports{
 		
@@ -34,6 +38,38 @@ public class Constants {
 	}
 	
     public static class HomePage{
+		
+    	//main tabs
+		public static final String home_page="Home";
+		public static final String looker_reports="Reports";
+		public static final String legacy_reports="Legacy Reports";
+		public static final String campaign_tracking_number_page="Campaign & Tracking Number";
+		public static final String group_User_page="Group & User";
+		public static final String settings_section="Settings";
+		    	
+    	
+    	//sub tabs
+		public static final String call_details_report="Call Details";
+		public static final String group_activity_report="Group Activity";
+		public static final String tracking_number_settings_report="Tracking Number Settings";
+		public static final String looker_schedule_report="My Scheduled Reports";		
+		public static final String legacy_schedule_report="Legacy Scheduled Reports";
+		public static final String cutomization="Customization";		
+		public static final String blacklist="Blacklist";
+		public static final String dni="DNI";
+		public static final String geo_locations="GeoRoute";
+		public static final String legacy_distribution_list="Legacy Distribution Lists";
+		public static final String tags="Tags ";
+		public static final String webhook="Webhook";
+		public static final String integration="Integration";
+		public static final String acquiso="Acquisio";
+		public static final String data_append="Data Append";
+		public static final String double_click="DoubleClick";
+		public static final String google_analytics="Google Analytics";
+	
+		
+		
+		
 		
 	}
     
