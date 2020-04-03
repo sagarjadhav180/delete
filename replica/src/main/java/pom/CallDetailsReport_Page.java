@@ -13,6 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import tests.CallDetailReportTest;
 import tests.TestBase;
 import tests.Util;
@@ -380,8 +381,7 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "verifying count of listed calls");
 		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mimatching with db count");
 		softassert.assertAll();
-	    
-	    
+	    	    
 	}
 	
 	public void allColumnPickerOptions(){
@@ -439,8 +439,6 @@ public class CallDetailsReport_Page extends TestBase{
 		softassert.assertAll();
 	}
 	
-	
-	
 	public void allColumnPickerCheckboxes(){
 	    SoftAssert softassert=new SoftAssert();
 		Util.click(column_Picker_button);
@@ -455,7 +453,7 @@ public class CallDetailsReport_Page extends TestBase{
 	}
 	
 	public void checkAllColumnPickerOptions(){
-	    SoftAssert softassert=new SoftAssert();
+
 		Util.click(column_Picker_button);
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
 			
@@ -741,8 +739,8 @@ public class CallDetailsReport_Page extends TestBase{
 			if(sectionToVerify.equals("mail feature")){
 				
 				wait.until(ExpectedConditions.visibilityOf(email_this_call_to_textbox));
-				email_this_call_to_textbox.sendKeys(CallDetailReportTest.default_mail_id_to);
-				email_this_call_message_textbox.sendKeys(CallDetailReportTest.default_mail_id_message);
+				email_this_call_to_textbox.sendKeys(Constants.LegacyReports.default_mail_id_to);
+				email_this_call_message_textbox.sendKeys(Constants.LegacyReports.default_mail_id_message);
 				Util.click(send_now_mail_button);
 				wait.until(ExpectedConditions.visibilityOf(success_message_for_mail_call));
 				logger.log(LogStatus.INFO, "Verifying if mail is sent successfully");

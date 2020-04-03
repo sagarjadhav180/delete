@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
+
 import pom.CallDetailsReport_Page;
 import pom.HomePage;
 import pom.LoginPage;
@@ -17,14 +19,7 @@ public class CallDetailReportTest extends TestBase{
 	CallDetailsReport_Page cdr;
 	HomePage hp;
 	
-	public static final String play_button="Listen to call";
-	public static final String inforamtion_icon_button="Toggle Call Info";
-	public static final String block_number="Block Number";
-	public static final String download_audio="Download Audio File";
-	public static final String email_call="Email Call";
-	public static final String default_mail_id_from="no-reply@messages.services";
-	public static final String default_mail_id_to="sagar.j@yopmail.com";
-	public static final String default_mail_id_message="Test Automation call mail";
+	
 	
 	@BeforeClass
 	public void goToCallDetailsReportPage() throws InterruptedException, IOException{
@@ -134,7 +129,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Basic Filter for Ad Source");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Ad Source");
+		cdr.basicFilterFeature(Constants.LegacyReports.ad_source);
 		
 	}
 	
@@ -144,7 +139,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Basic Filter for caller ID");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Caller ID");
+		cdr.basicFilterFeature(Constants.LegacyReports.caller_id);
 		
 	}
 	
@@ -154,7 +149,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Basic Filter for Tracking Number");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Tracking Number");
+		cdr.basicFilterFeature(Constants.LegacyReports.tracking_number);
 		
 	}
 	
@@ -164,7 +159,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Basic Filter for Duration");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Duration");
+		cdr.basicFilterFeature(Constants.LegacyReports.duration);
 		
 	}
 	
@@ -174,7 +169,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Basic Filter for Group Name");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Group Name");
+		cdr.basicFilterFeature(Constants.LegacyReports.group_name);
 		
 	}
 	
@@ -184,7 +179,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Basic Filter for Disposition");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.basicFilterFeature("Disposition");
+		cdr.basicFilterFeature(Constants.LegacyReports.disposition);
 		
 	}
 	
@@ -194,7 +189,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Advanced Filter for Caller ID");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.advancedFilterFeature("Caller ID");
+		cdr.advancedFilterFeature(Constants.LegacyReports.caller_id);
 		
 	}
     
@@ -204,7 +199,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Advanced Filter for Duration");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.advancedFilterFeature("Duration");
+		cdr.advancedFilterFeature(Constants.LegacyReports.duration);
 		
 	}
 	
@@ -214,7 +209,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Advanced Filter for Group Name");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.advancedFilterFeature("Group Name");
+		cdr.advancedFilterFeature(Constants.LegacyReports.group_name);
 		
 	}
 	
@@ -224,7 +219,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Advanced Filter for Line Type");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.advancedFilterFeature("Line Type");
+		cdr.advancedFilterFeature(Constants.LegacyReports.line_type);
 		
 	}
     
@@ -234,7 +229,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Date Range filter for today");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.dateRangeFilter("today");
+		cdr.dateRangeFilter(Constants.LegacyReports.today);
 		
 	}
     
@@ -244,7 +239,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Date Range filter for yesterday");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.dateRangeFilter("yesterday");
+		cdr.dateRangeFilter(Constants.LegacyReports.yesterday);
 		
 	}
     
@@ -254,7 +249,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Date Range filter for Last 7 days");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.dateRangeFilter("Last 7 days");
+		cdr.dateRangeFilter(Constants.LegacyReports.last_7_days);
 		
 	}
     
@@ -264,7 +259,7 @@ public class CallDetailReportTest extends TestBase{
 		logger=extent.startTest("Date Range filter for Last 30 days");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.dateRangeFilter("last 30 days");
+		cdr.dateRangeFilter(Constants.LegacyReports.last_30_days);
 		
 	}
     
@@ -273,7 +268,7 @@ public class CallDetailReportTest extends TestBase{
     	logger=extent.startTest("aaudio player opening");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.actionButtonClick(play_button);
+		cdr.actionButtonClick(Constants.LegacyReports.play_button);
 		cdr.actionSectionVerification("play_button", "");
     }
     
@@ -282,7 +277,7 @@ public class CallDetailReportTest extends TestBase{
     	logger=extent.startTest("information tag opening");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.actionButtonClick(inforamtion_icon_button);
+		cdr.actionButtonClick(Constants.LegacyReports.inforamtion_icon_button);
 		cdr.actionSectionVerification("inforamtion_icon_button", "complete info section");
     }
     
@@ -315,7 +310,7 @@ public class CallDetailReportTest extends TestBase{
     	logger=extent.startTest("email call section ");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.actionButtonClick(email_call);
+		cdr.actionButtonClick(Constants.LegacyReports.email_call);
 		cdr.actionSectionVerification("email_call", "mail call UI");
     }
     
@@ -324,7 +319,7 @@ public class CallDetailReportTest extends TestBase{
     	logger=extent.startTest("email call feature ");
 		logger.assignCategory("Call Details Test");
 		cdr=CallDetailsReport_Page.instance();
-		cdr.actionButtonClick(email_call);
+		cdr.actionButtonClick(Constants.LegacyReports.email_call);
 		cdr.actionSectionVerification("email_call", "mail feature");
     }
     
