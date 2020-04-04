@@ -1,14 +1,12 @@
 package pom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,9 +22,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 {
 	
-	
-	
-	@FindBy(xpath="//a[@class='btn btn-sm btn-default addcamp ng-scope']")
+	@FindBy(xpath="//a[@class='btn btn-sm btn-default addcamp ng-scope'][@aria-hidden='false']")
 	private static WebElement addCampaign_Button;
 	String addCampaign_Button_text="Add Campaign";
 
@@ -247,11 +243,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	public void clickAction(String buttonName,String campaignToBeEdited) throws InterruptedException{
 		if(buttonName.contains("add")){
 				
-					wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-					Thread.sleep(2000);					
+			
+			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
+			Thread.sleep(2000);					
 					
-					Util.click(addCampaign_Button);
-					wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
+			Util.click(addCampaign_Button);
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
 				
 		}
 		
@@ -273,8 +270,21 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 		else if(buttonName.contains("update")){
             Thread.sleep(30000);
-			WebElement edit = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
-			
+            WebElement edit = null;
+            if(bottomNextPagination_Button.isEnabled()){
+            	try{
+                    edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
+            	}
+            	catch(Exception e){
+            		bottomNextPagination_Button.click();
+                    edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
+            	}
+            }
+           
+            else{
+            	edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
+            }
+            
 			tests.Util.scrollFunction(edit);
 			tests.Util.click(edit);
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
@@ -282,7 +292,6 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 		else if(buttonName.contains("expand")){
 			
-
 			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
 			
 			tests.Util.scrollFunction(expand_campaign);
@@ -304,9 +313,22 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		
 		else if(buttonName.contains("archive")){
 			
-	
-			WebElement archive = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
-		
+						
+			WebElement archive = null;
+            if(bottomNextPagination_Button.isEnabled()){
+            	try{
+                    archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
+            	}
+            	catch(Exception e){
+            		bottomNextPagination_Button.click();
+                    archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
+            	}
+            }
+			
+            else{
+            	archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
+            }
+			
 			tests.Util.scrollFunction(archive);
 			tests.Util.click(archive);
 

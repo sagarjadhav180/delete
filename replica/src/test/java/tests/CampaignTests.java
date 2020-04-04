@@ -75,7 +75,7 @@ public class CampaignTests extends TestBase {
 	
 	//To check if logged in user is displayed in campaign owner dropdown by default
 		@Test(priority=2)
-		public void defaultCampaignOwnerValidation() throws InterruptedException, IOException{
+		public void campaignDefaultOwnerValidation() throws InterruptedException, IOException{
 			logger=extent.startTest("Check if logged in user is displayed in campaign owner dropdown by default");
 			logger.assignAuthor("Campaign Suite");
 			CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
@@ -187,7 +187,7 @@ public class CampaignTests extends TestBase {
 	
 	//CreateCampaignWithFutureStartDateAndNeverEndDate
 	@Test(priority=9)
-	public void createCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
+	public void campaignCreationWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 		
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
@@ -214,7 +214,7 @@ public class CampaignTests extends TestBase {
 	
 	//Edit campaignWithFutureStartDateAndNeverEndDate
 	@Test(priority=10)
-	public void updateCampaignWithFutureStartDateAndNeverEndDate() throws InterruptedException{
+	public void campaignUpdationWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with future start date..");
 		logger.assignCategory("Campaign Suite");
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
@@ -245,7 +245,7 @@ public class CampaignTests extends TestBase {
 	
 	//Create CampaignWithFutureStartDateAndFutureEndDate
 	@Test(priority=12)
-	public void createCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
+	public void campaignCreationWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
 //		hp.clickAction("Campaign");
@@ -271,7 +271,7 @@ public class CampaignTests extends TestBase {
 	
 	//Edit CampaignWithFutureStartDateAndFutureEndDate
 	@Test(priority=13)
-	public void updateCampaignWithFutureStartDateAndFutureEndDate() throws InterruptedException{
+	public void campaignUpdationWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with future start date And FutureEndDate..");
 		logger.assignCategory("Campaign Suite");
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
@@ -302,7 +302,7 @@ public class CampaignTests extends TestBase {
 	
 	//Check if appropriate alert is displayed while creating CampaignWithPastTime--negative scenario
 	@Test(priority=15)
-	public void createCampaignWithPastTime() throws InterruptedException{
+	public void campaignCreationWithPastTime() throws InterruptedException{
 //		hp=new HomePage(driver);
 //		hp.clickAction("Home");
 //		hp.clickAction("Campaign");

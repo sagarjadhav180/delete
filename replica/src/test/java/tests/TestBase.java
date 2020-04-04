@@ -24,6 +24,8 @@ import org.testng.annotations.Parameters;
 import com.relevantcodes.extentreports.*;
 
 import extentReport.*;
+import pom.CampaignAndTrackingNumberPage;
+import pom.CampaignBuilderPage;
 import pom.HomePage;
 
 @Listeners(extentReport.Listener.class)
@@ -114,12 +116,17 @@ public class TestBase
 				System.out.println("Failure Method" + methodName);
 				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
 				driver.navigate().refresh();
+				
 				Thread.sleep(3000);
 				HomePage hp=new HomePage(driver);
 				hp.left_hand_navigation_bar_click();
 //				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
 //				Thread.sleep(2000);
 				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
+				if(methodName.startsWith("campaign")){
+					CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
+				    ct.clickAction("list");
+				}
 				
 			} catch (Exception e) {
 				System.out.println("In Catch");
