@@ -13,7 +13,9 @@
       <class name="tests.CampaignTests"/>
       <class name="tests.TrackingNumberTest"/>
       <class name="tests.CallDetailReportTest"/>
-       <class name="tests.TrackingNumberSettingsTest"/>      
+       <class name="tests.TrackingNumberSettingsTest"/>
+       <class name="tests.GroupActivityReportTest"/>
+             
 	</classes>
 	</test>
 	
