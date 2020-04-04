@@ -101,7 +101,7 @@ public class CampaignTests extends TestBase {
 		campaign_name = "campaign "+number1;
 		cb.createCampaign(campaign_name);
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name);
+//		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
 	}
 		
@@ -116,7 +116,7 @@ public class CampaignTests extends TestBase {
 	    campaign_name_updated=campaign_name+"-updated";
 	    cb.EditCampaign(campaign_name_updated);
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name_updated);
+//		cp.campaignCreated(campaign_name_updated);
 		Thread.sleep(2000);
 	}
 	
@@ -153,7 +153,7 @@ public class CampaignTests extends TestBase {
 		
 		cb.createCampaign(campaign_name,external_id);
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name);
+//		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
 	}
 	
@@ -169,7 +169,7 @@ public class CampaignTests extends TestBase {
 	    external_id_updated=external_id+"-updated";
 	    cb.EditCampaign(campaign_name_updated,external_id_updated);
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name_updated);
+//		cp.campaignCreated(campaign_name_updated);
 		Thread.sleep(2000);
 	}
 	
@@ -208,7 +208,7 @@ public class CampaignTests extends TestBase {
 		
 		cb.createCampaign(campaign_name,external_id,Util.getDate());
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name);
+//		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
 	}	
 	
@@ -227,7 +227,7 @@ public class CampaignTests extends TestBase {
 	    external_id_updated=external_id+"-updated";
 	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate());
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name_updated);
+//		cp.campaignCreated(campaign_name_updated);
 		
 		Thread.sleep(2000);
 	}
@@ -265,7 +265,7 @@ public class CampaignTests extends TestBase {
 		
 		cb.createCampaign(campaign_name,external_id,Util.getDate(),Util.getDate());
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name);
+//		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
 	}	
 	
@@ -284,7 +284,7 @@ public class CampaignTests extends TestBase {
 	    external_id_updated=external_id+"-updated";
 	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate(),Util.getDate());
 		cb.clickAction("list");
-		cp.campaignCreated(campaign_name_updated);
+//		cp.campaignCreated(campaign_name_updated);
 		
 		Thread.sleep(2000);
 	}

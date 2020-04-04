@@ -271,12 +271,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		else if(buttonName.contains("update")){
             Thread.sleep(30000);
             WebElement edit = null;
-            if(bottomNextPagination_Button.isEnabled()){
+            if(topNextPagination_Button.isEnabled()){
             	try{
                     edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
             	}
             	catch(Exception e){
-            		bottomNextPagination_Button.click();
+            		topNextPagination_Button.click();
                     edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
             	}
             }
@@ -315,12 +315,12 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			
 						
 			WebElement archive = null;
-            if(bottomNextPagination_Button.isEnabled()){
+            if(topNextPagination_Button.isEnabled()){
             	try{
                     archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
             	}
             	catch(Exception e){
-            		bottomNextPagination_Button.click();
+            		topNextPagination_Button.click();
                     archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
             	}
             }
