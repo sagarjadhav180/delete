@@ -301,7 +301,7 @@ public class CampaignBuilderPage extends TestBase {
 		campaignName_TextBox.clear();
 		campaignName_TextBox.sendKeys(campaign_name);
 		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-//		SaveCampaignDetails_Button.click();
+		SaveCampaignDetails_Button.click();
 		
 		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
 		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
