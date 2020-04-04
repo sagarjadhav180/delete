@@ -684,7 +684,7 @@ public class CallDetailsReport_Page extends TestBase{
 
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
         
-		if(!(dbCount.equals("0") || dbCount.equalsIgnoreCase("null"))){
+		if(!(dbCount.equals("0") || dbCount==null)){
 			int final_count=table_call_count.size()+0;
 			
 			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
