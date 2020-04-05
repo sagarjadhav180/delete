@@ -42,6 +42,12 @@ public class CampaignBuilderPage extends TestBase {
 	//active/inactive toggle
 	@FindBy(xpath="(//span[@class='knob ng-binding ng-scope'])[2]")
 	private static WebElement active_InactiveCampaign_Button;
+
+	@FindBy(xpath="//div[@id='CSSActive']//div[@class='switch-animate switch-off']")
+	private static WebElement campaign_status_inactive;
+
+	@FindBy(xpath="//div[@id='CSSActive']//div[@class='switch-animate switch-on']")
+	private static WebElement campaign_status_active;
 	
 	@FindBy(xpath="(//span[@class='switch-right ng-binding ng-scope' and contains(text(),'No')])[2]")
 	private static WebElement NO;	
@@ -205,15 +211,9 @@ public class CampaignBuilderPage extends TestBase {
 				Assert1.assertTrue(labels.get(j).getText().equals(all_labels[i])," label-- "+all_labels[i]+" is not displayed or locator changed");
 				i++;
 			}
-
 			
 		}
 
-		
-		
-		
-		
-		
 		//verifying if active/inactive toggle button is displayed and its enabled
 		logger.log(LogStatus.INFO, "verifying if active/inactive toggle button is displayed");				
 		Assert1.assertTrue(active_InactiveCampaign_Button.isDisplayed(),"active_InactiveCampaign_Button is not displayed or locator changed");
@@ -290,353 +290,455 @@ public class CampaignBuilderPage extends TestBase {
 		Thread.sleep(1000);
 	}
 	
-	
-	
-	//to verify campaign is getting created without external id
-	public void createCampaign(String campaign_name) throws InterruptedException{
-		
-		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-		
-		wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
-		campaignName_TextBox.clear();
-		campaignName_TextBox.sendKeys(campaign_name);
-		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-		SaveCampaignDetails_Button.click();
-		
-		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
 
-		Assert1.assertAll();
-//		driver.switchTo().activeElement();
-//		Util.Action().moveToElement(campaign_success_msg_pause_button).click().perform();
-//		Util.Action().moveToElement(campaign_success_msg_close_button).click().perform();
+	public void create(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
 		
-		
-		Thread.sleep(1000);
-
-	}
-	
-	
-	
-	
-	//to verify campaign is getting created with external id
-		public void createCampaign(String campaign_name,String externalID) throws InterruptedException{
-			
-
-			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-			
-			campaignName_TextBox.clear();
-			campaignName_TextBox.sendKeys(campaign_name);
-			campaignID_TextBox.clear();
-			campaignID_TextBox.sendKeys(externalID);
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			SaveCampaignDetails_Button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
-			Assert1.assertAll();
-//			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
-		
-		//createCampaignWithFutureStartDateAndNeverEndDate
-		public void createCampaign(String campaign_name,String externalID,int futureStartDate) throws InterruptedException{
-			
-            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-            wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
-            campaignName_TextBox.clear();
-            campaignName_TextBox.sendKeys(campaign_name);
+        wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+        campaignName_TextBox.clear();
+        campaignName_TextBox.sendKeys(campaign_name);
+        
+        if(!(externalID=="")){
             campaignID_TextBox.clear();
             campaignID_TextBox.sendKeys(externalID);
-			startDate_Calender.click();
-			WebElement element;
-			int startdate;
-			String startDateToBeSelected;
-			if(futureStartDate<26){
-			startdate =futureStartDate+2;
-			startDateToBeSelected=String.valueOf(startdate);
-			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-			
-			}else {
-                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
-                startdate=2;
-				startDateToBeSelected=String.valueOf(startdate);
-				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-			}
-			Util.Action().moveToElement(element).click().perform();
-			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			SaveCampaignDetails_Button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
-			Assert1.assertAll();
-//			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
-		
-		
-		//updateCampaignWithFutureStartDateAndNeverEndDate
-            public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate) throws InterruptedException{
-			
-
-			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-
-			campaignName_TextBox.clear();
-			campaignName_TextBox.sendKeys(campaign_name_updated);
-			campaignID_TextBox.clear();
-			campaignID_TextBox.sendKeys(externalID);
-			active_InactiveCampaign_Button.click();
-			startDate_Calender.click();
-			WebElement element;
-			int startdate = 0;
-			String dateToBeSelected;
-			String startDateToBeSelected=String.valueOf(startdate);
-			startdate =futureStartDate;
-			
-			if(futureStartDate<26){
-				startdate =futureStartDate+3;
-				startDateToBeSelected=String.valueOf(startdate);
-				element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-				
-				}else {
-	                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
-	                startdate=3;
-					startDateToBeSelected=String.valueOf(startdate);
-					element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-				}
-			
-			Util.Action().moveToElement(element).click().perform();
-			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
-            
-			
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			SaveCampaignDetails_Button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
-			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
-			Assert1.assertAll();
-//			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
-
-		
-		
-		//createCampaignWithFutureStartDateAndFutureEndDate
-		public void createCampaign(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
-			
-            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-            campaignName_TextBox.clear();
-            campaignName_TextBox.sendKeys(campaign_name);
-            campaignID_TextBox.clear();
-            campaignID_TextBox.sendKeys(externalID);
-			startDate_Calender.click();
-			
-			WebElement element;
-			int startDate;
-			String startDateToBeSelected;
-			if(futureStartDate<26){
-			startDate =futureStartDate+1;
-			startDateToBeSelected=String.valueOf(startDate);
-			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-			
-			
-			}else {
+        
+        
+        if(!(futureStartDate==0)){
+        	startDate_Calender.click();
+    		
+    		WebElement element;
+    		int startDate;
+    		String startDateToBeSelected;
+    		if(futureStartDate<26){
+    		startDate =futureStartDate+1;
+    		startDateToBeSelected=String.valueOf(startDate);
+    		element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+    		
+    		
+    		}else {
                 Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
                 startDate=2;
                 startDateToBeSelected=String.valueOf(startDate);
-				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-			}
-			Util.Action().moveToElement(element).click().perform();
-			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
-			
-			wait.until(ExpectedConditions.visibilityOf(endDate_Calender));
-			endDate_Calender.click();
-			
-			WebElement element1;
-			int endDate = 0;
-			String endDateToBeSelected;
-			if(futureEndDate<26){
-			endDate =futureEndDate+2;
-			endDateToBeSelected=String.valueOf(endDate);
-			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
-			
-			
-			}else {
+    			element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+    		}
+    		Util.Action().moveToElement(element).click().perform();
+    		Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+        }
+        	
+        }
+		
+        if(!(futureEndDate==0)){
+        	wait.until(ExpectedConditions.visibilityOf(endDate_Calender));
+    		endDate_Calender.click();
+    		
+    		WebElement element1;
+    		int endDate = 0;
+    		String endDateToBeSelected;
+    		if(futureEndDate<26){
+    		endDate =futureEndDate+2;
+    		endDateToBeSelected=String.valueOf(endDate);
+    		element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+    		
+    		
+    		}else {
                 Util.Action().moveToElement(endCalender_rightArrow).click().perform();
                 endDate=3;
                 endDateToBeSelected=String.valueOf(endDate);
-				element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
-			}
-			Util.Action().moveToElement(element1).click().perform();
-			Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
+    			element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+    		}
+    		Util.Action().moveToElement(element1).click().perform();
+    		Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
+        	
+        }
+		
+		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+		SaveCampaignDetails_Button.click();
+		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
+		Assert1.assertAll();
+		Thread.sleep(1000);
+				
+	}
+	
+	
+
+	public void edit(String campaign_name_updated) throws InterruptedException{
 			
+		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+
+		Thread.sleep(3000);
+		System.out.println(campaignName_TextBox);
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		campaignName_TextBox.clear();
+		campaignName_TextBox.sendKeys(campaign_name_updated);
+		
+//		try{
+//			campaign_status_active.isDisplayed();
+//		}
+//		catch(Exception e){
+//			active_InactiveCampaign_Button.click();
+//		}
+			 			
+		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+		SaveCampaignDetails_Button.click();
 			
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			SaveCampaignDetails_Button.click();
+		wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+		Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+		Assert1.assertAll();
+	
+		Thread.sleep(1000);
+					
+	}
+
+	
+	
+	
+	
+	
+	//to verify campaign is getting created without external id
+//	public void createCampaign(String campaign_name) throws InterruptedException{
+//		
+//		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//		
+//		wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
+//		campaignName_TextBox.clear();
+//		campaignName_TextBox.sendKeys(campaign_name);
+//		wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//		SaveCampaignDetails_Button.click();
+//		
+//		wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+//		Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
+//
+//		Assert1.assertAll();
+////		driver.switchTo().activeElement();
+////		Util.Action().moveToElement(campaign_success_msg_pause_button).click().perform();
+////		Util.Action().moveToElement(campaign_success_msg_close_button).click().perform();
+//		
+//		
+//		Thread.sleep(1000);
+//
+//	}
+//	
+//	
+//	
+//	
+//	//to verify campaign is getting created with external id
+//		public void createCampaign(String campaign_name,String externalID) throws InterruptedException{
 //			
-			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
-			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
-			Assert1.assertAll();
+//
+//			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//			
+//			campaignName_TextBox.clear();
+//			campaignName_TextBox.sendKeys(campaign_name);
+//			campaignID_TextBox.clear();
+//			campaignID_TextBox.sendKeys(externalID);
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			SaveCampaignDetails_Button.click();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+//			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
+//		
+//		//createCampaignWithFutureStartDateAndNeverEndDate
+//		public void createCampaign(String campaign_name,String externalID,int futureStartDate) throws InterruptedException{
+//			
+//            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//            wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
+//            campaignName_TextBox.clear();
+//            campaignName_TextBox.sendKeys(campaign_name);
+//            campaignID_TextBox.clear();
+//            campaignID_TextBox.sendKeys(externalID);
+//			startDate_Calender.click();
+//			WebElement element;
+//			int startdate;
+//			String startDateToBeSelected;
+//			if(futureStartDate<26){
+//			startdate =futureStartDate+2;
+//			startDateToBeSelected=String.valueOf(startdate);
+//			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//			
+//			}else {
+//                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+//                startdate=2;
+//				startDateToBeSelected=String.valueOf(startdate);
+//				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//			}
+//			Util.Action().moveToElement(element).click().perform();
+//			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			SaveCampaignDetails_Button.click();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+//			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
+//		
+//		
+//		//updateCampaignWithFutureStartDateAndNeverEndDate
+//            public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate) throws InterruptedException{
+//			
+//
+//			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//
+//			campaignName_TextBox.clear();
+//			campaignName_TextBox.sendKeys(campaign_name_updated);
+//			campaignID_TextBox.clear();
+//			campaignID_TextBox.sendKeys(externalID);
+//			active_InactiveCampaign_Button.click();
+//			startDate_Calender.click();
+//			WebElement element;
+//			int startdate = 0;
+//			String dateToBeSelected;
+//			String startDateToBeSelected=String.valueOf(startdate);
+//			startdate =futureStartDate;
+//			
+//			if(futureStartDate<26){
+//				startdate =futureStartDate+3;
+//				startDateToBeSelected=String.valueOf(startdate);
+//				element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//				
+//				}else {
+//	                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+//	                startdate=3;
+//					startDateToBeSelected=String.valueOf(startdate);
+//					element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//				}
+//			
+//			Util.Action().moveToElement(element).click().perform();
+//			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+//            
+//			
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			SaveCampaignDetails_Button.click();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+//			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
+//
+//		
+//		
+//		//createCampaignWithFutureStartDateAndFutureEndDate
+//		public void createCampaign(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
+//			
+//            wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//            campaignName_TextBox.clear();
+//            campaignName_TextBox.sendKeys(campaign_name);
+//            campaignID_TextBox.clear();
+//            campaignID_TextBox.sendKeys(externalID);
+//			startDate_Calender.click();
+//			
+//			WebElement element;
+//			int startDate;
+//			String startDateToBeSelected;
+//			if(futureStartDate<26){
+//			startDate =futureStartDate+1;
+//			startDateToBeSelected=String.valueOf(startDate);
+//			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//			
+//			
+//			}else {
+//                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+//                startDate=2;
+//                startDateToBeSelected=String.valueOf(startDate);
+//				element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//			}
+//			Util.Action().moveToElement(element).click().perform();
+//			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(endDate_Calender));
+//			endDate_Calender.click();
+//			
+//			WebElement element1;
+//			int endDate = 0;
+//			String endDateToBeSelected;
+//			if(futureEndDate<26){
+//			endDate =futureEndDate+2;
+//			endDateToBeSelected=String.valueOf(endDate);
+//			element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+//			
+//			
+//			}else {
+//                Util.Action().moveToElement(endCalender_rightArrow).click().perform();
+//                endDate=3;
+//                endDateToBeSelected=String.valueOf(endDate);
+//				element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+//			}
+//			Util.Action().moveToElement(element1).click().perform();
+//			Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
+//			
+//			
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			SaveCampaignDetails_Button.click();
+////			
+//			wait.until(ExpectedConditions.visibilityOf(createCampaign_success_message));
+//			Assert1.assertTrue(createCampaign_success_message.isDisplayed(),campaign_name+" campaign not created");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
+//
+//           public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
+//			
+//
+//			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//
+//		    Thread.sleep(3000);
+//			System.out.println(campaignName_TextBox);
+//			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//			campaignName_TextBox.clear();
+//			campaignName_TextBox.sendKeys(campaign_name_updated);
+//			campaignID_TextBox.clear();
+//			campaignID_TextBox.sendKeys(externalID);
+//			active_InactiveCampaign_Button.click();
+//			startDate_Calender.click();
+//			WebElement element;
+//			int startDate;
+//			String startDateToBeSelected;
+//			
+//			startDate =futureStartDate;
+//			startDateToBeSelected=String.valueOf(startDate);
+//			if(futureStartDate<26){
+//				startDate =futureStartDate+2;
+//				startDateToBeSelected=String.valueOf(startDate);
+//				element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//				
+//				
+//				}else {
+//	                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
+//	                startDate=3;
+//	                startDateToBeSelected=String.valueOf(startDate);
+//					element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
+//			
+//				}
+//			Util.Action().moveToElement(element).click().perform();
+//			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
+//			
+//			try{
+//				endDate_Calender.click();
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+//			WebElement element1;
+//			int endDate;
+//			String endDateToBeSelected;
+//			
+//			endDate =futureEndDate;
+//			endDateToBeSelected=String.valueOf(endDate);
+//			if(futureEndDate<26){
+//				endDate =futureEndDate+3;
+//				endDateToBeSelected=String.valueOf(endDate);
+//				element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+//				
+//				
+//				}else {
+//	                Util.Action().moveToElement(endCalender_rightArrow).click().perform();
+//	                endDate=4;
+//	                endDateToBeSelected=String.valueOf(endDate);
+//					element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
+//				}
+//			
+//			Util.Action().moveToElement(element1).click().perform();
+//			Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
+//			
+//            
+//			
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			SaveCampaignDetails_Button.click();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+//			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
+//
+//		
+//		
+//		
+//		
+//		
+//		//to verify campaign is getting edited without external id
+//		public void EditCampaign(String campaign_name_updated) throws InterruptedException{
+//			
+//
+//			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//
+//		    Thread.sleep(3000);
+//			System.out.println(campaignName_TextBox);
+//			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//			campaignName_TextBox.clear();
+//			campaignName_TextBox.sendKeys(campaign_name_updated);
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			active_InactiveCampaign_Button.click();
+//			Thread.sleep(2000);
+//			SaveCampaignDetails_Button.click();
+//			
+//            Thread.sleep(2000);
 //			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
-
-           public void EditCampaign(String campaign_name_updated,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
-			
-
-			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-
-		    Thread.sleep(3000);
-			System.out.println(campaignName_TextBox);
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			campaignName_TextBox.clear();
-			campaignName_TextBox.sendKeys(campaign_name_updated);
-			campaignID_TextBox.clear();
-			campaignID_TextBox.sendKeys(externalID);
-			active_InactiveCampaign_Button.click();
-			startDate_Calender.click();
-			WebElement element;
-			int startDate;
-			String startDateToBeSelected;
-			
-			startDate =futureStartDate;
-			startDateToBeSelected=String.valueOf(startDate);
-			if(futureStartDate<26){
-				startDate =futureStartDate+2;
-				startDateToBeSelected=String.valueOf(startDate);
-				element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-				
-				
-				}else {
-	                Util.Action().moveToElement(StartCalender_rightArrow).click().perform();
-	                startDate=3;
-	                startDateToBeSelected=String.valueOf(startDate);
-					element = driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
-			
-				}
-			Util.Action().moveToElement(element).click().perform();
-			Util.Action().moveToElement(startdatePicker_ok_Button).click().perform();
-			
-			try{
-				endDate_Calender.click();
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			WebElement element1;
-			int endDate;
-			String endDateToBeSelected;
-			
-			endDate =futureEndDate;
-			endDateToBeSelected=String.valueOf(endDate);
-			if(futureEndDate<26){
-				endDate =futureEndDate+3;
-				endDateToBeSelected=String.valueOf(endDate);
-				element1=driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
-				
-				
-				}else {
-	                Util.Action().moveToElement(endCalender_rightArrow).click().perform();
-	                endDate=4;
-	                endDateToBeSelected=String.valueOf(endDate);
-					element1 = driver.findElement(By.xpath("(//sm-date-picker[@id='End DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+endDateToBeSelected+"])"));
-				}
-			
-			Util.Action().moveToElement(element1).click().perform();
-			Util.Action().moveToElement(enddatePicker_ok_Button).click().perform();
-			
-            
-			
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			SaveCampaignDetails_Button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
-			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
-			Assert1.assertAll();
-//			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
-
-		
-		
-		
-		
-		
-		//to verify campaign is getting edited without external id
-		public void EditCampaign(String campaign_name_updated) throws InterruptedException{
-			
-
-			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-
-		    Thread.sleep(3000);
-			System.out.println(campaignName_TextBox);
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			campaignName_TextBox.clear();
-			campaignName_TextBox.sendKeys(campaign_name_updated);
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			active_InactiveCampaign_Button.click();
-			Thread.sleep(2000);
-			SaveCampaignDetails_Button.click();
-			
-            Thread.sleep(2000);
-			driver.switchTo().activeElement();
-			wait.until(ExpectedConditions.visibilityOf(Ok_button_campaign_deactivate_confirmation_msg)).click();
-			
-			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
-			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
-			Assert1.assertAll();
-//			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
-		
-		//to verify campaign is getting edited with external id
-		public void EditCampaign(String campaign_name_updated,String externalID) throws InterruptedException{
-			
-
-			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-			System.out.println(campaignName_TextBox);
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			campaignName_TextBox.clear();
-			campaignName_TextBox.sendKeys(campaign_name_updated);
-			campaignID_TextBox.clear();
-			campaignID_TextBox.sendKeys(externalID);
-			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
-			SaveCampaignDetails_Button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
-			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
-			Assert1.assertAll();
-//			driver.switchTo().activeElement();
-//			campaign_success_msg_pause_button.click();
-//			campaign_success_msg_close_button.click();
-			
-			Thread.sleep(1000);
-					
-		}
+//			wait.until(ExpectedConditions.visibilityOf(Ok_button_campaign_deactivate_confirmation_msg)).click();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+//			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
+//		
+//		//to verify campaign is getting edited with external id
+//		public void EditCampaign(String campaign_name_updated,String externalID) throws InterruptedException{
+//			
+//
+//			wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+//			System.out.println(campaignName_TextBox);
+//			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+campaign_name_updated+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//			campaignName_TextBox.clear();
+//			campaignName_TextBox.sendKeys(campaign_name_updated);
+//			campaignID_TextBox.clear();
+//			campaignID_TextBox.sendKeys(externalID);
+//			wait.until(ExpectedConditions.visibilityOf(SaveCampaignDetails_Button));
+//			SaveCampaignDetails_Button.click();
+//			
+//			wait.until(ExpectedConditions.visibilityOf(updateCampaign_success_message));
+//			Assert1.assertTrue(updateCampaign_success_message.isDisplayed(),"campaign not updated ");
+//			Assert1.assertAll();
+////			driver.switchTo().activeElement();
+////			campaign_success_msg_pause_button.click();
+////			campaign_success_msg_close_button.click();
+//			
+//			Thread.sleep(1000);
+//					
+//		}
 		
             public void createPastDateCampaign(String campaign_name,int pastStartDate) throws InterruptedException{
 			

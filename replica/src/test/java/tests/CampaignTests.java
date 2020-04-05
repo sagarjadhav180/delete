@@ -99,10 +99,10 @@ public class CampaignTests extends TestBase {
 		cp.clickAction("add","");
 		number1 = tests.Util.generateRandomNumber();
 		campaign_name = "campaign "+number1;
-		cb.createCampaign(campaign_name);
+		cb.create(campaign_name,"",0,0);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name);
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
 	}
 		
 	//Edit Campaign without campaign external ID
@@ -114,10 +114,10 @@ public class CampaignTests extends TestBase {
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("update",campaign_name);
 	    campaign_name_updated=campaign_name+"-updated";
-	    cb.EditCampaign(campaign_name_updated);
+	    cb.edit(campaign_name_updated);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name_updated);
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
 	}
 	
 	
@@ -151,7 +151,7 @@ public class CampaignTests extends TestBase {
 		 number2 = tests.Util.generateRandomNumber();
 		 external_id= "external_id "+number2;
 		
-		cb.createCampaign(campaign_name,external_id);
+		cb.create(campaign_name,external_id,0,0);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
@@ -167,7 +167,7 @@ public class CampaignTests extends TestBase {
 	    cp.clickAction("update",campaign_name);
 	    campaign_name_updated=campaign_name+"-updated";
 	    external_id_updated=external_id+"-updated";
-	    cb.EditCampaign(campaign_name_updated,external_id_updated);
+	    cb.edit(campaign_name_updated);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name_updated);
 		Thread.sleep(2000);
@@ -206,7 +206,7 @@ public class CampaignTests extends TestBase {
 		 number2 = tests.Util.generateRandomNumber();
 		 external_id= "external_id "+number2;
 		
-		cb.createCampaign(campaign_name,external_id,Util.getDate());
+		cb.create(campaign_name,external_id,Util.getDate(),0);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
@@ -225,7 +225,7 @@ public class CampaignTests extends TestBase {
 		 System.err.println(campaign_name_updated);
 		 System.out.println("++++++++++++++++++++++++++++++");
 	    external_id_updated=external_id+"-updated";
-	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate());
+	    cb.edit(campaign_name_updated);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name_updated);
 		
@@ -263,7 +263,7 @@ public class CampaignTests extends TestBase {
 		 number2 = tests.Util.generateRandomNumber();
 		 external_id= "external_id "+number2;
 		
-		cb.createCampaign(campaign_name,external_id,Util.getDate(),Util.getDate());
+		cb.create(campaign_name,external_id,Util.getDate(),Util.getDate());
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name);
 		Thread.sleep(2000);
@@ -282,7 +282,7 @@ public class CampaignTests extends TestBase {
 		 System.err.println(campaign_name_updated);
 		 System.out.println("++++++++++++++++++++++++++++++");
 	    external_id_updated=external_id+"-updated";
-	    cb.EditCampaign(campaign_name_updated,external_id_updated,Util.getDate(),Util.getDate());
+	    cb.edit(campaign_name_updated);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name_updated);
 		
