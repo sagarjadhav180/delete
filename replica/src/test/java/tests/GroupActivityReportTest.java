@@ -85,9 +85,41 @@ public class GroupActivityReportTest extends TestBase {
 		ga.paginationCount();
 	}
 	
+	@Test(priority=6)
+	public void defaultColumnPickerOptions() throws InterruptedException{
+		logger=extent.startTest("Default column picker options Test");
+		logger.assignCategory(Constants.group_activity_report_category);
+			
+		ga=GroupActivityReportsPage.instance();
+		ga.allColumnPickerOptions();
+	}
 	
+	@Test(priority=7)
+	public void defaultColumnsDisplayed() throws InterruptedException{
+		logger=extent.startTest("default columns Test");
+		logger.assignCategory(Constants.group_activity_report_category);
+			
+		ga=GroupActivityReportsPage.instance();
+		ga.defaultColumns();
+	}
 	
+	@Test(priority=8)
+	public void allColumnPickerCheckboxesClickable() throws InterruptedException{
+		logger=extent.startTest("Enability of all column picker checkboxes");
+		logger.assignCategory(Constants.group_activity_report_category);
+			
+		ga=GroupActivityReportsPage.instance();
+		ga.allColumnPickerCheckboxes();
+	}
 	
+	@Test(priority=9)
+	public void advancedFilterUI() throws InterruptedException{
+		logger=extent.startTest("Advanced Filter section UI");
+		logger.assignCategory(Constants.group_activity_report_category);
+			
+		ga=GroupActivityReportsPage.instance();
+		ga.advancedFilter();
+	}
 	
 	
 	

@@ -69,7 +69,7 @@ public class GroupActivityReportsPage extends TestBase {
 
 	@FindBy(xpath="//table[@id='groupActivityReportDataGrid']//thead//tr[1]//th")
 	private static List<WebElement> actual_column_names;
-    String[] expected_column_names={" ID"," Group"," Ext ID"," Calls (GMT)"," Billable Minutes (GMT)"," Leads"," Conversions"," Call Value"," Unique"," Voicemail"," Answered"};
+    String[] expected_column_names={"ID","Group","Ext ID","Calls (GMT)","Billable Minutes (GMT)","Leads","Conversions","Call Value","Unique","Voicemail","Answered"};
 
     //Pagination
   	@FindBy(xpath="//button[text()='First']")
@@ -362,8 +362,8 @@ public class GroupActivityReportsPage extends TestBase {
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+final_count);
 				
-		logger.log(LogStatus.INFO, "verifying count of listed calls");
-		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mimatching with db count");
+		logger.log(LogStatus.INFO, "verifying count of listed groups");
+		softassert.assertEquals(dbCount, String.valueOf(final_count),"count of listed groups is mismtching with db count");
 		softassert.assertAll();
 	    
 	}
@@ -390,11 +390,12 @@ public class GroupActivityReportsPage extends TestBase {
         logger.log(LogStatus.INFO, "verifying column names in call detail table");
 		
 		for(int i=0;i<actual_column_names.size();i++){
-			
+
 			for(int j=0;j<expected_column_names.length;j++){
-				if(actual_column_names.get(i).getText().equals(expected_column_names[j])){
+
+				if(actual_column_names.get(i).getText().equalsIgnoreCase(expected_column_names[j])){
 					logger.log(LogStatus.INFO, "verifying if "+expected_column_names[j]+" is displayed");
-					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_column_names[j]),"column "+expected_column_names[j]+" is not present");
+					softassert.assertTrue(actual_column_names.get(i).getText().equalsIgnoreCase(expected_column_names[j]),"column "+expected_column_names[j]+" is not present");
 					break;
 				}
 			}
@@ -419,10 +420,12 @@ public class GroupActivityReportsPage extends TestBase {
 	    SoftAssert softassert=new SoftAssert();
 		Util.click(column_Picker_button);
 		for(int i=0;i<column_picker_options_checkboxes.size();i++){
-			
-			logger.log(LogStatus.INFO, "verifying if "+column_picker_options_checkboxes.get(i).getText()+" is enabled");
-			softassert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),column_picker_options_checkboxes.get(i) +" is not enabled");
-			
+
+			if(column_picker_options_checkboxes.get(i).isSelected()){
+				logger.log(LogStatus.INFO, "verifying if "+all_actual_column_picker_options_labels.get(i)+" is enabled");
+				softassert.assertTrue(column_picker_options_checkboxes.get(i).isEnabled(),all_actual_column_picker_options_labels.get(i)+" is not enabled");				
+			}
+
 		}
 		softassert.assertAll();
 		Util.click(column_Picker_button);
