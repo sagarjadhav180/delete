@@ -121,7 +121,14 @@ public class GroupActivityReportTest extends TestBase {
 		ga.advancedFilter();
 	}
 	
-	
+	@Test(priority=10)
+	public void basicFilterForGroupName() throws InterruptedException{
+		logger=extent.startTest("Basic Filter for Group Name");
+		logger.assignCategory(Constants.group_activity_report_category);
+			
+		ga=GroupActivityReportsPage.instance();
+		ga.basicFilterFeature("Group");
+	}
 	
 
 		

@@ -523,7 +523,7 @@ public class GroupActivityReportsPage extends TestBase {
 			}
 		}
 		
-			List<WebElement> values = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr[1]//td"));
+			List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
 			for(int j=0;j<values.size();j++){
 			if(index==j){
 				
@@ -536,7 +536,7 @@ public class GroupActivityReportsPage extends TestBase {
 		Util.click(basic_search_button);
 		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 		
-		String xPath="//table[@id='calldetailstable']//tbody//tr";
+		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
 		List<WebElement> rows = driver.findElements(By.xpath(xPath));
 		
 		for(int k=0;k<rows.size();k++){
