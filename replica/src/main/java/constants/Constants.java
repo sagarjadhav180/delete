@@ -35,6 +35,14 @@ public class Constants {
 		public static final String last_7_days="Last 7 Days";
 		public static final String last_30_days="Last 30 Days";
 		
+		//Group Activity Reports
+		public static final String group_filter="Group";
+		public static final String group_filter_advanced="Group Name";
+		public static final String conversions="Conversions";
+		public static final String answered_calls="Answered";		
+		public static final String calls="Calls (GMT)";
+		public static final String leads="Leads";
+		
 	}
 	
     public static class HomePage{
