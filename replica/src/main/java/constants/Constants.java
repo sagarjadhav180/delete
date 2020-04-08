@@ -36,7 +36,7 @@ public class Constants {
 		public static final String last_30_days="Last 30 Days";
 		
 		//Group Activity Reports
-		public static final String group_filter="Group";
+		public static final String basic_group_filter="Group";
 		public static final String group_filter_advanced="Group Name";
 		public static final String conversions="Conversions";
 		public static final String answered_calls="Answered";		
