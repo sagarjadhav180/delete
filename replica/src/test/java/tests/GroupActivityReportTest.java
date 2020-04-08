@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import constants.Constants;
+import pom.CallDetailsReport_Page;
 import pom.GroupActivityReportsPage;
 import pom.HomePage;
 import pom.LoginPage;
@@ -127,18 +128,108 @@ public class GroupActivityReportTest extends TestBase {
 		logger.assignCategory(Constants.group_activity_report_category);
 			
 		ga=GroupActivityReportsPage.instance();
-		ga.basicFilterFeature("Group");
+		ga.basicFilterFeature(Constants.LegacyReports.basic_group_filter);
+		
 	}
 	
-
+	@Test(priority=11)
+	public void advancedFilterForGroupName() throws InterruptedException{
 		
+		logger=extent.startTest("Advanced Filter for Group Name");
+		logger.assignCategory(Constants.group_activity_report_category);
 		
+		ga=GroupActivityReportsPage.instance();
+		ga.advancedFilterFeature(Constants.LegacyReports.group_filter_advanced);
 		
+	}
+	
+	@Test(priority=12)
+	public void advancedFilterForAnweredCalls() throws InterruptedException{
 		
+		logger=extent.startTest("Advanced Filter for answered calls");
+		logger.assignCategory(Constants.group_activity_report_category);
 		
+		ga=GroupActivityReportsPage.instance();
+		ga.advancedFilterFeature(Constants.LegacyReports.answered_calls);
 		
+	}
+	
+	@Test(priority=13)
+	public void advancedFilterForCalls() throws InterruptedException{
 		
+		logger=extent.startTest("Advanced Filter for Calls");
+		logger.assignCategory(Constants.group_activity_report_category);
 		
+		ga=GroupActivityReportsPage.instance();
+		ga.advancedFilterFeature(Constants.LegacyReports.calls);
+		Thread.sleep(2000);
+	}
+	
+	@Test(priority=14)
+	public void advancedFilterForLeads() throws InterruptedException{
+		
+		logger=extent.startTest("Advanced Filter for Leads");
+		logger.assignCategory(Constants.group_activity_report_category);
+		
+		ga=GroupActivityReportsPage.instance();
+		ga.advancedFilterFeature(Constants.LegacyReports.leads);
+		
+	}
+	
+	@Test(priority=15)
+	public void advancedFilterForConversion() throws InterruptedException{
+		
+		logger=extent.startTest("Advanced Filter for Conversion");
+		logger.assignCategory(Constants.group_activity_report_category);
+		
+		ga=GroupActivityReportsPage.instance();
+		ga.advancedFilterFeature(Constants.LegacyReports.conversions);
+		
+	}
+	
+	@Test(priority=17)
+	public void dateRangeFilterForToday(){
+		
+		logger=extent.startTest("Date Range filter for today");
+		logger.assignCategory(Constants.group_activity_report_category);
+		
+		ga=GroupActivityReportsPage.instance();
+		ga.dateRangeFilter(Constants.LegacyReports.today);
+		
+	}
+	
+	@Test(priority=18)
+	public void dateRangeFilterForYesterday(){
+		
+		logger=extent.startTest("Date Range filter for yesterday");
+		logger.assignCategory(Constants.group_activity_report_category);
+		
+		ga=GroupActivityReportsPage.instance();
+		ga.dateRangeFilter(Constants.LegacyReports.yesterday);
+		
+	}
+		
+	@Test(priority=19)
+	public void dateRangeFilterForLast7Days(){
+		
+		logger=extent.startTest("Date Range filter for last 7 days");
+		logger.assignCategory(Constants.group_activity_report_category);
+		
+		ga=GroupActivityReportsPage.instance();
+		ga.dateRangeFilter(Constants.LegacyReports.last_7_days);
+		
+	}	
+		
+	@Test(priority=20)
+	public void dateRangeFilterForLast30Days(){
+		
+		logger=extent.startTest("Date Range filter for last 30 days");
+		logger.assignCategory(Constants.group_activity_report_category);
+		
+		ga=GroupActivityReportsPage.instance();
+		ga.dateRangeFilter(Constants.LegacyReports.last_30_days);
+		
+	}	
 		
 		
 		

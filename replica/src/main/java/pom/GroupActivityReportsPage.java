@@ -3,6 +3,7 @@ package pom;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -227,8 +228,8 @@ public class GroupActivityReportsPage extends TestBase {
 					
 					if(tiles_heading.get(i).getText().startsWith("TOTAL CALLS")){
 						String total_call_count_from_ui = dashboard_tiles_values.get(j).getText();
-						String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-						System.out.println("SELECT count(*) as count FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+						String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+						System.out.println("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 						System.out.println("total_count_from_ui is "+total_call_count_from_ui);
 						System.out.println("total_count_from_db "+total_call_count_from_db);
 						logger.log(LogStatus.INFO, "verifying total calls count..");
@@ -244,7 +245,7 @@ public class GroupActivityReportsPage extends TestBase {
 					}
 					else if(tiles_heading.get(i).getText().endsWith("LEADS")){
 						String total_leads__from_ui = dashboard_tiles_values.get(j).getText();
-						String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+						String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
 						System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 						System.out.println("total_leads_from_db "+total_leads_from_db);
 						logger.log(LogStatus.INFO, "verifying total leads..");
@@ -258,7 +259,7 @@ public class GroupActivityReportsPage extends TestBase {
 					}
 					else if(tiles_heading.get(i).getText().startsWith("CONVERSIONS")){
 						String total_conversion_from_ui = dashboard_tiles_values.get(j).getText();
-						String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");
+						String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");
 						System.out.println("total_conversion__from_ui is "+total_conversion_from_ui);
 						System.out.println("total_conversion_from_db "+total_conversion_from_db);
 						logger.log(LogStatus.INFO, "verifying total conversion..");
@@ -272,7 +273,7 @@ public class GroupActivityReportsPage extends TestBase {
 					}
 					else if(tiles_heading.get(i).getText().startsWith("UNIQUE")){
 						String unique_calls_count_from_ui = dashboard_tiles_values.get(j).getText();
-						String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+						String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
 						System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
 						System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
 						logger.log(LogStatus.INFO, "verifying unique calls count..");
@@ -347,7 +348,7 @@ public class GroupActivityReportsPage extends TestBase {
     	
     	SoftAssert softassert=new SoftAssert();
 
-    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT(provisioned_route_ou_id)) as count FROM provisioned_route WHERE provisioned_route_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND provisioned_route_status='active'");
+    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND campaign_status NOT IN ('deleted')");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
@@ -505,7 +506,7 @@ public class GroupActivityReportsPage extends TestBase {
 		softassert.assertAll();
 	}
     
-    public void basicFilterFeature(String filterelement){
+    public void basicFilterFeature(String filterelement) throws InterruptedException{
 		SoftAssert softassert=new SoftAssert();
 	    
     	try{
@@ -528,33 +529,41 @@ public class GroupActivityReportsPage extends TestBase {
 			if(index==j){
 				
 				filter_value=values.get(j).getText();
+				break;
 			}
 		}
-		
-		basic_search_textbox.clear();
-		basic_search_textbox.sendKeys(filter_value);
-		Util.click(basic_search_button);
-		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-		
-		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
-		List<WebElement> rows = driver.findElements(By.xpath(xPath));
-		
-		for(int k=0;k<rows.size();k++){
 			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-			}		
-		}
+			basic_search_textbox.clear();
+			basic_search_textbox.sendKeys(filter_value);
+			Util.click(basic_search_button);
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+			Thread.sleep(2000);
+			String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
+			List<WebElement> rows = driver.findElements(By.xpath(xPath));
+			
+			for(int k=0;k<rows.size();k++){
+				List<WebElement> filtered_value;
+				
+				filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+				
+//				List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+				for(int l=0;l<filtered_value.size();l++){
+					
+					String actual_value = filtered_value.get(l).getText();
+					String expected_value=filter_value;
+					softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
+					Thread.sleep(2000);
+				}		
+			}
+
 
 		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
 		softassert.assertAll();
 			
 	}	
 
-    public void advancedFilterFeature(String filterelement){
+    public void advancedFilterFeature(String filterelement) throws InterruptedException{
+    		
     	try{
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
     	}catch(Exception e){
@@ -565,21 +574,31 @@ public class GroupActivityReportsPage extends TestBase {
 		String filter_value="";
 		
 		for(int i=0;i<actual_column_names.size();i++){
-		
-			if(actual_column_names.get(i).getText().equals(filterelement)){
-				index=i;
+		    
+			if(filterelement.startsWith("Group")){
+				if(actual_column_names.get(i).getText().equals("Group")){
+					index=i;	
+					break;
+			    }
 			}
+			
+			else if(actual_column_names.get(i).getText().equals(filterelement)){
+			index=i;
+			System.out.println("actual_column_names.get(i).getText() "+actual_column_names.get(i).getText() );
+			break;
+			}
+
+			
 		}
 		
-		List<WebElement> values = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr[1]//td"));
+		List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
 		for(int j=0;j<values.size();j++){
 			if(index==j){
+
 				filter_value=values.get(j).getText();
-				if(filterelement.equals("Line Type")){
-					if(filter_value.equals("") || filter_value.equals("null")){
-					filter_value="NonFixedVOIP";
-					}
-				}
+				System.out.println("filter_value "+filter_value);
+				System.out.println("values "+values.get(j).getText());
+				break;
 			}
 		}
 		
@@ -596,20 +615,29 @@ public class GroupActivityReportsPage extends TestBase {
 		}
 		
 		Util.click(apply_button);
+		Util.getJavascriptExecutor().executeScript("window.scrollBy", "0,200");
+		Thread.sleep(2000);
+		//		try{
+//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//			
+//		}
+//		catch(Exception e){
+//				
+//		}
 		
-		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-		
-		String xPath="//table[@id='calldetailstable']//tbody//tr";
+		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
 		List<WebElement> rows = driver.findElements(By.xpath(xPath));
 		
 		for(int k=0;k<rows.size();k++){
+		   List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+		     for(int l=0;l<filtered_value.size();l++){
 			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
-			}		
+					String actual_value = filtered_value.get(l).getText();
+					String expected_value=filter_value;
+					softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+			 }
+			
+					
 		}
 
 		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
@@ -623,19 +651,19 @@ public class GroupActivityReportsPage extends TestBase {
 		String endDateToBeUsed ="";
 		String startDateToBeUsed ="";
 		
-		if(dateRange.equals("Last 7 days")){
+		if(dateRange.equalsIgnoreCase("Last 7 days")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equals("today")){
+		else if(dateRange.equalsIgnoreCase("today")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equals("yesterday")){
+		else if(dateRange.equalsIgnoreCase("yesterday")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 		}
-		else if(dateRange.equals("last 30 days")){
+		else if(dateRange.equalsIgnoreCase("last 30 days")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
@@ -656,9 +684,9 @@ public class GroupActivityReportsPage extends TestBase {
 		
 		
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND campaign_status NOT IN ('deleted')");
         
-		if(!(dbCount.equals("0") || dbCount.equalsIgnoreCase("null"))){
+		if(!(dbCount=="0" || dbCount==null)){
 			int final_count=table_call_count.size()+0;
 			
 			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
