@@ -1,5 +1,6 @@
 package pom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -23,8 +24,19 @@ public class GroupActivityReportsPage extends TestBase {
 	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private static WebElement loading_wheel;
 	
+    @FindBy(xpath="//label[text()='Secondary Grouping']")
+	private static WebElement secondary_grouping_label;
+ 
+    @FindBy(xpath="//div[@id='s2id_autogen1']//span[@class='select2-arrow']")
+	private static WebElement secondary_grouping_button;
+
+    String[] expected_secondary_grouping_options={"None","Tracking Number","Campaign"};
+    
+    @FindBy(xpath="//div[@id='s2id_autogen1']//following-sibling::select")
+	private static WebElement secondary_grouping_listbox;
+    
     @FindBy(xpath="//h1[contains(text(),'Group Activity')]")
-	private static WebElement groupactivity_report_header;
+ 	private static WebElement groupactivity_report_header;
     
     //tiles
     @FindBy(xpath="//div[@id='summaryWidgets']//div[@class='col-xs-6 col-sm-4 col-md-4 chartizzle ng-scope col-lg-2']//tile-heading")
@@ -178,7 +190,10 @@ public class GroupActivityReportsPage extends TestBase {
 		
 		logger.log(LogStatus.INFO, "verifying if export_button is displayed");
 		softassert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
-	
+
+		logger.log(LogStatus.INFO, "verifying if secondary grouping label is displayed");
+		softassert.assertTrue(secondary_grouping_label.isDisplayed(),"secondary grouping label is not displayed or locator changed");
+			
 		logger.log(LogStatus.INFO, "verifying if basic_search_textbox is displayed");
 		softassert.assertTrue(basic_search_textbox.isDisplayed(),"basic_search_textbox is not displayed or locator changed");
 		
@@ -211,6 +226,52 @@ public class GroupActivityReportsPage extends TestBase {
 		
 		softassert.assertAll();	
 	}  
+	
+	public void secondaryGrouping(){
+		
+		SoftAssert softassert=new SoftAssert();
+		Util.click(secondary_grouping_button);
+		
+		Select select=new Select(secondary_grouping_listbox);
+		
+		List<WebElement> options = select.getOptions();
+		
+		for(int i=0;i<options.size();i++){
+			for(int j=0;j<expected_secondary_grouping_options.length;j++){
+				if(options.get(i).getText().equals(expected_secondary_grouping_options[j])){
+					logger.log(LogStatus.INFO, "Verifying if "+expected_secondary_grouping_options[j]+" is presnet");
+					softassert.assertTrue(options.get(i).getText().equals(expected_secondary_grouping_options[j]),"option "+expected_secondary_grouping_options[j]+" is not presnet");
+				}
+			}
+		}
+		
+		
+		softassert.assertAll();
+	}
+	
+	public void secondaryGroupingColumn(String groupingOption) throws InterruptedException{
+		
+		SoftAssert softassert=new SoftAssert();
+		
+		Select select=new Select(secondary_grouping_listbox);
+		
+		select.selectByVisibleText(groupingOption);
+		
+		Thread.sleep(4000);
+		
+		for(int j=0;j<actual_column_names.size();j++){
+			if(actual_column_names.get(j).getText().equals(groupingOption)){
+				logger.log(LogStatus.INFO, "Verifying if "+groupingOption+" is displayed");
+				softassert.assertTrue(actual_column_names.get(j).isDisplayed(),"column "+groupingOption+" is not displayed");
+			}
+		}
+		
+		select.selectByVisibleText("None");
+		Thread.sleep(3000);
+		softassert.assertAll();
+	}
+	
+	
 	
 	public void tileCountVerification(){
 		
@@ -432,6 +493,45 @@ public class GroupActivityReportsPage extends TestBase {
 		Util.click(column_Picker_button);
 	}
     
+	public void secondaryGroupingFeature(List secondaryGroupingOption,String option) throws InterruptedException{
+	    SoftAssert softassert=new SoftAssert();
+	    
+	    Select select=new Select(secondary_grouping_listbox);
+	    select.selectByVisibleText(option);
+	    Thread.sleep(4000);
+		List<Integer> index = new ArrayList<Integer>();
+	    
+		Util.click(column_Picker_button);
+		
+	    for(int m=0;m<secondaryGroupingOption.size();){
+	    	for(int j=0;j<all_actual_column_picker_options_labels.size();j++){
+	    		if(secondaryGroupingOption.get(m).equals(all_actual_column_picker_options_labels.get(j).getText())){
+					index.add(j);
+					
+				}	
+	    		
+				
+			}
+	    	m++;
+		}
+	    
+		for(int i=0;i<column_picker_options_checkboxes.size();i++){
+
+			for(int k=0;k<index.size();k++){
+				if(index.get(k)==i){
+					logger.log(LogStatus.INFO, "verifying if secondaryGrouping feature");
+					softassert.assertTrue(!(column_picker_options_checkboxes.get(i).isEnabled()),column_picker_options_checkboxes.get(i)+" is enabled");			
+				}
+			}
+			
+	
+		}
+		select.selectByVisibleText("None");
+		Thread.sleep(3000);
+		softassert.assertAll();
+		Util.click(column_Picker_button);
+	}
+	
 	public void allColumns(){
 	    SoftAssert softassert=new SoftAssert();
         logger.log(LogStatus.INFO, "verifying column names in call detail table");
