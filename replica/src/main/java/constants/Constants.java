@@ -1,5 +1,9 @@
 package constants;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Constants {
 
 	public static final String home_page_category="";
@@ -42,7 +46,11 @@ public class Constants {
 		public static final String answered_calls="Answered";		
 		public static final String calls="Calls (GMT)";
 		public static final String leads="Leads";
-		
+		public static final List<String> none=new ArrayList<String>(Arrays.asList("Campaign","Campaign Ext ID","Tracking Number"));
+		public static final List<String> campaign=new ArrayList<String>(Arrays.asList("Tracking Number"));
+		public static final List<String> trackingnumber=new ArrayList<String>(Arrays.asList("Campaign","Campaign Ext ID"));
+	
+	
 	}
 	
     public static class HomePage{
