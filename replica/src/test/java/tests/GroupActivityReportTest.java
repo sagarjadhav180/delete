@@ -123,6 +123,15 @@ public class GroupActivityReportTest extends TestBase {
 	}
 	
 	@Test(priority=10)
+	public void defaultSecondaryGroupingOption() throws InterruptedException{
+		logger=extent.startTest("Default Secondary Grouping Option");
+		logger.assignCategory(Constants.group_activity_report_category);
+			
+		ga=GroupActivityReportsPage.instance();
+		ga.defaultSecondaryOption("None");
+	}
+	
+	@Test(priority=11)
 	public void secondaryGroupingFeatureForNone() throws InterruptedException{
 		logger=extent.startTest("Secondary Grouping Feature For None Test");
 		logger.assignCategory(Constants.group_activity_report_category);
@@ -131,7 +140,7 @@ public class GroupActivityReportTest extends TestBase {
 		ga.secondaryGroupingFeature(Constants.LegacyReports.none,"None");
 	}
 	
-	@Test(priority=11)
+	@Test(priority=12)
 	public void secondaryGroupingFeatureForTrackingNumber() throws InterruptedException{
 		logger=extent.startTest("Secondary Grouping Feature For Tracking Number Test");
 		logger.assignCategory(Constants.group_activity_report_category,"Tracking Number");
@@ -140,7 +149,7 @@ public class GroupActivityReportTest extends TestBase {
 		ga.secondaryGroupingFeature(Constants.LegacyReports.trackingnumber,"Tracking Number");
 	}
 	
-	@Test(priority=12)
+	@Test(priority=13)
 	public void secondaryGroupingFeatureForCampaign() throws InterruptedException{
 		logger=extent.startTest("Secondary Grouping Feature For Campaign Test");
 		logger.assignCategory(Constants.group_activity_report_category);
@@ -149,7 +158,7 @@ public class GroupActivityReportTest extends TestBase {
 		ga.secondaryGroupingFeature(Constants.LegacyReports.campaign,"Campaign");
 	}
 	
-	@Test(priority=13)
+	@Test(priority=14)
 	public void secondaryGroupingFeatureForCampaignColumn() throws InterruptedException{
 		logger=extent.startTest("Secondary Grouping column Feature For Campaign column");
 		logger.assignCategory(Constants.group_activity_report_category);
@@ -158,7 +167,7 @@ public class GroupActivityReportTest extends TestBase {
 		ga.secondaryGroupingColumn("Campaign");
 	}
 	
-	@Test(priority=14)
+	@Test(priority=15)
 	public void secondaryGroupingFeatureForTrackingumber() throws InterruptedException{
 		logger=extent.startTest("Secondary Grouping column Feature For Tracking Number column");
 		logger.assignCategory(Constants.group_activity_report_category);
@@ -167,7 +176,7 @@ public class GroupActivityReportTest extends TestBase {
 		ga.secondaryGroupingColumn("Tracking Number");
 	}
 	
-	@Test(priority=15)
+	@Test(priority=16)
 	public void advancedFilterUI() throws InterruptedException{
 		logger=extent.startTest("Advanced Filter section UI");
 		logger.assignCategory(Constants.group_activity_report_category);
@@ -176,7 +185,7 @@ public class GroupActivityReportTest extends TestBase {
 		ga.advancedFilter();
 	}
 	
-	@Test(priority=16)
+	@Test(priority=17)
 	public void basicFilterForGroupName() throws InterruptedException{
 		logger=extent.startTest("Basic Filter for Group Name");
 		logger.assignCategory(Constants.group_activity_report_category);
@@ -186,7 +195,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 	
-	@Test(priority=17)
+	@Test(priority=18)
 	public void advancedFilterForGroupName() throws InterruptedException{
 		
 		logger=extent.startTest("Advanced Filter for Group Name");
@@ -197,7 +206,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 	
-	@Test(priority=18)
+	@Test(priority=19)
 	public void advancedFilterForAnweredCalls() throws InterruptedException{
 		
 		logger=extent.startTest("Advanced Filter for answered calls");
@@ -208,7 +217,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 	
-	@Test(priority=19)
+	@Test(priority=20)
 	public void advancedFilterForCalls() throws InterruptedException{
 		
 		logger=extent.startTest("Advanced Filter for Calls");
@@ -219,7 +228,7 @@ public class GroupActivityReportTest extends TestBase {
 		Thread.sleep(2000);
 	}
 	
-	@Test(priority=20)
+	@Test(priority=21)
 	public void advancedFilterForLeads() throws InterruptedException{
 		
 		logger=extent.startTest("Advanced Filter for Leads");
@@ -230,7 +239,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 	
-	@Test(priority=21)
+	@Test(priority=22)
 	public void advancedFilterForConversion() throws InterruptedException{
 		
 		logger=extent.startTest("Advanced Filter for Conversion");
@@ -241,7 +250,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 	
-	@Test(priority=22)
+	@Test(priority=23)
 	public void dateRangeFilterForToday(){
 		
 		logger=extent.startTest("Date Range filter for today");
@@ -252,7 +261,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 	
-	@Test(priority=23)
+	@Test(priority=24)
 	public void dateRangeFilterForYesterday(){
 		
 		logger=extent.startTest("Date Range filter for yesterday");
@@ -263,7 +272,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}
 		
-	@Test(priority=24)
+	@Test(priority=25)
 	public void dateRangeFilterForLast7Days(){
 		
 		logger=extent.startTest("Date Range filter for last 7 days");
@@ -274,7 +283,7 @@ public class GroupActivityReportTest extends TestBase {
 		
 	}	
 		
-	@Test(priority=25)
+	@Test(priority=26)
 	public void dateRangeFilterForLast30Days(){
 		
 		logger=extent.startTest("Date Range filter for last 30 days");
@@ -284,10 +293,6 @@ public class GroupActivityReportTest extends TestBase {
 		ga.dateRangeFilter(Constants.LegacyReports.last_30_days);
 		
 	}	
-		
-		
-		
-	
 		
 	//logging out -tear down
 	@AfterClass

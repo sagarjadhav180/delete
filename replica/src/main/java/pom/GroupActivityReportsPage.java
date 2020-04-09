@@ -249,6 +249,54 @@ public class GroupActivityReportsPage extends TestBase {
 		softassert.assertAll();
 	}
 	
+	public void defaultSecondaryOption(String option){
+		
+		SoftAssert softassert=new SoftAssert();
+		Select select=new Select(secondary_grouping_listbox);
+		String actual = select.getFirstSelectedOption().getText();
+		String expected=option;
+		
+		logger.log(LogStatus.INFO, "Verifying if by default option selected is None");
+		softassert.assertTrue(actual.equalsIgnoreCase(expected),"Default selected option is not "+option);
+		softassert.assertAll();
+	}
+	
+	public void secondaryGroupingFeature(List secondaryGroupingOption,String option) throws InterruptedException{
+	    SoftAssert softassert=new SoftAssert();
+	    
+	    Select select=new Select(secondary_grouping_listbox);
+	    select.selectByVisibleText(option);
+	    Thread.sleep(4000);
+		List<Integer> index = new ArrayList<Integer>();
+	    
+		Util.click(column_Picker_button);
+		
+	    for(int m=0;m<secondaryGroupingOption.size();){
+	    	
+	    	for(int j=0;j<all_actual_column_picker_options_labels.size();j++){
+	    		
+	    		if(secondaryGroupingOption.get(m).equals(all_actual_column_picker_options_labels.get(j).getText())){
+					index.add(j);	
+	    		}	    			
+			}
+	    	m++;
+		}
+	    
+		for(int i=0;i<column_picker_options_checkboxes.size();i++){
+
+			for(int k=0;k<index.size();k++){
+				if(index.get(k)==i){
+					logger.log(LogStatus.INFO, "verifying if secondaryGrouping feature");
+					softassert.assertTrue(!(column_picker_options_checkboxes.get(i).isEnabled()),column_picker_options_checkboxes.get(i)+" is enabled");			
+				}
+			}			
+		}
+		select.selectByVisibleText("None");
+		Thread.sleep(3000);
+		softassert.assertAll();
+		Util.click(column_Picker_button);
+	}
+	
 	public void secondaryGroupingColumn(String groupingOption) throws InterruptedException{
 		
 		SoftAssert softassert=new SoftAssert();
@@ -493,45 +541,7 @@ public class GroupActivityReportsPage extends TestBase {
 		Util.click(column_Picker_button);
 	}
     
-	public void secondaryGroupingFeature(List secondaryGroupingOption,String option) throws InterruptedException{
-	    SoftAssert softassert=new SoftAssert();
-	    
-	    Select select=new Select(secondary_grouping_listbox);
-	    select.selectByVisibleText(option);
-	    Thread.sleep(4000);
-		List<Integer> index = new ArrayList<Integer>();
-	    
-		Util.click(column_Picker_button);
 		
-	    for(int m=0;m<secondaryGroupingOption.size();){
-	    	for(int j=0;j<all_actual_column_picker_options_labels.size();j++){
-	    		if(secondaryGroupingOption.get(m).equals(all_actual_column_picker_options_labels.get(j).getText())){
-					index.add(j);
-					
-				}	
-	    		
-				
-			}
-	    	m++;
-		}
-	    
-		for(int i=0;i<column_picker_options_checkboxes.size();i++){
-
-			for(int k=0;k<index.size();k++){
-				if(index.get(k)==i){
-					logger.log(LogStatus.INFO, "verifying if secondaryGrouping feature");
-					softassert.assertTrue(!(column_picker_options_checkboxes.get(i).isEnabled()),column_picker_options_checkboxes.get(i)+" is enabled");			
-				}
-			}
-			
-	
-		}
-		select.selectByVisibleText("None");
-		Thread.sleep(3000);
-		softassert.assertAll();
-		Util.click(column_Picker_button);
-	}
-	
 	public void allColumns(){
 	    SoftAssert softassert=new SoftAssert();
         logger.log(LogStatus.INFO, "verifying column names in call detail table");
