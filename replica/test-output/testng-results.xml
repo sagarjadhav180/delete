@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="62" passed="61">
+<testng-results skipped="0" failed="0" total="27" passed="27">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="1315503" started-at="2020-03-27T07:12:53Z" finished-at="2020-03-27T07:34:48Z">
+  <suite name="Automation Suite-1" duration-ms="213199" started-at="2020-04-09T12:45:59Z" finished-at="2020-04-09T12:49:32Z">
     <groups>
     </groups>
-    <test name="chrome test" duration-ms="1315503" started-at="2020-03-27T07:12:53Z" finished-at="2020-03-27T07:34:48Z">
-      <class name="tests.LoginTest">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="setUp" is-config="true" duration-ms="179736" started-at="2020-03-27T12:42:53Z" finished-at="2020-03-27T12:45:52Z">
+    <test name="chrome test-1" duration-ms="213199" started-at="2020-04-09T12:45:59Z" finished-at="2020-04-09T12:49:32Z">
+      <class name="tests.GroupActivityReportTest">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="setUp" is-config="true" duration-ms="50956" started-at="2020-04-09T18:15:59Z" finished-at="2020-04-09T18:16:50Z">
           <params>
             <param index="0">
               <value>
@@ -23,1027 +23,428 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="login_page_UI_Verification()[pri:1, instance:tests.LoginTest@6b0c2d26]" name="login_page_UI_Verification" duration-ms="2031" started-at="2020-03-27T12:45:52Z" finished-at="2020-03-27T12:45:54Z">
+        <test-method status="PASS" signature="goToGroupActivityReportPage()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="goToGroupActivityReportPage" is-config="true" duration-ms="6344" started-at="2020-04-09T18:16:50Z" finished-at="2020-04-09T18:16:57Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- login_page_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="549" started-at="2020-03-27T12:45:54Z" finished-at="2020-03-27T12:45:55Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_page_UI_Verification status=SUCCESS method=LoginTest.login_page_UI_Verification()[pri:1, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_invalidate_cred()[pri:2, instance:tests.LoginTest@6b0c2d26]" name="login_with_invalidate_cred" duration-ms="4978" started-at="2020-03-27T12:45:55Z" finished-at="2020-03-27T12:46:00Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_invalidate_cred -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="106" started-at="2020-03-27T12:46:00Z" finished-at="2020-03-27T12:46:00Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_invalidate_cred status=SUCCESS method=LoginTest.login_with_invalidate_cred()[pri:2, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_username()[pri:3, instance:tests.LoginTest@6b0c2d26]" name="login_with_blank_username" duration-ms="349" started-at="2020-03-27T12:46:00Z" finished-at="2020-03-27T12:46:00Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_blank_username -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="77" started-at="2020-03-27T12:46:00Z" finished-at="2020-03-27T12:46:00Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_blank_username status=SUCCESS method=LoginTest.login_with_blank_username()[pri:3, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_password()[pri:4, instance:tests.LoginTest@6b0c2d26]" name="login_with_blank_password" duration-ms="355" started-at="2020-03-27T12:46:00Z" finished-at="2020-03-27T12:46:01Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_blank_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="77" started-at="2020-03-27T12:46:01Z" finished-at="2020-03-27T12:46:01Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_blank_password status=SUCCESS method=LoginTest.login_with_blank_password()[pri:4, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_inactive_user()[pri:5, instance:tests.LoginTest@6b0c2d26]" name="login_with_inactive_user" duration-ms="565" started-at="2020-03-27T12:46:01Z" finished-at="2020-03-27T12:46:01Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_inactive_user -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="61" started-at="2020-03-27T12:46:01Z" finished-at="2020-03-27T12:46:01Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_inactive_user status=SUCCESS method=LoginTest.login_with_inactive_user()[pri:5, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_deleted_user()[pri:6, instance:tests.LoginTest@6b0c2d26]" name="login_with_deleted_user" duration-ms="592" started-at="2020-03-27T12:46:01Z" finished-at="2020-03-27T12:46:02Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_deleted_user -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="60" started-at="2020-03-27T12:46:02Z" finished-at="2020-03-27T12:46:02Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_deleted_user status=SUCCESS method=LoginTest.login_with_deleted_user()[pri:6, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_username_and_password()[pri:7, instance:tests.LoginTest@6b0c2d26]" name="login_with_blank_username_and_password" duration-ms="202" started-at="2020-03-27T12:46:02Z" finished-at="2020-03-27T12:46:02Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- login_with_blank_username_and_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="68" started-at="2020-03-27T12:46:02Z" finished-at="2020-03-27T12:46:02Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login_with_blank_username_and_password status=SUCCESS method=LoginTest.login_with_blank_username_and_password()[pri:7, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="UIVerification_forgot_passowrd_page()[pri:8, instance:tests.LoginTest@6b0c2d26]" name="UIVerification_forgot_passowrd_page" duration-ms="3028" started-at="2020-03-27T12:46:02Z" finished-at="2020-03-27T12:46:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- UIVerification_forgot_passowrd_page -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="61" started-at="2020-03-27T12:46:05Z" finished-at="2020-03-27T12:46:05Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=UIVerification_forgot_passowrd_page status=SUCCESS method=LoginTest.UIVerification_forgot_passowrd_page()[pri:8, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="next_button_with_no_email_ID()[pri:9, instance:tests.LoginTest@6b0c2d26]" name="next_button_with_no_email_ID" duration-ms="335" started-at="2020-03-27T12:46:05Z" finished-at="2020-03-27T12:46:06Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- next_button_with_no_email_ID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="72" started-at="2020-03-27T12:46:06Z" finished-at="2020-03-27T12:46:06Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=next_button_with_no_email_ID status=SUCCESS method=LoginTest.next_button_with_no_email_ID()[pri:9, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="reset_password()[pri:10, instance:tests.LoginTest@6b0c2d26]" name="reset_password" duration-ms="1632" started-at="2020-03-27T12:46:06Z" finished-at="2020-03-27T12:46:08Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- reset_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="77" started-at="2020-03-27T12:46:08Z" finished-at="2020-03-27T12:46:08Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=reset_password status=SUCCESS method=LoginTest.reset_password()[pri:10, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="rememeber_me_functinonality()[pri:11, instance:tests.LoginTest@6b0c2d26]" name="rememeber_me_functinonality" duration-ms="11493" started-at="2020-03-27T12:46:08Z" finished-at="2020-03-27T12:46:19Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- rememeber_me_functinonality -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="65" started-at="2020-03-27T12:46:19Z" finished-at="2020-03-27T12:46:19Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=rememeber_me_functinonality status=SUCCESS method=LoginTest.rememeber_me_functinonality()[pri:11, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="validLogin()[pri:12, instance:tests.LoginTest@6b0c2d26]" name="validLogin" duration-ms="2150" started-at="2020-03-27T12:46:19Z" finished-at="2020-03-27T12:46:21Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validLogin -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="65" started-at="2020-03-27T12:46:21Z" finished-at="2020-03-27T12:46:21Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=validLogin status=SUCCESS method=LoginTest.validLogin()[pri:12, instance:tests.LoginTest@6b0c2d26] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.LoginTest@6b0c2d26]" name="tearDown" is-config="true" duration-ms="8175" started-at="2020-03-27T12:46:21Z" finished-at="2020-03-27T12:46:30Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.LoginTest@6b0c2d26]" name="close_connection" is-config="true" duration-ms="12938" started-at="2020-03-27T13:04:48Z" finished-at="2020-03-27T13:05:01Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- close_connection -->
-      </class> <!-- tests.LoginTest -->
-      <class name="tests.CampaignTests">
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CampaignTests@6e38921c]" name="goToCampaignPage" is-config="true" duration-ms="3002" started-at="2020-03-27T12:49:00Z" finished-at="2020-03-27T12:49:03Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="campaignBuilderPage_UI_Verification()[pri:1, instance:tests.CampaignTests@6e38921c]" name="campaignBuilderPage_UI_Verification" duration-ms="10145" started-at="2020-03-27T12:49:03Z" finished-at="2020-03-27T12:49:13Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaignBuilderPage_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="50" started-at="2020-03-27T12:49:13Z" finished-at="2020-03-27T12:49:13Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaignBuilderPage_UI_Verification status=SUCCESS method=CampaignTests.campaignBuilderPage_UI_Verification()[pri:1, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="defaultCampaignOwnerValidation()[pri:2, instance:tests.CampaignTests@6e38921c]" name="defaultCampaignOwnerValidation" duration-ms="7463" started-at="2020-03-27T12:49:13Z" finished-at="2020-03-27T12:49:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- defaultCampaignOwnerValidation -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="52" started-at="2020-03-27T12:49:20Z" finished-at="2020-03-27T12:49:20Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=defaultCampaignOwnerValidation status=SUCCESS method=CampaignTests.defaultCampaignOwnerValidation()[pri:2, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_Creation_Without_externalID()[pri:3, instance:tests.CampaignTests@6e38921c]" name="campaign_Creation_Without_externalID" duration-ms="14282" started-at="2020-03-27T12:49:20Z" finished-at="2020-03-27T12:49:35Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_Creation_Without_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="47" started-at="2020-03-27T12:49:35Z" finished-at="2020-03-27T12:49:35Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_Creation_Without_externalID status=SUCCESS method=CampaignTests.campaign_Creation_Without_externalID()[pri:3, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_updation_Without_externalID()[pri:4, instance:tests.CampaignTests@6e38921c]" name="campaign_updation_Without_externalID" duration-ms="52510" started-at="2020-03-27T12:49:35Z" finished-at="2020-03-27T12:50:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_updation_Without_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="46" started-at="2020-03-27T12:50:27Z" finished-at="2020-03-27T12:50:27Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_updation_Without_externalID status=SUCCESS method=CampaignTests.campaign_updation_Without_externalID()[pri:4, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_Without_externalID()[pri:5, instance:tests.CampaignTests@6e38921c]" name="campaign_deletion_Without_externalID" duration-ms="3743" started-at="2020-03-27T12:50:27Z" finished-at="2020-03-27T12:50:31Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_deletion_Without_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="45" started-at="2020-03-27T12:50:31Z" finished-at="2020-03-27T12:50:31Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_deletion_Without_externalID status=SUCCESS method=CampaignTests.campaign_deletion_Without_externalID()[pri:5, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_Creation_With_externalID()[pri:6, instance:tests.CampaignTests@6e38921c]" name="campaign_Creation_With_externalID" duration-ms="17985" started-at="2020-03-27T12:50:31Z" finished-at="2020-03-27T12:50:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_Creation_With_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="54" started-at="2020-03-27T12:50:49Z" finished-at="2020-03-27T12:50:49Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_Creation_With_externalID status=SUCCESS method=CampaignTests.campaign_Creation_With_externalID()[pri:6, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_updation_With_externalID()[pri:7, instance:tests.CampaignTests@6e38921c]" name="campaign_updation_With_externalID" duration-ms="45210" started-at="2020-03-27T12:50:49Z" finished-at="2020-03-27T12:51:34Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_updation_With_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="35" started-at="2020-03-27T12:51:34Z" finished-at="2020-03-27T12:51:34Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_updation_With_externalID status=SUCCESS method=CampaignTests.campaign_updation_With_externalID()[pri:7, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_With_externalID()[pri:8, instance:tests.CampaignTests@6e38921c]" name="campaign_deletion_With_externalID" duration-ms="3796" started-at="2020-03-27T12:51:34Z" finished-at="2020-03-27T12:51:38Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_deletion_With_externalID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="69" started-at="2020-03-27T12:51:38Z" finished-at="2020-03-27T12:51:38Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_deletion_With_externalID status=SUCCESS method=CampaignTests.campaign_deletion_With_externalID()[pri:8, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="createCampaignWithFutureStartDateAndNeverEndDate()[pri:9, instance:tests.CampaignTests@6e38921c]" name="createCampaignWithFutureStartDateAndNeverEndDate" duration-ms="18833" started-at="2020-03-27T12:51:38Z" finished-at="2020-03-27T12:51:57Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createCampaignWithFutureStartDateAndNeverEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="47" started-at="2020-03-27T12:51:57Z" finished-at="2020-03-27T12:51:57Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=createCampaignWithFutureStartDateAndNeverEndDate status=SUCCESS method=CampaignTests.createCampaignWithFutureStartDateAndNeverEndDate()[pri:9, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="updateCampaignWithFutureStartDateAndNeverEndDate()[pri:10, instance:tests.CampaignTests@6e38921c]" name="updateCampaignWithFutureStartDateAndNeverEndDate" duration-ms="47716" started-at="2020-03-27T12:51:57Z" finished-at="2020-03-27T12:52:45Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateCampaignWithFutureStartDateAndNeverEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="47" started-at="2020-03-27T12:52:45Z" finished-at="2020-03-27T12:52:45Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=updateCampaignWithFutureStartDateAndNeverEndDate status=SUCCESS method=CampaignTests.updateCampaignWithFutureStartDateAndNeverEndDate()[pri:10, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_With_futureStartDate()[pri:11, instance:tests.CampaignTests@6e38921c]" name="campaign_deletion_With_futureStartDate" duration-ms="13008" started-at="2020-03-27T12:52:45Z" finished-at="2020-03-27T12:52:58Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_deletion_With_futureStartDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="61" started-at="2020-03-27T12:52:58Z" finished-at="2020-03-27T12:52:58Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_deletion_With_futureStartDate status=SUCCESS method=CampaignTests.campaign_deletion_With_futureStartDate()[pri:11, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="createCampaignWithFutureStartDateAndFutureEndDate()[pri:12, instance:tests.CampaignTests@6e38921c]" name="createCampaignWithFutureStartDateAndFutureEndDate" duration-ms="18177" started-at="2020-03-27T12:52:58Z" finished-at="2020-03-27T12:53:16Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createCampaignWithFutureStartDateAndFutureEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="52" started-at="2020-03-27T12:53:16Z" finished-at="2020-03-27T12:53:16Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=createCampaignWithFutureStartDateAndFutureEndDate status=SUCCESS method=CampaignTests.createCampaignWithFutureStartDateAndFutureEndDate()[pri:12, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="updateCampaignWithFutureStartDateAndFutureEndDate()[pri:13, instance:tests.CampaignTests@6e38921c]" name="updateCampaignWithFutureStartDateAndFutureEndDate" duration-ms="48898" started-at="2020-03-27T12:53:16Z" finished-at="2020-03-27T12:54:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateCampaignWithFutureStartDateAndFutureEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="48" started-at="2020-03-27T12:54:05Z" finished-at="2020-03-27T12:54:05Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=updateCampaignWithFutureStartDateAndFutureEndDate status=SUCCESS method=CampaignTests.updateCampaignWithFutureStartDateAndFutureEndDate()[pri:13, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="campaign_deletion_With_futureStartDateAndFutureEndDate()[pri:14, instance:tests.CampaignTests@6e38921c]" name="campaign_deletion_With_futureStartDateAndFutureEndDate" duration-ms="3853" started-at="2020-03-27T12:54:05Z" finished-at="2020-03-27T12:54:09Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- campaign_deletion_With_futureStartDateAndFutureEndDate -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="56" started-at="2020-03-27T12:54:09Z" finished-at="2020-03-27T12:54:09Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=campaign_deletion_With_futureStartDateAndFutureEndDate status=SUCCESS method=CampaignTests.campaign_deletion_With_futureStartDateAndFutureEndDate()[pri:14, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="createCampaignWithPastTime()[pri:15, instance:tests.CampaignTests@6e38921c]" name="createCampaignWithPastTime" duration-ms="8645" started-at="2020-03-27T12:54:09Z" finished-at="2020-03-27T12:54:18Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createCampaignWithPastTime -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CampaignTests@6e38921c]" name="tearDown" is-config="true" duration-ms="39" started-at="2020-03-27T12:54:18Z" finished-at="2020-03-27T12:54:18Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=createCampaignWithPastTime status=SUCCESS method=CampaignTests.createCampaignWithPastTime()[pri:15, instance:tests.CampaignTests@6e38921c] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="goToHomePage()[pri:0, instance:tests.CampaignTests@6e38921c]" name="goToHomePage" is-config="true" duration-ms="16015" started-at="2020-03-27T12:54:18Z" finished-at="2020-03-27T12:54:34Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToHomePage -->
-      </class> <!-- tests.CampaignTests -->
-      <class name="tests.HomeTest">
-        <test-method status="PASS" signature="validLogin()[pri:0, instance:tests.HomeTest@3d3fcdb0]" name="validLogin" is-config="true" duration-ms="2957" started-at="2020-03-27T12:46:30Z" finished-at="2020-03-27T12:46:33Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validLogin -->
-        <test-method status="PASS" signature="ui_verification()[pri:1, instance:tests.HomeTest@3d3fcdb0]" name="ui_verification" duration-ms="10831" started-at="2020-03-27T12:46:33Z" finished-at="2020-03-27T12:46:43Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- ui_verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomeTest@3d3fcdb0]" name="tearDown" is-config="true" duration-ms="58" started-at="2020-03-27T12:46:43Z" finished-at="2020-03-27T12:46:43Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=ui_verification status=SUCCESS method=HomeTest.ui_verification()[pri:1, instance:tests.HomeTest@3d3fcdb0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="FAIL" signature="tiles_count_verification_UI()[pri:2, instance:tests.HomeTest@3d3fcdb0]" name="tiles_count_verification_UI" duration-ms="11690" started-at="2020-03-27T12:46:43Z" finished-at="2020-03-27T12:46:55Z">
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[The following asserts failed:
-	total_call_count_from_ui is not matching with db expected [true] but found [false],
-	answered_calls_count_from_ui is not matching with db expected [true] but found [false],
-	AVG CALL DURATION from ui is not matching with db expected [true] but found [false]]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: The following asserts failed:
-	total_call_count_from_ui is not matching with db expected [true] but found [false],
-	answered_calls_count_from_ui is not matching with db expected [true] but found [false],
-	AVG CALL DURATION from ui is not matching with db expected [true] but found [false]
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
-	at pom.HomePage.tilesCount(HomePage.java:480)
-	at tests.HomeTest.tiles_count_verification_UI(HomeTest.java:55)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
-	at org.testng.TestRunner.privateRun(TestRunner.java:782)
-	at org.testng.TestRunner.run(TestRunner.java:632)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
-	at org.testng.SuiteRunner.access$000(SuiteRunner.java:39)
-	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:400)
-	at org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tiles_count_verification_UI -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomeTest@3d3fcdb0]" name="tearDown" is-config="true" duration-ms="11820" started-at="2020-03-27T12:46:55Z" finished-at="2020-03-27T12:47:07Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tiles_count_verification_UI status=FAILURE method=HomeTest.tiles_count_verification_UI()[pri:2, instance:tests.HomeTest@3d3fcdb0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.HomeTest@3d3fcdb0]" name="tearDown" is-config="true" duration-ms="5329" started-at="2020-03-27T12:47:07Z" finished-at="2020-03-27T12:47:12Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- tests.HomeTest -->
-      <class name="tests.CamapignUIVerificationTest">
-        <test-method status="PASS" signature="goToCampaignPage()[pri:0, instance:tests.CamapignUIVerificationTest@641147d0]" name="goToCampaignPage" is-config="true" duration-ms="3086" started-at="2020-03-27T12:47:12Z" finished-at="2020-03-27T12:47:15Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToCampaignPage -->
-        <test-method status="PASS" signature="CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CamapignUIVerificationTest@641147d0]" name="CampaignAndTrackingNumberPage_UI_Verification" duration-ms="10446" started-at="2020-03-27T12:47:15Z" finished-at="2020-03-27T12:47:26Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- CampaignAndTrackingNumberPage_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@641147d0]" name="tearDown" is-config="true" duration-ms="66" started-at="2020-03-27T12:47:26Z" finished-at="2020-03-27T12:47:26Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=CampaignAndTrackingNumberPage_UI_Verification status=SUCCESS method=CamapignUIVerificationTest.CampaignAndTrackingNumberPage_UI_Verification()[pri:1, instance:tests.CamapignUIVerificationTest@641147d0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@641147d0]" name="defaultColumnsDisplayed" duration-ms="9553" started-at="2020-03-27T12:47:26Z" finished-at="2020-03-27T12:47:35Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- defaultColumnsDisplayed -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@641147d0]" name="tearDown" is-config="true" duration-ms="84" started-at="2020-03-27T12:47:35Z" finished-at="2020-03-27T12:47:35Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=defaultColumnsDisplayed status=SUCCESS method=CamapignUIVerificationTest.defaultColumnsDisplayed()[pri:2, instance:tests.CamapignUIVerificationTest@641147d0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@641147d0]" name="allColumnsDisplayed" duration-ms="72757" started-at="2020-03-27T12:47:35Z" finished-at="2020-03-27T12:48:48Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- allColumnsDisplayed -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CamapignUIVerificationTest@641147d0]" name="tearDown" is-config="true" duration-ms="58" started-at="2020-03-27T12:48:48Z" finished-at="2020-03-27T12:48:48Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=allColumnsDisplayed status=SUCCESS method=CamapignUIVerificationTest.allColumnsDisplayed()[pri:3, instance:tests.CamapignUIVerificationTest@641147d0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="goToHomePage()[pri:0, instance:tests.CamapignUIVerificationTest@641147d0]" name="goToHomePage" is-config="true" duration-ms="11442" started-at="2020-03-27T12:48:48Z" finished-at="2020-03-27T12:49:00Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToHomePage -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.CamapignUIVerificationTest@641147d0]" name="tearDown" is-config="true" duration-ms="865" started-at="2020-03-27T13:04:47Z" finished-at="2020-03-27T13:04:48Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- tests.CamapignUIVerificationTest -->
-      <class name="tests.CallDetailReportTest">
-        <test-method status="PASS" signature="goToCallDetailsReportPage()[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="goToCallDetailsReportPage" is-config="true" duration-ms="2936" started-at="2020-03-27T12:54:34Z" finished-at="2020-03-27T12:54:37Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- goToCallDetailsReportPage -->
-        <test-method status="PASS" signature="uiVerification()[pri:1, instance:tests.CallDetailReportTest@64d7f7e0]" name="uiVerification" duration-ms="5700" started-at="2020-03-27T12:54:37Z" finished-at="2020-03-27T12:54:42Z">
+        </test-method> <!-- goToGroupActivityReportPage -->
+        <test-method status="PASS" signature="uiVerification()[pri:1, instance:tests.GroupActivityReportTest@442675e1]" name="uiVerification" duration-ms="3668" started-at="2020-04-09T18:16:57Z" finished-at="2020-04-09T18:17:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- uiVerification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="35" started-at="2020-03-27T12:54:42Z" finished-at="2020-03-27T12:54:42Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="769" started-at="2020-04-09T18:17:00Z" finished-at="2020-04-09T18:17:01Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=uiVerification status=SUCCESS method=CallDetailReportTest.uiVerification()[pri:1, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=uiVerification status=SUCCESS method=GroupActivityReportTest.uiVerification()[pri:1, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="paginationUI()[pri:2, instance:tests.CallDetailReportTest@64d7f7e0]" name="paginationUI" duration-ms="149" started-at="2020-03-27T12:54:42Z" finished-at="2020-03-27T12:54:43Z">
+        <test-method status="PASS" signature="dateRangeFilterUIVerification()[pri:2, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterUIVerification" duration-ms="3812" started-at="2020-04-09T18:17:01Z" finished-at="2020-04-09T18:17:05Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- paginationUI -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="40" started-at="2020-03-27T12:54:43Z" finished-at="2020-03-27T12:54:43Z">
+        </test-method> <!-- dateRangeFilterUIVerification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="188" started-at="2020-04-09T18:17:05Z" finished-at="2020-04-09T18:17:05Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=paginationUI status=SUCCESS method=CallDetailReportTest.paginationUI()[pri:2, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=dateRangeFilterUIVerification status=SUCCESS method=GroupActivityReportTest.dateRangeFilterUIVerification()[pri:2, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="paginationCount()[pri:3, instance:tests.CallDetailReportTest@64d7f7e0]" name="paginationCount" duration-ms="1474" started-at="2020-03-27T12:54:43Z" finished-at="2020-03-27T12:54:44Z">
+        <test-method status="PASS" signature="tileCountVerification()[pri:3, instance:tests.GroupActivityReportTest@442675e1]" name="tileCountVerification" duration-ms="7467" started-at="2020-04-09T18:17:05Z" finished-at="2020-04-09T18:17:13Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- paginationCount -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="40" started-at="2020-03-27T12:54:44Z" finished-at="2020-03-27T12:54:44Z">
+        </test-method> <!-- tileCountVerification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="151" started-at="2020-04-09T18:17:13Z" finished-at="2020-04-09T18:17:13Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=paginationCount status=SUCCESS method=CallDetailReportTest.paginationCount()[pri:3, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=tileCountVerification status=SUCCESS method=GroupActivityReportTest.tileCountVerification()[pri:3, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tableCount()[pri:4, instance:tests.CallDetailReportTest@64d7f7e0]" name="tableCount" duration-ms="1188" started-at="2020-03-27T12:54:44Z" finished-at="2020-03-27T12:54:45Z">
+        <test-method status="PASS" signature="secondaryGroupingOptions()[pri:4, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingOptions" duration-ms="417" started-at="2020-04-09T18:17:13Z" finished-at="2020-04-09T18:17:13Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tableCount -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="43" started-at="2020-03-27T12:54:45Z" finished-at="2020-03-27T12:54:45Z">
+        </test-method> <!-- secondaryGroupingOptions -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="110" started-at="2020-04-09T18:17:13Z" finished-at="2020-04-09T18:17:13Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tableCount status=SUCCESS method=CallDetailReportTest.tableCount()[pri:4, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=secondaryGroupingOptions status=SUCCESS method=GroupActivityReportTest.secondaryGroupingOptions()[pri:4, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="defaultColumnPickerOptions()[pri:5, instance:tests.CallDetailReportTest@64d7f7e0]" name="defaultColumnPickerOptions" duration-ms="14387" started-at="2020-03-27T12:54:45Z" finished-at="2020-03-27T12:55:00Z">
+        <test-method status="PASS" signature="tableCountVerification()[pri:5, instance:tests.GroupActivityReportTest@442675e1]" name="tableCountVerification" duration-ms="1265" started-at="2020-04-09T18:17:13Z" finished-at="2020-04-09T18:17:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tableCountVerification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="141" started-at="2020-04-09T18:17:14Z" finished-at="2020-04-09T18:17:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tableCountVerification status=SUCCESS method=GroupActivityReportTest.tableCountVerification()[pri:5, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="paginationToolboxUIVerification()[pri:6, instance:tests.GroupActivityReportTest@442675e1]" name="paginationToolboxUIVerification" duration-ms="25" started-at="2020-04-09T18:17:15Z" finished-at="2020-04-09T18:17:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- paginationToolboxUIVerification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="110" started-at="2020-04-09T18:17:15Z" finished-at="2020-04-09T18:17:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=paginationToolboxUIVerification status=SUCCESS method=GroupActivityReportTest.paginationToolboxUIVerification()[pri:6, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="paginationCountVerification()[pri:7, instance:tests.GroupActivityReportTest@442675e1]" name="paginationCountVerification" duration-ms="28" started-at="2020-04-09T18:17:15Z" finished-at="2020-04-09T18:17:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- paginationCountVerification -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="68" started-at="2020-04-09T18:17:15Z" finished-at="2020-04-09T18:17:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=paginationCountVerification status=SUCCESS method=GroupActivityReportTest.paginationCountVerification()[pri:7, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="defaultColumnPickerOptions()[pri:8, instance:tests.GroupActivityReportTest@442675e1]" name="defaultColumnPickerOptions" duration-ms="7214" started-at="2020-04-09T18:17:15Z" finished-at="2020-04-09T18:17:22Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- defaultColumnPickerOptions -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="41" started-at="2020-03-27T12:55:00Z" finished-at="2020-03-27T12:55:00Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="101" started-at="2020-04-09T18:17:22Z" finished-at="2020-04-09T18:17:22Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=defaultColumnPickerOptions status=SUCCESS method=CallDetailReportTest.defaultColumnPickerOptions()[pri:5, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=defaultColumnPickerOptions status=SUCCESS method=GroupActivityReportTest.defaultColumnPickerOptions()[pri:8, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="defaultColumnsDisplayed()[pri:6, instance:tests.CallDetailReportTest@64d7f7e0]" name="defaultColumnsDisplayed" duration-ms="5120" started-at="2020-03-27T12:55:00Z" finished-at="2020-03-27T12:55:05Z">
+        <test-method status="PASS" signature="defaultColumnsDisplayed()[pri:9, instance:tests.GroupActivityReportTest@442675e1]" name="defaultColumnsDisplayed" duration-ms="2776" started-at="2020-04-09T18:17:22Z" finished-at="2020-04-09T18:17:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- defaultColumnsDisplayed -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="36" started-at="2020-03-27T12:55:05Z" finished-at="2020-03-27T12:55:05Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="84" started-at="2020-04-09T18:17:25Z" finished-at="2020-04-09T18:17:25Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=defaultColumnsDisplayed status=SUCCESS method=CallDetailReportTest.defaultColumnsDisplayed()[pri:6, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=defaultColumnsDisplayed status=SUCCESS method=GroupActivityReportTest.defaultColumnsDisplayed()[pri:9, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="allColumnPickerCheckboxesClickable()[pri:7, instance:tests.CallDetailReportTest@64d7f7e0]" name="allColumnPickerCheckboxesClickable" duration-ms="1882" started-at="2020-03-27T12:55:05Z" finished-at="2020-03-27T12:55:07Z">
+        <test-method status="PASS" signature="allColumnPickerCheckboxesClickable()[pri:10, instance:tests.GroupActivityReportTest@442675e1]" name="allColumnPickerCheckboxesClickable" duration-ms="1983" started-at="2020-04-09T18:17:25Z" finished-at="2020-04-09T18:17:27Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- allColumnPickerCheckboxesClickable -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="31" started-at="2020-03-27T12:55:07Z" finished-at="2020-03-27T12:55:07Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="68" started-at="2020-04-09T18:17:27Z" finished-at="2020-04-09T18:17:27Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=allColumnPickerCheckboxesClickable status=SUCCESS method=CallDetailReportTest.allColumnPickerCheckboxesClickable()[pri:7, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=allColumnPickerCheckboxesClickable status=SUCCESS method=GroupActivityReportTest.allColumnPickerCheckboxesClickable()[pri:10, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="columnPickerFeature()[pri:8, instance:tests.CallDetailReportTest@64d7f7e0]" name="columnPickerFeature" duration-ms="25651" started-at="2020-03-27T12:55:07Z" finished-at="2020-03-27T12:55:33Z">
+        <test-method status="PASS" signature="defaultSecondaryGroupingOption()[pri:11, instance:tests.GroupActivityReportTest@442675e1]" name="defaultSecondaryGroupingOption" duration-ms="132" started-at="2020-04-09T18:17:27Z" finished-at="2020-04-09T18:17:27Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- columnPickerFeature -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="41" started-at="2020-03-27T12:55:33Z" finished-at="2020-03-27T12:55:33Z">
+        </test-method> <!-- defaultSecondaryGroupingOption -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="67" started-at="2020-04-09T18:17:27Z" finished-at="2020-04-09T18:17:27Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=columnPickerFeature status=SUCCESS method=CallDetailReportTest.columnPickerFeature()[pri:8, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=defaultSecondaryGroupingOption status=SUCCESS method=GroupActivityReportTest.defaultSecondaryGroupingOption()[pri:11, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="advancedFilterUI()[pri:9, instance:tests.CallDetailReportTest@64d7f7e0]" name="advancedFilterUI" duration-ms="26525" started-at="2020-03-27T12:55:33Z" finished-at="2020-03-27T12:55:59Z">
+        <test-method status="PASS" signature="secondaryGroupingFeatureForNone()[pri:12, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForNone" duration-ms="9501" started-at="2020-04-09T18:17:27Z" finished-at="2020-04-09T18:17:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- secondaryGroupingFeatureForNone -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="60" started-at="2020-04-09T18:17:37Z" finished-at="2020-04-09T18:17:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=secondaryGroupingFeatureForNone status=SUCCESS method=GroupActivityReportTest.secondaryGroupingFeatureForNone()[pri:12, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="secondaryGroupingFeatureForTrackingNumber()[pri:13, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForTrackingNumber" duration-ms="17884" started-at="2020-04-09T18:17:37Z" finished-at="2020-04-09T18:17:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- secondaryGroupingFeatureForTrackingNumber -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="49" started-at="2020-04-09T18:17:55Z" finished-at="2020-04-09T18:17:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=secondaryGroupingFeatureForTrackingNumber status=SUCCESS method=GroupActivityReportTest.secondaryGroupingFeatureForTrackingNumber()[pri:13, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="secondaryGroupingFeatureForCampaign()[pri:14, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForCampaign" duration-ms="14047" started-at="2020-04-09T18:17:55Z" finished-at="2020-04-09T18:18:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- secondaryGroupingFeatureForCampaign -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="45" started-at="2020-04-09T18:18:09Z" finished-at="2020-04-09T18:18:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=secondaryGroupingFeatureForCampaign status=SUCCESS method=GroupActivityReportTest.secondaryGroupingFeatureForCampaign()[pri:14, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="secondaryGroupingFeatureForCampaignColumn()[pri:15, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForCampaignColumn" duration-ms="11345" started-at="2020-04-09T18:18:09Z" finished-at="2020-04-09T18:18:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- secondaryGroupingFeatureForCampaignColumn -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="56" started-at="2020-04-09T18:18:20Z" finished-at="2020-04-09T18:18:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=secondaryGroupingFeatureForCampaignColumn status=SUCCESS method=GroupActivityReportTest.secondaryGroupingFeatureForCampaignColumn()[pri:15, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="secondaryGroupingFeatureForTrackingumberColumn()[pri:16, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForTrackingumberColumn" duration-ms="11533" started-at="2020-04-09T18:18:20Z" finished-at="2020-04-09T18:18:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- secondaryGroupingFeatureForTrackingumberColumn -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="99" started-at="2020-04-09T18:18:32Z" finished-at="2020-04-09T18:18:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=secondaryGroupingFeatureForTrackingumberColumn status=SUCCESS method=GroupActivityReportTest.secondaryGroupingFeatureForTrackingumberColumn()[pri:16, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="advancedFilterUI()[pri:17, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterUI" duration-ms="7915" started-at="2020-04-09T18:18:32Z" finished-at="2020-04-09T18:18:40Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterUI -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="42" started-at="2020-03-27T12:55:59Z" finished-at="2020-03-27T12:55:59Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="64" started-at="2020-04-09T18:18:40Z" finished-at="2020-04-09T18:18:40Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=advancedFilterUI status=SUCCESS method=CallDetailReportTest.advancedFilterUI()[pri:9, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=advancedFilterUI status=SUCCESS method=GroupActivityReportTest.advancedFilterUI()[pri:17, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="basicFilterForAdSource()[pri:10, instance:tests.CallDetailReportTest@64d7f7e0]" name="basicFilterForAdSource" duration-ms="7935" started-at="2020-03-27T12:55:59Z" finished-at="2020-03-27T12:56:07Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- basicFilterForAdSource -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="36" started-at="2020-03-27T12:56:07Z" finished-at="2020-03-27T12:56:07Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=basicFilterForAdSource status=SUCCESS method=CallDetailReportTest.basicFilterForAdSource()[pri:10, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="basicFilterForCaller_ID()[pri:11, instance:tests.CallDetailReportTest@64d7f7e0]" name="basicFilterForCaller_ID" duration-ms="3780" started-at="2020-03-27T12:56:07Z" finished-at="2020-03-27T12:56:11Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- basicFilterForCaller_ID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="43" started-at="2020-03-27T12:56:11Z" finished-at="2020-03-27T12:56:11Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=basicFilterForCaller_ID status=SUCCESS method=CallDetailReportTest.basicFilterForCaller_ID()[pri:11, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="basicFilterForTrackingNumber()[pri:12, instance:tests.CallDetailReportTest@64d7f7e0]" name="basicFilterForTrackingNumber" duration-ms="4331" started-at="2020-03-27T12:56:11Z" finished-at="2020-03-27T12:56:15Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- basicFilterForTrackingNumber -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="35" started-at="2020-03-27T12:56:15Z" finished-at="2020-03-27T12:56:15Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=basicFilterForTrackingNumber status=SUCCESS method=CallDetailReportTest.basicFilterForTrackingNumber()[pri:12, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="basicFilterForDuration()[pri:13, instance:tests.CallDetailReportTest@64d7f7e0]" name="basicFilterForDuration" duration-ms="4295" started-at="2020-03-27T12:56:15Z" finished-at="2020-03-27T12:56:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- basicFilterForDuration -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="38" started-at="2020-03-27T12:56:20Z" finished-at="2020-03-27T12:56:20Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=basicFilterForDuration status=SUCCESS method=CallDetailReportTest.basicFilterForDuration()[pri:13, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="basicFilterForGroupName()[pri:14, instance:tests.CallDetailReportTest@64d7f7e0]" name="basicFilterForGroupName" duration-ms="7494" started-at="2020-03-27T12:56:20Z" finished-at="2020-03-27T12:56:27Z">
+        <test-method status="PASS" signature="basicFilterForGroupName()[pri:18, instance:tests.GroupActivityReportTest@442675e1]" name="basicFilterForGroupName" duration-ms="8532" started-at="2020-04-09T18:18:40Z" finished-at="2020-04-09T18:18:48Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- basicFilterForGroupName -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="39" started-at="2020-03-27T12:56:27Z" finished-at="2020-03-27T12:56:27Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="42" started-at="2020-04-09T18:18:48Z" finished-at="2020-04-09T18:18:48Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=basicFilterForGroupName status=SUCCESS method=CallDetailReportTest.basicFilterForGroupName()[pri:14, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=basicFilterForGroupName status=SUCCESS method=GroupActivityReportTest.basicFilterForGroupName()[pri:18, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="basicFilterForDisposition()[pri:15, instance:tests.CallDetailReportTest@64d7f7e0]" name="basicFilterForDisposition" duration-ms="5608" started-at="2020-03-27T12:56:27Z" finished-at="2020-03-27T12:56:33Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- basicFilterForDisposition -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="37" started-at="2020-03-27T12:56:33Z" finished-at="2020-03-27T12:56:33Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=basicFilterForDisposition status=SUCCESS method=CallDetailReportTest.basicFilterForDisposition()[pri:15, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="advancedFilterForCallerID()[pri:16, instance:tests.CallDetailReportTest@64d7f7e0]" name="advancedFilterForCallerID" duration-ms="4211" started-at="2020-03-27T12:56:33Z" finished-at="2020-03-27T12:56:37Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- advancedFilterForCallerID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="55" started-at="2020-03-27T12:56:37Z" finished-at="2020-03-27T12:56:37Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=advancedFilterForCallerID status=SUCCESS method=CallDetailReportTest.advancedFilterForCallerID()[pri:16, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="advancedFilterForDuration()[pri:17, instance:tests.CallDetailReportTest@64d7f7e0]" name="advancedFilterForDuration" duration-ms="3676" started-at="2020-03-27T12:56:37Z" finished-at="2020-03-27T12:56:41Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- advancedFilterForDuration -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="30" started-at="2020-03-27T12:56:41Z" finished-at="2020-03-27T12:56:41Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=advancedFilterForDuration status=SUCCESS method=CallDetailReportTest.advancedFilterForDuration()[pri:17, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="advancedFilterForGroupName()[pri:18, instance:tests.CallDetailReportTest@64d7f7e0]" name="advancedFilterForGroupName" duration-ms="5902" started-at="2020-03-27T12:56:41Z" finished-at="2020-03-27T12:56:47Z">
+        <test-method status="PASS" signature="advancedFilterForGroupName()[pri:19, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForGroupName" duration-ms="4182" started-at="2020-04-09T18:18:48Z" finished-at="2020-04-09T18:18:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterForGroupName -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="31" started-at="2020-03-27T12:56:47Z" finished-at="2020-03-27T12:56:47Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="71" started-at="2020-04-09T18:18:53Z" finished-at="2020-04-09T18:18:53Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=advancedFilterForGroupName status=SUCCESS method=CallDetailReportTest.advancedFilterForGroupName()[pri:18, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=advancedFilterForGroupName status=SUCCESS method=GroupActivityReportTest.advancedFilterForGroupName()[pri:19, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="advancedFilterForLineType()[pri:19, instance:tests.CallDetailReportTest@64d7f7e0]" name="advancedFilterForLineType" duration-ms="6968" started-at="2020-03-27T12:56:47Z" finished-at="2020-03-27T12:56:54Z">
+        <test-method status="PASS" signature="advancedFilterForAnweredCalls()[pri:20, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForAnweredCalls" duration-ms="5300" started-at="2020-04-09T18:18:53Z" finished-at="2020-04-09T18:18:58Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- advancedFilterForLineType -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="38" started-at="2020-03-27T12:56:54Z" finished-at="2020-03-27T12:56:54Z">
+        </test-method> <!-- advancedFilterForAnweredCalls -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="56" started-at="2020-04-09T18:18:58Z" finished-at="2020-04-09T18:18:58Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=advancedFilterForLineType status=SUCCESS method=CallDetailReportTest.advancedFilterForLineType()[pri:19, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=advancedFilterForAnweredCalls status=SUCCESS method=GroupActivityReportTest.advancedFilterForAnweredCalls()[pri:20, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="dateRangeFilterForToday()[pri:20, instance:tests.CallDetailReportTest@64d7f7e0]" name="dateRangeFilterForToday" duration-ms="186445" started-at="2020-03-27T12:56:54Z" finished-at="2020-03-27T13:00:00Z">
+        <test-method status="PASS" signature="advancedFilterForCalls()[pri:21, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForCalls" duration-ms="6409" started-at="2020-04-09T18:18:58Z" finished-at="2020-04-09T18:19:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- advancedFilterForCalls -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="77" started-at="2020-04-09T18:19:05Z" finished-at="2020-04-09T18:19:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=advancedFilterForCalls status=SUCCESS method=GroupActivityReportTest.advancedFilterForCalls()[pri:21, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="advancedFilterForLeads()[pri:22, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForLeads" duration-ms="5301" started-at="2020-04-09T18:19:05Z" finished-at="2020-04-09T18:19:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- advancedFilterForLeads -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="70" started-at="2020-04-09T18:19:10Z" finished-at="2020-04-09T18:19:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=advancedFilterForLeads status=SUCCESS method=GroupActivityReportTest.advancedFilterForLeads()[pri:22, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="advancedFilterForConversion()[pri:23, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForConversion" duration-ms="5697" started-at="2020-04-09T18:19:10Z" finished-at="2020-04-09T18:19:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- advancedFilterForConversion -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="66" started-at="2020-04-09T18:19:16Z" finished-at="2020-04-09T18:19:16Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=advancedFilterForConversion status=SUCCESS method=GroupActivityReportTest.advancedFilterForConversion()[pri:23, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="dateRangeFilterForToday()[pri:24, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForToday" duration-ms="2399" started-at="2020-04-09T18:19:16Z" finished-at="2020-04-09T18:19:18Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterForToday -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="34" started-at="2020-03-27T13:00:00Z" finished-at="2020-03-27T13:00:00Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="63" started-at="2020-04-09T18:19:18Z" finished-at="2020-04-09T18:19:18Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=dateRangeFilterForToday status=SUCCESS method=CallDetailReportTest.dateRangeFilterForToday()[pri:20, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=dateRangeFilterForToday status=SUCCESS method=GroupActivityReportTest.dateRangeFilterForToday()[pri:24, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="dateRangeFilterForYesterday()[pri:21, instance:tests.CallDetailReportTest@64d7f7e0]" name="dateRangeFilterForYesterday" duration-ms="5863" started-at="2020-03-27T13:00:00Z" finished-at="2020-03-27T13:00:06Z">
+        <test-method status="PASS" signature="dateRangeFilterForYesterday()[pri:25, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForYesterday" duration-ms="2149" started-at="2020-04-09T18:19:18Z" finished-at="2020-04-09T18:19:20Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterForYesterday -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="34" started-at="2020-03-27T13:00:06Z" finished-at="2020-03-27T13:00:06Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="56" started-at="2020-04-09T18:19:20Z" finished-at="2020-04-09T18:19:20Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=dateRangeFilterForYesterday status=SUCCESS method=CallDetailReportTest.dateRangeFilterForYesterday()[pri:21, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=dateRangeFilterForYesterday status=SUCCESS method=GroupActivityReportTest.dateRangeFilterForYesterday()[pri:25, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="dateRangeFilterForLast7days()[pri:22, instance:tests.CallDetailReportTest@64d7f7e0]" name="dateRangeFilterForLast7days" duration-ms="126864" started-at="2020-03-27T13:00:06Z" finished-at="2020-03-27T13:02:13Z">
+        <test-method status="PASS" signature="dateRangeFilterForLast7Days()[pri:26, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForLast7Days" duration-ms="2052" started-at="2020-04-09T18:19:20Z" finished-at="2020-04-09T18:19:22Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- dateRangeFilterForLast7days -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="40" started-at="2020-03-27T13:02:13Z" finished-at="2020-03-27T13:02:13Z">
+        </test-method> <!-- dateRangeFilterForLast7Days -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="37" started-at="2020-04-09T18:19:22Z" finished-at="2020-04-09T18:19:22Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=dateRangeFilterForLast7days status=SUCCESS method=CallDetailReportTest.dateRangeFilterForLast7days()[pri:22, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=dateRangeFilterForLast7Days status=SUCCESS method=GroupActivityReportTest.dateRangeFilterForLast7Days()[pri:26, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="dateRangeFilterForLast30days()[pri:23, instance:tests.CallDetailReportTest@64d7f7e0]" name="dateRangeFilterForLast30days" duration-ms="132693" started-at="2020-03-27T13:02:13Z" finished-at="2020-03-27T13:04:26Z">
+        <test-method status="PASS" signature="dateRangeFilterForLast30Days()[pri:27, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForLast30Days" duration-ms="2075" started-at="2020-04-09T18:19:22Z" finished-at="2020-04-09T18:19:25Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- dateRangeFilterForLast30days -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="28" started-at="2020-03-27T13:04:26Z" finished-at="2020-03-27T13:04:26Z">
+        </test-method> <!-- dateRangeFilterForLast30Days -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="55" started-at="2020-04-09T18:19:25Z" finished-at="2020-04-09T18:19:25Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=dateRangeFilterForLast30days status=SUCCESS method=CallDetailReportTest.dateRangeFilterForLast30days()[pri:23, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
+                <![CDATA[[TestResult name=dateRangeFilterForLast30Days status=SUCCESS method=GroupActivityReportTest.dateRangeFilterForLast30Days()[pri:27, instance:tests.GroupActivityReportTest@442675e1] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="audioPlayerOpen()[pri:24, instance:tests.CallDetailReportTest@64d7f7e0]" name="audioPlayerOpen" duration-ms="694" started-at="2020-03-27T13:04:26Z" finished-at="2020-03-27T13:04:26Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- audioPlayerOpen -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="42" started-at="2020-03-27T13:04:26Z" finished-at="2020-03-27T13:04:27Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=audioPlayerOpen status=SUCCESS method=CallDetailReportTest.audioPlayerOpen()[pri:24, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="informationTagOpen()[pri:25, instance:tests.CallDetailReportTest@64d7f7e0]" name="informationTagOpen" duration-ms="637" started-at="2020-03-27T13:04:27Z" finished-at="2020-03-27T13:04:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- informationTagOpen -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="40" started-at="2020-03-27T13:04:27Z" finished-at="2020-03-27T13:04:27Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=informationTagOpen status=SUCCESS method=CallDetailReportTest.informationTagOpen()[pri:25, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="infoSectionUIVerification()[pri:26, instance:tests.CallDetailReportTest@64d7f7e0]" name="infoSectionUIVerification" duration-ms="761" started-at="2020-03-27T13:04:27Z" finished-at="2020-03-27T13:04:28Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- infoSectionUIVerification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="32" started-at="2020-03-27T13:04:28Z" finished-at="2020-03-27T13:04:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=infoSectionUIVerification status=SUCCESS method=CallDetailReportTest.infoSectionUIVerification()[pri:26, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="commentSectionUIVerification()[pri:27, instance:tests.CallDetailReportTest@64d7f7e0]" name="commentSectionUIVerification" duration-ms="474" started-at="2020-03-27T13:04:28Z" finished-at="2020-03-27T13:04:28Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- commentSectionUIVerification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="43" started-at="2020-03-27T13:04:28Z" finished-at="2020-03-27T13:04:29Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=commentSectionUIVerification status=SUCCESS method=CallDetailReportTest.commentSectionUIVerification()[pri:27, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tagSectionUIVerification()[pri:28, instance:tests.CallDetailReportTest@64d7f7e0]" name="tagSectionUIVerification" duration-ms="490" started-at="2020-03-27T13:04:29Z" finished-at="2020-03-27T13:04:29Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tagSectionUIVerification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="34" started-at="2020-03-27T13:04:29Z" finished-at="2020-03-27T13:04:29Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tagSectionUIVerification status=SUCCESS method=CallDetailReportTest.tagSectionUIVerification()[pri:28, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="emailCallSectionUIVerification()[pri:29, instance:tests.CallDetailReportTest@64d7f7e0]" name="emailCallSectionUIVerification" duration-ms="1842" started-at="2020-03-27T13:04:29Z" finished-at="2020-03-27T13:04:31Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emailCallSectionUIVerification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="34" started-at="2020-03-27T13:04:31Z" finished-at="2020-03-27T13:04:31Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=emailCallSectionUIVerification status=SUCCESS method=CallDetailReportTest.emailCallSectionUIVerification()[pri:29, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="emailCallFeature()[pri:30, instance:tests.CallDetailReportTest@64d7f7e0]" name="emailCallFeature" duration-ms="6095" started-at="2020-03-27T13:04:31Z" finished-at="2020-03-27T13:04:37Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emailCallFeature -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="tearDown" is-config="true" duration-ms="30" started-at="2020-03-27T13:04:37Z" finished-at="2020-03-27T13:04:37Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=emailCallFeature status=SUCCESS method=CallDetailReportTest.emailCallFeature()[pri:30, instance:tests.CallDetailReportTest@64d7f7e0] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="logOut()[pri:0, instance:tests.CallDetailReportTest@64d7f7e0]" name="logOut" is-config="true" duration-ms="10139" started-at="2020-03-27T13:04:37Z" finished-at="2020-03-27T13:04:47Z">
+        <test-method status="PASS" signature="logOut()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="logOut" is-config="true" duration-ms="7080" started-at="2020-04-09T18:19:25Z" finished-at="2020-04-09T18:19:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- logOut -->
-      </class> <!-- tests.CallDetailReportTest -->
-    </test> <!-- chrome test -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="803" started-at="2020-04-09T18:19:32Z" finished-at="2020-04-09T18:19:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="close_connection" is-config="true" duration-ms="9416" started-at="2020-04-09T18:19:33Z" finished-at="2020-04-09T18:19:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close_connection -->
+      </class> <!-- tests.GroupActivityReportTest -->
+    </test> <!-- chrome test-1 -->
   </suite> <!-- Automation Suite-1 -->
 </testng-results>

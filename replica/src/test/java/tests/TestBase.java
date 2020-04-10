@@ -37,9 +37,16 @@ public class TestBase
 	public static final String campaign_ou_id="70045";
 	public static final String org_unit_id="70045"; 
 	public static final String first_last_name="new ac";
+	public static final String first_name="new";	
+	public static final String last_name="ac";
+	public static final String user_id="newac@yopmail.com";
 	public static final String env="stag-5";
 	public static final String account="Automation Account";
 	public static final String campaignToBeEdited="SJC-1";
+	public static final String tracking_number="SJ TN-1";
+	public static final String geo_location="do_not_delete_location(automation)";
+	public static final String webhook="automation_webhook_do_not_delete";	
+	public static final String webhook_url="https://eneq4s0znwehc.x.pipedream.net/";	
 	
 	
 	public static String Base_Url = "https://"+env+"-cmo-1.convirza.com";

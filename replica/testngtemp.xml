@@ -9,10 +9,10 @@
 
    <class name="tests.GroupActivityReportTest"/>
              
+             
+             
 	</classes>
 	</test>
-	
-
 	
 	
 </suite> <!-- Suite -->

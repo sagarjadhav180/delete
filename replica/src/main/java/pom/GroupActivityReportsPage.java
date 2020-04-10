@@ -166,24 +166,24 @@ public class GroupActivityReportsPage extends TestBase {
 		logger.log(LogStatus.INFO, "Verifying if dateRange_filter is displayed");
 		softassert.assertTrue(dateRange_filter.isDisplayed(),"dateRange_filter is not displayed or locator changed");
 		
-		Util.click(dateRange_filter);
-		logger.log(LogStatus.INFO, "verifying if daterange filter elements are present");
-		
-		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
-			
-			for(int j=0;j<expected_dateRange_filter_elements.length;j++){
-				if(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j])){
-					
-					logger.log(LogStatus.INFO, "Verifying if "+expected_dateRange_filter_elements[j]+" is present");
-					softassert.assertTrue(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j]),"filter element "+expected_dateRange_filter_elements[j]+" is not present or locator changed");
-					break;
-				}
-			}
-		}
-
-
-		Util.click(cancel_button_dateRange_filter);
-		Thread.sleep(2000);
+//		Util.click(dateRange_filter);
+//		logger.log(LogStatus.INFO, "verifying if daterange filter elements are present");
+//		
+//		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
+//			
+//			for(int j=0;j<expected_dateRange_filter_elements.length;j++){
+//				if(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j])){
+//					
+//					logger.log(LogStatus.INFO, "Verifying if "+expected_dateRange_filter_elements[j]+" is present");
+//					softassert.assertTrue(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j]),"filter element "+expected_dateRange_filter_elements[j]+" is not present or locator changed");
+//					break;
+//				}
+//			}
+//		}
+//
+//
+//		Util.click(cancel_button_dateRange_filter);
+//		Thread.sleep(2000);
 		
 		logger.log(LogStatus.INFO, "verifying if scheduleReport_button is displayed");
 		softassert.assertTrue(scheduleReport_button.isDisplayed(),"scheduleReport_button is not displayed or locator changed");
@@ -226,6 +226,28 @@ public class GroupActivityReportsPage extends TestBase {
 		
 		softassert.assertAll();	
 	}  
+
+	public void dateRangeFilterSectionUI() throws InterruptedException{
+		SoftAssert softassert=new SoftAssert();
+		Util.click(dateRange_filter);
+		logger.log(LogStatus.INFO, "verifying if daterange filter elements are present");
+		
+		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
+			
+			for(int j=0;j<expected_dateRange_filter_elements.length;j++){
+				if(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_dateRange_filter_elements[j]+" is present");
+					softassert.assertTrue(actual_dateRange_filter_elements.get(i).getText().equals(expected_dateRange_filter_elements[j]),"filter element "+expected_dateRange_filter_elements[j]+" is not present or locator changed");
+					break;
+				}
+			}
+		}
+		Util.click(cancel_button_dateRange_filter);
+		Thread.sleep(2000);
+		softassert.assertAll();
+
+	}
 	
 	public void secondaryGrouping(){
 		
@@ -647,7 +669,7 @@ public class GroupActivityReportsPage extends TestBase {
 			basic_search_textbox.sendKeys(filter_value);
 			Util.click(basic_search_button);
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
 			List<WebElement> rows = driver.findElements(By.xpath(xPath));
 			
@@ -726,7 +748,7 @@ public class GroupActivityReportsPage extends TestBase {
 		
 		Util.click(apply_button);
 		Util.getJavascriptExecutor().executeScript("window.scrollBy", "0,200");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		//		try{
 //			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //			

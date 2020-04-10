@@ -1,8 +1,11 @@
 package pom;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import tests.TestBase;
 
@@ -39,6 +42,12 @@ public class GeoRouteLocationsPage extends TestBase {
 	@FindBy(xpath="//div[text()='Successfully deleted the list']")
 	private WebElement success_message_for_main_location_deletion;		
 	
+	@FindBy(xpath="//input[contains(@class,'editable-input form-control')]")
+	private WebElement main_location_name_textbox;			
+
+	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[@class='btn btn-sm btn-primary'][contains(text(),'Save')]")
+	private WebElement main_location_save_button;			
+	
 	@FindBy(xpath="//button[contains(text(),'OK')]")
 	private WebElement main_location_deletion_ok_button;		
 	
@@ -52,11 +61,29 @@ public class GeoRouteLocationsPage extends TestBase {
 	
 	
 	
+	public GeoRouteLocationsPage(WebDriver driver) {
+
+		PageFactory.initElements(driver, this);
+		
+	}
+
 	//to get action button of desired Main Location 
     public WebElement getMainLocation(String main_location_name,String button_name){
 		
 		WebElement webelement = driver.findElement(By.xpath("//table[@id='table_geo_route']//tbody//tr//td//span[text()='"+main_location_name+"']//ancestor::tr//td//button[contains(text(),'"+button_name+"')]"));
 		return webelement;
 	}
+    
+    public void addMainLocation(String location_name){
+    	
+    	wait.until(ExpectedConditions.visibilityOf(add_geo_location_list_button));
+    	add_geo_location_list_button.click();
+    	
+    	wait.until(ExpectedConditions.visibilityOf(main_location_name_textbox));
+    	main_location_name_textbox.sendKeys(location_name);
+    	main_location_save_button.click();
+    	
+    
+    }
 
 }

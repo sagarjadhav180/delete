@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -95,6 +96,17 @@ public class HomePage extends TestBase {
 	@FindBy(xpath="//a[contains(text(),'Edit')]")
 	private WebElement edit_profile_link;
 
+	@FindBy(xpath="//select[@class='form-control ng-pristine ng-untouched ng-valid']")
+	private WebElement time_zone_listbox;
+	
+	String expected_time_zone="Eastern (ET)";
+
+	@FindBy(xpath="//div[@class='panel panel-midnightblue']//button[@class='btn btn-primary'][contains(text(),'Save')]")
+	private WebElement user_profile_save_button;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='User Profile updated successfully.']")
+	private WebElement user_profile_save_success_message;
+	
 	@FindBy(xpath="//a[contains(text(),'Support')]")
 	private WebElement support_link;
 
@@ -358,6 +370,21 @@ public class HomePage extends TestBase {
 		softassert.assertAll();
 	}
 	
+	
+	public void timeZoneSetting(){
+		
+		Util.click(profile_link);
+		Util.click(edit_profile_link);
+		
+		Select select=new Select(time_zone_listbox);
+		
+		if(!(select.getFirstSelectedOption().equals(expected_time_zone))){
+			select.selectByVisibleText(expected_time_zone);
+		}
+		Util.click(user_profile_save_button);
+		wait.until(ExpectedConditions.visibilityOf(user_profile_save_success_message));
+		Assert.assertTrue(user_profile_save_success_message.isDisplayed(),"User profile settings not saved");
+	}
 	
 	//To check Tile count
 	public void tilesCount(){

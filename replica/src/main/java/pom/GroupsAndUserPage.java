@@ -2,18 +2,21 @@ package pom;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import tests.TestBase;
 import tests.Util;
 
-public class GroupsAndUserPage {
+public class GroupsAndUserPage extends TestBase {
 	
 	String groupName="Ganesh 5";
 	
@@ -66,6 +69,12 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="//label[contains(text(),'Zip')]/..//input")
 	private WebElement zip_textbox;
 
+	@FindBy(xpath="//tr[11]//td[9]//form[1]//button[contains(text(),'Save')]")
+	private WebElement save_subgroup;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement save_subgroup_success_message;
+	
 	//Feature Settings Details 
 	@FindBy(xpath="//div [@class='primary switch ats-switch ng-isolate-scope ng-valid ng-dirty ng-touched']")
 	private WebElement CA_toggle;	
@@ -150,6 +159,15 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="//label[contains(text(),'Call Value')]//parent::*//following-sibling::div//input")
 	private WebElement call_value_textbox;
 
+	@FindBy(xpath="//md-checkbox[@class='ng-pristine ng-untouched ng-valid md-checked']//div[@class='md-icon']")
+	private WebElement record_call_checkbox;
+
+	@FindBy(xpath="(//md-checkbox[@class='ng-valid ng-dirty ng-valid-parse ng-touched']//div[@class='md-icon'])[1]")
+	private WebElement voice_prompt_checkbox;
+
+	@FindBy(xpath="(//md-checkbox[@class='ng-valid ng-dirty ng-valid-parse ng-touched']//div[@class='md-icon'])[2]")
+	private WebElement whisper_checkbox;
+	
 	@FindBy(xpath="//label[contains(text(),'Configure Voicemail Greetings')]/parent::*//following-sibling::div//textarea")
 	private WebElement configure_voicemail_greetings_textbox;	
 	
@@ -306,6 +324,24 @@ public class GroupsAndUserPage {
 	@FindBy(xpath="(//button[text()=' Add User'])[1]")
 	private WebElement add_user_button;	
 
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
+	private WebElement first_name_textbox;	
+	
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[2]")
+	private WebElement last_name_textbox;	
+	
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[3]")
+	private WebElement email_id_textbox;	
+
+	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[@class='btn btn-sm btn-primary'][contains(text(),'Save')]")
+	private WebElement save_user_button;
+	
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
+	private WebElement roles_listbox;	
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement user_creation_success_message;
+	
 	@FindBy(xpath="(//span[text()='Export Users'])[1]//parent::button")
 	private WebElement export_users_button;	
 
@@ -381,4 +417,67 @@ public class GroupsAndUserPage {
 		return webelement;
 	}
     
+    public void expandSection(String section){
+    	
+    	for(int i=0;i<section_labels.size();i++){
+    		if(section_labels.get(i).getText().startsWith(section)){
+    			section_labels.get(i).click();
+    		}
+    	}
+    	
+    }
+    
+    public void createGroup(String groupName){
+    	
+    	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
+    	add_subgroup_button.click();
+    	groupName_textbox.sendKeys(groupName);	
+    	
+    	Select select=new Select(industry_dropdown);
+    	select.selectByIndex(3);
+    	save_subgroup.click();
+    	
+    	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
+    	
+    	logger.log(LogStatus.INFO, "Verifying if sub-group is created successfully");
+    	Assert.assertTrue("Sub group not created successfully.",save_subgroup_success_message.getText().equals(expected_save_sub_group_success_message));
+      	
+    }
+    
+    public void createUser(String firstname,String lastname,String email_id,String role){
+    	
+    	wait.until(ExpectedConditions.visibilityOf(add_user_button));
+    	add_user_button.click();
+    	
+    	first_name_textbox.sendKeys(firstname);
+    	last_name_textbox.sendKeys(lastname);
+    	email_id_textbox.sendKeys(email_id);
+    	
+    	Select select=new Select(roles_listbox);
+    	select.selectByVisibleText(role);
+    	
+    	save_user_button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if "+role+"user is created successfully");
+    	String expected_user_creation_success_message="User "+firstname.concat(" ").concat(lastname)+" successfully created.";
+    	
+    	Assert.assertTrue("User not created successfully",user_creation_success_message.getText().equals(expected_user_creation_success_message));
+    }
+    
+    public void updateTNSettings(){
+    	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
+    	if(!(record_call_checkbox.isSelected())){
+    		Util.click(record_call_checkbox);
+    	}
+    	
+    	wait.until(ExpectedConditions.visibilityOf(voice_prompt_checkbox));
+    	if(voice_prompt_checkbox.isSelected()){
+    		Util.click(record_call_checkbox);
+    	}
+    	
+    	wait.until(ExpectedConditions.visibilityOf(whisper_checkbox));
+    	if(whisper_checkbox.isSelected()){
+    		Util.click(whisper_checkbox);
+    	}
+    }
 }
