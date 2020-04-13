@@ -229,7 +229,9 @@ public class GroupActivityReportsPage extends TestBase {
 
 	public void dateRangeFilterSectionUI() throws InterruptedException{
 		SoftAssert softassert=new SoftAssert();
+		
 		Util.click(dateRange_filter);
+		
 		logger.log(LogStatus.INFO, "verifying if daterange filter elements are present");
 		
 		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
@@ -249,7 +251,7 @@ public class GroupActivityReportsPage extends TestBase {
 
 	}
 	
-	public void secondaryGrouping(){
+	public void secondaryGrouping() throws InterruptedException{
 		
 		SoftAssert softassert=new SoftAssert();
 		Util.click(secondary_grouping_button);
@@ -479,7 +481,7 @@ public class GroupActivityReportsPage extends TestBase {
     	
     	SoftAssert softassert=new SoftAssert();
 
-    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND campaign_status NOT IN ('deleted')");
+    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"')");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
@@ -814,22 +816,15 @@ public class GroupActivityReportsPage extends TestBase {
 			}
 		}
 		
-		
 
-		String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND campaign_status NOT IN ('deleted')");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
         
 		if(!(dbCount=="0" || dbCount==null)){
-			int final_count=table_call_count.size()+0;
+		
+		String final_count=dashboard_tiles_values.get(0).getText();
 			
-			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
-				Util.scrollFunction(next_100_button);
-				Util.click(next_100_button);
-				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-				final_count=final_count+table_call_count.size();
-				
-		}
 		System.out.println("dbCount is "+dbCount);
-		System.out.println("table_call_count is "+final_count);	
+		System.out.println("call_count is "+final_count);	
 		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
 		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed calls is mismatching with db count");
 		}
