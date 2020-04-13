@@ -57,7 +57,7 @@ public class HomeTest extends TestBase
 	
 	//loging out -tear down
 	@AfterClass
-	public void tearDown() throws IOException{
+	public void logOut() throws IOException{
 		LoginPage lp=new LoginPage(driver);
 		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");

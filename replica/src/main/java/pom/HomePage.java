@@ -96,7 +96,7 @@ public class HomePage extends TestBase {
 	@FindBy(xpath="//a[contains(text(),'Edit')]")
 	private WebElement edit_profile_link;
 
-	@FindBy(xpath="//select[@class='form-control ng-pristine ng-untouched ng-valid']")
+	@FindBy(xpath="//label[contains(text(),'Time Zone')]//parent::div//following-sibling::div//select")
 	private WebElement time_zone_listbox;
 	
 	String expected_time_zone="Eastern (ET)";
@@ -371,19 +371,23 @@ public class HomePage extends TestBase {
 	}
 	
 	
-	public void timeZoneSetting(){
+	public void timeZoneSetting() throws InterruptedException{
 		
 		Util.click(profile_link);
 		Util.click(edit_profile_link);
 		
 		Select select=new Select(time_zone_listbox);
+		Thread.sleep(3000);
+		System.out.println(select.getFirstSelectedOption().getText());
 		
-		if(!(select.getFirstSelectedOption().equals(expected_time_zone))){
+		if(!(select.getFirstSelectedOption().getText().equalsIgnoreCase(expected_time_zone))){
 			select.selectByVisibleText(expected_time_zone);
+			wait.until(ExpectedConditions.visibilityOf(user_profile_save_button));
+			Util.click(user_profile_save_button);
+			wait.until(ExpectedConditions.visibilityOf(user_profile_save_success_message));
+			Assert.assertTrue(user_profile_save_success_message.isDisplayed(),"User profile settings not saved");
+
 		}
-		Util.click(user_profile_save_button);
-		wait.until(ExpectedConditions.visibilityOf(user_profile_save_success_message));
-		Assert.assertTrue(user_profile_save_success_message.isDisplayed(),"User profile settings not saved");
 	}
 	
 	//To check Tile count

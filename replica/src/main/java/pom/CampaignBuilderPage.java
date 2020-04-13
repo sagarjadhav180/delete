@@ -294,6 +294,7 @@ public class CampaignBuilderPage extends TestBase {
 	public void create(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
 		
         wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+        wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
         campaignName_TextBox.clear();
         campaignName_TextBox.sendKeys(campaign_name);
         

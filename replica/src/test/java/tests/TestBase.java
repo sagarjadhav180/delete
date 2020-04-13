@@ -17,6 +17,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
@@ -27,15 +28,17 @@ import extentReport.*;
 import pom.CampaignAndTrackingNumberPage;
 import pom.CampaignBuilderPage;
 import pom.HomePage;
+import testdata.TestData;
 
 @Listeners(extentReport.Listener.class)
 public class TestBase
 {
 
 	//Environment Variables
-	public static final String campaign_id = "46";
-	public static final String campaign_ou_id="70045";
-	public static final String org_unit_id="70045"; 
+	public static final String billing_id="70045";
+	public static  String org_unit_id="70045"; 
+    public static  String campaign_id = "46";
+	public static  String campaign_ou_id=org_unit_id;
 	public static final String first_last_name="new ac";
 	public static final String first_name="new";	
 	public static final String last_name="ac";
@@ -47,11 +50,11 @@ public class TestBase
 	public static final String geo_location="do_not_delete_location(automation)";
 	public static final String webhook="automation_webhook_do_not_delete";	
 	public static final String webhook_url="https://eneq4s0znwehc.x.pipedream.net/";	
-	
+	public static final String account_timezone="America/New_York";	
 	
 	public static String Base_Url = "https://"+env+"-cmo-1.convirza.com";
 	public static ExtentTest logger;
-	public  static ExtentReports extent = ExtentReportsGenerator.getInstance(true);
+	public static ExtentReports extent = ExtentReportsGenerator.getInstance(true);
 	public static WebDriver driver;
 	public static  WebDriverWait wait;
 	static int totalFailedTestCases;
@@ -64,11 +67,25 @@ public class TestBase
 	public static String methodName;
 	String url_to_hit;
 	
+//	@BeforeSuite
+	public void testSetUp() throws Exception{
+        
+		System.setProperty("webdriver.chrome.driver",".//chromedriver.exe");
+	    driver=new ChromeDriver();
+	    wait= new WebDriverWait(driver,60);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		//to delete cookies
+	    driver.manage().deleteAllCookies();
+	    driver.get("https://stag-5-cmo-1.convirza.com");
+		TestData.createData();		
+	}
+	
 	@Parameters({"browser","url"})
 	@BeforeTest
-	public void setUp(String browser,String url) throws IOException{
+	public void setUp(String browser,String url) throws Exception{
 
-        
+
 		
 		url_to_hit=url;
 		String sf = null;
@@ -100,7 +117,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 	    driver.get(url_to_hit);
-	    
+	    TestData.createData();			    
 	   
 	    
 	}
@@ -158,6 +175,7 @@ public class TestBase
 		extent.flush();
 
 	}
+	
 	
 	@AfterTest
 	public void tearDown() throws Exception{

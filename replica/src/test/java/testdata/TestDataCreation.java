@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.relevantcodes.extentreports.LogStatus;
 
 import constants.Constants;
+import pom.Breadcrumb;
 import pom.CampaignAndTrackingNumberPage;
 import pom.CampaignBuilderPage;
 import pom.GeoRouteLocationsPage;
@@ -15,6 +16,7 @@ import pom.TrackingNumberBuilderPage;
 import pom.WebHookPage;
 import tests.TestBase;
 import tests.TrackingNumberTest;
+import tests.Util;
 import tests.WebHookTest;
 
 public class TestDataCreation extends TestBase implements TestDataFunctions {
@@ -22,7 +24,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 	public void login() throws Exception {
 	
 		LoginPage lp=new LoginPage(driver);
-		logger.log(LogStatus.INFO, "login method called");
+
 		lp.validLogin();
 		HomePage hp=new HomePage(driver);
 		hp.left_hand_navigation_bar_click();
@@ -37,10 +39,18 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		gp.expandSection(Constants.GroupsAndUser.sub_groups);
 		gp.createGroup(account);
-		
+//		Thread.sleep(2000);
 		hp.clickAction(Constants.HomePage.home_page);
+		org_unit_id=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE 'Automation Account' AND top_ou_id='"+org_unit_id+"' ");
+	    System.out.println("org_unit_id is "+org_unit_id);
 	}
 
+	public void navigateToGroup() throws InterruptedException {
+		
+		Breadcrumb bc=new Breadcrumb(driver);
+		bc.goToGroup(account);
+	}
+	
 	public void createUser() throws InterruptedException {
 		HomePage hp=new HomePage(driver);
 		hp.clickAction(Constants.HomePage.group_User_page);
@@ -48,8 +58,10 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		gp.expandSection(Constants.GroupsAndUser.user_settings);
 		gp.createUser(first_name, last_name, user_id, Constants.GroupsAndUser.admin_role);;
-	
-		hp.clickAction(Constants.HomePage.home_page);
+	    Thread.sleep(2000);
+	    hp.clickAction(Constants.HomePage.home_page);
+	    
+
 	}
 
     public void trackingNumberSettings() throws InterruptedException {
@@ -58,7 +70,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		gp.expandSection(Constants.GroupsAndUser.tn_settings);
-		
+		gp.updateTNSettings();
 		hp.clickAction(Constants.HomePage.home_page);		
 	}
 	
@@ -80,6 +92,8 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		cb.create(campaignToBeEdited,"",0,0);
 		cb.clickAction("list");
 		hp.clickAction(Constants.HomePage.home_page);
+		Thread.sleep(3000);
+		campaign_id=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
 	}
 
 	public void createTrackingNumber() throws InterruptedException {
@@ -91,12 +105,17 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		TrackingNumberBuilderPage tn=new TrackingNumberBuilderPage(driver);
+		CampaignAndTrackingNumberPage ct;
+		TrackingNumberBuilderPage cb;
 		TrackingNumberTest tt=new TrackingNumberTest();
-		tt.createInstance();
-	    tn.createSimpleNumber(tracking_number);
+		ct=tt.createInstanceCampaignAndTrackingNumberPage();	
+		cb=tt.createInstance();	    
+		
+		ct.clickAction("update",campaignToBeEdited);
+		cb.createSimpleNumber(tracking_number);
 	    Thread.sleep(2000);		
 		hp.clickAction(Constants.HomePage.home_page);
+		Thread.sleep(2000);
 
 	}
 
@@ -123,15 +142,18 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		hp.click_subLink(Constants.HomePage.webhook);
 		WebHookPage wh=new WebHookPage(driver);
 		
-		logger=extent.startTest("Webhook creation");
 		wh.createWebHook(webhook, webhook_url);
 
 		
 	}
 
 	public void logOut() {
-		
+		LoginPage lp=new LoginPage(driver);
+		lp.logOut();
+//		driver.close();
 		
 	}
+
+	
 
 }

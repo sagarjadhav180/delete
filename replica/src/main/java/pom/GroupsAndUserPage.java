@@ -2,7 +2,6 @@ package pom;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -20,6 +20,9 @@ public class GroupsAndUserPage extends TestBase {
 	
 	String groupName="Ganesh 5";
 	
+
+	@FindBy(xpath="//div[@class='panel-body collapse in table-responsive ng-isolate-scope']")
+	private WebElement window;
 	
 	@FindBy(xpath="//div[@ class='groupDetailsProgressLoader']")
 	private WebElement loadingWheel;
@@ -69,6 +72,13 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Zip')]/..//input")
 	private WebElement zip_textbox;
 
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
+	private WebElement subgroup_name_textbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
+	private WebElement subgroup_industry_listbox;
+	
 	@FindBy(xpath="//tr[11]//td[9]//form[1]//button[contains(text(),'Save')]")
 	private WebElement save_subgroup;
 
@@ -159,13 +169,13 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Call Value')]//parent::*//following-sibling::div//input")
 	private WebElement call_value_textbox;
 
-	@FindBy(xpath="//md-checkbox[@class='ng-pristine ng-untouched ng-valid md-checked']//div[@class='md-icon']")
+	@FindBy(xpath="(//div[contains(text(),'Record Call')]//parent::div//following-sibling::div//md-checkbox)[1]")
 	private WebElement record_call_checkbox;
 
-	@FindBy(xpath="(//md-checkbox[@class='ng-valid ng-dirty ng-valid-parse ng-touched']//div[@class='md-icon'])[1]")
+	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[1]")
 	private WebElement voice_prompt_checkbox;
 
-	@FindBy(xpath="(//md-checkbox[@class='ng-valid ng-dirty ng-valid-parse ng-touched']//div[@class='md-icon'])[2]")
+	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[2]")
 	private WebElement whisper_checkbox;
 	
 	@FindBy(xpath="//label[contains(text(),'Configure Voicemail Greetings')]/parent::*//following-sibling::div//textarea")
@@ -419,33 +429,48 @@ public class GroupsAndUserPage extends TestBase {
     
     public void expandSection(String section){
     	
-    	for(int i=0;i<section_labels.size();i++){
-    		if(section_labels.get(i).getText().startsWith(section)){
-    			section_labels.get(i).click();
-    		}
+    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1000)", "");
+    	try{
+    	    wait.until(ExpectedConditions.invisibilityOf(loadingWheel));
+    	}
+    	catch(Exception e){
+    		
     	}
     	
-    }
-    
-    public void createGroup(String groupName){
+	    for(int i=0;i<section_labels.size();i++){
     	
+	    	if(section_labels.get(i).getText().startsWith(section)){
+	    		
+	    		section_labels.get(i).click();
+    		}
+    	}
+	}
+    	
+    	
+    	
+    
+    
+    public void createGroup(String groupName) throws InterruptedException{
+    	Util.scrollFunction(add_subgroup_button);
+    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)", "");
     	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
     	add_subgroup_button.click();
-    	groupName_textbox.sendKeys(groupName);	
+    	subgroup_name_textbox.sendKeys(groupName);
+    	Thread.sleep(2000);
+    	Select select=new Select(subgroup_industry_listbox);
     	
-    	Select select=new Select(industry_dropdown);
-    	select.selectByIndex(3);
-    	save_subgroup.click();
-    	
+    	select.selectByIndex(3);           
+        save_subgroup.click();
     	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
     	
-    	logger.log(LogStatus.INFO, "Verifying if sub-group is created successfully");
-    	Assert.assertTrue("Sub group not created successfully.",save_subgroup_success_message.getText().equals(expected_save_sub_group_success_message));
+    	Assert.assertTrue(save_subgroup_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
       	
     }
     
-    public void createUser(String firstname,String lastname,String email_id,String role){
+    public void createUser(String firstname,String lastname,String email_id,String role) throws InterruptedException{
     	
+    	Util.scrollFunction(add_user_button);
+    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-100)", "");
     	wait.until(ExpectedConditions.visibilityOf(add_user_button));
     	add_user_button.click();
     	
@@ -457,27 +482,27 @@ public class GroupsAndUserPage extends TestBase {
     	select.selectByVisibleText(role);
     	
     	save_user_button.click();
-    	
-    	logger.log(LogStatus.INFO, "Verifying if "+role+"user is created successfully");
     	String expected_user_creation_success_message="User "+firstname.concat(" ").concat(lastname)+" successfully created.";
     	
-    	Assert.assertTrue("User not created successfully",user_creation_success_message.getText().equals(expected_user_creation_success_message));
+    	Assert.assertTrue(user_creation_success_message.getText().equals(expected_user_creation_success_message),"User not created successfully");
     }
     
-    public void updateTNSettings(){
+    public void updateTNSettings() throws InterruptedException{
+    	Util.scrollFunction(configure_voicemail_greetings_textbox);
+    	Thread.sleep(5000);
     	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
-    	if(!(record_call_checkbox.isSelected())){
+    	if(!(record_call_checkbox.getAttribute("aria-checked").equals("true"))){
     		Util.click(record_call_checkbox);
     	}
     	
-    	wait.until(ExpectedConditions.visibilityOf(voice_prompt_checkbox));
-    	if(voice_prompt_checkbox.isSelected()){
-    		Util.click(record_call_checkbox);
+    	if(voice_prompt_checkbox.getAttribute("aria-checked").equals("true")){
+    		Util.click(voice_prompt_checkbox);
     	}
     	
-    	wait.until(ExpectedConditions.visibilityOf(whisper_checkbox));
-    	if(whisper_checkbox.isSelected()){
+    	if(whisper_checkbox.getAttribute("aria-checked").equals("true")){
     		Util.click(whisper_checkbox);
     	}
+    	
+    	tracking_number_settings_details_saveButton.click();
     }
 }

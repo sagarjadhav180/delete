@@ -1,0 +1,37 @@
+-------------TestData--------------------------------------------------------------------
+//group
+SELECT * FROM org_unit 
+WHERE org_unit_name LIKE 'Automation Account' AND top_ou_id='70045' AND org_unit_status='active'
+
+
+//campaign
+SELECT * FROM campaign 
+WHERE campaign_name LIKE 'SJC-1' AND campaign_ou_id='70045' 
+
+//tracking number
+SELECT * FROM campaign_provisioned_route 
+WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_name LIKE 'SJC-1' AND campaign_ou_id='70045') AND provisioned_route_id IN 
+(SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active')
+
+//time zone
+SELECT timezone FROM ct_user_detail
+WHERE ct_user_id=(SELECT ct_user_id FROM ct_user WHERE username LIKE 'newac@yopmail.com')
+
+//Tracking number settings
+
+SELECT * FROM default_provisioned_route WHERE org_unit_id='70045'
+
+//geo location
+SELECT * FROM location 
+WHERE location_name='do_not_delete_location(automation)' AND org_unit_id='70045'
+
+//webhook
+SELECT * FROM webhook 
+WHERE org_unit_id='70045' AND webhook_name LIKE 'automation_webhook_do_not_delete'
+
+//user
+SELECT * FROM ct_user 
+WHERE username LIKE 'newac@yopmail.com'
+
+--------------------------------------------------------------------------------------------------------------
+

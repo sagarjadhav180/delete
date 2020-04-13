@@ -4,6 +4,7 @@ public interface TestDataFunctions {
 
 	public void login() throws Exception;
 	public void createGroup() throws InterruptedException;
+	public void navigateToGroup()throws InterruptedException;
 	public void createUser() throws InterruptedException;
 	public void createCampaign() throws InterruptedException;
 	public void createTrackingNumber() throws InterruptedException;
