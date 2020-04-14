@@ -70,7 +70,7 @@ public class TrackingNumberTest extends TestBase{
        logger.assignCategory("Tracking number suite");
 					
 	   cp=createInstanceCampaignAndTrackingNumberPage();	
-       cp.clickAction("update","SJC-1");
+       cp.clickAction("update",campaignToBeEdited);
        tn=createInstance();
        tn.uiVerification();
 				    
@@ -83,7 +83,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("Simple Tracking number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -129,7 +129,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("Number Pool creation..");
 			logger.assignCategory("Tracking number suite");
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
 		    int number1 = tests.Util.generateRandomNumber();
 		    tracking_number_name="SJ TN-"+String.valueOf(number1);
@@ -179,7 +179,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("Reserve Number creation..");
 			logger.assignCategory("Tracking number suite");
 			String number = ReserveNumber.makeNumberReseve();
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 			tn = createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
 		    tracking_number_name="SJ TN-"+String.valueOf(number1);
@@ -220,7 +220,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("GeoRoute number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -249,7 +249,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("percentRoute number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -277,7 +277,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("outbound number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -307,7 +307,7 @@ public class TrackingNumberTest extends TestBase{
 			logger.assignCategory("Tracking number suite");
 			
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -335,7 +335,7 @@ public class TrackingNumberTest extends TestBase{
 			logger=extent.startTest("voicemail number creation..");
 			logger.assignCategory("Tracking number suite");
 			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -366,7 +366,7 @@ public class TrackingNumberTest extends TestBase{
 				logger=extent.startTest("scheduleRoute number creation..");
 				logger.assignCategory("Tracking number suite");
 				
-//			    cp.clickAction("update","SJC-1");
+//			    cp.clickAction("update",campaignToBeEdited);
 
 	            tn=createInstance();
 			    int number1 = tests.Util.generateRandomNumber();
@@ -396,7 +396,7 @@ public class TrackingNumberTest extends TestBase{
 				logger.assignCategory("Tracking number suite");
 				
 				cp=createInstanceCampaignAndTrackingNumberPage();
-//			    cp.clickAction("update","SJC-1");
+//			    cp.clickAction("update",campaignToBeEdited);
 
 	            tn=createInstance();
 			    int number1 = tests.Util.generateRandomNumber();

@@ -11,12 +11,16 @@ public class TestData extends TestBase{
 	    logger.assignCategory("Test Data");
 		TestDataCreation rd=new TestDataCreation();
 		
+		String first_name="Automation";
+		String last_name="Account";
+		String user_name="automation_account@yopmail.com";
+		String pass_word="automation_account";
 		String group=Util.readingFromDB("SELECT count(*) as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND top_ou_id='"+billing_id+"' AND org_unit_status='active'");
 		String campaign=Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
 		String tracking_number=Util.readingFromDB("SELECT count(*) as count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active')");
 		String geoLocation=Util.readingFromDB("SELECT count(*) as count FROM location WHERE location_name='"+geo_location+"' AND org_unit_id='"+org_unit_id+"'");
 		String webHook=Util.readingFromDB("SELECT count(*) as count FROM webhook WHERE org_unit_id='"+org_unit_id+"' AND webhook_name LIKE '"+webhook+"'");
-		String user=Util.readingFromDB("SELECT count(*) as count FROM ct_user WHERE username LIKE '"+user_id+"'");
+		String user=Util.readingFromDB("SELECT count(*) as count FROM ct_user WHERE username LIKE '"+user_name+"'");
 		String record_call_checkbox=Util.readingFromDB("SELECT record_call as count FROM default_provisioned_route WHERE org_unit_id='"+org_unit_id+"'");
 		String voice_prompt_checkbox=Util.readingFromDB("SELECT play_voice_prompt_first as count FROM default_provisioned_route WHERE org_unit_id='"+org_unit_id+"'");
 		String whisper_checkbox=Util.readingFromDB("SELECT play_whisper_message as count FROM default_provisioned_route WHERE org_unit_id='"+org_unit_id+"' ");
@@ -34,7 +38,13 @@ public class TestData extends TestBase{
 		System.out.println("user "+user);		
 		if(user.equals("0") || user==null){
 			System.out.println("creating user");
-			rd.createUser();
+			rd.createUser(first_name,last_name,user_name);
+			TestBase.setUser_id(user_name);
+			
+			
+			TestDataCreation tc=new TestDataCreation();
+			tc.logOut();
+			tc.login();
 		}
 
 		System.out.println("campaign "+campaign);

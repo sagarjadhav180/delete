@@ -41,7 +41,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		gp.createGroup(account);
 //		Thread.sleep(2000);
 		hp.clickAction(Constants.HomePage.home_page);
-		String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE 'Automation Account' AND top_ou_id='"+org_unit_id+"' ");
+		String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND top_ou_id='"+org_unit_id+"' AND org_unit_status='active'");
 	    TestBase.setOrg_unit_id(orgUnitID);
 	    TestBase.setCampaign_ou_id(orgUnitID);
 	}
@@ -52,22 +52,21 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		bc.goToGroup(account);
 	}
 	
-	public void createUser() throws InterruptedException {
+	public void createUser(String f_name,String l_name,String userID) throws InterruptedException {
 		HomePage hp=new HomePage(driver);
 		hp.clickAction(Constants.HomePage.group_User_page);
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		gp.expandSection(Constants.GroupsAndUser.user_settings);
-		gp.createUser(first_name, last_name, user_id, Constants.GroupsAndUser.admin_role);;
+		gp.createUser(f_name, l_name, userID, Constants.GroupsAndUser.admin_role);;
 	    Thread.sleep(2000);
 	    hp.clickAction(Constants.HomePage.home_page);
 	    
-
 	}
 
     public void trackingNumberSettings() throws InterruptedException {
     	HomePage hp=new HomePage(driver);
-		hp.clickAction(Constants.HomePage.group_User_page);
+		hp.clickActionNewAccount(Constants.HomePage.group_User_page);
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		gp.expandSection(Constants.GroupsAndUser.tn_settings);
@@ -80,7 +79,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		HomePage hp=new HomePage(driver);
         
 		try {
-			hp.clickAction(Constants.HomePage.campaign_tracking_number_page);
+			hp.clickActionNewAccount(Constants.HomePage.campaign_tracking_number_page);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

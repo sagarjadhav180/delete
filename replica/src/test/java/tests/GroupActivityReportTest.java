@@ -160,7 +160,7 @@ public class GroupActivityReportTest extends TestBase {
 	@Test(priority=13)
 	public void secondaryGroupingFeatureForTrackingNumber() throws InterruptedException{
 		logger=extent.startTest("Secondary Grouping Feature For Tracking Number Test");
-		logger.assignCategory(Constants.group_activity_report_category,"Tracking Number");
+		logger.assignCategory(Constants.group_activity_report_category);
 			
 		ga=GroupActivityReportsPage.instance();
 		ga.secondaryGroupingFeature(Constants.LegacyReports.trackingnumber,"Tracking Number");

@@ -140,43 +140,68 @@ public class HomePage extends TestBase {
 				
 				if(link.getText().contains("Campaign")){
 					link.click();
-//					try{
-//						driver.switchTo().activeElement();
-//					Util.click(pendo_close_button);
-//					Thread.sleep(3000);
-//					}
-//					catch(Exception e){}
-						
+
 					try{
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 					
 					}catch(Exception e){}
-					
+//					driver.switchTo().activeElement();
+//					Util.click(pendo_close_button);
+//					Thread.sleep(1000);					
 				}
 				
 				
 				
 				else{
 				link.click();
+				try{
+//					driver.switchTo().activeElement();
+//					Util.click(pendo_close_button);
+//					Thread.sleep(2000);
+					}
+					catch(Exception e){}
+					
 				}
 
-//				try{
-//					if(loading_wheel.isDisplayed()){
-//					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//					}
-//				}catch(Exception e){
-//				Thread.sleep(1000);	
-//				}
+
 			}
 		}
 		
-//		if(pendo_popup.isDisplayed()==true){
-//			driver.switchTo().activeElement();
-//			Util.click(pendo_close_button);
-//		}else{
-//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//			Thread.sleep(3000);	
-//		}
+	}
+	
+    public void clickActionNewAccount(String linkToBeClicked) throws InterruptedException{
+		
+		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
+		WebElement link = left_hand_navigation_bar_links.get(i);
+			if(link.getText().equals(linkToBeClicked)){
+				
+				if(link.getText().contains("Campaign")){
+					link.click();
+
+					try{
+					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+					
+					}catch(Exception e){}
+					driver.switchTo().activeElement();
+					Util.click(pendo_close_button);
+					Thread.sleep(1000);					
+				}
+				
+				
+				
+				else{
+				link.click();
+				try{
+					driver.switchTo().activeElement();
+					Util.click(pendo_close_button);
+					Thread.sleep(2000);
+					}
+					catch(Exception e){}
+					
+				}
+
+			}
+		}	
 	}
 	
 	public void default_collpased_left_hand_navigation_bar_click(){

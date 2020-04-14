@@ -52,8 +52,11 @@ public class LoginPage extends TestBase {
 	
 	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'"+first_last_name+"')]")
 	private static WebElement userprofile_link;
+
+	@FindBy(xpath="//a[@class='navbar-brand']")
+	private static WebElement logged_in_logo;
 	
-	@FindBy(xpath="//button[@id='pendo-close-guide-7438aaa2']")
+	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private static WebElement pendo_popup_close_button;
 	
 	@FindBy(xpath="//a[@class='dropdown-toggle username bootstro']//img")
@@ -332,8 +335,8 @@ Properties prop=new Properties();
 //		driver.switchTo().activeElement();
 //		pendo_popup_close_button.click();
 		
-		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
-		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
+		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+		Assert.assertTrue(logged_in_logo.isDisplayed(),"incorrect username displayed");
 		profileButton.click();
 		Util.click(logoutLink);
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
@@ -344,15 +347,7 @@ Properties prop=new Properties();
  	}
     
 	public void validLogin() throws IOException{
-		
-		
-		Properties prop=new Properties();
-		
-		FileInputStream file=new FileInputStream(".//property");
-		prop.load(file);
-		String username=prop.getProperty("username");
-		String password=prop.getProperty("password");
-		
+			
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
 		
 		wait.until(ExpectedConditions.visibilityOf(password_Field));
@@ -360,23 +355,27 @@ Properties prop=new Properties();
 		wait.until(ExpectedConditions.visibilityOf(login_button));
 		
 		username_Field.clear();
-		username_Field.sendKeys(username);
+		username_Field.sendKeys(user_id);
 		
 		password_Field.clear();
 		password_Field.sendKeys(password);
 		login_button.click();
+		try{
+			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+			Assert.assertTrue(logged_in_logo.isDisplayed(),"logo not displayed or locator changed"); 
+		}catch(Exception e){
+			driver.switchTo().activeElement();
+            Util.click(pendo_popup_close_button);			
+    		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+    		Assert.assertTrue(logged_in_logo.isDisplayed(),"logo not displayed or locator changed");
+		}
 		
-//		driver.switchTo().activeElement();
-//		pendo_popup_close_button.click();
-		
-		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
-		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
 		
 	}
 	
 	public void logOut(){
-		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
-		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
+		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+		Assert.assertTrue(logged_in_logo.isDisplayed());
 		profileButton.click();
 		Util.click(logoutLink);
 		wait.until(ExpectedConditions.visibilityOf(username_Field));

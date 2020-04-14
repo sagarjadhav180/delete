@@ -7,9 +7,9 @@ import java.util.List;
 public class Constants {
 
 	public static final String home_page_category="";
-	public static final String group_activity_report_category="Group Activity Reports";	
-	public static final String call_details_report_category="Call Details Test";		
-	
+	public static final String group_activity_report_category="Group Activity Reports Test";	
+	public static final String call_details_report_category="Call Details Reports Test";		
+	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Test";	
 	
 	public static class LegacyReports{
 		

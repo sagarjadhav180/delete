@@ -845,6 +845,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	tracking_number_name_textbox.sendKeys(tracking_number_name);
      	
      	wait.until(ExpectedConditions.visibilityOf(ad_source_dropdown));
+     	wait.until(ExpectedConditions.attributeContains(ad_source_dropdown, "aria-disabled", "false"));
      	Select selct_ad_source=new Select(ad_source_dropdown);
      	selct_ad_source.selectByIndex(4);
      	

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import pom.CallDetailsReport_Page;
 import pom.HomePage;
 import pom.LoginPage;
@@ -17,7 +18,6 @@ public class TrackingNumberSettingsTest extends TestBase{
 	
 	HomePage hp;
 	TrackingNumberSettingsReport_Page tn;
-	private static final String category="Tracking Number Settings Test";
 	
 	@BeforeClass
 	public void goToTrackingNumberSettingsPage() throws IOException, InterruptedException{
@@ -39,7 +39,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	@Test(priority=1)
 	public void uiVerification() throws InterruptedException{
 		logger=extent.startTest("uiVerification Test");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 			
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.uiVerification();
@@ -49,7 +49,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void paginationUIVerification(){
 		
 		logger=extent.startTest("Pagination toolbox UI verification");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.paginationButtons();
@@ -59,7 +59,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void paginationCount(){
 		
 		logger=extent.startTest("Pagination Count verification");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.paginationTrackingNumbersCount();
@@ -69,7 +69,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void tableCount(){
 		
 		logger=extent.startTest("Table count verification");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.tableTrackingNumbersCount();
 		
@@ -78,7 +78,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	@Test(priority=5)
 	public void defaultColumnPickerOptions(){
 		logger=extent.startTest("Default column picker options Test");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 			
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.allColumnPickerOptions();
@@ -87,7 +87,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	@Test(priority=6)
 	public void defaultColumnsDisplayed(){
 		logger=extent.startTest("Default columns Test");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 			
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.defaultColumns();
@@ -98,7 +98,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void allColumnPickerCheckboxesClickable(){
 	
 		logger=extent.startTest("Enability of all column picker checkboxes");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.allColumnPickerCheckboxes();
 	
@@ -107,7 +107,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	@Test(priority=8)
 	public void columnPickerFeature(){
 		logger=extent.startTest("Column Picker feature");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.checkAllColumnPickerOptions();
 		tn.allColumns();
@@ -117,7 +117,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void advancedFilterUI(){
 		
 		logger=extent.startTest("Advanced Filter section UI");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.advancedFilter();
 	}
@@ -126,7 +126,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void basicFilterFeatureForType(){
 		
 		logger=extent.startTest("Basic filter feature for Status");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.basicFilterFeature("Status");
 		 
@@ -136,7 +136,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void basicFilterFeatureForTrackingNumber(){
 		
 		logger=extent.startTest("Basic filter feature for Tracking Number");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.basicFilterFeature("Tracking Number");
 		 
@@ -146,7 +146,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void basicFilterFeatureForGroupName(){
 		
 		logger=extent.startTest("Basic filter feature for Group Name");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.basicFilterFeature("Group Name");
 		 
@@ -156,7 +156,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void basicFilterFeatureForAdSource(){
 		
 		logger=extent.startTest("Basic filter feature for Ad source");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.basicFilterFeature("Ad Source");
 		 
@@ -166,7 +166,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void basicFilterFeatureForCampaignName(){
 		
 		logger=extent.startTest("Basic filter feature for Campaign Name");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.basicFilterFeature("Campaign name");
 		 
@@ -176,7 +176,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void advancedFilterForTrackingNumber(){
 		
 		logger=extent.startTest("Advanced Filter for Tracking Number");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.advancedFilterFeature("Tracking Number");
 	}
@@ -185,7 +185,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void advancedFilterForGroupName(){
 		
 		logger=extent.startTest("Advanced Filter for Group Name");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.advancedFilterFeature("Group name");
 	}
@@ -194,7 +194,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void advancedFilterForCampaignName(){
 		
 		logger=extent.startTest("Advanced Filter for Campaig Name");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.advancedFilterFeature("Campaign Name");
 	}
@@ -203,7 +203,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 	public void advancedFilterForTrackingNumberName(){
 		
 		logger=extent.startTest("Advanced Filter for Tracking Number Name");
-		logger.assignCategory(category);
+		logger.assignCategory(Constants.tracking_number_settings_report_category);
 		tn=TrackingNumberSettingsReport_Page.instance();
 		tn.advancedFilterFeature("Tracking Number Name");
 	}

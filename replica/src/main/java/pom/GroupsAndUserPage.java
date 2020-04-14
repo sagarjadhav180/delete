@@ -482,9 +482,8 @@ public class GroupsAndUserPage extends TestBase {
     	select.selectByVisibleText(role);
     	
     	save_user_button.click();
-    	String expected_user_creation_success_message="User "+firstname.concat(" ").concat(lastname)+" successfully created.";
     	
-    	Assert.assertTrue(user_creation_success_message.getText().equals(expected_user_creation_success_message),"User not created successfully");
+    	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
     }
     
     public void updateTNSettings() throws InterruptedException{

@@ -1,8 +1,10 @@
 package tests;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -39,13 +41,14 @@ public class TestBase
 	public static  String org_unit_id="70045"; 
     public static  String campaign_id = "46";
 	public static  String campaign_ou_id="70045";
-	public static final String first_last_name="new ac";
-	public static final String first_name="new";	
-	public static final String last_name="ac";
-	public static final String user_id="newac@yopmail.com";
+	public static final String first_last_name="Autmation Account";
+	public static final String first_name="Autmation";	
+	public static final String last_name="Account";
+	public static String user_id="automation_account@yopmail.com";
+	public static String password="lmc2demo";
 	public static final String env="stag-5";
-	public static final String account="Automation Account1111";
-	public static final String campaignToBeEdited="SJC-11111";
+	public static final String account="Automation Account";
+	public static final String campaignToBeEdited="SJC-1";
 	public static final String tracking_number="SJ TN-1";
 	public static final String geo_location="do_not_delete_location(automation)";
 	public static final String webhook="automation_webhook_do_not_delete";	
@@ -66,20 +69,35 @@ public class TestBase
 	public static String methodName;
 	String url_to_hit;
 	
-//	@BeforeSuite
+	@BeforeSuite
 	public void testSetUp() throws Exception{
         
-		System.setProperty("webdriver.chrome.driver",".//chromedriver.exe");
-	    driver=new ChromeDriver();
-	    wait= new WebDriverWait(driver,60);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		//to delete cookies
-	    driver.manage().deleteAllCookies();
-	    driver.get("https://stag-5-cmo-1.convirza.com");
-		TestData.createData();		
+		Properties prop=new Properties();
+		
+		FileInputStream file=new FileInputStream(".//property");
+		prop.load(file);
+		String user=prop.getProperty("username");
+		TestBase.setUser_id(user);
+		String pass=prop.getProperty("password");
+		TestBase.setPassword(pass);
 	}
 	
+	public static String getUser_id() {
+		return user_id;
+	}
+
+	public static void setUser_id(String user_id) {
+		TestBase.user_id = user_id;
+	}
+
+	public static String getPassword() {
+		return password;
+	}
+
+	public static void setPassword(String password) {
+		TestBase.password = password;
+	}
+
 	@Parameters({"browser","url"})
 	@BeforeTest
 	public void setUp(String browser,String url) throws Exception{
