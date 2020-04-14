@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -294,8 +295,9 @@ public class CampaignBuilderPage extends TestBase {
 	public void create(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
 		
         wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
-        wait.until(ExpectedConditions.elementToBeClickable(campaignName_TextBox));
-        campaignName_TextBox.clear();
+		wait.until(ExpectedConditions.attributeContains(campaignName_TextBox, "tabindex", "0"));
+
+		campaignName_TextBox.clear();
         campaignName_TextBox.sendKeys(campaign_name);
         
         if(!(externalID=="")){

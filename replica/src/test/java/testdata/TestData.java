@@ -44,6 +44,8 @@ public class TestData extends TestBase{
 
 		System.out.println("tracking_number "+tracking_number);
 		if(tracking_number.equals("0") || tracking_number==null){
+			rd.createWebhook();
+			rd.createGeoLoaction();
 			rd.createTrackingNumber();
 		}
 
@@ -54,7 +56,7 @@ public class TestData extends TestBase{
 
 		System.out.println("webHook "+webHook);
 		if(webHook.equals("0") || webHook==null){
-			rd.createWebHook();
+			rd.createWebhook();
 		}
 		
 		System.out.println("record_call_checkbox "+record_call_checkbox);
@@ -70,7 +72,7 @@ public class TestData extends TestBase{
         	System.out.println("updating time zone");
         	rd.timeZone();		
         }
-	    
+	    TestBase.test();
 		
 		rd.logOut();
 	}

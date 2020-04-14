@@ -77,6 +77,7 @@ public class GeoRouteLocationsPage extends TestBase {
     public void addMainLocation(String location_name){
     	
     	wait.until(ExpectedConditions.visibilityOf(add_geo_location_list_button));
+		wait.until(ExpectedConditions.attributeContains(add_geo_location_list_button, "aria-disabled", "false"));
     	add_geo_location_list_button.click();
     	
     	wait.until(ExpectedConditions.visibilityOf(main_location_name_textbox));

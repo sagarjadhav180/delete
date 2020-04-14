@@ -11,7 +11,7 @@ public interface TestDataFunctions {
 	public void trackingNumberSettings() throws InterruptedException;
 	public void timeZone() throws InterruptedException;
 	public void createGeoLoaction() throws InterruptedException;
-	public void createWebHook() throws InterruptedException;
+	public void createWebhook() throws InterruptedException;
 	public void logOut();
 		
 	

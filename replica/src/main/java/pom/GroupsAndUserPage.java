@@ -79,7 +79,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
 	private WebElement subgroup_industry_listbox;
 	
-	@FindBy(xpath="//tr[11]//td[9]//form[1]//button[contains(text(),'Save')]")
+	@FindBy(xpath="(//div[@class='panel-body collapse in table-responsive ng-isolate-scope'])[1]//tr//td[@class='text-right']//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
 	private WebElement save_subgroup;
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
@@ -456,9 +456,9 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
     	add_subgroup_button.click();
     	subgroup_name_textbox.sendKeys(groupName);
-    	Thread.sleep(2000);
-    	Select select=new Select(subgroup_industry_listbox);
     	
+    	Select select=new Select(subgroup_industry_listbox);
+    	Thread.sleep(2000);
     	select.selectByIndex(3);           
         save_subgroup.click();
     	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";

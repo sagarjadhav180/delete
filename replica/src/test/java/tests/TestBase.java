@@ -38,20 +38,19 @@ public class TestBase
 	public static final String billing_id="70045";
 	public static  String org_unit_id="70045"; 
     public static  String campaign_id = "46";
-	public static  String campaign_ou_id=org_unit_id;
+	public static  String campaign_ou_id="70045";
 	public static final String first_last_name="new ac";
 	public static final String first_name="new";	
 	public static final String last_name="ac";
 	public static final String user_id="newac@yopmail.com";
 	public static final String env="stag-5";
-	public static final String account="Automation Account";
-	public static final String campaignToBeEdited="SJC-1";
+	public static final String account="Automation Account1111";
+	public static final String campaignToBeEdited="SJC-11111";
 	public static final String tracking_number="SJ TN-1";
 	public static final String geo_location="do_not_delete_location(automation)";
 	public static final String webhook="automation_webhook_do_not_delete";	
 	public static final String webhook_url="https://eneq4s0znwehc.x.pipedream.net/";	
-	public static final String account_timezone="America/New_York";	
-	
+	public static final String account_timezone="America/New_York";		
 	public static String Base_Url = "https://"+env+"-cmo-1.convirza.com";
 	public static ExtentTest logger;
 	public static ExtentReports extent = ExtentReportsGenerator.getInstance(true);
@@ -176,6 +175,36 @@ public class TestBase
 
 	}
 	
+	
+	public static String getOrg_unit_id() {
+		return org_unit_id;
+	}
+
+	public static void setOrg_unit_id(String org_unit_id) {
+		TestBase.org_unit_id = org_unit_id;
+	}
+
+	public static String getCampaign_id() {
+		return campaign_id;
+	}
+
+	public static void setCampaign_id(String campaign_id) {
+		TestBase.campaign_id = campaign_id;
+	}
+
+	public static String getCampaign_ou_id() {
+		return campaign_ou_id;
+	}
+
+	public static void setCampaign_ou_id(String campaign_ou_id) {
+		TestBase.campaign_ou_id = campaign_ou_id;
+	}
+
+	public static void test(){
+		System.out.println("org_unit_id is "+org_unit_id);
+		System.out.println("campaign_id is "+campaign_id);
+		System.out.println("campaign_ou_id is "+campaign_ou_id);
+	}
 	
 	@AfterTest
 	public void tearDown() throws Exception{

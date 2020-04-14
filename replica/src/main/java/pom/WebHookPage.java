@@ -48,7 +48,10 @@ public class WebHookPage extends TestBase{
 	}
 	
 	public void createWebHook(String webhhokName,String endpointUrl){
-		
+
+		wait.until(ExpectedConditions.visibilityOf(add_weebhook_button));
+		wait.until(ExpectedConditions.attributeContains(add_weebhook_button, "aria-disabled", "false"));
+		add_weebhook_button.click();
 		wait.until(ExpectedConditions.visibilityOf(webhook_name_textbox));
 		
 		webhook_name_textbox.sendKeys(webhhokName);

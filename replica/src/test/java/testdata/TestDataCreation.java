@@ -41,8 +41,9 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		gp.createGroup(account);
 //		Thread.sleep(2000);
 		hp.clickAction(Constants.HomePage.home_page);
-		org_unit_id=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE 'Automation Account' AND top_ou_id='"+org_unit_id+"' ");
-	    System.out.println("org_unit_id is "+org_unit_id);
+		String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE 'Automation Account' AND top_ou_id='"+org_unit_id+"' ");
+	    TestBase.setOrg_unit_id(orgUnitID);
+	    TestBase.setCampaign_ou_id(orgUnitID);
 	}
 
 	public void navigateToGroup() throws InterruptedException {
@@ -93,7 +94,8 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		cb.clickAction("list");
 		hp.clickAction(Constants.HomePage.home_page);
 		Thread.sleep(3000);
-		campaign_id=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
+		String campaignID=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
+	    TestBase.setCampaign_id(campaignID);
 	}
 
 	public void createTrackingNumber() throws InterruptedException {
@@ -129,22 +131,26 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 	public void createGeoLoaction() throws InterruptedException {
 		HomePage hp=new HomePage(driver);
 		hp.clickAction(Constants.HomePage.settings_section);
+		hp.click_subLink("Customization");
 		hp.click_subLink(Constants.HomePage.geo_locations);
 		
 		GeoRouteLocationsPage geo=new GeoRouteLocationsPage(driver);
 		geo.addMainLocation(geo_location);
 		hp.clickAction(Constants.HomePage.home_page);				
+		Thread.sleep(2000);
 	}
 
-	public void createWebHook() throws InterruptedException {
+	public void createWebhook() throws InterruptedException {
 		HomePage hp=new HomePage(driver);
 		hp.clickAction(Constants.HomePage.settings_section);
+		hp.click_subLink("Customization");
 		hp.click_subLink(Constants.HomePage.webhook);
 		WebHookPage wh=new WebHookPage(driver);
 		
 		wh.createWebHook(webhook, webhook_url);
 
-		
+		hp.clickAction(Constants.HomePage.home_page);
+		Thread.sleep(2000);
 	}
 
 	public void logOut() {

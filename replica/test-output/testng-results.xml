@@ -2,12 +2,12 @@
 <testng-results skipped="27" failed="0" total="27" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="265217" started-at="2020-04-13T10:57:02Z" finished-at="2020-04-13T11:01:28Z">
+  <suite name="Automation Suite-1" duration-ms="233409" started-at="2020-04-13T14:13:44Z" finished-at="2020-04-13T14:17:37Z">
     <groups>
     </groups>
-    <test name="chrome test-1" duration-ms="265217" started-at="2020-04-13T10:57:02Z" finished-at="2020-04-13T11:01:28Z">
+    <test name="chrome test-1" duration-ms="233409" started-at="2020-04-13T14:13:44Z" finished-at="2020-04-13T14:17:37Z">
       <class name="tests.GroupActivityReportTest">
-        <test-method status="FAIL" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="setUp" is-config="true" duration-ms="0" started-at="2020-04-13T16:27:02Z" finished-at="2020-04-13T16:27:02Z">
+        <test-method status="FAIL" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="setUp" is-config="true" duration-ms="0" started-at="2020-04-13T19:43:44Z" finished-at="2020-04-13T19:43:44Z">
           <params>
             <param index="0">
               <value>
@@ -20,14 +20,52 @@
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
+          <exception class="org.openqa.selenium.WebDriverException">
+            <message>
+              <![CDATA[unknown error: Element <button class="btn btn-default pull-left " id="addUser" ng-click="addSubgroup(); resizeWindow();" ng-disabled="!canAddSub || isReadonly" tabindex="0" aria-disabled="false" style="height: 34px;">...</button> is not clickable at point (333, 469). Other element would receive the click: <div class="subGroupProgressLoader">...</div>
+  (Session info: chrome=80.0.3987.163)
+  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.18362 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'LAPTOP-Q18VUQ5U', ip: '5.5.26.156', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_201'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.36.540470 (e522d04694c7eb..., userDataDir: C:\Users\PREETI~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 80.0.3987.163, webStorageEnabled: true}
+Session ID: 77195c4eca81877aa9631b896094305f]]>
+            </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-	at pom.TrackingNumberBuilderPage.trackingNumberCreationVerification(TrackingNumberBuilderPage.java:941)
-	at pom.TrackingNumberBuilderPage.createSimpleNumber(TrackingNumberBuilderPage.java:1822)
-	at testdata.TestDataCreation.createTrackingNumber(TestDataCreation.java:115)
-	at testdata.TestData.createData(TestData.java:45)
-	at tests.TestBase.setUp(TestBase.java:120)
+              <![CDATA[org.openqa.selenium.WebDriverException: unknown error: Element <button class="btn btn-default pull-left " id="addUser" ng-click="addSubgroup(); resizeWindow();" ng-disabled="!canAddSub || isReadonly" tabindex="0" aria-disabled="false" style="height: 34px;">...</button> is not clickable at point (333, 469). Other element would receive the click: <div class="subGroupProgressLoader">...</div>
+  (Session info: chrome=80.0.3987.163)
+  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.18362 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'LAPTOP-Q18VUQ5U', ip: '5.5.26.156', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_201'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.36.540470 (e522d04694c7eb..., userDataDir: C:\Users\PREETI~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 80.0.3987.163, webStorageEnabled: true}
+Session ID: 77195c4eca81877aa9631b896094305f
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:83)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy15.click(Unknown Source)
+	at pom.GroupsAndUserPage.createGroup(GroupsAndUserPage.java:457)
+	at testdata.TestDataCreation.createGroup(TestDataCreation.java:41)
+	at testdata.TestData.createData(TestData.java:30)
+	at tests.TestBase.setUp(TestBase.java:119)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -48,239 +86,239 @@
 	at java.lang.Thread.run(Unknown Source)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- org.openqa.selenium.WebDriverException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="SKIP" signature="goToGroupActivityReportPage()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="goToGroupActivityReportPage" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:25Z" finished-at="2020-04-13T16:31:25Z">
+        <test-method status="SKIP" signature="goToGroupActivityReportPage()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="goToGroupActivityReportPage" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToGroupActivityReportPage -->
-        <test-method status="SKIP" signature="uiVerification()[pri:1, instance:tests.GroupActivityReportTest@442675e1]" name="uiVerification" duration-ms="4" started-at="2020-04-13T16:31:25Z" finished-at="2020-04-13T16:31:25Z">
+        <test-method status="SKIP" signature="uiVerification()[pri:1, instance:tests.GroupActivityReportTest@442675e1]" name="uiVerification" duration-ms="3" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- uiVerification -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="dateRangeFilterUIVerification()[pri:2, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterUIVerification" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="dateRangeFilterUIVerification()[pri:2, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterUIVerification" duration-ms="2" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterUIVerification -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="tileCountVerification()[pri:3, instance:tests.GroupActivityReportTest@442675e1]" name="tileCountVerification" duration-ms="1" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tileCountVerification()[pri:3, instance:tests.GroupActivityReportTest@442675e1]" name="tileCountVerification" duration-ms="6" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tileCountVerification -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="secondaryGroupingOptions()[pri:4, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingOptions" duration-ms="2" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="secondaryGroupingOptions()[pri:4, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingOptions" duration-ms="3" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- secondaryGroupingOptions -->
-        <test-method status="SKIP" signature="tableCountVerification()[pri:5, instance:tests.GroupActivityReportTest@442675e1]" name="tableCountVerification" duration-ms="4" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="SKIP" signature="tableCountVerification()[pri:5, instance:tests.GroupActivityReportTest@442675e1]" name="tableCountVerification" duration-ms="1" started-at="2020-04-13T19:47:35Z" finished-at="2020-04-13T19:47:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tableCountVerification -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="paginationToolboxUIVerification()[pri:6, instance:tests.GroupActivityReportTest@442675e1]" name="paginationToolboxUIVerification" duration-ms="5" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="paginationToolboxUIVerification()[pri:6, instance:tests.GroupActivityReportTest@442675e1]" name="paginationToolboxUIVerification" duration-ms="10" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- paginationToolboxUIVerification -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="paginationCountVerification()[pri:7, instance:tests.GroupActivityReportTest@442675e1]" name="paginationCountVerification" duration-ms="1" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="paginationCountVerification()[pri:7, instance:tests.GroupActivityReportTest@442675e1]" name="paginationCountVerification" duration-ms="1" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- paginationCountVerification -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="defaultColumnPickerOptions()[pri:8, instance:tests.GroupActivityReportTest@442675e1]" name="defaultColumnPickerOptions" duration-ms="3" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="defaultColumnPickerOptions()[pri:8, instance:tests.GroupActivityReportTest@442675e1]" name="defaultColumnPickerOptions" duration-ms="3" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- defaultColumnPickerOptions -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="defaultColumnsDisplayed()[pri:9, instance:tests.GroupActivityReportTest@442675e1]" name="defaultColumnsDisplayed" duration-ms="2" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="defaultColumnsDisplayed()[pri:9, instance:tests.GroupActivityReportTest@442675e1]" name="defaultColumnsDisplayed" duration-ms="2" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- defaultColumnsDisplayed -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="allColumnPickerCheckboxesClickable()[pri:10, instance:tests.GroupActivityReportTest@442675e1]" name="allColumnPickerCheckboxesClickable" duration-ms="3" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="allColumnPickerCheckboxesClickable()[pri:10, instance:tests.GroupActivityReportTest@442675e1]" name="allColumnPickerCheckboxesClickable" duration-ms="1" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- allColumnPickerCheckboxesClickable -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="defaultSecondaryGroupingOption()[pri:11, instance:tests.GroupActivityReportTest@442675e1]" name="defaultSecondaryGroupingOption" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="defaultSecondaryGroupingOption()[pri:11, instance:tests.GroupActivityReportTest@442675e1]" name="defaultSecondaryGroupingOption" duration-ms="4" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- defaultSecondaryGroupingOption -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="secondaryGroupingFeatureForNone()[pri:12, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForNone" duration-ms="0" started-at="2020-04-13T16:31:26Z" finished-at="2020-04-13T16:31:26Z">
+        <test-method status="SKIP" signature="secondaryGroupingFeatureForNone()[pri:12, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForNone" duration-ms="2" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- secondaryGroupingFeatureForNone -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="secondaryGroupingFeatureForTrackingNumber()[pri:13, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForTrackingNumber" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="secondaryGroupingFeatureForTrackingNumber()[pri:13, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForTrackingNumber" duration-ms="1" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- secondaryGroupingFeatureForTrackingNumber -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="secondaryGroupingFeatureForCampaign()[pri:14, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForCampaign" duration-ms="5" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="secondaryGroupingFeatureForCampaign()[pri:14, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForCampaign" duration-ms="3" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- secondaryGroupingFeatureForCampaign -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="secondaryGroupingFeatureForCampaignColumn()[pri:15, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForCampaignColumn" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="secondaryGroupingFeatureForCampaignColumn()[pri:15, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForCampaignColumn" duration-ms="2" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- secondaryGroupingFeatureForCampaignColumn -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="secondaryGroupingFeatureForTrackingumberColumn()[pri:16, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForTrackingumberColumn" duration-ms="9" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="secondaryGroupingFeatureForTrackingumberColumn()[pri:16, instance:tests.GroupActivityReportTest@442675e1]" name="secondaryGroupingFeatureForTrackingumberColumn" duration-ms="1" started-at="2020-04-13T19:47:36Z" finished-at="2020-04-13T19:47:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- secondaryGroupingFeatureForTrackingumberColumn -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="advancedFilterUI()[pri:17, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterUI" duration-ms="1" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="advancedFilterUI()[pri:17, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterUI" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterUI -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="basicFilterForGroupName()[pri:18, instance:tests.GroupActivityReportTest@442675e1]" name="basicFilterForGroupName" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="basicFilterForGroupName()[pri:18, instance:tests.GroupActivityReportTest@442675e1]" name="basicFilterForGroupName" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- basicFilterForGroupName -->
-        <test-method status="SKIP" signature="advancedFilterForGroupName()[pri:19, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForGroupName" duration-ms="4" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="SKIP" signature="advancedFilterForGroupName()[pri:19, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForGroupName" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterForGroupName -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="advancedFilterForAnweredCalls()[pri:20, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForAnweredCalls" duration-ms="4" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="advancedFilterForAnweredCalls()[pri:20, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForAnweredCalls" duration-ms="3" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterForAnweredCalls -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="advancedFilterForCalls()[pri:21, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForCalls" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="advancedFilterForCalls()[pri:21, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForCalls" duration-ms="5" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterForCalls -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="advancedFilterForLeads()[pri:22, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForLeads" duration-ms="1" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="advancedFilterForLeads()[pri:22, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForLeads" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterForLeads -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="advancedFilterForConversion()[pri:23, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForConversion" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="advancedFilterForConversion()[pri:23, instance:tests.GroupActivityReportTest@442675e1]" name="advancedFilterForConversion" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- advancedFilterForConversion -->
-        <test-method status="SKIP" signature="dateRangeFilterForToday()[pri:24, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForToday" duration-ms="4" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="SKIP" signature="dateRangeFilterForToday()[pri:24, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForToday" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterForToday -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="dateRangeFilterForYesterday()[pri:25, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForYesterday" duration-ms="4" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="dateRangeFilterForYesterday()[pri:25, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForYesterday" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterForYesterday -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="dateRangeFilterForLast7Days()[pri:26, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForLast7Days" duration-ms="3" started-at="2020-04-13T16:31:27Z" finished-at="2020-04-13T16:31:27Z">
+        <test-method status="SKIP" signature="dateRangeFilterForLast7Days()[pri:26, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForLast7Days" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterForLast7Days -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:28Z" finished-at="2020-04-13T16:31:28Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="dateRangeFilterForLast30Days()[pri:27, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForLast30Days" duration-ms="1" started-at="2020-04-13T16:31:28Z" finished-at="2020-04-13T16:31:28Z">
+        <test-method status="SKIP" signature="dateRangeFilterForLast30Days()[pri:27, instance:tests.GroupActivityReportTest@442675e1]" name="dateRangeFilterForLast30Days" duration-ms="1" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dateRangeFilterForLast30Days -->
-        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:28Z" finished-at="2020-04-13T16:31:28Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="logOut()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="logOut" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:28Z" finished-at="2020-04-13T16:31:28Z">
+        <test-method status="SKIP" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="SKIP" signature="logOut()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="logOut" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- logOut -->
-        <test-method status="SKIP" signature="tearDown()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:28Z" finished-at="2020-04-13T16:31:28Z">
+        <test-method status="SKIP" signature="tearDown()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="SKIP" signature="close_connection()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="close_connection" is-config="true" duration-ms="0" started-at="2020-04-13T16:31:28Z" finished-at="2020-04-13T16:31:28Z">
+        <test-method status="SKIP" signature="close_connection()[pri:0, instance:tests.GroupActivityReportTest@442675e1]" name="close_connection" is-config="true" duration-ms="0" started-at="2020-04-13T19:47:37Z" finished-at="2020-04-13T19:47:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
