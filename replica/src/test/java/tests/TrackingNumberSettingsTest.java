@@ -24,14 +24,14 @@ public class TrackingNumberSettingsTest extends TestBase{
 		LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-        logger.assignCategory("Login Suite");
+        logger.assignCategory(Constants.login_page_category);
         lp.validLogin();
         
         hp=new HomePage(driver);
         hp.left_hand_navigation_bar_click();
-		hp.clickAction("Legacy Reports");
+		hp.clickAction(Constants.HomePage.legacy_reports);
 		
-		hp.click_subLink("Tracking Number Settings");
+		hp.click_subLink(Constants.HomePage.tracking_number_settings_report);
 		
 	}
 	

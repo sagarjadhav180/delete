@@ -6,10 +6,15 @@ import java.util.List;
 
 public class Constants {
 
-	public static final String home_page_category="";
-	public static final String group_activity_report_category="Group Activity Reports Test";	
-	public static final String call_details_report_category="Call Details Reports Test";		
-	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Test";	
+	public static final String webhook_category="WebHook Suite";
+	public static final String tracking_number_category="Tracking Number Suite";	
+	public static final String campaign_category="Campaign Suite";	
+	public static final String login_page_category="Login Page Suite";
+	public static final String home_page_category="Home Page Suite";
+	public static final String group_activity_report_category="Group Activity Reports Suite";	
+	public static final String call_details_report_category="Call Details Reports Suite";		
+	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
+	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
 	
 	public static class LegacyReports{
 		
@@ -83,10 +88,6 @@ public class Constants {
 		public static final String double_click="DoubleClick";
 		public static final String google_analytics="Google Analytics";
 	
-		
-		
-		
-		
 	}
     
     public static class LoginPage{
@@ -119,6 +120,19 @@ public class Constants {
     	
     	
 	}
+    
+    
+    public static class LegacyScheduledReport{
+       	
+    	public static final String edit_scheduled_report_button="Edit";
+    	public static final String delete_scheduled_report_button="Delete";
+    	public static final String send_now_scheduled_report_button="Send Now";
+    	
+    	
+	}
+    
+    
+    
 	
 }
 

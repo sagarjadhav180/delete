@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import pom.HomePage;
 import pom.LoginPage;
 import pom.WebHookPage;
@@ -23,7 +24,7 @@ public class WebHookTest extends TestBase {
         LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-        logger.assignCategory("Login Suite");
+        logger.assignCategory(Constants.login_page_category);
         lp.validLogin();
         hp=new HomePage(driver);
         hp.left_hand_navigation_bar_click();
@@ -35,7 +36,7 @@ public class WebHookTest extends TestBase {
 		wh=new WebHookPage(driver);
 		logger=extent.startTest("Webhook creation");
 		logger.log(LogStatus.INFO, "verifying if webhook is getting created");
-		logger.assignCategory("Webhook Suite");
+		logger.assignCategory(Constants.webhook_category);
 		wh.createWebHook(webhook, webhook_url);
 	}
 

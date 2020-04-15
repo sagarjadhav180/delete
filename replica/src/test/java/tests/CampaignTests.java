@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-
+import constants.Constants;
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
 import pom.LoginPage;
@@ -34,13 +34,13 @@ public class CampaignTests extends TestBase {
 		LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-        logger.assignCategory("Login Suite");
+        logger.assignCategory(Constants.login_page_category);
         lp.validLogin();
         HomePage hp=new HomePage(driver);
         hp.left_hand_navigation_bar_click();
 		
 		try {
-			hp.clickAction("Campaign & Tracking Number");
+			hp.clickAction(Constants.HomePage.campaign_tracking_number_page);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class CampaignTests extends TestBase {
 	public void campaignBuilderPage_UI_Verification() throws InterruptedException{
 		
         logger=extent.startTest("Campaign builder page UI verification..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
         logger.log(LogStatus.INFO, "going to campaign builder page..");
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);	
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
@@ -77,7 +77,7 @@ public class CampaignTests extends TestBase {
 		@Test(priority=2)
 		public void campaignDefaultOwnerValidation() throws InterruptedException, IOException{
 			logger=extent.startTest("Check if logged in user is displayed in campaign owner dropdown by default");
-			logger.assignAuthor("Campaign Suite");
+			logger.assignAuthor(Constants.campaign_category);
 			CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 			
@@ -92,7 +92,7 @@ public class CampaignTests extends TestBase {
 	public void campaign_Creation_Without_externalID() throws InterruptedException{
 		
 		logger=extent.startTest("Campaign creation without external ID..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		
@@ -109,7 +109,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=4)
 	public void campaign_updation_Without_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign updation without external ID..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("update",campaign_name);
@@ -126,7 +126,7 @@ public class CampaignTests extends TestBase {
 	public void campaign_deletion_Without_externalID() throws InterruptedException{
 	
 		logger=extent.startTest("Campaign deletion without external ID..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("archive",campaign_name);
@@ -141,7 +141,7 @@ public class CampaignTests extends TestBase {
 //		hp.clickAction("Home");
 //		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign creation with external ID..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		
@@ -161,7 +161,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=7)
 	public void campaign_updation_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with external ID..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("update",campaign_name);
@@ -177,7 +177,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=8)
 	public void campaign_deletion_With_externalID() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion without external ID..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("archive",campaign_name);
 //	    driver.navigate().refresh();
@@ -193,7 +193,7 @@ public class CampaignTests extends TestBase {
 //		hp.clickAction("Home");
 //		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign creation with future start date..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		
@@ -216,7 +216,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=10)
 	public void campaignUpdationWithFutureStartDateAndNeverEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with future start date..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		cp.clickAction("update",campaign_name);
@@ -236,7 +236,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=11)
 	public void campaign_deletion_With_futureStartDate() throws InterruptedException{
      	logger=extent.startTest("Campaign deletion with future start date..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
      	CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("archive",campaign_name);
 //	    driver.navigate().refresh();
@@ -250,7 +250,7 @@ public class CampaignTests extends TestBase {
 //		hp.clickAction("Home");
 //		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign creation with future start date and future end date..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		
@@ -273,7 +273,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=13)
 	public void campaignUpdationWithFutureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign updation with future start date And FutureEndDate..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		cp.clickAction("update",campaign_name);
@@ -293,7 +293,7 @@ public class CampaignTests extends TestBase {
 	@Test(priority=14)
 	public void campaign_deletion_With_futureStartDateAndFutureEndDate() throws InterruptedException{
 		logger=extent.startTest("Campaign deletion with future start date And Future EndDate ..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 	    cp.clickAction("archive",campaign_name);
 //	    driver.navigate().refresh();
@@ -307,7 +307,7 @@ public class CampaignTests extends TestBase {
 //		hp.clickAction("Home");
 //		hp.clickAction("Campaign");
 		logger=extent.startTest("Campaign creation with past start date..");
-		logger.assignCategory("Campaign Suite");
+		logger.assignCategory(Constants.campaign_category);
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);			
 		

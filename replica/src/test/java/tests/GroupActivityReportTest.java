@@ -26,7 +26,7 @@ public class GroupActivityReportTest extends TestBase {
 		LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-        logger.assignCategory("Login Suite");
+        logger.assignCategory(Constants.login_page_category);
         lp.validLogin();
         
         hp=new HomePage(driver);
