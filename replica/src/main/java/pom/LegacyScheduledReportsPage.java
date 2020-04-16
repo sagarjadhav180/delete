@@ -69,6 +69,7 @@ public class LegacyScheduledReportsPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Your report is being processed.']")
 	private static WebElement send_now_confirmation_message;	
 	
+	
 	public LegacyScheduledReportsPage(WebDriver driver){
 		PageFactory.initElements(driver,this);
 	}
