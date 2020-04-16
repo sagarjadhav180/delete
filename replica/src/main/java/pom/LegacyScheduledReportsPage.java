@@ -1,5 +1,7 @@
 package pom;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,7 +38,7 @@ public class LegacyScheduledReportsPage extends TestBase {
 	private WebElement export_tsv_button;	
 	
 	@FindBy(xpath="//table[@id='scheduledreportstable']//thead//tr[1]//th")
-	private WebElement actual_column_labels;
+	private List<WebElement> actual_column_labels;
 	
 	String[] expected_column_labels={"Name","Report","Creator","Dist List","Freq","Format","Status","Actions"};
 	
@@ -58,7 +60,7 @@ public class LegacyScheduledReportsPage extends TestBase {
 	private static WebElement pagination_count;	
 	
 	@FindBy(xpath="//table[@id='scheduledreportstable']//tbody//tr")
-	private static WebElement table_count;	
+	private static List<WebElement> table_count;	
 
 	@FindBy(xpath="//button[@class='btn btn-primary'][text()='OK']")
 	private static WebElement ok_button_scheduled_report_deletion_message;	
@@ -68,6 +70,9 @@ public class LegacyScheduledReportsPage extends TestBase {
 	
 	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Your report is being processed.']")
 	private static WebElement send_now_confirmation_message;	
+	
+	String db_count=Util.readingFromDB("");
+	SoftAssert softassert=new SoftAssert();
 	
 	
 	public LegacyScheduledReportsPage(WebDriver driver){
@@ -98,17 +103,22 @@ public class LegacyScheduledReportsPage extends TestBase {
     //verification of buttons in top pagination toolbox
     public void paginationToolboxUI(){
 
-    	SoftAssert softassert=new SoftAssert();
+    	
     	logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
     	wait.until(ExpectedConditions.visibilityOf(first_button));
     	softassert.assertTrue(first_button.isDisplayed(),"first_button is not present or locator changed");
     	softassert.assertTrue(last_button.isDisplayed(),"last_button is not present or locator changed");	
     	softassert.assertTrue(next_button.isDisplayed(),"next_button is not present or locator changed");	
     	softassert.assertTrue(prev_button.isDisplayed(),"prev_button is not present or locator changed");    	
+    	softassert.assertAll();
+    
     }
     
 	public void paginationCount(){
 		
+		if(table_count.size()>100){
+			
+		}
 	}
 	
     public void tableCount(){
@@ -117,22 +127,54 @@ public class LegacyScheduledReportsPage extends TestBase {
 	
     public void headerLabel(){
     	
+    	logger.log(LogStatus.INFO, "Verifying if header label is dispalyed");
+    	Assert.assertTrue(legacy_scheduled_reports_label.isDisplayed(),"header label is not displayed or locator changed");
+    	
     }
     
     public void scheduleButton(){
     	
+    	logger.log(LogStatus.INFO, "Verifying if add schedule button is displayed");
+    	softassert.assertTrue(add_scheduled_report_button.isDisplayed(),"Add schedule report button is not displayed or locator changed");
+    	
+    	logger.log(LogStatus.INFO, "Verifying if add schedule report button is clickable");
+    	softassert.assertTrue(add_scheduled_report_button.isEnabled(),"Add schedule report button is not enabled");
+    	softassert.assertAll();
     }
     
     public void exportButton(){
+    	logger.log(LogStatus.INFO, "Verifying if export button is displayed");
+    	softassert.assertTrue(export_button.isDisplayed(),"export button is not displayed or locator changed");
     	
+    	logger.log(LogStatus.INFO, "Verifying if export button is clickable");
+    	softassert.assertTrue(export_button.isEnabled(),"export button is not enabled");
+    	softassert.assertAll();
     }
     
     public void exportButtonOptions(){
     	
+    	logger.log(LogStatus.INFO, "Verifying options present in export button");
+    	
+    	export_button.click();
+    	softassert.assertTrue(export_excel_button.isDisplayed(),"excel option not present for export");
+    	softassert.assertTrue(export_tsv_button.isDisplayed(),"tsv option not present for export");
+    	softassert.assertAll();
     }
     
     public void columnNames(){
     	
+    	for(int i=0;i<actual_column_labels.size();i++){
+    		
+    		for(int j=0;j<expected_column_labels.length;j++){
+    			
+    			if(actual_column_labels.get(i).getText().equals(expected_column_labels[j])){
+    				
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_column_labels[j]+" column is present");
+    				softassert.assertTrue(actual_column_labels.get(i).getText().equals(expected_column_labels[j]),expected_column_labels[j]+" column is not present");
+    			}
+    		}
+    	}
+    	softassert.assertAll();
     }
     
     public void editReport(){
