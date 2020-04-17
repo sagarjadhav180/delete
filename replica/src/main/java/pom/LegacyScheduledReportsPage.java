@@ -95,6 +95,13 @@ public class LegacyScheduledReportsPage extends TestBase {
 			Assert.assertTrue(send_now_confirmation_message.isDisplayed(),"mail is not sent");
 		}
 		
+		else if(button_name.contains("Add Scheduled Report")){
+			add_scheduled_report_button.click();
+		}
+		
+		else if(button_name.contains("Export as")){
+			export_button.click();
+		}
 		Thread.sleep(2000);
 		
 
@@ -191,7 +198,5 @@ public class LegacyScheduledReportsPage extends TestBase {
     
     
     
-    
-    
-    
+
 }
