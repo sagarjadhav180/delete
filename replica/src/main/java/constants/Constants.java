@@ -127,8 +127,10 @@ public class Constants {
     	public static final String edit_scheduled_report_button="Edit";
     	public static final String delete_scheduled_report_button="Delete";
     	public static final String send_now_scheduled_report_button="Send Now";
+    	public static final String export_button="Export as";
+    	public static final String add_scheduled_report_button="Add Scheduled Report";
     	
-    	
+ 
 	}
     
     
