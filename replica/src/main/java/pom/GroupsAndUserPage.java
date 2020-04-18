@@ -429,13 +429,15 @@ public class GroupsAndUserPage extends TestBase {
     
     public void expandSection(String section){
     	
-    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1000)", "");
+
     	try{
     	    wait.until(ExpectedConditions.invisibilityOf(loadingWheel));
     	}
     	catch(Exception e){
     		
     	}
+    	
+    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1000)", "");
     	
 	    for(int i=0;i<section_labels.size();i++){
     	

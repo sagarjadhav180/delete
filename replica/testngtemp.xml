@@ -4,7 +4,7 @@
   	
 	<test name="chrome test-1" preserve-order="true" parallel="false" >
     <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+    <parameter name="url" value="https://stag-2-cmo-1.convirza.com"/>
 	<classes>
 
    <class name="tests.GroupActivityReportTest"/>

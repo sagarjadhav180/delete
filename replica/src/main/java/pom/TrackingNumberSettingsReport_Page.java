@@ -184,7 +184,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     	SoftAssert softassert=new SoftAssert();
     	//verification of count in pagination toolbox	
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+org_unit_id+"') AND status='active'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+TestBase.getOrg_unit_id()+"') AND status='active'");
 
 
 		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
@@ -201,7 +201,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     public void tableTrackingNumbersCount(){
 		//verification of count in pagination toolbox	
     	SoftAssert softassert=new SoftAssert();
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+org_unit_id+"') AND status='active'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+TestBase.getOrg_unit_id()+"') AND status='active'");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);

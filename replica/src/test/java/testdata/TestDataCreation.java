@@ -41,9 +41,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		gp.createGroup(account);
 //		Thread.sleep(2000);
 		hp.clickAction(Constants.HomePage.home_page);
-		String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND top_ou_id='"+org_unit_id+"' AND org_unit_status='active'");
-	    TestBase.setOrg_unit_id(orgUnitID);
-	    TestBase.setCampaign_ou_id(orgUnitID);
+		
 	}
 
 	public void navigateToGroup() throws InterruptedException {
@@ -93,8 +91,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		cb.clickAction("list");
 		hp.clickAction(Constants.HomePage.home_page);
 		Thread.sleep(3000);
-		String campaignID=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
-	    TestBase.setCampaign_id(campaignID);
+
 	}
 
 	public void createTrackingNumber() throws InterruptedException {

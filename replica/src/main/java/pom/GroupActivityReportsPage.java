@@ -361,8 +361,8 @@ public class GroupActivityReportsPage extends TestBase {
 					
 					if(tiles_heading.get(i).getText().startsWith("TOTAL CALLS")){
 						String total_call_count_from_ui = dashboard_tiles_values.get(j).getText();
-						String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-						System.out.println("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+						String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+						System.out.println("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 						System.out.println("total_count_from_ui is "+total_call_count_from_ui);
 						System.out.println("total_count_from_db "+total_call_count_from_db);
 						logger.log(LogStatus.INFO, "verifying total calls count..");
@@ -378,7 +378,7 @@ public class GroupActivityReportsPage extends TestBase {
 					}
 					else if(tiles_heading.get(i).getText().endsWith("LEADS")){
 						String total_leads__from_ui = dashboard_tiles_values.get(j).getText();
-						String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+						String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
 						System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 						System.out.println("total_leads_from_db "+total_leads_from_db);
 						logger.log(LogStatus.INFO, "verifying total leads..");
@@ -392,7 +392,7 @@ public class GroupActivityReportsPage extends TestBase {
 					}
 					else if(tiles_heading.get(i).getText().startsWith("CONVERSIONS")){
 						String total_conversion_from_ui = dashboard_tiles_values.get(j).getText();
-						String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");
+						String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");
 						System.out.println("total_conversion__from_ui is "+total_conversion_from_ui);
 						System.out.println("total_conversion_from_db "+total_conversion_from_db);
 						logger.log(LogStatus.INFO, "verifying total conversion..");
@@ -406,7 +406,7 @@ public class GroupActivityReportsPage extends TestBase {
 					}
 					else if(tiles_heading.get(i).getText().startsWith("UNIQUE")){
 						String unique_calls_count_from_ui = dashboard_tiles_values.get(j).getText();
-						String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+						String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
 						System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
 						System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
 						logger.log(LogStatus.INFO, "verifying unique calls count..");
@@ -460,7 +460,7 @@ public class GroupActivityReportsPage extends TestBase {
 			String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 			String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
-			String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 
 			String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
 			System.out.println("dbCount is "+dbCount);
@@ -481,7 +481,7 @@ public class GroupActivityReportsPage extends TestBase {
     	
     	SoftAssert softassert=new SoftAssert();
 
-    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"')");
+    	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
@@ -817,7 +817,7 @@ public class GroupActivityReportsPage extends TestBase {
 		}
 		
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+org_unit_id+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
         
 		if(!(dbCount=="0" || dbCount==null)){
 		

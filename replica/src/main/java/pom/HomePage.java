@@ -181,10 +181,21 @@ public class HomePage extends TestBase {
 					try{
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 					
-					}catch(Exception e){}
-					driver.switchTo().activeElement();
-					Util.click(pendo_close_button);
-					Thread.sleep(1000);					
+					}catch(Exception e){
+						
+						try{
+							driver.switchTo().activeElement();
+							Util.click(pendo_close_button);
+							Thread.sleep(1000);
+						}
+						catch(Exception c){
+							
+						}
+						
+						
+					}
+					
+					
 				}
 				
 				
@@ -427,8 +438,8 @@ public class HomePage extends TestBase {
 			
 			//total calls count
 			String total_call_count_from_ui = dashboard_tiles_values.get(0).getText();
-			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			System.out.println("total_count_from_ui is "+total_call_count_from_ui);
 			System.out.println("total_count_from_db "+total_call_count_from_db);
 			logger.log(LogStatus.INFO, "verifying total calls count..");
@@ -436,7 +447,7 @@ public class HomePage extends TestBase {
 			
 			//total unique calls count
 			String unique_calls_count_from_ui = dashboard_tiles_values.get(1).getText();
-			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
 			System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
 			System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying unique calls count..");
@@ -444,7 +455,7 @@ public class HomePage extends TestBase {
 
 			//total answered calls calls count
 			String answered_calls_count_from_ui = dashboard_tiles_values.get(2).getText();
-			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
+			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
 			System.out.println("answered_calls_count_from_ui is "+answered_calls_count_from_ui);
 			System.out.println("answered_calls_count_from_db "+answered_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying answered calls count..");
@@ -452,7 +463,7 @@ public class HomePage extends TestBase {
 
 			//AVG CALL DURATION
 			String avg_call_duration__from_ui = dashboard_tiles_values.get(3).getText();
-			String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			if(avg_call_duration_from_db==null){
 				avg_call_duration_from_db="0";
 			}
@@ -471,7 +482,7 @@ public class HomePage extends TestBase {
 			
 			//TOTAL LEADS
 			String total_leads__from_ui = dashboard_tiles_values.get(4).getText();
-			String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+			String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
 			System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 			System.out.println("total_leads_from_db "+total_leads_from_db);
 			logger.log(LogStatus.INFO, "verifying total leads..");
@@ -497,7 +508,7 @@ public class HomePage extends TestBase {
 			
 			//TOTAL CONVERSIONS
 			String total_conversion__from_ui = dashboard_tiles_values.get(6).getText();
-			String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'') AND indicator_id='18'");
+			String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'') AND indicator_id='18'");
 			if(total_conversion_from_db==null){
 				total_conversion_from_db="0";
 			}

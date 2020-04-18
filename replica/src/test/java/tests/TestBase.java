@@ -46,7 +46,8 @@ public class TestBase
 	public static final String last_name="Account";
 	public static String user_id="automation_account@yopmail.com";
 	public static String password="lmc2demo";
-	public static final String env="stag-5";
+		
+	public static String env="stag-5";
 	public static final String account="Automation Account";
 	public static final String campaignToBeEdited="SJC-1";
 	public static final String tracking_number="SJ TN-1";
@@ -80,6 +81,9 @@ public class TestBase
 		TestBase.setUser_id(user);
 		String pass=prop.getProperty("password");
 		TestBase.setPassword(pass);
+		String environment = prop.getProperty("Environment");
+		TestBase.setEnv(environment);
+		
 	}
 	
 	public static String getUser_id() {
@@ -193,6 +197,13 @@ public class TestBase
 
 	}
 	
+	public static String getEnv() {
+		return env;
+	}
+
+	public static void setEnv(String env) {
+		TestBase.env = env;
+	}
 	
 	public static String getOrg_unit_id() {
 		return org_unit_id;
