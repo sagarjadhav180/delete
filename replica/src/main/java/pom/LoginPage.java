@@ -50,8 +50,8 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath="//a[@class='pull-left']")
 	private static WebElement forgotPassword_link;	
 	
-	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'"+first_last_name+"')]")
-	private static WebElement userprofile_link;
+//	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'"+TestBase.getFirst_last_name()+"')]")
+//	private static WebElement userprofile_link;
 
 	@FindBy(xpath="//a[@class='navbar-brand']")
 	private static WebElement logged_in_logo;
@@ -355,7 +355,7 @@ Properties prop=new Properties();
 		wait.until(ExpectedConditions.visibilityOf(login_button));
 		
 		username_Field.clear();
-		username_Field.sendKeys(user_id);
+		username_Field.sendKeys(TestBase.getUser_id());
 		
 		password_Field.clear();
 		password_Field.sendKeys(password);

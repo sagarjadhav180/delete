@@ -19,6 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import tests.TestBase;
 import tests.Util;
 
+@SuppressWarnings("unused")
 public class HomePage extends TestBase {
 	
 

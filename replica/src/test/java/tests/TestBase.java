@@ -36,14 +36,16 @@ import testdata.TestData;
 public class TestBase
 {
 
+
+
 	//Environment Variables
 	public static final String billing_id="70045";
-	public static  String org_unit_id="70045"; 
-    public static  String campaign_id = "46";
-	public static  String campaign_ou_id="70045";
-	public static final String first_last_name="Autmation Account";
-	public static final String first_name="Autmation";	
-	public static final String last_name="Account";
+	public static String org_unit_id="70045"; 
+    public static String campaign_id = "46";
+	public static String campaign_ou_id="70045";
+	public static String first_last_name="Autmation Account";
+	public static String first_name="Autmation";	
+	public static String last_name="Account";
 	public static String user_id="automation_account@yopmail.com";
 	public static String password="lmc2demo";
 		
@@ -86,22 +88,8 @@ public class TestBase
 		
 	}
 	
-	public static String getUser_id() {
-		return user_id;
-	}
 
-	public static void setUser_id(String user_id) {
-		TestBase.user_id = user_id;
-	}
-
-	public static String getPassword() {
-		return password;
-	}
-
-	public static void setPassword(String password) {
-		TestBase.password = password;
-	}
-
+	
 	@Parameters({"browser","url"})
 	@BeforeTest
 	public void setUp(String browser,String url) throws Exception{
@@ -196,6 +184,47 @@ public class TestBase
 		extent.flush();
 
 	}
+
+	public static String getUser_id() {
+		return user_id;
+	}
+
+	public static void setUser_id(String user_id) {
+		TestBase.user_id = user_id;
+	}
+
+	public static String getPassword() {
+		return password;
+	}
+
+	public static void setPassword(String password) {
+		TestBase.password = password;
+	}
+
+	public static String getFirst_last_name() {
+		return first_last_name;
+	}
+
+	public static void setFirst_last_name(String first_last_name) {
+		TestBase.first_last_name = first_last_name;
+	}
+
+	public static String getFirst_name() {
+		return first_name;
+	}
+
+	public static void setFirst_name(String first_name) {
+		TestBase.first_name = first_name;
+	}
+
+	public static String getLast_name() {
+		return last_name;
+	}
+
+	public static void setLast_name(String last_name) {
+		TestBase.last_name = last_name;
+	}
+
 	
 	public static String getEnv() {
 		return env;

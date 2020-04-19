@@ -5,14 +5,10 @@ import java.util.Objects;
 import tests.TestBase;
 import tests.Util;
 
-
+@SuppressWarnings("unused")
 public class TestData extends TestBase{
 	
 	
-
-	
-	
-	@SuppressWarnings("unused")
 	public static void createData() throws Exception{
 		logger=extent.startTest("Pre Suite Test data creation");
 	    logger.assignCategory("Test Data");
@@ -20,6 +16,7 @@ public class TestData extends TestBase{
 		
 		String first_name="Automation";
 		String last_name="Account";
+		String first_last_name="Automation Account";
 		String user_name="automation_account@yopmail.com";
 		String pass_word="automation_account";
 
@@ -45,17 +42,25 @@ public class TestData extends TestBase{
 
 		String user=Util.readingFromDB("SELECT count(*) as count FROM ct_user WHERE username LIKE '"+user_name+"'");
 		System.out.println("user "+user);		
-		if(user.equals("0") || user==null){
+		if(user.equals("0")){
 			System.out.println("creating user");
 			rd.createUser(first_name,last_name,user_name);
 			TestBase.setUser_id(user_name);
-			
+			TestBase.setFirst_name(first_name);
+			TestBase.setLast_name(last_name);
+			TestBase.setFirst_last_name(first_last_name);
 			
 			TestDataCreation tc=new TestDataCreation();
 			tc.logOut();
 			tc.login();
 		}
+		else{
+			TestBase.setFirst_name(first_name);
+			TestBase.setLast_name(last_name);
+			TestBase.setFirst_last_name(first_last_name);
 
+		}
+		
 		System.out.println("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"'");
 		String campaign=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"'");
 		System.out.println("campaign "+campaign);
