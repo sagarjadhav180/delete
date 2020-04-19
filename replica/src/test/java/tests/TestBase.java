@@ -32,14 +32,22 @@ import pom.CampaignBuilderPage;
 import pom.HomePage;
 import testdata.TestData;
 
+@SuppressWarnings("unused")
 @Listeners(extentReport.Listener.class)
 public class TestBase
 {
 
-
-
 	//Environment Variables
 	public static final String billing_id="70045";
+	public static final String account="Automation Account";
+	public static final String campaignToBeEdited="=00000SJC-1";
+	public static final String tracking_number="SJ TN-1";
+	public static final String geo_location="do_not_delete_location(automation)";
+	public static final String webhook="automation_webhook_do_not_delete";	
+	public static final String webhook_url="https://eneq4s0znwehc.x.pipedream.net/";	
+	public static final String account_timezone="America/New_York";
+	
+	
 	public static String org_unit_id="70045"; 
     public static String campaign_id = "46";
 	public static String campaign_ou_id="70045";
@@ -48,15 +56,7 @@ public class TestBase
 	public static String last_name="Account";
 	public static String user_id="automation_account@yopmail.com";
 	public static String password="lmc2demo";
-		
 	public static String env="stag-5";
-	public static final String account="Automation Account";
-	public static final String campaignToBeEdited="SJC-1";
-	public static final String tracking_number="SJ TN-1";
-	public static final String geo_location="do_not_delete_location(automation)";
-	public static final String webhook="automation_webhook_do_not_delete";	
-	public static final String webhook_url="https://eneq4s0znwehc.x.pipedream.net/";	
-	public static final String account_timezone="America/New_York";		
 	public static String Base_Url = "https://"+env+"-cmo-1.convirza.com";
 	public static ExtentTest logger;
 	public static ExtentReports extent = ExtentReportsGenerator.getInstance(true);
@@ -93,8 +93,6 @@ public class TestBase
 	@Parameters({"browser","url"})
 	@BeforeTest
 	public void setUp(String browser,String url) throws Exception{
-
-
 		
 		url_to_hit=url;
 		String sf = null;
