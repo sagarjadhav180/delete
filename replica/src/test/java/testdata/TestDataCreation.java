@@ -19,6 +19,7 @@ import tests.TrackingNumberTest;
 import tests.Util;
 import tests.WebHookTest;
 
+@SuppressWarnings("unused")
 public class TestDataCreation extends TestBase implements TestDataFunctions {
 
 	public void login() throws Exception {
