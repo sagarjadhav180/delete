@@ -129,8 +129,10 @@ public class Constants {
     	public static final String send_now_scheduled_report_button="Send Now";
     	public static final String export_button="Export as";
     	public static final String add_scheduled_report_button="Add Scheduled Report";
+    	public static final String secondary_grouping_for_call_details="Call Details";    	
+    	public static final String secondary_grouping_for_tracking_number_settings="Tracking Number Settings";
+    	public static final String secondary_grouping_for_group_activity="Group Activity";    	
     	
- 
 	}
     
     
