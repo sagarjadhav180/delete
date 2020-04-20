@@ -96,8 +96,11 @@ public class LegacyScheduledReportsPage extends TestBase {
 	//to get action button of desired schedule  
     public void clickAction(String schedule_name,String button_name) throws InterruptedException{
 		
-		WebElement webelement = driver.findElement(By.xpath("//table[@id='scheduledreportstable']//tbody//tr//td[text()='"+schedule_name+"']//parent::tr//child::button[contains(text(),'"+button_name+"')]"));
-		webelement.click();
+    	if(schedule_name!=""){
+    		WebElement webelement = driver.findElement(By.xpath("//table[@id='scheduledreportstable']//tbody//tr//td[text()='"+schedule_name+"']//parent::tr//child::button[contains(text(),'"+button_name+"')]"));
+    		webelement.click();	
+    	}
+		
 		if(button_name.contains("Delete")){
 			driver.switchTo().activeElement();
 			Util.click(ok_button_scheduled_report_deletion_message);
@@ -178,6 +181,7 @@ public class LegacyScheduledReportsPage extends TestBase {
     	export_button.click();
     	softassert.assertTrue(export_excel_button.isDisplayed(),"excel option not present for export");
     	softassert.assertTrue(export_tsv_button.isDisplayed(),"tsv option not present for export");
+    	export_button.click();
     	softassert.assertAll();
     }
     

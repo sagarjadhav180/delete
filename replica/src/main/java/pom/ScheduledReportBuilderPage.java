@@ -64,10 +64,10 @@ public class ScheduledReportBuilderPage extends TestBase {
 	@FindBy(xpath="//button[@class='btn btn-primary'][2]")
 	private WebElement basic_search_clear_button;
 	
-	@FindBy(xpath="//div[@class='select2-container ng-pristine ng-untouched ng-valid']//b")
+	@FindBy(xpath="//label[@id='report-label']//parent::div//following-sibling::div//span[@class='select2-arrow']")
 	private WebElement report_type_button;
 	
-	@FindBy(xpath="//ul[@class='select2-result-sub']//li//span")
+	@FindBy(xpath="//ul[@class='select2-result-sub']//li")
 	private List<WebElement> report_type_listbox;	
 	String[] expected_report_type_listbox_options={"Call Details","Group Activity","Tracking Number Settings"};
 
@@ -248,7 +248,9 @@ public class ScheduledReportBuilderPage extends TestBase {
 		
     	logger.log(LogStatus.INFO, "Verifying if List button is displayed");
 		softassert.assertTrue(list_button.isDisplayed(),"List Button is not displayed or locator changed");
-    	
+
+    	logger.log(LogStatus.INFO, "Verifying if List button is clickable");
+		softassert.assertTrue(list_button.isEnabled(),"List Button is not clickable");
 	}
 	
 	public void reportsDetailUIVerification(){
@@ -321,8 +323,18 @@ public class ScheduledReportBuilderPage extends TestBase {
 		softassert.assertTrue(default_option_report_type.isDisplayed(),"by default report type is not selected");
 	}
 	
-	public void secondaryGroupingOptionEnability(String reportType){
+	public void secondaryGroupingOptionEnability(String reportType) throws InterruptedException{
+
+		report_type_button.click();
 		
+		for(int i=0;i<report_type_listbox.size();i++){
+			if(report_type_listbox.get(i).getText().equals(reportType)){
+				report_type_listbox.get(i).click();
+				break;
+			}
+		}
+		
+		Thread.sleep(2000);
 		if(reportType.equals("Call Details") || reportType.equals("Tracking Number Settings")){
 			
 			logger.log(LogStatus.INFO, "Verifying if secondary grouping is disabled for report "+reportType);
@@ -330,7 +342,7 @@ public class ScheduledReportBuilderPage extends TestBase {
 		}
 		else if(reportType.equals("Group Activity")) {
 			logger.log(LogStatus.INFO, "Verifying if secondary grouping is enabled for report "+reportType);
-			softassert.assertTrue(!(secondary_grouping_disabled.isDisplayed()),"secondary grouping is disabled for report "+reportType);			
+			softassert.assertFalse(secondary_grouping_disabled.isDisplayed(),"secondary grouping is disabled for report "+reportType);			
 		}
 	}
 	
