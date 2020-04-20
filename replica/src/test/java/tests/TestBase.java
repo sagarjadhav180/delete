@@ -40,7 +40,7 @@ public class TestBase
 	//Environment Variables
 	public static final String billing_id="70045";
 	public static final String account="Automation Account";
-	public static final String campaignToBeEdited="=00000SJC-1";
+	public static final String campaignToBeEdited="00000SJC-1";
 	public static final String tracking_number="SJ TN-1";
 	public static final String geo_location="do_not_delete_location(automation)";
 	public static final String webhook="automation_webhook_do_not_delete";	

@@ -30,7 +30,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 		
 	//Tracking number list
 	
-	@FindBy(xpath="//h4[contains(text(),'TRACKING NUMBERS FOR SJC-1')]")
+	@FindBy(xpath="//h4[contains(text(),'TRACKING NUMBERS FOR')]")
 	private static WebElement header;
 
 	@FindBy(xpath="//button[@class='btn btn-info'][contains(text(),'Add Tracking Number')]")
