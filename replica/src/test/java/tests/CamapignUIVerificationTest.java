@@ -32,8 +32,7 @@ public class CamapignUIVerificationTest extends TestBase{
     logger.assignCategory(Constants.login_page_category);
     lp.validLogin();		
 	hp=new HomePage(driver);
-    hp.left_hand_navigation_bar_click();
-	logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
+    logger.log(LogStatus.INFO, "going to campaign and tracking number page..");
 	hp.clickAction(Constants.HomePage.campaign_tracking_number_page);
 
 		

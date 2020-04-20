@@ -27,8 +27,6 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		LoginPage lp=new LoginPage(driver);
 
 		lp.validLogin();
-		HomePage hp=new HomePage(driver);
-		hp.left_hand_navigation_bar_click();
 		
 	}
 

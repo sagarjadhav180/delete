@@ -369,7 +369,8 @@ Properties prop=new Properties();
     		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
     		Assert.assertTrue(logged_in_logo.isDisplayed(),"logo not displayed or locator changed");
 		}
-		
+		HomePage hp=new HomePage(driver);
+        hp.left_hand_navigation_bar_click();
 		
 	}
 	

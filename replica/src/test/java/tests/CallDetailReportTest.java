@@ -31,8 +31,7 @@ public class CallDetailReportTest extends TestBase{
         lp.validLogin();
         
         hp=new HomePage(driver);
-        hp.left_hand_navigation_bar_click();
-		hp.clickAction(Constants.HomePage.legacy_reports);
+    	hp.clickAction(Constants.HomePage.legacy_reports);
 		
 		hp.click_subLink(Constants.HomePage.call_details_report);
 	}

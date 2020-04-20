@@ -79,6 +79,19 @@ public class LegacyScheduledReportsPage extends TestBase {
 		PageFactory.initElements(driver,this);
 	}
 
+	static int counter=0;
+	public static LegacyScheduledReportsPage intanceLegacySchedule(){
+		
+		LegacyScheduledReportsPage sp = null;
+		if(counter==0){
+			sp=new LegacyScheduledReportsPage(driver);
+			return sp;
+		}
+		else{
+		return sp;
+		}
+	}
+	
 
 	//to get action button of desired schedule  
     public void clickAction(String schedule_name,String button_name) throws InterruptedException{

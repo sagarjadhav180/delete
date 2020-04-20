@@ -224,6 +224,20 @@ public class ScheduledReportBuilderPage extends TestBase {
 		PageFactory.initElements(driver,this);
 	}
 	
+	static int counter=0;
+	public static ScheduledReportBuilderPage intanceScheduleBuilder(){
+		
+		ScheduledReportBuilderPage sp = null;
+		if(counter==0){
+			sp=new ScheduledReportBuilderPage(driver);
+			return sp;
+		}
+		else{
+		return sp;
+		}
+	}
+	
+	
 	public void scheduledReportBuilderPageLabel(){
 		
 		logger.log(LogStatus.INFO, "Verifying header label is displayed");

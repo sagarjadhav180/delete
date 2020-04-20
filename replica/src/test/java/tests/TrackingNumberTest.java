@@ -33,8 +33,7 @@ public class TrackingNumberTest extends TestBase{
 	        logger.assignCategory(Constants.login_page_category);
 	        lp.validLogin();
 	        HomePage hp=new HomePage(driver);
-	        hp.left_hand_navigation_bar_click();
-			
+	        
 			try {
 				hp.clickAction(Constants.HomePage.campaign_tracking_number_page);
 			} catch (InterruptedException e) {

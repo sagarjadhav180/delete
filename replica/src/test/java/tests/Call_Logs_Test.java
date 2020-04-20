@@ -25,7 +25,6 @@ public class Call_Logs_Test extends TestBase{
         lp.validLogin();
         
 		hp=new HomePage(driver);
-		hp.left_hand_navigation_bar_click();
 		hp.clickAction("Reports");
 		
 	}
