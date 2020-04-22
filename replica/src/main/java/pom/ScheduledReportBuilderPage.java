@@ -2,6 +2,7 @@ package pom;
 
 import java.util.List;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import tests.TestBase;
 import tests.Util;
 
@@ -74,7 +76,7 @@ public class ScheduledReportBuilderPage extends TestBase {
 	@FindBy(xpath="//span[contains(text(),'-- Disabled --')]")
 	private WebElement default_option_report_type;
 	
-	@FindBy(xpath="//div[@class='select2-container ng-pristine ng-untouched ng-valid']//b")
+	@FindBy(xpath="//label[text()='Secondary Grouping']//parent::div//following-sibling::div[1]//a")
 	private WebElement secondary_grouping_button;
 
 	@FindBy(xpath="//span[contains(text(),'None')]")
@@ -97,7 +99,7 @@ public class ScheduledReportBuilderPage extends TestBase {
 	@FindBy(xpath="//div[5]//div[3]//button[1][text()='OK']")
 	private WebElement date_range_calender_ok_button;		
 	
-	@FindBy(xpath="//div[5]//button[2][text()='Cancel']")
+	@FindBy(xpath="(//div[@class='daterangepicker dropdown-menu opensleft']//button[text()='Cancel'])")
 	private WebElement date_range_calender_cancel_button;			
 	
 	@FindBy(xpath="//button[@class='btn btn-default btn-block btn-adv'][text()='Advanced filter']")
@@ -342,12 +344,22 @@ public class ScheduledReportBuilderPage extends TestBase {
 		}
 		else if(reportType.equals("Group Activity")) {
 			logger.log(LogStatus.INFO, "Verifying if secondary grouping is enabled for report "+reportType);
-			softassert.assertFalse(secondary_grouping_disabled.isDisplayed(),"secondary grouping is disabled for report "+reportType);			
+			softassert.assertFalse(secondary_grouping_button.isDisplayed(),"secondary grouping is disabled for report "+reportType);			
 		}
 	}
 	
-	public void seconadryGroupingOptions(){
+	public void seconadryGroupingOptions() throws InterruptedException{
+
+		report_type_button.click();
+		for(int i=0;i<report_type_listbox.size();i++){
+			if(report_type_listbox.get(i).getText().equals(Constants.LegacyScheduledReport.secondary_grouping_for_group_activity)){
+				report_type_listbox.get(i).click();
+				break;
+			}
+		}
 		
+		Thread.sleep(2000);
+		secondary_grouping_button.click();
 		logger.log(LogStatus.INFO, "Verifying options pressent in secondary grouping options");
 		
 		for(int i=0;i<secondary_grouping_listbox.size();i++){
@@ -363,12 +375,15 @@ public class ScheduledReportBuilderPage extends TestBase {
 			}
 			
 		}
-		
-		softassert.assertAll();
+		softassert.assertAll();	
+		//escape click
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
+        Thread.sleep(2000);
 	}
 	
 	public void dateRangeFilterUI() throws InterruptedException{
 		
+	  date_range_calender_button.click();	
       logger.log(LogStatus.INFO, "verifying if daterange filter elements are present");
 		
 		for(int i=0;i<date_range_calender_options.size();i++){
@@ -383,13 +398,24 @@ public class ScheduledReportBuilderPage extends TestBase {
 			}
 		}
 
-
-		Util.click(date_range_calender_cancel_button);
+		Util.scrollFunction(date_range_calender_button);
+//		date_range_calender_cancel_button.click();
+		Util.Action().moveToElement(date_range_calender_cancel_button).click().perform();
 		Thread.sleep(2000);
-		
+		softassert.assertAll();
 	}
 	
-	public void advanceFilterUI(){
+	public void advanceFilterUI() throws InterruptedException{
+		
+		report_type_button.click();
+		for(int i=0;i<report_type_listbox.size();i++){
+			if(report_type_listbox.get(i).getText().equals(Constants.LegacyScheduledReport.secondary_grouping_for_group_activity)){
+				report_type_listbox.get(i).click();
+				break;
+			}
+		}
+		
+		Thread.sleep(2000);
 		
         Util.click(advanced_filter_button);
 		
@@ -426,7 +452,18 @@ public class ScheduledReportBuilderPage extends TestBase {
 		softassert.assertAll();
 	}
 
-	public void advanceFilterOptions(String reportType){
+	public void advanceFilterOptions(String reportType) throws InterruptedException{
+		
+        report_type_button.click();
+		
+		for(int i=0;i<report_type_listbox.size();i++){
+			if(report_type_listbox.get(i).getText().equals(reportType)){
+				report_type_listbox.get(i).click();
+				break;
+			}
+		}
+		
+		Thread.sleep(2000);
 		
         Util.click(advanced_filter_button);
 		
@@ -466,7 +503,9 @@ public class ScheduledReportBuilderPage extends TestBase {
 	public void createSchedule(String reportType,String reportName) throws InterruptedException{
 		
 		wait.until(ExpectedConditions.attributeContains(scheduled_report_name_textbox, "tabindex", "0"));
+		scheduled_report_name_textbox.clear();
 		scheduled_report_name_textbox.sendKeys(reportName);
+		description_textbox.clear();
 		description_textbox.sendKeys("test");
 		
 		report_type_button.click();
@@ -485,7 +524,7 @@ public class ScheduledReportBuilderPage extends TestBase {
 		driver.switchTo().activeElement();
 		Util.click(scheduled_report_save_success_message_pause_button);
 		Util.click(scheduled_report_save_success_message_close_button);
-		Util.click(list_button);
+//		Util.click(list_button);
 		Thread.sleep(2000);
         
 	}

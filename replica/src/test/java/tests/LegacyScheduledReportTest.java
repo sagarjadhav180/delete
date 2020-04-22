@@ -86,12 +86,18 @@ public class LegacyScheduledReportTest extends TestBase {
 	@Test(priority=6)
 	public void tableCountVerification(){
 		
-		
+		logger=extent.startTest("Table count Verification Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		ls=LegacyScheduledReportsPage.intanceLegacySchedule();
+		ls.tableCount();
 	}
 	
 	@Test(priority=7)
 	public void paginationCountVerification(){
-		
+		logger=extent.startTest("PAgination count Verification Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		ls=LegacyScheduledReportsPage.intanceLegacySchedule();
+		ls.paginationCount();
 		
 	}
 	
@@ -174,8 +180,99 @@ public class LegacyScheduledReportTest extends TestBase {
 		
 	}
 	
+	@Test(priority=16,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void secondaryGroupingOptions() throws InterruptedException{
+		
+		logger=extent.startTest("Secondary Grouping Options Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.seconadryGroupingOptions();
+		
+	}
+	
+	@Test(priority=17,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void dateRangeFilterUI() throws InterruptedException{
+		
+		logger=extent.startTest("Date Range Filter Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.dateRangeFilterUI();
+		
+	}
+	
+	@Test(priority=18,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void advanceFilterUI() throws InterruptedException{
+		
+		logger=extent.startTest("Advance Filter Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.advanceFilterUI();
+		
+	}
+	
+	@Test(priority=19,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void advanceFilterElementsForCallDetailsReport() throws InterruptedException{
+		
+		logger=extent.startTest("Advance Filter Elements For Call Details Report Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.advanceFilterOptions(Constants.LegacyScheduledReport.secondary_grouping_for_call_details);
+		
+	}
+	
+	@Test(priority=20,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void advanceFilterElementsForTrackingNumberSettingsReport() throws InterruptedException{
+		
+		logger=extent.startTest("Advance Filter Elements For Tracking Number Settings Report Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.advanceFilterOptions(Constants.LegacyScheduledReport.secondary_grouping_for_tracking_number_settings);
+		
+	}
+	
+	@Test(priority=21,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void advanceFilterElementsForGroupActivityReport() throws InterruptedException{
+		
+		logger=extent.startTest("Advance Filter Elements For Group Activity Report Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.advanceFilterOptions(Constants.LegacyScheduledReport.secondary_grouping_for_group_activity);
+		
+	}
+	
+	@Test(priority=22,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void scheduledReportForCallDetails() throws InterruptedException{
+		
+		logger=extent.startTest("Scheduled Report Creation For Call Details Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.createSchedule(Constants.LegacyScheduledReport.secondary_grouping_for_call_details, "automation_schedule"+String.valueOf(Util.generateRandomNumber()));
+		
+	}
+	
+	@Test(priority=23,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void scheduledReportForTrackingNumberSettingsReport() throws InterruptedException{
+		
+		logger=extent.startTest("Scheduled Report Creation For Tracking Number Settings Report Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.createSchedule(Constants.LegacyScheduledReport.secondary_grouping_for_tracking_number_settings, "automation_schedule"+String.valueOf(Util.generateRandomNumber()));
+		
+	}
+	
+	@Test(priority=24,dependsOnMethods="navigateToScheduledReportBuilderPage")
+	public void scheduledReportForGroupActivityReport() throws InterruptedException{
+		
+		logger=extent.startTest("Scheduled Report Creation For Group Activity Report Test");
+		logger.assignCategory(Constants.legacy_scheduled_report_category);
+		sb=ScheduledReportBuilderPage.intanceScheduleBuilder();
+		sb.createSchedule(Constants.LegacyScheduledReport.secondary_grouping_for_group_activity, "automation_schedule"+String.valueOf(Util.generateRandomNumber()));
+		
+	}
+	
 	@AfterClass
 	public void logOut(){
+		Util.readingFromDB("DELETE FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'AND report_name LIKE 'automation%'");
 		LoginPage lp=new LoginPage(driver);
 		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");

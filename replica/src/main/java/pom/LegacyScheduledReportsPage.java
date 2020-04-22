@@ -71,7 +71,7 @@ public class LegacyScheduledReportsPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Your report is being processed.']")
 	private static WebElement send_now_confirmation_message;	
 	
-	String db_count=Util.readingFromDB("");
+
 	SoftAssert softassert=new SoftAssert();
 	
 	
@@ -112,6 +112,7 @@ public class LegacyScheduledReportsPage extends TestBase {
 		}
 		
 		else if(button_name.contains("Add Scheduled Report")){
+			wait.until(ExpectedConditions.attributeContains(add_scheduled_report_button, "aria-disabled", "false"));
 			add_scheduled_report_button.click();
 		}
 		
@@ -140,13 +141,34 @@ public class LegacyScheduledReportsPage extends TestBase {
 	public void paginationCount(){
 		
 		if(table_count.size()>100){
+	    	String db_count = Util.readingFromDB("SELECT count(*) as count FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'");			
+			String ui_count = pagination_count.getText().substring(pagination_count.getText().indexOf('f')+2);
 			
+	    	System.out.println("table_count "+ui_count);
+	    	System.out.println("db count "+db_count);
+	    	logger.log(LogStatus.INFO, "Verifying if table count is matching with db count");
+	    	Assert.assertTrue(db_count.equals(String.valueOf(ui_count)),"Tabel count is not matching with db count");
 		}
 	}
 	
     public void tableCount(){
-		
-	}
+
+    	int final_count=table_count.size()+0;
+
+    	if(!(next_button.getAttribute("class").endsWith("disabled"))){
+    		next_button.click();
+			final_count=final_count+table_count.size();
+			
+    	}	
+    	
+    	String db_count = Util.readingFromDB("SELECT count(*) as count FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'");
+    	
+    	System.out.println("table_count "+final_count);
+    	System.out.println("db count "+db_count);
+    	logger.log(LogStatus.INFO, "Verifying if table count is matching with db count");
+    	Assert.assertTrue(db_count.equals(String.valueOf(final_count)),"Tabel count is not matching with db count");
+	
+    }
 	
     public void headerLabel(){
     	
