@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Constants {
 
+	public static final String call_logs_category="Call Logs Suite";
 	public static final String webhook_category="WebHook Suite";
 	public static final String tracking_number_category="Tracking Number Suite";	
 	public static final String campaign_category="Campaign Suite";	
