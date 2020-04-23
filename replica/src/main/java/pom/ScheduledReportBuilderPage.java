@@ -239,6 +239,14 @@ public class ScheduledReportBuilderPage extends TestBase {
 		}
 	}
 	
+	public void clickAction(String buttonName) throws InterruptedException{
+		
+		if(buttonName.contains("list")){
+			wait.until(ExpectedConditions.visibilityOf(list_button));
+			Util.click(list_button);
+			Thread.sleep(4000);
+		}
+	}
 	
 	public void scheduledReportBuilderPageLabel(){
 		
@@ -519,6 +527,17 @@ public class ScheduledReportBuilderPage extends TestBase {
 		
 		scheduled_report_save_button.click();
 		logger.log(LogStatus.INFO, "Verifying if scheduled report is created");
+		
+		if(reportName.startsWith("updated")){
+			wait.until(ExpectedConditions.visibilityOf(scheduled_report_update_success_message));
+			Assert.assertTrue(scheduled_report_update_success_message.isDisplayed(),"report not updated successfully");
+			driver.switchTo().activeElement();
+			Util.click(scheduled_report_save_success_message_pause_button);
+			Util.click(scheduled_report_save_success_message_close_button);
+//			Util.click(list_button);
+			Thread.sleep(2000);
+		}
+		
 		wait.until(ExpectedConditions.visibilityOf(scheduled_report_save_success_message));
 		Assert.assertTrue(scheduled_report_save_success_message.isDisplayed(),"report not created successfully");
 		driver.switchTo().activeElement();
@@ -620,6 +639,8 @@ public class ScheduledReportBuilderPage extends TestBase {
 			}
 		}
 		
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
+		
 		logger.log(LogStatus.INFO, "Verifying if save button for new distribution list is displayed");
 		softassert.assertTrue(save_new_distribution_list_button.isDisplayed(),"save button for new distribution list is not displayed");
 		
@@ -632,10 +653,12 @@ public class ScheduledReportBuilderPage extends TestBase {
 	
 	
 	
-	public void createScheduledDistribution(String reportName,String reportType){
+	public void createScheduledDistribution(String reportName,String reportType) throws InterruptedException{
 		
 		wait.until(ExpectedConditions.attributeContains(scheduled_report_name_textbox, "tabindex", "0"));
+		scheduled_report_name_textbox.clear();
 		scheduled_report_name_textbox.sendKeys(reportName);
+		description_textbox.clear();
 		description_textbox.sendKeys("test");
 		
 		report_type_button.click();
@@ -649,12 +672,18 @@ public class ScheduledReportBuilderPage extends TestBase {
 		
 		scheduled_report_save_button.click();
 		
+		wait.until(ExpectedConditions.visibilityOf(scheduled_report_save_success_message));
+		driver.switchTo().activeElement();
+		Util.click(scheduled_report_save_success_message_pause_button);
+		Util.click(scheduled_report_save_success_message_close_button);
+//		Util.click(list_button);
+		Thread.sleep(2000);
+		
 		wait.until(ExpectedConditions.attributeContains(add_new_scheduled_distribution_button, "tabindex", "0"));
 		add_new_scheduled_distribution_button.click();
 		
 		from_textbox.sendKeys("test_automation@moentek.com");
 		create_new_distribution_list_button.click();
-		
 		distribution_list_name_textbox.sendKeys("test_automation");
 		emails_textbox.sendKeys("sagar.j@moentek.com");
 		create_new_distribution_list_save_select_button.click();
@@ -662,20 +691,44 @@ public class ScheduledReportBuilderPage extends TestBase {
 		Select select=new Select(frequency_listbox);
 		
 		select.selectByIndex(1);
-	
 		message_textbox.sendKeys("test");
 		attachment_listbox_button.click();
 		
-		attachment_listbox.get(1).click();
+		attachment_listbox.get(0).click();
 		save_new_distribution_list_button.click();
 		
 		wait.until(ExpectedConditions.visibilityOf(new_scheduled_report_save_success_message));
 		logger.log(LogStatus.INFO, "Verifying if new scheduled report is created");
 		Assert.assertTrue(new_scheduled_report_save_success_message.isDisplayed(),"new scheduled report not created");
+		driver.switchTo().activeElement();
+		Util.click(scheduled_report_save_success_message_pause_button);
+		Util.click(scheduled_report_save_success_message_close_button);
 		
 	}
 	
 	
-	
-	
+    public void updateScheduledDistribution(String reportName,String reportType) throws InterruptedException{
+		
+		wait.until(ExpectedConditions.attributeContains(scheduled_report_name_textbox, "tabindex", "0"));
+		scheduled_report_name_textbox.clear();
+		scheduled_report_name_textbox.sendKeys(reportName);
+		description_textbox.clear();
+		description_textbox.sendKeys("test");
+		
+		report_type_button.click();
+		
+		for(int i=0;i<report_type_listbox.size();i++){
+			if(report_type_listbox.get(i).getText().equals(reportType)){
+				report_type_listbox.get(i).click();
+				break;
+			}
+		}
+		
+		scheduled_report_save_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(scheduled_report_update_success_message));
+		driver.switchTo().activeElement();
+		Util.click(scheduled_report_save_success_message_pause_button);
+		Util.click(scheduled_report_save_success_message_close_button);
+      }
 }

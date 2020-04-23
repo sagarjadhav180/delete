@@ -97,19 +97,22 @@ public class LegacyScheduledReportsPage extends TestBase {
     public void clickAction(String schedule_name,String button_name) throws InterruptedException{
 		
     	if(schedule_name!=""){
+    		
     		WebElement webelement = driver.findElement(By.xpath("//table[@id='scheduledreportstable']//tbody//tr//td[text()='"+schedule_name+"']//parent::tr//child::button[contains(text(),'"+button_name+"')]"));
+    		System.out.println(webelement);
     		webelement.click();	
+    		
+    		if(button_name.contains("Delete")){
+    			driver.switchTo().activeElement();
+    			Util.click(ok_button_scheduled_report_deletion_message);
+    		}
+    		else if(button_name.contains("Send Now")){
+    			wait.until(ExpectedConditions.visibilityOf(send_now_confirmation_message));
+    			logger.log(LogStatus.INFO, "Verifying if mail is sent");
+    			Assert.assertTrue(send_now_confirmation_message.isDisplayed(),"mail is not sent");
+    		}
     	}
 		
-		if(button_name.contains("Delete")){
-			driver.switchTo().activeElement();
-			Util.click(ok_button_scheduled_report_deletion_message);
-		}
-		else if(button_name.contains("Send Now")){
-			wait.until(ExpectedConditions.visibilityOf(send_now_confirmation_message));
-			logger.log(LogStatus.INFO, "Verifying if mail is sent");
-			Assert.assertTrue(send_now_confirmation_message.isDisplayed(),"mail is not sent");
-		}
 		
 		else if(button_name.contains("Add Scheduled Report")){
 			wait.until(ExpectedConditions.attributeContains(add_scheduled_report_button, "aria-disabled", "false"));
