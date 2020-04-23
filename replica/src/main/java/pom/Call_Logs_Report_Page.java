@@ -72,13 +72,125 @@ public class Call_Logs_Report_Page extends TestBase {
 	
 	SoftAssert softassert=new SoftAssert(); 
 
-	
-    
 	public Call_Logs_Report_Page(WebDriver driver){
 		PageFactory.initElements(driver, this);
 	}
 	
+	public void switchToIFrame(){
+		
+		driver.switchTo().frame(reports_iframe);
+		
+	}
+	
+	public void headerLabel(){
 
+		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
+		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
+		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
+				
+	}
+	
+	public void tilesVerification() throws InterruptedException{
+		
+		for(int i=0;i<tiles.size();){
+			for(int j=0;j<expceted_tile_names.length;j++){
+
+				if(tiles.get(i).getText().equals(expceted_tile_names[j])){
+					
+					wait.until(ExpectedConditions.visibilityOf(tiles.get(i)));
+					System.out.println("we -"+tiles.get(i).getText());
+					System.out.println("array -"+expceted_tile_names[j]);
+					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
+				
+			    softassert.assertEquals(tiles.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+				}
+			}
+			i++;
+		}
+		
+	}
+	
+	public void totalCallsGraph(){
+		
+		Util.scrollFunction(total_calls_graph);
+		logger.log(LogStatus.INFO, "verifying if total calls graph is present");
+		softassert.assertTrue(total_calls_graph.isDisplayed(),"total calls graph is not displayed or locator has been chamged..");
+
+	}
+	
+	public void uniqueCallsGraph(){
+		
+		logger.log(LogStatus.INFO, "verifying if unique calls graph is present");
+		softassert.assertTrue(unique_calls_graph.isDisplayed(),"unique calls graph is not displayed or locator has been chamged..");
+
+	}
+	
+	public void columnsVerification(){
+		
+		for(int i=0;i<table_column_labels.size();){
+			for(int j=0;j<expeted_table_column_labels.length;j++){
+				if(table_column_labels.get(i).getText().equals(expeted_table_column_labels[j])){
+					wait.until(ExpectedConditions.visibilityOf(table_column_labels.get(i)));
+					System.out.println("we-"+table_column_labels.get(i).getText());
+					System.out.println("array-"+expeted_table_column_labels[j]);
+            	logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[j]+" column is present");
+			    softassert.assertEquals(table_column_labels.get(i).getText(), expeted_table_column_labels[j],expeted_table_column_labels[j]+" is not present");				
+				}
+			}
+			i++;
+
+		}
+
+		
+	}
+	
+	public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+	
+	    
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
+
+	public void filterElements(){
+    
+	Util.click(filter_button);
+    
+    for(int k=0;k<filter_elements_after_expanding.size();){
+    	for(int j=0;j<expected_filter_elements.length;j++){
+
+    		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
+	    			    			    		
+    		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+    		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+    		System.out.println("array-"+expected_filter_elements[j]);		
+    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
+    	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
+    		}
+    		}
+    	k++;
+    }
+	System.out.println("-------------------------------------------------------------------------------");
+    
+//	//collapsing filter section
+	Util.click(filter_button);
+
+		
+	}
+	
+	public void footerNote(){
+	
+	Util.scrollFunction(footer_note);
+	
+    wait.until(ExpectedConditions.visibilityOf(footer_note));
+	logger.log(LogStatus.INFO, "verifying if footer note is present");
+    softassert.assertTrue(footer_note.isDisplayed(), "footer note is not present");
+		
+	}
+	
 	
 	public void uiVerification() throws InterruptedException{
 		
@@ -86,8 +198,6 @@ public class Call_Logs_Report_Page extends TestBase {
 		
 
 		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
-
-		
 		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
 		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
 

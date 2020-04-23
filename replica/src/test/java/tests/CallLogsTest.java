@@ -8,11 +8,12 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import pom.Call_Logs_Report_Page;
 import pom.HomePage;
 import pom.LoginPage;
 
-public class Call_Logs_Test extends TestBase{
+public class CallLogsTest extends TestBase{
 
 	HomePage hp;
 	Call_Logs_Report_Page clr;
@@ -26,17 +27,74 @@ public class Call_Logs_Test extends TestBase{
         
 		hp=new HomePage(driver);
 		hp.clickAction("Reports");
-		
+		clr=new Call_Logs_Report_Page(driver);
+		clr.switchToIFrame();
 	}
 	
 	
 	@Test(priority=1)
-	public void UI_Verification() throws IOException, InterruptedException{
-		logger=extent.startTest("Call logs UI_Verification"); 
-		logger.assignCategory("Call logs Suite");
-        logger.log(LogStatus.INFO, "verifying UI of call logs report. ");
-		clr=new Call_Logs_Report_Page(driver);
-		clr.uiVerification();
+	public void headerLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Call logs header Label Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+		clr.headerLabel();
+	}
+	
+	@Test(priority=2)
+	public void tilesVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Tiles Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+        clr.tilesVerification();
+	}
+	
+	@Test(priority=3)
+	public void presenceOfTotalCallsGraph() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Total Calls Graph Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        
+        clr=new Call_Logs_Report_Page(driver);
+        clr.totalCallsGraph();
+	}
+	
+	@Test(priority=4)
+	public void presenceOfUniqueCallsGraph() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Unique Calls Graph Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+        clr.totalCallsGraph();
+	}
+	
+	@Test(priority=5)
+	public void tableColumnsTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Table Columns Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+        clr.columnsVerification();
+	}
+	
+	@Test(priority=6)
+	public void filterButtonTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+        clr.filterButton();
+	}
+	
+	@Test(priority=7)
+	public void filterButtonElementsTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Elements Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+        clr.filterElements();
+	}
+	
+	@Test(priority=8)
+	public void footerNoteTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Footer Note Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new Call_Logs_Report_Page(driver);
+        clr.footerNote();
 	}
 	
 	@AfterClass
