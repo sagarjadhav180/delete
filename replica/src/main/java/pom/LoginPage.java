@@ -59,7 +59,7 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private static WebElement pendo_popup_close_button;
 	
-	@FindBy(xpath="//a[@class='dropdown-toggle username bootstro']//img")
+	@FindBy(xpath="//a[@class='dropdown-toggle username bootstro']//span[@class='hidden-xs ng-binding']")
 	private static WebElement profileButton;
 
 	@FindBy(xpath="//a[@class='text-right ng-scope']")
