@@ -20,7 +20,7 @@ import extentReport.ExtentReportsGenerator;
 import tests.TestBase;
 import tests.Util;
 
-public class Call_Logs_Report_Page extends TestBase {
+public class CallLogsReportPage extends TestBase {
 	
 
 	@FindBy(xpath="//div[@class='ag-body-horizontal-scroll-viewport']")
@@ -32,8 +32,22 @@ public class Call_Logs_Report_Page extends TestBase {
 	@FindBy(xpath="(//span[text()='Call Logs - Enhanced'])[1]")
 	private WebElement call_logs_enhanced_label;	
 
-	@FindBy(xpath="//div[@class='vis-single-value']//div[@class='looker-vis-context-title']/span")
-	private List<WebElement> tiles;	
+	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
+	private List<WebElement> tiles_names;	
+	
+	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
+	private WebElement run_button;
+
+	@FindBy(xpath="//div[@class='dropdown-toggle button-xs']/i")
+	private WebElement gear_icon;
+
+	@FindBy(xpath="//ul[@class='dropdown-menu dropdown-wide pull-right']//li//a")
+	private List<WebElement> gear_icon_options;
+	
+	String[] expected_gear_icon_options={"Download as PDF...","Download as CSVs","Send","Schedule","Move to Trash"};
+
+	@FindBy(xpath="//Select[starts-with(@class,'timezone-')]")
+	private WebElement timezone;
 	
 	@FindBy(xpath="(//div[@class='vis-container'])[8]")
 	private WebElement total_calls_graph;		
@@ -72,7 +86,7 @@ public class Call_Logs_Report_Page extends TestBase {
 	
 	SoftAssert softassert=new SoftAssert(); 
 
-	public Call_Logs_Report_Page(WebDriver driver){
+	public CallLogsReportPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -91,22 +105,30 @@ public class Call_Logs_Report_Page extends TestBase {
 	}
 	
 	public void tilesVerification() throws InterruptedException{
-		
-		for(int i=0;i<tiles.size();){
+
+		Thread.sleep(7000);
+		for(int i=0;i<tiles_names.size();){
 			for(int j=0;j<expceted_tile_names.length;j++){
 
-				if(tiles.get(i).getText().equals(expceted_tile_names[j])){
+				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
 					
-					wait.until(ExpectedConditions.visibilityOf(tiles.get(i)));
-					System.out.println("we -"+tiles.get(i).getText());
+					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
+					Thread.sleep(1000);
+					System.out.println("we -"+tiles_names.get(i).getText());
 					System.out.println("array -"+expceted_tile_names[j]);
 					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
 				
-			    softassert.assertEquals(tiles.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
 				}
 			}
 			i++;
 		}
+		
+	}
+	
+    public void tileValueVerificationForDefault7DaysFilter(String tile_name){
+		
+		WebElement tiles_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a"));
 		
 	}
 	
@@ -190,6 +212,7 @@ public class Call_Logs_Report_Page extends TestBase {
     softassert.assertTrue(footer_note.isDisplayed(), "footer note is not present");
 		
 	}
+
 	
 	
 	public void uiVerification() throws InterruptedException{
@@ -201,21 +224,21 @@ public class Call_Logs_Report_Page extends TestBase {
 		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
 		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
 
-		System.out.println("----------------------------------------tiles---------------------------------------");
+		System.out.println("----------------------------------------tiles_names---------------------------------------");
 		
 		try{
 			Thread.sleep(3000);
-		for(int i=0;i<tiles.size();){
+		for(int i=0;i<tiles_names.size();){
 			for(int j=0;j<expceted_tile_names.length;j++){
 
-				if(tiles.get(i).getText().equals(expceted_tile_names[j])){
+				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
 					
-					wait.until(ExpectedConditions.visibilityOf(tiles.get(i)));
-					System.out.println("we -"+tiles.get(i).getText());
+					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
+					System.out.println("we -"+tiles_names.get(i).getText());
 					System.out.println("array -"+expceted_tile_names[j]);
 					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
 				
-			    softassert.assertEquals(tiles.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
 				}
 			}
 			i++;
@@ -225,17 +248,17 @@ public class Call_Logs_Report_Page extends TestBase {
 			Thread.sleep(7000);
 			}
 		finally{
-			for(int i=0;i<tiles.size();){
+			for(int i=0;i<tiles_names.size();){
 				for(int j=0;j<expceted_tile_names.length;j++){
 
-					if(tiles.get(i).getText().equals(expceted_tile_names[j])){
+					if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
 						
-						wait.until(ExpectedConditions.visibilityOf(tiles.get(i)));
-						System.out.println("we -"+tiles.get(i).getText());
+						wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
+						System.out.println("we -"+tiles_names.get(i).getText());
 						System.out.println("array -"+expceted_tile_names[j]);
 						logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
 					
-				    softassert.assertEquals(tiles.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+				    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
 					}
 				}
 				i++;
