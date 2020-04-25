@@ -32,6 +32,31 @@ WHERE org_unit_id='70045' AND webhook_name LIKE 'automation_webhook_do_not_delet
 //user
 SELECT * FROM ct_user 
 WHERE username LIKE 'newac@yopmail.com'
+----------------------------------------------------------------------------------------
+---------------------------legacy scheduled report-----------------------------------------------------------------------------------
+SELECT * FROM schedule LIMIT 10
 
---------------------------------------------------------------------------------------------------------------
+SELECT * FROM report_sched WHERE org_unit_id='70045'AND report_name LIKE 'automation%'
 
+DELETE FROM report_sched WHERE org_unit_id='70045'AND report_name LIKE 'automation%'
+
+---------------------------------------------------------------------------------------
+
+------------------------------call logs-------------------------------------------------------------------
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND repeat_call='false'
+
+
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND disposition IN ('ANSWERED')
+
+
+SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='51'
+
+SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='18'
+-------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
