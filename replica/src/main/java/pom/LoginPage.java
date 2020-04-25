@@ -53,7 +53,7 @@ public class LoginPage extends TestBase {
 //	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'"+TestBase.getFirst_last_name()+"')]")
 //	private static WebElement userprofile_link;
 
-	@FindBy(xpath="//a[@class='navbar-brand']")
+	@FindBy(xpath="//div[@class='navbar-header pull-left']")
 	private static WebElement logged_in_logo;
 	
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
@@ -374,9 +374,19 @@ Properties prop=new Properties();
 		
 	}
 	
-	public void logOut(){
-		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
-		Assert.assertTrue(logged_in_logo.isDisplayed());
+	public void logOut() {
+		try{
+			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+			Assert.assertTrue(logged_in_logo.isDisplayed());	
+		}
+		catch(Exception e){
+			driver.navigate().refresh();
+		}
+		finally{
+			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+			Assert.assertTrue(logged_in_logo.isDisplayed());
+		}
+		
 		profileButton.click();
 		Util.click(logoutLink);
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
