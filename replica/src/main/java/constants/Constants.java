@@ -136,7 +136,17 @@ public class Constants {
     	
 	}
     
-    
+    public static class CallLogsReport{
+
+    	public static final String total_calls_tile="Total Calls";
+    	public static final String unique_calls_tile="Unique Calls";
+    	public static final String answered_calls_tile="Answered Calls";
+    	public static final String average_calls_duration_tile="Average Call Duration";
+    	public static final String leads_tile="Total Leads";
+    	public static final String conversion_tile="Total Conversion";
+   
+    	
+    }
     
 	
 }
