@@ -128,8 +128,113 @@ public class CallLogsReportPage extends TestBase {
 	
     public void tileValueVerificationForDefault7DaysFilter(String tile_name){
 		
-		WebElement tiles_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a"));
+    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+
+		String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+		String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
+		String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+		String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");		
 		
+		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
+	
+		if(tile_name.equals("Total Calls")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_call_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_call_count_from_db);
+				softassert.assertTrue(tile_values.equals(total_call_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Unique Calls")){
+			
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(unique_calls_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(unique_calls_count_from_db);
+				softassert.assertTrue(tile_values.equals(unique_calls_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Total Leads")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_leads_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_leads_from_db);
+				softassert.assertTrue(tile_values.equals(total_leads_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Total Conversion")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_conversion_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_conversion_from_db);
+				softassert.assertTrue(tile_values.equals(total_conversion_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}	
+		else if(tile_name.equals("Answered Calls")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(answered_calls_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(answered_calls_count_from_db);
+				softassert.assertTrue(tile_values.equals(answered_calls_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_values.equals("Average Call Duration")){
+			int sec = 0;
+			int min = Integer.valueOf(tile_values.substring(0,tile_values.indexOf('m')-1));
+	        if(min<=9){
+	        	sec = Integer.valueOf(tile_values.substring(6,8));    	
+	        }
+	        else{
+	        	sec = Integer.valueOf(tile_values.substring(7,9));    	        	
+	        }
+	        min=min*60;
+			int final_count=sec+min;
+			tile_values=String.valueOf(final_count);
+			System.out.println(tile_values);
+
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(avg_call_duration_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(avg_call_duration_from_db);
+				softassert.assertTrue(tile_values.equals(avg_call_duration_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		
+		
+
+		softassert.assertAll();
 	}
 	
 	public void totalCallsGraph(){
