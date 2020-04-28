@@ -120,7 +120,7 @@ public class CallLogsTest extends TestBase{
 		logger=extent.startTest("Table Columns Test"); 
 		logger.assignCategory(Constants.call_logs_category);
         clr=new CallLogsReportPage(driver);
-        clr.columnsVerification();
+        clr.allColumnVerification();
 	}
 	
 	@Test(priority=12)

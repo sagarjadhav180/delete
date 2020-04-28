@@ -20,6 +20,7 @@ import extentReport.ExtentReportsGenerator;
 import tests.TestBase;
 import tests.Util;
 
+@SuppressWarnings("unused")
 public class CallLogsReportPage extends TestBase {
 	
 
@@ -63,7 +64,7 @@ public class CallLogsReportPage extends TestBase {
 //	@FindBy(xpath="//*[@id='dashboard']/div/div[2]/div/div/div/div/div[2]/div[10]/div/lk-vis-element/div/div/div[2]/div/div/div/lk-visualization-container/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div/div//div")
 //	private List<WebElement> table_column_labels;	
 	
-	String[] expeted_table_column_labels={"Hunt Type","Ad Source","Tracking Number Type","Campaign","Tracking Number Name","Tracking Number","Ring-to Name","Ring to Phone Number","Caller ID","Disposition","Tags","Comments","Identified Agent","Voicemail","Group","Play Call","Duration","Date/Time"};
+	String[] expeted_table_column_labels={"Actions","Play Call","Duration","Date/Time","Group","Campaign","Tracking Number Name","Tracking Number","Tracking Number Type","Hunt Type","Ad Source","Ring-to Name","Ring to Phone Number","Caller ID","Disposition","Voicemail","Identified Agent","Tags","Comments",};
 	
 	@FindBy(xpath="//div [@class='body-text text-muted']")
 	private WebElement footer_note;	
@@ -269,6 +270,33 @@ public class CallLogsReportPage extends TestBase {
 		}
 
 		
+	}
+	
+	public void allColumnVerification() throws InterruptedException{
+		
+		WebElement actionsColumn = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='Actions']"));
+		actionsColumn.click();
+//		Util.Action().sendKeys(Keys.TAB).perform();
+//		Util.Action().sendKeys(Keys.TAB).perform();
+		Thread.sleep(2000);
+		
+		for(int i=0;i<expeted_table_column_labels.length;i++){
+			
+							
+			Thread.sleep(1000);
+			WebElement column = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='"+expeted_table_column_labels[i]+"']"));	
+			System.out.println("actual column "+column.getText());
+			System.out.println("expected column "+expeted_table_column_labels[i]);
+			logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[i]+" column is present");
+            wait.until(ExpectedConditions.visibilityOf(column));
+			softassert.assertEquals(column.getText(), expeted_table_column_labels[i],expeted_table_column_labels[i]+" is not present");				
+			Util.Action().sendKeys(Keys.TAB).perform();	
+			if(expeted_table_column_labels[i].equals("Comments")){
+				break;
+			}
+		}
+		
+		softassert.assertAll();
 	}
 	
 	public void filterButton(){
