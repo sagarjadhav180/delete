@@ -1,8 +1,10 @@
 package pom;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -61,6 +63,9 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//div[@class='ag-header-row']//strong")
 	private List<WebElement> table_column_labels;	
 
+	@FindBy(xpath="(//i[@class='icon lk-icon-ellipsis fa fa-rotate-90'])[10]")
+	private WebElement table_data_download_icon;	
+	
 //	@FindBy(xpath="//*[@id='dashboard']/div/div[2]/div/div/div/div/div[2]/div[10]/div/lk-vis-element/div/div/div[2]/div/div/div/lk-visualization-container/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div/div//div")
 //	private List<WebElement> table_column_labels;	
 	
@@ -71,6 +76,9 @@ public class CallLogsReportPage extends TestBase {
 
 	
 	//Filter section
+	@FindBy(xpath="//div[@class='filters clearfix']")
+	private WebElement filter_section;		
+	
 	@FindBy(xpath="//strong[@class='filter-section-title']//i")
 	private WebElement filter_button;	
 	
@@ -276,13 +284,13 @@ public class CallLogsReportPage extends TestBase {
 		
 		WebElement actionsColumn = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='Actions']"));
 		actionsColumn.click();
-//		Util.Action().sendKeys(Keys.TAB).perform();
+
+		Util.Action().sendKeys(Keys.TAB).perform();
 //		Util.Action().sendKeys(Keys.TAB).perform();
 		Thread.sleep(2000);
 		
 		for(int i=0;i<expeted_table_column_labels.length;i++){
-			
-							
+									
 			Thread.sleep(1000);
 			WebElement column = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='"+expeted_table_column_labels[i]+"']"));	
 			System.out.println("actual column "+column.getText());
@@ -290,11 +298,18 @@ public class CallLogsReportPage extends TestBase {
 			logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[i]+" column is present");
             wait.until(ExpectedConditions.visibilityOf(column));
 			softassert.assertEquals(column.getText(), expeted_table_column_labels[i],expeted_table_column_labels[i]+" is not present");				
-			Util.Action().sendKeys(Keys.TAB).perform();	
+			if(i<expeted_table_column_labels.length-2){
+				Util.Action().sendKeys(Keys.TAB).perform();	
+					
+			}
+			
 			if(expeted_table_column_labels[i].equals("Comments")){
 				break;
 			}
 		}
+		
+		
+		
 		
 		softassert.assertAll();
 	}
@@ -346,140 +361,222 @@ public class CallLogsReportPage extends TestBase {
 		
 	}
 
+	String call_id;
+	public void callDataInsertion(){
+		
+		//getting provisioned_route_id from campign
+		String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM campaign_provisioned_route WHERE campaign_id='"+TestBase.getCampaign_id()+"' LIMIT 1");
+		
+		//inserting data in call table
+		Util.readingFromDB("INSERT INTO call(provisioned_route_id,org_unit_id,disposition,duration,source,tracking,ring_to,repeat_call,call_started,location_route_id) VALUES('"+provisioned_route_id+"','"+TestBase.getOrg_unit_id()+"','ANSWERED','30','3852502145','1111111111','8018786943','false','"+Util.getDate("yyyy-MM-dd", "-2")+" 23:00','-1')");
+		this.call_id=Util.readingFromDB("SELECT call_id as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+Util.getDate("yyyy-MM-dd", "-7")+" 23:59' AND '"+Util.getDate("yyyy-MM-dd", "0")+" 23:59' AND tracking='1111111111'");
+		
+		System.out.println("call_id "+call_id);
+		//inserting data in call_detail
+		Util.readingFromDB("INSERT INTO call_detail(call_id,bill_second,call_value,is_outbound,call_mine_status,cdr_source,call_ended,call_created,ring_to_name,channel_id,spam_call_checked,hunt_type,tracking_type,is_voicemail,is_dni_call,is_voicemail_checked,usage_component_id,is_premium,usage_type)VALUES ('"+call_id+"','60','32','false','not mined','SP','"+Util.getDate("yyyy-MM-dd", "-2")+" 23:02','"+Util.getDate("yyyy-MM-dd", "-2")+" 23:00','test','2','false','rollover','SimpleRoute','true','false','true','21','false','LOCAL')");
+		
+	}
 	
+	public void deleteCallRecord(){
 	
-	public void uiVerification() throws InterruptedException{
+		call_id=Util.readingFromDB("SELECT call_id as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.org_unit_id+"')  AND tracking='1111111111'");
 		
-		driver.switchTo().frame(reports_iframe);
+		Util.readingFromDB("DELETE FROM call WHERE call_id='"+call_id+"'");
+		Util.readingFromDB("DELETE FROM call_detail WHERE call_id='"+call_id+"'");
+	}
+	
+	public void filterFeature(String filterName,String filterValue) throws InterruptedException{
 		
-
-		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
-		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
-		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
-
-		System.out.println("----------------------------------------tiles_names---------------------------------------");
+		filter_button.click();
 		
-		try{
-			Thread.sleep(3000);
-		for(int i=0;i<tiles_names.size();){
-			for(int j=0;j<expceted_tile_names.length;j++){
-
-				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
-					
-					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
-					System.out.println("we -"+tiles_names.get(i).getText());
-					System.out.println("array -"+expceted_tile_names[j]);
-					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
-				
-			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
-				}
-			}
-			i++;
-		}}
-		catch(Exception e){
-			driver.navigate().refresh();
-			Thread.sleep(7000);
-			}
-		finally{
-			for(int i=0;i<tiles_names.size();){
-				for(int j=0;j<expceted_tile_names.length;j++){
-
-					if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
-						
-						wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
-						System.out.println("we -"+tiles_names.get(i).getText());
-						System.out.println("array -"+expceted_tile_names[j]);
-						logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
-					
-				    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
-					}
-				}
-				i++;
+		String xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name'][text()='"+filterName+"']";
+		
+		WebElement filter_textbox = driver.findElement(By.xpath(""+xpath+"//parent::tr//select//following-sibling::span"));
+	
+		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+        Util.Action().moveToElement(filter_textbox).perform();
+        Util.Action().click().perform();
+	    Util.Action().sendKeys(Keys.CLEAR).perform();
+		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+	
+//		filter_textbox.sendKeys(filterValue);
+//		Thread.sleep(5000);
+//		filter_button.click();
+		
+		run_button.click();
+		filter_button.click();
+		Thread.sleep(5000);
+		
+		int index=0;
+		
+		for(int i=0;i<table_column_labels.size();i++){
+			if(table_column_labels.get(i).getText().equals(filterName)){
+				index=i+1;
+//				if(index>7){
+//					table_column_labels.get(0).click();
+//					do{
+//						Util.Action().sendKeys(Keys.TAB).perform();
+//						Thread.sleep(1000);
+//					}
+//					while(table_column_labels.get(i).isDisplayed());
+//				}
 			}
 		}
 		
-		Util.scrollFunction(total_calls_graph);
-		logger.log(LogStatus.INFO, "verifying if total calls graph is present");
-		softassert.assertTrue(total_calls_graph.isDisplayed(),"total calls graph is not displayed or locator has been chamged..");
-
-		logger.log(LogStatus.INFO, "verifying if unique calls graph is present");
-		softassert.assertTrue(unique_calls_graph.isDisplayed(),"unique calls graph is not displayed or locator has been chamged..");
+		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
 		
-		System.out.println("-------------------------------table-columns------------------------------------------------");
-
-		
-//		Util.scrollFunction(call_logs_scroll);
-
-		for(int i=0;i<table_column_labels.size();){
-			for(int j=0;j<expeted_table_column_labels.length;j++){
-				if(table_column_labels.get(i).getText().equals(expeted_table_column_labels[j])){
-					wait.until(ExpectedConditions.visibilityOf(table_column_labels.get(i)));
-					System.out.println("we-"+table_column_labels.get(i).getText());
-					System.out.println("array-"+expeted_table_column_labels[j]);
-            	logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[j]+" column is present");
-			    softassert.assertEquals(table_column_labels.get(i).getText(), expeted_table_column_labels[j],expeted_table_column_labels[j]+" is not present");				
-				}
-			}
-			i++;
-
+		for(int j=0;j<filtered_values.size();j++){
+			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
+			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
 		}
-		Util.getJavascriptExecutor().executeScript("window.scrollBy(500,0)","");
-
-
 		
 		
-	    wait.until(ExpectedConditions.visibilityOf(filter_button));
-	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
-	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+		softassert.assertAll();
+
+        filter_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+        Util.Action().moveToElement(filter_textbox).perform();
+        Util.Action().click().perform();
+	    Util.Action().sendKeys(filterValue).perform();
+		Util.Action().sendKeys(Keys.ESCAPE).perform();	
 	
-	    
-	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
-	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+		filter_button.click();
+
+	}
 	
-//	    for(int i=0;i<filter_elements_before_expanding.size();){
+//	public void uiVerification() throws InterruptedException{
+//		
+//		driver.switchTo().frame(reports_iframe);
+//		
+//
+//		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
+//		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
+//		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
+//
+//		System.out.println("----------------------------------------tiles_names---------------------------------------");
+//		
+//		try{
+//			Thread.sleep(3000);
+//		for(int i=0;i<tiles_names.size();){
+//			for(int j=0;j<expceted_tile_names.length;j++){
+//
+//				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
+//					
+//					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
+//					System.out.println("we -"+tiles_names.get(i).getText());
+//					System.out.println("array -"+expceted_tile_names[j]);
+//					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
+//				
+//			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+//				}
+//			}
+//			i++;
+//		}}
+//		catch(Exception e){
+//			driver.navigate().refresh();
+//			Thread.sleep(7000);
+//			}
+//		finally{
+//			for(int i=0;i<tiles_names.size();){
+//				for(int j=0;j<expceted_tile_names.length;j++){
+//
+//					if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
+//						
+//						wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
+//						System.out.println("we -"+tiles_names.get(i).getText());
+//						System.out.println("array -"+expceted_tile_names[j]);
+//						logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
+//					
+//				    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+//					}
+//				}
+//				i++;
+//			}
+//		}
+//		
+//		Util.scrollFunction(total_calls_graph);
+//		logger.log(LogStatus.INFO, "verifying if total calls graph is present");
+//		softassert.assertTrue(total_calls_graph.isDisplayed(),"total calls graph is not displayed or locator has been chamged..");
+//
+//		logger.log(LogStatus.INFO, "verifying if unique calls graph is present");
+//		softassert.assertTrue(unique_calls_graph.isDisplayed(),"unique calls graph is not displayed or locator has been chamged..");
+//		
+//		System.out.println("-------------------------------table-columns------------------------------------------------");
+//
+//		
+////		Util.scrollFunction(call_logs_scroll);
+//
+//		for(int i=0;i<table_column_labels.size();){
+//			for(int j=0;j<expeted_table_column_labels.length;j++){
+//				if(table_column_labels.get(i).getText().equals(expeted_table_column_labels[j])){
+//					wait.until(ExpectedConditions.visibilityOf(table_column_labels.get(i)));
+//					System.out.println("we-"+table_column_labels.get(i).getText());
+//					System.out.println("array-"+expeted_table_column_labels[j]);
+//            	logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[j]+" column is present");
+//			    softassert.assertEquals(table_column_labels.get(i).getText(), expeted_table_column_labels[j],expeted_table_column_labels[j]+" is not present");				
+//				}
+//			}
+//			i++;
+//
+//		}
+//		Util.getJavascriptExecutor().executeScript("window.scrollBy(500,0)","");
+//
+//
+//		
+//		
+//	    wait.until(ExpectedConditions.visibilityOf(filter_button));
+//	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+//	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+//	
+//	    
+//	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+//	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+//	
+////	    for(int i=0;i<filter_elements_before_expanding.size();){
+////	    	for(int j=0;j<expected_filter_elements.length;j++){
+////
+////	    		if(filter_elements_before_expanding.get(i).getText().equals(expected_filter_elements[j])){
+////		    		System.out.println("we - "+filter_elements_before_expanding.get(i).getText());
+////		    		System.out.println("array -"+expected_filter_elements[j]);
+////	    			wait.until(ExpectedConditions.visibilityOf(filter_elements_before_expanding.get(i)));
+////	    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" is present");
+////	    	    softassert.assertEquals(filter_elements_before_expanding.get(i).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
+////	    		}
+////	    		}
+////	    	i++;
+////	    }
+//		System.out.println("------------------------filter-element-after-expanding-------------------------------------------------------");	    
+//	    //expanding filter section
+//	    Util.click(filter_button);
+//	    
+//	    for(int k=0;k<filter_elements_after_expanding.size();){
 //	    	for(int j=0;j<expected_filter_elements.length;j++){
 //
-//	    		if(filter_elements_before_expanding.get(i).getText().equals(expected_filter_elements[j])){
-//		    		System.out.println("we - "+filter_elements_before_expanding.get(i).getText());
-//		    		System.out.println("array -"+expected_filter_elements[j]);
-//	    			wait.until(ExpectedConditions.visibilityOf(filter_elements_before_expanding.get(i)));
-//	    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" is present");
-//	    	    softassert.assertEquals(filter_elements_before_expanding.get(i).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
+//	    		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
+//		    			    			    		
+//	    		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+//	    		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+//	    		System.out.println("array-"+expected_filter_elements[j]);		
+//	    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
+//	    	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
 //	    		}
 //	    		}
-//	    	i++;
+//	    	k++;
 //	    }
-		System.out.println("------------------------filter-element-after-expanding-------------------------------------------------------");	    
-	    //expanding filter section
-	    Util.click(filter_button);
-	    
-	    for(int k=0;k<filter_elements_after_expanding.size();){
-	    	for(int j=0;j<expected_filter_elements.length;j++){
-
-	    		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
-		    			    			    		
-	    		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
-	    		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
-	    		System.out.println("array-"+expected_filter_elements[j]);		
-	    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
-	    	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
-	    		}
-	    		}
-	    	k++;
-	    }
-		System.out.println("-------------------------------------------------------------------------------");
-	    
-//		//collapsing filter section
-		Util.click(filter_button);
-
-		Util.scrollFunction(footer_note);
-		
-	    wait.until(ExpectedConditions.visibilityOf(footer_note));
-		logger.log(LogStatus.INFO, "verifying if footer note is present");
-	    softassert.assertTrue(footer_note.isDisplayed(), "footer note is not present");
-	    
-	    softassert.assertAll();
-	}
+//		System.out.println("-------------------------------------------------------------------------------");
+//	    
+////		//collapsing filter section
+//		Util.click(filter_button);
+//
+//		Util.scrollFunction(footer_note);
+//		
+//	    wait.until(ExpectedConditions.visibilityOf(footer_note));
+//		logger.log(LogStatus.INFO, "verifying if footer note is present");
+//	    softassert.assertTrue(footer_note.isDisplayed(), "footer note is not present");
+//	    
+//	    softassert.assertAll();
+//	}
 	
 	
 	

@@ -27,8 +27,11 @@ public class CallLogsTest extends TestBase{
         
 		hp=new HomePage(driver);
 		hp.clickAction("Reports");
+		Thread.sleep(7000);
 		clr=new CallLogsReportPage(driver);
 		clr.switchToIFrame();
+		clr.callDataInsertion();
+		Thread.sleep(100000);
 	}
 	
 	
@@ -140,6 +143,22 @@ public class CallLogsTest extends TestBase{
 	}
 	
 	@Test(priority=14)
+	public void filterFeatureForHuntTypeTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Hunt Type Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+        clr.filterFeature("Hunt Type", "Rollover");
+	}
+	
+	@Test(priority=15)
+	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Group Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+        clr.filterFeature("Group", TestBase.account);
+	}
+	
+	@Test(priority=15)
 	public void footerNoteTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Footer Note Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -149,7 +168,8 @@ public class CallLogsTest extends TestBase{
 	
 	@AfterClass
 	public void goBackToHomePage() throws InterruptedException{
-		
+		clr=new CallLogsReportPage(driver);
+        clr.deleteCallRecord();
         LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("LogOut"); 
         logger.log(LogStatus.INFO, "loggin out.. ");
