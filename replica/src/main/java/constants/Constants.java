@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tests.TestBase;
+
 public class Constants {
 
 	public static final String call_logs_category="Call Logs Suite";
@@ -144,6 +146,24 @@ public class Constants {
     	public static final String average_calls_duration_tile="Average Call Duration";
     	public static final String leads_tile="Total Leads";
     	public static final String conversion_tile="Total Conversion";
+    	
+    	//data to be inserted in call table
+    	public static final String group=TestBase.getOrg_unit_id();
+    	public static final String campaign=TestBase.campaignToBeEdited;   	
+    	public static final String tracking_number="1111111111";
+    	public static final String tracking_number_type="simple";
+    	public static final String hunt_type="rollover";
+    	public static final String ring_to_phone_number="8018786943 | Voicemail";
+    	public static final String source="3852502145";
+    	public static final String disposition="ANSWERED";
+    	public static final String duration="30";
+    	public static final String repeat_call="true";
+    	public static final String location_route_id="-1";
+
+
+
+
+    	
    
     	
     }
