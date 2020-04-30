@@ -56,7 +56,26 @@ SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_
 SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='51'
 
 SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='18'
--------------------------------------------------------------------------------------------
+
+//for call entry
+
+SELECT provisioned_route_id FROM campaign_provisioned_route 
+WHERE campaign_id='46'
+
+INSERT INTO call(provisioned_route_id,org_unit_id,disposition,duration,source,tracking,ring_to,repeat_call,
+call_started,location_route_id)
+VALUES('211','70045','ANSWERED','30','3852502145','1111111111','8018786943','false','2020-04-26 23:00','-1')
+
+INSERT INTO call_detail(call_id,bill_second,call_value,is_outbound,call_mine_status,cdr_source,call_ended,call_created,ring_to_name,channel_id,spam_call_checked,hunt_type,tracking_type,is_voicemail,is_dni_call,is_voicemail_checked,usage_component_id,is_premium,usage_type)
+VALUES ('135118','60','32','false','not mined','SP','2020-04-26 23:02','2020-04-26 23:00','test','2','false','rollover','SimpleRoute','true','false','true','21','false','LOCAL')
+
+DELETE FROM call
+WHERE call_id='135118'
+
+DELETE FROM call_detail
+WHERE call_id='135118' 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
