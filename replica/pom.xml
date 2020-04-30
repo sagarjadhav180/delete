@@ -33,7 +33,6 @@
     <version>20190722</version>
 </dependency>
 
-
 <dependency>
     <groupId>com.monitorjbl</groupId>
     <artifactId>xlsx-streamer</artifactId>
