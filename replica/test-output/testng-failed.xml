@@ -2,51 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="1" guice-stage="DEVELOPMENT" name="Failed suite [Automation Suite-1]" parallel="tests">
   <parameter name="browser" value="chrome"/>
-  <parameter name="url" value="https://stag-2-cmo-1.convirza.com"/>
+  <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
   <test name="chrome test-1">
     <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-2-cmo-1.convirza.com"/>
+    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
-      <class name="tests.GroupActivityReportTest"/>
+      <class name="tests.LoginTest"/>
     </classes>
   </test> <!-- chrome test-1 -->
-  <test name="chrome test-1(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-2-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.GroupActivityReportTest">
-        <methods>
-          <include name="basicFilterForGroupName"/>
-          <include name="advancedFilterUI"/>
-          <include name="advancedFilterForConversion"/>
-          <include name="tableCountVerification"/>
-          <include name="allColumnPickerCheckboxesClickable"/>
-          <include name="secondaryGroupingFeatureForCampaignColumn"/>
-          <include name="dateRangeFilterUIVerification"/>
-          <include name="dateRangeFilterForToday"/>
-          <include name="dateRangeFilterForLast7Days"/>
-          <include name="advancedFilterForGroupName"/>
-          <include name="tileCountVerification"/>
-          <include name="uiVerification"/>
-          <include name="defaultSecondaryGroupingOption"/>
-          <include name="dateRangeFilterForYesterday"/>
-          <include name="paginationToolboxUIVerification"/>
-          <include name="advancedFilterForLeads"/>
-          <include name="testSetUp"/>
-          <include name="setUp"/>
-          <include name="advancedFilterForAnweredCalls"/>
-          <include name="secondaryGroupingFeatureForTrackingNumber"/>
-          <include name="secondaryGroupingOptions"/>
-          <include name="dateRangeFilterForLast30Days"/>
-          <include name="paginationCountVerification"/>
-          <include name="defaultColumnPickerOptions"/>
-          <include name="advancedFilterForCalls"/>
-          <include name="defaultColumnsDisplayed"/>
-          <include name="secondaryGroupingFeatureForTrackingumberColumn"/>
-          <include name="secondaryGroupingFeatureForNone"/>
-          <include name="secondaryGroupingFeatureForCampaign"/>
-        </methods>
-      </class> <!-- tests.GroupActivityReportTest -->
-    </classes>
-  </test> <!-- chrome test-1(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->
