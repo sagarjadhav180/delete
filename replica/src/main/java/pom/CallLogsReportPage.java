@@ -412,14 +412,14 @@ public class CallLogsReportPage extends TestBase {
 		for(int i=0;i<table_column_labels.size();i++){
 			if(table_column_labels.get(i).getText().equals(filterName)){
 				index=i+1;
-//				if(index>7){
-//					table_column_labels.get(0).click();
-//					do{
-//						Util.Action().sendKeys(Keys.TAB).perform();
-//						Thread.sleep(1000);
-//					}
-//					while(table_column_labels.get(i).isDisplayed());
-//				}
+				if(index>7){
+					table_column_labels.get(0).click();
+					do{
+						Util.Action().sendKeys(Keys.TAB).perform();
+						Thread.sleep(1000);
+					}
+					while(table_column_labels.get(i).isDisplayed());
+				}
 			}
 		}
 		
