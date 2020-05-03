@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="12" passed="12">
   <reporter-output>
   </reporter-output>
-  <suite name="Automation Suite-1" duration-ms="73372" started-at="2020-05-01T13:16:20Z" finished-at="2020-05-01T13:17:34Z">
+  <suite name="Automation Suite-1" duration-ms="278535" started-at="2020-05-03T08:00:26Z" finished-at="2020-05-03T08:05:04Z">
     <groups>
     </groups>
-    <test name="chrome test-1" duration-ms="73372" started-at="2020-05-01T13:16:20Z" finished-at="2020-05-01T13:17:34Z">
+    <test name="chrome test-1" duration-ms="278535" started-at="2020-05-03T08:00:26Z" finished-at="2020-05-03T08:05:04Z">
       <class name="tests.LoginTest">
-        <test-method status="PASS" signature="testSetUp()[pri:0, instance:tests.LoginTest@442675e1]" name="testSetUp" is-config="true" duration-ms="14" started-at="2020-05-01T18:46:20Z" finished-at="2020-05-01T18:46:20Z">
+        <test-method status="PASS" signature="testSetUp()[pri:0, instance:tests.LoginTest@442675e1]" name="testSetUp" is-config="true" duration-ms="16" started-at="2020-05-03T13:30:26Z" finished-at="2020-05-03T13:30:26Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSetUp -->
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.LoginTest@442675e1]" name="setUp" is-config="true" duration-ms="47665" started-at="2020-05-01T18:46:20Z" finished-at="2020-05-01T18:47:08Z">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.LoginTest@442675e1]" name="setUp" is-config="true" duration-ms="243102" started-at="2020-05-03T13:30:26Z" finished-at="2020-05-03T13:34:29Z">
           <params>
             <param index="0">
               <value>
@@ -27,11 +27,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="login_page_UI_Verification()[pri:1, instance:tests.LoginTest@442675e1]" name="login_page_UI_Verification" duration-ms="1309" started-at="2020-05-01T18:47:08Z" finished-at="2020-05-01T18:47:09Z">
+        <test-method status="PASS" signature="login_page_UI_Verification()[pri:1, instance:tests.LoginTest@442675e1]" name="login_page_UI_Verification" duration-ms="2591" started-at="2020-05-03T13:34:29Z" finished-at="2020-05-03T13:34:31Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_page_UI_Verification -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="676" started-at="2020-05-01T18:47:09Z" finished-at="2020-05-01T18:47:10Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="543" started-at="2020-05-03T13:34:31Z" finished-at="2020-05-03T13:34:32Z">
           <params>
             <param index="0">
               <value>
@@ -42,11 +42,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_invalidate_cred()[pri:2, instance:tests.LoginTest@442675e1]" name="login_with_invalidate_cred" duration-ms="2454" started-at="2020-05-01T18:47:10Z" finished-at="2020-05-01T18:47:12Z">
+        <test-method status="PASS" signature="login_with_invalidate_cred()[pri:2, instance:tests.LoginTest@442675e1]" name="login_with_invalidate_cred" duration-ms="8444" started-at="2020-05-03T13:34:32Z" finished-at="2020-05-03T13:34:40Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_with_invalidate_cred -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="106" started-at="2020-05-01T18:47:12Z" finished-at="2020-05-01T18:47:13Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="108" started-at="2020-05-03T13:34:40Z" finished-at="2020-05-03T13:34:41Z">
           <params>
             <param index="0">
               <value>
@@ -57,11 +57,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_username()[pri:3, instance:tests.LoginTest@442675e1]" name="login_with_blank_username" duration-ms="305" started-at="2020-05-01T18:47:13Z" finished-at="2020-05-01T18:47:13Z">
+        <test-method status="PASS" signature="login_with_blank_username()[pri:3, instance:tests.LoginTest@442675e1]" name="login_with_blank_username" duration-ms="244" started-at="2020-05-03T13:34:41Z" finished-at="2020-05-03T13:34:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_with_blank_username -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="87" started-at="2020-05-01T18:47:13Z" finished-at="2020-05-01T18:47:13Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="57" started-at="2020-05-03T13:34:41Z" finished-at="2020-05-03T13:34:41Z">
           <params>
             <param index="0">
               <value>
@@ -72,11 +72,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_password()[pri:4, instance:tests.LoginTest@442675e1]" name="login_with_blank_password" duration-ms="423" started-at="2020-05-01T18:47:13Z" finished-at="2020-05-01T18:47:13Z">
+        <test-method status="PASS" signature="login_with_blank_password()[pri:4, instance:tests.LoginTest@442675e1]" name="login_with_blank_password" duration-ms="354" started-at="2020-05-03T13:34:41Z" finished-at="2020-05-03T13:34:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_with_blank_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="81" started-at="2020-05-01T18:47:13Z" finished-at="2020-05-01T18:47:13Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="72" started-at="2020-05-03T13:34:41Z" finished-at="2020-05-03T13:34:41Z">
           <params>
             <param index="0">
               <value>
@@ -87,11 +87,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_inactive_user()[pri:5, instance:tests.LoginTest@442675e1]" name="login_with_inactive_user" duration-ms="580" started-at="2020-05-01T18:47:13Z" finished-at="2020-05-01T18:47:14Z">
+        <test-method status="PASS" signature="login_with_inactive_user()[pri:5, instance:tests.LoginTest@442675e1]" name="login_with_inactive_user" duration-ms="497" started-at="2020-05-03T13:34:41Z" finished-at="2020-05-03T13:34:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_with_inactive_user -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="67" started-at="2020-05-01T18:47:14Z" finished-at="2020-05-01T18:47:14Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="51" started-at="2020-05-03T13:34:42Z" finished-at="2020-05-03T13:34:42Z">
           <params>
             <param index="0">
               <value>
@@ -102,11 +102,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_deleted_user()[pri:6, instance:tests.LoginTest@442675e1]" name="login_with_deleted_user" duration-ms="574" started-at="2020-05-01T18:47:14Z" finished-at="2020-05-01T18:47:15Z">
+        <test-method status="PASS" signature="login_with_deleted_user()[pri:6, instance:tests.LoginTest@442675e1]" name="login_with_deleted_user" duration-ms="525" started-at="2020-05-03T13:34:42Z" finished-at="2020-05-03T13:34:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_with_deleted_user -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="56" started-at="2020-05-01T18:47:15Z" finished-at="2020-05-01T18:47:15Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="55" started-at="2020-05-03T13:34:42Z" finished-at="2020-05-03T13:34:42Z">
           <params>
             <param index="0">
               <value>
@@ -117,11 +117,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="login_with_blank_username_and_password()[pri:7, instance:tests.LoginTest@442675e1]" name="login_with_blank_username_and_password" duration-ms="169" started-at="2020-05-01T18:47:15Z" finished-at="2020-05-01T18:47:15Z">
+        <test-method status="PASS" signature="login_with_blank_username_and_password()[pri:7, instance:tests.LoginTest@442675e1]" name="login_with_blank_username_and_password" duration-ms="157" started-at="2020-05-03T13:34:42Z" finished-at="2020-05-03T13:34:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login_with_blank_username_and_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="59" started-at="2020-05-01T18:47:15Z" finished-at="2020-05-01T18:47:15Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="57" started-at="2020-05-03T13:34:43Z" finished-at="2020-05-03T13:34:43Z">
           <params>
             <param index="0">
               <value>
@@ -132,11 +132,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="UIVerification_forgot_passowrd_page()[pri:8, instance:tests.LoginTest@442675e1]" name="UIVerification_forgot_passowrd_page" duration-ms="2756" started-at="2020-05-01T18:47:15Z" finished-at="2020-05-01T18:47:18Z">
+        <test-method status="PASS" signature="UIVerification_forgot_passowrd_page()[pri:8, instance:tests.LoginTest@442675e1]" name="UIVerification_forgot_passowrd_page" duration-ms="3321" started-at="2020-05-03T13:34:43Z" finished-at="2020-05-03T13:34:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- UIVerification_forgot_passowrd_page -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="96" started-at="2020-05-01T18:47:18Z" finished-at="2020-05-01T18:47:18Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="63" started-at="2020-05-03T13:34:46Z" finished-at="2020-05-03T13:34:46Z">
           <params>
             <param index="0">
               <value>
@@ -147,11 +147,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="next_button_with_no_email_ID()[pri:9, instance:tests.LoginTest@442675e1]" name="next_button_with_no_email_ID" duration-ms="843" started-at="2020-05-01T18:47:18Z" finished-at="2020-05-01T18:47:19Z">
+        <test-method status="PASS" signature="next_button_with_no_email_ID()[pri:9, instance:tests.LoginTest@442675e1]" name="next_button_with_no_email_ID" duration-ms="401" started-at="2020-05-03T13:34:46Z" finished-at="2020-05-03T13:34:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- next_button_with_no_email_ID -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="81" started-at="2020-05-01T18:47:19Z" finished-at="2020-05-01T18:47:19Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="80" started-at="2020-05-03T13:34:46Z" finished-at="2020-05-03T13:34:46Z">
           <params>
             <param index="0">
               <value>
@@ -162,11 +162,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="reset_password()[pri:10, instance:tests.LoginTest@442675e1]" name="reset_password" duration-ms="1837" started-at="2020-05-01T18:47:19Z" finished-at="2020-05-01T18:47:21Z">
+        <test-method status="PASS" signature="reset_password()[pri:10, instance:tests.LoginTest@442675e1]" name="reset_password" duration-ms="1613" started-at="2020-05-03T13:34:46Z" finished-at="2020-05-03T13:34:48Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- reset_password -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="67" started-at="2020-05-01T18:47:21Z" finished-at="2020-05-01T18:47:21Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="119" started-at="2020-05-03T13:34:48Z" finished-at="2020-05-03T13:34:48Z">
           <params>
             <param index="0">
               <value>
@@ -177,11 +177,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="rememeber_me_functinonality()[pri:11, instance:tests.LoginTest@442675e1]" name="rememeber_me_functinonality" duration-ms="7165" started-at="2020-05-01T18:47:21Z" finished-at="2020-05-01T18:47:28Z">
+        <test-method status="PASS" signature="rememeber_me_functinonality()[pri:11, instance:tests.LoginTest@442675e1]" name="rememeber_me_functinonality" duration-ms="9068" started-at="2020-05-03T13:34:48Z" finished-at="2020-05-03T13:34:57Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- rememeber_me_functinonality -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="59" started-at="2020-05-01T18:47:28Z" finished-at="2020-05-01T18:47:28Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="45" started-at="2020-05-03T13:34:57Z" finished-at="2020-05-03T13:34:57Z">
           <params>
             <param index="0">
               <value>
@@ -192,11 +192,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="validLogin()[pri:12, instance:tests.LoginTest@442675e1]" name="validLogin" duration-ms="2058" started-at="2020-05-01T18:47:28Z" finished-at="2020-05-01T18:47:30Z">
+        <test-method status="PASS" signature="validLogin()[pri:12, instance:tests.LoginTest@442675e1]" name="validLogin" duration-ms="1816" started-at="2020-05-03T13:34:57Z" finished-at="2020-05-03T13:34:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validLogin -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="81" started-at="2020-05-01T18:47:30Z" finished-at="2020-05-01T18:47:30Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="61" started-at="2020-05-03T13:34:59Z" finished-at="2020-05-03T13:34:59Z">
           <params>
             <param index="0">
               <value>
@@ -207,11 +207,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="3652" started-at="2020-05-01T18:47:30Z" finished-at="2020-05-01T18:47:34Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.LoginTest@442675e1]" name="tearDown" is-config="true" duration-ms="5036" started-at="2020-05-03T13:34:59Z" finished-at="2020-05-03T13:35:04Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.LoginTest@442675e1]" name="close_connection" is-config="true" duration-ms="11933" started-at="2020-05-01T18:47:34Z" finished-at="2020-05-01T18:47:46Z">
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.LoginTest@442675e1]" name="close_connection" is-config="true" duration-ms="11965" started-at="2020-05-03T13:35:04Z" finished-at="2020-05-03T13:35:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close_connection -->
