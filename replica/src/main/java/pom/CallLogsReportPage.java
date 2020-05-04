@@ -106,6 +106,10 @@ public class CallLogsReportPage extends TestBase {
 		
 	}
 	
+	public void goToReport(String reportName){
+		
+	}
+	
 	public void headerLabel(){
 
 		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
@@ -137,6 +141,8 @@ public class CallLogsReportPage extends TestBase {
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
+
     }
 	
     public void presenceOfTimeZone(){

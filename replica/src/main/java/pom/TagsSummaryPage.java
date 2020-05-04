@@ -44,6 +44,11 @@ public class TagsSummaryPage extends TestBase {
 		
 	}
     
+	public void headerLabel(){
+
+		
+	}
+    
     public void presenceOfGearIcon(){
 		
 		logger.log(LogStatus.INFO, "Verifying if gear icon is present");

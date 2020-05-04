@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -42,6 +43,11 @@ public class BlockedCallsReportPage extends TestBase{
 		
 		driver.switchTo().frame(reports_iframe);
 		
+	}
+    
+	public void headerLabel(){
+
+				
 	}
     
     public void presenceOfGearIcon(){

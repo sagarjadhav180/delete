@@ -43,6 +43,11 @@ public class MarketingDashboardPage extends TestBase{
 		driver.switchTo().frame(reports_iframe);
 		
 	}
+
+	public void headerLabel(){
+
+		
+	}
     
     public void presenceOfGearIcon(){
 		

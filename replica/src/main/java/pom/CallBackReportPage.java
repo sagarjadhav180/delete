@@ -38,6 +38,11 @@ public class CallBackReportPage extends TestBase{
 		PageFactory.initElements(driver, this);
 	}
 	
+	public void headerLabel(){
+
+		
+	}
+	
     public void switchToIFrame(){
 		
 		driver.switchTo().frame(reports_iframe);

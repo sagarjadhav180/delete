@@ -46,6 +46,30 @@ public class CallLogsTest extends TestBase{
 	}
 	
 	@Test(priority=2)
+	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.presenceOfGearIcon();
+	}
+	
+	@Test(priority=3)
+	public void gearIconOptionsVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Gear Icon options Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.gearIconOptions();
+	}
+	
+	@Test(priority=4)
+	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.presenceOfTimeZone();
+	}
+	
+	@Test(priority=5)
 	public void tilesVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Tiles Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -53,7 +77,7 @@ public class CallLogsTest extends TestBase{
         clr.tilesVerification();
 	}
 
-	@Test(priority=3)
+	@Test(priority=6)
 	public void totalCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -61,7 +85,7 @@ public class CallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.total_calls_tile);
 	}
 	
-	@Test(priority=4)
+	@Test(priority=7)
 	public void uniqueCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Unique Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -69,7 +93,7 @@ public class CallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.unique_calls_tile);
 	}
 	
-	@Test(priority=5)
+	@Test(priority=8)
 	public void answeredCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Answered Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -77,7 +101,7 @@ public class CallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.answered_calls_tile);
 	}
 	
-	@Test(priority=6)
+	@Test(priority=9)
 	public void averageCallsDurationTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Average Calls Duration Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -85,7 +109,7 @@ public class CallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.average_calls_duration_tile);
 	}
 	
-	@Test(priority=7)
+	@Test(priority=10)
 	public void totalLeadsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Leads Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -93,7 +117,7 @@ public class CallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.leads_tile);
 	}
 	
-	@Test(priority=8)
+	@Test(priority=11)
 	public void totalConversionTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Conversion Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -103,7 +127,7 @@ public class CallLogsTest extends TestBase{
 	
 	
 	
-	@Test(priority=9)
+	@Test(priority=12)
 	public void presenceOfTotalCallsGraph() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Total Calls Graph Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -112,7 +136,7 @@ public class CallLogsTest extends TestBase{
         clr.totalCallsGraph();
 	}
 	
-	@Test(priority=10)
+	@Test(priority=13)
 	public void presenceOfUniqueCallsGraph() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Unique Calls Graph Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -120,7 +144,7 @@ public class CallLogsTest extends TestBase{
         clr.totalCallsGraph();
 	}
 	
-	@Test(priority=11)
+	@Test(priority=14)
 	public void tableColumnsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Table Columns Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -128,7 +152,7 @@ public class CallLogsTest extends TestBase{
         clr.allColumnVerification();
 	}
 	
-	@Test(priority=12)
+	@Test(priority=15)
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -136,7 +160,7 @@ public class CallLogsTest extends TestBase{
         clr.filterButton();
 	}
 	
-	@Test(priority=13)
+	@Test(priority=16)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -145,7 +169,7 @@ public class CallLogsTest extends TestBase{
 	}
 	
 	
-	@Test(priority=14)
+	@Test(priority=17)
 	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Group Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -153,7 +177,7 @@ public class CallLogsTest extends TestBase{
         clr.filterFeature("Group", TestBase.account);
 	}
 	
-	@Test(priority=15)
+	@Test(priority=18)
 	public void filterFeatureForCampaignTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Campaign Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -161,7 +185,7 @@ public class CallLogsTest extends TestBase{
         clr.filterFeature("Campaign", TestBase.campaignToBeEdited);
 	}
 	
-	@Test(priority=16)
+	@Test(priority=19)
 	public void footerNoteTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Footer Note Test"); 
 		logger.assignCategory(Constants.call_logs_category);

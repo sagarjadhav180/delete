@@ -8,7 +8,22 @@ import tests.TestBase;
 
 public class Constants {
 
-	public static final String call_logs_category="Call Logs Suite";
+	public static final String call_logs_category="Call Logs Report Suite";
+	public static final String call_back_category="Call Back Report Suite";
+	public static final String account_details_category="Account Details Report Suite";
+	public static final String analytics_summary_category="Analytics Summary Report Suite";
+	public static final String billing_usage_category="Billing Usage Report Suite";
+	public static final String blocked_calls_category="Blocked Calls Report Suite";
+	public static final String caller_activity_category="Caller Activity Report Suite";
+	public static final String calls_by_region_category="Calls by Region Report Suite";
+	public static final String call_trends_category="Call Trends Report Suite";
+	public static final String email_digest_category="Email Digest Report Suite";
+	public static final String ivr_keypress_category="IVR Keypress Report Suite";
+	public static final String marketing_dashboard_category="Marketing Dashboard Report Suite";
+	public static final String tags_summary_category="Tags Summary Report Suite";
+	public static final String tracking_number_settings_category="Tracking Number Settings Report Suite";
+	public static final String user_logs_category="User Logs Report Suite";
+	
 	public static final String webhook_category="WebHook Suite";
 	public static final String tracking_number_category="Tracking Number Suite";	
 	public static final String campaign_category="Campaign Suite";	
@@ -18,6 +33,28 @@ public class Constants {
 	public static final String call_details_report_category="Call Details Reports Suite";		
 	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
+	
+public static class LookerReports{
+    	
+    	public static final String call_back_report="Call Back";
+    	public static final String account_details_report="Account Details";
+    	public static final String analytics_summary_report="Analytics Summary";
+    	public static final String billing_usage_report="Billing Usage";
+    	public static final String blocked_calls_report="Blocked Calls";
+    	public static final String caller_activity_report="Caller Activity";
+    	public static final String calls_by_region_report="Calls by Region";
+    	public static final String call_trends_report="Call Trends";
+    	public static final String email_digest_report="Email Digest";
+    	public static final String ivr_keypress_report="IVR Keypress";
+    	public static final String marketing_dashboard_report="Marketing Dashboard";
+    	public static final String tags_summary_report="Tags Summary";
+    	public static final String tracking_number_settings_report="Tracking Number Settings";
+    	public static final String user_logs_report="User Logs";    	
+    	
+    	
+    }
+
+	
 	
 	public static class LegacyReports{
 		
@@ -138,6 +175,7 @@ public class Constants {
     	
 	}
     
+        
     public static class CallLogsReport{
 
     	public static final String total_calls_tile="Total Calls";
