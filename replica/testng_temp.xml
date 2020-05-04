@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Automation Suite-1" parallel="tests" thread-count="1" >
-  	
-	<test name="chrome test-1" preserve-order="true" parallel="false" >
-    <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-	<classes>
+<suite name="Automation Suite-1" parallel="tests" thread-count="1">
 
-   <class name="tests.LoginTest">
-   
-   
-   
-   
-   </class>
-             
-             
-             
-	</classes>
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="chrome" />
+		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+
+			<class name="tests.CallLogsTest">
+
+				<methods>
+					<include name="filterFeatureForHuntTypeTest" />
+
+				</methods>
+
+
+			</class>
+
+
+
+		</classes>
 	</test>
-	
-	
+
+
 </suite> <!-- Suite -->

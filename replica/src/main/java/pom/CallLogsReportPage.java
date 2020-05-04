@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -30,7 +31,7 @@ public class CallLogsReportPage extends TestBase {
 	private WebElement call_logs_scroll;	
 	
 	@FindBy(xpath="//strong[text()='Comments']")
-	private WebElement commnets_column;	
+	private WebElement comments_column;	
 	
 	@FindBy(xpath="(//span[text()='Call Logs - Enhanced'])[1]")
 	private WebElement call_logs_enhanced_label;	
@@ -113,6 +114,37 @@ public class CallLogsReportPage extends TestBase {
 				
 	}
 	
+	public void presenceOfGearIcon(){
+		
+		logger.log(LogStatus.INFO, "Verifying if gear icon is present");
+		Assert.assertTrue(gear_icon.isDisplayed(),"Gear icon is not present or locator has been changed.");
+	}
+	
+    public void gearIconOptions(){
+		
+		logger.log(LogStatus.INFO, "Verifying options present in gear icon");
+        
+		gear_icon.click();
+		for(int i=0;i<gear_icon_options.size();i++){
+			
+			for(int j=0;j<expected_gear_icon_options.length;j++){
+				
+				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
+					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
+					softassert.assertTrue(gear_icon_options.get(i).equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
+				}
+			}
+		}
+    
+		softassert.assertAll();
+    }
+	
+    public void presenceOfTimeZone(){
+		
+		logger.log(LogStatus.INFO, "Verifying if Time Zone is present");
+		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
+	}
+    
 	public void tilesVerification() throws InterruptedException{
 
 		Thread.sleep(7000);
@@ -396,8 +428,8 @@ public class CallLogsReportPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
         Util.Action().moveToElement(filter_textbox).perform();
         Util.Action().click().perform();
-	    Util.Action().sendKeys(Keys.CLEAR).perform();
-		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+	    Util.Action().sendKeys(filterValue).perform();
+	    Util.Action().sendKeys(Keys.ESCAPE).perform();	
 	
 //		filter_textbox.sendKeys(filterValue);
 //		Thread.sleep(5000);
@@ -410,22 +442,20 @@ public class CallLogsReportPage extends TestBase {
 		int index=0;
 		
 		for(int i=0;i<table_column_labels.size();i++){
+			
 			if(table_column_labels.get(i).getText().equals(filterName)){
+				
 				index=i+1;
-				if(index>7){
-					table_column_labels.get(0).click();
-					do{
-						Util.Action().sendKeys(Keys.TAB).perform();
-						Thread.sleep(1000);
-					}
-					while(table_column_labels.get(i).isDisplayed());
-				}
+				break;
 			}
 		}
 		
 		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
-		
+		System.out.println("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
 		for(int j=0;j<filtered_values.size();j++){
+			
+			System.out.println(filtered_values.get(j).getText());
+			System.out.println(filterValue);
 			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
 			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
 		}
@@ -438,7 +468,9 @@ public class CallLogsReportPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
         Util.Action().moveToElement(filter_textbox).perform();
         Util.Action().click().perform();
-	    Util.Action().sendKeys(filterValue).perform();
+        Thread.sleep(1000);
+	    Util.Action().sendKeys(Keys.CLEAR).perform();
+        Util.Action().sendKeys(Keys.CLEAR).perform();
 		Util.Action().sendKeys(Keys.ESCAPE).perform();	
 	
 		filter_button.click();
