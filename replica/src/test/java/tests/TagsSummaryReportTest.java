@@ -19,11 +19,12 @@ public class TagsSummaryReportTest extends TestBase{
 	
 	HomePage hp;
 	CallLogsReportPage clr;
-	TagsSummaryPage ts;
+	TagsSummaryPage ts; 
 	
 	@BeforeClass
 	public void goToLookerReports() throws InterruptedException, IOException{
 		LoginPage lp=new LoginPage(driver);
+		ts=new TagsSummaryPage(driver);
 		logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
         lp.validLogin();
