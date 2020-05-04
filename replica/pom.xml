@@ -33,6 +33,12 @@
 			<version>20190722</version>
 		</dependency>
 
+<dependency>
+    <groupId>org.openrdf.sesame</groupId>
+    <artifactId>sesame-rio-api</artifactId>
+    <version>2.7.2</version>
+</dependency>
+
 		<dependency>
 			<groupId>com.monitorjbl</groupId>
 			<artifactId>xlsx-streamer</artifactId>
