@@ -147,9 +147,9 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.0.0-M3</version>
           <executions>
-          <execution>
-    <phase>none</phase>
-</execution>
+           <execution>
+            <phase>none</phase>
+           </execution>
           </executions>
           <configuration>
             <useSystemClassLoader>false</useSystemClassLoader>
