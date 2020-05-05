@@ -42,6 +42,9 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Detailed View']")
 	private WebElement detailed_view_tile;
 
+	@FindBy(xpath="//span[text()='Detailed View']//../..//preceding-sibling::div//a")
+	private WebElement detailed_view_button;
+	
 	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Detailed View']")
 	private WebElement loading_wheel_detailed_view;
 
@@ -88,7 +91,7 @@ public class CallLogsReportPage extends TestBase {
 //	@FindBy(xpath="//*[@id='dashboard']/div/div[2]/div/div/div/div/div[2]/div[10]/div/lk-vis-element/div/div/div[2]/div/div/div/lk-visualization-container/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div/div//div")
 //	private List<WebElement> table_column_labels;	
 	
-	String[] expeted_table_column_labels={"Actions","Play Call","Duration","Date/Time","Group","Campaign","Tracking Number Name","Tracking Number","Tracking Number Type","Hunt Type","Ad Source","Ring-to Name","Ring to Phone Number","Caller ID","Disposition","Voicemail","Identified Agent","Tags","Comments",};
+	String[] expeted_table_column_labels={"Actions","Play Call","Duration","Date/Time","Group","Campaign","Tracking Number Name","Tracking Number","Tracking Number Type","Hunt Type","Ad Source","Ring-to Name","Ring to Phone Number","Caller ID","Disposition","Voicemail","Identified Agent","Tags","Comments"};
 	
 	@FindBy(xpath="//div [@class='body-text text-muted']")
 	private WebElement footer_note;	
@@ -409,14 +412,52 @@ public class CallLogsReportPage extends TestBase {
 		
 	}
 	
-	public void footerNote(){
+	public void footerNote() {
 	
 	Util.scrollFunction(footer_note);
 	
     wait.until(ExpectedConditions.visibilityOf(footer_note));
 	logger.log(LogStatus.INFO, "verifying if footer note is present");
     softassert.assertTrue(footer_note.isDisplayed(), "footer note is not present");
+	
+	}
+	
+	public void detailedViewTile() throws InterruptedException{
+	
+		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1800)", "");
+	    Thread.sleep(2000);
+	    int i=10;
+		do{
+			wait.until(ExpectedConditions.visibilityOf(detailed_view_tile));	
+		}
+		while(i<10);
+
+		logger.log(LogStatus.INFO, "Verifying if detailed view tile is present");
+		Assert.assertTrue(detailed_view_tile.isDisplayed(),"Detailed view tile is not displayed or locator chnaged");
+	}
+	
+	public void detailedViewUIVerification(){
 		
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_button));
+		detailed_view_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_header));
+		logger.log(LogStatus.INFO, "Verifying if report header label is displayed");
+		softassert.assertTrue(detailed_view_header.isDisplayed(),"Detailed view header label not displayed or locator changed");
+
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_header_note));
+		logger.log(LogStatus.INFO, "Verifying if report note is displayed");
+		softassert.assertTrue(detailed_view_header_note.isDisplayed(),"Detailed view report note not displayed or locator changed");
+
+		wait.until(ExpectedConditions.visibilityOf(default_view_tile));
+		logger.log(LogStatus.INFO, "Verifying if default view tile is displayed");
+		softassert.assertTrue(default_view_tile.isDisplayed(),"Default view tile not displayed or locator changed");
+
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_table));
+		logger.log(LogStatus.INFO, "Verifying if detailed view table is displayed");
+		softassert.assertTrue(detailed_view_table.isDisplayed(),"Default view table not displayed or locator changed");
+
+		softassert.assertAll();
 	}
 
 	String call_id;

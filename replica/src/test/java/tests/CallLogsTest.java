@@ -22,8 +22,8 @@ public class CallLogsTest extends TestBase{
 	public void goToLookerReports() throws InterruptedException, IOException{
 		LoginPage lp=new LoginPage(driver);
 		clr=new CallLogsReportPage(driver);
-		clr.callDataInsertion();
-		Thread.sleep(60000);
+//		clr.callDataInsertion();
+//		Thread.sleep(60000);
 		logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
         lp.validLogin();
@@ -191,6 +191,22 @@ public class CallLogsTest extends TestBase{
 		logger.assignCategory(Constants.call_logs_category);
         clr=new CallLogsReportPage(driver);
         clr.footerNote();
+	}
+	
+	@Test(priority=20)
+	public void presenceOfDetailedViewTileTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Detailed View Tile Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+        clr.detailedViewTile();
+	}
+	
+	@Test(priority=21)
+	public void detailedViewUIVerificationTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Detailed View UI Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+        clr.detailedViewUIVerification();
 	}
 	
 	@AfterClass

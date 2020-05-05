@@ -27,7 +27,7 @@ public class BlockedCallsReportPage extends TestBase{
 	
 	String[] expected_gear_icon_options={"Download as PDF...","Download as CSVs","Send","Schedule","Move to Trash"};
 
-	@FindBy(xpath="//Select[starts-with(@class,'timezone-')]")
+	@FindBy(xpath="//span[@class='timezone']")
 	private WebElement timezone;
 	
 	@FindBy(xpath="//iframe[@id='looker']")

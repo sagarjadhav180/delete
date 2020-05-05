@@ -24,6 +24,7 @@ public class LookerTrackingNumberSettingsReportTest extends TestBase{
 	@BeforeClass
 	public void goToLookerReports() throws InterruptedException, IOException{
 		LoginPage lp=new LoginPage(driver);
+		tns=new LookerTrackingNumberSettingsPage(driver);
 		logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
         lp.validLogin();
@@ -33,7 +34,7 @@ public class LookerTrackingNumberSettingsReportTest extends TestBase{
 		Thread.sleep(7000);
 		clr.goToReport(Constants.LookerReports.tracking_number_settings_report);
 
-		clr.switchToIFrame();
+		tns.switchToIFrame();
 
 	}
 
