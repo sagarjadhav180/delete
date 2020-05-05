@@ -39,6 +39,24 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
 	private List<WebElement> tiles_names;	
 	
+	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Detailed View']")
+	private WebElement detailed_view_tile;
+
+	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Detailed View']")
+	private WebElement loading_wheel_detailed_view;
+
+	@FindBy(xpath="(//span[text()='Call Logs Extended - Enhanced'])[1]")
+	private WebElement detailed_view_header;
+
+	@FindBy(xpath="//p[text()='This report is intended for download and/or scheduling. Due to the amount of data available, it may take longer than usual to load. To increase loading speed, the amount of logs available here has been reduced to 100 logs. The full set of logs will be available on the downloaded or scheduled version.']")
+	private WebElement detailed_view_header_note;
+
+	@FindBy(xpath="//span[text()='Default Report']")
+	private WebElement default_view_tile;
+	
+	@FindBy(xpath="//div[@class='ag-root-wrapper-body ag-layout-normal']")
+	private WebElement detailed_view_table;
+	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
 
@@ -50,7 +68,7 @@ public class CallLogsReportPage extends TestBase {
 	
 	String[] expected_gear_icon_options={"Download as PDF...","Download as CSVs","Send","Schedule","Move to Trash"};
 
-	@FindBy(xpath="//Select[starts-with(@class,'timezone-')]")
+	@FindBy(xpath="//span[@class='timezone']")
 	private WebElement timezone;
 	
 	@FindBy(xpath="(//div[@class='vis-container'])[8]")
@@ -124,7 +142,7 @@ public class CallLogsReportPage extends TestBase {
 		Assert.assertTrue(gear_icon.isDisplayed(),"Gear icon is not present or locator has been changed.");
 	}
 	
-    public void gearIconOptions(){
+    public void gearIconOptions() throws InterruptedException{
 		
 		logger.log(LogStatus.INFO, "Verifying options present in gear icon");
         
@@ -142,11 +160,13 @@ public class CallLogsReportPage extends TestBase {
     
 		softassert.assertAll();
 		gear_icon.click();
+		Thread.sleep(1000);
 
     }
 	
     public void presenceOfTimeZone(){
 		
+    	wait.until(ExpectedConditions.visibilityOf(timezone));
 		logger.log(LogStatus.INFO, "Verifying if Time Zone is present");
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}

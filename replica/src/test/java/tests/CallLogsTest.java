@@ -46,6 +46,14 @@ public class CallLogsTest extends TestBase{
 	}
 	
 	@Test(priority=2)
+	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.presenceOfTimeZone();
+	}
+	
+	@Test(priority=3)
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -53,20 +61,12 @@ public class CallLogsTest extends TestBase{
 		clr.presenceOfGearIcon();
 	}
 	
-	@Test(priority=3)
+	@Test(priority=4)
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
         clr=new CallLogsReportPage(driver);
 		clr.gearIconOptions();
-	}
-	
-	@Test(priority=4)
-	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
-		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
-		logger.assignCategory(Constants.call_logs_category);
-        clr=new CallLogsReportPage(driver);
-		clr.presenceOfTimeZone();
 	}
 	
 	@Test(priority=5)

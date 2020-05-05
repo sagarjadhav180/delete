@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="1" guice-stage="DEVELOPMENT"
-	name="Failed suite [Automation Suite-1]" parallel="tests">
-	<parameter name="browser" value="chrome" />
-	<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
-	<test name="chrome test-1">
-		<parameter name="browser" value="chrome" />
-		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
-		<classes>
-			<class name="tests.CallLogsTest">
-				<methods>
-					<include name="filterFeatureForHuntTypeTest" />
-					<include name="filterFeatureForGroupTest" />
-					<include name="filterFeatureForCampaignTest" />
-				</methods>
-			</class> <!-- tests.CallLogsTest -->
-		</classes>
-	</test> <!-- chrome test-1 -->
+<suite thread-count="1" guice-stage="DEVELOPMENT" name="Failed suite [Automation Suite-1]" parallel="tests">
+  <parameter name="browser" value="chrome"/>
+  <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+  <test name="chrome test-1">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+    <classes>
+      <class name="tests.CallLogsTest"/>
+    </classes>
+  </test> <!-- chrome test-1 -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

@@ -10,15 +10,7 @@
 
 			<class name="tests.CallLogsTest">
 
-				<methods>
-					<include name="filterFeatureForHuntTypeTest" />
-
-				</methods>
-
-
 			</class>
-
-
 
 		</classes>
 	</test>
