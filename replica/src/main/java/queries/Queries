@@ -77,5 +77,21 @@ WHERE call_id='135118'
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------------
+--------------------------Tracking number settings looker---------------------------------------------------------------------
+
+//active campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+
+//inactive campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='inactive')
+
+//active tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN 
+(SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )
+
+//inactive tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')
+
+
 -----------------------------------------------------------------------------------------------------

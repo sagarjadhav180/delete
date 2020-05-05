@@ -3,6 +3,7 @@ package pom;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -73,6 +74,8 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
 	
 	String[] expected_filter_elements={"Campaign","Group","Hunt Type","Ring-to Number","Send to Voicemail","Tracking Number Name","Tracking Number","Tracking Number Status","Tracking Number Type"};
 	
+	@FindBy(xpath="")
+	private WebElement filter_button;
 	
 	SoftAssert softassert=new SoftAssert(); 
 
@@ -146,12 +149,12 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
 		
 	}
 
-public void tileValueVerificationForDefault7DaysFilter(String tile_name){
+    public void tileValueVerification(String tile_name){
 		
-		String active_campaigns_count_from_db = Util.readingFromDB("");
-		String active_tracking_numbers_count_from_db = Util.readingFromDB("");
-		String inactive_campaigns_count_from_db = Util.readingFromDB("");
-		String inactive_tracking_numbers_count_from_db = Util.readingFromDB("");
+		String active_campaigns_count_from_db = Util.readingFromDB("SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active')");
+		String active_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active');AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )");
+		String inactive_campaigns_count_from_db = Util.readingFromDB("SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='inactive')");
+		String inactive_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active')AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')");
 		
 		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
 	
@@ -215,7 +218,72 @@ public void tileValueVerificationForDefault7DaysFilter(String tile_name){
 
 	}
 
+    //to update
+    public void allColumnVerification() throws InterruptedException{
+		
+		WebElement actionsColumn = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='Actions']"));
+		actionsColumn.click();
+
+		Util.Action().sendKeys(Keys.TAB).perform();
+//		Util.Action().sendKeys(Keys.TAB).perform();
+		Thread.sleep(2000);
+		
+		for(int i=0;i<expeted_table_column_labels.length;i++){
+									
+			Thread.sleep(1000);
+			WebElement column = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='"+expeted_table_column_labels[i]+"']"));	
+			System.out.println("actual column "+column.getText());
+			System.out.println("expected column "+expeted_table_column_labels[i]);
+			logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[i]+" column is present");
+            wait.until(ExpectedConditions.visibilityOf(column));
+			softassert.assertEquals(column.getText(), expeted_table_column_labels[i],expeted_table_column_labels[i]+" is not present");				
+			if(i<expeted_table_column_labels.length-2){
+				Util.Action().sendKeys(Keys.TAB).perform();	
+					
+			}
+			
+			if(i>expeted_table_column_labels.length){
+				break;
+			}
+		}
+				
+		softassert.assertAll();
+	}
+
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
     
-    
+    public void filterElements(){
+        
+    	Util.click(filter_button);
+        
+        for(int k=0;k<filter_elements_after_expanding.size();){
+        	for(int j=0;j<expected_filter_elements.length;j++){
+
+        		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
+    	    			    			    		
+        		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+        		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+        		System.out.println("array-"+expected_filter_elements[j]);		
+        		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
+        	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
+        		}
+        		}
+        	k++;
+        }
+    	System.out.println("-------------------------------------------------------------------------------");
+        
+    	//collapsing filter section
+    	Util.click(filter_button);
+
+    	}
+
     
 }
