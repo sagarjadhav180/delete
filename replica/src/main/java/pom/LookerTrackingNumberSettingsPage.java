@@ -74,7 +74,7 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
 	
 	String[] expected_filter_elements={"Campaign","Group","Hunt Type","Ring-to Number","Send to Voicemail","Tracking Number Name","Tracking Number","Tracking Number Status","Tracking Number Type"};
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//strong[@class='filter-section-title']//i")
 	private WebElement filter_button;
 	
 	SoftAssert softassert=new SoftAssert(); 
@@ -89,19 +89,66 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
 		
 	}
     
+    public void switchToMainWindow(){
+		
+		driver.switchTo().window(driver.getWindowHandle());
+		
+	}
+    
 	public void headerLabel(){
 
 		wait.until(ExpectedConditions.visibilityOf(tracking_number_settings_label));
 		logger.log(LogStatus.INFO, "verifying if tracking number settings label is present");
 		softassert.assertTrue(tracking_number_settings_label.isDisplayed(),"tracking number settings label is not displayed or locator has been chamged..");
 	}
-    
+
+	public void runButton(){
+
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+	}
+	
     public void presenceOfGearIcon(){
 		
 		logger.log(LogStatus.INFO, "Verifying if gear icon is present");
 		Assert.assertTrue(gear_icon.isDisplayed(),"Gear icon is not present or locator has been changed.");
 	}
 	
+    public void detailedViewTile() throws InterruptedException{
+    	
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_tile));			
+ 
+		logger.log(LogStatus.INFO, "Verifying if detailed view tile is present");
+		Assert.assertTrue(detailed_view_tile.isDisplayed(),"Detailed view tile is not displayed or locator chnaged");
+        Thread.sleep(1000);
+    }
+
+	public void detailedViewUIVerification(){
+
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_button));
+		detailed_view_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_header));
+		logger.log(LogStatus.INFO, "Verifying if report header label is displayed");
+		softassert.assertTrue(detailed_view_header.isDisplayed(),"Detailed view header label not displayed or locator changed");
+
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_header_note));
+		logger.log(LogStatus.INFO, "Verifying if report note is displayed");
+		softassert.assertTrue(detailed_view_header_note.isDisplayed(),"Detailed view report note not displayed or locator changed");
+
+		wait.until(ExpectedConditions.visibilityOf(default_view_tile));
+		logger.log(LogStatus.INFO, "Verifying if default view tile is displayed");
+		softassert.assertTrue(default_view_tile.isDisplayed(),"Default view tile not displayed or locator changed");
+
+		wait.until(ExpectedConditions.visibilityOf(detailed_view_table));
+		logger.log(LogStatus.INFO, "Verifying if detailed view table is displayed");
+		softassert.assertTrue(detailed_view_table.isDisplayed(),"Default view table not displayed or locator changed");
+
+		softassert.assertAll();
+	}
+
+    
     public void gearIconOptions(){
 		
 		logger.log(LogStatus.INFO, "Verifying options present in gear icon");
@@ -111,14 +158,15 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
 			
 			for(int j=0;j<expected_gear_icon_options.length;j++){
 				
-				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
+				if(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
-					softassert.assertTrue(gear_icon_options.get(i).equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
+					softassert.assertTrue(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
 				}
 			}
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 	
     public void presenceOfTimeZone(){
@@ -152,9 +200,9 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
     public void tileValueVerification(String tile_name){
 		
 		String active_campaigns_count_from_db = Util.readingFromDB("SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active')");
-		String active_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active');AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )");
+		String active_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )");
 		String inactive_campaigns_count_from_db = Util.readingFromDB("SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='inactive')");
-		String inactive_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active')AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')");
+		String inactive_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')");
 		
 		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
 	
@@ -210,19 +258,18 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
 				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
 			}
 
-			softassert.assertAll();			
+			
 			
 		}
 		
-		
+		softassert.assertAll();		
 
 	}
 
-    //to update
     public void allColumnVerification() throws InterruptedException{
 		
-		WebElement actionsColumn = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='Actions']"));
-		actionsColumn.click();
+		WebElement tnIDColumn = driver.findElement(By.xpath("//div[@class='ag-header-row']//strong[text()='Tracking Number ID']"));
+		tnIDColumn.click();
 
 		Util.Action().sendKeys(Keys.TAB).perform();
 //		Util.Action().sendKeys(Keys.TAB).perform();
@@ -278,12 +325,74 @@ public class LookerTrackingNumberSettingsPage extends TestBase {
         		}
         	k++;
         }
-    	System.out.println("-------------------------------------------------------------------------------");
-        
+
+        softassert.assertAll();
     	//collapsing filter section
     	Util.click(filter_button);
 
     	}
 
+	public void filterFeature(String filterName) throws InterruptedException{
+
+        int index=0;
+        String filterValue;
+		for(int i=0;i<table_column_labels.size();i++){
+			
+			if(filterName.endsWith(table_column_labels.get(i).getText())){
+				
+				index=i+1;
+				break;
+			}
+		}
+		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
+		filterValue=value_to_be_filtered.get(0).getText();
+		
+		filter_button.click();
+		
+		String xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name'][text()='"+filterName+"']";
+		
+		WebElement filter_textbox = driver.findElement(By.xpath(""+xpath+"//parent::tr//select//following-sibling::span"));
+	
+		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+        Util.Action().moveToElement(filter_textbox).perform();
+        Util.Action().click().perform();
+	    Util.Action().sendKeys(filterValue).perform();
+	    Util.Action().sendKeys(Keys.ESCAPE).perform();	
+	
+//		filter_textbox.sendKeys(filterValue);
+//		Thread.sleep(5000);
+//		filter_button.click();
+		
+		run_button.click();
+		filter_button.click();
+		Thread.sleep(5000);
+		
+	
+		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
+		System.out.println("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
+		for(int j=0;j<filtered_values.size();j++){
+			
+			System.out.println(filtered_values.get(j).getText());
+			System.out.println(filterValue);
+			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
+			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
+		}
+		
+		
+		softassert.assertAll();
+
+        filter_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+        Util.Action().moveToElement(filter_textbox).perform();
+        Util.Action().click().perform();
+        Thread.sleep(1000);
+	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+        Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+	
+		filter_button.click();
+
+	}
     
 }

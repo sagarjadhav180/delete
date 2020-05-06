@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Automation_Suite-1">
-              <span class="suite-name border-failed">Automation Suite-1</span>
+              <span class="suite-name border-passed">Automation Suite-1</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,21 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">21 methods, 1 failed,   20 passed</span>
-                  </li>
-                  <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Automation_Suite-1" class="hide-methods failed suite-Automation_Suite-1"> (hide)</a> <!-- hide-methods failed suite-Automation_Suite-1 -->
-                      <a href="#" panel-name="suite-Automation_Suite-1" class="show-methods failed suite-Automation_Suite-1"> (show)</a> <!-- show-methods failed suite-Automation_Suite-1 -->
-                    </span>
-                    <div class="method-list-content failed suite-Automation_Suite-1">
-                      <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.CallLogsTest" hash-for-method="detailedViewUIVerificationTest">detailedViewUIVerificationTest</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content failed suite-Automation_Suite-1 -->
+                    <span class="method-stats">21 methods,   21 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -122,6 +108,11 @@
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.CallLogsTest" hash-for-method="averageCallsDurationTileValueVerification">averageCallsDurationTileValueVerification</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Automation_Suite-1" title="tests.CallLogsTest" hash-for-method="detailedViewUIVerificationTest">detailedViewUIVerificationTest</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -226,64 +217,6 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Automation_Suite-1" class="panel Automation_Suite-1">
-          <div class="suite-Automation_Suite-1-class-failed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">tests.CallLogsTest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="detailedViewUIVerificationTest">
-                  </a> <!-- detailedViewUIVerificationTest -->
-                  <span class="method-name">detailedViewUIVerificationTest</span>
-                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //span[text()=&apos;Detailed View&apos;]//../..//preceding-sibling::div//a&apos; (tried for 60 second(s) with 500 milliseconds interval)
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:81)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:271)
-	at pom.CallLogsReportPage.detailedViewUIVerification(CallLogsReportPage.java:441)
-	at tests.CallLogsTest.detailedViewUIVerificationTest(CallLogsTest.java:209)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//span[text()=&apos;Detailed View&apos;]//../..//preceding-sibling::div//a&quot;}
-  (Session info: chrome=81.0.4044.129)
-  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.18362 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;3.11.0&apos;, revision: &apos;e59cfb3&apos;, time: &apos;2018-03-11T20:26:55.152Z&apos;
-System info: host: &apos;LAPTOP-Q18VUQ5U&apos;, ip: &apos;5.5.17.108&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_152&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.36.540470 (e522d04694c7eb..., userDataDir: C:\Users\PREETI~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 81.0.4044.129, webStorageEnabled: true}
-Session ID: 494ea19294dfbcc43240fcaa676095b6
-*** Element info: {Using=xpath, value=//span[text()=&apos;Detailed View&apos;]//../..//preceding-sibling::div//a}
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
-	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:319)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:421)
-	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:311)
-	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at com.sun.proxy.$Proxy16.isDisplayed(Unknown Source)
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:315)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:44)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:301)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:298)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:248)
-	... 22 more
-... Removed 20 stack frames
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Automation_Suite-1-class-failed -->
           <div class="suite-Automation_Suite-1-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -302,6 +235,13 @@ Session ID: 494ea19294dfbcc43240fcaa676095b6
                   <a name="averageCallsDurationTileValueVerification">
                   </a> <!-- averageCallsDurationTileValueVerification -->
                   <span class="method-name">averageCallsDurationTileValueVerification</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="detailedViewUIVerificationTest">
+                  </a> <!-- detailedViewUIVerificationTest -->
+                  <span class="method-name">detailedViewUIVerificationTest</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -488,94 +428,94 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(21);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'detailedViewUIVerificationTest')
+data.setCell(0, 1, 'filterFeatureForGroupTest')
 data.setCell(0, 2, 'tests.CallLogsTest')
-data.setCell(0, 3, 120097);
+data.setCell(0, 3, 73203);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'filterFeatureForGroupTest')
+data.setCell(1, 1, 'filterFeatureForCampaignTest')
 data.setCell(1, 2, 'tests.CallLogsTest')
-data.setCell(1, 3, 73476);
+data.setCell(1, 3, 70387);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'filterFeatureForCampaignTest')
+data.setCell(2, 1, 'filterButtonElementsTest')
 data.setCell(2, 2, 'tests.CallLogsTest')
-data.setCell(2, 3, 70565);
+data.setCell(2, 3, 28834);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'filterButtonElementsTest')
+data.setCell(3, 1, 'tableColumnsTest')
 data.setCell(3, 2, 'tests.CallLogsTest')
-data.setCell(3, 3, 25310);
+data.setCell(3, 3, 25372);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'tableColumnsTest')
+data.setCell(4, 1, 'tilesVerification')
 data.setCell(4, 2, 'tests.CallLogsTest')
-data.setCell(4, 3, 24547);
+data.setCell(4, 3, 16450);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'tilesVerification')
+data.setCell(5, 1, 'headerLabelVerification')
 data.setCell(5, 2, 'tests.CallLogsTest')
-data.setCell(5, 3, 16038);
+data.setCell(5, 3, 16276);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'totalLeadsTileValueVerification')
+data.setCell(6, 1, 'uniqueCallsTileValueVerification')
 data.setCell(6, 2, 'tests.CallLogsTest')
-data.setCell(6, 3, 6498);
+data.setCell(6, 3, 9894);
 data.setCell(7, 0, 7)
 data.setCell(7, 1, 'totalCallsTileValueVerification')
 data.setCell(7, 2, 'tests.CallLogsTest')
-data.setCell(7, 3, 6424);
+data.setCell(7, 3, 9839);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'answeredCallsTileValueVerification')
+data.setCell(8, 1, 'detailedViewUIVerificationTest')
 data.setCell(8, 2, 'tests.CallLogsTest')
-data.setCell(8, 3, 6372);
+data.setCell(8, 3, 9829);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'averageCallsDurationTileValueVerification')
+data.setCell(9, 1, 'totalConversionTileValueVerification')
 data.setCell(9, 2, 'tests.CallLogsTest')
-data.setCell(9, 3, 6298);
+data.setCell(9, 3, 8765);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'uniqueCallsTileValueVerification')
+data.setCell(10, 1, 'averageCallsDurationTileValueVerification')
 data.setCell(10, 2, 'tests.CallLogsTest')
-data.setCell(10, 3, 6287);
+data.setCell(10, 3, 8034);
 data.setCell(11, 0, 11)
-data.setCell(11, 1, 'totalConversionTileValueVerification')
+data.setCell(11, 1, 'totalLeadsTileValueVerification')
 data.setCell(11, 2, 'tests.CallLogsTest')
-data.setCell(11, 3, 6279);
+data.setCell(11, 3, 8029);
 data.setCell(12, 0, 12)
-data.setCell(12, 1, 'gearIconOptionsVerification')
+data.setCell(12, 1, 'answeredCallsTileValueVerification')
 data.setCell(12, 2, 'tests.CallLogsTest')
-data.setCell(12, 3, 2634);
+data.setCell(12, 3, 6565);
 data.setCell(13, 0, 13)
-data.setCell(13, 1, 'presenceOfDetailedViewTileTest')
+data.setCell(13, 1, 'gearIconOptionsVerification')
 data.setCell(13, 2, 'tests.CallLogsTest')
-data.setCell(13, 3, 2117);
+data.setCell(13, 3, 6273);
 data.setCell(14, 0, 14)
-data.setCell(14, 1, 'headerLabelVerification')
+data.setCell(14, 1, 'presenceOfDetailedViewTileTest')
 data.setCell(14, 2, 'tests.CallLogsTest')
-data.setCell(14, 3, 1615);
+data.setCell(14, 3, 2096);
 data.setCell(15, 0, 15)
 data.setCell(15, 1, 'presenceOfTimeZoneVerification')
 data.setCell(15, 2, 'tests.CallLogsTest')
-data.setCell(15, 3, 1320);
+data.setCell(15, 3, 499);
 data.setCell(16, 0, 16)
-data.setCell(16, 1, 'presenceOfGearIconVerification')
+data.setCell(16, 1, 'footerNoteTest')
 data.setCell(16, 2, 'tests.CallLogsTest')
-data.setCell(16, 3, 1191);
+data.setCell(16, 3, 377);
 data.setCell(17, 0, 17)
-data.setCell(17, 1, 'filterButtonTest')
+data.setCell(17, 1, 'presenceOfTotalCallsGraph')
 data.setCell(17, 2, 'tests.CallLogsTest')
-data.setCell(17, 3, 182);
+data.setCell(17, 3, 139);
 data.setCell(18, 0, 18)
-data.setCell(18, 1, 'footerNoteTest')
+data.setCell(18, 1, 'filterButtonTest')
 data.setCell(18, 2, 'tests.CallLogsTest')
-data.setCell(18, 3, 139);
+data.setCell(18, 3, 133);
 data.setCell(19, 0, 19)
-data.setCell(19, 1, 'presenceOfTotalCallsGraph')
+data.setCell(19, 1, 'presenceOfGearIconVerification')
 data.setCell(19, 2, 'tests.CallLogsTest')
-data.setCell(19, 3, 137);
+data.setCell(19, 3, 100);
 data.setCell(20, 0, 20)
 data.setCell(20, 1, 'presenceOfUniqueCallsGraph')
 data.setCell(20, 2, 'tests.CallLogsTest')
-data.setCell(20, 3, 79);
+data.setCell(20, 3, 76);
 window.suiteTableData['Automation_Suite-1']= { tableData: data, tableDiv: 'times-div-Automation_Suite-1'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 minutes</span>
+              <span class="suite-total-time">Total running time: 5 minutes</span>
               <div id="times-div-Automation_Suite-1">
               </div> <!-- times-div-Automation_Suite-1 -->
             </div> <!-- times-div -->
@@ -608,194 +548,186 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="configuration-test before">
                 <span class="method-name">setUp(chrome, https://stag-5-cmo-1.convirza.com)</span>
-                <span class="method-start">28 ms</span>
+                <span class="method-start">20 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">goToLookerReports</span>
-                <span class="method-start">39763 ms</span>
+                <span class="method-start">146077 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">headerLabelVerification</span>
-                <span class="method-start">60816 ms</span>
+                <span class="method-start">160273 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=headerLabelVerification status=SUCCESS method=CallLogsTest.headerLabelVerification(...)</span>
-                <span class="method-start">62434 ms</span>
+                <span class="method-start">176553 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">presenceOfTimeZoneVerification</span>
-                <span class="method-start">63348 ms</span>
+                <span class="method-start">177354 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=presenceOfTimeZoneVerification status=SUCCESS method=CallLogsTest.presenceOfTimeZon...)</span>
-                <span class="method-start">64670 ms</span>
+                <span class="method-start">177856 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">presenceOfGearIconVerification</span>
-                <span class="method-start">64819 ms</span>
+                <span class="method-start">177983 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=presenceOfGearIconVerification status=SUCCESS method=CallLogsTest.presenceOfGearIco...)</span>
-                <span class="method-start">66012 ms</span>
+                <span class="method-start">178086 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">gearIconOptionsVerification</span>
-                <span class="method-start">66117 ms</span>
+                <span class="method-start">178199 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=gearIconOptionsVerification status=SUCCESS method=CallLogsTest.gearIconOptionsVerif...)</span>
-                <span class="method-start">68751 ms</span>
+                <span class="method-start">184476 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">tilesVerification</span>
-                <span class="method-start">68808 ms</span>
+                <span class="method-start">184562 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=tilesVerification status=SUCCESS method=CallLogsTest.tilesVerification()[pri:5, ins...)</span>
-                <span class="method-start">84850 ms</span>
+                <span class="method-start">201013 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">totalCallsTileValueVerification</span>
-                <span class="method-start">84937 ms</span>
+                <span class="method-start">201143 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=totalCallsTileValueVerification status=SUCCESS method=CallLogsTest.totalCallsTileVa...)</span>
-                <span class="method-start">91363 ms</span>
+                <span class="method-start">210983 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">uniqueCallsTileValueVerification</span>
-                <span class="method-start">91440 ms</span>
+                <span class="method-start">211035 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=uniqueCallsTileValueVerification status=SUCCESS method=CallLogsTest.uniqueCallsTile...)</span>
-                <span class="method-start">97728 ms</span>
+                <span class="method-start">220931 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">answeredCallsTileValueVerification</span>
-                <span class="method-start">97787 ms</span>
+                <span class="method-start">220975 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=answeredCallsTileValueVerification status=SUCCESS method=CallLogsTest.answeredCalls...)</span>
-                <span class="method-start">104164 ms</span>
+                <span class="method-start">227542 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">averageCallsDurationTileValueVerification</span>
-                <span class="method-start">104298 ms</span>
+                <span class="method-start">227589 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=averageCallsDurationTileValueVerification status=SUCCESS method=CallLogsTest.averag...)</span>
-                <span class="method-start">110598 ms</span>
+                <span class="method-start">235624 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">totalLeadsTileValueVerification</span>
-                <span class="method-start">110675 ms</span>
+                <span class="method-start">235672 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=totalLeadsTileValueVerification status=SUCCESS method=CallLogsTest.totalLeadsTileVa...)</span>
-                <span class="method-start">117174 ms</span>
+                <span class="method-start">243702 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">totalConversionTileValueVerification</span>
-                <span class="method-start">117222 ms</span>
+                <span class="method-start">243741 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=totalConversionTileValueVerification status=SUCCESS method=CallLogsTest.totalConver...)</span>
-                <span class="method-start">123503 ms</span>
+                <span class="method-start">252507 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">presenceOfTotalCallsGraph</span>
-                <span class="method-start">123552 ms</span>
+                <span class="method-start">252555 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=presenceOfTotalCallsGraph status=SUCCESS method=CallLogsTest.presenceOfTotalCallsGr...)</span>
-                <span class="method-start">123691 ms</span>
+                <span class="method-start">252695 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">presenceOfUniqueCallsGraph</span>
-                <span class="method-start">123751 ms</span>
+                <span class="method-start">252732 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=presenceOfUniqueCallsGraph status=SUCCESS method=CallLogsTest.presenceOfUniqueCalls...)</span>
-                <span class="method-start">123831 ms</span>
+                <span class="method-start">252810 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">tableColumnsTest</span>
-                <span class="method-start">123905 ms</span>
+                <span class="method-start">252886 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=tableColumnsTest status=SUCCESS method=CallLogsTest.tableColumnsTest()[pri:14, inst...)</span>
-                <span class="method-start">148453 ms</span>
+                <span class="method-start">278259 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">filterButtonTest</span>
-                <span class="method-start">148511 ms</span>
+                <span class="method-start">278308 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=filterButtonTest status=SUCCESS method=CallLogsTest.filterButtonTest()[pri:15, inst...)</span>
-                <span class="method-start">148694 ms</span>
+                <span class="method-start">278442 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">filterButtonElementsTest</span>
-                <span class="method-start">148759 ms</span>
+                <span class="method-start">278491 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=filterButtonElementsTest status=SUCCESS method=CallLogsTest.filterButtonElementsTes...)</span>
-                <span class="method-start">174071 ms</span>
+                <span class="method-start">307326 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">filterFeatureForGroupTest</span>
-                <span class="method-start">174186 ms</span>
+                <span class="method-start">307386 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=filterFeatureForGroupTest status=SUCCESS method=CallLogsTest.filterFeatureForGroupT...)</span>
-                <span class="method-start">247664 ms</span>
+                <span class="method-start">380591 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">filterFeatureForCampaignTest</span>
-                <span class="method-start">247715 ms</span>
+                <span class="method-start">380651 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=filterFeatureForCampaignTest status=SUCCESS method=CallLogsTest.filterFeatureForCam...)</span>
-                <span class="method-start">318281 ms</span>
+                <span class="method-start">451039 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">footerNoteTest</span>
-                <span class="method-start">318328 ms</span>
+                <span class="method-start">451086 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=footerNoteTest status=SUCCESS method=CallLogsTest.footerNoteTest()[pri:19, instance...)</span>
-                <span class="method-start">318468 ms</span>
+                <span class="method-start">451464 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
                 <span class="method-name">presenceOfDetailedViewTileTest</span>
-                <span class="method-start">318505 ms</span>
+                <span class="method-start">451503 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=presenceOfDetailedViewTileTest status=SUCCESS method=CallLogsTest.presenceOfDetaile...)</span>
-                <span class="method-start">320633 ms</span>
+                <span class="method-start">453600 ms</span>
               </div> <!-- configuration-method after -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">detailedViewUIVerificationTest</span>
-                <span class="method-start">320669 ms</span>
+                <span class="method-start">453628 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDown([TestResult name=detailedViewUIVerificationTest status=FAILURE method=CallLogsTest.detailedViewUIVer...)</span>
-                <span class="method-start">440772 ms</span>
+                <span class="method-name">tearDown([TestResult name=detailedViewUIVerificationTest status=SUCCESS method=CallLogsTest.detailedViewUIVer...)</span>
+                <span class="method-start">463458 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">loggingOut</span>
-                <span class="method-start">462496 ms</span>
+                <span class="method-start">463497 ms</span>
               </div> <!-- configuration-class after -->
-              <div class="configuration-test after">
-                <span class="method-name">tearDown</span>
-                <span class="method-start">469273 ms</span>
-              </div> <!-- configuration-test after -->
-              <div class="configuration-suite after">
-                <span class="method-name">close_connection</span>
-                <span class="method-start">470114 ms</span>
-              </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

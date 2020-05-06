@@ -198,15 +198,32 @@ public static class LookerReports{
     	public static final String repeat_call="true";
     	public static final String location_route_id="-1";
 
-
-
-
-    	
-   
     	
     }
     
-	
+    public static class LookerTrackingNumberSettingsReport{
+    	
+    	public static final String active_campaigns_tile="Active Campaigns";
+    	public static final String inactive_campaigns_tile="Inactive Campaigns";
+    	public static final String active_tracking_numbers_tile="Active Tracking Numbers";
+    	public static final String inactive_tracking_numbers_tile="Inactive Tracking Numbers";
+
+    	//filter section
+    	public static final String campaign_filter="Campaign";
+    	public static final String group_filter="Group";    	
+    	public static final String ring_to_number_filter="Ring-to Number";    	
+    	public static final String send_to_voicemail_filter="Send to Voicemail";    	
+    	public static final String tracking_number_name_filter="Tracking Number Name";    	
+    	public static final String tracking_number_filter="Tracking Number";    	
+    	public static final String tracking_number_status_filter="Tracking Number Status";    	
+    	public static final String tracking_number_type_filter="Tracking Number Type";    	
+    	
+    		
+    }
+
+
+    
+    
 }
 
 	

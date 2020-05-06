@@ -2,6 +2,7 @@ package tests;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -14,8 +15,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.IClass;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -146,17 +149,30 @@ public class TestBase
 				String img = Util.image_upload(image_path);
 				System.out.println("Failure Method" + methodName);
 				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
-				driver.navigate().refresh();
 				
-				Thread.sleep(3000);
-				HomePage hp=new HomePage(driver);
-				hp.left_hand_navigation_bar_click();
 //				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
 //				Thread.sleep(2000);
 				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
 				if(methodName.startsWith("campaign")){
+					driver.navigate().refresh();
+					
+					Thread.sleep(3000);
+					HomePage hp=new HomePage(driver);
+					hp.left_hand_navigation_bar_click();
 					CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
 				    ct.clickAction("list");
+				}
+				else if(result.getName().getClass().toString().startsWith("Looker")){
+					
+
+
+				}
+				else{
+					driver.navigate().refresh();
+					
+					Thread.sleep(3000);
+					HomePage hp=new HomePage(driver);
+					hp.left_hand_navigation_bar_click();
 				}
 				
 			} catch (Exception e) {

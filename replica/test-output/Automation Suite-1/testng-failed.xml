@@ -10,22 +10,4 @@
       <class name="tests.CallLogsTest"/>
     </classes>
   </test> <!-- chrome test-1 -->
-  <test name="chrome test-1(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
-    <classes>
-      <class name="tests.CallLogsTest">
-        <methods>
-          <include name="detailedViewUIVerificationTest"/>
-          <include name="loggingOut"/>
-          <include name="goToLookerReports"/>
-          <include name="testSetUp"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="close_connection"/>
-        </methods>
-      </class> <!-- tests.CallLogsTest -->
-    </classes>
-  </test> <!-- chrome test-1(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

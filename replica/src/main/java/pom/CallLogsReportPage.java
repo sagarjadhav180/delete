@@ -115,6 +115,9 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//iframe[@id='looker']")
 	private WebElement reports_iframe;
 	
+	@FindBy(xpath="//span[@class='select2-arrow']")
+	private WebElement reports_listbox_button;	
+	
 	SoftAssert softassert=new SoftAssert(); 
 
 	public CallLogsReportPage(WebDriver driver){
@@ -127,8 +130,17 @@ public class CallLogsReportPage extends TestBase {
 		
 	}
 	
+    public void switchToMainWindow(){
+		
+		driver.switchTo().window(driver.getWindowHandle());
+		
+	}
+	
 	public void goToReport(String reportName){
 		
+		reports_listbox_button.click();
+		WebElement report = driver.findElement(By.xpath("//ul[@id='select2-results-1']//ul[@class='select2-result-sub']//li//div[text()='"+reportName+"']"));
+		report.click();
 	}
 	
 	public void headerLabel(){
@@ -136,6 +148,14 @@ public class CallLogsReportPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
 		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
 		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
+				
+	}
+	
+	public void runButton(){
+
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		softassert.assertTrue(run_button.isDisplayed(),"run button is not displayed or locator has been chamged..");
 				
 	}
 	
@@ -154,9 +174,9 @@ public class CallLogsReportPage extends TestBase {
 			
 			for(int j=0;j<expected_gear_icon_options.length;j++){
 				
-				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
+				if(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
-					softassert.assertTrue(gear_icon_options.get(i).equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
+					softassert.assertTrue(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
 				}
 			}
 		}
@@ -404,8 +424,8 @@ public class CallLogsReportPage extends TestBase {
     		}
     	k++;
     }
-	System.out.println("-------------------------------------------------------------------------------");
-    
+	
+    softassert.assertAll();
 	//collapsing filter section
 	Util.click(filter_button);
 
@@ -536,8 +556,8 @@ public class CallLogsReportPage extends TestBase {
         Util.Action().moveToElement(filter_textbox).perform();
         Util.Action().click().perform();
         Thread.sleep(1000);
-	    Util.Action().sendKeys(Keys.CLEAR).perform();
-        Util.Action().sendKeys(Keys.CLEAR).perform();
+	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+        Util.Action().sendKeys(Keys.BACK_SPACE).perform();
 		Util.Action().sendKeys(Keys.ESCAPE).perform();	
 	
 		filter_button.click();

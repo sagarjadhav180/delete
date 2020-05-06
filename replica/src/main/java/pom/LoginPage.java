@@ -375,18 +375,19 @@ Properties prop=new Properties();
 	}
 	
 	public void logOut() {
-		try{
-			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
-			Assert.assertTrue(logged_in_logo.isDisplayed());	
-		}
-		catch(Exception e){
-			driver.navigate().refresh();
-		}
-		finally{
-			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
-			Assert.assertTrue(logged_in_logo.isDisplayed());
-		}
-		
+//		try{
+//			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+//			Assert.assertTrue(logged_in_logo.isDisplayed());	
+//		}
+//		catch(Exception e){
+//			driver.navigate().refresh();
+//		}
+//		finally{
+//			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+//			Assert.assertTrue(logged_in_logo.isDisplayed());
+//		}
+
+		wait.until(ExpectedConditions.visibilityOf(profileButton));
 		profileButton.click();
 		Util.click(logoutLink);
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
