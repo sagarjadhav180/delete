@@ -34,7 +34,7 @@ public class Constants {
 	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
 	
-public static class LookerReports{
+    public static class LookerReports{
     	
     	public static final String call_back_report="Call Back";
     	public static final String account_details_report="Account Details";
@@ -221,7 +221,16 @@ public static class LookerReports{
     		
     }
 
-
+    public static class LookerCallBackReport{
+    	public static final String total_calls_tile="Total Calls";
+    	public static final String answered_calls_tile="Answered Calls";
+    	public static final String average_calls_duration_tile="Average Call Duration";
+    	public static final String missed_opportunity_tile="Missed Opportunity Calls";
+       	public static final String call_back_tag_tile="Tagged as Call Back";
+           	
+    	
+    }
+    	   
     
     
 }

@@ -322,8 +322,6 @@ public class CallLogsReportPage extends TestBase {
 			
 		}
 		
-		
-
 		softassert.assertAll();
 	}
 	
