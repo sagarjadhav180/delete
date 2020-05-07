@@ -44,7 +44,7 @@ public class CallBackReportPage extends TestBase{
 	@FindBy(xpath="//span[text()='Missed Opportunity Over Time']")
 	private WebElement missed_opportunity_over_time_label;	
 	
-	@FindBy(xpath="//div[@id='highcharts-9bietra-492']")
+	@FindBy(xpath="//div[starts-with(@id,'highcharts')]")
 	private WebElement missed_opportunity_over_time_graph;	
 
 	@FindBy(xpath="(//span[text()='Missed Opportunity Calls'])[3]")
@@ -141,6 +141,7 @@ public class CallBackReportPage extends TestBase{
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 	
     public void presenceOfTimeZone(){
@@ -236,7 +237,7 @@ public class CallBackReportPage extends TestBase{
 		}
         
 		
-        else if(tile_values.equals("Average Call Duration")){
+        else if(tile_name.equals("Average Call Duration")){
 			int sec = 0;
 			int min = Integer.valueOf(tile_values.substring(0,tile_values.indexOf('m')-1));
 	        if(min<=9){
@@ -248,8 +249,6 @@ public class CallBackReportPage extends TestBase{
 	        min=min*60;
 			int final_count=sec+min;
 			tile_values=String.valueOf(final_count);
-			System.out.println(tile_values);
-
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(avg_call_duration_from_db!=null){
 				System.out.println(tile_values);
@@ -257,6 +256,7 @@ public class CallBackReportPage extends TestBase{
 				softassert.assertTrue(tile_values.equals(avg_call_duration_from_db),"Tile count doest match with db count");			
 			}
 			else{
+				System.out.println(tile_values);
 				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
 			}
 			
@@ -274,9 +274,9 @@ public class CallBackReportPage extends TestBase{
     public void presenceOfMissedOpportunityOverTimeGraph(){
     	
     	logger.log(LogStatus.INFO, "Verifying if Missed Opportunity Over Time Graph is displayed");
+    	softassert.assertTrue(missed_opportunity_over_time_graph.isDisplayed(),"Missed Opportunity Over Time Graph not displayed or locator changed");
     	softassert.assertTrue(missed_opportunity_call_legend.isDisplayed(),"missed_opportunity_call_legend is not present or locator changed");
     	softassert.assertTrue(total_calls_legend.isDisplayed(),"total_calls_legend is not present or locator changed");
-    	softassert.assertTrue(missed_opportunity_over_time_graph.isDisplayed(),"Missed Opportunity Over Time Graph not displayed or locator changed");
     	softassert.assertAll();
     }
     

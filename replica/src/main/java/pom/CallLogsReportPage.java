@@ -296,7 +296,7 @@ public class CallLogsReportPage extends TestBase {
 			}
 			
 		}
-		else if(tile_values.equals("Average Call Duration")){
+		else if(tile_name.equals("Average Call Duration")){
 			int sec = 0;
 			int min = Integer.valueOf(tile_values.substring(0,tile_values.indexOf('m')-1));
 	        if(min<=9){
@@ -308,7 +308,6 @@ public class CallLogsReportPage extends TestBase {
 	        min=min*60;
 			int final_count=sec+min;
 			tile_values=String.valueOf(final_count);
-			System.out.println(tile_values);
 
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(avg_call_duration_from_db!=null){
