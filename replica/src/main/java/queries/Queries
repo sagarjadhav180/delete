@@ -93,6 +93,13 @@ SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM
 //avg call duration
 SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
 
+//missed opportunity
+SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-30 23:59' AND '2020-05-07 23:59') AND indicator_id='2065'
+
+//tagged call as call back
+SELECT COUNT(*) AS count FROM call_tag 
+WHERE tag_id='9' AND call_tag_created BETWEEN '2020-04-30 23:59' AND '2020-05-07 23:59'
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --------------------------Tracking number settings looker---------------------------------------------------------------------
