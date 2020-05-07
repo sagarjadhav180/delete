@@ -56,6 +56,12 @@ public class BlockedCallsReportPage extends TestBase{
 		Assert.assertTrue(gear_icon.isDisplayed(),"Gear icon is not present or locator has been changed.");
 	}
 	
+    public void switchToMainWindow(){
+		
+		driver.switchTo().window(driver.getWindowHandle());
+		
+	}
+
     public void gearIconOptions(){
 		
 		logger.log(LogStatus.INFO, "Verifying options present in gear icon");
@@ -67,13 +73,14 @@ public class BlockedCallsReportPage extends TestBase{
 				
 				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
-					softassert.assertTrue(gear_icon_options.get(i).equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
+					softassert.assertTrue(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
 				}
 			}
 		}
     
 		softassert.assertAll();
     }
+
 	
     public void presenceOfTimeZone(){
 		

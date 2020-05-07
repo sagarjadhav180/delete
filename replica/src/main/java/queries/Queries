@@ -43,18 +43,23 @@ DELETE FROM report_sched WHERE org_unit_id='70045'AND report_name LIKE 'automati
 ---------------------------------------------------------------------------------------
 
 ------------------------------call logs-------------------------------------------------------------------
+
+//total calls
 SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
 
+//unique calls
 SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND repeat_call='false'
 
-
+//answered calls
 SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND disposition IN ('ANSWERED')
 
-
+//avg calls duration
 SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
 
+//total leads
 SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='51'
 
+//total conversion
 SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='18'
 
 //for call entry
@@ -76,6 +81,19 @@ DELETE FROM call_detail
 WHERE call_id='135118' 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------call back report--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//answered calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND disposition IN ('ANSWERED')
+
+//avg call duration
+SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --------------------------Tracking number settings looker---------------------------------------------------------------------
 
