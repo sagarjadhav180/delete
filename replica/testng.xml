@@ -15,6 +15,12 @@
 			<class name="tests.CallDetailReportTest" />
 			<class name="tests.TrackingNumberSettingsTest" />
 			<class name="tests.GroupActivityReportTest" />
+			<class name="tests.LegacyScheduledReportTest" />
+		    <class name="tests.CallLogsTest" />
+		    <class name="tests.LookerTrackingNumberSettingsReportTest" />
+		    <class name="tests.CallBackReportTest" />
+		    
+		    
 
 		</classes>
 	</test>
