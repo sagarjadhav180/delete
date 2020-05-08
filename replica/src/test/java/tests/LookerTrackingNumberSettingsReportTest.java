@@ -15,6 +15,7 @@ import pom.HomePage;
 import pom.LoginPage;
 import pom.LookerTrackingNumberSettingsPage;
 
+@SuppressWarnings("unused")
 public class LookerTrackingNumberSettingsReportTest extends TestBase{
 	
 	HomePage hp;

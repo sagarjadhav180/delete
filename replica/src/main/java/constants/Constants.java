@@ -222,13 +222,19 @@ public class Constants {
     }
 
     public static class LookerCallBackReport{
+    
     	public static final String total_calls_tile="Total Calls";
     	public static final String answered_calls_tile="Answered Calls";
     	public static final String average_calls_duration_tile="Average Call Duration";
     	public static final String missed_opportunity_tile="Missed Opportunity Calls";
        	public static final String call_back_tag_tile="Tagged as Call Back";
-           	
-    	
+        
+       	//filter section
+       	public static final String group_filter="Group";
+       	public static final String campaign_filter="Campaign";
+       	public static final String tracking_number_name_filter="Tracking Number Name";
+       	public static final String tracking_number_filter="Tracking Number";
+        
     }
     	   
     

@@ -134,7 +134,7 @@ public class CallBackReportPage extends TestBase{
 			
 			for(int j=0;j<expected_gear_icon_options.length;j++){
 				
-				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
+				if(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
 					softassert.assertTrue(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
 				}
@@ -167,18 +167,20 @@ public class CallBackReportPage extends TestBase{
     	}
     	softassert.assertAll();
     }
+        
+    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+
+	String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+	String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
+	String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+	String missed_opportuntity_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='2065'");
+	String tagged_as_call_back_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call_tag WHERE tag_id='9' AND call_tag_created BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+
     
     public void tileValueVerification(String tile_name){
 		
-    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
-
-		String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
-		String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		String missed_opportuntity_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='2065'");
-		String tagged_as_call_back_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call_tag WHERE tag_id='9' AND call_tag_created BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		
+    	
 		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
 	
         if(tile_name.equals("Total Calls")){
@@ -368,6 +370,137 @@ public class CallBackReportPage extends TestBase{
 		softassert.assertAll();
 	}
 
+    public void filterFeatureForTaggedAsCallBack(String filterName) throws InterruptedException{
+
+    	if(tagged_as_call_back_from_db.equals("0")){
+    		
+    		logger.log(LogStatus.INFO, "Verifying if no results label is displayed since there is no data to filter");
+    		Assert.assertTrue(no_results_label_for_tagged_as_callback_table.isDisplayed(),"no results label is not displayed or locator changed");
+    	}
+    	else{
+    		int index=0;
+            String filterValue;
+    		for(int i=0;i<tagged_as_callback_table_columns.size();i++){
+    			
+    			if(filterName.equals(tagged_as_callback_table_columns.get(i).getText())){
+    				
+    				index=i+1;
+    				break;
+    			}
+    		}
+    		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
+    		filterValue=value_to_be_filtered.get(0).getText();
+    		
+    		filter_button.click();
+    		
+    		String xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name'][text()='"+filterName+"']";
+    		
+    		WebElement filter_textbox = driver.findElement(By.xpath(""+xpath+"//parent::tr//select//following-sibling::span"));
+    	
+    		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+            Util.Action().moveToElement(filter_textbox).perform();
+            Util.Action().click().perform();
+    	    Util.Action().sendKeys(filterValue).perform();
+    	    Util.Action().sendKeys(Keys.ESCAPE).perform();	
+    		
+    		run_button.click();
+    		filter_button.click();
+    		Thread.sleep(5000);
+    		
+    	
+    		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
+    		System.out.println("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
+    		for(int j=0;j<filtered_values.size();j++){
+    			
+    			System.out.println(filtered_values.get(j).getText());
+    			System.out.println(filterValue);
+    			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
+    			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
+    		}
+    		
+    		
+    		softassert.assertAll();
+
+            filter_button.click();
+    		
+    		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+            Util.Action().moveToElement(filter_textbox).perform();
+            Util.Action().click().perform();
+            Thread.sleep(1000);
+    	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+            Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+    		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+    	
+    		filter_button.click();
+    	}
+    	        
+	}
+    
+    public void filterFeatureForMissedOppSummary(String filterName) throws InterruptedException{
+
+    	if(missed_opportuntity_from_db.equals("0")){
+    		logger.log(LogStatus.INFO, "Verifying if no results label is displayed since there is no data to filter");
+    		Assert.assertTrue(no_results_label_for_missed_opportunity_summary_table.isDisplayed(),"no results label is not displayed or locator changed");
+    	}
+    
+    	else{
+    		int index=0;
+            String filterValue;
+    		for(int i=0;i<missed_opportunity_summary_table_columns.size();i++){
+    			
+    			if(filterName.equals(missed_opportunity_summary_table_columns.get(i).getText())){
+    				
+    				index=i+1;
+    				break;
+    			}
+    		}
+    		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
+    		filterValue=value_to_be_filtered.get(0).getText();
+    		
+    		filter_button.click();
+    		
+    		String xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name'][text()='"+filterName+"']";
+    		
+    		WebElement filter_textbox = driver.findElement(By.xpath(""+xpath+"//parent::tr//select//following-sibling::span"));
+    	
+    		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+            Util.Action().moveToElement(filter_textbox).perform();
+            Util.Action().click().perform();
+    	    Util.Action().sendKeys(filterValue).perform();
+    	    Util.Action().sendKeys(Keys.ESCAPE).perform();	
+    		
+    		run_button.click();
+    		filter_button.click();
+    		Thread.sleep(5000);
+    		
+    	
+    		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
+    		System.out.println("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
+    		for(int j=0;j<filtered_values.size();j++){
+    			
+    			System.out.println(filtered_values.get(j).getText());
+    			System.out.println(filterValue);
+    			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
+    			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
+    		}
+    		
+    		
+    		softassert.assertAll();
+
+            filter_button.click();
+    		
+    		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+            Util.Action().moveToElement(filter_textbox).perform();
+            Util.Action().click().perform();
+            Thread.sleep(1000);
+    	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+            Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+    		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+    	
+    		filter_button.click();
+    	}
+    	
+	}
     
     
     

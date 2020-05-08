@@ -180,6 +180,7 @@ public class CallBackReportTest extends TestBase {
 		cb.taggedAsCallBackTableColumnVerification();
 	}
 	
+	@Test(priority=18)	
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -187,11 +188,76 @@ public class CallBackReportTest extends TestBase {
         cb.filterButton();
 	}
 	
+	@Test(priority=19)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.call_back_category);
         cb=new CallBackReportPage(driver);
         cb.filterElements();
+	}
+	
+	@Test(priority=20)
+	public void filterFeatureForMissedOppGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Group Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.group_filter);
+	}
+	
+	@Test(priority=21)
+	public void filterFeatureForMissedOppCampaignTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Campaign Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.campaign_filter);
+	}
+	
+	@Test(priority=22)
+	public void filterFeatureForMissedOppTrackingNumberNameTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Tracking Number Name Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.tracking_number_name_filter);
+	}
+	
+	@Test(priority=23)
+	public void filterFeatureForMissedOppTrackingNumberTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Tracking Number Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.tracking_number_filter);
+	}
+	
+	@Test(priority=24)
+	public void filterFeatureForTaggedGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Group Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.group_filter);
+	}
+	
+	@Test(priority=25)
+	public void filterFeatureForTaggedCampaignTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Campaign Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.campaign_filter);
+	}
+	
+	@Test(priority=26)
+	public void filterFeatureForTaggedTrackingNumberNameTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Tracking Number Name Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.tracking_number_name_filter);
+	}
+	
+	@Test(priority=27)
+	public void filterFeatureForTaggedTrackingNumberTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Missed Opp Tracking Number Test"); 
+		logger.assignCategory(Constants.call_back_category);
+        cb=new CallBackReportPage(driver);
+        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.tracking_number_filter);
 	}
 	
 	@AfterClass
