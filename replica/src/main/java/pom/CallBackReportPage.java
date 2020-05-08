@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import tests.TestBase;
 import tests.Util;
 
+@SuppressWarnings("unused")
 public class CallBackReportPage extends TestBase{
 	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")

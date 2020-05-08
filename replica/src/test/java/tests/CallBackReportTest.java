@@ -16,6 +16,7 @@ import pom.HomePage;
 import pom.LoginPage;
 import pom.LookerTrackingNumberSettingsPage;
 
+@SuppressWarnings("unused")
 public class CallBackReportTest extends TestBase {
 
 	HomePage hp;
