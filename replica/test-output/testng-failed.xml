@@ -7,7 +7,304 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
     <classes>
+      <class name="tests.LoginTest"/>
+      <class name="tests.HomeTest"/>
+      <class name="tests.CamapignUIVerificationTest"/>
+      <class name="tests.CampaignTests"/>
+      <class name="tests.TrackingNumberTest"/>
+      <class name="tests.CallDetailReportTest"/>
+      <class name="tests.TrackingNumberSettingsTest"/>
+      <class name="tests.GroupActivityReportTest"/>
+      <class name="tests.LegacyScheduledReportTest"/>
       <class name="tests.CallLogsTest"/>
+      <class name="tests.LookerTrackingNumberSettingsReportTest"/>
+      <class name="tests.CallBackReportTest"/>
     </classes>
   </test> <!-- chrome test-1 -->
+  <test name="chrome test-1(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="https://stag-5-cmo-1.convirza.com"/>
+    <classes>
+      <class name="tests.LookerTrackingNumberSettingsReportTest">
+        <methods>
+          <include name="activeCampaignCountVerification"/>
+          <include name="presenceOfDetailedViewTileTest"/>
+          <include name="presenceOfTimeZoneVerification"/>
+          <include name="filterFeatureForTrackingNumberNameTest"/>
+          <include name="filterFeatureForTrackingNumberTypeTest"/>
+          <include name="filterFeatureForRingToNumberTest"/>
+          <include name="presenceOfGearIconVerification"/>
+          <include name="filterButtonTest"/>
+          <include name="filterFeatureForTrackingNumberTest"/>
+          <include name="gearIconOptionsVerification"/>
+          <include name="tableColumnsTest"/>
+          <include name="inActiveTrackingNumberCountVerification"/>
+          <include name="runButtonVerification"/>
+          <include name="headerLabelVerification"/>
+          <include name="tilesVerification"/>
+          <include name="detailedViewUIVerificationTest"/>
+          <include name="inActiveCampaignCountVerification"/>
+          <include name="activeTrackingNumberCountVerification"/>
+          <include name="filterFeatureForGroupTest"/>
+          <include name="filterButtonElementsTest"/>
+          <include name="filterFeatureForCampaignTest"/>
+        </methods>
+      </class> <!-- tests.LookerTrackingNumberSettingsReportTest -->
+      <class name="tests.CamapignUIVerificationTest">
+        <methods>
+          <include name="CampaignAndTrackingNumberPage_UI_Verification"/>
+          <include name="defaultColumnsDisplayed"/>
+          <include name="allColumnsDisplayed"/>
+        </methods>
+      </class> <!-- tests.CamapignUIVerificationTest -->
+      <class name="tests.TrackingNumberTest">
+        <methods>
+          <include name="IVRCreation"/>
+          <include name="numberPoolUpdation"/>
+          <include name="outboundTrakingNumberDeletion"/>
+          <include name="percentTrakingNumberDeletion"/>
+          <include name="simpleTrakingNumberDeletion"/>
+          <include name="numberPoolDeletion"/>
+          <include name="hangupTrakingNumberDeletion"/>
+          <include name="GeoRouteTrakingNumberCreation"/>
+          <include name="hangupTrakingNumberCreation"/>
+          <include name="voicemailTrakingNumberCreation"/>
+          <include name="scheduleTrakingNumberCreation"/>
+          <include name="numberPoolCreation"/>
+          <include name="GeoRouteTrakingNumberDeletion"/>
+          <include name="reserveNumberUpdation"/>
+          <include name="reserveNumberDeletion"/>
+          <include name="scheduleTrakingNumberDeletion"/>
+          <include name="outboundTrakingNumberCreation"/>
+          <include name="simpleTrakingNumberCreation"/>
+          <include name="simpleTrakingNumberUpdation"/>
+          <include name="percentTrakingNumberCreation"/>
+          <include name="voicemailTrakingNumberDeletion"/>
+          <include name="IVRDeletion"/>
+          <include name="reserveNumberCreation"/>
+          <include name="trakingNumberPageUIVerification"/>
+        </methods>
+      </class> <!-- tests.TrackingNumberTest -->
+      <class name="tests.CallDetailReportTest">
+        <methods>
+          <include name="dateRangeFilterForLast30days"/>
+          <include name="dateRangeFilterForLast7days"/>
+          <include name="tagSectionUIVerification"/>
+          <include name="advancedFilterUI"/>
+          <include name="informationTagOpen"/>
+          <include name="basicFilterForGroupName"/>
+          <include name="allColumnPickerCheckboxesClickable"/>
+          <include name="audioPlayerOpen"/>
+          <include name="advancedFilterForCallerID"/>
+          <include name="emailCallSectionUIVerification"/>
+          <include name="advancedFilterForDuration"/>
+          <include name="basicFilterForCaller_ID"/>
+          <include name="dateRangeFilterForToday"/>
+          <include name="emailCallFeature"/>
+          <include name="paginationCount"/>
+          <include name="uiVerification"/>
+          <include name="advancedFilterForGroupName"/>
+          <include name="tableCount"/>
+          <include name="commentSectionUIVerification"/>
+          <include name="basicFilterForDuration"/>
+          <include name="columnPickerFeature"/>
+          <include name="dateRangeFilterForYesterday"/>
+          <include name="basicFilterForDisposition"/>
+          <include name="basicFilterForAdSource"/>
+          <include name="defaultColumnsDisplayed"/>
+          <include name="infoSectionUIVerification"/>
+          <include name="advancedFilterForLineType"/>
+          <include name="defaultColumnPickerOptions"/>
+          <include name="basicFilterForTrackingNumber"/>
+          <include name="paginationUI"/>
+        </methods>
+      </class> <!-- tests.CallDetailReportTest -->
+      <class name="tests.LegacyScheduledReportTest">
+        <methods>
+          <include name="advanceFilterUI"/>
+          <include name="presenceOfReportLabel"/>
+          <include name="defaultSecondaryOptionForGroupActivityReport"/>
+          <include name="addNewScheduleDistributionSectionUIVerificationTest"/>
+          <include name="advanceFilterElementsForTrackingNumberSettingsReport"/>
+          <include name="editScheduledReportTest"/>
+          <include name="navigateToScheduledReportBuilderPage"/>
+          <include name="tableCountVerification"/>
+          <include name="scheduledReportForGroupActivityReport"/>
+          <include name="advanceFilterElementsForGroupActivityReport"/>
+          <include name="deleteScheduledReportTest"/>
+          <include name="scheduledReportForTrackingNumberSettingsReport"/>
+          <include name="defaultSecondaryOptionForTrackingNumberSettingsReport"/>
+          <include name="paginationCountVerification"/>
+          <include name="PresenceOfExportButton"/>
+          <include name="presenceOfAddScheduleButton"/>
+          <include name="defaultReportSelected"/>
+          <include name="defaultSecondaryOptionForCallDetailsReport"/>
+          <include name="paginationToolboxUIVerification"/>
+          <include name="ScheduledReportBuilderPageLabel"/>
+          <include name="addNewScheduleDistributionTest"/>
+          <include name="reportDetailSectionUIVerification"/>
+          <include name="scheduledReportForCallDetails"/>
+          <include name="advanceFilterElementsForCallDetailsReport"/>
+          <include name="presenceOfListButton"/>
+          <include name="dateRangeFilterUI"/>
+          <include name="secondaryGroupingOptions"/>
+          <include name="sendNowScheduledReportTest"/>
+          <include name="exportButtonOptions"/>
+        </methods>
+      </class> <!-- tests.LegacyScheduledReportTest -->
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="testSetUp"/>
+          <include name="login_with_invalidate_cred"/>
+          <include name="setUp"/>
+          <include name="next_button_with_no_email_ID"/>
+          <include name="UIVerification_forgot_passowrd_page"/>
+          <include name="rememeber_me_functinonality"/>
+          <include name="login_with_blank_password"/>
+          <include name="login_with_blank_username_and_password"/>
+          <include name="login_with_blank_username"/>
+          <include name="validLogin"/>
+          <include name="login_with_inactive_user"/>
+          <include name="reset_password"/>
+          <include name="login_page_UI_Verification"/>
+          <include name="login_with_deleted_user"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
+      <class name="tests.TrackingNumberSettingsTest">
+        <methods>
+          <include name="advancedFilterForTrackingNumberName"/>
+          <include name="basicFilterFeatureForCampaignName"/>
+          <include name="defaultColumnsDisplayed"/>
+          <include name="basicFilterFeatureForType"/>
+          <include name="defaultColumnPickerOptions"/>
+          <include name="uiVerification"/>
+          <include name="paginationCount"/>
+          <include name="advancedFilterForCampaignName"/>
+          <include name="advancedFilterForGroupName"/>
+          <include name="tableCount"/>
+          <include name="advancedFilterUI"/>
+          <include name="basicFilterFeatureForGroupName"/>
+          <include name="basicFilterFeatureForAdSource"/>
+          <include name="columnPickerFeature"/>
+          <include name="advancedFilterForTrackingNumber"/>
+          <include name="allColumnPickerCheckboxesClickable"/>
+          <include name="basicFilterFeatureForTrackingNumber"/>
+          <include name="paginationUIVerification"/>
+        </methods>
+      </class> <!-- tests.TrackingNumberSettingsTest -->
+      <class name="tests.GroupActivityReportTest">
+        <methods>
+          <include name="basicFilterForGroupName"/>
+          <include name="advancedFilterUI"/>
+          <include name="advancedFilterForConversion"/>
+          <include name="tableCountVerification"/>
+          <include name="allColumnPickerCheckboxesClickable"/>
+          <include name="secondaryGroupingFeatureForCampaignColumn"/>
+          <include name="dateRangeFilterUIVerification"/>
+          <include name="dateRangeFilterForToday"/>
+          <include name="dateRangeFilterForLast7Days"/>
+          <include name="advancedFilterForGroupName"/>
+          <include name="tileCountVerification"/>
+          <include name="uiVerification"/>
+          <include name="defaultSecondaryGroupingOption"/>
+          <include name="dateRangeFilterForYesterday"/>
+          <include name="paginationToolboxUIVerification"/>
+          <include name="advancedFilterForLeads"/>
+          <include name="advancedFilterForAnweredCalls"/>
+          <include name="secondaryGroupingFeatureForTrackingNumber"/>
+          <include name="secondaryGroupingOptions"/>
+          <include name="dateRangeFilterForLast30Days"/>
+          <include name="paginationCountVerification"/>
+          <include name="defaultColumnPickerOptions"/>
+          <include name="advancedFilterForCalls"/>
+          <include name="defaultColumnsDisplayed"/>
+          <include name="secondaryGroupingFeatureForTrackingumberColumn"/>
+          <include name="secondaryGroupingFeatureForNone"/>
+          <include name="secondaryGroupingFeatureForCampaign"/>
+        </methods>
+      </class> <!-- tests.GroupActivityReportTest -->
+      <class name="tests.CallBackReportTest">
+        <methods>
+          <include name="presenceOfMissedOpportunitySummaryLabelVerification"/>
+          <include name="presenceOfGearIconVerification"/>
+          <include name="filterButtonTest"/>
+          <include name="presenceOfTimeZoneVerification"/>
+          <include name="presenceOfMissedOpportunityOverTimeGraphVerification"/>
+          <include name="filterFeatureForMissedOppCampaignTest"/>
+          <include name="filterButtonElementsTest"/>
+          <include name="filterFeatureForTaggedTrackingNumberTest"/>
+          <include name="filterFeatureForTaggedGroupTest"/>
+          <include name="filterFeatureForMissedOppTrackingNumberTest"/>
+          <include name="taggedAsCallBackCountVerification"/>
+          <include name="runButtonVerification"/>
+          <include name="AnsweredCallsCountVerification"/>
+          <include name="missedOpportunitySummaryTableColumnVerification"/>
+          <include name="tilesVerification"/>
+          <include name="filterFeatureForTaggedCampaignTest"/>
+          <include name="filterFeatureForMissedOppGroupTest"/>
+          <include name="avgCallDurationVerification"/>
+          <include name="presenceOfMissedOpportunityOverTimeLabelVerification"/>
+          <include name="presenceOfTaggedAsCallBackLabelVerification"/>
+          <include name="toalCallsCountVerification"/>
+          <include name="gearIconOptionsVerification"/>
+          <include name="filterFeatureForMissedOppTrackingNumberNameTest"/>
+          <include name="headerLabelVerification"/>
+          <include name="taggedAsCallBackTableColumnVerification"/>
+          <include name="missedOppCallsCountVerification"/>
+          <include name="filterFeatureForTaggedTrackingNumberNameTest"/>
+        </methods>
+      </class> <!-- tests.CallBackReportTest -->
+      <class name="tests.CampaignTests">
+        <methods>
+          <include name="campaignBuilderPage_UI_Verification"/>
+          <include name="campaignCreationWithFutureStartDateAndFutureEndDate"/>
+          <include name="campaignCreationWithFutureStartDateAndNeverEndDate"/>
+          <include name="campaign_deletion_With_futureStartDate"/>
+          <include name="campaign_Creation_Without_externalID"/>
+          <include name="campaignUpdationWithFutureStartDateAndFutureEndDate"/>
+          <include name="campaign_deletion_With_externalID"/>
+          <include name="campaign_Creation_With_externalID"/>
+          <include name="campaignUpdationWithFutureStartDateAndNeverEndDate"/>
+          <include name="campaignCreationWithPastTime"/>
+          <include name="campaign_updation_Without_externalID"/>
+          <include name="campaign_deletion_With_futureStartDateAndFutureEndDate"/>
+          <include name="campaignDefaultOwnerValidation"/>
+          <include name="campaign_deletion_Without_externalID"/>
+          <include name="campaign_updation_With_externalID"/>
+        </methods>
+      </class> <!-- tests.CampaignTests -->
+      <class name="tests.CallLogsTest">
+        <methods>
+          <include name="detailedViewUIVerificationTest"/>
+          <include name="filterFeatureForGroupTest"/>
+          <include name="presenceOfTotalCallsGraph"/>
+          <include name="runButtonVerification"/>
+          <include name="headerLabelVerification"/>
+          <include name="totalConversionTileValueVerification"/>
+          <include name="tilesVerification"/>
+          <include name="averageCallsDurationTileValueVerification"/>
+          <include name="answeredCallsTileValueVerification"/>
+          <include name="presenceOfUniqueCallsGraph"/>
+          <include name="filterButtonTest"/>
+          <include name="presenceOfGearIconVerification"/>
+          <include name="totalLeadsTileValueVerification"/>
+          <include name="gearIconOptionsVerification"/>
+          <include name="tableColumnsTest"/>
+          <include name="uniqueCallsTileValueVerification"/>
+          <include name="totalCallsTileValueVerification"/>
+          <include name="filterButtonElementsTest"/>
+          <include name="filterFeatureForCampaignTest"/>
+          <include name="presenceOfTimeZoneVerification"/>
+          <include name="presenceOfDetailedViewTileTest"/>
+          <include name="footerNoteTest"/>
+        </methods>
+      </class> <!-- tests.CallLogsTest -->
+      <class name="tests.HomeTest">
+        <methods>
+          <include name="ui_verification"/>
+          <include name="tiles_count_verification_UI"/>
+        </methods>
+      </class> <!-- tests.HomeTest -->
+    </classes>
+  </test> <!-- chrome test-1(failed) -->
 </suite> <!-- Failed suite [Automation Suite-1] -->

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -32,6 +33,13 @@ public class AccountDetailsReportPage extends TestBase{
 	@FindBy(xpath="//iframe[@id='looker']")
 	private WebElement reports_iframe;
 	
+	@FindBy(xpath="//strong[@class='filter-section-title']//i")
+	private WebElement filter_button;
+	
+	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
+	private List<WebElement> filter_elements_after_expanding;
+
+	
 	SoftAssert softassert=new SoftAssert(); 
 
 	public AccountDetailsReportPage(WebDriver driver){
@@ -43,6 +51,12 @@ public class AccountDetailsReportPage extends TestBase{
 		driver.switchTo().frame(reports_iframe);
 		
 	}
+
+    public void switchToMainWindow(){
+		
+		driver.switchTo().window(driver.getWindowHandle());
+			
+    }
     
 	public void headerLabel(){
 
@@ -54,12 +68,6 @@ public class AccountDetailsReportPage extends TestBase{
 		logger.log(LogStatus.INFO, "Verifying if gear icon is present");
 		Assert.assertTrue(gear_icon.isDisplayed(),"Gear icon is not present or locator has been changed.");
 	}
-	
-    public void switchToMainWindow(){
-		
-		driver.switchTo().window(driver.getWindowHandle());
-		
-	}
 
     public void gearIconOptions(){
 		
@@ -70,7 +78,7 @@ public class AccountDetailsReportPage extends TestBase{
 			
 			for(int j=0;j<expected_gear_icon_options.length;j++){
 				
-				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
+				if(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
 					softassert.assertTrue(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
 				}
@@ -86,5 +94,10 @@ public class AccountDetailsReportPage extends TestBase{
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}
 
-	
+	public void runButton(){
+
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+	}
 }

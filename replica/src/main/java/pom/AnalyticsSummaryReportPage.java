@@ -32,6 +32,13 @@ public class AnalyticsSummaryReportPage extends TestBase{
 	@FindBy(xpath="//iframe[@id='looker']")
 	private WebElement reports_iframe;
 	
+	@FindBy(xpath="//strong[@class='filter-section-title']//i")
+	private WebElement filter_button;
+	
+	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
+	private List<WebElement> filter_elements_after_expanding;
+
+	
 	SoftAssert softassert=new SoftAssert(); 
 
 	public AnalyticsSummaryReportPage(WebDriver driver){
@@ -41,6 +48,12 @@ public class AnalyticsSummaryReportPage extends TestBase{
     public void switchToIFrame(){
 		
 		driver.switchTo().frame(reports_iframe);
+		
+	}
+
+    public void switchToMainWindow(){
+		
+		driver.switchTo().window(driver.getWindowHandle());
 		
 	}
     
@@ -54,12 +67,6 @@ public class AnalyticsSummaryReportPage extends TestBase{
 		logger.log(LogStatus.INFO, "Verifying if gear icon is present");
 		Assert.assertTrue(gear_icon.isDisplayed(),"Gear icon is not present or locator has been changed.");
 	}
-	
-    public void switchToMainWindow(){
-		
-		driver.switchTo().window(driver.getWindowHandle());
-		
-	}
 
     public void gearIconOptions(){
 		
@@ -70,7 +77,7 @@ public class AnalyticsSummaryReportPage extends TestBase{
 			
 			for(int j=0;j<expected_gear_icon_options.length;j++){
 				
-				if(gear_icon_options.get(i).equals(expected_gear_icon_options[j])){
+				if(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j])){
 					logger.log(LogStatus.INFO, "Verifying if "+expected_gear_icon_options[j]+" is present");
 					softassert.assertTrue(gear_icon_options.get(i).getText().equals(expected_gear_icon_options[j]),"Gear icon "+expected_gear_icon_options[j]+" is present");
 				}
