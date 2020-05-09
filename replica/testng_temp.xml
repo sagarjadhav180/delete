@@ -9,7 +9,11 @@
 		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
 		<classes>
 
-			<class name="tests.CallBackReportTest">
+			<class name="tests.LegacyScheduledReportTest">
+			
+			<methods>
+					<include name="tableCountVerification"/>
+			</methods>
 			
 			</class>
 

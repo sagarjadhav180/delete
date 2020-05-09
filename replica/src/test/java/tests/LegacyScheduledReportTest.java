@@ -20,6 +20,7 @@ public class LegacyScheduledReportTest extends TestBase {
 	LegacyScheduledReportsPage ls;
 	String report_name ;
 	String updated_report_name;
+	
 	@BeforeClass
 	public void goToLegacyScheduledReportsPage() throws IOException, InterruptedException{
 		

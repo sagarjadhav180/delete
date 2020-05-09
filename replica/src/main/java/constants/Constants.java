@@ -81,8 +81,8 @@ public class Constants {
 		//Date range
 		public static final String today="Today";
 		public static final String yesterday="Yesterday";
-		public static final String last_7_days="Last 7 Days";
-		public static final String last_30_days="Last 30 Days";
+		public static final String last_7_days="Last 7 days";
+		public static final String last_30_days="Last 30 days";
 		
 		//Group Activity Reports
 		public static final String basic_group_filter="Group";

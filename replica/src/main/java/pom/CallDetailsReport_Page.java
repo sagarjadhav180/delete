@@ -282,6 +282,7 @@ public class CallDetailsReport_Page extends TestBase{
 		logger.log(LogStatus.INFO, "verifying if export_button is displayed");
 		softassert.assertTrue(export_button.isDisplayed(),"export_button is not displayed or locator changed");
 	
+		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		logger.log(LogStatus.INFO, "verifying if showing_label is present");
 		softassert.assertTrue(showing_label.isDisplayed(),"showing_label is not displayed or locator changed");
 		
@@ -645,15 +646,15 @@ public class CallDetailsReport_Page extends TestBase{
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equals("today")){
+		else if(dateRange.equals("Today")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equals("yesterday")){
+		else if(dateRange.equals("Yesterday")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 		}
-		else if(dateRange.equals("last 30 days")){
+		else if(dateRange.equals("Last 30 days")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
@@ -672,9 +673,10 @@ public class CallDetailsReport_Page extends TestBase{
 		
 		for(int i=0;i<actual_dateRange_filter_elements.size();i++){
 			
+
+			
 			if(dateRange.equalsIgnoreCase(actual_dateRange_filter_elements.get(i).getText())){
-		
-				Util.Action().moveToElement(actual_dateRange_filter_elements.get(i)).click().perform();
+				Util.click(actual_dateRange_filter_elements.get(i));
 				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 				break;
 			}
@@ -684,7 +686,8 @@ public class CallDetailsReport_Page extends TestBase{
 
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
         
-		if(!(dbCount.equals("0") || dbCount==null)){
+		System.out.println("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		if(!(dbCount.equals("0"))){
 			int final_count=table_call_count.size()+0;
 			
 			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){

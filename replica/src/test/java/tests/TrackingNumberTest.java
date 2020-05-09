@@ -64,7 +64,7 @@ public class TrackingNumberTest extends TestBase{
 		
 		
 	//Tracking number page UI verification
-	@Test(priority=0)
+	@Test(priority=1)
 	public void trakingNumberPageUIVerification() throws InterruptedException{
 	   logger=extent.startTest("Tracking number UI Verification..");
        logger.assignCategory(Constants.tracking_number_category);
@@ -78,7 +78,7 @@ public class TrackingNumberTest extends TestBase{
 		
 		
 	//create simple tracking number
-     	@Test(priority=1)
+     	@Test(priority=2)
 		public void simpleTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("Simple Tracking number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -95,7 +95,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//edit simple tracking number
-		@Test(priority=2)
+		@Test(priority=3)
 		public void simpleTrakingNumberUpdation() throws InterruptedException{
 			logger=extent.startTest("Simple Tracking number update..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -109,7 +109,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//delete simple tracking number
-		@Test(priority=3)
+		@Test(priority=4)
 		public void simpleTrakingNumberDeletion() throws InterruptedException{
 			logger=extent.startTest("Simple Tracking number deletion..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -124,7 +124,7 @@ public class TrackingNumberTest extends TestBase{
 
 
      	//create number pool
-     	@Test(priority=4)
+     	@Test(priority=5)
 		public void numberPoolCreation() throws InterruptedException{
 			logger=extent.startTest("Number Pool creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -149,7 +149,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//edit simple tracking number
-		@Test(priority=5)
+		@Test(priority=6)
 		public void numberPoolUpdation() throws InterruptedException{
 			logger=extent.startTest("Number pool update..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -163,7 +163,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//delete simple tracking number
-		@Test(priority=6)
+		@Test(priority=7)
 		public void numberPoolDeletion() throws InterruptedException{
 			logger=extent.startTest("Number pool deletion..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -174,7 +174,7 @@ public class TrackingNumberTest extends TestBase{
 		}	
 		
 		//create reserve number
-     	@Test(priority=7)
+     	@Test(priority=8)
 		public void reserveNumberCreation() throws Exception{
 			logger=extent.startTest("Reserve Number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -190,7 +190,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//edit reserve number
-		@Test(priority=8)
+		@Test(priority=9)
 		public void reserveNumberUpdation() throws InterruptedException{
 			logger=extent.startTest("reserve number number update..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -204,7 +204,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//delete simple tracking number
-		@Test(priority=9)
+		@Test(priority=10)
 		public void reserveNumberDeletion() throws InterruptedException{
 			logger=extent.startTest("reserve number deletion..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -215,7 +215,7 @@ public class TrackingNumberTest extends TestBase{
 		}	
 		
         //GeoRoute creation
-		@Test(priority=10)
+		@Test(priority=11)
 		public void GeoRouteTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("GeoRoute number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -232,7 +232,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//GeoRoute deletion
-		@Test(priority=11)
+		@Test(priority=12)
 		public void GeoRouteTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("geo route number deletion..");
@@ -244,7 +244,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
         //percent route creation
-		@Test(priority=12)
+		@Test(priority=13)
 		public void percentTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("percentRoute number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -260,7 +260,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//percent route deletion
-		@Test(priority=13)
+		@Test(priority=14)
 		public void percentTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("percent route number deletion..");
@@ -272,7 +272,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
         //outbound route creation
-		@Test(priority=14)
+		@Test(priority=15)
 		public void outboundTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("outbound number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -289,7 +289,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 
 		//outbound route deletion
-		@Test(priority=15)
+		@Test(priority=16)
 		public void outboundTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("outbound route number deletion..");
@@ -301,7 +301,7 @@ public class TrackingNumberTest extends TestBase{
 		}		
 		
         //hangup route creation
-		@Test(priority=16)
+		@Test(priority=17)
 		public void hangupTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("hangup number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -318,7 +318,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 
         //hangup route deletion
-		@Test(priority=17)
+		@Test(priority=18)
 		public void hangupTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("hangup route number deletion..");
@@ -330,7 +330,7 @@ public class TrackingNumberTest extends TestBase{
 		}		
 		
         //voicemail route creation
-		@Test(priority=18)
+		@Test(priority=19)
 		public void voicemailTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("voicemail number creation..");
 			logger.assignCategory(Constants.tracking_number_category);
@@ -346,7 +346,7 @@ public class TrackingNumberTest extends TestBase{
 		}		
 
         //voicemail route deletion
-		@Test(priority=19)
+		@Test(priority=20)
 		public void voicemailTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("voicemail route number deletion..");
@@ -361,7 +361,7 @@ public class TrackingNumberTest extends TestBase{
 
 		
 	    //schedule route creation
-		@Test(priority=20)
+		@Test(priority=21)
 		public void scheduleTrakingNumberCreation() throws InterruptedException{
 				logger=extent.startTest("scheduleRoute number creation..");
 				logger.assignCategory(Constants.tracking_number_category);
@@ -378,7 +378,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//schedule route deletion
-		@Test(priority=21)
+		@Test(priority=22)
 		public void scheduleTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("schedule route number deletion..");
@@ -390,7 +390,7 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		 //IVR route creation
-		@Test(priority=22)
+		@Test(priority=23)
 		public void IVRCreation() throws InterruptedException{
 				logger=extent.startTest("IVR route creation..");
 				logger.assignCategory(Constants.tracking_number_category);
@@ -409,7 +409,7 @@ public class TrackingNumberTest extends TestBase{
 			
 		
 		//IVR route deletion
-		@Test(priority=23)
+		@Test(priority=24)
 		public void IVRDeletion() throws InterruptedException{
 
 			logger=extent.startTest("IVR route number deletion..");

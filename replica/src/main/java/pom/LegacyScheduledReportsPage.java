@@ -164,8 +164,8 @@ public class LegacyScheduledReportsPage extends TestBase {
 			
     	}	
     	
-    	String db_count = Util.readingFromDB("SELECT count(*) as count FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'");
-    	
+    	String db_count = Util.readingFromDB("SELECT count(*) as count FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"' AND report_status='active'");
+    
     	System.out.println("table_count "+final_count);
     	System.out.println("db count "+db_count);
     	logger.log(LogStatus.INFO, "Verifying if table count is matching with db count");

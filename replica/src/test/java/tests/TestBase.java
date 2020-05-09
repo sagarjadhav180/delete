@@ -127,7 +127,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 	    driver.get(url_to_hit);
-	    TestData.createData();			    
+//	    TestData.createData();			    
 	   	    
 	}
 
