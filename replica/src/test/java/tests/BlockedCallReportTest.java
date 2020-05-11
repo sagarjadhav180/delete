@@ -42,7 +42,7 @@ public class BlockedCallReportTest extends TestBase{
 		bc.switchToIFrame();
 	}
 
-	
+    @Test(priority=1)
 	public void headerLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Header Label Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
@@ -50,6 +50,7 @@ public class BlockedCallReportTest extends TestBase{
 		bc.headerLabel();
 	}
 	
+    @Test(priority=2)
 	public void runButtonVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Run Button Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
@@ -57,6 +58,7 @@ public class BlockedCallReportTest extends TestBase{
 		bc.runButton();
 	}
 	
+    @Test(priority=3)
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
@@ -64,7 +66,7 @@ public class BlockedCallReportTest extends TestBase{
 		bc.presenceOfGearIcon();
 	}
 	
-	
+    @Test(priority=4)
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
@@ -72,7 +74,7 @@ public class BlockedCallReportTest extends TestBase{
 		bc.gearIconOptions();
 	}
 	
-	
+    @Test(priority=5)
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
@@ -80,6 +82,7 @@ public class BlockedCallReportTest extends TestBase{
 		bc.presenceOfTimeZone();
 	}
 	
+    @Test(priority=6)
 	public void tilesVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Tiles Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
@@ -87,6 +90,14 @@ public class BlockedCallReportTest extends TestBase{
 		bc.tilesVerification();
 	}
 	
+    @Test(priority=7)
+	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Group Test"); 
+		logger.assignCategory(Constants.blocked_calls_category);
+		bc=new BlockedCallsReportPage(driver);
+		bc.filterFeatureBlockedCallsTable(Constants.LookerBlockedCallReport.group_filter);
+	}
+    
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
 		
