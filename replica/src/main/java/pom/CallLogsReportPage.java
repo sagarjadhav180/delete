@@ -156,7 +156,8 @@ public class CallLogsReportPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(run_button));
 		logger.log(LogStatus.INFO, "verifying if run_button is present");
 		softassert.assertTrue(run_button.isDisplayed(),"run button is not displayed or locator has been chamged..");
-				
+		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
 	}
 	
 	public void presenceOfGearIcon(){

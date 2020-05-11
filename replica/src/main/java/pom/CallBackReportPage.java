@@ -116,6 +116,8 @@ public class CallBackReportPage extends TestBase{
 		wait.until(ExpectedConditions.visibilityOf(run_button));
 		logger.log(LogStatus.INFO, "verifying if run_button is present");
 		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
 	}
     
 	

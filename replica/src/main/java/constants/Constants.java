@@ -237,7 +237,18 @@ public class Constants {
         
     }
     	   
-    
+    public static class LookerBlockedCallReport{
+    	
+    	public static final String calls_checked_tile="Calls Checked";
+    	public static final String blocked_call_tile="Blocked Call";
+    	
+    	//filter section
+    	public static final String group_filter="Group";
+       	public static final String campaign_filter="Campaign";
+       	public static final String tracking_number_name_filter="Tracking Number Name";
+       	public static final String tracking_number_filter="Tracking Number";
+    			
+    }
     
 }
 
