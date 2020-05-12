@@ -250,6 +250,25 @@ public class Constants {
     			
     }
     
+    public static class LookerIVRKeypressReport{
+    	
+    	public static final String total_call_tile="Total Call";
+    	public static final String ivr_calls_tile="IVR Calls";
+    	public static final String avg_time_tile="Average Time in Menu";
+    	public static final String abandoned_calls_tile="Abandoned Calls";
+    	public static final String unused_path_tile="Number Of Unused Paths";
+    	
+    	//filter section
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
 }
 
 	

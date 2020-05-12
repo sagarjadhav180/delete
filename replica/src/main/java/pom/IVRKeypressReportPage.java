@@ -38,6 +38,57 @@ public class IVRKeypressReportPage extends TestBase{
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 	
+	String[] expected_filter_elements_after_expanding={"Date Range","Caller ID","Campaign","Destination","Group","Tracking Number Name","Tracking Number","Ring-to Number","Calls with Agent ID","Agent ID","Calls with Call Outcome","Sale Amount"};
+	
+	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
+	private List<WebElement> tiles_names;	
+	
+	String[] expected_tiles_names={"Total Call","IVR Calls","Average Time in Menu","Abandoned Calls","Number Of Unused Paths"};
+	
+	@FindBy(xpath="//div[@class='looker-vis-context-title']//span[text()='Path Performance']")
+	private WebElement path_performance_table_title;
+
+	@FindBy(xpath="(//div[@class='ag-header-row'])[2]//strong")
+	private List<WebElement> path_performance_table_column;
+	
+	String[] expected_path_performance_table_column={"Group|External ID","Campaign|External ID","Tracking Number | Tracking Number Name","Tracking Number Type","IVR Path","Total Calls","Average Call Duration","Abandoned Calls","Abandoned Rate"};
+
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[1]//span[text()='No Results']")
+	private WebElement no_result_label_path_performance_table;
+	
+	@FindBy(xpath="//div[@class='looker-vis-context-title']//span[text()='Unused Paths']")
+	private WebElement unused_path_table_title;
+
+	@FindBy(xpath="(//div[@class='ag-header-row'])[5]//strong")
+	private List<WebElement> unused_path_table_column;
+
+	String[] expected_unused_path_table_column={"Group|External ID","Campaign|External ID","Tracking Number | Tracking Number Name","Tracking Number Type","IVR Path"};
+	
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[2]//span[text()='No Results']")
+	private WebElement no_result_label_unused_path_table;
+	
+	@FindBy(xpath="//div[@class='looker-vis-context-title']//span[text()='Calls']")
+	private WebElement calls_table_title;
+
+	@FindBy(xpath="(//div[@class='ag-header-row'])[8]//strong")
+	private List<WebElement> calls_table_column;
+
+	String[] expected_call_table_column={"Play Call","Date/Time","Group|External ID","Campaign|External ID","Tracking Number | Tracking Number Name","Caller Id","Keypress","Ring to Phone Number","Total Duration","Total Time in Menu"};
+	
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[3]//span[text()='No Results']")
+	private WebElement no_result_label_calls_table;
+	
+	@FindBy(xpath="//div[@class='title-text'][text()='Instant Insights']")
+	private WebElement instants_insights_title;	
+
+	@FindBy(xpath="(//div[@class='ag-header-row'])[11]//strong")
+	private List<WebElement> instants_insights_table_column;
+
+	String[] expected_instants_insights_table_column={"Play Call","Duration","Date/Time","Group|External ID","Campaign|External ID","Tracking Number | Tracking Number Name","Caller Id","Agent ID","Lead","Sale"};	
+	
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[4]//span[text()='No Results']")
+	private WebElement no_result_label_instants_insights_table;
+	
 	SoftAssert softassert=new SoftAssert(); 
 
 	public IVRKeypressReportPage(WebDriver driver){
