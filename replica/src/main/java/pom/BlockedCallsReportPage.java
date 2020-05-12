@@ -195,11 +195,11 @@ public class BlockedCallsReportPage extends TestBase{
 		for(int i=0;i<blocked_calls_table_column_labels.size();i++){
 			
 			for(int j=0;j<expected_blocked_calls_table_column_labels.length;j++){
-				
-				if(blocked_calls_table_column_labels.get(i).getText().equals(expected_blocked_calls_table_column_labels[j])){
 					
+				if(blocked_calls_table_column_labels.get(i).getText().equals(expected_blocked_calls_table_column_labels[j])){
+			
 					logger.log(LogStatus.INFO, "Verifying if "+expected_blocked_calls_table_column_labels[j]+" is present");
-					softassert.assertTrue(blocked_calls_table_column_labels.get(i).getText().equals(expected_blocked_calls_table_column_labels[j]),"Column "+expected_blocked_number_table_column_labels[j]+" is not present");
+					softassert.assertTrue(blocked_calls_table_column_labels.get(i).getText().equals(expected_blocked_calls_table_column_labels[j]),"Column "+expected_blocked_calls_table_column_labels[j]+" is not present");
 				}
 			}
 			
@@ -279,12 +279,12 @@ public class BlockedCallsReportPage extends TestBase{
     			
     			if(filterName.equals(blocked_calls_table_column_labels.get(i).getText())){
     				
-    				index=i;
+    				index=i+1;
     				break;
     			}
     		}
-    		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index+3)+"]"));
-    		System.out.println("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index+3)+"]");
+    		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index)+"]"));
+    		System.out.println("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index)+"]");
     		filterValue=value_to_be_filtered.get(0).getText();
     		
     		filter_button.click();
@@ -304,8 +304,8 @@ public class BlockedCallsReportPage extends TestBase{
     		Thread.sleep(5000);
     		
     	
-    		List<WebElement> filtered_values = driver.findElements(By.xpath("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index+1)+"]//span[@class='drillable-item-content']"));
-    		System.out.println("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index+1)+"]//span[@class='drillable-item-content']");
+    		List<WebElement> filtered_values = driver.findElements(By.xpath("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index)+"]//span[@class='drillable-item-content']"));
+    		System.out.println("(//div[@class='ag-center-cols-container'])[2]/div//div[starts-with(@class,'ag-cell ag-cell-not-inline-editing ag-cell-with-height')]["+String.valueOf(index)+"]//span[@class='drillable-item-content']");
     		for(int j=0;j<filtered_values.size();j++){
     			
     			System.out.println(filtered_values.get(j).getText());

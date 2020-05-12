@@ -89,14 +89,84 @@ public class BlockedCallReportTest extends TestBase{
 		bc=new BlockedCallsReportPage(driver);
 		bc.tilesVerification();
 	}
-	
-    @Test(priority=7)
-	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
-		logger=extent.startTest("Filter Feature For Group Test"); 
+    
+    public void callsCheckedCountVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Calls Checked Count Verification Test"); 
 		logger.assignCategory(Constants.blocked_calls_category);
 		bc=new BlockedCallsReportPage(driver);
-		bc.filterFeatureBlockedCallsTable(Constants.LookerBlockedCallReport.group_filter);
+		bc.tileValueVerification(Constants.LookerBlockedCallReport.calls_checked_tile);
 	}
+	
+    public void blockedCallsCountVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Blocked Calls Count Verification Test"); 
+		logger.assignCategory(Constants.blocked_calls_category);
+		bc=new BlockedCallsReportPage(driver);
+		bc.tileValueVerification(Constants.LookerBlockedCallReport.blocked_call_tile);
+	}
+    
+    @Test(priority=7)
+	public void blockedNumbersTableColumnVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Blocked Numbers Table Column Verification Test"); 
+		logger.assignCategory(Constants.blocked_calls_category);
+		bc=new BlockedCallsReportPage(driver);
+		bc.blockedNumebrsTableColumnVerification();
+	}
+    
+    @Test(priority=8)
+	public void blockedCallsTableColumnVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Blocked Calls Table Column Verification Test"); 
+		logger.assignCategory(Constants.blocked_calls_category);
+		bc=new BlockedCallsReportPage(driver);
+		bc.blockedCallsTableColumnVerification();
+	}
+    
+    @Test(priority=9)
+	public void filterButtonTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Test"); 
+		logger.assignCategory(Constants.blocked_calls_category);
+		bc=new BlockedCallsReportPage(driver);
+		bc.filterButton();
+	}
+    
+    @Test(priority=10)
+	public void filterButtonElementsTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Elements Test"); 
+		logger.assignCategory(Constants.blocked_calls_category);
+		bc=new BlockedCallsReportPage(driver);
+		bc.filterElements();
+	}
+    
+//    @Test(priority=7)
+//	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
+//		logger=extent.startTest("Filter Feature For Group Test"); 
+//		logger.assignCategory(Constants.blocked_calls_category);
+//		bc=new BlockedCallsReportPage(driver);
+//		bc.filterFeatureBlockedCallsTable(Constants.LookerBlockedCallReport.group_filter);
+//	}
+//    
+//    @Test(priority=8)
+//	public void filterFeatureForCampaignTest() throws IOException, InterruptedException{
+//		logger=extent.startTest("Filter Feature For Campaign Test"); 
+//		logger.assignCategory(Constants.blocked_calls_category);
+//		bc=new BlockedCallsReportPage(driver);
+//		bc.filterFeatureBlockedCallsTable(Constants.LookerBlockedCallReport.campaign_filter);
+//	}
+//    
+//    @Test(priority=9)
+//	public void filterFeatureForTrackingNumberNameTest() throws IOException, InterruptedException{
+//		logger=extent.startTest("Filter Feature For Tracking Number Name Test"); 
+//		logger.assignCategory(Constants.blocked_calls_category);
+//		bc=new BlockedCallsReportPage(driver);
+//		bc.filterFeatureBlockedCallsTable(Constants.LookerBlockedCallReport.tracking_number_name_filter);
+//	}
+//    
+//    @Test(priority=10)
+//	public void filterFeatureForTrackingNumberTest() throws IOException, InterruptedException{
+//		logger=extent.startTest("Filter Feature For Tracking Number Test"); 
+//		logger.assignCategory(Constants.blocked_calls_category);
+//		bc=new BlockedCallsReportPage(driver);
+//		bc.filterFeatureBlockedCallsTable(Constants.LookerBlockedCallReport.tracking_number_filter);
+//	}
     
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
