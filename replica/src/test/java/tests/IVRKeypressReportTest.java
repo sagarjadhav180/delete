@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import constants.Constants;
+import pom.CallBackReportPage;
 import pom.CallLogsReportPage;
 import pom.HomePage;
 import pom.IVRKeypressReportPage;
@@ -37,7 +38,6 @@ public class IVRKeypressReportTest extends TestBase{
 
 	}
 
-	@Test(priority=1)
 	public void headerLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Header Label Verification Test"); 
 		logger.assignCategory(Constants.ivr_keypress_category);
@@ -45,7 +45,13 @@ public class IVRKeypressReportTest extends TestBase{
 		ivr.headerLabel();
 	}
 	
-	@Test(priority=2)
+	public void runButtonVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Run Button Verification Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+        ivr=new IVRKeypressReportPage(driver);
+		ivr.runButton();
+	}
+	
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
 		logger.assignCategory(Constants.ivr_keypress_category);
@@ -53,7 +59,7 @@ public class IVRKeypressReportTest extends TestBase{
 		ivr.presenceOfGearIcon();
 	}
 	
-	@Test(priority=3)
+
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
 		logger.assignCategory(Constants.ivr_keypress_category);
@@ -61,7 +67,7 @@ public class IVRKeypressReportTest extends TestBase{
         ivr.gearIconOptions();
 	}
 	
-	@Test(priority=4)
+	
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
 		logger.assignCategory(Constants.ivr_keypress_category);
@@ -69,6 +75,53 @@ public class IVRKeypressReportTest extends TestBase{
 		ivr.presenceOfTimeZone();
 	}
 	
+	
+	public void tilesVerificationForIVR() throws IOException, InterruptedException{
+		logger=extent.startTest("Tiles Verification for IVR Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+		ivr=new IVRKeypressReportPage(driver);
+		ivr.tilesVerificationForIVR();
+	}
+	
+	
+	public void tilesVerificationForInstantInsights() throws IOException, InterruptedException{
+		logger=extent.startTest("Tiles Verification for Instant Insights Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+		ivr=new IVRKeypressReportPage(driver);
+		ivr.tilesVerificationForInstantInghts();
+	}
+	
+	
+	public void pathPerformanceLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Path Performance Label Verification Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+		ivr=new IVRKeypressReportPage(driver);
+		ivr
+	}
+	
+	
+	public void unusedPathLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Unused Path Label Verification Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+		ivr=new IVRKeypressReportPage(driver);
+		ivr
+	}
+	
+	
+	public void callsLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Calls Label Verification Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+		ivr=new IVRKeypressReportPage(driver);
+		ivr
+	}
+	
+	
+	public void instantInsightsLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Instant Insights Label Verification Test"); 
+		logger.assignCategory(Constants.ivr_keypress_category);
+		ivr=new IVRKeypressReportPage(driver);
+		ivr
+	}
 	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
