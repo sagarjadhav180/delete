@@ -120,3 +120,49 @@ SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHE
 
 
 -----------------------------------------------------------------------------------------------------
+--------------------------IVR Keyperss Report-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+
+//ivr calls
+SELECT * FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time>'00:00:00'
+
+//avg time in menu
+SELECT (AVG(menu_time)) FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time>'00:00:00'
+
+//abandon calls
+SELECT * FROM call 
+WHERE call_id IN (SELECT call_id FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time>'00:00:00') AND ring_to='abandon'
+
+//instants insight call
+SELECT * FROM post_call_ivr_responses 
+WHERE call_id IN (SELECT call_id FROM call
+WHERE call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows 
+WHERE postcall_ivr_enabled=true) AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045'))
+
+//calls with agent id
+SELECT * FROM post_call_ivr_responses   
+WHERE call_id IN (SELECT call_id FROM call
+WHERE call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59' 
+AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')) 
+AND sales IS NULL AND lead IS NULL AND agent_id IS NOT NULL
+
+//calls with outcome
+SELECT * FROM post_call_ivr_responses    
+WHERE call_id IN (SELECT call_id FROM call
+WHERE call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59' 
+AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')) 
+AND sales IS NOT NULL AND lead IS NOT NULL AND agent_id IS NULL
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
