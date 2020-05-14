@@ -49,7 +49,7 @@ public class IVRKeypressReportPage extends TestBase{
 	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
 	private List<WebElement> tiles_names_ivr;	
 	
-	String[] expected_tiles_names_ivr={"Total Call","IVR Calls","Average Time in Menu","Abandoned Calls","Number Of Unused Paths"};
+	String[] expected_tiles_names_ivr={"Total Calls","IVR Calls","Average Time in Menu","Abandoned Calls","Number Of Unused Paths"};
 	
 	@FindBy(xpath="//div[@class='looker-vis-context-title']//span[text()='Path Performance']")
 	private WebElement path_performance_table_title;
@@ -148,6 +148,7 @@ public class IVRKeypressReportPage extends TestBase{
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 	
     public void presenceOfTimeZone(){
@@ -302,7 +303,7 @@ public class IVRKeypressReportPage extends TestBase{
     
     public void tilesVerificationForIVR(){
     	
-    	for(int i=0;i<tiles_names_ivr.size();i++){
+    	for(int i=0;i<5;i++){
     		
     		for(int j=0;j<expected_tiles_names_ivr.length;j++){
     			
@@ -319,7 +320,7 @@ public class IVRKeypressReportPage extends TestBase{
     
     public void tilesVerificationForInstantInghts(){
     	
-    	for(int i=0;i<tiles_names_instants_insights.size();i++){
+    	for(int i=5;i<9;i++){
     		
     		for(int j=0;j<expected_tiles_names_instants_insights.length;j++){
     			
@@ -336,53 +337,39 @@ public class IVRKeypressReportPage extends TestBase{
     
     //-----------------------------------------------------------------------
 
-    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
-    
-    //total calls
-    String total_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-	
-    //ivr calls
-    String ivr_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time IS NOT NULL");
-    
-    //avg time in menu
-    String avg_time_menu_from_db_without_roundoff=Util.readingFromDB("SELECT (AVG(menu_time)) AS count FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' ))");
-   
-    //abandon calls
-    String abandon_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call WHERE call_id IN (SELECT call_id FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2')) AND menu_time IS NOT NULL) AND ring_to='abandon'");
-    
-    //instants insight call
-    String instants_insight_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM post_call_ivr_responses WHERE call_id IN (SELECT call_id FROM call WHERE call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE postcall_ivr_enabled=true) AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"'))");
-
-    //calls with agent id
-    String calls_with_agent_id_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM post_call_ivr_responses  WHERE call_id IN (SELECT call_id FROM call WHERE call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')) AND sales IS NULL AND lead IS NULL AND agent_id IS NOT NULL");
-    
-    //calls with outcome
-    String calls_with_outcome_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM post_call_ivr_responses WHERE call_id IN (SELECT call_id FROM call WHERE call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')) AND sales IS NOT NULL AND lead IS NOT NULL AND agent_id IS NULL");
-    
+        
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
     
     
     public void tileValueVerificationForIVR(String tile_name){
-		
-    	long roundoff = Math.round(Double.valueOf(avg_time_menu_from_db_without_roundoff.substring(6)));
     	
-    	String without_sec = avg_time_menu_from_db_without_roundoff.substring(0,6);
+    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+    	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+        
+        //total calls
+        String total_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
     	
-    	String avg_time_menu_from_db = without_sec.concat(String.valueOf(roundoff));
-    	
+        //ivr calls
+        String ivr_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' ))");
+        
+        //avg time in menu
+        String avg_time_menu_from_db_without_roundoff=Util.readingFromDB("SELECT (AVG(menu_time)) AS count FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' ))");
+       
+        //abandon calls
+        String abandon_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call WHERE call_id IN (SELECT call_id FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2')) AND menu_time IS NOT NULL) AND ring_to='abandon'");
+            	    	
 		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
-	
-        if(tile_name.equals("Total Call")){
-			
+		
+        if(tile_name.equals("Total Calls")){
+        	String tile_values_total_calls=driver.findElement(By.xpath("(//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a)[1]")).getText();			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(total_calls_from_db!=null){
 				System.out.println(tile_values);
-				System.out.println(total_calls_from_db);
-				softassert.assertTrue(tile_values.equals(total_calls_from_db),"Tile count doest match with db count");			
+				System.out.println(tile_values_total_calls);
+				softassert.assertTrue(tile_values_total_calls.equals(total_calls_from_db),"Tile count doest match with db count");			
 			}
 			else{
-				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+				softassert.assertTrue(tile_values_total_calls.equals("0"),"Tile count doest match with db count");			
 			}
 			
 		}
@@ -404,13 +391,20 @@ public class IVRKeypressReportPage extends TestBase{
         else if(tile_name.equals("Average Time in Menu")){
 			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
-			if(avg_time_menu_from_db!=null){
+			if(avg_time_menu_from_db_without_roundoff!=null){
+					
+				long roundoff = Math.round(Double.valueOf(avg_time_menu_from_db_without_roundoff.substring(6)));
+	        	
+	        	String without_sec = avg_time_menu_from_db_without_roundoff.substring(0,6);
+	        	
+	        	String avg_time_menu_from_db = without_sec.concat(String.valueOf(roundoff));
+				
 				System.out.println(tile_values);
 				System.out.println(avg_time_menu_from_db);
 				softassert.assertTrue(tile_values.equals(avg_time_menu_from_db),"Tile count doest match with db count");			
 			}
 			else{
-				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+				softassert.assertTrue(tile_values.equals("00:00:00"),"Tile count doest match with db count");			
 			}
 			
 		}
@@ -434,10 +428,25 @@ public class IVRKeypressReportPage extends TestBase{
      
     public void tileValueVerificationForInstantInsights(String tile_name){
 		
+    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+    	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+        
+        //total calls
+        String total_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+    	
+    	//instants insight call
+        String instants_insight_calls_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM post_call_ivr_responses WHERE call_id IN (SELECT call_id FROM call WHERE call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows WHERE postcall_ivr_enabled=true) AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"'))");
+
+        //calls with agent id
+        String calls_with_agent_id_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM post_call_ivr_responses  WHERE call_id IN (SELECT call_id FROM call WHERE call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')) AND sales IS NULL AND lead IS NULL AND agent_id IS NOT NULL");
+        
+        //calls with outcome
+        String calls_with_outcome_from_db=Util.readingFromDB("SELECT COUNT(*) AS count FROM post_call_ivr_responses WHERE call_id IN (SELECT call_id FROM call WHERE call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')) AND sales IS NOT NULL AND lead IS NOT NULL AND agent_id IS NULL");
+    	
 		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
 	
         if(tile_name.equals("Total Calls")){
-			
+        	tile_values=driver.findElement(By.xpath("(//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a)[2]")).getText();
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(total_calls_from_db!=null){
 				System.out.println(tile_values);
