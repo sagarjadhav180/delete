@@ -165,6 +165,61 @@ public class IVRKeypressReportPage extends TestBase{
 		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
 	}
 	
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
+	
+    public void filterElements(){
+        
+    	Util.click(filter_button);
+        
+        for(int k=0;k<filter_elements_after_expanding.size();){
+        	for(int j=0;j<expected_filter_elements_after_expanding.length;j++){
+
+        		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements_after_expanding[j])){
+    	    			    			    		
+        		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+        		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+        		System.out.println("array-"+expected_filter_elements_after_expanding[j]);		
+        		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements_after_expanding[j]+" filter is present");
+        	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements_after_expanding[j],expected_filter_elements_after_expanding[j]+" filter element is npt present");
+        		}
+        		}
+        	k++;
+        }
+
+        softassert.assertAll();
+    	//collapsing filter section
+    	Util.click(filter_button);
+
+    }
+    
+	public void pathPerformanceLabelVerification(){
+		logger.log(LogStatus.INFO, "verifying if path performance label is present");
+		Assert.assertTrue(path_performance_table_title.isDisplayed(),"path performance label is not displayed or locator has been chamged..");
+	}
+	
+	public void ususedPathLabelVerification(){
+		logger.log(LogStatus.INFO, "verifying if Unused Path label is present");
+		Assert.assertTrue(unused_path_table_title.isDisplayed(),"Unused Path label is not displayed or locator has been chamged..");
+	}
+	
+	public void callsLabelVerification(){
+		logger.log(LogStatus.INFO, "verifying if Calls label is present");
+		Assert.assertTrue(calls_table_title.isDisplayed(),"Calls label is not displayed or locator has been chamged..");
+	}
+	
+	public void instantInsightsLabelVerification(){
+		logger.log(LogStatus.INFO, "verifying if Instant Insights label is present");
+		Assert.assertTrue(instants_insights_title.isDisplayed(),"Instant Insights label is not displayed or locator has been chamged..");
+	}
+	
     public void pathPerformanceTableColumnVerification() throws InterruptedException{
 		
 		Thread.sleep(2000);

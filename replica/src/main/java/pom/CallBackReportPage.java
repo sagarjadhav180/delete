@@ -331,7 +331,7 @@ public class CallBackReportPage extends TestBase{
     	//collapsing filter section
     	Util.click(filter_button);
 
-    	}
+    }
     
     public void missedOppTableColumnVerification() throws InterruptedException{
 		

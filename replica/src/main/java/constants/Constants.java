@@ -252,11 +252,18 @@ public class Constants {
     
     public static class LookerIVRKeypressReport{
     	
+    	//IVR tiles
     	public static final String total_call_tile="Total Call";
     	public static final String ivr_calls_tile="IVR Calls";
     	public static final String avg_time_tile="Average Time in Menu";
     	public static final String abandoned_calls_tile="Abandoned Calls";
     	public static final String unused_path_tile="Number Of Unused Paths";
+    	
+    	//Instant Insights tiles
+    	public static final String total_call_tile_instnat_insights="Total Calls";
+    	public static final String calls_with_instant_insights_tile="Calls with Instant Insights";    	
+    	public static final String calls_with_agent_id_tile="Calls with Agent ID";    	
+    	public static final String calls_with_call_outcome_tile="Calls with Call Outcome";        	
     	
     	//filter section
     	
