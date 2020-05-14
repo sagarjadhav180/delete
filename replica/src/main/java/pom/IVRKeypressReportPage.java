@@ -79,7 +79,7 @@ public class IVRKeypressReportPage extends TestBase{
 	@FindBy(xpath="(//div[@class='ag-header-row'])[8]//strong")
 	private List<WebElement> calls_table_column;
 
-	String[] expected_call_table_column={"Play Call","Date/Time","Group|External ID","Campaign|External ID","Tracking Number | Tracking Number Name","Caller Id","Keypress","Ring to Phone Number","Total Duration","Total Time in Menu"};
+	String[] expected_calls_table_column={"Play Call","Date/Time","Group|External ID","Campaign|External ID","Tracking Number | Tracking Number Name","Caller Id","Keypress","Ring to Phone Number","Total Duration","Total Time in Menu"};
 	
 	@FindBy(xpath="(//div[@class='ag-grid-container'])[3]//span[text()='No Results']")
 	private WebElement no_result_label_calls_table;
@@ -165,6 +165,86 @@ public class IVRKeypressReportPage extends TestBase{
 		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
 	}
 	
+    public void pathPerformanceTableColumnVerification() throws InterruptedException{
+		
+		Thread.sleep(2000);
+		
+		for(int i=0;i<path_performance_table_column.size();i++){
+			
+			for(int j=0;j<expected_path_performance_table_column.length;j++){
+				
+				if(path_performance_table_column.get(i).getText().equals(expected_path_performance_table_column[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_path_performance_table_column[j]+" is present");
+					softassert.assertTrue(path_performance_table_column.get(i).getText().equals(expected_path_performance_table_column[j]),"Column "+expected_path_performance_table_column[j]+" is not present");
+				}
+			}
+			
+		}
+			
+		softassert.assertAll();
+	}
+	
+    public void unusedPathTableColumnVerification() throws InterruptedException{
+		
+		Thread.sleep(2000);
+		
+		for(int i=0;i<unused_path_table_column.size();i++){
+			
+			for(int j=0;j<expected_unused_path_table_column.length;j++){
+				
+				if(unused_path_table_column.get(i).getText().equals(expected_unused_path_table_column[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_unused_path_table_column[j]+" is present");
+					softassert.assertTrue(unused_path_table_column.get(i).getText().equals(expected_unused_path_table_column[j]),"Column "+expected_unused_path_table_column[j]+" is not present");
+				}
+			}
+			
+		}
+			
+		softassert.assertAll();
+	}
+    
+    public void callsTableColumnVerification() throws InterruptedException{
+		
+		Thread.sleep(2000);
+		
+		for(int i=0;i<calls_table_column.size();i++){
+			
+			for(int j=0;j<expected_calls_table_column.length;j++){
+				
+				if(calls_table_column.get(i).getText().equals(expected_calls_table_column[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_calls_table_column[j]+" is present");
+					softassert.assertTrue(calls_table_column.get(i).getText().equals(expected_calls_table_column[j]),"Column "+expected_calls_table_column[j]+" is not present");
+				}
+			}
+			
+		}
+			
+		softassert.assertAll();
+	}
+    
+    public void instantInsightsTableColumnVerification() throws InterruptedException{
+		
+		Thread.sleep(2000);
+		
+		for(int i=0;i<instants_insights_table_column.size();i++){
+			
+			for(int j=0;j<expected_instants_insights_table_column.length;j++){
+				
+				if(instants_insights_table_column.get(i).getText().equals(expected_instants_insights_table_column[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_instants_insights_table_column[j]+" is present");
+					softassert.assertTrue(instants_insights_table_column.get(i).getText().equals(expected_instants_insights_table_column[j]),"Column "+expected_instants_insights_table_column[j]+" is not present");
+				}
+			}
+			
+		}
+			
+		softassert.assertAll();
+	}
+    
     public void tilesVerificationForIVR(){
     	
     	for(int i=0;i<tiles_names_ivr.size();i++){
@@ -297,8 +377,68 @@ public class IVRKeypressReportPage extends TestBase{
 		softassert.assertAll();		
 	}
      
-
-    
+    public void tileValueVerificationForInstantInsights(String tile_name){
+		
+		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
+	
+        if(tile_name.equals("Total Calls")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_calls_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_calls_from_db);
+				softassert.assertTrue(tile_values.equals(total_calls_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+        
+        else if(tile_name.equals("Calls with Instant Insights")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(instants_insight_calls_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(instants_insight_calls_from_db);
+				softassert.assertTrue(tile_values.equals(instants_insight_calls_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+        
+        else if(tile_name.equals("Calls with Agent ID")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(calls_with_agent_id_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(calls_with_agent_id_from_db);
+				softassert.assertTrue(tile_values.equals(calls_with_agent_id_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+        
+        else if(tile_name.equals("Calls with Call Outcome")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(calls_with_outcome_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(calls_with_outcome_from_db);
+				softassert.assertTrue(tile_values.equals(calls_with_outcome_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+        
+		softassert.assertAll();		
+	}
     
     
 
