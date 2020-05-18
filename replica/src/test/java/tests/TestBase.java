@@ -102,7 +102,7 @@ public class TestBase
 		String sc = null ;
 		if(browser.contains("chrome")){
 
-			System.setProperty("webdriver.chrome.driver",".//chmod777.exe");
+			System.setProperty("webdriver.chrome.driver",".//chromedriver.exe");
 		    driver=new ChromeDriver();
 
 		    
