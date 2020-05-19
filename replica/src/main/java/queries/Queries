@@ -82,6 +82,17 @@ WHERE call_id='135118'
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+----------------------------Marketing dashboard-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//total leads
+SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='51'
+
+//total conversion
+SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='18'
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ---------------------------call back report--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //total calls

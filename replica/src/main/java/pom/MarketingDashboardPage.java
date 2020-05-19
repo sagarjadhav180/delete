@@ -2,6 +2,7 @@ package pom;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,9 @@ import tests.TestBase;
 import tests.Util;
 
 public class MarketingDashboardPage extends TestBase{
+	
+	@FindBy(xpath="//div[@class='title-main']//span[text()='Marketing Dashboard - Enhanced']")
+	private WebElement header_label;
 	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
@@ -40,6 +44,9 @@ public class MarketingDashboardPage extends TestBase{
 	@FindBy(xpath="//div[@class='looker-vis-context-title']//span[text()='Calls Mix']")
 	private WebElement call_mix_label;
 
+	@FindBy(xpath="//div[@class='looker-vis-context-title']//span[text()='Highest Converting']")
+	private WebElement highest_converting_label;
+	
 	@FindBy(xpath="(//div[starts-with(@id,'highcharts-')])[1]")
 	private WebElement call_mix_pie_chart;
 
@@ -107,12 +114,12 @@ public class MarketingDashboardPage extends TestBase{
 	String[] expected_filter_elements_after_expanding={"Date Range","Show Columns By","Stack Columns By","Group Calls By","Group Website Calls By","Ad Source","Campaign","Group","Keywords","Referring Source","Referring Type","Ring-to Name","Ring-to Number","Tracking Number Name","Tracking Number"};
 	
 	@FindBy(xpath="(//div[@class='vis-single-value']//span[@class='looker-vis-context-title-text '][text()='Detailed View'])[1]")
-	private WebElement mkt_dashboard_tile;
+	private WebElement mkt_dashboard__detailed_view_tile;
 		
 	String[] expected_tile_names_mkt_dashboard={"Total Calls","Leads","Conversions"};
 
 	@FindBy(xpath="(//div[@class='vis-single-value']//span[@class='looker-vis-context-title-text '][text()='Detailed View'])[2]")
-	private WebElement website_calls_tile;
+	private WebElement website_calls_detailed_view_tile;
 	
 	String[] expected_tile_names_website_calls={"Website Number Swaps","Website Calls"};
 	
@@ -136,7 +143,8 @@ public class MarketingDashboardPage extends TestBase{
     
 	public void headerLabel(){
 
-		
+		logger.log(LogStatus.INFO, "Verifying if header label is present");
+		Assert.assertTrue(header_label.isDisplayed(),"Header label is not displayed or locator changed");
 	}
     
     public void presenceOfGearIcon(){
@@ -180,7 +188,7 @@ public class MarketingDashboardPage extends TestBase{
 	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
 	}
     
-public void filterElements(){
+    public void filterElements(){
         
     	Util.click(filter_button);
         
@@ -205,5 +213,146 @@ public void filterElements(){
 
     }
     
+    public void marketingDahsboardTilesVerification(){
+    	
+    	for(int i=0;i<expected_tile_names_mkt_dashboard.length;i++){
+    		
+    		WebElement tile = driver.findElement(By.xpath("//div[@class='centered']//span[text()='"+expected_tile_names_mkt_dashboard[i]+"']"));
+    		
+    		softassert.assertTrue(expected_tile_names_mkt_dashboard[i].equals(tile.getText()),expected_tile_names_mkt_dashboard[i] +" tile is not present");
+    	}
+    	
+    	softassert.assertAll();
+    }
 
+    public void websiteCallsTilesVerification(){
+    	
+    	for(int i=0;i<expected_tile_names_website_calls.length;i++){
+    		
+    		WebElement tile = driver.findElement(By.xpath("//div[@class='centered']//span[text()='"+expected_tile_names_website_calls[i]+"']"));
+    		
+    		softassert.assertTrue(expected_tile_names_website_calls[i].equals(tile.getText()),expected_tile_names_website_calls[i] +" tile is not present");
+    	}
+    	
+    	softassert.assertAll();
+    }
+    
+    
+    public void callMixLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Call Mix Label is displayed");
+    	Assert.assertTrue(call_mix_label.isDisplayed(),"Call Mix Label is not displayed or locator changed");
+    }
+    
+    public void highestConvertingLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Highest Converting Label is displayed");
+    	Assert.assertTrue(highest_converting_label.isDisplayed(),"Highest Converting Label Label is not displayed or locator changed");
+    }
+    
+    public void websiteCallsLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Website Calls Label is displayed");
+    	Assert.assertTrue(website_calls_label.isDisplayed(),"Website Calls Label is not displayed or locator changed");
+    }
+    
+    public void websiteNumberSwapsMapLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Website Number Swaps Map Label is displayed");
+    	Assert.assertTrue(website_number_swaps_map_label.isDisplayed(),"Website Number Swaps Map Label is not displayed or locator changed");
+    }
+    
+    public void websiteCallsMapLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Website Calls Map Label is displayed");
+    	Assert.assertTrue(website_calls_map_label.isDisplayed(),"Website Calls Map Label is not displayed or locator changed");
+    }
+    
+    public void callmixPieChart(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Call Mix Pie Chart is displayed");
+    	Assert.assertTrue(call_mix_pie_chart.isDisplayed(),"Call Mix Pie Chart is not displayed or locator changed");
+    }
+    
+    public void highestConvertingGraph(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Highest Converting Graph is displayed");
+    	Assert.assertTrue(highest_converting_graph.isDisplayed(),"Highest Converting Graph is not displayed or locator changed");
+    }
+    
+    public void totalCallsGraph(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Total Calls Graph is displayed");
+    	Assert.assertTrue(total_calls_graph.isDisplayed(),"Total Calls Graph is not displayed or locator changed");
+    }
+    
+    public void uniqueCallsGraph(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Unique Calls Graph is displayed");
+    	Assert.assertTrue(unique_calls_graph.isDisplayed(),"Unique Calls Graph is not displayed or locator changed");
+    }
+    
+    public void websiteNumberSwapsMap(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Website Number Swaps Map is displayed");
+    	Assert.assertTrue(website_number_swaps_map.isDisplayed(),"Website Number Swaps Map is not displayed or locator changed");
+    }
+    
+    public void websiteCallsMap(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Website Calls Map is displayed");
+    	Assert.assertTrue(website_calls_map.isDisplayed(),"Website Calls Map is not displayed or locator changed");
+    }
+    
+    public void marketingDashboardTableColumnVerification() throws InterruptedException{
+		
+		Thread.sleep(2000);
+		
+		for(int i=0;i<marketing_dashboard_table_columns.size();i++){
+			
+			for(int j=0;j<expected_marketing_dashboard_table_columns.length;j++){
+				
+				if(marketing_dashboard_table_columns.get(i).getText().equals(expected_marketing_dashboard_table_columns[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_marketing_dashboard_table_columns[j]+" is present");
+					softassert.assertTrue(marketing_dashboard_table_columns.get(i).getText().equals(expected_marketing_dashboard_table_columns[j]),"Column "+expected_marketing_dashboard_table_columns[j]+" is not present");
+				}
+			}
+			
+		}
+			
+		softassert.assertAll();
+	}
+    
+    public void websiteCallsTableColumnVerification() throws InterruptedException{
+		
+		Thread.sleep(2000);
+		
+		for(int i=0;i<website_calls_table_columns.size();i++){
+			
+			for(int j=0;j<expected_website_calls_table_columns.length;j++){
+				
+				if(website_calls_table_columns.get(i).getText().equals(expected_website_calls_table_columns[j])){
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_website_calls_table_columns[j]+" is present");
+					softassert.assertTrue(website_calls_table_columns.get(i).getText().equals(expected_website_calls_table_columns[j]),"Column "+expected_website_calls_table_columns[j]+" is not present");
+				}
+			}
+			
+		}
+			
+		softassert.assertAll();
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
