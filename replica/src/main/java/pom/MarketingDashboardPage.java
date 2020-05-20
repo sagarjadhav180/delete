@@ -59,6 +59,11 @@ public class MarketingDashboardPage extends TestBase{
 	@FindBy(xpath="(//div[starts-with(@id,'highcharts-')])[4]")
 	private WebElement unique_calls_graph;
 
+	@FindBy(xpath="//div[@class='centered']//span[@class='looker-vis-context-title-text ']")
+	private List<WebElement> marketing_dashboard_tiles;
+	
+	String[] expected_marketing_dashboard_tiles={"Total Calls","Leads","Conversions"};
+	
 	@FindBy(xpath="(//div[@class='grid-element']//div[@class='ag-header-row'])[2]//span[@class='column-label']//strong")
 	private List<WebElement> marketing_dashboard_table_columns;
 
@@ -141,6 +146,15 @@ public class MarketingDashboardPage extends TestBase{
 		
 	}
     
+    public void runButton(){
+
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
+	}
+    
 	public void headerLabel(){
 
 		logger.log(LogStatus.INFO, "Verifying if header label is present");
@@ -170,6 +184,7 @@ public class MarketingDashboardPage extends TestBase{
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 
     public void presenceOfTimeZone(){
@@ -213,15 +228,20 @@ public class MarketingDashboardPage extends TestBase{
 
     }
     
-    public void marketingDahsboardTilesVerification(){
+    public void marketingDahsboardTilesVerification() throws InterruptedException{
     	
-    	for(int i=0;i<expected_tile_names_mkt_dashboard.length;i++){
+    	for(int i=0;i<marketing_dashboard_tiles.size();){
     		
-    		WebElement tile = driver.findElement(By.xpath("//div[@class='centered']//span[text()='"+expected_tile_names_mkt_dashboard[i]+"']"));
-    		
-    		softassert.assertTrue(expected_tile_names_mkt_dashboard[i].equals(tile.getText()),expected_tile_names_mkt_dashboard[i] +" tile is not present");
-    	}
-    	
+    		for(int j=0;j<expected_marketing_dashboard_tiles.length;j++){
+    			
+    			if(marketing_dashboard_tiles.get(i).getText().startsWith(expected_marketing_dashboard_tiles[j])){
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_marketing_dashboard_tiles[j]+" is present");
+    				softassert.assertTrue(marketing_dashboard_tiles.get(i).getText().startsWith(expected_marketing_dashboard_tiles[j]),expected_marketing_dashboard_tiles[j]+" is not present or locator changed");
+    			}
+    			
+    		}
+    		i++;
+    	}    	
     	softassert.assertAll();
     }
 
@@ -345,7 +365,60 @@ public class MarketingDashboardPage extends TestBase{
 	}
     
     
-    
+    public void tileValueVerificationForDefault7DaysFilter(String tile_name){
+		
+    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+
+		String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+		String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");		
+		
+		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
+	
+		if(tile_name.equals("Total Calls")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_call_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_call_count_from_db);
+				softassert.assertTrue(tile_values.equals(total_call_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		
+		else if(tile_name.equals("Total Leads")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_leads_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_leads_from_db);
+				softassert.assertTrue(tile_values.equals(total_leads_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Total Conversion")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(total_conversion_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(total_conversion_from_db);
+				softassert.assertTrue(tile_values.equals(total_conversion_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		
+		softassert.assertAll();
+	}
     
     
     
