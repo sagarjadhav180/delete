@@ -4,9 +4,12 @@
 <suite name="Automation Suite-1" parallel="tests" thread-count="1">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
+		
 		<parameter name="browser" value="chrome" />
 		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
+		
 		<classes>
+			
 			<class name="tests.LoginTest" />
 			<class name="tests.HomeTest" />
 			<class name="tests.CamapignUIVerificationTest" />
@@ -19,10 +22,13 @@
 		    <class name="tests.CallLogsTest" />
 		    <class name="tests.LookerTrackingNumberSettingsReportTest" />
 		    <class name="tests.CallBackReportTest" />
+		    <class name="tests.BlockedCallReportTest" />
+		    <class name="tests.IVRKeypressReportTest" />
+		    <class name="tests.MarketingDashboardTest" />
 		    
-		    
-
+	
 		</classes>
+
 	</test>
 
 
