@@ -247,14 +247,22 @@ public class MarketingDashboardPage extends TestBase{
 
     public void websiteCallsTilesVerification(){
     	
-    	for(int i=0;i<expected_tile_names_website_calls.length;i++){
-    		
-    		WebElement tile = driver.findElement(By.xpath("//div[@class='centered']//span[text()='"+expected_tile_names_website_calls[i]+"']"));
-    		
-    		softassert.assertTrue(expected_tile_names_website_calls[i].equals(tile.getText()),expected_tile_names_website_calls[i] +" tile is not present");
-    	}
+    	for(int i=0;i<marketing_dashboard_tiles.size();){
+		
+		for(int j=0;j<expected_tile_names_website_calls.length;j++){
+			
+			if(marketing_dashboard_tiles.get(i).getText().startsWith(expected_tile_names_website_calls[j])){
+				logger.log(LogStatus.INFO, "Verifying if "+expected_tile_names_website_calls[j]+" is present");
+				softassert.assertTrue(marketing_dashboard_tiles.get(i).getText().startsWith(expected_tile_names_website_calls[j]),expected_tile_names_website_calls[j]+" is not present or locator changed");
+			}
+			
+		}
+		i++;
+	}    	
+	softassert.assertAll();
     	
-    	softassert.assertAll();
+    	
+    	
     }
     
     
@@ -375,8 +383,8 @@ public class MarketingDashboardPage extends TestBase{
 		String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");		
 		
 		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
-	
-		if(tile_name.equals("Total Calls")){
+        
+		if(tile_name.startsWith("Total Calls")){
 			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(total_call_count_from_db!=null){
@@ -390,7 +398,7 @@ public class MarketingDashboardPage extends TestBase{
 			
 		}
 		
-		else if(tile_name.equals("Total Leads")){
+		else if(tile_name.startsWith("Leads")){
 			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(total_leads_from_db!=null){
@@ -403,7 +411,7 @@ public class MarketingDashboardPage extends TestBase{
 			}
 			
 		}
-		else if(tile_name.equals("Total Conversion")){
+		else if(tile_name.startsWith("Conversions")){
 			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(total_conversion_from_db!=null){
