@@ -204,8 +204,8 @@ public class Constants {
     public static class MarketingDashboardReport{
 
     	public static final String total_calls_tile="Total Calls";
-    	public static final String leads_tile="Total Leads";
-    	public static final String conversion_tile="Total Conversion";
+    	public static final String leads_tile="Leads";
+    	public static final String conversion_tile="Conversions";
     	
     }
 
