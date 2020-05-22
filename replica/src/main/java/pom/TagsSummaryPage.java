@@ -12,6 +12,7 @@ import org.testng.asserts.SoftAssert;
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
+import tests.Util;
 
 public class TagsSummaryPage extends TestBase {
 
@@ -118,5 +119,13 @@ public class TagsSummaryPage extends TestBase {
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}
 
+  //pg queris
+    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+
+	String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+	String tagged_as_call_back_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call_tag WHERE tag_id='9' AND call_tag_created BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+    
+    
 
 }

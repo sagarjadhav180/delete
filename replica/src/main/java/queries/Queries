@@ -177,3 +177,20 @@ AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045'))
 AND sales IS NOT NULL AND lead IS NOT NULL AND agent_id IS NULL
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------Tags Summary------------------------------------------------------------------------------------------------------------------------------------------------------
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-15 23:59' AND '2020-05-22 23:59'
+
+//tagged calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_id IN (SELECT call_id FROM call_tag 
+WHERE call_tag_created BETWEEN '2019-05-21 23:59' AND '2020-05-22 23:59')
+
+//tags used
+SELECT DISTINCT(tag_id) FROM call_tag 
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2019-05-22 23:59' AND '2020-05-22 23:59')
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
