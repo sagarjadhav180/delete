@@ -147,7 +147,11 @@ public class TagsSummaryPage extends TestBase {
     	softassert.assertAll();
     }
 
-	
+    public void tagsOverTimeLabel(){
+		
+		logger.log(LogStatus.INFO, "Verifying if Tags Over Time Label is present");
+		Assert.assertTrue(tags_over_time_label.isDisplayed(),"Time Zone is not present or locator has been changed.");
+	}
 	
 
 }
