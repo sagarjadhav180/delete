@@ -25,6 +25,8 @@ public class TagsSummaryPage extends TestBase {
 	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
 	private List<WebElement> tiles_names;	
 	
+	String [] expected_tiles_names={"Total Calls","Tagged Calls","Tags Used"};
+	
 	@FindBy(xpath="//div[@class='vis-header']//span[text()='Tags Over Time']")
 	private WebElement tags_over_time_label;	
 
@@ -83,7 +85,8 @@ public class TagsSummaryPage extends TestBase {
 	}
     
 	public void headerLabel(){
-
+		logger.log(LogStatus.INFO, "Verifying if header label is present");
+		Assert.assertTrue(header_label.isDisplayed(),"Header label is not present or locator has been changed.");
 		
 	}
     
@@ -124,8 +127,27 @@ public class TagsSummaryPage extends TestBase {
 	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
 	String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-	String tagged_as_call_back_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call_tag WHERE tag_id='9' AND call_tag_created BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+	String tagged_calls_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_id IN (SELECT call_id FROM call_tag WHERE call_tag_created BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59')");
+	String tags_used_from_db = Util.readingFromDB("SELECT count(DISTINCT(tag_id)) AS count FROM call_tag WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59')");    
     
-    
+    public void tilesVerification(){
+    	
+    	for(int i=0;i<tiles_names.size();i++){
+    		
+    		for(int j=0;j<expected_tiles_names.length;j++){
+    			
+    			if(tiles_names.get(i).getText().equals(expected_tiles_names[j])){
+    				
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_tiles_names[j]+" is present");
+    				softassert.assertTrue(tiles_names.get(i).getText().equals(expected_tiles_names[j]),"Tile "+expected_tiles_names[j]+" is not present");
+    			}
+    		}
+    		
+    	}
+    	softassert.assertAll();
+    }
+
+	
+	
 
 }
