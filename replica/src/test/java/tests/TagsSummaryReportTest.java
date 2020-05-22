@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import constants.Constants;
+import pom.CallBackReportPage;
 import pom.CallLogsReportPage;
 import pom.HomePage;
 import pom.LoginPage;
@@ -22,23 +23,29 @@ public class TagsSummaryReportTest extends TestBase{
 	TagsSummaryPage ts; 
 	
 	@BeforeClass
-	public void goToLookerReports() throws InterruptedException, IOException{
+	public void goToLookerReports() throws Exception{
 		LoginPage lp=new LoginPage(driver);
 		ts=new TagsSummaryPage(driver);
 		logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
         lp.validLogin();
         
-		hp=new HomePage(driver);
-		hp.clickAction("Reports");
-		Thread.sleep(7000);
-		clr.goToReport(Constants.LookerReports.tags_summary_report);
-
-		clr.switchToIFrame();
+        goToReport();
 
 	}
 
-	@Test(priority=1)
+	public void goToReport() throws Exception{
+		ts=new TagsSummaryPage(driver);
+		clr=new CallLogsReportPage(driver);
+		hp=new HomePage(driver);
+		hp.clickAction("Reports");
+		Thread.sleep(1000);
+		clr.goToReport(Constants.LookerReports.tags_summary_report);
+        Thread.sleep(7000);
+		ts.switchToIFrame();
+	}
+	
+	@Test
 	public void headerLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Header Label Verification Test"); 
 		logger.assignCategory(Constants.marketing_dashboard_category);
@@ -46,7 +53,7 @@ public class TagsSummaryReportTest extends TestBase{
 		ts.headerLabel();
 	}
 	
-	@Test(priority=2)
+	@Test
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
 		logger.assignCategory(Constants.marketing_dashboard_category);
@@ -54,7 +61,7 @@ public class TagsSummaryReportTest extends TestBase{
 		ts.presenceOfGearIcon();
 	}
 	
-	@Test(priority=3)
+	@Test
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
 		logger.assignCategory(Constants.marketing_dashboard_category);
@@ -62,7 +69,7 @@ public class TagsSummaryReportTest extends TestBase{
         ts.gearIconOptions();
 	}
 	
-	@Test(priority=4)
+	@Test
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
 		logger.assignCategory(Constants.marketing_dashboard_category);
@@ -73,6 +80,9 @@ public class TagsSummaryReportTest extends TestBase{
 	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
+		
+		ts=new TagsSummaryPage(driver);
+		ts.switchToMainWindow();
 		
 		LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("LogOut"); 
