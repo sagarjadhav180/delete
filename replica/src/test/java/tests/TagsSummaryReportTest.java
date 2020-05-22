@@ -90,4 +90,6 @@ public class TagsSummaryReportTest extends TestBase{
         lp.logOut();
 	}
 
+	
+	
 }

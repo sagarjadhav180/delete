@@ -18,6 +18,27 @@ public class TagsSummaryPage extends TestBase {
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
 
+	@FindBy(xpath="(//div[@class='title-main']//span[text()='Tags Summary'])")
+	private WebElement header_label;
+	
+	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
+	private List<WebElement> tiles_names;	
+	
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Tags Over Time']")
+	private WebElement tags_over_time_label;	
+
+	@FindBy(xpath="(//div[starts-with(@id,'highcharts-')])[1]")
+	private WebElement tags_over_time_graph;	
+
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Tags Mix']")
+	private WebElement tags_mix_label;	
+
+	@FindBy(xpath="(//div[starts-with(@id,'highcharts-')])[2]")
+	private WebElement tags_mix_graph;	
+
+	@FindBy(xpath="(//div[@class='dashboard-element'])[6]//div[@class='ag-header-container']//strong")
+	private List<WebElement> calls_table_columns;	
+	
 	@FindBy(xpath="//div[@class='dropdown-toggle button-xs']/i")
 	private WebElement gear_icon;
 
@@ -37,6 +58,10 @@ public class TagsSummaryPage extends TestBase {
 	
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
+
+	@FindBy(xpath="(//div[@class='dashboard-element'])[7]//div[@class='ag-header-container']//strong")
+	private List<WebElement> tags_table_columns;	
+
 	
 	SoftAssert softassert=new SoftAssert(); 
 

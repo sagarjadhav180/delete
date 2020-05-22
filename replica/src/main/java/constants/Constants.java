@@ -259,6 +259,13 @@ public class Constants {
     			
     }
     
+    public static class LookerTagsSummaryReport{
+    	
+    	public static final String total_call_tile="Total Calls";
+    	public static final String tagged_calls_tile="Tagged Calls";
+    	public static final String tags_used_tile="Tags Used";
+    }
+    
     public static class LookerIVRKeypressReport{
     	
     	//IVR tiles
