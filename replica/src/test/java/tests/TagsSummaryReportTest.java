@@ -181,6 +181,30 @@ public class TagsSummaryReportTest extends TestBase{
 		ts.filterElements();
 	}
 	
+	@Test(priority=18)
+	public void filterFeatureForCallsTableGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Calls table Group Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.filterFeatureForCallsTable(Constants.LookerTagsSummaryReport.group_filter);
+	}
+
+	@Test(priority=19)
+	public void filterFeatureForTagsTableGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Tags table Group Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.filterFeatureForTagsTable(Constants.LookerTagsSummaryReport.group_filter);
+	}
+	
+	@Test(priority=20)
+	public void filterFeatureForTagsTableTagTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Tags table Tag Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.filterFeatureForTagsTable(Constants.LookerTagsSummaryReport.Tag_filter);
+	}
+	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
 		

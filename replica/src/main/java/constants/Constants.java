@@ -264,6 +264,11 @@ public class Constants {
     	public static final String total_call_tile="Total Calls";
     	public static final String tagged_calls_tile="Tagged Calls";
     	public static final String tags_used_tile="Tags Used";
+    	
+    	//filter section
+    	public static final String group_filter="Group";
+    	public static final String Tag_filter="Tag";
+    	
     }
     
     public static class LookerIVRKeypressReport{
