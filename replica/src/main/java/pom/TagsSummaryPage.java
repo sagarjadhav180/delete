@@ -91,6 +91,15 @@ public class TagsSummaryPage extends TestBase {
 		
 	}
     
+    public void runButton(){
+
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
+	}
+    
 	public void headerLabel(){
 		logger.log(LogStatus.INFO, "Verifying if header label is present");
 		Assert.assertTrue(header_label.isDisplayed(),"Header label is not present or locator has been changed.");
@@ -237,8 +246,14 @@ public class TagsSummaryPage extends TestBase {
     
     public void tagsOverTimeGraph(){
 		
-		logger.log(LogStatus.INFO, "Verifying if Tags Over Time Graph is present");
-		Assert.assertTrue(tags_over_time_graph.isDisplayed(),"Tags Over Time Graph is not present or locator has been changed.");
+    	if(Integer.parseInt(tagged_calls_from_db)>0){
+    		logger.log(LogStatus.INFO, "Verifying if Tags Over Time Graph is present");
+    		Assert.assertTrue(tags_over_time_graph.isDisplayed(),"Tags Over Time Graph is not present or locator has been changed.");    		
+    	}
+    	else{
+    		logger.log(LogStatus.INFO, "tagsOverTimeGraph is not present since tagged call are 0");
+    	}
+
 	}
     
     public void tagsMixLabel(){
@@ -248,9 +263,15 @@ public class TagsSummaryPage extends TestBase {
 	}
     
     public void tagsMixGraph(){
-		
-		logger.log(LogStatus.INFO, "Verifying if Tags Mix Graph is present");
-		Assert.assertTrue(tags_mix_graph.isDisplayed(),"Tags Mix Graph is not present or locator has been changed.");
+	
+    	if(Integer.parseInt(tagged_calls_from_db)>0){
+    		logger.log(LogStatus.INFO, "Verifying if Tags Mix Graph is present");
+    		Assert.assertTrue(tags_mix_graph.isDisplayed(),"Tags Mix Graph is not present or locator has been changed.");    		
+    	}
+    	else{
+    		logger.log(LogStatus.INFO, "tagsMixGraph is not present since tagged calls are 0");
+    	}
+
 	}
     
     public void callsTableColumnVerification() throws InterruptedException{
@@ -293,8 +314,17 @@ public class TagsSummaryPage extends TestBase {
 		softassert.assertAll();
 	}
     
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
     
-	
+    	
     
     
 

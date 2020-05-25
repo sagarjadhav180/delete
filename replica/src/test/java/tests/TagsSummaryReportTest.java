@@ -45,38 +45,141 @@ public class TagsSummaryReportTest extends TestBase{
 		ts.switchToIFrame();
 	}
 	
-	@Test
+	@Test(priority=1)
+	public void runButtonVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Run Button Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+        ts=new TagsSummaryPage(driver);
+		ts.runButton();
+	}
+	
+	@Test(priority=2)
 	public void headerLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Header Label Verification Test"); 
-		logger.assignCategory(Constants.marketing_dashboard_category);
+		logger.assignCategory(Constants.tags_summary_category);
         ts=new TagsSummaryPage(driver);
 		ts.headerLabel();
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
-		logger.assignCategory(Constants.marketing_dashboard_category);
+		logger.assignCategory(Constants.tags_summary_category);
         ts=new TagsSummaryPage(driver);
 		ts.presenceOfGearIcon();
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
-		logger.assignCategory(Constants.marketing_dashboard_category);
+		logger.assignCategory(Constants.tags_summary_category);
         ts=new TagsSummaryPage(driver);
         ts.gearIconOptions();
 	}
 	
-	@Test
+	@Test(priority=5)
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
-		logger.assignCategory(Constants.marketing_dashboard_category);
+		logger.assignCategory(Constants.tags_summary_category);
         ts=new TagsSummaryPage(driver);
 		ts.presenceOfTimeZone();
 	}
+
+	@Test(priority=6)
+	public void tilesVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Tiles Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+        ts=new TagsSummaryPage(driver);
+		ts.tilesVerification();
+	}
 	
+	@Test(priority=7)
+	public void toalCallsCountVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Toal Calls Count Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+        ts=new TagsSummaryPage(driver);
+		ts.tileValueVerification(Constants.LookerTagsSummaryReport.total_call_tile);
+	}
+	
+	@Test(priority=8)
+	public void taggedCallsCountVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Tagged Calls Count Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+        ts=new TagsSummaryPage(driver);
+		ts.tileValueVerification(Constants.LookerTagsSummaryReport.tagged_calls_tile);
+	}
+	
+	@Test(priority=9)
+	public void tagsUsedCountVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Tags Used Count Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+        ts=new TagsSummaryPage(driver);
+		ts.tileValueVerification(Constants.LookerTagsSummaryReport.tags_used_tile);
+	}
+	
+	@Test(priority=10)
+	public void presenceOfTagsOverTimeLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Tags Over Time Label Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.tagsOverTimeLabel();
+	}
+	
+	@Test(priority=11)
+	public void presenceOfTagsOverTimeGraphVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Tags Over Time Graph Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.tagsOverTimeGraph();
+	}
+	
+	@Test(priority=12)
+	public void presenceOfTagsMixLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Tags Mix Label Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.tagsMixLabel();
+	}
+	
+	@Test(priority=13)
+	public void presenceOfTagsMixGraphVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Tags Mix Graph Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.tagsMixGraph();
+	}
+	
+	@Test(priority=14)
+	public void callsTableColumnVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Calls Table Column Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.callsTableColumnVerification();
+	}
+	
+	@Test(priority=15)
+	public void tagsTableColumnVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Tags Table Column Verification Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.tagsTableColumnVerification();
+	}
+
+	@Test(priority=16)
+	public void filterButtonTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.filterButton();
+	}
+
+	@Test(priority=17)
+	public void filterButtonElementsTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Elements Test"); 
+		logger.assignCategory(Constants.tags_summary_category);
+		ts=new TagsSummaryPage(driver);
+		ts.filterElements();
+	}
 	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
