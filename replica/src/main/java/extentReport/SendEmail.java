@@ -84,6 +84,7 @@ public class SendEmail extends TestBase {
 		SendEmail.sendMail("cfauiautomation@gmail.com", "Moentek@123", "smtp.gmail.com", "465", "true", "true", true,
 				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "CFA App Automation Test Result", writer,
 				".//Extent.html", "Automation_Report.html", "");
+		
 	}
 
 	@Test

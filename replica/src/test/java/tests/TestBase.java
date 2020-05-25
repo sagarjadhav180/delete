@@ -1,5 +1,6 @@
 package tests;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -88,6 +89,7 @@ public class TestBase
 		TestBase.setPassword(pass);
 		String environment = prop.getProperty("Environment");
 		TestBase.setEnv(environment);
+
 		
 	}
 	
@@ -128,7 +130,7 @@ public class TestBase
 	    driver.manage().deleteAllCookies();
 	    driver.get(url_to_hit);
 //	    TestData.createData();			    
-	   	    
+		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
 	}
 
 
