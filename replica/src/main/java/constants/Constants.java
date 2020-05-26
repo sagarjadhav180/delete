@@ -50,7 +50,7 @@ public class Constants {
     	public static final String tags_summary_report="Tags Summary";
     	public static final String tracking_number_settings_report="Tracking Number Settings";
     	public static final String user_logs_report="User Logs";    	
-    	
+    	public static final String webhook_logs_report="Webhook Logs";
     	
     }
 
