@@ -194,3 +194,21 @@ WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit
 AND call_started BETWEEN '2019-05-22 23:59' AND '2020-05-22 23:59')
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------Webhook logs----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-19 23:59' AND '2020-05-26 23:59'
+
+//pre-call webhook sent
+SELECT * FROM v_webhook_logs 
+WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND log_date BETWEEN '2020-05-19 23:59' AND '2020-05-26 23:59' AND type LIKE 'Pre Call Webhook'
+
+//pre-call webhook sent
+SELECT * FROM v_webhook_logs 
+WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND log_date BETWEEN '2020-05-19 23:59' AND '2020-05-26 23:59' AND type LIKE 'Post Call Webhook'
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
