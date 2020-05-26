@@ -267,7 +267,7 @@ public class Constants {
     	
     	//filter section
     	public static final String webhhok_filter="Webhook";
-    	public static final String status_filter="Status";
+    	public static final String status_filter="Webhook Status";
     	
     }
     
