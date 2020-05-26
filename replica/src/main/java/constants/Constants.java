@@ -259,6 +259,18 @@ public class Constants {
     			
     }
     
+    public static class LookerWebhookLogsReport{
+    	
+    	public static final String total_call_tile="Total Calls";
+    	public static final String pre_call_webhook_tile="Pre-call Webhooks Sent";
+    	public static final String post_call_webhook_tile="Post-call Webhooks Sent";
+    	
+    	//filter section
+    	public static final String webhhok_filter="Webhook";
+    	public static final String status_filter="Status";
+    	
+    }
+    
     public static class LookerTagsSummaryReport{
     	
     	public static final String total_call_tile="Total Calls";
@@ -286,10 +298,7 @@ public class Constants {
     	public static final String calls_with_agent_id_tile="Calls with Agent ID";    	
     	public static final String calls_with_call_outcome_tile="Calls with Call Outcome";        	
     	
-    	//filter section
-    	
-    	
-    	
+   	
     }
     
     
