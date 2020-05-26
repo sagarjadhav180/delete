@@ -15,6 +15,30 @@ import tests.TestBase;
 
 public class WebhookLogsReportPage extends TestBase{
 	
+	@FindBy(xpath="(//div[@class='title-main']//span[text()='Webhook Logs'])")
+	private WebElement header_label;
+	
+	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
+	private List<WebElement> tiles_names;
+	
+	String [] expected_tiles_names={"Total Calls","Pre-call Webhooks Sent","Post-call Webhooks Sent"};
+	
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Webhook Summary']")
+	private WebElement webhook_summary_label;	
+
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[1]//div[@class='ag-header-container']//strong")
+	private List<WebElement> webhook_summary_table_columns;	
+	
+	String[] expected_webhook_summary_table_columns={"Webhook","End Point URL","Times Executed"};
+	
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Webhook Logs']")
+	private WebElement webhook_logs_label;	
+
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[2]//div[@class='ag-header-container']//strong")
+	private List<WebElement> webhook_logs_table_columns;
+	
+	String[] expected_webhook_logs_table_columns={"Webhook","Date/Time Executed","Type","End Point URL","Status"};
+	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
 
@@ -37,6 +61,8 @@ public class WebhookLogsReportPage extends TestBase{
 	
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
+	
+	String[] expected_filter_elements_after_expanding={"Date Range","Webhook","Webhook Status"};
 	
 	SoftAssert softassert=new SoftAssert(); 
 
