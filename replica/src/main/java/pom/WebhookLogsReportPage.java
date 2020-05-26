@@ -377,7 +377,7 @@ public class WebhookLogsReportPage extends TestBase{
             String filterValue;
     		for(int i=0;i<webhook_logs_table_columns.size();i++){
     			
-    			if(filterName.equals(webhook_logs_table_columns.get(i).getText())){
+    			if(filterName.endsWith(webhook_logs_table_columns.get(i).getText())){
     				
     				index=i+1;
     				break;
