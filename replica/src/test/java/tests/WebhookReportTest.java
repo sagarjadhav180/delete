@@ -148,7 +148,7 @@ public class WebhookReportTest extends TestBase{
 		ts.webhookLogsTableColumnVerification();
 	}
 	
-
+	@Test(priority=14)
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.webhook_logs_report_category);
@@ -156,6 +156,7 @@ public class WebhookReportTest extends TestBase{
 		ts.filterButton();
 	}
 	
+	@Test(priority=15)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.webhook_logs_report_category);
@@ -163,6 +164,7 @@ public class WebhookReportTest extends TestBase{
 		ts.filterElements();
 	}
 	
+	@Test(priority=16)
 	public void filterFeatureForWebhookSummaryTableWebhookTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Webhook Summary Table Webhook Test"); 
 		logger.assignCategory(Constants.webhook_logs_report_category);
@@ -170,6 +172,7 @@ public class WebhookReportTest extends TestBase{
 		ts.filterFeatureForWebhookSummaryTable(Constants.LookerWebhookLogsReport.webhhok_filter);
 	}
 	
+	@Test(priority=17)
 	public void filterFeatureForWebhookLogsTableWebhookTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Webhook Logs Table Webhook Test"); 
 		logger.assignCategory(Constants.webhook_logs_report_category);
@@ -177,6 +180,7 @@ public class WebhookReportTest extends TestBase{
 		ts.filterFeatureForWebhookLogsTable(Constants.LookerWebhookLogsReport.webhhok_filter);
 	}
 	
+	@Test(priority=18)
 	public void filterFeatureForWebhookLogsTableWebhookStatusTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Webhook Logs Table Webhook Status Test"); 
 		logger.assignCategory(Constants.webhook_logs_report_category);
