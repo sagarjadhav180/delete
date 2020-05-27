@@ -272,6 +272,15 @@ public class Constants {
     	
     }
     
+    public static class LookerUserLogsReport{
+    	
+    	//filter section
+    	public static final String user_filter="User";
+    	public static final String group_filter="Group";
+    	public static final String activity_filter="Activity";
+    	
+    }
+    
     public static class LookerTagsSummaryReport{
     	
     	public static final String total_call_tile="Total Calls";
