@@ -17,7 +17,7 @@ import pom.WebHookPage;
 import tests.TestBase;
 import tests.TrackingNumberTest;
 import tests.Util;
-import tests.WebHookTest;
+import tests.WebhookTest;
 
 @SuppressWarnings("unused")
 public class TestDataCreation extends TestBase implements TestDataFunctions {
