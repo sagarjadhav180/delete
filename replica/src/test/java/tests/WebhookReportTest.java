@@ -47,7 +47,7 @@ public class WebhookReportTest extends TestBase{
 	@Test(priority=1)
 	public void runButtonVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Run Button Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.runButton();
 	}
@@ -55,7 +55,7 @@ public class WebhookReportTest extends TestBase{
 	@Test(priority=2)
 	public void headerLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Header Label Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.headerLabel();
 	}
@@ -63,7 +63,7 @@ public class WebhookReportTest extends TestBase{
 	@Test(priority=3)
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.presenceOfGearIcon();
 	}
@@ -71,7 +71,7 @@ public class WebhookReportTest extends TestBase{
 	@Test(priority=4)
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
         ts.gearIconOptions();
 	}
@@ -79,98 +79,107 @@ public class WebhookReportTest extends TestBase{
 	@Test(priority=5)
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.presenceOfTimeZone();
 	}
-	
+
+	@Test(priority=6)
 	public void tilesVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Tiles Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.tilesVerification();
 	}
 	
+	@Test(priority=7)
 	public void toalCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Toal Calls Count Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.tileValueVerification(Constants.LookerWebhookLogsReport.total_call_tile);
 	}
 	
+	@Test(priority=8)
 	public void preCallWebhookCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Pre Call Webhook Count Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.tileValueVerification(Constants.LookerWebhookLogsReport.pre_call_webhook_tile);
 	}
 	
+	@Test(priority=9)
 	public void postCallWebhookCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Post Call Webhook Count Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
         ts=new WebhookLogsReportPage(driver);
 		ts.tileValueVerification(Constants.LookerWebhookLogsReport.post_call_webhook_tile);
 	}
 	
+	@Test(priority=10)	
 	public void presenceOfWebhookSummaryLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of WebhookSummary Label Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.webhookSummaryLabel();
 	}
 	
+	@Test(priority=11)
 	public void webhookSummaryTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Webhook Summary Table Column Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.webhookSummaryTableColumnVerification();
 	}
 	
+	@Test(priority=12)
 	public void presenceOfWebhookLogsLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Webhook Logs Label Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.webhookLogsLabel();
 	}
 	
+	@Test(priority=13)
 	public void webhookLogsTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Webhook Logs Table Column Verification Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.webhookLogsTableColumnVerification();
 	}
 	
+
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.filterButton();
 	}
 	
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.filterElements();
 	}
 	
 	public void filterFeatureForWebhookSummaryTableWebhookTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Webhook Summary Table Webhook Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.filterFeatureForWebhookSummaryTable(Constants.LookerWebhookLogsReport.webhhok_filter);
 	}
 	
 	public void filterFeatureForWebhookLogsTableWebhookTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Webhook Logs Table Webhook Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.filterFeatureForWebhookLogsTable(Constants.LookerWebhookLogsReport.webhhok_filter);
 	}
 	
 	public void filterFeatureForWebhookLogsTableWebhookStatusTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Webhook Logs Table Webhook Status Test"); 
-		logger.assignCategory(Constants.webhook_category);
+		logger.assignCategory(Constants.webhook_logs_report_category);
 		ts=new WebhookLogsReportPage(driver);
 		ts.filterFeatureForWebhookLogsTable(Constants.LookerWebhookLogsReport.status_filter);
 	}

@@ -12,7 +12,7 @@ import pom.HomePage;
 import pom.LoginPage;
 import pom.WebHookPage;
 
-public class WebHookTest extends TestBase {
+public class WebhookTest extends TestBase {
 
 	HomePage hp;
 	WebHookPage wh;

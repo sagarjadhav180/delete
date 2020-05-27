@@ -24,7 +24,7 @@ public class Constants {
 	public static final String tracking_number_settings_category="Tracking Number Settings Report Suite";
 	public static final String user_logs_category="User Logs Report Suite";
 	
-	public static final String webhook_category="WebHook Suite";
+	public static final String webhook_logs_report_category="Webhook Logs Report Suite";
 	public static final String tracking_number_category="Tracking Number Suite";	
 	public static final String campaign_category="Campaign Suite";	
 	public static final String login_page_category="Login Page Suite";
@@ -33,6 +33,7 @@ public class Constants {
 	public static final String call_details_report_category="Call Details Reports Suite";		
 	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
+	public static final String webhook_category="Webhook Suite";
 	
     public static class LookerReports{
     	
