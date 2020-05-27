@@ -120,6 +120,7 @@ public class WebhookLogsReportPage extends TestBase{
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 
     public void presenceOfTimeZone(){
