@@ -12,6 +12,7 @@ import constants.Constants;
 import pom.CallLogsReportPage;
 import pom.HomePage;
 import pom.LoginPage;
+import pom.TagsSummaryPage;
 import pom.UserLogsReportPage;
 import pom.WebhookLogsReportPage;
 
@@ -83,12 +84,89 @@ public class UserLogsReportTest extends TestBase{
 		ts.presenceOfTimeZone();
 	}
 	
+	@Test(priority=6)
+	public void presenceOfAllActivityLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of All Activity Label Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.allActivityByTypeLabel();
+	}	
 	
+	@Test(priority=7)
+	public void presenceOfAllActivityGraphVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of All Activity Graph Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.allActivityByTypeGraph();
+	}
 	
+	@Test(priority=8)
+	public void allActivityTableColumnVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("All Activity Table Column Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.allActivityTableColumnVerification();
+	}
 	
+	@Test(priority=9)
+	public void presenceOfLoginActivityTableLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Login Activity Table Label Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.loginActivityTableLabel();
+	}	
 	
+	@Test(priority=10)
+	public void presenceOfLoginActivityGraphLabelVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Login Activity Graph Label Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.loginActivityGraphLabel();
+	}	
+
+	@Test(priority=11)
+	public void presenceOfLoginActivityGraphVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Presence Of Login Activity Graph Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.loginActivityGraph();
+	}
 	
+	@Test(priority=12)
+	public void LoginActivityTableColumnVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("Login Activity Table Column Verification Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.loginActivityTableColumnVerification();
+	}
 	
+	public void filterButtonElementsTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Elements Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.filterElements();
+	}
+	
+	public void filterFeatureForUserTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For User Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.filterFeatureForAllActivityTable(Constants.LookerUserLogsReport.user_filter);
+	}
+	
+	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Group Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.filterFeatureForAllActivityTable(Constants.LookerUserLogsReport.group_filter);
+	}
+	
+	public void filterFeatureForActivityTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Activity Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.filterFeatureForAllActivityTable(Constants.LookerUserLogsReport.activity_filter);
+	}
 	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
