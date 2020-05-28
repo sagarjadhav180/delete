@@ -140,6 +140,15 @@ public class UserLogsReportTest extends TestBase{
 		ts.loginActivityTableColumnVerification();
 	}
 	
+	@Test(priority=13)	
+	public void filterButtonTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Button Test"); 
+		logger.assignCategory(Constants.user_logs_category);
+		ts=new UserLogsReportPage(driver);
+		ts.filterButton();
+	}
+	
+	@Test(priority=14)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.user_logs_category);
@@ -147,6 +156,7 @@ public class UserLogsReportTest extends TestBase{
 		ts.filterElements();
 	}
 	
+	@Test(priority=15)
 	public void filterFeatureForUserTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For User Test"); 
 		logger.assignCategory(Constants.user_logs_category);
@@ -154,6 +164,7 @@ public class UserLogsReportTest extends TestBase{
 		ts.filterFeatureForAllActivityTable(Constants.LookerUserLogsReport.user_filter);
 	}
 	
+	@Test(priority=16)
 	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Group Test"); 
 		logger.assignCategory(Constants.user_logs_category);
@@ -161,6 +172,7 @@ public class UserLogsReportTest extends TestBase{
 		ts.filterFeatureForAllActivityTable(Constants.LookerUserLogsReport.group_filter);
 	}
 	
+	@Test(priority=17)
 	public void filterFeatureForActivityTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Activity Test"); 
 		logger.assignCategory(Constants.user_logs_category);
