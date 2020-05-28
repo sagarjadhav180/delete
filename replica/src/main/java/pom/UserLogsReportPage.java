@@ -205,6 +205,16 @@ public class UserLogsReportPage extends TestBase{
 			
 		softassert.assertAll();
 	}
+
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
     
     public void filterElements(){
         
@@ -237,11 +247,22 @@ public class UserLogsReportPage extends TestBase{
             String filterValue;
     		for(int i=0;i<all_activity_table_columns.size();i++){
     			
-    			if(filterName.startsWith(all_activity_table_columns.get(i).getText())){
+    			if(filterName.equals("User")){
+    				if(all_activity_table_columns.get(i).getText().startsWith(filterName)){
+        				
+        				index=i+1;
+        				break;
+        			}
+    			}
+    			else{
+    				if(filterName.equals(all_activity_table_columns.get(i).getText())){
     				
     				index=i+1;
     				break;
     			}
+    				
+    			}
+    			
     		}
     		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("(//div[@class='ag-grid-container'])[1]//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
     		filterValue=value_to_be_filtered.get(0).getText();
