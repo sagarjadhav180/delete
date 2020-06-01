@@ -82,7 +82,8 @@ public class CallTrendsReportTest extends TestBase{
         ts=new CallTrendsReportPage(driver);
 		ts.presenceOfTimeZone();
 	}
-	
+
+	@Test(priority=6)
 	public void tilesVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Tiles Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -90,6 +91,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.tilesVerification();
 	}
 	
+	@Test(priority=7)
 	public void totalCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Calls Count Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -97,6 +99,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.tileValueVerificationForDefault7DaysFilter(Constants.LookerCallTrendsReport.total_calls_tile);
 	}
 	
+	@Test(priority=8)
 	public void uniqueCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Unique Calls Count Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -111,6 +114,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.tileValueVerificationForDefault7DaysFilter(Constants.LookerCallTrendsReport.answered_calls_tile);
 	}
 	
+	@Test(priority=9)
 	public void unAnsweredCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Unanswered Calls Count Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -118,6 +122,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.tileValueVerificationForDefault7DaysFilter(Constants.LookerCallTrendsReport.unanswered_calls_tile);
 	}
 	
+	@Test(priority=10)
 	public void longestCallDurationVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Longest Call Duration Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -125,13 +130,15 @@ public class CallTrendsReportTest extends TestBase{
 		ts.tileValueVerificationForDefault7DaysFilter(Constants.LookerCallTrendsReport.longest_call_duration_tile);
 	}
 	
+//	@Test(priority=11)
 	public void averageCallDurationVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Average Call Duration Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
         ts=new CallTrendsReportPage(driver);
 		ts.tileValueVerificationForDefault7DaysFilter(Constants.LookerCallTrendsReport.average_calls_duration_tile);
 	}
-	
+
+	@Test(priority=12)
 	public void presenceOfCallsOverTimebyDayLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls Over Time by Day Label Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -139,6 +146,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callsOverTimebyDayLabel();
 	}
 
+	@Test(priority=13)
 	public void presenceOfCallsOverTimebyDayGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls Over Time by Day Graph Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -146,13 +154,15 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callsOverTimebyDayGraph();
 	}
 	
+	@Test(priority=14)
 	public void callsOverTimebyDayTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Calls Over Time by Day Table Column Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
         ts=new CallTrendsReportPage(driver);
 		ts.callsOverTimebyDayTableColumnVerification();
 	}
-	
+
+	@Test(priority=15)
 	public void presenceOfCallsOverTimebyHourLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls Over Time by Hour Label Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -160,6 +170,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callsOverTimebyHourLabel();
 	}
 	
+	@Test(priority=16)
 	public void presenceOfCallsOverTimebyHourGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls Over Time by Hour Graph Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -167,6 +178,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callsOverTimebyHourGraph();
 	}
 	
+	@Test(priority=17)
 	public void callsOverTimebyHourTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Calls Over Time by Hour Table Column Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -174,6 +186,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callsOverTimebyHourTableColumnVerification();
 	}
 	
+	@Test(priority=18)
 	public void presenceOfCallMixLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Call Mix Label Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -181,6 +194,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callsMixLabel();
 	}
 	
+//	@Test(priority=19)
 	public void presenceOfCallMixGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Call Mix Graph Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -188,6 +202,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.callMixGraph();
 	}
 	
+	@Test(priority=20)
 	public void callMixTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Call Mix Table Column Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
