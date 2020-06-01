@@ -209,6 +209,34 @@ public class CallTrendsReportTest extends TestBase{
 		ts.filterElements();
 	}
 	
+	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Group Test"); 
+		logger.assignCategory(Constants.call_trends_category);
+        ts=new CallTrendsReportPage(driver);
+		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.group_filter);
+	}
+	
+	public void filterFeatureForCampaignTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Campaign Test"); 
+		logger.assignCategory(Constants.call_trends_category);
+        ts=new CallTrendsReportPage(driver);
+		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.campaign_filter);
+	}
+	
+	public void filterFeatureForTrackingNumberNameTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Tracking Number Name Test"); 
+		logger.assignCategory(Constants.call_trends_category);
+        ts=new CallTrendsReportPage(driver);
+		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.tracking_number_name_filter);
+	}
+	
+	public void filterFeatureForTrackingNumberTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature For Tracking Number Test"); 
+		logger.assignCategory(Constants.call_trends_category);
+        ts=new CallTrendsReportPage(driver);
+		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.tracking_number_filter);
+	}
+	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
 		
