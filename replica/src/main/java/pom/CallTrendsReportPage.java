@@ -193,10 +193,10 @@ public class CallTrendsReportPage extends TestBase{
     		
     		for(int j=0;j<expected_tiles_names.length;j++){
     			
-    			if(tiles_names.get(i).getText().equals(expected_tiles_names[j])){
+    			if(tiles_names.get(i).getText().startsWith(expected_tiles_names[j])){
     				
     				logger.log(LogStatus.INFO, "Verifying if "+expected_tiles_names[j]+" is present");
-    				softassert.assertTrue(tiles_names.get(i).getText().equals(expected_tiles_names[j]),"Tile "+expected_tiles_names[j]+" is not present");
+    				softassert.assertTrue(tiles_names.get(i).getText().startsWith(expected_tiles_names[j]),"Tile "+expected_tiles_names[j]+" is not present");
     			}
     		}
     		
