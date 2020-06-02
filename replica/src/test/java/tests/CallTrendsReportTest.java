@@ -209,7 +209,8 @@ public class CallTrendsReportTest extends TestBase{
         ts=new CallTrendsReportPage(driver);
 		ts.callMixTableColumnVerification();
 	}
-	
+
+	@Test(priority=21)
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -217,13 +218,15 @@ public class CallTrendsReportTest extends TestBase{
 		ts.filterButton();
 	}
 	
+	@Test(priority=22)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.call_trends_category);
         ts=new CallTrendsReportPage(driver);
 		ts.filterElements();
 	}
-	
+
+	@Test(priority=23)
 	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Group Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -231,6 +234,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.group_filter);
 	}
 	
+	@Test(priority=24)
 	public void filterFeatureForCampaignTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Campaign Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -238,6 +242,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.campaign_filter);
 	}
 	
+	@Test(priority=25)
 	public void filterFeatureForTrackingNumberNameTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Tracking Number Name Test"); 
 		logger.assignCategory(Constants.call_trends_category);
@@ -245,6 +250,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.filterFeatureForCallMixTable(Constants.LookerCallTrendsReport.tracking_number_name_filter);
 	}
 	
+	@Test(priority=26)
 	public void filterFeatureForTrackingNumberTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Tracking Number Test"); 
 		logger.assignCategory(Constants.call_trends_category);
