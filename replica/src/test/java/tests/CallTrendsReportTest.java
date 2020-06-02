@@ -130,7 +130,7 @@ public class CallTrendsReportTest extends TestBase{
 		ts.tileValueVerificationForDefault7DaysFilter(Constants.LookerCallTrendsReport.longest_call_duration_tile);
 	}
 	
-//	@Test(priority=11)
+	@Test(priority=11)
 	public void averageCallDurationVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Average Call Duration Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
