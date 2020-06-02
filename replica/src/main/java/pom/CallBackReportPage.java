@@ -176,7 +176,7 @@ public class CallBackReportPage extends TestBase{
 
 	String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 	String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
-	String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+	String avg_call_duration_from_db = Util.readingFromDB("SELECT AVG(duration) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 	String missed_opportuntity_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='2065'");
 	String tagged_as_call_back_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call_tag WHERE tag_id='9' AND call_tag_created BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 
@@ -258,8 +258,8 @@ public class CallBackReportPage extends TestBase{
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(avg_call_duration_from_db!=null){
 				System.out.println(tile_values);
-				System.out.println(avg_call_duration_from_db);
-				softassert.assertTrue(tile_values.equals(avg_call_duration_from_db),"Tile count doest match with db count");			
+				System.out.println(avg_call_duration_from_db.substring(0,avg_call_duration_from_db.indexOf('.')));
+				softassert.assertTrue(tile_values.equals(avg_call_duration_from_db.substring(0,avg_call_duration_from_db.indexOf('.'))),"Tile count doest match with db count");			
 			}
 			else{
 				System.out.println(tile_values);
