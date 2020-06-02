@@ -460,7 +460,7 @@ public class CallTrendsReportPage extends TestBase{
     			
     			if(filterName.equals(calls_mix_table_columns.get(i).getText())){
     				
-    				index=i+1;
+    				index=i;
     				break;
     			}
     		}
@@ -476,7 +476,14 @@ public class CallTrendsReportPage extends TestBase{
     		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
             Util.Action().moveToElement(filter_textbox).perform();
             Util.Action().click().perform();
-    	    Util.Action().sendKeys(filterValue).perform();
+            if(filterName.equals("Group")){
+        	    Util.Action().sendKeys(filterValue.substring(0, filterValue.indexOf('|'))).perform();            	
+            	
+            }
+            else{
+        	    Util.Action().sendKeys(filterValue).perform();            	
+            }
+
     	    Util.Action().sendKeys(Keys.ESCAPE).perform();	
     		
     		run_button.click();
