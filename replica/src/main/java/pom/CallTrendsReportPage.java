@@ -116,6 +116,7 @@ public class CallTrendsReportPage extends TestBase{
 	}
     
 	public void headerLabel(){
+
 		logger.log(LogStatus.INFO, "Verifying if header label is present");
 		Assert.assertTrue(header_label.isDisplayed(),"Header label is not present or locator has been changed.");
 
