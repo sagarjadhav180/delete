@@ -293,6 +293,13 @@ public class Constants {
     	
     }
     
+    public static class LookerAnalyticsSummaryReport{
+    	
+    	public static final String total_call_tile="Total Calls";
+    	public static final String total_analyzed_calls_tile="Total Analyzed Calls";
+    
+    }
+    
     public static class LookerCallTrendsReport{
 
     	//tiles
