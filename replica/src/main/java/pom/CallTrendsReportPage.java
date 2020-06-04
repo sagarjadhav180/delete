@@ -489,7 +489,7 @@ public class CallTrendsReportPage extends TestBase{
     		
     		run_button.click();
     		filter_button.click();
-    		Thread.sleep(5000);
+    		Thread.sleep(7000);
     		
     	
     		List<WebElement> filtered_values = driver.findElements(By.xpath("(//div[@class='ag-grid-container'])[3]//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
