@@ -238,3 +238,15 @@ SELECT MAX(duration) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id
 AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'  
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------Analytics summary------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-29 23:59' AND '2020-06-05 23:59'
+
+//total analyzed calls
+SELECT * FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-29 23:59' AND '2020-06-05 23:59') AND call_mine_status='mined'
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
