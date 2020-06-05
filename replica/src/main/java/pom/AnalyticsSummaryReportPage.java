@@ -192,7 +192,7 @@ public class AnalyticsSummaryReportPage extends TestBase{
 	String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
 	String total_call_count_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-	String total_analyzed_call_count_from_db = Util.readingFromDB("");
+	String total_analyzed_call_count_from_db = Util.readingFromDB("SELECT COUNT(*) AS count FROM call_detail WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND call_mine_status='mined'");
     
 	public void tileValueVerificationForDefault7DaysFilter(String tile_name){
 		
