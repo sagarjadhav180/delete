@@ -20,7 +20,7 @@ public class CallsByRegionReportPage extends TestBase {
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='title-main']//span[text()='Calls By Region']")
 	private WebElement header_label;
 	
 	@FindBy(xpath="//div[@class='dropdown-toggle button-xs']/i")
@@ -43,32 +43,32 @@ public class CallsByRegionReportPage extends TestBase {
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 	
-	String[] expected_filter_elements_after_expanding={};
+	String[] expected_filter_elements_after_expanding={"Date Range","Show By","Ad Source","Campaign","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Group","Referring Source","Referring Type","Tracking Number Name","Tracking Number"};
 	
 	SoftAssert softassert=new SoftAssert(); 
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Calls By Regions']")
 	private WebElement calls_by_region_graph_label;
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='vis-wrapper-container'])[1]")
 	private WebElement calls_by_region_graph;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Top Regions']")
 	private WebElement top_regions_graph_label;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[starts-with(@id,'highcharts-')])[1]")
 	private WebElement top_regions_graph;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Calls By State/Province']")
 	private WebElement calls_by_state_graph_label;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[starts-with(@id,'highcharts-')])[1]")
 	private WebElement calls_by_state_graph;
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[1]//div[@class='ag-header-container']//strong")
 	private List<WebElement> table_columns;
 	
-	String[] expected_table_columns={};
+	String[] expected_table_columns={"Calls By Zip/Postal Code","City","State/Province","Country Code","Calls","Average Call Duration"};
 	
 	public CallsByRegionReportPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
