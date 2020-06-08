@@ -19,19 +19,19 @@
 			<class name="tests.TrackingNumberSettingsTest" />
 			<class name="tests.GroupActivityReportTest" />
 			<class name="tests.LegacyScheduledReportTest" />
-		    <class name="tests.CallLogsTest" />
+		    <class name="tests.LookerCallLogsTest" />
 		    <class name="tests.LookerTrackingNumberSettingsReportTest" />
-		    <class name="tests.CallBackReportTest" />
-		    <class name="tests.BlockedCallReportTest" />
-		    <class name="tests.IVRKeypressReportTest" />
-		    <class name="tests.MarketingDashboardTest" />
-		    <class name="tests.CallsByRegionReportTest" />
-		    <class name="tests.CallerActivityReportTest" />
-		    <class name="tests.CallTrendsReportTest" />
-		    <class name="tests.AnalyticsSummaryReportTest" />
-		    <class name="tests.TagsSummaryReportTest" />
-	        <class name="tests.UserLogsReportTest" />
-	        <class name="tests.WebhookReportTest" />
+		    <class name="tests.LookerCallBackReportTest" />
+		    <class name="tests.LookerBlockedCallReportTest" />
+		    <class name="tests.LookerIVRKeypressReportTest" />
+		    <class name="tests.LookerMarketingDashboardTest" />
+		    <class name="tests.LookerCallsByRegionReportTest" />
+		    <class name="tests.LookerCallerActivityReportTest" />
+		    <class name="tests.LookerCallTrendsReportTest" />
+		    <class name="tests.LookerAnalyticsSummaryReportTest" />
+		    <class name="tests.LookerTagsSummaryReportTest" />
+	        <class name="tests.LookerUserLogsReportTest" />
+	        <class name="tests.LookerWebhookReportTest" />
 		</classes>
 
 	</test>
