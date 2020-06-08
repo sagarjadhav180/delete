@@ -6,15 +6,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
+import tests.Util;
 
 public class EmailDigestReportPage extends TestBase{
 
+	@FindBy(xpath="")
+	private WebElement header_label;
+	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
 
@@ -38,6 +43,39 @@ public class EmailDigestReportPage extends TestBase{
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 	
+	String[] expected_filter_elements_after_expanding={};
+	
+	@FindBy(xpath="")
+	private WebElement summary_of_calls_label;
+	
+	@FindBy(xpath="")
+	private List<WebElement> summary_of_calls_table_columns;
+
+	String[] expected_summary_of_calls_table_columns={};
+	
+	@FindBy(xpath="")
+	private WebElement coachable_calls_label;
+
+	@FindBy(xpath="")
+	private List<WebElement> coachable_calls_table_columns;
+
+	String[] expected_coachable_calls_table_columns={};
+	
+	@FindBy(xpath="")
+	private WebElement coachable_calls_table_no_results_label;
+	
+	@FindBy(xpath="")
+	private WebElement good_calls_label;
+
+	@FindBy(xpath="")
+	private List<WebElement> good_calls_table_columns;
+
+	String[] expected_good_calls_table_columns={};	
+	
+	@FindBy(xpath="")
+	private WebElement good_calls_table_no_results_label;
+
+	
 	SoftAssert softassert=new SoftAssert(); 
 
 	public EmailDigestReportPage(WebDriver driver){
@@ -56,9 +94,18 @@ public class EmailDigestReportPage extends TestBase{
 		
 	}
     
-	public void headerLabel(){
+    public void runButton(){
 
-				
+ 		wait.until(ExpectedConditions.visibilityOf(run_button));
+ 		logger.log(LogStatus.INFO, "verifying if run_button is present");
+ 		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+ 		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+ 		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
+ 	}
+    
+	public void headerLabel(){
+		logger.log(LogStatus.INFO, "Verifying if header label is present");
+		Assert.assertTrue(header_label.isDisplayed(),"Header label is not present or locator has been changed.");
 	}
     
     public void presenceOfGearIcon(){
@@ -84,6 +131,7 @@ public class EmailDigestReportPage extends TestBase{
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 
 	
@@ -93,4 +141,114 @@ public class EmailDigestReportPage extends TestBase{
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}
 	
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
+    
+    public void filterElements(){
+        
+    	Util.click(filter_button);
+        
+        for(int k=0;k<filter_elements_after_expanding.size();){
+        	for(int j=0;j<expected_filter_elements_after_expanding.length;j++){
+
+        		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements_after_expanding[j])){
+    	    			    			    		
+        		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+        		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+        		System.out.println("array-"+expected_filter_elements_after_expanding[j]);		
+        		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements_after_expanding[j]+" filter is present");
+        	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements_after_expanding[j],expected_filter_elements_after_expanding[j]+" filter element is npt present");
+        		}
+        		}
+        	k++;
+        }
+
+        softassert.assertAll();
+    	//collapsing filter section
+    	Util.click(filter_button);
+
+    }
+    
+    public void summaryOfCallsLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Summary Of Calls Label is displayed");
+    	Assert.assertTrue(summary_of_calls_label.isDisplayed(),"Summary Of Calls Label is not displayed");
+    }
+    
+    public void summaryOfCallsTableColumnVerification() throws InterruptedException{
+		
+    	Thread.sleep(2000);
+    		
+    	for(int i=0;i<summary_of_calls_table_columns.size();i++){
+    				
+    		for(int j=0;j<expected_summary_of_calls_table_columns.length;j++){
+    					
+    			if(summary_of_calls_table_columns.get(i).getText().equals(expected_summary_of_calls_table_columns[j])){
+    					
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_summary_of_calls_table_columns[j]+" is present");
+    				softassert.assertTrue(summary_of_calls_table_columns.get(i).getText().equals(expected_summary_of_calls_table_columns[j]),"Column "+expected_summary_of_calls_table_columns[j]+" is not present");
+    				}
+    			}	
+    		}
+    		
+    	softassert.assertAll();		
+	}
+    
+    public void coachableCallsLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Coachable Calls Label is displayed");
+    	Assert.assertTrue(coachable_calls_label.isDisplayed(),"Coachable Calls Label is not displayed");
+    }
+    
+    public void coachableCallsTableColumnVerification() throws InterruptedException{
+		
+    	Thread.sleep(2000);
+    		
+    	for(int i=0;i<coachable_calls_table_columns.size();i++){
+    				
+    		for(int j=0;j<expected_coachable_calls_table_columns.length;j++){
+    					
+    			if(coachable_calls_table_columns.get(i).getText().equals(expected_coachable_calls_table_columns[j])){
+    					
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_coachable_calls_table_columns[j]+" is present");
+    				softassert.assertTrue(coachable_calls_table_columns.get(i).getText().equals(expected_coachable_calls_table_columns[j]),"Column "+expected_coachable_calls_table_columns[j]+" is not present");
+    				}
+    			}	
+    		}
+    		
+    	softassert.assertAll();		
+	}
+
+    public void goodCallsLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Good Calls Label is displayed");
+    	Assert.assertTrue(good_calls_label.isDisplayed(),"Good Calls Label is not displayed");
+    }
+    
+    public void goodCallsTableColumnVerification() throws InterruptedException{
+		
+    	Thread.sleep(2000);
+    		
+    	for(int i=0;i<good_calls_table_columns.size();i++){
+    				
+    		for(int j=0;j<expected_good_calls_table_columns.length;j++){
+    					
+    			if(good_calls_table_columns.get(i).getText().equals(expected_good_calls_table_columns[j])){
+    					
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_good_calls_table_columns[j]+" is present");
+    				softassert.assertTrue(good_calls_table_columns.get(i).getText().equals(expected_good_calls_table_columns[j]),"Column "+expected_good_calls_table_columns[j]+" is not present");
+    				}
+    			}	
+    		}
+    		
+    	softassert.assertAll();		
+	}
+    
 }

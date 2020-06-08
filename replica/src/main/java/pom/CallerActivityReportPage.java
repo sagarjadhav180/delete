@@ -6,14 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
+import tests.Util;
 
 public class CallerActivityReportPage extends TestBase {
+
+	@FindBy(xpath="//div[@class='title-main']//span[text()='Caller Activity']")
+	private WebElement header_label;
 	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
@@ -38,8 +43,23 @@ public class CallerActivityReportPage extends TestBase {
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 	
+	String[] expected_filter_elements_after_expanding={"Date Range","Calls By","Campaign","Group","Tracking Number Name","Tracking Number"};
+	
 	SoftAssert softassert=new SoftAssert(); 
 
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Top Callers Timeline']")
+	private WebElement top_callers_timeline_label;
+
+	@FindBy(xpath="//div[@class='timeline-vis']")
+	private WebElement top_callers_timeline_graph;
+
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[1]//div[@class='ag-header-container']//strong")
+	private List<WebElement> top_callers_timeline_table_columns;
+	
+	String[] expected_top_callers_timeline_table_columns={"Caller Id","Caller Name","Business Name","Address","Total Number of Calls","Total Duration of Calls","First Call Date","First Tracking Number Name/Number","Last Call Date","Last Tracking Number Name/Number",""};
+	
+	
+	
 	public CallerActivityReportPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
 	}
@@ -57,8 +77,10 @@ public class CallerActivityReportPage extends TestBase {
 	}
     
 	public void headerLabel(){
-
-				
+		
+		logger.log(LogStatus.INFO, "Verifying if header label is present");
+		Assert.assertTrue(header_label.isDisplayed(),"Header label is not present or locator has been changed.");
+		
 	}
     
     public void presenceOfGearIcon(){
@@ -84,6 +106,7 @@ public class CallerActivityReportPage extends TestBase {
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 
     
@@ -93,5 +116,81 @@ public class CallerActivityReportPage extends TestBase {
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}
 
+    public void runButton(){
 
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
+	}
+    
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
+    
+    public void filterElements(){
+        
+    	Util.click(filter_button);
+        
+        for(int k=0;k<filter_elements_after_expanding.size();){
+        	for(int j=0;j<expected_filter_elements_after_expanding.length;j++){
+
+        		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements_after_expanding[j])){
+    	    			    			    		
+        		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+        		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+        		System.out.println("array-"+expected_filter_elements_after_expanding[j]);		
+        		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements_after_expanding[j]+" filter is present");
+        	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements_after_expanding[j],expected_filter_elements_after_expanding[j]+" filter element is npt present");
+        		}
+        		}
+        	k++;
+        }
+
+        softassert.assertAll();
+    	//collapsing filter section
+    	Util.click(filter_button);
+
+    }
+    
+    public void topCallersTimeLineLabel(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Top Callers Time Line Label is displayed");
+    	Assert.assertTrue(top_callers_timeline_label.isDisplayed(),"Top Callers Time Line Label is not displayed");
+    }
+    
+    public void topCallersTimeLineGraph(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying if Top Callers Time Line Graph is displayed");
+    	Assert.assertTrue(top_callers_timeline_graph.isDisplayed(),"Top Callers Time Line graph is not displayed");
+    }
+    
+    public void topCallersTimeLineTableColumnVerification() throws InterruptedException{
+			
+    	Thread.sleep(2000);
+    		
+    	for(int i=0;i<top_callers_timeline_table_columns.size();i++){
+    				
+    		for(int j=0;j<expected_top_callers_timeline_table_columns.length;j++){
+    					
+    			if(top_callers_timeline_table_columns.get(i).getText().equals(expected_top_callers_timeline_table_columns[j])){
+    					
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_top_callers_timeline_table_columns[j]+" is present");
+    				softassert.assertTrue(top_callers_timeline_table_columns.get(i).getText().equals(expected_top_callers_timeline_table_columns[j]),"Column "+expected_top_callers_timeline_table_columns[j]+" is not present");
+    				}
+    			}	
+    		}
+    		
+    	softassert.assertAll();		
+	}
+    
+    
+    
 }

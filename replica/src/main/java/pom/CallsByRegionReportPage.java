@@ -6,18 +6,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
+import tests.Util;
 
 public class CallsByRegionReportPage extends TestBase {
 
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
 	private WebElement run_button;
 
+	@FindBy(xpath="")
+	private WebElement header_label;
+	
 	@FindBy(xpath="//div[@class='dropdown-toggle button-xs']/i")
 	private WebElement gear_icon;
 
@@ -38,8 +43,33 @@ public class CallsByRegionReportPage extends TestBase {
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 	
+	String[] expected_filter_elements_after_expanding={};
+	
 	SoftAssert softassert=new SoftAssert(); 
 
+	@FindBy(xpath="")
+	private WebElement calls_by_region_graph_label;
+	
+	@FindBy(xpath="")
+	private WebElement calls_by_region_graph;
+
+	@FindBy(xpath="")
+	private WebElement top_regions_graph_label;
+
+	@FindBy(xpath="")
+	private WebElement top_regions_graph;
+
+	@FindBy(xpath="")
+	private WebElement calls_by_state_graph_label;
+
+	@FindBy(xpath="")
+	private WebElement calls_by_state_graph;
+	
+	@FindBy(xpath="")
+	private List<WebElement> table_columns;
+	
+	String[] expected_table_columns={};
+	
 	public CallsByRegionReportPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
 	}
@@ -57,8 +87,8 @@ public class CallsByRegionReportPage extends TestBase {
 	}
     
 	public void headerLabel(){
-
-				
+		logger.log(LogStatus.INFO, "Verifying if header label is present");
+		Assert.assertTrue(header_label.isDisplayed(),"Header label is not present or locator has been changed.");
 	}
     
     public void presenceOfGearIcon(){
@@ -84,6 +114,7 @@ public class CallsByRegionReportPage extends TestBase {
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 
 	
@@ -93,5 +124,111 @@ public class CallsByRegionReportPage extends TestBase {
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}
 	
+    public void runButton(){
+
+		wait.until(ExpectedConditions.visibilityOf(run_button));
+		logger.log(LogStatus.INFO, "verifying if run_button is present");
+		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
+		logger.log(LogStatus.INFO, "verifying if run_button is enabled");
+		Assert.assertTrue(run_button.isEnabled(),"run_button is not enabled");
+	}
+    
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
+    
+    public void filterElements(){
+        
+    	Util.click(filter_button);
+        
+        for(int k=0;k<filter_elements_after_expanding.size();){
+        	for(int j=0;j<expected_filter_elements_after_expanding.length;j++){
+
+        		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements_after_expanding[j])){
+    	    			    			    		
+        		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+        		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+        		System.out.println("array-"+expected_filter_elements_after_expanding[j]);		
+        		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements_after_expanding[j]+" filter is present");
+        	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements_after_expanding[j],expected_filter_elements_after_expanding[j]+" filter element is npt present");
+        		}
+        		}
+        	k++;
+        }
+
+        softassert.assertAll();
+    	//collapsing filter section
+    	Util.click(filter_button);
+
+    }
+    
+    public void callsByRegionGraphLabel(){
+		
+    	logger.log(LogStatus.INFO, "Verifying if Calls By Region Graph Label is present");
+    	Assert.assertTrue(calls_by_region_graph_label.isDisplayed(),"Calls By Region Graph Label is not present or locator has been changed.");    		
+
+	}
+
+    public void callsByRegionGraph(){
+		
+    	logger.log(LogStatus.INFO, "Verifying if Calls By Region Graph is present");
+    	Assert.assertTrue(calls_by_region_graph.isDisplayed(),"Calls By Region Graph is not present or locator has been changed.");    		
+
+	}
+    
+    public void topRegionGraphLabel(){
+		
+    	logger.log(LogStatus.INFO, "Verifying if Top Region Graph Label is present");
+    	Assert.assertTrue(top_regions_graph_label.isDisplayed(),"Top Regions Graph Label is not present or locator has been changed.");    		
+
+	}
+
+    public void topRegionGraph(){
+		
+    	logger.log(LogStatus.INFO, "Verifying if Top Region Graph is present");
+    	Assert.assertTrue(top_regions_graph.isDisplayed(),"Top Regions Graph is not present or locator has been changed.");    		
+
+	}
+
+    public void callsByStateGraphLabel(){
+		
+    	logger.log(LogStatus.INFO, "Verifying if Calls By State Graph Label is present");
+    	Assert.assertTrue(calls_by_state_graph_label.isDisplayed(),"Calls By State Graph Label is not present or locator has been changed.");    		
+
+	}
+
+    public void callsByStateGraph(){
+		
+    	logger.log(LogStatus.INFO, "Verifying if Calls By State Graph is present");
+    	Assert.assertTrue(calls_by_state_graph.isDisplayed(),"Calls By State Graph is not present or locator has been changed.");    		
+
+	}
+    
+    public void tableColumnVerification() throws InterruptedException{
 	
+    	Thread.sleep(2000);
+    	
+    	for(int i=0;i<table_columns.size();i++){
+    			
+    		for(int j=0;j<expected_table_columns.length;j++){
+    				
+    			if(table_columns.get(i).getText().equals(expected_table_columns[j])){
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_table_columns[j]+" is present");
+   					softassert.assertTrue(table_columns.get(i).getText().equals(expected_table_columns[j]),"Column "+expected_table_columns[j]+" is not present");
+   				}
+   			}
+   			
+    	}
+    			
+    	softassert.assertAll();	
+	}
+    
+    
+    
 }
