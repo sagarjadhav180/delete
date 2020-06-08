@@ -42,7 +42,8 @@ public class EmailDigestReportTest extends TestBase {
         Thread.sleep(7000);
 		ts.switchToIFrame();
 	}
-	
+
+	@Test(priority=1)
 	public void runButtonVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Run Button Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
