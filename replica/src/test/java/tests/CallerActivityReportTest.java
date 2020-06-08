@@ -83,6 +83,7 @@ public class CallerActivityReportTest extends TestBase{
 		ts.presenceOfTimeZone();
 	}
 
+	@Test(priority=6)
 	public void presenceOfTopCallersTimeLineLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Top Callers TimeLine Label Verification Test"); 
 		logger.assignCategory(Constants.caller_activity_category);
@@ -90,6 +91,7 @@ public class CallerActivityReportTest extends TestBase{
 		ts.topCallersTimeLineLabel();
 	}
 	
+	@Test(priority=7)
 	public void presenceOfTopCallersTimeLineGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Top Callers TimeLine Graph Verification Test"); 
 		logger.assignCategory(Constants.caller_activity_category);
@@ -97,6 +99,7 @@ public class CallerActivityReportTest extends TestBase{
 		ts.topCallersTimeLineGraph();
 	}
 	
+	@Test(priority=8)
 	public void topCallersTimeLineTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Top Callers Time Line Table Column Verification Test"); 
 		logger.assignCategory(Constants.caller_activity_category);
@@ -104,6 +107,7 @@ public class CallerActivityReportTest extends TestBase{
 		ts.topCallersTimeLineTableColumnVerification();
 	}
 	
+	@Test(priority=9)
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.caller_activity_category);
@@ -111,6 +115,7 @@ public class CallerActivityReportTest extends TestBase{
         ts.filterButton();
 	}
 	
+	@Test(priority=10)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.caller_activity_category);
