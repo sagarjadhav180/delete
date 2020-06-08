@@ -83,6 +83,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.presenceOfTimeZone();
 	}
 
+	@Test(priority=6)
 	public void presenceOfCallsByRegionGraphLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls By Region Graph Label Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -90,6 +91,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.callsByRegionGraphLabel();
 	}
 	
+	@Test(priority=7)
 	public void presenceOfCallsByRegionGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls By Region Graph Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -97,6 +99,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.callsByRegionGraph();
 	}
 
+	@Test(priority=8)
 	public void presenceOfTopRegionGraphLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Top Region Graph Label Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -104,6 +107,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.topRegionGraphLabel();
 	}
 	
+	@Test(priority=9)
 	public void presenceOfTopRegionGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Top Region Graph Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -111,6 +115,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.topRegionGraphLabel();
 	}
 	
+	@Test(priority=10)
 	public void presenceOfCallsByStateGraphLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls By State Graph Label Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -118,6 +123,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.callsByStateGraphLabel();
 	}
 	
+	@Test(priority=11)
 	public void presenceOfCallsByStateGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Calls By State Graph Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -125,6 +131,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.callsByStateGraph();
 	}
 	
+	@Test(priority=12)
 	public void tableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Table Column Verification Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -132,6 +139,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.tableColumnVerification();
 	}
 	
+	@Test(priority=13)	
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
@@ -139,6 +147,7 @@ public class CallsByRegionReportTest extends TestBase{
 		ts.filterButton();
 	}
 	
+	@Test(priority=14)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.calls_by_region_category);
