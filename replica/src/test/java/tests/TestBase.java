@@ -163,7 +163,7 @@ public class TestBase
 					CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
 				    ct.clickAction("list");
 				}
-				else if(result.getName().getClass().toString().startsWith("Looker")){
+				else if(result.getTestClass().getRealClass().getSimpleName().startsWith("Looker")){
 					
 
 
