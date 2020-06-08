@@ -15,7 +15,7 @@ import pom.EmailDigestReportPage;
 import pom.HomePage;
 import pom.LoginPage;
 
-public class EmailDigestReportTest extends TestBase {
+public class LookerEmailDigestReportTest extends TestBase {
 
 	HomePage hp;
 	CallLogsReportPage clr;
