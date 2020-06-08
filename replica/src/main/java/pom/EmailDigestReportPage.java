@@ -17,7 +17,7 @@ import tests.Util;
 
 public class EmailDigestReportPage extends TestBase{
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='title-main']//span[text()='Email Digest']")
 	private WebElement header_label;
 	
 	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
@@ -43,36 +43,36 @@ public class EmailDigestReportPage extends TestBase{
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 	
-	String[] expected_filter_elements_after_expanding={};
+	String[] expected_filter_elements_after_expanding={"Date Range","User","Group Name","Tracking Number Name","Coachable Calls Missed Opportunity (High/Moderate/Low)","Coachable Calls Sales Skills (High/Moderate/Low)","Good Calls Sales Skills (High/Moderate/Low)"};
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Summary of Calls']")
 	private WebElement summary_of_calls_label;
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[1]//div[@class='ag-header-container']//strong")
 	private List<WebElement> summary_of_calls_table_columns;
 
-	String[] expected_summary_of_calls_table_columns={};
+	String[] expected_summary_of_calls_table_columns={"Group Name","Calls over 30 sec","Total Conversion","Conversion Rate","Average Lead Quality","Average Sales Performance"};
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Coachable Calls']")
 	private WebElement coachable_calls_label;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[2]//div[@class='ag-header-container']//strong")
 	private List<WebElement> coachable_calls_table_columns;
 
-	String[] expected_coachable_calls_table_columns={};
+	String[] expected_coachable_calls_table_columns={"Group Name","Tracking Number Name","Call Started Date/Time","Caller Id","Play Call","Sales Skills (High/Moderate/Low)","Lead Score (High/Moderate/Low)","Missed Opportunity (High/Moderate/Low)"};
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[2]//span[text()='No Results']")
 	private WebElement coachable_calls_table_no_results_label;
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='vis-header']//span[text()='Good Calls']")
 	private WebElement good_calls_label;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[3]//div[@class='ag-header-container']//strong")
 	private List<WebElement> good_calls_table_columns;
 
-	String[] expected_good_calls_table_columns={};	
+	String[] expected_good_calls_table_columns={"Group Name","Tracking Number Name","Call Started Date/Time","Caller Id","Play Call","Sales Skills (High/Moderate/Low)","Lead Score (High/Moderate/Low)","Conversion Score (High/Moderate/Low)"};	
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="(//div[@class='ag-grid-container'])[3]//span[text()='No Results']")
 	private WebElement good_calls_table_no_results_label;
 
 	
