@@ -15,7 +15,7 @@ import pom.CallLogsReportPage;
 import pom.HomePage;
 import pom.LoginPage;
 
-public class CallerActivityReportTest extends TestBase{
+public class LookerCallerActivityReportTest extends TestBase{
 
 	HomePage hp;
 	CallLogsReportPage clr;

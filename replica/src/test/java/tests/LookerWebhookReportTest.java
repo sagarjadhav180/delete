@@ -15,7 +15,7 @@ import pom.LoginPage;
 import pom.TagsSummaryPage;
 import pom.WebhookLogsReportPage;
 
-public class WebhookReportTest extends TestBase{
+public class LookerWebhookReportTest extends TestBase{
 	
 	HomePage hp;
 	CallLogsReportPage clr;

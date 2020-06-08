@@ -16,7 +16,7 @@ import pom.IVRKeypressReportPage;
 import pom.LoginPage;
 import pom.LookerTrackingNumberSettingsPage;
 
-public class IVRKeypressReportTest extends TestBase{
+public class LookerIVRKeypressReportTest extends TestBase{
 	
 	HomePage hp;
 	CallLogsReportPage clr;

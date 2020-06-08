@@ -16,7 +16,7 @@ import pom.LoginPage;
 import pom.MarketingDashboardPage;
 import pom.TagsSummaryPage;
 
-public class TagsSummaryReportTest extends TestBase{
+public class LookerTagsSummaryReportTest extends TestBase{
 	
 	HomePage hp;
 	CallLogsReportPage clr;
