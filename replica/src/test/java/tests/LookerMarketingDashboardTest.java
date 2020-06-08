@@ -16,7 +16,7 @@ import pom.IVRKeypressReportPage;
 import pom.LoginPage;
 import pom.MarketingDashboardPage;
 
-public class MarketingDashboardTest extends TestBase {
+public class LookerMarketingDashboardTest extends TestBase {
 	
 	HomePage hp;
 	CallLogsReportPage clr;

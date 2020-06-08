@@ -15,7 +15,7 @@ import pom.AnalyticsSummaryReportPage;
 import pom.HomePage;
 import pom.LoginPage;
 
-public class AnalyticsSummaryReportTest extends TestBase{
+public class LookerAnalyticsSummaryReportTest extends TestBase{
 
 	HomePage hp;
 	CallLogsReportPage clr;

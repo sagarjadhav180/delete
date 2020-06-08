@@ -17,7 +17,7 @@ import pom.LoginPage;
 import pom.LookerTrackingNumberSettingsPage;
 
 @SuppressWarnings("unused")
-public class CallBackReportTest extends TestBase {
+public class LookerCallBackReportTest extends TestBase {
 
 	HomePage hp;
 	CallLogsReportPage clr;

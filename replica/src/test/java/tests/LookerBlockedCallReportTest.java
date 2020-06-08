@@ -15,7 +15,7 @@ import pom.HomePage;
 import pom.LoginPage;
 import pom.LookerTrackingNumberSettingsPage;
 
-public class BlockedCallReportTest extends TestBase{
+public class LookerBlockedCallReportTest extends TestBase{
 	
 	HomePage hp;
 	CallLogsReportPage clr;
