@@ -165,8 +165,6 @@ public class TestBase
 				}
 				else if(result.getTestClass().getRealClass().getSimpleName().startsWith("Looker")){
 					
-
-
 				}
 				else{
 					driver.navigate().refresh();
