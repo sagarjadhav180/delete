@@ -2,6 +2,8 @@ package pom;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -250,5 +252,68 @@ public class EmailDigestReportPage extends TestBase{
     		
     	softassert.assertAll();		
 	}
+
+    public void filterFeatureForCallsTable(String filterName) throws InterruptedException{
+
+    	
+    		int index=0;
+            String filterValue;
+    		for(int i=0;i<summary_of_calls_table_columns.size();i++){
+    			
+    			if(filterName.equals(summary_of_calls_table_columns.get(i).getText())){
+    				
+    				index=i+1;
+    				break;
+    			}
+    		}
+    		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("(//div[@class='ag-grid-container'])[1]//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
+    		filterValue=value_to_be_filtered.get(0).getText();
+    		
+    		filter_button.click();
+    		
+    		String xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name'][text()='"+filterName+"']";
+    		
+    		WebElement filter_textbox = driver.findElement(By.xpath(""+xpath+"//parent::tr//select//following-sibling::span"));
+    	
+    		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+            Util.Action().moveToElement(filter_textbox).perform();
+            Util.Action().click().perform();
+    	    Util.Action().sendKeys(filterValue).perform();
+    	    Util.Action().sendKeys(Keys.ESCAPE).perform();	
+    		
+    		run_button.click();
+    		filter_button.click();
+    		Thread.sleep(5000);
+    		
+    	
+    		List<WebElement> filtered_values = driver.findElements(By.xpath("(//div[@class='ag-grid-container'])[1]//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
+    		System.out.println("(//div[@class='ag-grid-container'])[1]//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
+    		for(int j=0;j<filtered_values.size();j++){
+    			
+    			System.out.println(filtered_values.get(j).getText());
+    			System.out.println(filterValue);
+    			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
+    			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
+    		}
+    		
+    		
+    		softassert.assertAll();
+
+            filter_button.click();
+    		
+    		wait.until(ExpectedConditions.visibilityOf(filter_textbox));
+            Util.Action().moveToElement(filter_textbox).perform();
+            Util.Action().click().perform();
+            Thread.sleep(1000);
+    	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+            Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+    		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+    	
+    		filter_button.click();
+    	
+    	        
+	}	
+    
+    
     
 }
