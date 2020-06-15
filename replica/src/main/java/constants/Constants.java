@@ -300,6 +300,12 @@ public class Constants {
     
     }
     
+    public static class LookerEmailDigestReport{
+    	
+    	public static final String group_filter="Group Name";
+    
+    }
+    
     public static class LookerCallTrendsReport{
 
     	//tiles
