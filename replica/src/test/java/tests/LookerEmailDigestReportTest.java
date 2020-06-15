@@ -14,6 +14,7 @@ import pom.CallerActivityReportPage;
 import pom.EmailDigestReportPage;
 import pom.HomePage;
 import pom.LoginPage;
+import pom.TagsSummaryPage;
 
 public class LookerEmailDigestReportTest extends TestBase {
 
@@ -83,6 +84,7 @@ public class LookerEmailDigestReportTest extends TestBase {
 		ts.presenceOfTimeZone();
 	}
 	
+	@Test(priority=6)
 	public void presenceOfSummaryOfCallsLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Summary Of Calls Label Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
@@ -90,6 +92,7 @@ public class LookerEmailDigestReportTest extends TestBase {
 		ts.summaryOfCallsLabel();
 	}
 	
+	@Test(priority=7)
 	public void summaryOfCallsTableColumnsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Summary Of Calls Table Columns Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
@@ -97,6 +100,7 @@ public class LookerEmailDigestReportTest extends TestBase {
 		ts.summaryOfCallsTableColumnVerification();
 	}
 	
+	@Test(priority=8)
 	public void presenceOfCoachableCallsLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Coachable Calls Label Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
@@ -104,6 +108,7 @@ public class LookerEmailDigestReportTest extends TestBase {
 		ts.coachableCallsLabel();
 	}
 	
+	@Test(priority=9)
 	public void coachableCallsTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Coachable Calls Table Column Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
@@ -111,13 +116,15 @@ public class LookerEmailDigestReportTest extends TestBase {
 		ts.coachableCallsTableColumnVerification();
 	}
 	
+	@Test(priority=10)
 	public void presenceOfGoodCallsLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Good Calls Label Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
         ts=new EmailDigestReportPage(driver);
 		ts.goodCallsLabel();
 	}
-	
+
+	@Test(priority=11)
 	public void goodCallsTableColumnVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Good Calls Table Column Verification Test"); 
 		logger.assignCategory(Constants.email_digest_category);
@@ -125,6 +132,7 @@ public class LookerEmailDigestReportTest extends TestBase {
 		ts.goodCallsTableColumnVerification();
 	}
 	
+	@Test(priority=12)
 	public void filterButtonTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Test"); 
 		logger.assignCategory(Constants.email_digest_category);
@@ -132,11 +140,20 @@ public class LookerEmailDigestReportTest extends TestBase {
         ts.filterButton();
 	}
 	
+	@Test(priority=13)
 	public void filterButtonElementsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Button Elements Test"); 
 		logger.assignCategory(Constants.email_digest_category);
         ts=new EmailDigestReportPage(driver);
 		ts.filterElements();
+	}
+	
+	@Test(priority=14)
+	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
+		logger=extent.startTest("Filter Feature Group Test"); 
+		logger.assignCategory(Constants.email_digest_category);
+        ts=new EmailDigestReportPage(driver);
+        ts.filterFeatureForCallsTable(Constants.LookerEmailDigestReport.group_filter);
 	}
 	
 	@AfterClass
