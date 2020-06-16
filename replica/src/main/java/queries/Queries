@@ -250,3 +250,44 @@ SELECT * FROM call_detail
 WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
 AND call_started BETWEEN '2020-05-29 23:59' AND '2020-06-05 23:59') AND call_mine_status='mined'
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------account details---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//active campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+
+//inactive campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='inactive')
+
+//active tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN 
+(SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )
+
+//inactive tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'
+
+//unique calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND repeat_call='false'
+
+//answered calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND disposition IN ('ANSWERED')
+
+//unanswered calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND disposition IN ('NO ANSWER')
+
+//avg call duration
+SELECT ROUND(AVG(duration)) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'
+
+//longest call
+SELECT MAX(duration) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'  
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
