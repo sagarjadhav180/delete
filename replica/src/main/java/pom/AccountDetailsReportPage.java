@@ -269,6 +269,76 @@ public class AccountDetailsReportPage extends TestBase{
     	softassert.assertAll();
     }
     
+    public void campaignAndTNTileValueVerification(String tile_name){
+		
+		String active_campaigns_count_from_db = Util.readingFromDB("SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active')");
+		String active_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )");
+		String inactive_campaigns_count_from_db = Util.readingFromDB("SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='inactive')");
+		String inactive_tracking_numbers_count_from_db = Util.readingFromDB("SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND campaign_status='active') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')");
+		
+		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
+	
+		if(tile_name.equals("Active Campaigns")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(active_campaigns_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(active_campaigns_count_from_db);
+				softassert.assertTrue(tile_values.equals(active_campaigns_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Active Tracking Numbers")){
+			
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(active_tracking_numbers_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(active_tracking_numbers_count_from_db);
+				softassert.assertTrue(tile_values.equals(active_tracking_numbers_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Inactive Campaigns")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(inactive_campaigns_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(inactive_campaigns_count_from_db);
+				softassert.assertTrue(tile_values.equals(inactive_campaigns_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+			
+		}
+		else if(tile_name.equals("Inactive Tracking Numbers")){
+			
+			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
+			if(inactive_tracking_numbers_count_from_db!=null){
+				System.out.println(tile_values);
+				System.out.println(inactive_tracking_numbers_count_from_db);
+				softassert.assertTrue(tile_values.equals(inactive_tracking_numbers_count_from_db),"Tile count doest match with db count");			
+			}
+			else{
+				softassert.assertTrue(tile_values.equals("0"),"Tile count doest match with db count");			
+			}
+
+			
+			
+		}
+		
+		softassert.assertAll();		
+
+	}
+    
+    
     public void campaignSettingsTableColumnVerification() throws InterruptedException{
 		
 		Thread.sleep(2000);
@@ -470,12 +540,14 @@ public class AccountDetailsReportPage extends TestBase{
 
 //  -------------------------------------------------------------------------------------------------------------------- 
 
-	public void tileValueVerificationForDefault7DaysFilter(String tile_name){
+	public void callTrendsTileValueVerificationForDefault7DaysFilter(String tile_name){
 			
 			
 			String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
 		
 			if(tile_name.equals("Total Calls")){
+				
+				tile_values=driver.findElement(By.xpath("(//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Total Calls'])[2]//parent::Div//parent::div/preceding-sibling::div//a")).getText();
 				
 				logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 				if(total_call_count_from_db!=null){
