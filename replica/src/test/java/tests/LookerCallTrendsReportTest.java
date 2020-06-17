@@ -194,7 +194,7 @@ public class LookerCallTrendsReportTest extends TestBase{
 		ts.callsMixLabel();
 	}
 	
-//	@Test(priority=19)
+	@Test(priority=19)
 	public void presenceOfCallMixGraphVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Call Mix Graph Verification Test"); 
 		logger.assignCategory(Constants.call_trends_category);
