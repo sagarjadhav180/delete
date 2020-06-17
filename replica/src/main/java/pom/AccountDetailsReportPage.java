@@ -44,6 +44,8 @@ public class AccountDetailsReportPage extends TestBase{
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 
+	String[] expected_filter_elements_after_expanding={""};
+	
 	@FindBy(xpath="//div[@class='title-text'][text()='Group Settings']")
 	private WebElement group_settings_label;
 	
