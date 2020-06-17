@@ -547,7 +547,7 @@ public class AccountDetailsReportPage extends TestBase{
 		Assert.assertTrue(call_trends_label.isDisplayed(),"Call Trends label is not present or locator has been changed.");
 	}
     
-    public void tilesVerification(){
+    public void callTrendsTilesVerification(){
     	
     	for(int i=0;i<call_trends_tiles.size();i++){
     		
