@@ -44,7 +44,7 @@ public class AccountDetailsReportPage extends TestBase{
 	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
 	private List<WebElement> filter_elements_after_expanding;
 
-	String[] expected_filter_elements_after_expanding={""};
+	String[] expected_filter_elements_after_expanding={"Date Range","Stack Columns By","Group Pie Chart By","Campaign","Campaign Status","Group","Group Status","Hunt Type","Ring-to Number","Tracking Number Name","Tracking Number","Tracking Number Status","Tracking Number Type"};
 	
 	@FindBy(xpath="//div[@class='title-text'][text()='Group Settings']")
 	private WebElement group_settings_label;
@@ -221,7 +221,42 @@ public class AccountDetailsReportPage extends TestBase{
 		logger.log(LogStatus.INFO, "verifying if run_button is present");
 		Assert.assertTrue(run_button.isDisplayed(),"run_button is not displayed or locator has been chamged..");
 	}
+
+    public void filterButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(filter_button));
+	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
+	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
+
+	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
+	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
+	}
 	
+    public void filterElements(){
+        
+    	Util.click(filter_button);
+        
+        for(int k=0;k<filter_elements_after_expanding.size();){
+        	for(int j=0;j<expected_filter_elements_after_expanding.length;j++){
+
+        		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements_after_expanding[j])){
+    	    			    			    		
+        		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+        		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+        		System.out.println("array-"+expected_filter_elements_after_expanding[j]);		
+        		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements_after_expanding[j]+" filter is present");
+        	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements_after_expanding[j],expected_filter_elements_after_expanding[j]+" filter element is npt present");
+        		}
+        		}
+        	k++;
+        }
+
+        softassert.assertAll();
+    	//collapsing filter section
+    	Util.click(filter_button);
+
+    }
+    
     public void groupSettingsLabel(){
 		
 		logger.log(LogStatus.INFO, "Verifying if Group Settings Label is present");
