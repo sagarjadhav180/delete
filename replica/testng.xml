@@ -32,6 +32,9 @@
 		    <class name="tests.LookerTagsSummaryReportTest" />
 	        <class name="tests.LookerUserLogsReportTest" />
 	        <class name="tests.LookerWebhookReportTest" />
+	        <class name="tests.LookerAccountDetailsReportTest" />
+	        <class name="tests.LookerLookerEmailDigestReportTest" />
+	        
 		</classes>
 
 	</test>
