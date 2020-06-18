@@ -124,6 +124,7 @@ public class BlockedCallsReportPage extends TestBase{
 		}
     
 		softassert.assertAll();
+		gear_icon.click();
     }
 
 	
