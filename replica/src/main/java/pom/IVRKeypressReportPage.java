@@ -395,7 +395,7 @@ public class IVRKeypressReportPage extends TestBase{
 					
 				String roundoff = String.valueOf(Double.valueOf(avg_time_menu_from_db_without_roundoff.substring(6)));
 	        	
-				String avg_time_menu_from_db=roundoff.substring(7,roundoff.indexOf('.'));
+				String avg_time_menu_from_db=roundoff.substring(0,roundoff.indexOf('.'));
 
 				
 				System.out.println(tile_values);
