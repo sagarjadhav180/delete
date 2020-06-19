@@ -545,7 +545,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 
 
     	
-        String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='"+campaign_id+"') AND status NOT IN ('suspended')" );
+        String dbCount = Util.readingFromDB("SELECT count(*) FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='"+TestBase.getCampaign_id()+"') AND status NOT IN ('suspended')" );
         
         if(dbCount!=null){
         	
