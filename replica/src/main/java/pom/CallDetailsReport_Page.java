@@ -801,6 +801,7 @@ public class CallDetailsReport_Page extends TestBase{
 				}			
 			}
 			else if(sectionToVerify.contains("comments")){
+				wait.until(ExpectedConditions.visibilityOf(comments_button));
 				comments_button.click();
 				logger.log(LogStatus.INFO, "Verifying if Comments sectionis opened");
 				softassert.assertTrue(comment_section.isDisplayed(),"comment section not displayed or locator changed");
@@ -816,7 +817,7 @@ public class CallDetailsReport_Page extends TestBase{
 				
 			}
 			else if(sectionToVerify.contains("tags")){
-				
+				wait.until(ExpectedConditions.visibilityOf(tags_button));				
 				Util.click(tags_button);
 				logger.log(LogStatus.INFO, "Verifyig if tags section is opened");
 				softassert.assertTrue(tag_section.isDisplayed(),"tags section is not displayed or locator changed");
