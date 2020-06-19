@@ -33,7 +33,7 @@
 	        <class name="tests.LookerUserLogsReportTest" />
 	        <class name="tests.LookerWebhookReportTest" />
 	        <class name="tests.LookerAccountDetailsReportTest" />
-	        <class name="tests.LookerLookerEmailDigestReportTest" />
+	        <class name="tests.LookerEmailDigestReportTest" />
 	        
 		</classes>
 
