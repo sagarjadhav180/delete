@@ -179,7 +179,7 @@ public class LookerCallLogsTest extends TestBase{
 	}
 	
 	
-	@Test(priority=18)
+//	@Test(priority=18)
 	public void filterFeatureForGroupTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Group Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -187,7 +187,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.filterFeature("Group", TestBase.account);
 	}
 	
-	@Test(priority=19)
+//	@Test(priority=19)
 	public void filterFeatureForCampaignTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Filter Feature For Campaign Test"); 
 		logger.assignCategory(Constants.call_logs_category);
