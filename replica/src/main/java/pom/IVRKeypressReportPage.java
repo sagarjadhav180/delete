@@ -392,14 +392,9 @@ public class IVRKeypressReportPage extends TestBase{
 			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
 			if(avg_time_menu_from_db_without_roundoff!=null){
-					
-				String roundoff = String.valueOf(Double.valueOf(avg_time_menu_from_db_without_roundoff.substring(6)));
-	        	
-				String avg_time_menu_from_db=roundoff.substring(0,roundoff.indexOf('.'));
+			
+				String avg_time_menu_from_db=avg_time_menu_from_db_without_roundoff.substring(0,avg_time_menu_from_db_without_roundoff.indexOf('.'));
 
-				
-				System.out.println(tile_values);
-				System.out.println(avg_time_menu_from_db);
 				softassert.assertTrue(tile_values.equals(avg_time_menu_from_db),"Tile count doest match with db count");			
 			}
 			else{
