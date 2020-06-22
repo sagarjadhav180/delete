@@ -117,6 +117,9 @@ public class CallLogsReportPage extends TestBase {
 	
 	@FindBy(xpath="//span[@class='select2-arrow']")
 	private WebElement reports_listbox_button;	
+
+	@FindBy(xpath="//input[@id='s2id_autogen1_search']")
+	private WebElement reports_listbox_textbox;	
 	
 	SoftAssert softassert=new SoftAssert(); 
 
@@ -136,11 +139,15 @@ public class CallLogsReportPage extends TestBase {
 		
 	}
 	
-	public void goToReport(String reportName){
+	public void goToReport(String reportName) throws InterruptedException{
 		
 		reports_listbox_button.click();
-		WebElement report = driver.findElement(By.xpath("//ul[@id='select2-results-1']//ul[@class='select2-result-sub']//li//div[text()='"+reportName+"']"));
-		report.click();
+		reports_listbox_textbox.sendKeys(reportName);
+//		WebElement report = driver.findElement(By.xpath("//ul[@id='select2-results-1']//ul[@class='select2-result-sub']//li//div[text()='"+reportName+"']"));
+//		System.out.println(report);
+//		wait.until(ExpectedConditions.visibilityOf(report));
+//		report.click();
+		Util.Action().sendKeys(Keys.ENTER).perform();
 	}
 	
 	public void headerLabel(){
