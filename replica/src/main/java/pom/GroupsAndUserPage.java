@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import com.relevantcodes.extentreports.LogStatus;
-
 import tests.TestBase;
 import tests.Util;
 
@@ -20,7 +18,6 @@ public class GroupsAndUserPage extends TestBase {
 	
 	String groupName="Ganesh 5";
 	
-
 	@FindBy(xpath="//div[@class='panel-body collapse in table-responsive ng-isolate-scope']")
 	private WebElement window;
 	
@@ -32,17 +29,11 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[@class='table-to-scrape']//button[1]//span[contains(text(),'Export')]")
 	private WebElement exportGroupsUsers_button;
-
-	//Sections
-	@FindBy(xpath="//h4[contains(@class,'ng-binding')]")
-	private List<WebElement> section_labels;
-	
-	//all labels
-	@FindBy(xpath="//label")
-	private List<WebElement> all_labels;
-	
-	
+		
 	//Group Details 
+	@FindBy(xpath="(//label[@class='control-label'])[position()>1 and position()<9]")
+	private List<WebElement> group_details_labels;
+	
 	String[] groupDetailsLabels={"Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code"};
 	
 	@FindBy(xpath="//button[contains(text(),'Save Group Details')]")
@@ -53,9 +44,10 @@ public class GroupsAndUserPage extends TestBase {
 
 	String[] states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
 	
-	
 	@FindBy(xpath="//select[@ng-model='industry']")
 	private WebElement industry_dropdown;
+	
+	String[] expected_industry_dropdown={"Advertising:Digital","Advertising:Direct","Automotive:Dealership","Automotive:Service","Education:Institution","Education:Marketing","Financial:Insurance","Financial:Mortgage","Home Services:Home Improvement","Home Services:Electrician","Home Services:Plumber/HVAC","Home Services:Housekeeping","Home Services:Pest Control","Hospitality:Accomodations","Hospitality:Travel Agency","Medical:Cosmetic","Medical:Chiropractor","Medical:Dental","Medical:Home Healthcare","Medical:Other","Other:Other","Personal Care:Gym/Fitness","Personal Care:Spa","Real Estate:Sales","Real Estate:Property Management","Rental:Party/Event","Rental:Heavy Equipment","Rental:Furniture/Electronics","Rental:Other"};
 	
 	@FindBy(xpath="//label[contains(text(),'Name')]/..//input")
 	private WebElement groupName_textbox;
@@ -72,12 +64,23 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Zip')]/..//input")
 	private WebElement zip_textbox;
 
-
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
 	private WebElement subgroup_name_textbox;
 
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[2]")
+	private WebElement external_id_textbox;
+	
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
 	private WebElement subgroup_industry_listbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[3]")
+	private WebElement subgroup_phone_textbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	private WebElement subgroup_city_textbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	private WebElement subgroup_zip_code_textbox;
 	
 	@FindBy(xpath="(//div[@class='panel-body collapse in table-responsive ng-isolate-scope'])[1]//tr//td[@class='text-right']//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
 	private WebElement save_subgroup;
@@ -85,24 +88,31 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement save_subgroup_success_message;
 	
-	//Feature Settings Details 
-	@FindBy(xpath="//div [@class='primary switch ats-switch ng-isolate-scope ng-valid ng-dirty ng-touched']")
+	//Feature Settings Details 	
+	@FindBy(xpath="//label[contains(text(),'Conversation Analytics')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement CA_toggle;	
 	
-	@FindBy(xpath="//div[@ class='primary switch ats-switch ng-isolate-scope disabled ng-valid']")
+	@FindBy(xpath="//label[contains(text(),'Spam Guard')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement spamGuard_toggle;	
 	
-	@FindBy(xpath="(//div[@ class='primary switch ats-switch ng-isolate-scope ng-valid'])[2]")
+	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement shareDNI_toggle;
 
+	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
+	private WebElement feature_settings_save_button;
 
+	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
+	private WebElement feature_settings_reset_button;
+	
 	//Tracking Number Settings Details 
+	@FindBy(xpath="(//label[@class='control-label'])[position()>8 and position()<20]")
+	private List<WebElement> tn_settings_labels;
 	
 	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='btn btn-primary'][contains(text(),'Save')]")
-	private WebElement tracking_number_settings_details_saveButton;	
+	private WebElement tracking_number_settings_details_save_Button;	
 
 	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='reset btn'][contains(text(),'Reset')]")
-	private WebElement tracking_number_settings_details_resetButton;
+	private WebElement tracking_number_settings_details_reset_Button;
 	
 	String[] trackingNumberLabels={"Call Value","Repeat Interval (in hours)","Activate Voicemail?","Voicemail","Configure Voicemail Greetings","Overflow","Ring-to Phone Number","Host Domain","Referring Website","DNI Type","HTML Class"};
 	String[] checkBoxLabels_forTN={"Record Call","Play a voice prompt","Play whisper message before connecting",""};
@@ -192,52 +202,40 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement play_whisper_message_textbox;
 
 	@FindBy(xpath="(//label[contains(text(),'Ring-to Phone Number')]//parent::*//following-sibling::div//input)")
-	private WebElement ringtonumber_textbox;
+	private WebElement ring_to_number_textbox;
 	
 	
 	//Custom Sources Section
+	@FindBy(xpath="(//label[@class='control-label'])[position()>19 and position()<25]")
+	private List<WebElement> custom_sources_labels;
+	String[] customsources_labels={"Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5"};
 	
 	@FindBy(xpath="//p[text()='With your own custom sources, you can easily categorize your calls. When created, it becomes available to be applied for that group and any sub-groups below.']")
 	private WebElement custom_sources_note;	
 	
-	String[] customsources_labels={"Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5"};
-	
-	@FindBy(xpath="(//input[@placeholder='Add a New Source'])[1]")
-	private WebElement custom_source1_textbox;		
-
-	@FindBy(xpath="//label[text()='Custom Source 1']//parent::div//ul//li")
-	private WebElement custom_source1_list;	
-	
-	@FindBy(xpath="(//input[@placeholder='Add a New Source'])[2]")
-	private WebElement custom_source2_textbox;
-
-	@FindBy(xpath="//label[text()='Custom Source 2']//parent::div//ul//li")
-	private WebElement custom_source2_list;	
-	
-	@FindBy(xpath="(//input[@placeholder='Add a New Source'])[3]")
-	private WebElement custom_source3_textbox;
-	
-	@FindBy(xpath="//label[text()='Custom Source 3']//parent::div//ul//li")
-	private WebElement custom_source3_list;	
-	
-	@FindBy(xpath="(//input[@placeholder='Add a New Source'])[4]")
-	private WebElement custom_source4_textbox;
-	
-	@FindBy(xpath="//label[text()='Custom Source 4']//parent::div//ul//li")
-	private WebElement custom_source4_list;	
-	
-	@FindBy(xpath="(//input[@placeholder='Add a New Source'])[5]")
-	private WebElement custom_source5_textbox;
-	
-	@FindBy(xpath="//label[text()='Custom Source 5']//parent::div//ul//li")
-	private WebElement custom_source5_list;	
-
 	@FindBy(xpath="//button[contains(text(),'Clear')]")
 	private WebElement custom_source_clear_button;	
 
+	@FindBy(xpath="//a[starts-with(text(),'Add custom sources')]")
+	private WebElement add_custom_source_button;	
+
+	@FindBy(xpath="//div[text()='Successfully Created Custom Source']")
+	private WebElement add_custom_source_success_message;	
+	
 	@FindBy(xpath="//button[contains(text(),'Selected')]")
 	private WebElement custom_source_delete_button;	
 	
+	@FindBy(xpath="//div[@class='bootbox-body'][text()='Custom Source is associated with a tracking number. Are you sure you want to delete this Custom Source?']")
+	private WebElement custom_source_deletion_confiramtion_message;	
+
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']")
+	private WebElement custom_source_deletion_cancel_button;	
+
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
+	private WebElement custom_source_deletion_ok_button;	
+
+	@FindBy(xpath="//div[text()='Successfully deleted the custom source']")
+	private WebElement custom_source_deletion_success_message;	
 	
 	//Call Action Settings Section
 	//all xpaths are written for first call action
@@ -412,6 +410,14 @@ public class GroupsAndUserPage extends TestBase {
 		return webelement;
 	}
 	
+    public void addCustomSource(String custom_source_type,String cs_name){
+		
+		WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
+		WebElement cs_list = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
+		cs_textbox.sendKeys(cs_name);
+		
+	}
+	
 	
 	//to get action button of desired group
     public WebElement getgroup(String group_name,String button_name){
@@ -428,28 +434,17 @@ public class GroupsAndUserPage extends TestBase {
 	}
     
     public void expandSection(String section){
-    	
-
-    	try{
-    	    wait.until(ExpectedConditions.invisibilityOf(loadingWheel));
-    	}
-    	catch(Exception e){
-    		
-    	}
-    	
-    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-1000)", "");
-    	
-	    for(int i=0;i<section_labels.size();i++){
-    	
-	    	if(section_labels.get(i).getText().startsWith(section)){
-	    		
-	    		section_labels.get(i).click();
-    		}
-    	}
+ 
+		WebElement we = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section+"')]//parent::div//i[starts-with(@class,'pull-right')]")); 
+		we.click();
 	}
-    	
-    	
-    	
+    
+    public void collpaseSection(String section){
+ 
+		WebElement we = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section+"')]//parent::div//i[starts-with(@class,'pull-right')]")); 
+		we.click();
+	}
+ 
     
     
     public void createGroup(String groupName) throws InterruptedException{
@@ -504,6 +499,6 @@ public class GroupsAndUserPage extends TestBase {
     		Util.click(whisper_checkbox);
     	}
     	
-    	tracking_number_settings_details_saveButton.click();
+    	tracking_number_settings_details_save_Button.click();
     }
 }
