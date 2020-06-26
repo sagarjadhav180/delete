@@ -271,12 +271,6 @@ public class TestBase
 		TestBase.campaign_ou_id = campaign_ou_id;
 	}
 
-	public static void test(){
-		System.out.println("org_unit_id is "+org_unit_id);
-		System.out.println("campaign_id is "+campaign_id);
-		System.out.println("campaign_ou_id is "+campaign_ou_id);
-	}
-	
 	@AfterTest
 	public void tearDown() throws Exception{
 		if(driver!=null){
