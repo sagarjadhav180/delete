@@ -70,10 +70,10 @@ public class TestBase
 	static int totalPassedTestCases;
 	static int totalSkipedTestCases;
 
-	List<ITestNGMethod> passedtests = new ArrayList<ITestNGMethod>();
-	List<ITestNGMethod> failedtests = new ArrayList<ITestNGMethod>();
-	List<ITestNGMethod> skippedtests = new ArrayList<ITestNGMethod>();
-	public static String methodName;
+//	List<ITestNGMethod> passedtests = new ArrayList<ITestNGMethod>();
+//	List<ITestNGMethod> failedtests = new ArrayList<ITestNGMethod>();
+//	List<ITestNGMethod> skippedtests = new ArrayList<ITestNGMethod>();
+//	public static String methodName;
 	String url_to_hit;
 	
 	@BeforeSuite
@@ -134,69 +134,69 @@ public class TestBase
 	}
 
 
-	@AfterMethod
-	public void tearDown(ITestResult result) throws Exception {
-
-		if (result.getStatus() == ITestResult.FAILURE) {
-
-			try {
-				System.out.println("In fail");
-				Thread.sleep(1200);
-				failedtests.add(result.getMethod());
-				logger.log(LogStatus.FAIL, "" + result.getThrowable().getMessage() + "");
-				logger.log(LogStatus.FAIL, "Failed.");
-				methodName = result.getName();
-				String image_path = Util.createScreenshot(driver, methodName);
-				String img = Util.image_upload(image_path);
-				System.out.println("Failure Method" + methodName);
-				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
-				
-//				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
-//				Thread.sleep(2000);
-				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
-				if(methodName.startsWith("campaign")){
-					driver.navigate().refresh();
-					
-					Thread.sleep(3000);
-					HomePage hp=new HomePage(driver);
-					hp.left_hand_navigation_bar_click();
-					CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
-				    ct.clickAction("list");
-				}
-				else if(result.getTestClass().getRealClass().getSimpleName().startsWith("Looker")){
-					
-				}
-				else{
-					driver.navigate().refresh();
-					
-					Thread.sleep(3000);
-					HomePage hp=new HomePage(driver);
-					hp.left_hand_navigation_bar_click();
-				}
-				
-			} catch (Exception e) {
-				System.out.println("In Catch");
-				e.printStackTrace();
-			}
-
-		}
-
-		else if (result.getStatus() == ITestResult.SUCCESS) {
-			System.out.println("In Pass");
-			logger.log(LogStatus.PASS, "Success.");
-			passedtests.add(result.getMethod());
-		}
-
-		else {
-			System.out.println("In skip");
-			logger.log(LogStatus.SKIP, "Test case skipped.");
-			skippedtests.add(result.getMethod());
-
-		}
-		extent.endTest(logger);
-		extent.flush();
-
-	}
+//	@AfterMethod
+//	public void tearDown(ITestResult result) throws Exception {
+//
+//		if (result.getStatus() == ITestResult.FAILURE) {
+//
+//			try {
+//				System.out.println("In fail");
+//				Thread.sleep(1200);
+//				failedtests.add(result.getMethod());
+//				logger.log(LogStatus.FAIL, "" + result.getThrowable().getMessage() + "");
+//				logger.log(LogStatus.FAIL, "Failed.");
+//				methodName = result.getName();
+//				String image_path = Util.createScreenshot(driver, methodName);
+//				String img = Util.image_upload(image_path);
+//				System.out.println("Failure Method" + methodName);
+//				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
+//				
+////				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
+////				Thread.sleep(2000);
+//				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
+//				if(methodName.startsWith("campaign")){
+//					driver.navigate().refresh();
+//					
+//					Thread.sleep(3000);
+//					HomePage hp=new HomePage(driver);
+//					hp.left_hand_navigation_bar_click();
+//					CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
+//				    ct.clickAction("list");
+//				}
+//				else if(result.getTestClass().getRealClass().getSimpleName().startsWith("Looker")){
+//					
+//				}
+//				else{
+//					driver.navigate().refresh();
+//					
+//					Thread.sleep(3000);
+//					HomePage hp=new HomePage(driver);
+//					hp.left_hand_navigation_bar_click();
+//				}
+//				
+//			} catch (Exception e) {
+//				System.out.println("In Catch");
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//		else if (result.getStatus() == ITestResult.SUCCESS) {
+//			System.out.println("In Pass");
+//			logger.log(LogStatus.PASS, "Success.");
+//			passedtests.add(result.getMethod());
+//		}
+//
+//		else {
+//			System.out.println("In skip");
+//			logger.log(LogStatus.SKIP, "Test case skipped.");
+//			skippedtests.add(result.getMethod());
+//
+//		}
+//		extent.endTest(logger);
+//		extent.flush();
+//
+//	}
 
 	public static String getUser_id() {
 		return user_id;
