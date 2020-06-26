@@ -120,7 +120,7 @@ public class TestData extends TestBase{
         	System.out.println("updating time zone");
         	rd.timeZone();		
         }
-	    TestBase.test();
+
 		
 		rd.logOut();
 	}
