@@ -121,15 +121,7 @@ public class LookerCallerActivityReportTest extends TestBase{
         ts=new CallerActivityReportPage(driver);
 		ts.filterElements();
 	}
-	
-	@Test(priority=11)
-	public void Test() throws IOException, InterruptedException{
 		
-		logger=extent.startTest("failed"); 
-		logger.assignCategory(Constants.caller_activity_category);
-		Assert.fail();
-	}
-	
 	@AfterClass
 	public void loggingOut() throws InterruptedException{
 		
