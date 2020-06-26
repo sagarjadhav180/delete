@@ -105,20 +105,47 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement feature_settings_reset_button;
 	
 	//Tracking Number Settings Details 
-	@FindBy(xpath="(//label[@class='control-label'])[position()>8 and position()<20]")
+	@FindBy(xpath="//form[@id='ouForm2']//label")
 	private List<WebElement> tn_settings_labels;
+	String[] expected_tn_settings_labels={"Call Value","Repeat Interval (in hours)","Activate Voicemail?","Voicemail","Configure Voicemail Greetings","Overflow","Ring-to Phone Number","Host Domain","Referring Website","DNI Type","HTML Class","Instant Insights","Record Agent ID","Agent ID voice prompt","Number of Digits in Agent Id","Key Press - Record Call Outcome","Voice prompt for Call outcome","Record a Sale","Sale amount voice prompt","Record a Lead"}; 
 	
-	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='btn btn-primary'][contains(text(),'Save')]")
-	private WebElement tracking_number_settings_details_save_Button;	
+	@FindBy(xpath="//label[contains(text(),'Call Value')]//parent::*//following-sibling::div//input")
+	private WebElement call_value_textbox;
 
-	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='reset btn'][contains(text(),'Reset')]")
-	private WebElement tracking_number_settings_details_reset_Button;
+	@FindBy(xpath="//div[starts-with(@class,'col-lg-')][contains(text(),'Record Call')]")
+	private WebElement record_call_checkbox_label;
 	
-	String[] trackingNumberLabels={"Call Value","Repeat Interval (in hours)","Activate Voicemail?","Voicemail","Configure Voicemail Greetings","Overflow","Ring-to Phone Number","Host Domain","Referring Website","DNI Type","HTML Class"};
-	String[] checkBoxLabels_forTN={"Record Call","Play a voice prompt","Play whisper message before connecting",""};
-	String[] instantInsights_labels_for_call_outcome={"Key Press","Voice prompt for Call outcome","Record a Sale","Sale amount voice prompt","Record a Lead"};
-	String[] instantInsights_labels_for_agentID={"Record Agent ID","Agent ID voice prompt","Number of Digits in Agent Id",""};
+	@FindBy(xpath="(//div[contains(text(),'Record Call')]//parent::div//following-sibling::div//md-checkbox)[1]")
+	private WebElement record_call_checkbox;
+
+	@FindBy(xpath="//div[starts-with(@class,'col-lg-')][contains(text(),'Play a voice prompt')]")
+	private WebElement voice_prompt_checkbox_label;
 	
+	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[1]")
+	private WebElement voice_prompt_checkbox;
+
+	@FindBy(xpath="//div[starts-with(@class,'col-lg-')][contains(text(),'Play whisper message before connecting')]")
+	private WebElement whisper_checkbox_label;
+	
+	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[2]")
+	private WebElement whisper_checkbox;
+	
+	@FindBy(xpath="//label[contains(text(),'Configure Voicemail Greetings')]/parent::*//following-sibling::div//textarea")
+	private WebElement configure_voicemail_greetings_textbox;	
+	
+	@FindBy(xpath="//label[contains(text(),'Repeat Interval (in hours)')]//parent::*//following-sibling::div//input")
+	private WebElement repeat_interval_textbox;
+
+	@FindBy(xpath="(//div[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[1]")
+	private WebElement play_voice_prompt_textbox;
+
+	@FindBy(xpath="(//div[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[2]")
+	private WebElement play_whisper_message_textbox;
+
+	@FindBy(xpath="(//label[contains(text(),'Ring-to Phone Number')]//parent::*//following-sibling::div//input)")
+	private WebElement ring_to_number_textbox;
+	
+	//DNI
 	@FindBy(xpath="//span[contains(text(),'Dynamic Number')]")
 	private WebElement DNI_checkbox_label;
 	
@@ -130,18 +157,32 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//label[text()='Referring Website']//parent::*//select")
 	private WebElement reffering_website_dropdown;
-
+	String[] expected_reffering_website_dropdown={"Add New","Any","Bing","Google (Paid)","Google (Organic)","Yahoo (Paid)","Yahoo (Organic)"};
+	
 	@FindBy(xpath="//label[text()='DNI Type']//parent::*//select")
 	private WebElement dni_type_dropdown;
-
 	String[] dni_types={"URL","Source"};
 	
-	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div")
+	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
 	private WebElement custom_parameters;
 	
-	@FindBy(xpath="//label[contains(text(),'Instant Insights')]")
-	private WebElement instant_insights_label;
+	//DNI custom parameters 
+	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
+	private WebElement dni_custom_parameters_label;
+
+	@FindBy(xpath="//label[@class='control-label ng-binding'][starts-with(text(),'Capture Custom')]")
+	private WebElement dni_custom_parameters_note;
+
+	@FindBy(xpath="//textarea[@class='form-control ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern']")
+	private WebElement dni_custom_parameters_textbox;
+
+	@FindBy(xpath="//div[@class='modal-footer ng-scope']//button[text()='Save']")
+	private WebElement dni_custom_parameters_save_button;
+
+	@FindBy(xpath="//div[@class='modal-footer ng-scope']//button[text()='Cancel']")
+	private WebElement dni_custom_parameters_cancel_button;
 	
+	//Instant Insights
 	@FindBy(xpath="(//label[text()='Voice prompt for Call outcome']//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement voice_prompt_for_call_outcome_textbox;	
 
@@ -153,7 +194,6 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="//label[text()='Sale amount voice prompt']//parent::*//following-sibling::div//textarea")
 	private WebElement sale_amount_voice_prompt_textbox;
-	
 	
 	@FindBy(xpath="(//label[text()='Sale amount voice prompt']//parent::*//following-sibling::div[@class='col-sm-12 col-lg-1 col-md-1 col-xs-12 mt10 mb10']//a)[1]")
 	private WebElement sale_amount_voice_prompt_addfile_button;
@@ -174,36 +214,12 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement number_of_digits_in_agent_Id_dropdown;
 	
 	String[] number_of_digits_in_agent_Id_list={"1","2","3","4","5","6","7","8","9"};
-	
-	
-	@FindBy(xpath="//label[contains(text(),'Call Value')]//parent::*//following-sibling::div//input")
-	private WebElement call_value_textbox;
 
-	@FindBy(xpath="(//div[contains(text(),'Record Call')]//parent::div//following-sibling::div//md-checkbox)[1]")
-	private WebElement record_call_checkbox;
+	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='btn btn-primary'][contains(text(),'Save')]")
+	private WebElement tracking_number_settings_details_save_Button;	
 
-	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[1]")
-	private WebElement voice_prompt_checkbox;
-
-	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[2]")
-	private WebElement whisper_checkbox;
-	
-	@FindBy(xpath="//label[contains(text(),'Configure Voicemail Greetings')]/parent::*//following-sibling::div//textarea")
-	private WebElement configure_voicemail_greetings_textbox;	
-	
-
-	@FindBy(xpath="//label[contains(text(),'Repeat Interval (in hours)')]//parent::*//following-sibling::div//input")
-	private WebElement repeat_interval_textbox;
-
-	@FindBy(xpath="(//div[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[1]")
-	private WebElement play_voice_prompt_textbox;
-
-	@FindBy(xpath="(//div[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[2]")
-	private WebElement play_whisper_message_textbox;
-
-	@FindBy(xpath="(//label[contains(text(),'Ring-to Phone Number')]//parent::*//following-sibling::div//input)")
-	private WebElement ring_to_number_textbox;
-	
+	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='reset btn'][contains(text(),'Reset')]")
+	private WebElement tracking_number_settings_details_reset_Button;
 	
 	//Custom Sources Section
 	@FindBy(xpath="(//label[@class='control-label'])[position()>19 and position()<25]")
@@ -239,47 +255,56 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Call Action Settings Section
 	//all xpaths are written for first call action
-	@FindBy(xpath="//li[1]//div[2]//div[2]//div[1]//div[2]//div[1]//div[2]//div[1]//select[1]")
+	@FindBy(xpath="//h3[text()='If']")
+	private WebElement if_condtion_label;		
+	
+	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[2]")
 	private WebElement if_condtion_dropdown;		
 
-	String[] if_condtion_list={"repeat call","duration","disposition","caller id","missed opportunity","sales inquiry","conversion","lead quality","referring source","referring type","UTM Campaign","UTM Source","UTM Medium","Send to Voicemail"};
+	String[] expected_if_condtion_list={"repeat call","duration","disposition","caller id","missed opportunity","sales inquiry","conversion","lead quality","referring source","referring type","UTM Campaign","UTM Source","UTM Medium","Send to Voicemail"};
 	
-	@FindBy(xpath="//li[1]//div[2]//div[2]//div[1]//div[2]//div[1]//div[2]//div[2]//select[1]")
+	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[3]")
 	private WebElement operator_dropdown;
 
-	String[] operator_list={"is","is not"};
+	String[] expected_operator_list_for_repeat_call={"is","is not"};
+	String[] expected_operator_list_for_duration={"=","!=",">",">=","<","<="};
+	String[] expected_operator_list_for_disposition={"is","is not"};
+	String[] expected_operator_list_for_caller_id={"is","is not","contains","does not contain","begins with","ends with"};
+	String[] expected_operator_list_for_missed_opp={"is","is not"};	
+	String[] expected_operator_list_for_sales_enquiry={"is","is not"};
+	String[] expected_operator_list_for_conversion={"is","is not"};
+	String[] expected_operator_list_for_lead_quality={"is","is not"};
+	String[] expected_operator_list_for_reff_source={"is","is not","contains","does not contain"};
+	String[] expected_operator_list_for_reff_type={"is","is not"};
+	String[] expected_operator_list_for_utm_campaign={"is","is not","contains","does not contain","begins with","ends with"};
+	String[] expected_operator_list_for_utm_source={"is","is not","contains","does not contain","begins with","ends with"};	
+	String[] expected_operator_list_for_utm_medium={"is","is not","contains","does not contain","begins with","ends with"};
+	String[] expected_operator_list_for_vm={"is","is not"};
 	
-	@FindBy(xpath="//li[1]//div[2]//div[2]//div[1]//div[2]//div[1]//div[2]//div[3]//select[1]")
-	private WebElement if_condtion_dropdown_value;
-
-	String[] if_condtion_dropdown_list={"true","false"};
-	
-	@FindBy(xpath="//div[@class='col-lg-2 col-md-2 col-sm-2 col-xs-2 col-sm-offset-1']//div//select[@class='form-control ng-pristine ng-untouched ng-valid ng-isolate-scope']")
+	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[5]")
 	private WebElement and_or_dropdown;
 
 	String[] and_or_list={"AND","OR"};
 	
-	@FindBy(xpath="//li[1]//div[@ class='col-sm-4 col-xs-3 callactionresponsive']//select")
+	@FindBy(xpath="(//h3[text()='Then']//ancestor::div[starts-with(@class,'row')]//select)[1]")
 	private WebElement then_condition_dropdown;
-
     String[] then_condition_list={"Send email alert to","Send SMS to","Tag call as","Trigger the webhook","Flag for call back","Send call for Google Analytics"};
 	
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//span//preceding-sibling::input")
-	private WebElement then_condition_for_email;
+	private WebElement then_condition_textbox_for_email;
 	
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//input[@id='smsNumber']")
-	private WebElement then_condition_for_sms;
+	private WebElement then_condition_textbox_for_sms;
 
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//ul[@class='select2-choices']")
-	private WebElement then_condition_for_tag_call;
+	private WebElement then_condition_for_tag_textbox_call;
 
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//select[@id='triggerWebhook']")
-	private WebElement then_condition_for_webhook;
+	private WebElement then_condition_listbox_for_webhook;
 
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//select[@id='triggerWebhook']//following-sibling::a//i")
 	private WebElement jump_to_webhook_settings_link;
 
-	
 	//sub group section
 	@FindBy(xpath="(//button[text()=' Add Sub-Group'])[1]")
 	private WebElement add_subgroup_button;	
@@ -501,4 +526,28 @@ public class GroupsAndUserPage extends TestBase {
     	
     	tracking_number_settings_details_save_Button.click();
     }
+    
+    public void add10CallAction(){
+    	
+    	for(int i=1;i<=10;i++){
+    		
+    		//Rule
+    		WebElement rule = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[2]"));
+    		Select rules=new Select(rule);
+    		rules.selectByIndex(i);
+    		
+    		//operator
+    		WebElement operator = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[3]"));
+    		Select select=new Select(operator);
+    		select.selectByIndex(1);
+    		
+    		//rule value
+    		
+    		
+    	}
+    	
+    }
+    
+    
+    
 }
