@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import tests.TestBase;
 import tests.Util;
@@ -17,6 +18,8 @@ import tests.Util;
 public class GroupsAndUserPage extends TestBase {
 	
 	String groupName="Ganesh 5";
+	
+	SoftAssert softassert=new SoftAssert();
 	
 	@FindBy(xpath="//div[@class='panel-body collapse in table-responsive ng-isolate-scope']")
 	private WebElement window;
@@ -255,6 +258,15 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Call Action Settings Section
 	//all xpaths are written for first call action
+	@FindBy(xpath="//button[@class='btn btn-primary'][text()='OK']")
+	private WebElement add_action_button;	
+	
+	@FindBy(xpath="")
+	private WebElement delete_call_action_ok_button;	
+	
+	@FindBy(xpath="//div[text()='Successfully Deleted Call Action']")
+	private WebElement delete_call_action_success_message;
+	
 	@FindBy(xpath="//h3[text()='If']")
 	private WebElement if_condtion_label;		
 	
@@ -304,7 +316,7 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//select[@id='triggerWebhook']//following-sibling::a//i")
 	private WebElement jump_to_webhook_settings_link;
-
+	
 	//sub group section
 	@FindBy(xpath="(//button[text()=' Add Sub-Group'])[1]")
 	private WebElement add_subgroup_button;	
@@ -542,11 +554,59 @@ public class GroupsAndUserPage extends TestBase {
     		select.selectByIndex(1);
     		
     		//rule value
+    		WebElement rule_value = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[4]"));
+    		Select select1=new Select(rule_value);
+    		select1.selectByIndex(1);
     		
+    		//action
+    		WebElement action = driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[9]"));
+    		Select select2=new Select(action);
+    		select2.selectByVisibleText("Trigger the webhook");
     		
+    		//action_value
+    		WebElement action_value = driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[12]"));
+    		Select select3=new Select(action_value);
+    		select3.selectByIndex(1);
+    		
+    		//add action button
+    		if(i<10){
+    			WebElement add_action_button = driver.findElement(By.xpath("(//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//following-sibling::div[@class='timeline-footer text-right']//a"));
+        		add_action_button.click();
+    		}
+    		else if(i==10){
+    			List<WebElement> add_action_button = null;
+    			try{
+        			add_action_button = driver.findElements(By.xpath("(//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//following-sibling::div[@class='timeline-footer text-right']//a"));
+        			
+    			}
+    			catch(Exception e){
+    				Assert.assertTrue(add_action_button.isEmpty(),"Add Button is dispalyed to add 11th call action");
+    			}
+
+    		}
     	}
     	
     }
+    
+    public void deleteAllCations(){
+    	
+    	List<WebElement> delete_icons = driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
+
+    	for(int i=0;i<delete_icons.size();i++){
+    		delete_icons.get(i).click();
+    		driver.switchTo().activeElement();
+    		delete_call_action_ok_button.click();
+            wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
+            softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
+    	}
+    	
+    	softassert.assertAll();
+    }
+    
+    
+    
+    
+    
     
     
     
