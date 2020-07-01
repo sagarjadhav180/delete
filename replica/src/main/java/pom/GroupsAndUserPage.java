@@ -67,29 +67,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Zip')]/..//input")
 	private WebElement zip_textbox;
 
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
-	private WebElement subgroup_name_textbox;
-
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[2]")
-	private WebElement external_id_textbox;
 	
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
-	private WebElement subgroup_industry_listbox;
-
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[3]")
-	private WebElement subgroup_phone_textbox;
-
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
-	private WebElement subgroup_city_textbox;
-
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
-	private WebElement subgroup_zip_code_textbox;
-	
-	@FindBy(xpath="(//div[@class='panel-body collapse in table-responsive ng-isolate-scope'])[1]//tr//td[@class='text-right']//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
-	private WebElement save_subgroup;
-
-	@FindBy(xpath="//div[@class='ui-pnotify-text']")
-	private WebElement save_subgroup_success_message;
 	
 	//Feature Settings Details 	
 	@FindBy(xpath="//label[contains(text(),'Conversation Analytics')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
@@ -318,6 +296,27 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement jump_to_webhook_settings_link;
 	
 	//sub group section
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
+	private WebElement subgroup_name_textbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[2]")
+	private WebElement subgroup_external_id_textbox;
+	
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
+	private WebElement subgroup_industry_listbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[3]")
+	private WebElement subgroup_phone_textbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	private WebElement subgroup_city_textbox;
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	private WebElement subgroup_zip_code_textbox;
+	
+	@FindBy(xpath="(//div[@class='panel-body collapse in table-responsive ng-isolate-scope'])[1]//tr//td[@class='text-right']//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
+	private WebElement save_subgroup;
+	
 	@FindBy(xpath="(//button[text()=' Add Sub-Group'])[1]")
 	private WebElement add_subgroup_button;	
 
@@ -346,6 +345,24 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//table[@id='table_sub_group']//tbody//tr")
 	private static WebElement groups_countOf_groups;
+
+	@FindBy(xpath="Sub-group t is created successfully.")
+	private WebElement subgroup_creation_success_message;	
+
+	@FindBy(xpath="//div[contains(text(),'updated successfully.')]")
+	private WebElement subgroup_updation_success_message;	
+
+	@FindBy(xpath="//form[@class='bootbox-form']//input")
+	private WebElement textbox_subgroup_deletion_popup;	
+
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
+	private WebElement ok_button_subgroup_deletion_popup;
+
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']")
+	private WebElement cancel_button_subgroup_deletion_popup;
+
+	@FindBy(xpath="//div[text()='Group deleted.']")
+	private WebElement subgroup_deletion_success_message;	
 	
 	//verification of buttons in top pagination toolbox
 //		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
@@ -378,22 +395,34 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[3]")
 	private WebElement email_id_textbox;	
 
-	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[@class='btn btn-sm btn-primary'][contains(text(),'Save')]")
-	private WebElement save_user_button;
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	private WebElement agent_ring_to_textbox;	
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[5]")
+	private WebElement agent_id_textbox;	
 	
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
 	private WebElement roles_listbox;	
-
+	
+	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[@class='btn btn-sm btn-primary'][contains(text(),'Save')]")
+	private WebElement save_user_button;
+	
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement user_creation_success_message;
+	
+	@FindBy(xpath="")
+	private WebElement user_updation_success_message;
+
+	@FindBy(xpath="")
+	private WebElement user_deletion_success_message;
 	
 	@FindBy(xpath="(//span[text()='Export Users'])[1]//parent::button")
 	private WebElement export_users_button;	
 
 	@FindBy(xpath="//table[@ id='table_group_user']//th")
-	private List<WebElement> users_columns;
+	private List<WebElement> users_columns_names;
 
-    String[] users_names={"First Name","Last Name","Email","Agent Ring-to","Agent ID","Role","Status","Actions"};
+    String[] expected_users_columns_names={"First Name","Last Name","Email","Agent Ring-to","Agent ID","Role","Status","Actions"};
 
 	@FindBy(xpath="(//button[4])[3]")
 	private static WebElement users_topNextPagination_Button;
@@ -497,7 +526,7 @@ public class GroupsAndUserPage extends TestBase {
         save_subgroup.click();
     	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
     	
-    	Assert.assertTrue(save_subgroup_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
+    	Assert.assertTrue(subgroup_creation_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
       	
     }
     
