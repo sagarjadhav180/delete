@@ -33,7 +33,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='table-to-scrape']//button[1]//span[contains(text(),'Export')]")
 	private WebElement exportGroupsUsers_button;
 		
-	//Group Details 
+	//Group Details------------------------------------------------------------------
 	@FindBy(xpath="(//label[@class='control-label'])[position()>1 and position()<9]")
 	private List<WebElement> group_details_labels;
 	
@@ -69,7 +69,7 @@ public class GroupsAndUserPage extends TestBase {
 
 	
 	
-	//Feature Settings Details 	
+	//Feature Settings Details ---------------------------------------------------------
 	@FindBy(xpath="//label[contains(text(),'Conversation Analytics')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement CA_toggle;	
 	
@@ -85,7 +85,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement feature_settings_reset_button;
 	
-	//Tracking Number Settings Details 
+	//Tracking Number Settings Details------------------------------------------------
 	@FindBy(xpath="//form[@id='ouForm2']//label")
 	private List<WebElement> tn_settings_labels;
 	String[] expected_tn_settings_labels={"Call Value","Repeat Interval (in hours)","Activate Voicemail?","Voicemail","Configure Voicemail Greetings","Overflow","Ring-to Phone Number","Host Domain","Referring Website","DNI Type","HTML Class","Instant Insights","Record Agent ID","Agent ID voice prompt","Number of Digits in Agent Id","Key Press - Record Call Outcome","Voice prompt for Call outcome","Record a Sale","Sale amount voice prompt","Record a Lead"}; 
@@ -126,7 +126,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//label[contains(text(),'Ring-to Phone Number')]//parent::*//following-sibling::div//input)")
 	private WebElement ring_to_number_textbox;
 	
-	//DNI
+	//DNI-------------------------------------------------------
 	@FindBy(xpath="//span[contains(text(),'Dynamic Number')]")
 	private WebElement DNI_checkbox_label;
 	
@@ -147,7 +147,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
 	private WebElement custom_parameters;
 	
-	//DNI custom parameters 
+	//DNI custom parameters-----------------------------------------------------------------
 	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
 	private WebElement dni_custom_parameters_label;
 
@@ -163,7 +163,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-footer ng-scope']//button[text()='Cancel']")
 	private WebElement dni_custom_parameters_cancel_button;
 	
-	//Instant Insights
+	//Instant Insights--------------------------------------------------------------------------------------------------------
 	@FindBy(xpath="(//label[text()='Voice prompt for Call outcome']//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement voice_prompt_for_call_outcome_textbox;	
 
@@ -202,7 +202,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='reset btn'][contains(text(),'Reset')]")
 	private WebElement tracking_number_settings_details_reset_Button;
 	
-	//Custom Sources Section
+	//Custom Sources Section-----------------------------------------------------------
 	@FindBy(xpath="(//label[@class='control-label'])[position()>19 and position()<25]")
 	private List<WebElement> custom_sources_labels;
 	String[] customsources_labels={"Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5"};
@@ -234,8 +234,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[text()='Successfully deleted the custom source']")
 	private WebElement custom_source_deletion_success_message;	
 	
-	//Call Action Settings Section
-	//all xpaths are written for first call action
+	//Call Action Settings Section---------------------------------------------------
 	@FindBy(xpath="//button[@class='btn btn-primary'][text()='OK']")
 	private WebElement add_action_button;	
 	
@@ -295,7 +294,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//select[@id='triggerWebhook']//following-sibling::a//i")
 	private WebElement jump_to_webhook_settings_link;
 	
-	//sub group section
+	//sub group section------------------------------------------------------
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
 	private WebElement subgroup_name_textbox;
 
@@ -382,7 +381,7 @@ public class GroupsAndUserPage extends TestBase {
 //		Assert1.assertEquals(dbCount, String.valueOf(groups_countOf_groups.size()),"count  of listed groups is mismatching with db count");
 	
 
-	//users section
+	//users section--------------------------------------------------------------
 	@FindBy(xpath="(//button[text()=' Add User'])[1]")
 	private WebElement add_user_button;	
 
@@ -428,7 +427,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']") 	
 	private WebElement user_deletion_confiramtion_popup_cancel_button;
 
-	//Change password popup
+	//Change password popup-------------------------------------------
 	@FindBy(xpath="//h3[@class='modal-title'][text()='Change Password']")
 	private WebElement change_password_label;	
 
@@ -466,13 +465,22 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-body']//span[text()='Reporting Access']")
 	private WebElement user_permissions_reporting_access_label;	
 
-	@FindBy(xpath="//li[@ng-repeat='group in groupsList']//label")
-	private WebElement user_permissions_groups_list;	
-
-	@FindBy(xpath="//ul[@class='tree-view-wrapper ng-scope']//label")
-	private WebElement user_permissions_reports_list;
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='User's permission updated successfully']")
+	private WebElement user_permissions_update_success_message;	
 	
-	//----------------------------------------------------------------//
+	@FindBy(xpath="//li[@ng-repeat='group in groupsList']//label")
+	private List<WebElement> user_permissions_groups_labels;	
+
+	@FindBy(xpath="//li[@ng-repeat='group in groupsList']//input")
+	private List<WebElement> user_permissions_groups_checkboxes;
+	
+	@FindBy(xpath="//ul[@class='tree-view-wrapper ng-scope']//label")
+	private List<WebElement> user_permissions_reports_labels;
+	
+	@FindBy(xpath="//ul[@class='tree-view-wrapper ng-scope']//input")
+	private List<WebElement> user_permissions_reports_checkboxes;	
+	
+    //------------------------------------------------------------------------------//
 	@FindBy(xpath="(//span[text()='Export Users'])[1]//parent::button")
 	private WebElement export_users_button;	
 
