@@ -407,15 +407,72 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[@class='btn btn-sm btn-primary'][contains(text(),'Save')]")
 	private WebElement save_user_button;
 	
-	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'successfully created.')]")
 	private WebElement user_creation_success_message;
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'successfully updated.')]")
 	private WebElement user_updation_success_message;
 
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'has been removed.')]")
 	private WebElement user_deletion_success_message;
+
+	@FindBy(xpath="//form[@class='bootbox-form']//input")
+	private WebElement user_deletion_confiramtion_popup_textbox;
+
+	@FindBy(xpath="//h4[@class='modal-title'][starts-with(text(),'Deleting this User will also delete all scheduled Reports by this user.')]")
+	private WebElement user_deletion_confiramtion_popup_note;
+
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
+	private WebElement user_deletion_confiramtion_popup_ok_button;
+
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']") 	
+	private WebElement user_deletion_confiramtion_popup_cancel_button;
+
+	//Change password popup
+	@FindBy(xpath="//h3[@class='modal-title'][text()='Change Password']")
+	private WebElement change_password_label;	
+
+	@FindBy(xpath="//form[@id='updateUserPassword']//input")
+	private WebElement change_password_textbox;	
+
+	@FindBy(xpath="//form[@id='updateUserPassword']//button[text()='OK']")
+	private WebElement change_password_ok_button;	
+
+	@FindBy(xpath="//form[@id='updateUserPassword']//a[text()='Cancel']")
+	private WebElement change_password_cancel_button;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Password updated successfully.']")
+	private WebElement change_password_success_message;	
 	
+	//User Permissions window
+	@FindBy(xpath="//div[@class='modal-header']//h4[text()='User Permissions']")
+	private WebElement user_permissions_window_label;		
+
+	@FindBy(xpath="//div[@class='modal-body']//p[text()='Access Audio ']")
+	private WebElement user_permissions_access_audio_label;		
+
+	@FindBy(xpath="(//div[@class='modal-body']//div[starts-with(@class,'switch-animate switch')])[1]")
+	private WebElement user_permissions_access_audio_toggle;
+
+	@FindBy(xpath="//div[@class='modal-body']//p[text()='Score Calls']")
+	private WebElement user_permissions_score_calls_label;		
+
+	@FindBy(xpath="(//div[@class='modal-body']//div[starts-with(@class,'switch-animate switch')])[2]")
+	private WebElement user_permissions_score_calls_toggle;
+
+	@FindBy(xpath="//div[@class='modal-body']//span[text()='Group Access']")
+	private WebElement user_permissions_group_access_label;
+	
+	@FindBy(xpath="//div[@class='modal-body']//span[text()='Reporting Access']")
+	private WebElement user_permissions_reporting_access_label;	
+
+	@FindBy(xpath="//li[@ng-repeat='group in groupsList']//label")
+	private WebElement user_permissions_groups_list;	
+
+	@FindBy(xpath="//ul[@class='tree-view-wrapper ng-scope']//label")
+	private WebElement user_permissions_reports_list;
+	
+	//----------------------------------------------------------------//
 	@FindBy(xpath="(//span[text()='Export Users'])[1]//parent::button")
 	private WebElement export_users_button;	
 
