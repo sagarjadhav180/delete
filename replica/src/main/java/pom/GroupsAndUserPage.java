@@ -37,7 +37,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//label[@class='control-label'])[position()>1 and position()<9]")
 	private List<WebElement> group_details_labels;
 	
-	String[] groupDetailsLabels={"Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code"};
+	String[] expected_groupDetailsLabels={"Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code"};
 	
 	@FindBy(xpath="//button[contains(text(),'Save Group Details')]")
 	private WebElement saveGroupDetails_button;	
@@ -45,7 +45,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//select[@id='source'][contains(@validate-blur-forza,'State')]")
 	private WebElement state_dropdown;	
 
-	String[] states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
+	String[] expected_states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
 	
 	@FindBy(xpath="//select[@ng-model='industry']")
 	private WebElement industry_dropdown;
@@ -532,6 +532,105 @@ public class GroupsAndUserPage extends TestBase {
 	public GroupsAndUserPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
 	}
+	
+    public void groupsAndUserHeaderLabel(){
+		
+		wait.until(ExpectedConditions.visibilityOf(groupsAndUserPage_label));
+		Assert.assertTrue(groupsAndUserPage_label.isDisplayed(),"Groups and User page Label is not displayed or locator changed");
+	}
+	
+    public void exportGroupsAndUserButton(){
+		
+		wait.until(ExpectedConditions.visibilityOf(exportGroupsUsers_button));
+		softassert.assertTrue(exportGroupsUsers_button.isDisplayed(),"Export Groups and User button is not displayed or locator changed");
+		softassert.assertTrue(exportGroupsUsers_button.isEnabled(),"Export Groups and User button is not clickable");
+		
+		softassert.assertAll();
+	}
+    
+    public void Strip(String stripName){
+    	
+    	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
+	
+    	wait.until(ExpectedConditions.visibilityOf(strip));
+		Assert.assertTrue(strip.isDisplayed(), stripName+"is not displayed or locator changed");
+    }
+	
+    public void expandStrip(String stripName){
+    	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
+    	
+    	if(!(stripName.equals("GROUP DETAILS FOR") || stripName.equals("USERS FOR"))){
+        	strip.click();
+    	}
+
+    	WebElement strip_state = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div[@ng-show='isGroupDetailsOpen']"));
+    	
+    	String icon = strip_state.getAttribute("aria-hidden");
+        	
+    	Assert.assertTrue(icon.equals("true"),stripName+" is not expandable");
+    	    	
+    }
+
+    public void collapseStrip(String stripName){
+    	
+    	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]"));
+        strip.click();	
+    	
+        WebElement strip_state = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div[@ng-show='is"+stripName+"Open']"));
+    	
+    	String icon = strip_state.getAttribute("aria-hidden");
+        	
+    	Assert.assertTrue(icon.equals("false"),stripName+" is not collapsible");
+    	    	
+    }
+    
+    public void groupDetailsUI(){
+    	
+    	for(int i=0;i<group_details_labels.size();i++){
+    		
+    		for(int j=0;j<expected_groupDetailsLabels.length;j++){
+    			
+    			if(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j])){
+        			softassert.assertTrue(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j]));    				
+    			}
+    
+    		}
+    				
+    	}
+    	
+    	softassert.assertTrue(groupName_textbox.isDisplayed(),"groupName textbox is not displayed");
+    	softassert.assertTrue(externalID_textbox.isDisplayed(),"external ID textbox is not displayed");    	
+    	softassert.assertTrue(phone_textbox.isDisplayed(),"phone textbox is not displayed");    	    	
+    	softassert.assertTrue(city_textbox.isDisplayed(),"city textbox is not displayed");
+    	softassert.assertTrue(zip_textbox.isDisplayed(),"zip textbox is not displayed");
+    	
+    	softassert.assertTrue(industry_dropdown.isDisplayed(),"industry dropdown is not displayed");
+    	Select select=new Select(industry_dropdown);
+    	
+    	for(int i=0;i<select.getOptions().size();i++){
+    		
+    		for(int j=0;j<expected_industry_dropdown.length;j++){
+    			
+    			if(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j])){
+    				softassert.assertTrue(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j]),expected_industry_dropdown[j]+" is not present");
+    			}	
+    		}
+    	}
+
+    	softassert.assertTrue(state_dropdown.isDisplayed(),"state dropdown is not displayed");
+    	Select select1=new Select(state_dropdown);
+    	
+    	for(int i=0;i<select1.getOptions().size();i++){
+    		
+    		for(int j=0;j<expected_states.length;j++){
+    			if(select1.getOptions().get(i).getText().equals(expected_states[j])){
+    		    	softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_states[j]),expected_states[j]+" is not present");    				
+    			}
+    		}
+    	}
+    	
+    	softassert.assertAll();
+    }
 	
 	
 	//to get checkbox of required custom source
