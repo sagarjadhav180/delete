@@ -557,13 +557,29 @@ public class GroupsAndUserPage extends TestBase {
     }
 	
     public void expandStrip(String stripName){
-    	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
     	
-    	if(!(stripName.equals("GROUP DETAILS FOR") || stripName.equals("USERS FOR"))){
+        WebElement strip = null ;
+    	
+    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
+    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	else{
+    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	
+    	
+    	if(!(stripName.equals("Group Details") || stripName.equals("Users"))){
         	strip.click();
     	}
 
-    	WebElement strip_state = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div[@ng-show='isGroupDetailsOpen']"));
+    	WebElement strip_state;
+    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
+       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));    		
+    	}
+    	else{
+       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    	}
+
     	
     	String icon = strip_state.getAttribute("aria-hidden");
         	
@@ -573,10 +589,23 @@ public class GroupsAndUserPage extends TestBase {
 
     public void collapseStrip(String stripName){
     	
-    	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]"));
-        strip.click();	
+    	WebElement strip = null ;
     	
-        WebElement strip_state = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div[@ng-show='is"+stripName+"Open']"));
+    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
+    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	else{
+    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	strip.click();	
+    	
+    	WebElement strip_state;
+    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
+       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));    		
+    	}
+    	else{
+       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    	}
     	
     	String icon = strip_state.getAttribute("aria-hidden");
         	
@@ -633,6 +662,7 @@ public class GroupsAndUserPage extends TestBase {
     }
 	
 	
+    
 	//to get checkbox of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
 		
@@ -663,10 +693,14 @@ public class GroupsAndUserPage extends TestBase {
 		return webelement;
 	}
     
-    public void expandSection(String section){
+    public void expandSection(String section_name){
  
-		WebElement we = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section+"')]//parent::div//i[starts-with(@class,'pull-right')]")); 
-		we.click();
+    	WebElement section;
+    	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
+    		section=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+		section=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]")); 
+		section.click();
 	}
     
     public void collpaseSection(String section){

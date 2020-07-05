@@ -7,10 +7,9 @@
 		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
 		<classes>
 
-			<class name="tests.CallerActivityReportTest">
+			<class name="tests.LookerCallerActivityReportTest"/>
 			
 			
-			</class>
 
 		</classes>
 	</test>

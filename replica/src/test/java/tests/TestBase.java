@@ -129,7 +129,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 	    driver.get(url_to_hit);
-//	    TestData.createData();			    
+	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
 	}
 

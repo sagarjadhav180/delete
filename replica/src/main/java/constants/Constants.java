@@ -145,10 +145,10 @@ public class Constants {
 	
     public static class GroupsAndUser{
 		
-    	public static final String group_details="GROUP DETAILS";
-    	public static final String feature_settings="FEATURE SETTINGS";
-    	public static final String tn_settings="TRACKING NUMBER";
-    	public static final String custom_sources="CUSTOM SOURCES";
+    	public static final String group_details="Group Details";
+    	public static final String feature_settings="Feature Settings";
+    	public static final String tn_settings="Tracking Number";
+    	public static final String custom_sources="Custom Source";
     	public static final String call_actions="Call Actions";
     	public static final String sub_groups="Sub-Groups";
     	public static final String user_settings="Users";
@@ -158,6 +158,8 @@ public class Constants {
     	public static final String admin_role="Admin";
     	public static final String standard_role="Standard";    	
     	public static final String readonly_role="Read-Only";    	
+    	
+    	//
     	
     	
 	}
