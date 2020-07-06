@@ -41,6 +41,12 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="//button[contains(text(),'Save Group Details')]")
 	private WebElement saveGroupDetails_button;	
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Automation Account updated.']")
+	private WebElement update_groupDetails_success_message;	
+	
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement saveGroupDetails_alert;	
 	
 	@FindBy(xpath="//select[@id='source'][contains(@validate-blur-forza,'State')]")
 	private WebElement state_dropdown;	
@@ -555,64 +561,7 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(strip));
 		Assert.assertTrue(strip.isDisplayed(), stripName+"is not displayed or locator changed");
     }
-	
-    public void expandStrip(String stripName){
-    	
-        WebElement strip = null ;
-    	
-    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
-    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
-    	}
-    	else{
-    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
-    	}
-    	
-    	
-    	if(!(stripName.equals("Group Details") || stripName.equals("Users"))){
-        	strip.click();
-    	}
-
-    	WebElement strip_state;
-    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
-       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));    		
-    	}
-    	else{
-       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-    	}
-
-    	
-    	String icon = strip_state.getAttribute("aria-hidden");
-        	
-    	Assert.assertTrue(icon.equals("true"),stripName+" is not expandable");
-    	    	
-    }
-
-    public void collapseStrip(String stripName){
-    	
-    	WebElement strip = null ;
-    	
-    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
-    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
-    	}
-    	else{
-    		strip=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+stripName+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
-    	}
-    	strip.click();	
-    	
-    	WebElement strip_state;
-    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
-       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));    		
-    	}
-    	else{
-       	 strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+stripName+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-    	}
-    	
-    	String icon = strip_state.getAttribute("aria-hidden");
-        	
-    	Assert.assertTrue(icon.equals("false"),stripName+" is not collapsible");
-    	    	
-    }
-    
+	   
     public void groupDetailsUI(){
     	
     	for(int i=0;i<group_details_labels.size();i++){
@@ -661,8 +610,54 @@ public class GroupsAndUserPage extends TestBase {
     	softassert.assertAll();
     }
 	
-	
+	public void groupDetailsFormValidation(String validation_textbox){
+		
+		WebElement strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'GROUP DETAILS')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+		WebElement strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'GROUP DETAILS')]//parent::div//i[starts-with(@class,'pull-right')]"));
+		
+		if(strip_state.getAttribute("aria-hidden").equals("true")){
+			strip.click();
+		}
+		if(validation_textbox.equals("group_name_textbox")){
+			String group = groupName_textbox.getAttribute("value");
+			groupName_textbox.clear();
+			saveGroupDetails_button.click();
+			Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for empty group name not displayed");
+			groupName_textbox.sendKeys(group);	
+		}
+		else if(validation_textbox.equals("phone_number_textbox")){
+			phone_textbox.clear();
+			phone_textbox.sendKeys("22");
+			saveGroupDetails_button.click();
+			Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
+			phone_textbox.clear();
+		}
+		
+	}
     
+	public void groupDetailsUpdate(){
+		WebElement strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'GROUP DETAILS')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+		WebElement strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'GROUP DETAILS')]//parent::div//i[starts-with(@class,'pull-right')]"));
+		
+		if(strip_state.getAttribute("aria-hidden").equals("true")){
+			strip.click();
+		}
+		
+		String external_id = "ext_id"+Util.generateRandomNumber();
+		externalID_textbox.clear();
+		externalID_textbox.sendKeys(external_id);
+		phone_textbox.clear();
+		phone_textbox.sendKeys("8018786943");
+		saveGroupDetails_button.click();
+		wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));
+		Assert.assertTrue(update_groupDetails_success_message.isDisplayed(),"group details not updated successfully");
+		
+	}
+
+	public void featureSettingsUI(){
+		
+	}
+	
 	//to get checkbox of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
 		
@@ -694,23 +689,47 @@ public class GroupsAndUserPage extends TestBase {
 	}
     
     public void expandSection(String section_name){
- 
-    	WebElement section;
+    	
+    	WebElement strip;
+    	WebElement strip_state;
+    	
     	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
-    		section=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+
+    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
-		section=driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]")); 
-		section.click();
-	}
+    	else{
+    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	
+    	if(strip_state.getAttribute("aria-hidden").equals("true")){
+			strip.click();
+	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("false"),section_name+" is not expandable");
+		}
+    }
     
-    public void collpaseSection(String section){
+    public void collpaseSection(String section_name){
  
-		WebElement we = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section+"')]//parent::div//i[starts-with(@class,'pull-right')]")); 
-		we.click();
+    	WebElement strip;
+    	WebElement strip_state;
+    	
+    	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
+
+    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	else{
+    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    	}
+    	
+    	if(strip_state.getAttribute("aria-hidden").equals("false")){
+			strip.click();
+	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("true"),section_name+" is not collapsible");
+		}
 	}
  
-    
-    
     public void createGroup(String groupName) throws InterruptedException{
     	Util.scrollFunction(add_subgroup_button);
     	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)", "");
