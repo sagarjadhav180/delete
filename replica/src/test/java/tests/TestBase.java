@@ -104,7 +104,7 @@ public class TestBase
 		String sc = null ;
 		if(browser.contains("chrome")){
 
-			System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver");
+			System.setProperty("webdriver.chrome.driver",".//chromedriver");
 		    driver=new ChromeDriver();
 
 		    
