@@ -116,6 +116,9 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[2]")
 	private WebElement whisper_checkbox;
+
+	@FindBy(xpath="(//label[contains(text(),'Activate Voicemail?')]//parent::div//following-sibling::div//md-checkbox)[1]")
+	private WebElement activate_voicemail_checkbox;
 	
 	@FindBy(xpath="//label[contains(text(),'Configure Voicemail Greetings')]/parent::*//following-sibling::div//textarea")
 	private WebElement configure_voicemail_greetings_textbox;	
@@ -123,9 +126,15 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Repeat Interval (in hours)')]//parent::*//following-sibling::div//input")
 	private WebElement repeat_interval_textbox;
 
+	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[1]")
+	private WebElement play_voice_prompt_checkbox;
+	
 	@FindBy(xpath="(//div[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement play_voice_prompt_textbox;
 
+	@FindBy(xpath="(//div[contains(text(),'Play whisper message before connecting')]//parent::div//following-sibling::div//md-checkbox)[1]")
+	private WebElement play_whisper_message_checkbox;
+	
 	@FindBy(xpath="(//div[contains(text(),'voice prompt')]//parent::*//following-sibling::div//textarea)[2]")
 	private WebElement play_whisper_message_textbox;
 
