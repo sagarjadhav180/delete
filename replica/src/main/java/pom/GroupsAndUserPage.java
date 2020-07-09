@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import constants.Constants;
 import tests.TestBase;
 import tests.Util;
 
@@ -147,8 +148,14 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="(//label[contains(text(),'Ring-to Phone Number')]//parent::*//following-sibling::div//input)")
 	private WebElement ring_to_number_textbox;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement tn_settings_alert;
 	
 	//DNI-------------------------------------------------------
+	@FindBy(xpath="//span[contains(text(),'Dynamic Number')]/..//following-sibling::div//md-checkbox")
+	private WebElement DNI_checkbox;
+	
 	@FindBy(xpath="//span[contains(text(),'Dynamic Number')]")
 	private WebElement DNI_checkbox_label;
 	
@@ -186,6 +193,12 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement dni_custom_parameters_cancel_button;
 	
 	//Instant Insights--------------------------------------------------------------------------------------------------------
+	@FindBy(xpath="//label[contains(text(),'Instant Insights')]/..//following-sibling::div//md-checkbox")
+	private WebElement instant_insights_checkbox;
+	
+	@FindBy(xpath="//select[@name='postIVRType']")
+	private WebElement instant_insights_dropdown;
+	
 	@FindBy(xpath="(//label[text()='Voice prompt for Call outcome']//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement voice_prompt_for_call_outcome_textbox;	
 
@@ -580,6 +593,8 @@ public class GroupsAndUserPage extends TestBase {
 	   
     public void groupDetailsUI(){
     	
+		expandSection(Constants.GroupsAndUser.group_details);    	
+    	
     	for(int i=0;i<group_details_labels.size();i++){
     		
     		for(int j=0;j<expected_groupDetailsLabels.length;j++){
@@ -628,12 +643,8 @@ public class GroupsAndUserPage extends TestBase {
 	
 	public void groupDetailsFormValidation(String validation_textbox){
 		
-		WebElement strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'GROUP DETAILS')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-		WebElement strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'GROUP DETAILS')]//parent::div//i[starts-with(@class,'pull-right')]"));
+		expandSection(Constants.GroupsAndUser.group_details);
 		
-		if(strip_state.getAttribute("aria-hidden").equals("true")){
-			strip.click();
-		}
 		if(validation_textbox.equals("group_name_textbox")){
 			String group = groupName_textbox.getAttribute("value");
 			groupName_textbox.clear();
@@ -652,12 +663,8 @@ public class GroupsAndUserPage extends TestBase {
 	}
     
 	public void groupDetailsUpdate(){
-		WebElement strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'GROUP DETAILS')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-		WebElement strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'GROUP DETAILS')]//parent::div//i[starts-with(@class,'pull-right')]"));
 		
-		if(strip_state.getAttribute("aria-hidden").equals("true")){
-			strip.click();
-		}
+		expandSection(Constants.GroupsAndUser.group_details);
 		
 		String external_id = "ext_id"+Util.generateRandomNumber();
 		externalID_textbox.clear();
@@ -672,15 +679,69 @@ public class GroupsAndUserPage extends TestBase {
 
 	public void featureSettingsUI(){
 		
-		softassert.assertTrue(CA_toggle.isDisplayed(),"CA toggle is not present");		
+		expandSection(Constants.GroupsAndUser.feature_settings);
+		
+		//CA
 		softassert.assertTrue(CA_label.isDisplayed(),"CA label is not present");
-		softassert.assertTrue(spamGuard_toggle.isDisplayed(),"Spam Guard toggle is not present");
+		softassert.assertTrue(CA_toggle.isDisplayed(),"CA toggle is not present");
+		softassert.assertTrue(CA_toggle.isEnabled(),"CA toggle is not clickable");
+		//Spam guard
 		softassert.assertTrue(spamGuard_label.isDisplayed(),"Spam Guard label is not present");
+		softassert.assertTrue(spamGuard_toggle.isDisplayed(),"Spam Guard toggle is not present");
+		softassert.assertTrue(spamGuard_toggle.isEnabled(),"Spam Guard toggle is not clickable");
+		//Share DNI
 		softassert.assertTrue(share_dni_label.isDisplayed(),"Share DNI label is not present");
+		softassert.assertTrue(shareDNI_toggle.isDisplayed(),"Share DNI toggle is not present");
+		softassert.assertTrue(shareDNI_toggle.isEnabled(),"Share DNI toggle is not clickable");
+		//Feature Settings buttons
 		softassert.assertTrue(feature_settings_save_button.isDisplayed(),"Feature settings save button is not dipslayed");
 		softassert.assertTrue(feature_settings_save_button.isEnabled(),"Feature settings save button is not enabled");
 		softassert.assertTrue(feature_settings_reset_button.isDisplayed(),"Feature settings reset button is not dipslayed");
 		softassert.assertTrue(feature_settings_reset_button.isEnabled(),"Feature settings reset button is not emabled");
+        
+		softassert.assertAll();
+	}
+	
+	public void tnSettingsFormValidations(String textbox) {
+		
+		expandSection(Constants.GroupsAndUser.tn_settings);
+		
+		if(textbox.equals("ring_to_number_textbox")) {
+			ring_to_number_textbox.clear();
+			ring_to_number_textbox.sendKeys("22");
+			wait.until(ExpectedConditions.visibilityOf(tn_settings_alert));
+			softassert.assertTrue(tn_settings_alert.isDisplayed(),"Appropriaten alert is not displayed foir invalid rin to number");
+		}
+		
+		else if (textbox.equals("dni_section")) {
+			
+			if(!DNI_checkbox.isSelected()) {
+				
+				softassert.assertTrue(hostDomain_textbox.getAttribute("aria-diabled").equals("true"),"hostDomain_textbox is enabled");
+				softassert.assertTrue(htmlclass_textbox.getAttribute("aria-diabled").equals("true"),"htmlclass_textbox is enabled");				
+				softassert.assertTrue(reffering_website_dropdown.getAttribute("aria-diabled").equals("true"),"reffering_website_dropdown is enabled");
+				softassert.assertTrue(dni_type_dropdown.getAttribute("aria-diabled").equals("true"),"dni_type_dropdown is enabled");
+				
+			}
+		}
+		
+		else if (textbox.equals("instant_insights_section")) {
+			
+			if(!instant_insights_checkbox.isSelected()) {
+				
+				instant_insights_checkbox.click();
+				Select select = new Select(instant_insights_dropdown); 
+				select.deselectByVisibleText("Call Outcome (Conversion type)");
+				instant_insights_checkbox.click();				
+				
+				softassert.assertTrue(voice_prompt_for_call_outcome_textbox.getAttribute("aria-diabled").equals("true"),"hostDomain_textbox is enabled");
+				softassert.assertTrue(sale_amount_voice_prompt_textbox.getAttribute("aria-diabled").equals("true"),"htmlclass_textbox is enabled");				
+				
+			}
+		}
+		
+		
+		
 	}
 	
 	//to get checkbox of required custom source
