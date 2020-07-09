@@ -73,21 +73,28 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Zip')]/..//input")
 	private WebElement zip_textbox;
 
-	
-	
 	//Feature Settings Details ---------------------------------------------------------
+	@FindBy(xpath="(//label[contains(text(),'Conversation Analytics')])[2]")
+	private WebElement CA_label;	
+	
 	@FindBy(xpath="//label[contains(text(),'Conversation Analytics')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement CA_toggle;	
+
+	@FindBy(xpath="//label[contains(text(),'Spam Guard')][1]")
+	private WebElement spamGuard_label;	
 	
 	@FindBy(xpath="//label[contains(text(),'Spam Guard')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement spamGuard_toggle;	
+
+	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]")
+	private WebElement share_dni_label;	
 	
 	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement shareDNI_toggle;
 
 	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement feature_settings_save_button;
-
+	
 	@FindBy(xpath="//label[contains(text(),'Share DNI (Website Call Tracking) code with Sub-Groups')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement feature_settings_reset_button;
 	
@@ -665,6 +672,15 @@ public class GroupsAndUserPage extends TestBase {
 
 	public void featureSettingsUI(){
 		
+		softassert.assertTrue(CA_toggle.isDisplayed(),"CA toggle is not present");		
+		softassert.assertTrue(CA_label.isDisplayed(),"CA label is not present");
+		softassert.assertTrue(spamGuard_toggle.isDisplayed(),"Spam Guard toggle is not present");
+		softassert.assertTrue(spamGuard_label.isDisplayed(),"Spam Guard label is not present");
+		softassert.assertTrue(share_dni_label.isDisplayed(),"Share DNI label is not present");
+		softassert.assertTrue(feature_settings_save_button.isDisplayed(),"Feature settings save button is not dipslayed");
+		softassert.assertTrue(feature_settings_save_button.isEnabled(),"Feature settings save button is not enabled");
+		softassert.assertTrue(feature_settings_reset_button.isDisplayed(),"Feature settings reset button is not dipslayed");
+		softassert.assertTrue(feature_settings_reset_button.isEnabled(),"Feature settings reset button is not emabled");
 	}
 	
 	//to get checkbox of required custom source
