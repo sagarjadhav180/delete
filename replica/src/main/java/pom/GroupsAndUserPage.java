@@ -115,7 +115,7 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement whisper_checkbox_label;
 	
 	@FindBy(xpath="(//div[contains(text(),'Play a voice prompt')]//parent::div//following-sibling::div//md-checkbox)[2]")
-	private WebElement whisper_checkbox;
+	private WebElement whisper_checkbox; 
 
 	@FindBy(xpath="(//label[contains(text(),'Activate Voicemail?')]//parent::div//following-sibling::div//md-checkbox)[1]")
 	private WebElement activate_voicemail_checkbox;
