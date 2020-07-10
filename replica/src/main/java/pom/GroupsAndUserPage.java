@@ -209,17 +209,6 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//select[@name='postIVRType']")
 	private WebElement instant_insights_dropdown;
 
-	
-	//09/07/2020 --- Please update Xpath....using the default one for now
-	
-	@FindBy(xpath = "//*[@id=\"ouForm2\"]/div/accordion/accordion-group/div/div[2]/div[2]/div/div[3]/div[2]/md-checkbox/div[1]/div")
-	private WebElement instantinsignts_Checkbox;
-	
-	
-	
-	//----End of Temporary Xpath section-----
-
-	
 	@FindBy(xpath="(//label[text()='Voice prompt for Call outcome']//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement voice_prompt_for_call_outcome_textbox;	
 
@@ -702,18 +691,21 @@ public class GroupsAndUserPage extends TestBase {
 		
 		expandSection(Constants.GroupsAndUser.feature_settings);
 		
-		//CA
+		//CA 
 		softassert.assertTrue(CA_label.isDisplayed(),"CA label is not present");
 		softassert.assertTrue(CA_toggle.isDisplayed(),"CA toggle is not present");
 		softassert.assertTrue(CA_toggle.isEnabled(),"CA toggle is not clickable");
+	
 		//Spam guard
 		softassert.assertTrue(spamGuard_label.isDisplayed(),"Spam Guard label is not present");
 		softassert.assertTrue(spamGuard_toggle.isDisplayed(),"Spam Guard toggle is not present");
 		softassert.assertTrue(spamGuard_toggle.isEnabled(),"Spam Guard toggle is not clickable");
+		
 		//Share DNI
 		softassert.assertTrue(share_dni_label.isDisplayed(),"Share DNI label is not present");
 		softassert.assertTrue(shareDNI_toggle.isDisplayed(),"Share DNI toggle is not present");
 		softassert.assertTrue(shareDNI_toggle.isEnabled(),"Share DNI toggle is not clickable");
+		
 		//Feature Settings buttons
 		softassert.assertTrue(feature_settings_save_button.isDisplayed(),"Feature settings save button is not dipslayed");
 		softassert.assertTrue(feature_settings_save_button.isEnabled(),"Feature settings save button is not enabled");
@@ -723,18 +715,67 @@ public class GroupsAndUserPage extends TestBase {
 		softassert.assertAll();
 	}
 	
-	public void tnSettingsFormValidations(String textbox) {
+	 // Tracking Number Setting UI Validation
+    
+		public void TNSettingsUI(){
+			
+			for (int i=0; i<tn_settings_labels.size(); i++) {
+				
+				for(int j=0; j<expected_tn_settings_labels.length; j++) {
+					
+	    			if(tn_settings_labels.get(i).getText().equals(expected_tn_settings_labels[j])){
+	        			softassert.assertTrue(tn_settings_labels.get(i).getText().equals(expected_tn_settings_labels[j]),expected_tn_settings_labels[j] +" is not present"); 
+				}
+				
+				}
+			}
+			
+			// TNSetting Page Controls validation
+			
+			softassert.assertTrue(call_value_textbox.isDisplayed(),"call value textbox is not present");
+			softassert.assertTrue(repeat_interval_textbox.isDisplayed(),"Repeat Interval textbox is not present");
+			softassert.assertTrue(activate_voicemail_checkbox.isDisplayed(),"Activated Voicemail checkbox is not present");
+			softassert.assertTrue(voicemail_dropdown.isDisplayed(), "Voicemail dropdown is not present");
+			softassert.assertTrue(overflow_dropdown.isDisplayed(), "Overflow dropdown is not present");
+			softassert.assertTrue(configure_voicemail_greetings_textbox.isDisplayed(), "Configure Voicemail Greeting textbox is not present");
+			softassert.assertTrue(record_call_checkbox.isDisplayed(),"Record Call checkbox is not present");
+			softassert.assertTrue(play_voice_prompt_checkbox.isDisplayed(),"Play a Voice prompt checkbox is not present");
+			softassert.assertTrue(play_whisper_message_checkbox.isDisplayed(),"Play whishper message before connecting checkbox is not present");
+			softassert.assertTrue(ring_to_number_textbox.isDisplayed(),"Ring-to Phone Number textbox is not present");
+			
+			// TNSettings--DYNAMIC NUMBER section control validation
+			
+			softassert.assertTrue(DNI_checkbox_label.isDisplayed(),"Dynamic Number checkbox is not present");
+			softassert.assertTrue(hostDomain_textbox.isDisplayed(),"Host Domain textbox is not present");
+			softassert.assertTrue(reffering_website_dropdown.isDisplayed(),"Referring Website dropdown is not present");
+			softassert.assertTrue(dni_type_dropdown.isDisplayed(),"DNI Type dropdown is not present");
+			softassert.assertTrue(htmlclass_textbox.isDisplayed(),"HTML Class textbox is not present");
+
+			// TNSettings--Instant Insights section control validation
+			
+			softassert.assertTrue(instant_insights_checkbox.isDisplayed(),"Instant Insights checkbox is not present");	
+			//softassert.assertTrue(.call.isDisplayed(),"Instant Insights checkbox is not present");	
+			softassert.assertTrue(voice_prompt_for_call_outcome_textbox.isDisplayed(),"Voice Prompt for Call Outcome textbox is not present");	
+			softassert.assertTrue(voice_prompt_for_call_outcome_addfile_button.isDisplayed(),"Voice Prompt for Call Outcome Add File Button is not present");	
+			softassert.assertTrue(voice_prompt_for_call_outcome_play_button.isDisplayed(),"Voice Prompt for Call Outcome play button is not present");	
+			softassert.assertTrue(sale_amount_voice_prompt_textbox.isDisplayed(),"Sale Amount Voice Prompt textbox is not present");
+			softassert.assertTrue(sale_amount_voice_prompt_addfile_button.isDisplayed(),"Sale Amount Voice Prompt Add File button is not present");	
+			softassert.assertTrue(sale_amount_voice_prompt_play_button.isDisplayed(),"Sale Amount Voice Prompt play button is not present");
+			
+			// TNSetting Save & Reset Button Controls
+			
+			softassert.assertTrue(tracking_number_settings_details_save_Button.isDisplayed(),"Save button is not present");	
+			softassert.assertTrue(tracking_number_settings_details_reset_Button.isDisplayed(),"Reset button is not present");	
+
+			softassert.assertAll();
+		}
+	
+		//DNI and Instant Insights section form validation
+	    public void dniAndIntantInsightsFormValidations(String section_name) {
 		
 		expandSection(Constants.GroupsAndUser.tn_settings);
 		
-		if(textbox.equals("ring_to_number_textbox")) {
-			ring_to_number_textbox.clear();
-			ring_to_number_textbox.sendKeys("22");
-			wait.until(ExpectedConditions.visibilityOf(tn_settings_alert));
-			softassert.assertTrue(tn_settings_alert.isDisplayed(),"Appropriaten alert is not displayed foir invalid rin to number");
-		}
-		
-		else if (textbox.equals("dni_section")) {
+		if (section_name.equals("dni_section")) {
 			
 			if(!DNI_checkbox.isSelected()) {
 				
@@ -746,7 +787,7 @@ public class GroupsAndUserPage extends TestBase {
 			}
 		}
 		
-		else if (textbox.equals("instant_insights_section")) {
+		else if (section_name.equals("instant_insights_section")) {
 			
 			if(!instant_insights_checkbox.isSelected()) {
 				
@@ -760,11 +801,15 @@ public class GroupsAndUserPage extends TestBase {
 				
 			}
 		}
-		
-		
+				
+	}
+	    
+	//TN settings form validation
+	public void tnSettingsFormValidation(String textbox) {
 		
 	}
-	
+
+	    
 	//to get checkbox of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
 		
@@ -837,62 +882,7 @@ public class GroupsAndUserPage extends TestBase {
 		}
 	}
  
-    // Tracking Number Setting UI Validation
-    
-	public void TNSettingsUI(){
-		
-		for (int i=0; i<tn_settings_labels.size(); i++) {
-			
-			for(int j=0; j<expected_tn_settings_labels.length; j++) {
-				
-    			if(tn_settings_labels.get(i).getText().equals(expected_tn_settings_labels[j])){
-        			softassert.assertTrue(tn_settings_labels.get(i).getText().equals(expected_tn_settings_labels[j])); 
-			}
-			
-			}
-		}
-		
-		softassert.assertAll();
-		
-		
-		// TNSetting Page Controls validation
-		
-		softassert.assertTrue(call_value_textbox.isDisplayed(),"call value textbox is not present");
-		softassert.assertTrue(repeat_interval_textbox.isDisplayed(),"Repeat Interval textbox is not present");
-		softassert.assertTrue(activate_voicemail_checkbox.isDisplayed(),"Activated Voicemail checkbox is not present");
-		softassert.assertTrue(voicemail_dropdown.isDisplayed(), "Voicemail dropdown is not present");
-		softassert.assertTrue(overflow_dropdown.isDisplayed(), "Overflow dropdown is not present");
-		softassert.assertTrue(configure_voicemail_greetings_textbox.isDisplayed(), "Configure Voicemail Greeting textbox is not present");
-		softassert.assertTrue(record_call_checkbox.isDisplayed(),"Record Call checkbox is not present");
-		softassert.assertTrue(play_voice_prompt_checkbox.isDisplayed(),"Play a Voice prompt checkbox is not present");
-		softassert.assertTrue(play_whisper_message_checkbox.isDisplayed(),"Play whishper message before connecting checkbox is not present");
-		softassert.assertTrue(ring_to_number_textbox.isDisplayed(),"Ring-to Phone Number textbox is not present");
-		
-		// TNSettings--DYNAMIC NUMBER section control validation
-		
-		softassert.assertTrue(DNI_checkbox_label.isDisplayed(),"Dynamic Number checkbox is not present");
-		softassert.assertTrue(hostDomain_textbox.isDisplayed(),"Host Domain textbox is not present");
-		softassert.assertTrue(reffering_website_dropdown.isDisplayed(),"Referring Website dropdown is not present");
-		softassert.assertTrue(dni_type_dropdown.isDisplayed(),"DNI Type dropdown is not present");
-		softassert.assertTrue(htmlclass_textbox.isDisplayed(),"HTML Class textbox is not present");
-
-		// TNSettings--Instant Insights section control validation
-		
-		softassert.assertTrue(instantinsignts_Checkbox.isDisplayed(),"Instant Insights checkbox is not present");	
-		//softassert.assertTrue(.call.isDisplayed(),"Instant Insights checkbox is not present");	
-		softassert.assertTrue(voice_prompt_for_call_outcome_textbox.isDisplayed(),"Voice Prompt for Call Outcome textbox is not present");	
-		softassert.assertTrue(voice_prompt_for_call_outcome_addfile_button.isDisplayed(),"Voice Prompt for Call Outcome Add File Button is not present");	
-		softassert.assertTrue(voice_prompt_for_call_outcome_play_button.isDisplayed(),"Voice Prompt for Call Outcome play button is not present");	
-		softassert.assertTrue(sale_amount_voice_prompt_textbox.isDisplayed(),"Sale Amount Voice Prompt textbox is not present");
-		softassert.assertTrue(sale_amount_voice_prompt_addfile_button.isDisplayed(),"Sale Amount Voice Prompt Add File button is not present");	
-		softassert.assertTrue(sale_amount_voice_prompt_play_button.isDisplayed(),"Sale Amount Voice Prompt play button is not present");
-		
-		// TNSetting Save & Reset Button Controls
-		
-		softassert.assertTrue(tracking_number_settings_details_save_Button.isDisplayed(),"Save button is not present");	
-		softassert.assertTrue(tracking_number_settings_details_reset_Button.isDisplayed(),"Reset button is not present");	
-
-	}
+   
     
     public void createGroup(String groupName) throws InterruptedException{
     	Util.scrollFunction(add_subgroup_button);
