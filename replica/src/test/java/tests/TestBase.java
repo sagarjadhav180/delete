@@ -11,7 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.SessionId;
@@ -104,7 +106,7 @@ public class TestBase
 		String sc = null ;
 		if(browser.contains("chrome")){
 
-			System.setProperty("webdriver.chrome.driver",".//phantomjs");
+			System.setProperty("webdriver.chrome.driver",".//chromedriver");
 		    driver=new ChromeDriver();
 
 		    
@@ -122,6 +124,15 @@ public class TestBase
 			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 		    
 		}
+		 else if (browser.equals("headless")) {
+			
+			 String chromeDriverPath = ".//chromedriver" ;
+			 System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+			 ChromeOptions options = new ChromeOptions();
+			 options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
+			 driver = new ChromeDriver(options);
+			 
+			}
 
 		wait= new WebDriverWait(driver,60);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -129,7 +140,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 	    driver.get(url_to_hit);
-	    TestData.createData();			    
+//	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
 	}
 
