@@ -181,7 +181,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="//label[text()='DNI Type']//parent::*//select")
 	private WebElement dni_type_dropdown;
-	String[] dni_types={"URL","Source"};
+	String[] expected_dni_types={"URL","Source"};
 	
 	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
 	private WebElement custom_parameters;
@@ -205,10 +205,11 @@ public class GroupsAndUserPage extends TestBase {
 	//Instant Insights--------------------------------------------------------------------------------------------------------
 	@FindBy(xpath="//label[contains(text(),'Instant Insights')]/..//following-sibling::div//md-checkbox")
 	private WebElement instant_insights_checkbox;
-	
+
 	@FindBy(xpath="//select[@name='postIVRType']")
 	private WebElement instant_insights_dropdown;
-
+	String[] expected_instant_insights_dropdown= {"Call Outcome (Conversion type)","Agent ID","Call Outcome and Agent ID"};
+	
 	@FindBy(xpath="(//label[text()='Voice prompt for Call outcome']//parent::*//following-sibling::div//textarea)[1]")
 	private WebElement voice_prompt_for_call_outcome_textbox;	
 
@@ -750,11 +751,60 @@ public class GroupsAndUserPage extends TestBase {
 			softassert.assertTrue(reffering_website_dropdown.isDisplayed(),"Referring Website dropdown is not present");
 			softassert.assertTrue(dni_type_dropdown.isDisplayed(),"DNI Type dropdown is not present");
 			softassert.assertTrue(htmlclass_textbox.isDisplayed(),"HTML Class textbox is not present");
-
+            
+			//DNI Reffering Website dropdown
+			Select select=new Select(reffering_website_dropdown);
+			for(int j=0;j<select.getOptions().size();j++) {
+				
+				for(int k=0;k<expected_reffering_website_dropdown.length;k++) {
+					if(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j])) {
+						softassert.assertTrue(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j]),expected_reffering_website_dropdown[j]+" is not present");
+					}
+				}
+			}
+			
+			//DNI type dropdown
+			Select select1=new Select(dni_type_dropdown);
+			for(int j=0;j<select1.getOptions().size();j++) {
+				
+				for(int k=0;k<expected_dni_types.length;k++) {
+					if(select1.getOptions().get(j).equals(expected_dni_types[j])) {
+						softassert.assertTrue(select1.getOptions().get(j).equals(expected_dni_types[j]),expected_dni_types[j]+" is not present");
+					}
+				}
+			}
+			
+			//DNI Custom Parameters popup
+			if(!DNI_checkbox.isSelected()) {
+				DNI_checkbox.click();
+			}
+				custom_parameters.click();
+				
+				driver.switchTo().activeElement();
+				softassert.assertTrue(dni_custom_parameters_label.isDisplayed(),"DNI custom parameters label");
+				softassert.assertTrue(dni_custom_parameters_note.isDisplayed(),"DNI custom parameters note");
+				softassert.assertTrue(dni_custom_parameters_textbox.isDisplayed(),"DNI custom parameters textbox");
+				softassert.assertTrue(dni_custom_parameters_save_button.isDisplayed(),"DNI custom parameters Save button");
+				softassert.assertTrue(dni_custom_parameters_cancel_button.isDisplayed(),"DNI custom parameters Cancel button");
+				dni_custom_parameters_cancel_button.click();
+				
+			if(DNI_checkbox.isSelected()) {
+			   DNI_checkbox.click();
+			}
+			
 			// TNSettings--Instant Insights section control validation
 			
-			softassert.assertTrue(instant_insights_checkbox.isDisplayed(),"Instant Insights checkbox is not present");	
-			//softassert.assertTrue(.call.isDisplayed(),"Instant Insights checkbox is not present");	
+			Select select2=new Select(instant_insights_dropdown);
+			for(int l=0;l<select2.getOptions().size();l++) {
+				
+				for(int m=0;m<expected_instant_insights_dropdown.length;m++) {
+					if(select2.getOptions().get(l).equals(expected_instant_insights_dropdown[m])) {
+						softassert.assertTrue(select2.getOptions().get(l).equals(expected_instant_insights_dropdown[m]),expected_instant_insights_dropdown[m]+" is not present");
+					}
+				}
+			}
+			
+			softassert.assertTrue(instant_insights_checkbox.isDisplayed(),"Instant Insights checkbox is not present");			
 			softassert.assertTrue(voice_prompt_for_call_outcome_textbox.isDisplayed(),"Voice Prompt for Call Outcome textbox is not present");	
 			softassert.assertTrue(voice_prompt_for_call_outcome_addfile_button.isDisplayed(),"Voice Prompt for Call Outcome Add File Button is not present");	
 			softassert.assertTrue(voice_prompt_for_call_outcome_play_button.isDisplayed(),"Voice Prompt for Call Outcome play button is not present");	
@@ -806,6 +856,7 @@ public class GroupsAndUserPage extends TestBase {
 	    
 	//TN settings form validation
 	public void tnSettingsFormValidation(String textbox) {
+
 		
 	}
 
