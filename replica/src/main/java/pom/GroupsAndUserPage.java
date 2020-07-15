@@ -247,6 +247,9 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='btn btn-primary'][contains(text(),'Save')]")
 	private WebElement tracking_number_settings_details_save_Button;	
 
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement tn_settings_success_message;
+	
 	@FindBy(xpath="//form[@id='ouForm2']//div//button[@class='reset btn'][contains(text(),'Reset')]")
 	private WebElement tracking_number_settings_details_reset_Button;
 	
@@ -581,52 +584,76 @@ public class GroupsAndUserPage extends TestBase {
 		PageFactory.initElements(driver, this);
 	}
 	
+	//Groups And User Header Label verification
     public void groupsAndUserHeaderLabel(){
 		
 		wait.until(ExpectedConditions.visibilityOf(groupsAndUserPage_label));
+		
+		logger.log(LogStatus.INFO, "Verifying if Groups and User page Label is displayed");
 		Assert.assertTrue(groupsAndUserPage_label.isDisplayed(),"Groups and User page Label is not displayed or locator changed");
 	}
 	
+    //Export Groups And User Button verification
     public void exportGroupsAndUserButton(){
 		
 		wait.until(ExpectedConditions.visibilityOf(exportGroupsUsers_button));
+
+		logger.log(LogStatus.INFO, "Verifying if Export Groups and User button is displayed");
 		softassert.assertTrue(exportGroupsUsers_button.isDisplayed(),"Export Groups and User button is not displayed or locator changed");
+
+		logger.log(LogStatus.INFO, "Verifying if Export Groups and User button is enabled");
 		softassert.assertTrue(exportGroupsUsers_button.isEnabled(),"Export Groups and User button is not clickable");
 		
 		softassert.assertAll();
 	}
-    
+
+    //Strips verification
     public void Strip(String stripName){
     	
     	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
 	
     	wait.until(ExpectedConditions.visibilityOf(strip));
-		Assert.assertTrue(strip.isDisplayed(), stripName+"is not displayed or locator changed");
+    	
+		logger.log(LogStatus.INFO, "Verifying if "+stripName+"is displayed");
+    	Assert.assertTrue(strip.isDisplayed(), stripName+"is not displayed or locator changed");
     }
-	   
+
+    //Group Details UI verification
     public void groupDetailsUI(){
     	
 		expandSection(Constants.GroupsAndUser.group_details);    	
     	
+		
     	for(int i=0;i<group_details_labels.size();i++){
     		
     		for(int j=0;j<expected_groupDetailsLabels.length;j++){
     			
     			if(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j])){
-        			softassert.assertTrue(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j]));    				
-    			}
-    
-    		}
-    				
+
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_groupDetailsLabels[j]+" is displayed");
+    				softassert.assertTrue(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j]),expected_groupDetailsLabels[j]+" is not displayed");    				
+    			}    
+    		}	
     	}
     	
+		logger.log(LogStatus.INFO, "Verifying if groupName textbox is displayed");
     	softassert.assertTrue(groupName_textbox.isDisplayed(),"groupName textbox is not displayed");
+
+		logger.log(LogStatus.INFO, "Verifying if external ID textbox is displayed");
     	softassert.assertTrue(externalID_textbox.isDisplayed(),"external ID textbox is not displayed");    	
-    	softassert.assertTrue(phone_textbox.isDisplayed(),"phone textbox is not displayed");    	    	
+
+		logger.log(LogStatus.INFO, "Verifying if Phone textbox is displayed");
+    	softassert.assertTrue(phone_textbox.isDisplayed(),"Phone textbox is not displayed");    	    	
+
+		logger.log(LogStatus.INFO, "Verifying if City textbox is displayed");
     	softassert.assertTrue(city_textbox.isDisplayed(),"city textbox is not displayed");
+
+		logger.log(LogStatus.INFO, "Verifying if Zip textbox is displayed");
     	softassert.assertTrue(zip_textbox.isDisplayed(),"zip textbox is not displayed");
     	
-    	softassert.assertTrue(industry_dropdown.isDisplayed(),"industry dropdown is not displayed");
+		logger.log(LogStatus.INFO, "Verifying if Industry dropdown is displayed");
+    	softassert.assertTrue(industry_dropdown.isDisplayed(),"Industry dropdown is not displayed");
+
     	Select select=new Select(industry_dropdown);
     	
     	for(int i=0;i<select.getOptions().size();i++){
@@ -634,26 +661,31 @@ public class GroupsAndUserPage extends TestBase {
     		for(int j=0;j<expected_industry_dropdown.length;j++){
     			
     			if(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j])){
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_industry_dropdown[j]+" is present");
     				softassert.assertTrue(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j]),expected_industry_dropdown[j]+" is not present");
     			}	
     		}
     	}
 
-    	softassert.assertTrue(state_dropdown.isDisplayed(),"state dropdown is not displayed");
+		logger.log(LogStatus.INFO, "Verifying if State dropdown is displayed");
+    	softassert.assertTrue(state_dropdown.isDisplayed(),"State dropdown is not displayed");
+
     	Select select1=new Select(state_dropdown);
     	
     	for(int i=0;i<select1.getOptions().size();i++){
     		
     		for(int j=0;j<expected_states.length;j++){
     			if(select1.getOptions().get(i).getText().equals(expected_states[j])){
-    		    	softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_states[j]),expected_states[j]+" is not present");    				
+    				logger.log(LogStatus.INFO, "Verifying if "+expected_states[j]+" is present");
+    				softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_states[j]),expected_states[j]+" is not present");    				
     			}
     		}
     	}
     	
     	softassert.assertAll();
     }
-	
+
+    //Group Details Form Validation    
 	public void groupDetailsFormValidation(String validation_textbox){
 		
 		expandSection(Constants.GroupsAndUser.group_details);
@@ -662,6 +694,8 @@ public class GroupsAndUserPage extends TestBase {
 			String group = groupName_textbox.getAttribute("value");
 			groupName_textbox.clear();
 			saveGroupDetails_button.click();
+	
+			logger.log(LogStatus.INFO, "Verifying if Save Group Details alert is displayed");
 			Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for empty group name not displayed");
 			groupName_textbox.sendKeys(group);	
 		}
@@ -669,12 +703,15 @@ public class GroupsAndUserPage extends TestBase {
 			phone_textbox.clear();
 			phone_textbox.sendKeys("22");
 			saveGroupDetails_button.click();
+
+			logger.log(LogStatus.INFO, "Verifying if Save Group Details alert is displayed");
 			Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
 			phone_textbox.clear();
 		}
 		
 	}
     
+    //Group Details Updattion
 	public void groupDetailsUpdate(){
 		
 		expandSection(Constants.GroupsAndUser.group_details);
@@ -686,30 +723,37 @@ public class GroupsAndUserPage extends TestBase {
 		phone_textbox.sendKeys("8018786943");
 		saveGroupDetails_button.click();
 		wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));
+		
+		logger.log(LogStatus.INFO, "Verifying if Update group Details success message is displayed");
 		Assert.assertTrue(update_groupDetails_success_message.isDisplayed(),"group details not updated successfully");
 		
 	}
 
+    //Feature Settings UI Verification
 	public void featureSettingsUI(){
 		
 		expandSection(Constants.GroupsAndUser.feature_settings);
 		
 		//CA 
+		logger.log(LogStatus.INFO, "Verifying UI of Call Analytics section");
 		softassert.assertTrue(CA_label.isDisplayed(),"CA label is not present");
 		softassert.assertTrue(CA_toggle.isDisplayed(),"CA toggle is not present");
 		softassert.assertTrue(CA_toggle.isEnabled(),"CA toggle is not clickable");
 	
 		//Spam guard
+		logger.log(LogStatus.INFO, "Verifying UI of Spam Guard section");
 		softassert.assertTrue(spamGuard_label.isDisplayed(),"Spam Guard label is not present");
 		softassert.assertTrue(spamGuard_toggle.isDisplayed(),"Spam Guard toggle is not present");
 		softassert.assertTrue(spamGuard_toggle.isEnabled(),"Spam Guard toggle is not clickable");
 		
 		//Share DNI
+		logger.log(LogStatus.INFO, "Verifying UI of DNI section");
 		softassert.assertTrue(share_dni_label.isDisplayed(),"Share DNI label is not present");
 		softassert.assertTrue(shareDNI_toggle.isDisplayed(),"Share DNI toggle is not present");
 		softassert.assertTrue(shareDNI_toggle.isEnabled(),"Share DNI toggle is not clickable");
 		
-		//Feature Settings buttons
+		//Feature Settings section
+		logger.log(LogStatus.INFO, "Verifying UI of Feature Settings section");		
 		softassert.assertTrue(feature_settings_save_button.isDisplayed(),"Feature settings save button is not dipslayed");
 		softassert.assertTrue(feature_settings_save_button.isEnabled(),"Feature settings save button is not enabled");
 		softassert.assertTrue(feature_settings_reset_button.isDisplayed(),"Feature settings reset button is not dipslayed");
@@ -717,16 +761,17 @@ public class GroupsAndUserPage extends TestBase {
         
 		softassert.assertAll();
 	}
+
 	
-	 // Tracking Number Setting UI Validation
-    
-		public void TNSettingsUI(){
+	//Tracking Number Setting UI Validation
+	public void TNSettingsUI(){
 			
 			for (int i=0; i<tn_settings_labels.size(); i++) {
 				
 				for(int j=0; j<expected_tn_settings_labels.length; j++) {
 					
 	    			if(tn_settings_labels.get(i).getText().equals(expected_tn_settings_labels[j])){
+	    				logger.log(LogStatus.INFO, "Verifying if "+expected_tn_settings_labels[j]+" is present");	    				
 	        			softassert.assertTrue(tn_settings_labels.get(i).getText().equals(expected_tn_settings_labels[j]),expected_tn_settings_labels[j] +" is not present"); 
 				}
 				
@@ -734,7 +779,7 @@ public class GroupsAndUserPage extends TestBase {
 			}
 			
 			// TNSetting Page Controls validation
-			
+			logger.log(LogStatus.INFO, "Verifying TNSetting Page Controls validation");
 			softassert.assertTrue(call_value_textbox.isDisplayed(),"call value textbox is not present");
 			softassert.assertTrue(repeat_interval_textbox.isDisplayed(),"Repeat Interval textbox is not present");
 			softassert.assertTrue(activate_voicemail_checkbox.isDisplayed(),"Activated Voicemail checkbox is not present");
@@ -747,7 +792,7 @@ public class GroupsAndUserPage extends TestBase {
 			softassert.assertTrue(ring_to_number_textbox.isDisplayed(),"Ring-to Phone Number textbox is not present");
 			
 			// TNSettings--DYNAMIC NUMBER section control validation
-			
+			logger.log(LogStatus.INFO, "Verifying TNSettings--DYNAMIC NUMBER section control validation");			
 			softassert.assertTrue(DNI_checkbox_label.isDisplayed(),"Dynamic Number checkbox is not present");
 			softassert.assertTrue(hostDomain_textbox.isDisplayed(),"Host Domain textbox is not present");
 			softassert.assertTrue(reffering_website_dropdown.isDisplayed(),"Referring Website dropdown is not present");
@@ -760,6 +805,7 @@ public class GroupsAndUserPage extends TestBase {
 				
 				for(int k=0;k<expected_reffering_website_dropdown.length;k++) {
 					if(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j])) {
+						logger.log(LogStatus.INFO, "Verifying if "+expected_reffering_website_dropdown[j]+" is present");			
 						softassert.assertTrue(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j]),expected_reffering_website_dropdown[j]+" is not present");
 					}
 				}
@@ -771,6 +817,7 @@ public class GroupsAndUserPage extends TestBase {
 				
 				for(int k=0;k<expected_dni_types.length;k++) {
 					if(select1.getOptions().get(j).equals(expected_dni_types[j])) {
+						logger.log(LogStatus.INFO, "Verifying if "+expected_dni_types[j]+" is not present");
 						softassert.assertTrue(select1.getOptions().get(j).equals(expected_dni_types[j]),expected_dni_types[j]+" is not present");
 					}
 				}
@@ -783,6 +830,7 @@ public class GroupsAndUserPage extends TestBase {
 				custom_parameters.click();
 				
 				driver.switchTo().activeElement();
+				logger.log(LogStatus.INFO, "Verifying UI of DNI Custom Parameters popup");
 				softassert.assertTrue(dni_custom_parameters_label.isDisplayed(),"DNI custom parameters label");
 				softassert.assertTrue(dni_custom_parameters_note.isDisplayed(),"DNI custom parameters note");
 				softassert.assertTrue(dni_custom_parameters_textbox.isDisplayed(),"DNI custom parameters textbox");
@@ -794,18 +842,20 @@ public class GroupsAndUserPage extends TestBase {
 			   DNI_checkbox.click();
 			}
 			
-			// TNSettings--Instant Insights section control validation
+			//TNSettings--Instant Insights section control validation
 			
 			Select select2=new Select(instant_insights_dropdown);
 			for(int l=0;l<select2.getOptions().size();l++) {
 				
 				for(int m=0;m<expected_instant_insights_dropdown.length;m++) {
 					if(select2.getOptions().get(l).equals(expected_instant_insights_dropdown[m])) {
+						logger.log(LogStatus.INFO, "Verifying if "+expected_instant_insights_dropdown[m]+" is present");
 						softassert.assertTrue(select2.getOptions().get(l).equals(expected_instant_insights_dropdown[m]),expected_instant_insights_dropdown[m]+" is not present");
 					}
 				}
 			}
 			
+			logger.log(LogStatus.INFO, "Verifying TNSettings--Instant Insights section control validation");			
 			softassert.assertTrue(instant_insights_checkbox.isDisplayed(),"Instant Insights checkbox is not present");			
 			softassert.assertTrue(voice_prompt_for_call_outcome_textbox.isDisplayed(),"Voice Prompt for Call Outcome textbox is not present");	
 			softassert.assertTrue(voice_prompt_for_call_outcome_addfile_button.isDisplayed(),"Voice Prompt for Call Outcome Add File Button is not present");	
@@ -814,16 +864,18 @@ public class GroupsAndUserPage extends TestBase {
 			softassert.assertTrue(sale_amount_voice_prompt_addfile_button.isDisplayed(),"Sale Amount Voice Prompt Add File button is not present");	
 			softassert.assertTrue(sale_amount_voice_prompt_play_button.isDisplayed(),"Sale Amount Voice Prompt play button is not present");
 			
-			// TNSetting Save & Reset Button Controls
-			
+			//TNSetting Save & Reset Button Controls
+
+			logger.log(LogStatus.INFO, "Verifying TNSetting Save & Reset Button Controls");
 			softassert.assertTrue(tracking_number_settings_details_save_Button.isDisplayed(),"Save button is not present");	
 			softassert.assertTrue(tracking_number_settings_details_reset_Button.isDisplayed(),"Reset button is not present");	
 
 			softassert.assertAll();
-		}
+   }
 	
-		//DNI and Instant Insights section form validation
-	    public void dniAndIntantInsightsFormValidations(String section_name) {
+		
+   //DNI and Instant Insights section form validation-------------
+   public void dniAndIntantInsightsFormValidations(String section_name) {
 		
 		expandSection(Constants.GroupsAndUser.tn_settings);
 		
@@ -831,9 +883,16 @@ public class GroupsAndUserPage extends TestBase {
 			
 			if(!DNI_checkbox.isSelected()) {
 				
+				logger.log(LogStatus.INFO, "Verifying HostDomain textbox is not enabled");
 				softassert.assertTrue(hostDomain_textbox.getAttribute("aria-diabled").equals("true"),"hostDomain_textbox is enabled");
+
+				logger.log(LogStatus.INFO, "Verifying Htmlclass textbox is not enabled");
 				softassert.assertTrue(htmlclass_textbox.getAttribute("aria-diabled").equals("true"),"htmlclass_textbox is enabled");				
+				
+				logger.log(LogStatus.INFO, "Verifying Reffering Website dropdown is not enabled");				
 				softassert.assertTrue(reffering_website_dropdown.getAttribute("aria-diabled").equals("true"),"reffering_website_dropdown is enabled");
+
+				logger.log(LogStatus.INFO, "Verifying DNI type dropdown is not enabled");
 				softassert.assertTrue(dni_type_dropdown.getAttribute("aria-diabled").equals("true"),"dni_type_dropdown is enabled");
 				
 			}
@@ -847,9 +906,12 @@ public class GroupsAndUserPage extends TestBase {
 				Select select = new Select(instant_insights_dropdown); 
 				select.deselectByVisibleText("Call Outcome (Conversion type)");
 				instant_insights_checkbox.click();				
-				
-				softassert.assertTrue(voice_prompt_for_call_outcome_textbox.getAttribute("aria-diabled").equals("true"),"hostDomain_textbox is enabled");
-				softassert.assertTrue(sale_amount_voice_prompt_textbox.getAttribute("aria-diabled").equals("true"),"htmlclass_textbox is enabled");				
+
+				logger.log(LogStatus.INFO, "Verifying Voice prompt for call outcome textbox is not enabled");
+				softassert.assertTrue(voice_prompt_for_call_outcome_textbox.getAttribute("aria-diabled").equals("true"),"Voice prompt for call outcome textbox is enabled");
+
+				logger.log(LogStatus.INFO, "Verifying if Sale amount voice prompt textbox is not enabled");
+				softassert.assertTrue(sale_amount_voice_prompt_textbox.getAttribute("aria-diabled").equals("true"),"Sale amount voice prompt textbox is enabled");				
 				
 			}
 		}
@@ -857,7 +919,7 @@ public class GroupsAndUserPage extends TestBase {
 		softassert.assertAll();
 	}
 	    
-	//TN settings form validation
+	//TN settings form validation-------------------
 	public void tnSettingsFormValidation(String fieldName) throws InterruptedException {
 
 		//Expanding TN settings section
@@ -918,7 +980,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 
 	    
-	//to get checkbox of required custom source
+	//to get check-box of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
 		
 		WebElement webelement = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+csa+"]/..//preceding-sibling::input"));
@@ -941,7 +1003,7 @@ public class GroupsAndUserPage extends TestBase {
 		return webelement;
 	}
 	
-  //to get action button of desired user
+    //to get action button of desired user
     public WebElement getUser(String user_email,String button_name){
 		
 		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
@@ -965,6 +1027,8 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(strip_state.getAttribute("aria-hidden").equals("true")){
 			strip.click();
+			
+	    	logger.log(LogStatus.INFO, "Verifying if "+section_name+" is expandable");			
 	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("false"),section_name+" is not expandable");
 		}
     }
@@ -986,6 +1050,8 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(strip_state.getAttribute("aria-hidden").equals("false")){
 			strip.click();
+			
+	    	logger.log(LogStatus.INFO, "Verifying if "+section_name+" is collapsible");			
 	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("true"),section_name+" is not collapsible");
 		}
 	}
@@ -1004,7 +1070,8 @@ public class GroupsAndUserPage extends TestBase {
     	select.selectByIndex(3);           
         save_subgroup.click();
     	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
-    	
+
+    	logger.log(LogStatus.INFO, "Verifying if Subgroup creation success message is displayed");
     	Assert.assertTrue(subgroup_creation_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
       	
     }
@@ -1025,10 +1092,13 @@ public class GroupsAndUserPage extends TestBase {
     	
     	save_user_button.click();
     	
+    	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
     	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
     }
+
     
     public void updateTNSettings() throws InterruptedException{
+    	
     	Util.scrollFunction(configure_voicemail_greetings_textbox);
     	Thread.sleep(5000);
     	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
@@ -1063,7 +1133,7 @@ public class GroupsAndUserPage extends TestBase {
     	
 		//DNI section
 		if(DNI_checkbox.isSelected()) {
-			DNI_checkbox.click();	
+		    DNI_checkbox.click();	
 		}
 		
 		//Ring to number
@@ -1071,8 +1141,12 @@ public class GroupsAndUserPage extends TestBase {
 		ring_to_number_textbox.sendKeys("1234567891");
 		
     	tracking_number_settings_details_save_Button.click();
+    	
+    	logger.log(LogStatus.INFO, "Verifying if TN settings updation success message is displayed");
+    	Assert.assertTrue(tn_settings_success_message.isDisplayed(),"TN settings updation success message is not displayed");
     }
     
+
     public void add10CallAction(){
     	
     	for(int i=1;i<=10;i++){
@@ -1107,14 +1181,16 @@ public class GroupsAndUserPage extends TestBase {
     			WebElement add_action_button = driver.findElement(By.xpath("(//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//following-sibling::div[@class='timeline-footer text-right']//a"));
         		add_action_button.click();
     		}
+
     		else if(i==10){
+				logger.log(LogStatus.INFO, "Verifing if Add action button is not dispalyed after adding 10 call actions");
     			List<WebElement> add_action_button = null;
     			try{
         			add_action_button = driver.findElements(By.xpath("(//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//following-sibling::div[@class='timeline-footer text-right']//a"));
-        			
+        		    Assert.fail("Add Button is dispalyed to add 11th call action");	
     			}
-    			catch(Exception e){
-    				Assert.assertTrue(add_action_button.isEmpty(),"Add Button is dispalyed to add 11th call action");
+    			catch(Exception e) {
+    				logger.log(LogStatus.PASS, "");
     			}
 
     		}
@@ -1131,6 +1207,7 @@ public class GroupsAndUserPage extends TestBase {
     		driver.switchTo().activeElement();
     		delete_call_action_ok_button.click();
             wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
+            logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
             softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
     	}
     	
