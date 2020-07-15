@@ -34,8 +34,9 @@ public class SendEmail extends TestBase {
 		// email address :- ""saurabhk@alohatechnology.com",
 		// "surajm@alohatechnology.com","ahrarh@alohatechnology.com" "
 		//"lsnow@convirza.com"
-		String[] to = {"ganesh.g@moentek.com","snehal.d@moentek.com"};
-		String[] cc = {"sagar.j@moentek.com","sagar.jadhav180@gmail.com","sagar.jadhav2343@gmail.com"};
+		//"rakesh.m@moentek.com"
+		String[] to = {"lsnow@convirza.com","ganesh.g@moentek.com","rakesh.m@moentek.com","amit.madhukar@moentek.com"};
+		String[] cc = {"sagar.j@moentek.com"};
 		String[] bcc = {};
 //
 //		String[] to = { "rahilaloha@gmail.com" };
@@ -80,9 +81,10 @@ public class SendEmail extends TestBase {
 				+ "<br> <b><span style='color:black;font-size:13px;font-family:sans-serif'> Number of Test Cases Skipped: </b>"
 				+ totalSkipedTestCases + " </span><br/><br/>" + "<img src=" + pie_chart_link + "/>" + "<br><br><br>"
 				+ "<br/><br/> <b style='font-size:13.5px;font-family:open sans-serif;padding-left:5px'>Thanks,</b><br/> <b style='font-size:13.5px;font-family:open sans-serif;padding-left:5px'>QA Team</b><br/></body> </html>";
-		SendEmail.sendMail("sagartest180@gmail.com", "sagar@123", "smtp.gmail.com", "465", "true", "true", true,
+		SendEmail.sendMail("cfauiautomation@gmail.com", "Moentek@123", "smtp.gmail.com", "465", "true", "true", true,
 				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "CFA App Automation Test Result", writer,
 				".//Extent.html", "Automation_Report.html", "");
+		
 	}
 
 	@Test

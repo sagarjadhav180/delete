@@ -50,13 +50,16 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath="//a[@class='pull-left']")
 	private static WebElement forgotPassword_link;	
 	
-	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'new ac')]")
-	private static WebElement userprofile_link;
+//	@FindBy(xpath="//span[@class='hidden-xs ng-binding' and contains(text(),'"+TestBase.getFirst_last_name()+"')]")
+//	private static WebElement userprofile_link;
+
+	@FindBy(xpath="//div[@class='navbar-header pull-left']")
+	private static WebElement logged_in_logo;
 	
-	@FindBy(xpath="//button[@id='pendo-close-guide-7438aaa2']")
+	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private static WebElement pendo_popup_close_button;
 	
-	@FindBy(xpath="//a[@class='dropdown-toggle username bootstro']//img")
+	@FindBy(xpath="//a[@class='dropdown-toggle username bootstro']//span[@class='hidden-xs ng-binding']")
 	private static WebElement profileButton;
 
 	@FindBy(xpath="//a[@class='text-right ng-scope']")
@@ -332,8 +335,8 @@ Properties prop=new Properties();
 //		driver.switchTo().activeElement();
 //		pendo_popup_close_button.click();
 		
-		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
-		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
+		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+		Assert.assertTrue(logged_in_logo.isDisplayed(),"incorrect username displayed");
 		profileButton.click();
 		Util.click(logoutLink);
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
@@ -344,15 +347,7 @@ Properties prop=new Properties();
  	}
     
 	public void validLogin() throws IOException{
-		
-		
-		Properties prop=new Properties();
-		
-		FileInputStream file=new FileInputStream(".//property");
-		prop.load(file);
-		String username=prop.getProperty("username");
-		String password=prop.getProperty("password");
-		
+			
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
 		
 		wait.until(ExpectedConditions.visibilityOf(password_Field));
@@ -360,23 +355,39 @@ Properties prop=new Properties();
 		wait.until(ExpectedConditions.visibilityOf(login_button));
 		
 		username_Field.clear();
-		username_Field.sendKeys(username);
+		username_Field.sendKeys(TestBase.getUser_id());
 		
 		password_Field.clear();
 		password_Field.sendKeys(password);
 		login_button.click();
-		
-//		driver.switchTo().activeElement();
-//		pendo_popup_close_button.click();
-		
-		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
-		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
+		try{
+			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+			Assert.assertTrue(logged_in_logo.isDisplayed(),"logo not displayed or locator changed"); 
+		}catch(Exception e){
+			driver.switchTo().activeElement();
+            Util.click(pendo_popup_close_button);			
+    		wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+    		Assert.assertTrue(logged_in_logo.isDisplayed(),"logo not displayed or locator changed");
+		}
+		HomePage hp=new HomePage(driver);
+        hp.left_hand_navigation_bar_click();
 		
 	}
 	
-	public void logOut(){
-		wait.until(ExpectedConditions.visibilityOf(userprofile_link));
-		Assert.assertTrue(userprofile_link.isDisplayed(),"incorrect username displayed");
+	public void logOut() {
+//		try{
+//			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+//			Assert.assertTrue(logged_in_logo.isDisplayed());	
+//		}
+//		catch(Exception e){
+//			driver.navigate().refresh();
+//		}
+//		finally{
+//			wait.until(ExpectedConditions.visibilityOf(logged_in_logo));
+//			Assert.assertTrue(logged_in_logo.isDisplayed());
+//		}
+
+		wait.until(ExpectedConditions.visibilityOf(profileButton));
 		profileButton.click();
 		Util.click(logoutLink);
 		wait.until(ExpectedConditions.visibilityOf(username_Field));

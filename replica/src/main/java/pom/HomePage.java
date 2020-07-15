@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -18,8 +19,10 @@ import com.relevantcodes.extentreports.LogStatus;
 import tests.TestBase;
 import tests.Util;
 
+@SuppressWarnings("unused")
 public class HomePage extends TestBase {
 	
+
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
 	private WebElement pendo_close_button;	
 
@@ -43,7 +46,6 @@ public class HomePage extends TestBase {
 	
 	
 	//dashboard 
-
 	@FindBy(xpath="//canvas[@ class='flot-overlay']")
 	private WebElement unique_calls_graph;
 
@@ -95,18 +97,22 @@ public class HomePage extends TestBase {
 	@FindBy(xpath="//a[contains(text(),'Edit')]")
 	private WebElement edit_profile_link;
 
+	@FindBy(xpath="//label[contains(text(),'Time Zone')]//parent::div//following-sibling::div//select")
+	private WebElement time_zone_listbox;
+	
+	String expected_time_zone="Eastern (ET)";
+
+	@FindBy(xpath="//div[@class='panel panel-midnightblue']//button[@class='btn btn-primary'][contains(text(),'Save')]")
+	private WebElement user_profile_save_button;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='User Profile updated successfully.']")
+	private WebElement user_profile_save_success_message;
+	
 	@FindBy(xpath="//a[contains(text(),'Support')]")
 	private WebElement support_link;
 
 	@FindBy(xpath="	//a[contains(text(),'Sign Out')]")
 	private WebElement logout_link;
-
-<<<<<<< HEAD
-	String org_unit_id="70045";
-=======
-	String org_unit_id="1633";
->>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
-
 	
 //	WebDriverWait wait;
 //	ExtentTest logger;
@@ -118,6 +124,15 @@ public class HomePage extends TestBase {
 		
 	}
 	
+	public void click_subLink(String linkToBeClicked){
+		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
+			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
+				left_hand_navigation_bar_sub_links.get(i).click();
+				break;
+			}
+		}
+	}
+	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
 		
 		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
@@ -126,17 +141,63 @@ public class HomePage extends TestBase {
 				
 				if(link.getText().contains("Campaign")){
 					link.click();
-//					try{
-//						driver.switchTo().activeElement();
-//					Util.click(pendo_close_button);
-//					Thread.sleep(3000);
-//					}
-//					catch(Exception e){}
-						
+
 					try{
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 					
 					}catch(Exception e){}
+//					driver.switchTo().activeElement();
+//					Util.click(pendo_close_button);
+//					Thread.sleep(1000);					
+				}
+				
+				
+				
+				
+				
+				else{
+				link.click();
+				try{
+//					driver.switchTo().activeElement();
+//					Util.click(pendo_close_button);
+//					Thread.sleep(2000);
+					}
+					catch(Exception e){}
+					
+				}
+
+
+			}
+		}
+		
+	}
+	
+    public void clickActionNewAccount(String linkToBeClicked) throws InterruptedException{
+		
+		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
+		WebElement link = left_hand_navigation_bar_links.get(i);
+			if(link.getText().equals(linkToBeClicked)){
+				
+				if(link.getText().contains("Campaign")){
+					link.click();
+
+					try{
+					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+					
+					}catch(Exception e){
+						
+						try{
+							driver.switchTo().activeElement();
+							Util.click(pendo_close_button);
+							Thread.sleep(1000);
+						}
+						catch(Exception c){
+							
+						}
+						
+						
+					}
+					
 					
 				}
 				
@@ -144,25 +205,17 @@ public class HomePage extends TestBase {
 				
 				else{
 				link.click();
+				try{
+					driver.switchTo().activeElement();
+					Util.click(pendo_close_button);
+					Thread.sleep(2000);
+					}
+					catch(Exception e){}
+					
 				}
 
-//				try{
-//					if(loading_wheel.isDisplayed()){
-//					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//					}
-//				}catch(Exception e){
-//				Thread.sleep(1000);	
-//				}
 			}
-		}
-		
-//		if(pendo_popup.isDisplayed()==true){
-//			driver.switchTo().activeElement();
-//			Util.click(pendo_close_button);
-//		}else{
-//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//			Thread.sleep(3000);	
-//		}
+		}	
 	}
 	
 	public void default_collpased_left_hand_navigation_bar_click(){
@@ -211,7 +264,8 @@ public class HomePage extends TestBase {
 		logger.log(LogStatus.INFO, "verifying if profile_link is displayed");
 		softassert.assertTrue(profile_link.isDisplayed(),"profile_link is not displayed or locator has been changed..");
 		
-		profile_link.click();
+		Util.click(profile_link);
+		
 		//To check if edit_profile_link is displayed
 		logger.log(LogStatus.INFO, "verifying if edit_profile_link is displayed");
 		softassert.assertTrue(edit_profile_link.isDisplayed(),"edit_profile_link is not displayed or locator has been changed..");
@@ -356,23 +410,40 @@ public class HomePage extends TestBase {
 	}
 	
 	
+	public void timeZoneSetting() throws InterruptedException{
+		
+		Util.click(profile_link);
+		Util.click(edit_profile_link);
+		
+		Select select=new Select(time_zone_listbox);
+		Thread.sleep(3000);
+		System.out.println(select.getFirstSelectedOption().getText());
+		
+		if(!(select.getFirstSelectedOption().getText().equalsIgnoreCase(expected_time_zone))){
+			select.selectByVisibleText(expected_time_zone);
+			wait.until(ExpectedConditions.visibilityOf(user_profile_save_button));
+			Util.click(user_profile_save_button);
+			wait.until(ExpectedConditions.visibilityOf(user_profile_save_success_message));
+			Assert.assertTrue(user_profile_save_success_message.isDisplayed(),"User profile settings not saved");
+
+		}
+	}
+	
 	//To check Tile count
 	public void tilesCount(){
 		
-		   String endDateToBeUsed = Util.getcurrentdate();
+		   String endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
+		   String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-8");
 
-		   
-		   String startDateToBeUsed = Util.getLastDate();
-
-		   
 		   System.out.println("startDateToBeUsed is "+startDateToBeUsed);
 		   System.out.println("endDateToBeUsed is "+endDateToBeUsed);
-		for(int i=0;i<dashboard_tiles_values.size();i++){
+		
+		   for(int i=0;i<dashboard_tiles_values.size();i++){
 			
 			//total calls count
 			String total_call_count_from_ui = dashboard_tiles_values.get(0).getText();
-			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			System.out.println("SELECT count(*) FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			System.out.println("total_count_from_ui is "+total_call_count_from_ui);
 			System.out.println("total_count_from_db "+total_call_count_from_db);
 			logger.log(LogStatus.INFO, "verifying total calls count..");
@@ -380,7 +451,7 @@ public class HomePage extends TestBase {
 			
 			//total unique calls count
 			String unique_calls_count_from_ui = dashboard_tiles_values.get(1).getText();
-			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
+			String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
 			System.out.println("unique_calls_count_from_ui is "+unique_calls_count_from_ui);
 			System.out.println("unique_calls_count_from_db "+unique_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying unique calls count..");
@@ -388,7 +459,7 @@ public class HomePage extends TestBase {
 
 			//total answered calls calls count
 			String answered_calls_count_from_ui = dashboard_tiles_values.get(2).getText();
-			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
+			String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
 			System.out.println("answered_calls_count_from_ui is "+answered_calls_count_from_ui);
 			System.out.println("answered_calls_count_from_db "+answered_calls_count_from_db);
 			logger.log(LogStatus.INFO, "verifying answered calls count..");
@@ -396,7 +467,7 @@ public class HomePage extends TestBase {
 
 			//AVG CALL DURATION
 			String avg_call_duration__from_ui = dashboard_tiles_values.get(3).getText();
-			String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+			String avg_call_duration_from_db = Util.readingFromDB("SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
 			if(avg_call_duration_from_db==null){
 				avg_call_duration_from_db="0";
 			}
@@ -406,20 +477,20 @@ public class HomePage extends TestBase {
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("softassert "+softassert);
 			System.out.println("avg_call_duration_from_db "+avg_call_duration_from_db);
-			System.out.println("avg_call_duration__from_ui "+avg_call_duration__from_ui.substring(5,6));
+			System.out.println("avg_call_duration__from_ui "+avg_call_duration__from_ui.substring(5,avg_call_duration__from_ui.indexOf('s')));
 			System.out.println();
 			
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			
-			softassert.assertTrue(avg_call_duration_from_db.equals(avg_call_duration__from_ui.substring(5,6)),"AVG CALL DURATION from ui is not matching with db");
+			softassert.assertTrue(avg_call_duration_from_db.equals(avg_call_duration__from_ui.substring(5,avg_call_duration__from_ui.indexOf('s'))),"AVG CALL DURATION from ui is not matching with db");
 			
 			//TOTAL LEADS
 			String total_leads__from_ui = dashboard_tiles_values.get(4).getText();
-			String total_leads_from_db = Util.readingFromDB("SELECT count(*) FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+org_unit_id+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
+			String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"' AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
 			System.out.println("total_leads__from_ui is "+total_leads__from_ui);
 			System.out.println("total_leads_from_db "+total_leads_from_db);
 			logger.log(LogStatus.INFO, "verifying total leads..");
-			if(total_leads_from_db==null){
+			if(total_leads_from_db==null || total_leads_from_db=="0"){
 			softassert.assertTrue("0".equals(total_leads__from_ui),"total_leads__from_ui is not matching with db");
 			}
 			else{
@@ -441,7 +512,7 @@ public class HomePage extends TestBase {
 			
 			//TOTAL CONVERSIONS
 			String total_conversion__from_ui = dashboard_tiles_values.get(6).getText();
-			String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+org_unit_id+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'') AND indicator_id='18'");
+			String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id="+TestBase.getOrg_unit_id()+" AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'') AND indicator_id='18'");
 			if(total_conversion_from_db==null){
 				total_conversion_from_db="0";
 			}
