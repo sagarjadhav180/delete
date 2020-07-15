@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import constants.Constants;
 import tests.TestBase;
 import tests.Util;
@@ -852,12 +854,67 @@ public class GroupsAndUserPage extends TestBase {
 			}
 		}
 				
+		softassert.assertAll();
 	}
 	    
 	//TN settings form validation
-	public void tnSettingsFormValidation(String textbox) {
+	public void tnSettingsFormValidation(String fieldName) throws InterruptedException {
 
+		//Expanding TN settings section
+        expandSection(Constants.GroupsAndUser.tn_settings);
+        
+        //Reseting all settings
+        updateTNSettings();
+        
+        //DNI section
+		if (fieldName.equals("dni_section")) {
+			
+			DNI_checkbox.click();
+			hostDomain_textbox.clear();
+			htmlclass_textbox.clear();
+		}
 		
+		//Instant Insights section
+		else if (fieldName.equals("instant_insights_section")) {
+			
+			instant_insights_checkbox.click();
+			voice_prompt_for_call_outcome_textbox.clear();
+			sale_amount_voice_prompt_textbox.clear();
+		}
+		
+		//Repeat Interval text-box
+		else if(fieldName.equals("repeat_interval_textbox")) {
+			
+			repeat_interval_textbox.clear();
+		}
+		
+		//Play Voice Prompt text-box
+		else if(fieldName.equals("play_voice_prompt_textbox")) {
+			play_voice_prompt_checkbox.click();
+			play_voice_prompt_textbox.clear();
+		}
+		
+		//Whisper message text-box
+		else if(fieldName.equals("play_whisper_message_before_connecting_textbox")) {
+			play_whisper_message_checkbox.click();
+			play_whisper_message_textbox.clear();
+		}
+		
+		//Ring to number text-box
+		else if(fieldName.equals("ring_to_phone_number_textbox")) {
+			
+			ring_to_number_textbox.clear();
+			ring_to_number_textbox.sendKeys("22");
+		}
+		
+		tracking_number_settings_details_save_Button.click();
+		wait.until(ExpectedConditions.invisibilityOf(tn_settings_alert));
+		
+		logger.log(LogStatus.INFO, "Verifying if alert is displayed for "+fieldName);
+		Assert.assertTrue(tn_settings_alert.isDisplayed(),"Appropriate alert is not displayed for "+fieldName);
+		
+		//Reseting all settings
+		updateTNSettings();
 	}
 
 	    
@@ -975,18 +1032,44 @@ public class GroupsAndUserPage extends TestBase {
     	Util.scrollFunction(configure_voicemail_greetings_textbox);
     	Thread.sleep(5000);
     	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
+    	
+    	//Activate voice mail check-box
+    	if(!(activate_voicemail_checkbox.getAttribute("aria-checked").equals("true"))){
+    		Util.click(activate_voicemail_checkbox);
+    	}
+    	
+    	//Record Call check-box
     	if(!(record_call_checkbox.getAttribute("aria-checked").equals("true"))){
     		Util.click(record_call_checkbox);
     	}
     	
+    	//Voice prompt check-box
     	if(voice_prompt_checkbox.getAttribute("aria-checked").equals("true")){
     		Util.click(voice_prompt_checkbox);
     	}
     	
+    	//Whisper check-box
     	if(whisper_checkbox.getAttribute("aria-checked").equals("true")){
     		Util.click(whisper_checkbox);
     	}
     	
+    	//Instant insights section
+    	if(!instant_insights_checkbox.isSelected()) {
+			instant_insights_checkbox.click();
+		}
+		Select select = new Select(instant_insights_dropdown); 
+		select.deselectByVisibleText("Call Outcome (Conversion type)");
+		instant_insights_checkbox.click();
+    	
+		//DNI section
+		if(DNI_checkbox.isSelected()) {
+			DNI_checkbox.click();	
+		}
+		
+		//Ring to number
+		ring_to_number_textbox.clear();
+		ring_to_number_textbox.sendKeys("1234567891");
+		
     	tracking_number_settings_details_save_Button.click();
     }
     
