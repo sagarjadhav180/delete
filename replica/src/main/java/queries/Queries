@@ -1,0 +1,293 @@
+-------------TestData--------------------------------------------------------------------
+//group
+SELECT * FROM org_unit 
+WHERE org_unit_name LIKE 'Automation Account' AND top_ou_id='70045' AND org_unit_status='active'
+
+
+//campaign
+SELECT * FROM campaign 
+WHERE campaign_name LIKE 'SJC-1' AND campaign_ou_id='70045' 
+
+//tracking number
+SELECT * FROM campaign_provisioned_route 
+WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_name LIKE 'SJC-1' AND campaign_ou_id='70045') AND provisioned_route_id IN 
+(SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active')
+
+//time zone
+SELECT timezone FROM ct_user_detail
+WHERE ct_user_id=(SELECT ct_user_id FROM ct_user WHERE username LIKE 'newac@yopmail.com')
+
+//Tracking number settings
+
+SELECT * FROM default_provisioned_route WHERE org_unit_id='70045'
+
+//geo location
+SELECT * FROM location 
+WHERE location_name='do_not_delete_location(automation)' AND org_unit_id='70045'
+
+//webhook
+SELECT * FROM webhook 
+WHERE org_unit_id='70045' AND webhook_name LIKE 'automation_webhook_do_not_delete'
+
+//user
+SELECT * FROM ct_user 
+WHERE username LIKE 'newac@yopmail.com'
+----------------------------------------------------------------------------------------
+---------------------------legacy scheduled report-----------------------------------------------------------------------------------
+SELECT * FROM schedule LIMIT 10
+
+SELECT * FROM report_sched WHERE org_unit_id='70045'AND report_name LIKE 'automation%'
+
+DELETE FROM report_sched WHERE org_unit_id='70045'AND report_name LIKE 'automation%'
+
+---------------------------------------------------------------------------------------
+
+------------------------------call logs-------------------------------------------------------------------
+
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//unique calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND repeat_call='false'
+
+//answered calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND disposition IN ('ANSWERED')
+
+//avg calls duration
+SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//total leads
+SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='51'
+
+//total conversion
+SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='18'
+
+//for call entry
+
+SELECT provisioned_route_id FROM campaign_provisioned_route 
+WHERE campaign_id='46'
+
+INSERT INTO call(provisioned_route_id,org_unit_id,disposition,duration,source,tracking,ring_to,repeat_call,
+call_started,location_route_id)
+VALUES('211','70045','ANSWERED','30','3852502145','1111111111','8018786943','false','2020-04-26 23:00','-1')
+
+INSERT INTO call_detail(call_id,bill_second,call_value,is_outbound,call_mine_status,cdr_source,call_ended,call_created,ring_to_name,channel_id,spam_call_checked,hunt_type,tracking_type,is_voicemail,is_dni_call,is_voicemail_checked,usage_component_id,is_premium,usage_type)
+VALUES ('135118','60','32','false','not mined','SP','2020-04-26 23:02','2020-04-26 23:00','test','2','false','rollover','SimpleRoute','true','false','true','21','false','LOCAL')
+
+DELETE FROM call
+WHERE call_id='135118'
+
+DELETE FROM call_detail
+WHERE call_id='135118' 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------Marketing dashboard-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//total leads
+SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='51'
+
+//total conversion
+SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59') AND indicator_id='18'
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------call back report--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//answered calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59' AND disposition IN ('ANSWERED')
+
+//avg call duration
+SELECT ROUND(AVG(duration)) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-17 23:59' AND '2020-04-24 23:59'
+
+//missed opportunity
+SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND call_started BETWEEN '2020-04-30 23:59' AND '2020-05-07 23:59') AND indicator_id='2065'
+
+//tagged call as call back
+SELECT COUNT(*) AS count FROM call_tag 
+WHERE tag_id='9' AND call_tag_created BETWEEN '2020-04-30 23:59' AND '2020-05-07 23:59'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------Tracking number settings looker---------------------------------------------------------------------
+
+//active campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+
+//inactive campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='inactive')
+
+//active tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN 
+(SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )
+
+//inactive tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')
+
+
+-----------------------------------------------------------------------------------------------------
+--------------------------IVR Keyperss Report-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+
+//ivr calls
+SELECT * FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time>'00:00:00'
+
+//avg time in menu
+SELECT (AVG(menu_time)) FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time>'00:00:00'
+
+//abandon calls
+SELECT * FROM call 
+WHERE call_id IN (SELECT call_id FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59'
+AND tracking IN (SELECT dnis FROM ce_call_flows WHERE routable_type LIKE 'IvrRoute2' )) AND menu_time>'00:00:00') AND ring_to='abandon'
+
+//instants insight call
+SELECT * FROM post_call_ivr_responses 
+WHERE call_id IN (SELECT call_id FROM call
+WHERE call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59' AND tracking IN (SELECT dnis FROM ce_call_flows 
+WHERE postcall_ivr_enabled=true) AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045'))
+
+//calls with agent id
+SELECT * FROM post_call_ivr_responses   
+WHERE call_id IN (SELECT call_id FROM call
+WHERE call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59' 
+AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')) 
+AND sales IS NULL AND lead IS NULL AND agent_id IS NOT NULL
+
+//calls with outcome
+SELECT * FROM post_call_ivr_responses    
+WHERE call_id IN (SELECT call_id FROM call
+WHERE call_started BETWEEN '2020-04-13 23:59' AND '2020-05-13 23:59' 
+AND org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')) 
+AND sales IS NOT NULL AND lead IS NOT NULL AND agent_id IS NULL
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------Tags Summary------------------------------------------------------------------------------------------------------------------------------------------------------
+//total calls
+SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-15 23:59' AND '2020-05-22 23:59'
+
+//tagged calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_id IN (SELECT call_id FROM call_tag 
+WHERE call_tag_created BETWEEN '2019-05-21 23:59' AND '2020-05-22 23:59')
+
+//tags used
+SELECT DISTINCT(tag_id) FROM call_tag 
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2019-05-22 23:59' AND '2020-05-22 23:59')
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------Webhook logs----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-19 23:59' AND '2020-05-26 23:59'
+
+//pre-call webhook sent
+SELECT * FROM v_webhook_logs 
+WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND log_date BETWEEN '2020-05-19 23:59' AND '2020-05-26 23:59' AND type LIKE 'Pre Call Webhook'
+
+//pre-call webhook sent
+SELECT * FROM v_webhook_logs 
+WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND log_date BETWEEN '2020-05-19 23:59' AND '2020-05-26 23:59' AND type LIKE 'Post Call Webhook'
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------call trends-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'
+
+//unique calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND repeat_call='false'
+
+//answered calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND disposition IN ('ANSWERED')
+
+//unanswered calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND disposition IN ('NO ANSWER')
+
+//avg call duration
+SELECT ROUND(AVG(duration)) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'
+
+//longest call
+SELECT MAX(duration) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'  
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------Analytics summary------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-29 23:59' AND '2020-06-05 23:59'
+
+//total analyzed calls
+SELECT * FROM call_detail
+WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-29 23:59' AND '2020-06-05 23:59') AND call_mine_status='mined'
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------account details---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//active campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+
+//inactive campaigns
+SELECT COUNT (DISTINCT(campaign_id)) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='inactive')
+
+//active tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN 
+(SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')
+AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active' )
+
+//inactive tracking numbers
+SELECT COUNT (provisioned_route_id) AS count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') AND campaign_status='active')AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='inactive')
+
+//total calls
+SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'
+
+//unique calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND repeat_call='false'
+
+//answered calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND disposition IN ('ANSWERED')
+
+//unanswered calls
+SELECT COUNT(*) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59' AND disposition IN ('NO ANSWER')
+
+//avg call duration
+SELECT ROUND(AVG(duration)) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045')
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'
+
+//longest call
+SELECT MAX(duration) AS count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='70045') 
+AND call_started BETWEEN '2020-05-22 23:59' AND '2020-05-29 23:59'  
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

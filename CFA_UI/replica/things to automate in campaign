@@ -1,0 +1,78 @@
+##campaign
+existing test cases
+
+1.go to campaign and tracking number page - UI verification
+2.campaign builder page - UI verification
+2.createCampaign with/without campaign external ID
+3.editTheCampaign
+4.DeleteTheCampaign
+5.createCampaignWithFutureStartDateAndNeverEndDate
+6.editCampaignWithFutureStartDateAndNeverEndDate
+7.deleteCampaignWithFutureStartDateAndNeverEndDate
+8.createCampaignWithFutureStartDateAndFutureEndDate
+9.editCampaignWithFutureStartDateAndFutureEndDate
+10.deleteCampaignWithFutureStartDateAndFutureEndDate
+11.createCampaignWithPastTime--negative scenario
+
+
+
+
+
+##Groups
+UI verification
+1.create company level group/location level group
+2.edit
+3.delete
+
+
+##user
+UI verification
+1.create 
+2.update
+3.delete
+
+##Tracking number
+UI verification
+1.create
+2.edit
+3.delete
+
+##Tags
+UI verification
+1.create tag
+2.delete tag
+3.verify after delete
+4.on call detail page
+5.on scorecard
+
+
+##GeoRoute
+1.UI verification
+2.create new geo route location and check if its available for use
+3.edit
+4.delete
+
+##Blacklist
+1.UI Verification
+2.add number
+3.remove number
+
+
+
+
+
+pending--
+web hook
+reports legacy and looker
+
+
+
+
+
+
+
+
+
+
+
+

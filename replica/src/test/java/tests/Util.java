@@ -2,7 +2,6 @@ package tests;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +16,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.*;
+
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
@@ -47,7 +46,7 @@ public class Util extends TestBase{
 	
 	static JsonNode rootNode;
 	static JavascriptExecutor jse = (JavascriptExecutor)driver;
-	static String dbUrl="jdbc:postgresql://stag-5-pg-1.convirza.com:5432/ct_stg";
+	static String dbUrl="jdbc:postgresql://"+TestBase.getEnv()+"-pg-1.convirza.com:5432/ct_stg";
 	static String username="moentekdbrw";
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;
@@ -206,34 +205,20 @@ public class Util extends TestBase{
 		return number;
 	}
 	
-	
-	public static String getcurrentdate(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+	public static String getDate(String Format,String days){
+		DateFormat dateFormat = new SimpleDateFormat(Format);
 		
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, -1);
+		cal.add(Calendar.DATE, Integer.valueOf(days));
 	    
 		Date todate1 = cal.getTime();
-	    String startdate = dateFormat.format(todate1);
+	    String date = dateFormat.format(todate1);
 
-	    System.out.println(startdate);
-	    return startdate;
-	}
-	
-	public static String getLastDate(){
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, -8);
-	    
-		Date todate1 = cal.getTime();
-	    String enddate = dateFormat.format(todate1);
-
-	    System.out.println(enddate);
-	    return enddate;
+	    System.out.println(date);
+	    return date;
 		
 	}
-	
 	
 	public static JavascriptExecutor getJavascriptExecutor(){
 		return jse;
@@ -247,9 +232,6 @@ public class Util extends TestBase{
 		DateFormat dateFormat = new SimpleDateFormat();
 		int currentDate = date.getDate();
 		return currentDate;
-		
-		
-		
 	}
 	
 //	public static void waitTillPageLoad(){

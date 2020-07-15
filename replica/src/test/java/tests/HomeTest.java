@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import pom.HomePage;
 import pom.LoginPage;
 
@@ -20,10 +21,9 @@ public class HomeTest extends TestBase
         LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("validLogin"); 
         logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-        logger.assignCategory("Login Suite");
+        logger.assignCategory(Constants.login_page_category);
         lp.validLogin();
         hp=new HomePage(driver);
-        hp.left_hand_navigation_bar_click();
 
          
 	}
@@ -42,7 +42,7 @@ public class HomeTest extends TestBase
 		hp=new HomePage(driver);
 		logger=extent.startTest("ui_verification");
 		logger.log(LogStatus.INFO, "verifying UI of the Home page..");
-		logger.assignCategory("Home page Suite");
+		logger.assignCategory(Constants.home_page_category);
 		hp.UIVerification();
 	} 
 	
@@ -51,19 +51,19 @@ public class HomeTest extends TestBase
 		hp=new HomePage(driver);
 		logger=extent.startTest("count_verification_UI");
 		logger.log(LogStatus.INFO, "verifying count displayed on UI..");
-		logger.assignCategory("Home page Suite");
+		logger.assignCategory(Constants.home_page_category);
 		hp.tilesCount();
 	}
 	
 	//loging out -tear down
-			@AfterClass
-			public void tearDown() throws IOException{
-		        LoginPage lp=new LoginPage(driver);
-		        logger=extent.startTest("LogOut"); 
-		        logger.log(LogStatus.INFO, "loggin out.. ");
-		        lp.logOut();
+	@AfterClass
+	public void logOut() throws IOException{
+		LoginPage lp=new LoginPage(driver);
+		logger=extent.startTest("LogOut"); 
+		logger.log(LogStatus.INFO, "loggin out.. ");
+		lp.logOut();
 		        		
-			}
+    }
 		
 		
 		

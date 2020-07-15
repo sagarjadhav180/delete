@@ -1,14 +1,12 @@
 package pom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,9 +22,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 {
 	
-	String campaign_ou_id_id="70045";
-	
-	@FindBy(xpath="//a[@class='btn btn-sm btn-default addcamp ng-scope']")
+	@FindBy(xpath="//a[@class='btn btn-sm btn-default addcamp ng-scope'][@aria-hidden='false']")
 	private static WebElement addCampaign_Button;
 	String addCampaign_Button_text="Add Campaign";
 
@@ -216,7 +212,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	int Expected_Column_Picker_options_count=32;
 	
-	@FindBy(xpath="//tbody[@ id='progressLoader']")
+	@FindBy(xpath="//div[@class='pageProgressLoader']")
 	private WebElement loading_wheel;	
 	
 	@FindBy(xpath="//button[@id='_pendo-close-guide_']")
@@ -239,21 +235,21 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 	
 	
-	public CampaignAndTrackingNumberPage(WebDriver driver,WebDriverWait wait1){
-		
+	public CampaignAndTrackingNumberPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
-        wait=wait1;
-		
-	}
+      }
 
 	
 	public void clickAction(String buttonName,String campaignToBeEdited) throws InterruptedException{
 		if(buttonName.contains("add")){
 				
-					wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-					Thread.sleep(2000);					
-					addCampaign_Button.click();
-					wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
+			
+			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
+			
+			Thread.sleep(2000);					
+					
+			Util.click(addCampaign_Button);
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
 				
 		}
 		
@@ -274,22 +270,29 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			
 		}
 		else if(buttonName.contains("update")){
-
-			WebElement edit = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
-			
+            Thread.sleep(30000);
+            WebElement edit = null;
+            if(topNextPagination_Button.isEnabled()){
+            	try{
+                    edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
+            	}
+            	catch(Exception e){
+            		topNextPagination_Button.click();
+                    edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
+            	}
+            }
+           
+            else{
+            	edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
+            }
+            
 			tests.Util.scrollFunction(edit);
-//			edit.click();
 			tests.Util.click(edit);
-//			try{
-//				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//			
-//			}catch(Exception e){
-//			Thread.sleep(1000);	
-//			}
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+
 		}
 		else if(buttonName.contains("expand")){
 			
-
 			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
 			
 			tests.Util.scrollFunction(expand_campaign);
@@ -311,9 +314,22 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		
 		else if(buttonName.contains("archive")){
 			
-	
-			WebElement archive = driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
-		
+						
+			WebElement archive = null;
+            if(topNextPagination_Button.isEnabled()){
+            	try{
+                    archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
+            	}
+            	catch(Exception e){
+            		topNextPagination_Button.click();
+                    archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
+            	}
+            }
+			
+            else{
+            	archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
+            }
+			
 			tests.Util.scrollFunction(archive);
 			tests.Util.click(archive);
 
@@ -418,22 +434,17 @@ public class CampaignAndTrackingNumberPage extends TestBase
  					System.out.println(Column_Picker_options_checkbox_tocheck.get(i));
                     Util.Action().moveToElement(Column_Picker_options_checkbox_tocheck.get(i)).click().perform();
 // 					break;
-                               
- 				}
+           	}
  				
+	      }    
 	    	
-	    	
-	    }
-
-           
 	    	i++; 
 //	    break;
 	    }
 
 		Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)");
 	    Util.click(Column_Picker_button);
-	    
-	    
+	   
 	}
 	
 
@@ -588,18 +599,13 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 
 	//verification of count in top pagination toolbox	
-<<<<<<< HEAD
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id="+campaign_ou_id_id+" AND campaign_status NOT IN ('deleted')" );
-=======
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id=1633 AND campaign_status NOT IN ('deleted')" );
->>>>>>> 23b5cb7c84ec35829a42815d6e86777026e6900e
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id='"+campaign_ou_id+"' AND campaign_status NOT IN ('deleted')" );
+
+
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
 	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
-	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
-	
-	logger.log(LogStatus.INFO, "verifying count of listed campaigns");
-	Assert1.assertEquals(dbCount, String.valueOf(countOfCamapign.size()),"count  of listed campaigns is mimatching with db count");
-	
+	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+		
 	//verification of bottom pagination toolbox
         if(countOfCamapign.size()>100){
 		Util.scrollFunction(bottomNextPagination_Button);
@@ -624,9 +630,22 @@ public class CampaignAndTrackingNumberPage extends TestBase
     	Assert1.assertTrue(topFirstPagination_count.isEnabled(),"topFirstPagination_count is not clickable");	
     	Assert1.assertTrue(topLastPagination_count.isEnabled(),"topLastPagination_count is not clickable");    	
 
-
+    	logger.log(LogStatus.INFO, "verifying count of listed campaigns");
+    	
+    	int final_count=countOfCamapign.size()+0;
+    	if(!(topNextPagination_Button.getAttribute("class").endsWith("disabled"))){
+    		Util.click(topNextPagination_Button);
+    		wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+    		final_count=final_count+countOfCamapign.size();
+    	}
+    	System.out.println("dbCount "+dbCount);
+    	System.out.println("final_count "+final_count);
+    	Assert1.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mismtching with db count");
     	
     Assert1.assertAll();
+    Util.scrollFunction(topPrevPagination_Button);
+    Util.click(topPrevPagination_Button);
+    wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 	
 	}
 	
@@ -682,24 +701,6 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 	 	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

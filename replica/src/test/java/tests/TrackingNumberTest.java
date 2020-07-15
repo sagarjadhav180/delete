@@ -1,74 +1,76 @@
 package tests;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Set;
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.json.JSONException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import constants.Constants;
 import pom.CampaignAndTrackingNumberPage;
 import pom.HomePage;
 import pom.LoginPage;
 import pom.TrackingNumberBuilderPage;
-import pom.campaignBuilderPage;
 import reservenumber.ReserveNumber;
 
 public class TrackingNumberTest extends TestBase{
 	
 	String tracking_number_name;
 	String updated_tracking_number_name;
-	int counter=0;
+	int counter_a=0;
+	int counter_b=0;
 	TrackingNumberBuilderPage tn;
+	CampaignAndTrackingNumberPage cp;
 	
-	//navigating to Campaign builder page
+	    //navigating to Campaign builder page
 		@BeforeClass
 		public void goToCampaignPage() throws IOException, InterruptedException{
 			
 			LoginPage lp=new LoginPage(driver);
 	        logger=extent.startTest("validLogin"); 
 	        logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
-	        logger.assignCategory("Login Suite");
+	        logger.assignCategory(Constants.login_page_category);
 	        lp.validLogin();
 	        HomePage hp=new HomePage(driver);
-	        hp.left_hand_navigation_bar_click();
-			
+	        
 			try {
-				hp.clickAction("Campaign & Tracking Number");
+				hp.clickAction(Constants.HomePage.campaign_tracking_number_page);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}		
 			
 		}
 	
 
-		  public TrackingNumberBuilderPage createInstance(){
+		  public CampaignAndTrackingNumberPage createInstanceCampaignAndTrackingNumberPage(){
                 
-			  if(counter==0){
+			  if(counter_b==0){
+			    cp=new CampaignAndTrackingNumberPage(driver);
+			    counter_b++;
+			  }
+			    return cp;		  
+		  }
+		  
+		  public TrackingNumberBuilderPage createInstance(){
+              
+			  if(counter_a==0){
 			    tn=new TrackingNumberBuilderPage(driver);
-			    counter++;
+			    counter_a++;
 			  }
 			    return tn;		  
 		  }
 		
 		
 	//Tracking number page UI verification
-	@Test(priority=0)
+	@Test(priority=1)
 	public void trakingNumberPageUIVerification() throws InterruptedException{
 	   logger=extent.startTest("Tracking number UI Verification..");
-       logger.assignCategory("Tracking number suite");
+       logger.assignCategory(Constants.tracking_number_category);
 					
-	   campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-	   CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-       cp.clickAction("update","SJC-1");
+	   cp=createInstanceCampaignAndTrackingNumberPage();	
+       cp.clickAction("update",campaignToBeEdited);
        tn=createInstance();
        tn.uiVerification();
 				    
@@ -76,14 +78,12 @@ public class TrackingNumberTest extends TestBase{
 		
 		
 	//create simple tracking number
-     	@Test(priority=1)
+     	@Test(priority=2)
 		public void simpleTrakingNumberCreation() throws InterruptedException{
-			logger=extent.startTest("Tracking number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger=extent.startTest("Simple Tracking number creation..");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -95,10 +95,10 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//edit simple tracking number
-		@Test(priority=2)
+		@Test(priority=3)
 		public void simpleTrakingNumberUpdation() throws InterruptedException{
-			logger=extent.startTest("Tracking number update..");
-			logger.assignCategory("Tracking number suite");
+			logger=extent.startTest("Simple Tracking number update..");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=createInstance();
 		    tn.clickAction(tracking_number_name, "Edit");
@@ -109,10 +109,10 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//delete simple tracking number
-		@Test(priority=3)
+		@Test(priority=4)
 		public void simpleTrakingNumberDeletion() throws InterruptedException{
-			logger=extent.startTest("Tracking number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger=extent.startTest("Simple Tracking number deletion..");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(updated_tracking_number_name, "Delete");
@@ -124,13 +124,12 @@ public class TrackingNumberTest extends TestBase{
 
 
      	//create number pool
-     	@Test(priority=4)
+     	@Test(priority=5)
 		public void numberPoolCreation() throws InterruptedException{
 			logger=extent.startTest("Number Pool creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
 		    int number1 = tests.Util.generateRandomNumber();
 		    tracking_number_name="SJ TN-"+String.valueOf(number1);
@@ -150,10 +149,10 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//edit simple tracking number
-		@Test(priority=5)
+		@Test(priority=6)
 		public void numberPoolUpdation() throws InterruptedException{
 			logger=extent.startTest("Number pool update..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			tn = createInstance();
 
 		    tn.clickAction(tracking_number_name, "Edit");
@@ -164,10 +163,10 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//delete simple tracking number
-		@Test(priority=6)
+		@Test(priority=7)
 		public void numberPoolDeletion() throws InterruptedException{
 			logger=extent.startTest("Number pool deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			tn = createInstance();
 
 		    tn.clickAction(updated_tracking_number_name, "Delete");
@@ -175,14 +174,12 @@ public class TrackingNumberTest extends TestBase{
 		}	
 		
 		//create reserve number
-     	@Test(priority=7)
+     	@Test(priority=8)
 		public void reserveNumberCreation() throws Exception{
 			logger=extent.startTest("Reserve Number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			String number = ReserveNumber.makeNumberReseve();
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 			tn = createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
 		    tracking_number_name="SJ TN-"+String.valueOf(number1);
@@ -193,10 +190,10 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//edit reserve number
-		@Test(priority=8)
+		@Test(priority=9)
 		public void reserveNumberUpdation() throws InterruptedException{
 			logger=extent.startTest("reserve number number update..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 			tn = createInstance(); 
 		    tn.clickAction(tracking_number_name, "Edit");
@@ -207,10 +204,10 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//delete simple tracking number
-		@Test(priority=9)
+		@Test(priority=10)
 		public void reserveNumberDeletion() throws InterruptedException{
 			logger=extent.startTest("reserve number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(updated_tracking_number_name, "Delete");
@@ -218,14 +215,12 @@ public class TrackingNumberTest extends TestBase{
 		}	
 		
         //GeoRoute creation
-		@Test(priority=10)
+		@Test(priority=11)
 		public void GeoRouteTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("GeoRoute number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -237,11 +232,11 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//GeoRoute deletion
-		@Test(priority=11)
+		@Test(priority=12)
 		public void GeoRouteTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("geo route number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
@@ -249,14 +244,12 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
         //percent route creation
-		@Test(priority=12)
+		@Test(priority=13)
 		public void percentTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("percentRoute number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -267,11 +260,11 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//percent route deletion
-		@Test(priority=13)
+		@Test(priority=14)
 		public void percentTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("percent route number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
@@ -279,14 +272,12 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
         //outbound route creation
-		@Test(priority=14)
+		@Test(priority=15)
 		public void outboundTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("outbound number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -298,11 +289,11 @@ public class TrackingNumberTest extends TestBase{
 		}
 
 		//outbound route deletion
-		@Test(priority=15)
+		@Test(priority=16)
 		public void outboundTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("outbound route number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
@@ -310,14 +301,13 @@ public class TrackingNumberTest extends TestBase{
 		}		
 		
         //hangup route creation
-		@Test(priority=16)
+		@Test(priority=17)
 		public void hangupTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("hangup number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+			
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -328,11 +318,11 @@ public class TrackingNumberTest extends TestBase{
 		}
 
         //hangup route deletion
-		@Test(priority=17)
+		@Test(priority=18)
 		public void hangupTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("hangup route number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
@@ -340,14 +330,12 @@ public class TrackingNumberTest extends TestBase{
 		}		
 		
         //voicemail route creation
-		@Test(priority=18)
+		@Test(priority=19)
 		public void voicemailTrakingNumberCreation() throws InterruptedException{
 			logger=extent.startTest("voicemail number creation..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
+//		    cp.clickAction("update",campaignToBeEdited);
 
             tn=createInstance();
 		    int number1 = tests.Util.generateRandomNumber();
@@ -358,56 +346,27 @@ public class TrackingNumberTest extends TestBase{
 		}		
 
         //voicemail route deletion
-		@Test(priority=19)
+		@Test(priority=20)
 		public void voicemailTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("voicemail route number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
 		    Thread.sleep(2000);
 		}		
 		
-        //schedule route creation
-		@Test(priority=20)
-		public void scheduleTrakingNumberCreation() throws InterruptedException{
-			logger=extent.startTest("schedule number creation..");
-			logger.assignCategory("Tracking number suite");
-			
-			campaignBuilderPage cb=new campaignBuilderPage(driver, wait);
-			CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//		    cp.clickAction("update","SJC-1");
-
-            tn=createInstance();
-		    int number1 = tests.Util.generateRandomNumber();
-		    tracking_number_name="SJ TN-"+String.valueOf(number1);
-		    tn.createScheduleRoute(tracking_number_name);
-		    Thread.sleep(2000);
-	
-		}
-
-        //schedule route deletion
-		@Test(priority=21)
-		public void scheduleTrakingNumberDeletion() throws InterruptedException{
-
-			logger=extent.startTest("scedule route number deletion..");
-			logger.assignCategory("Tracking number suite");
-			    
-		    tn=new TrackingNumberBuilderPage(driver);
-		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
-		}		
+       
 
 		
 	    //schedule route creation
-		@Test(priority=14)
+		@Test(priority=21)
 		public void scheduleTrakingNumberCreation() throws InterruptedException{
 				logger=extent.startTest("scheduleRoute number creation..");
-				logger.assignCategory("Tracking number suite");
+				logger.assignCategory(Constants.tracking_number_category);
 				
-				CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//			    cp.clickAction("update","SJC-1");
+//			    cp.clickAction("update",campaignToBeEdited);
 
 	            tn=createInstance();
 			    int number1 = tests.Util.generateRandomNumber();
@@ -419,113 +378,57 @@ public class TrackingNumberTest extends TestBase{
 		}
 		
 		//schedule route deletion
-		@Test(priority=15)
+		@Test(priority=22)
 		public void scheduleTrakingNumberDeletion() throws InterruptedException{
 
 			logger=extent.startTest("schedule route number deletion..");
-			logger.assignCategory("Tracking number suite");
+			logger.assignCategory(Constants.tracking_number_category);
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
 		    Thread.sleep(2000);
 		}
 		
-	    //outbound route creation
-			@Test(priority=16)
-			public void outboundTrakingNumberCreation() throws InterruptedException{
-					logger=extent.startTest("outboundRoute number creation..");
-					logger.assignCategory("Tracking number suite");
-					
-					CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//				    cp.clickAction("update","SJC-1");
+		 //IVR route creation
+		@Test(priority=23)
+		public void IVRCreation() throws InterruptedException{
+				logger=extent.startTest("IVR route creation..");
+				logger.assignCategory(Constants.tracking_number_category);
+				
+				cp=createInstanceCampaignAndTrackingNumberPage();
+//			    cp.clickAction("update",campaignToBeEdited);
 
-		            tn=createInstance();
-				    int number1 = tests.Util.generateRandomNumber();
-				    tracking_number_name="SJ TN-"+String.valueOf(number1);
-				    tn.createOutboundRoute(tracking_number_name);
-				    Thread.sleep(2000);
-
-			
-			}
-			
-			//outbound route deletion
-			@Test(priority=17)
-			public void outboundTrakingNumberDeletion() throws InterruptedException{
-
-				logger=extent.startTest("outbound route number deletion..");
-				logger.assignCategory("Tracking number suite");
-				    
-			    tn=new TrackingNumberBuilderPage(driver);
-			    tn.clickAction(tracking_number_name, "Delete");
+	            tn=createInstance();
+			    int number1 = tests.Util.generateRandomNumber();
+			    tracking_number_name="SJ TN-"+String.valueOf(number1);
+			    tn.createIVRRoute(tracking_number_name);
 			    Thread.sleep(2000);
-			}
-			
-			//Voicemail route creation
-			@Test(priority=18)
-			public void VoicemailTrakingNumberCreation() throws InterruptedException{
-					logger=extent.startTest("VoicemailRoute number creation..");
-					logger.assignCategory("Tracking number suite");
-					
-					CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//				    cp.clickAction("update","SJC-1");
 
-		            tn=createInstance();
-				    int number1 = tests.Util.generateRandomNumber();
-				    tracking_number_name="SJ TN-"+String.valueOf(number1);
-				    tn.createVoicemailRoute(tracking_number_name);
-				    Thread.sleep(2000);
-
-			
-			}			
 		
-			//voicemail route deletion
-			@Test(priority=19)
-			public void voicemailTrakingNumberDeletion() throws InterruptedException{
-
-				logger=extent.startTest("voicemail route number deletion..");
-				logger.assignCategory("Tracking number suite");
-				    
-			    tn=new TrackingNumberBuilderPage(driver);
-			    tn.clickAction(tracking_number_name, "Delete");
-			    Thread.sleep(2000);
-			}
+		} 
 			
-			//Hangup route creation
-			@Test(priority=20)
-			public void HangupTrakingNumberCreation() throws InterruptedException{
-					logger=extent.startTest("HangupRoute number creation..");
-					logger.assignCategory("Tracking number suite");
-					
-					CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver,wait);			
-//				    cp.clickAction("update","SJC-1");
-
-		            tn=createInstance();
-				    int number1 = tests.Util.generateRandomNumber();
-				    tracking_number_name="SJ TN-"+String.valueOf(number1);
-				    tn.createVoicemailRoute(tracking_number_name);
-				    Thread.sleep(2000);
-
-			
-			}			
 		
-			//Hangup route deletion
-			@Test(priority=21)
-			public void HangupTrakingNumberDeletion() throws InterruptedException{
+		//IVR route deletion
+		@Test(priority=24)
+		public void IVRDeletion() throws InterruptedException{
 
-				logger=extent.startTest("hangup route number deletion..");
-				logger.assignCategory("Tracking number suite");
-				    
-			    tn=new TrackingNumberBuilderPage(driver);
-			    tn.clickAction(tracking_number_name, "Delete");
-			    Thread.sleep(2000);
-			}
+			logger=extent.startTest("IVR route number deletion..");
+			logger.assignCategory(Constants.tracking_number_category);
+					    
+		    tn=new TrackingNumberBuilderPage(driver);
+		    tn.clickAction(tracking_number_name, "Delete");
+		    Thread.sleep(2000);
+		}
 			
 		@AfterClass
 	    public void cleanUp(){
 	    	tn = createInstance();
 		    tn.unprovisionNumbers();
-	    	
-	   	
-	    	
+		    LoginPage lp=new LoginPage(driver);
+			logger=extent.startTest("LogOut"); 
+			logger.log(LogStatus.INFO, "loggin out.. ");
+			lp.logOut();   	
+		    
+		    
 	    	}
 }
