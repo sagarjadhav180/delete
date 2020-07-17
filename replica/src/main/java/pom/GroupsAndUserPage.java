@@ -1,6 +1,8 @@
 package pom;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -286,10 +288,13 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement custom_source_deletion_success_message;	
 	
 	//Call Action Settings Section---------------------------------------------------
-	@FindBy(xpath="//button[@class='btn btn-primary'][text()='OK']")
+	@FindBy(xpath="//span[text()=' Action']")
+	private WebElement action_label;
+	
+	@FindBy(xpath="//a[text()='Add Action']")
 	private WebElement add_action_button;	
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
 	private WebElement delete_call_action_ok_button;	
 	
 	@FindBy(xpath="//div[text()='Successfully Deleted Call Action']")
@@ -297,29 +302,35 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="//h3[text()='If']")
 	private WebElement if_condtion_label;		
-	
-	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[2]")
-	private WebElement if_condtion_dropdown;		
+
+	@FindBy(xpath="//h3[text()='Then']")
+	private WebElement then_condtion_label;	
 
 	String[] expected_if_condtion_list={"repeat call","duration","disposition","caller id","missed opportunity","sales inquiry","conversion","lead quality","referring source","referring type","UTM Campaign","UTM Source","UTM Medium","Send to Voicemail"};
 	
+	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//input)[1]")
+	private WebElement if_condition_textbox;
+
+	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[4]")
+	private WebElement if_condition_dropdown;
+	
 	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[3]")
 	private WebElement operator_dropdown;
-
+	
 	String[] expected_operator_list_for_repeat_call={"is","is not"};
 	String[] expected_operator_list_for_duration={"=","!=",">",">=","<","<="};
 	String[] expected_operator_list_for_disposition={"is","is not"};
 	String[] expected_operator_list_for_caller_id={"is","is not","contains","does not contain","begins with","ends with"};
-	String[] expected_operator_list_for_missed_opp={"is","is not"};	
-	String[] expected_operator_list_for_sales_enquiry={"is","is not"};
+	String[] expected_operator_list_for_missed_opportunity={"is","is not"};	
+	String[] expected_operator_list_for_sales_inquiry={"is","is not"};
 	String[] expected_operator_list_for_conversion={"is","is not"};
 	String[] expected_operator_list_for_lead_quality={"is","is not"};
-	String[] expected_operator_list_for_reff_source={"is","is not","contains","does not contain"};
-	String[] expected_operator_list_for_reff_type={"is","is not"};
-	String[] expected_operator_list_for_utm_campaign={"is","is not","contains","does not contain","begins with","ends with"};
-	String[] expected_operator_list_for_utm_source={"is","is not","contains","does not contain","begins with","ends with"};	
-	String[] expected_operator_list_for_utm_medium={"is","is not","contains","does not contain","begins with","ends with"};
-	String[] expected_operator_list_for_vm={"is","is not"};
+	String[] expected_operator_list_for_referring_source={"is","is not","contains","does not contain"};
+	String[] expected_operator_list_for_referring_type={"is","is not"};
+	String[] expected_operator_list_for_UTM_Campaign={"is","is not","contains","does not contain","begins with","ends with"};
+	String[] expected_operator_list_for_UTM_Source={"is","is not","contains","does not contain","begins with","ends with"};	
+	String[] expected_operator_list_for_UTM_Medium={"is","is not","contains","does not contain","begins with","ends with"};
+	String[] expected_operator_list_for_Send_to_Voicemail={"is","is not"};
 	
 	@FindBy(xpath="(//h3[text()='If']//ancestor::div[@class='row']//select)[5]")
 	private WebElement and_or_dropdown;
@@ -328,7 +339,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="(//h3[text()='Then']//ancestor::div[starts-with(@class,'row')]//select)[1]")
 	private WebElement then_condition_dropdown;
-    String[] then_condition_list={"Send email alert to","Send SMS to","Tag call as","Trigger the webhook","Flag for call back","Send call for Google Analytics"};
+    String[] expected_then_condition_list={"Send email alert to","Send SMS to","Tag call as","Trigger the webhook","Flag for call back","Send call for Google Analytics"};
 	
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//span//preceding-sibling::input")
 	private WebElement then_condition_textbox_for_email;
@@ -344,6 +355,15 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[@ class='col-sm-8 col-xs-8 callactionresponsive']//select[@id='triggerWebhook']//following-sibling::a//i")
 	private WebElement jump_to_webhook_settings_link;
+
+	@FindBy(xpath="//div[starts-with(@ng-show,'callActions')]//following-sibling::button[text()='Save']")
+	private WebElement call_action_save_button;
+
+	@FindBy(xpath="//div[starts-with(@ng-show,'callActions')]//following-sibling::button[text()='Reset']")
+	private WebElement call_action_reset_button;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement call_actions_settings_alert;
 	
 	//sub group section------------------------------------------------------
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
@@ -764,6 +784,7 @@ public class GroupsAndUserPage extends TestBase {
 
 	
 	//Tracking Number Setting UI Validation
+	@SuppressWarnings("unlikely-arg-type")
 	public void TNSettingsUI(){
 			
 			for (int i=0; i<tn_settings_labels.size(); i++) {
@@ -919,6 +940,7 @@ public class GroupsAndUserPage extends TestBase {
 		softassert.assertAll();
 	}
 	    
+   
 	//TN settings form validation-------------------
 	public void tnSettingsFormValidation(String fieldName) throws InterruptedException {
 
@@ -979,6 +1001,264 @@ public class GroupsAndUserPage extends TestBase {
 		updateTNSettings();
 	}
 
+	
+	//Call Action section UI Verification
+	@SuppressWarnings("unlikely-arg-type")
+	public void callActionSectionUI() {
+		
+		expandSection(Constants.GroupsAndUser.call_actions);
+		
+		logger.log(LogStatus.INFO, "Verifying if Action label is present");
+		softassert.assertTrue(action_label.isDisplayed(),"Action label is not displayed");
+
+		logger.log(LogStatus.INFO, "Verifying if If label is present");
+		softassert.assertTrue(if_condtion_label.isDisplayed(),"If label is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if Then label is present");
+		softassert.assertTrue(then_condtion_label.isDisplayed(),"Then label is not displayed");
+	
+		logger.log(LogStatus.INFO, "Verifying if Add Action Button is present");
+		softassert.assertTrue(add_action_button.isDisplayed(),"Add Action Button is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if Save Button is present");
+		softassert.assertTrue(call_action_save_button.isDisplayed(),"Save Button is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if Reset Button is present");
+		softassert.assertTrue(call_action_reset_button.isDisplayed(),"Reset Button is not displayed");
+	
+		//Rules list-box
+		Select rules=new Select(if_condition_dropdown);
+		
+		for(int i=1;i<rules.getOptions().size();i++) {
+			
+			for(int j=0;j<expected_if_condtion_list.length;j++) {
+				
+				if(rules.getOptions().get(i).equals(expected_if_condtion_list[j])) {
+					
+					logger.log(LogStatus.INFO, "Verifying if "+expected_if_condtion_list[j]+" is present");
+					softassert.assertTrue(call_action_reset_button.isDisplayed(),expected_if_condtion_list[j]+" is not present");					
+				
+				}
+			}
+		}
+		
+		//Operators for all Rules
+		for(int k=1;k<rules.getOptions().size();k++) {
+		
+			String rule = rules.getOptions().get(k).toString();
+			
+			logger.log(LogStatus.INFO, "Verifying operators dispalyed for Rule - "+rules.getOptions().get(k));
+			ruleOperators(rule,expected_operator_list_for_repeat_call);
+			ruleOperators(rule,expected_operator_list_for_duration);
+			ruleOperators(rule,expected_operator_list_for_disposition);
+			ruleOperators(rule,expected_operator_list_for_caller_id);
+			ruleOperators(rule,expected_operator_list_for_missed_opportunity);
+			ruleOperators(rule,expected_operator_list_for_sales_inquiry);
+			ruleOperators(rule,expected_operator_list_for_conversion);
+			ruleOperators(rule,expected_operator_list_for_lead_quality);
+			ruleOperators(rule,expected_operator_list_for_referring_source);
+			ruleOperators(rule,expected_operator_list_for_referring_type);
+			ruleOperators(rule,expected_operator_list_for_UTM_Campaign);
+			ruleOperators(rule,expected_operator_list_for_UTM_Source);
+			ruleOperators(rule,expected_operator_list_for_UTM_Medium);
+			ruleOperators(rule,expected_operator_list_for_Send_to_Voicemail);
+			
+		}
+		
+		//And/If operator
+		Select and_if=new Select(and_or_dropdown);
+		
+		logger.log(LogStatus.INFO, "Verifting if And/OR conditions are present");
+		for(int i=0;i<and_if.getOptions().size();i++) {
+			
+			for(int j=0;j<and_or_list.length;j++) {
+				
+				if(and_if.getOptions().get(i).equals(and_or_list[j])) {
+					
+					softassert.assertTrue(and_if.getOptions().get(i).equals(and_or_list[j]),and_or_list[j]+" is not present");
+				}
+			}
+		}
+		
+		//Action list-box
+		
+		Select actions=new Select(then_condition_dropdown);
+		
+		logger.log(LogStatus.INFO, "Verifting options displayed in Action listbox");
+		for(int i=0;i<actions.getOptions().size();i++) {
+			
+			for(int j=0;j<expected_then_condition_list.length;j++) {
+				
+				if(actions.getOptions().get(i).equals(expected_then_condition_list[j])) {
+					
+					softassert.assertTrue(actions.getOptions().get(i).equals(expected_then_condition_list[j]),expected_then_condition_list[j]+" is not present");
+				}
+			}
+		}
+		
+		softassert.assertAll();
+		
+	}
+	
+	
+	//Rules Operators
+	public void ruleOperators(String rule,String[] exp_operator) {
+
+		Select rules=new Select(if_condition_dropdown);
+		Select operators=new Select(operator_dropdown);
+		
+		rules.selectByVisibleText(rule);
+		
+		for(int i=0;i<operators.getOptions().size();i++) {
+			
+			for(int j=0;j<exp_operator.length;j++) {
+				
+				if(operators.getOptions().get(i).equals(exp_operator[j])) {
+				
+					softassert.assertTrue(operators.getOptions().get(i).equals(exp_operator[j]),exp_operator[j]+" is not present");
+				}				
+			}
+			
+		}
+		softassert.assertAll();
+	}
+	
+	
+	//Call Action Form Validation
+	public void callActionFormValidation(String section) {
+
+		expandSection(Constants.GroupsAndUser.call_actions);
+		call_action_reset_button.click();
+		
+		if(section.equals("rule")) {
+			//Input for Rule Condition
+			Select rules=new Select(if_condition_dropdown);
+			rules.selectByVisibleText("duration");
+
+			Select operators=new Select(operator_dropdown);
+			operators.selectByVisibleText("=");
+			if_condition_textbox.clear();
+			if_condition_textbox.sendKeys("10");	
+		}
+		else if (section.equals("action")) {
+			//Input for Rule Condition
+			Select rules=new Select(if_condition_dropdown);
+			rules.selectByVisibleText("duration");
+
+			Select operators=new Select(operator_dropdown);
+			operators.selectByVisibleText("=");
+			
+			//Input for Action Target
+			Select actions=new Select(then_condition_dropdown);
+			actions.selectByVisibleText("Flag for call back");
+		
+		}
+		
+		
+		//Save click
+		call_action_save_button.click();
+		wait.until(ExpectedConditions.visibilityOf(call_actions_settings_alert));
+		logger.log(LogStatus.INFO, "Verifying if alert is displayed");
+		Assert.assertTrue(call_actions_settings_alert.isDisplayed(),"Appropriate Alert is npt displayed");
+		
+	}
+	
+	
+	//Call Actions Reset function
+	public void resetCallAction() {
+		
+		expandSection(Constants.GroupsAndUser.call_actions);
+		call_action_reset_button.click();
+		
+		//Input for Rule Condition
+		Select rules=new Select(if_condition_dropdown);
+		rules.selectByVisibleText("duration");
+
+		Select operators=new Select(operator_dropdown);
+		operators.selectByVisibleText("=");
+		if_condition_textbox.clear();
+		if_condition_textbox.sendKeys("10");	
+		
+		//Input for Action Target
+		Select actions=new Select(then_condition_dropdown);
+		actions.selectByVisibleText("Flag for call back");
+		
+		//Reset Button click
+		call_action_reset_button.click();
+		logger.log(LogStatus.INFO, "Verifyig if call action data is reset");
+		call_action_save_button.click();
+		wait.until(ExpectedConditions.visibilityOf(call_actions_settings_alert));
+		Assert.assertTrue(call_actions_settings_alert.isDisplayed(),"call action data is not reset");
+		
+	}
+
+    
+	//Call Actions -- Validation for max 10 actions 
+	public void add10CallAction() throws InterruptedException{
+    	
+    	for(int i=1;i<=10;i++){
+    		
+    		//Rule
+    		WebElement rule = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[2]"));
+    		Select rules=new Select(rule);
+    		rules.selectByVisibleText("duration");
+    		
+    		//operator
+    		WebElement operator = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[3]"));
+    		Select operators=new Select(operator);
+    		operators.selectByVisibleText("=");
+    		
+    		//rule value
+    		WebElement rule_value = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//input)[1]"));
+    		rule_value.clear();
+    		rule_value.sendKeys("10");
+    		
+    		//action
+    		WebElement action = driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[9]"));
+    		Select actions=new Select(action);
+    		actions.selectByVisibleText("Flag for call back");
+    		
+    		//add action button
+    		if(i<10){
+    			WebElement add_action_button = driver.findElement(By.xpath("(//a[text()='Add Action'])["+i+"]"));
+        		add_action_button.click();
+        		Thread.sleep(2000);
+    		}
+
+    		else if(i==10){
+				logger.log(LogStatus.INFO, "Verifing if Add action button is not dispalyed after adding 10 call actions");
+    			
+				try{
+        			add_action_button = driver.findElement(By.xpath("(//a[text()='Add Action'])["+i+"]"));
+        		    Assert.fail("Add Button is dispalyed to add 11th call action");	
+    			}
+    			catch(Exception e) {
+    				logger.log(LogStatus.PASS, "");
+    			}
+
+    		}
+    	}
+    	
+    }
+    
+
+    //Cleanup activity for call actions
+    public void deleteAllCations(){
+    	
+    	List<WebElement> delete_icons = driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
+
+    	for(int i=0;i<delete_icons.size();i++){
+    		delete_icons.get(i).click();
+    		driver.switchTo().activeElement();
+    		delete_call_action_ok_button.click();
+            wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
+            logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
+            softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
+    	}
+    	
+    	softassert.assertAll();
+    }
+	
 	    
 	//to get check-box of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
@@ -986,6 +1266,7 @@ public class GroupsAndUserPage extends TestBase {
 		WebElement webelement = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+csa+"]/..//preceding-sibling::input"));
 		return webelement;
 	}
+	
 	
     public void addCustomSource(String custom_source_type,String cs_name){
 		
@@ -995,7 +1276,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
 	
-	
+    
 	//to get action button of desired group
     public WebElement getgroup(String group_name,String button_name){
 		
@@ -1147,72 +1428,7 @@ public class GroupsAndUserPage extends TestBase {
     }
     
 
-    public void add10CallAction(){
-    	
-    	for(int i=1;i<=10;i++){
-    		
-    		//Rule
-    		WebElement rule = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[2]"));
-    		Select rules=new Select(rule);
-    		rules.selectByIndex(i);
-    		
-    		//operator
-    		WebElement operator = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[3]"));
-    		Select select=new Select(operator);
-    		select.selectByIndex(1);
-    		
-    		//rule value
-    		WebElement rule_value = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[4]"));
-    		Select select1=new Select(rule_value);
-    		select1.selectByIndex(1);
-    		
-    		//action
-    		WebElement action = driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[9]"));
-    		Select select2=new Select(action);
-    		select2.selectByVisibleText("Trigger the webhook");
-    		
-    		//action_value
-    		WebElement action_value = driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[12]"));
-    		Select select3=new Select(action_value);
-    		select3.selectByIndex(1);
-    		
-    		//add action button
-    		if(i<10){
-    			WebElement add_action_button = driver.findElement(By.xpath("(//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//following-sibling::div[@class='timeline-footer text-right']//a"));
-        		add_action_button.click();
-    		}
-
-    		else if(i==10){
-				logger.log(LogStatus.INFO, "Verifing if Add action button is not dispalyed after adding 10 call actions");
-    			List<WebElement> add_action_button = null;
-    			try{
-        			add_action_button = driver.findElements(By.xpath("(//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//following-sibling::div[@class='timeline-footer text-right']//a"));
-        		    Assert.fail("Add Button is dispalyed to add 11th call action");	
-    			}
-    			catch(Exception e) {
-    				logger.log(LogStatus.PASS, "");
-    			}
-
-    		}
-    	}
-    	
-    }
     
-    public void deleteAllCations(){
-    	
-    	List<WebElement> delete_icons = driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
-
-    	for(int i=0;i<delete_icons.size();i++){
-    		delete_icons.get(i).click();
-    		driver.switchTo().activeElement();
-    		delete_call_action_ok_button.click();
-            wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
-            logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
-            softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
-    	}
-    	
-    	softassert.assertAll();
-    }
     
     
     
