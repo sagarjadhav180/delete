@@ -385,7 +385,10 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement subgroup_zip_code_textbox;
 	
 	@FindBy(xpath="(//div[@class='panel-body collapse in table-responsive ng-isolate-scope'])[1]//tr//td[@class='text-right']//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
-	private WebElement save_subgroup;
+	private WebElement save_subgroup_button;
+
+	@FindBy(xpath="(//div[@class='panel-body collapse in table-responsive ng-isolate-scope'])[1]//tr//td[@class='text-right']//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Cancel')]")
+	private WebElement cancel_subgroup_button;
 	
 	@FindBy(xpath="(//button[text()=' Add Sub-Group'])[1]")
 	private WebElement add_subgroup_button;	
@@ -396,7 +399,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//table[@ id='table_sub_group']//th")
 	private List<WebElement> sub_group_columns;
 	
-	String[] sub_group_columns_names={"OUID","Group Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code","Actions"};
+	String[] expected_sub_group_columns_names={"OUID","Group Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code","Actions"};
 	
 	@FindBy(xpath="(//button[4])[1]")
 	private static WebElement groups_topNextPagination_Button;	
@@ -414,9 +417,9 @@ public class GroupsAndUserPage extends TestBase {
 	private static WebElement groups_topPagination_count;
 
 	@FindBy(xpath="//table[@id='table_sub_group']//tbody//tr")
-	private static WebElement groups_countOf_groups;
+	private static List<WebElement> groups_countOf_groups;
 
-	@FindBy(xpath="Sub-group t is created successfully.")
+	@FindBy(xpath="//div[contains(text(),'created successfully.')]")
 	private WebElement subgroup_creation_success_message;	
 
 	@FindBy(xpath="//div[contains(text(),'updated successfully.')]")
@@ -433,25 +436,10 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[text()='Group deleted.']")
 	private WebElement subgroup_deletion_success_message;	
-	
-	//verification of buttons in top pagination toolbox
-//		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
-//		wait.until(ExpectedConditions.visibilityOf(groups_topNextPagination_Button));
-//		Assert1.assertTrue(groups_topNextPagination_Button.isDisplayed(),"groups_topNextPagination_Button is not present or locator changed");
-//		Assert1.assertTrue(groups_topPrevPagination_Button.isDisplayed(),"groups_topPrevPagination_Button is not present or locator changed");	
-//		Assert1.assertTrue(groups_topFirstPagination_Button.isDisplayed(),"groups_topFirstPagination_count is not present or locator changed");	
-//		Assert1.assertTrue(groups_topLastPagination_Button.isDisplayed(),"groups_topLastPagination_count is not present or locator changed");	
-		
-		//verification of count in top pagination toolbox	
-//		dbCount = Util.readingFromDB("SELECT count(*) as count FROM org_unit WHERE org_unit_parent_id=70135" );
-//		countOnUI_pagination=groups_topPagination_count.getText().substring(groups_topPagination_count.getText().indexOf('f')+2);
-//		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
-//		Assert1.assertEquals(dbCount, groups_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
-//		
-//		logger.log(LogStatus.INFO, "verifying count of listed groups");
-//		Assert1.assertEquals(dbCount, String.valueOf(groups_countOf_groups.size()),"count  of listed groups is mismatching with db count");
-	
 
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement saveSubGroupDetails_alert;
+	
 	//users section--------------------------------------------------------------
 	@FindBy(xpath="(//button[text()=' Add User'])[1]")
 	private WebElement add_user_button;	
@@ -577,32 +565,13 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//table[@id='table_group_user']//tbody//tr")
 	private static WebElement users_countOf_groups;
-		
-
-//verification of buttons in top pagination toolbox
-//		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
-//		wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
-//		Assert1.assertTrue(users_topNextPagination_Button.isDisplayed(),"users_topNextPagination_Button is not present or locator changed");
-//		Assert1.assertTrue(users_topPrevPagination_Button.isDisplayed(),"users_topPrevPagination_Button is not present or locator changed");	
-//		Assert1.assertTrue(users_topFirstPagination_Button.isDisplayed(),"users_topFirstPagination_count is not present or locator changed");	
-//		Assert1.assertTrue(users_topLastPagination_Button.isDisplayed(),"users_topLastPagination_count is not present or locator changed");	
-		
-		//verification of count in top pagination toolbox	
-//		dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70135 AND role_id !=4" );
-//		countOnUI_pagination=users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
-//		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
-//		Assert1.assertEquals(dbCount, users_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
-//		
-//		logger.log(LogStatus.INFO, "verifying count of listed groups");
-//		Assert1.assertEquals(dbCount, String.valueOf(users_countOf_groups.size()),"count  of listed users is mismatching with db count");
-
-
-	
+			
 	WebDriver driver;	
 	
 	public GroupsAndUserPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
 	}
+	
 	
 	//Groups And User Header Label verification
     public void groupsAndUserHeaderLabel(){
@@ -613,6 +582,7 @@ public class GroupsAndUserPage extends TestBase {
 		Assert.assertTrue(groupsAndUserPage_label.isDisplayed(),"Groups and User page Label is not displayed or locator changed");
 	}
 	
+    
     //Export Groups And User Button verification
     public void exportGroupsAndUserButton(){
 		
@@ -627,6 +597,7 @@ public class GroupsAndUserPage extends TestBase {
 		softassert.assertAll();
 	}
 
+    
     //Strips verification
     public void Strip(String stripName){
     	
@@ -638,6 +609,7 @@ public class GroupsAndUserPage extends TestBase {
     	Assert.assertTrue(strip.isDisplayed(), stripName+"is not displayed or locator changed");
     }
 
+    
     //Group Details UI verification
     public void groupDetailsUI(){
     	
@@ -705,6 +677,7 @@ public class GroupsAndUserPage extends TestBase {
     	softassert.assertAll();
     }
 
+    
     //Group Details Form Validation    
 	public void groupDetailsFormValidation(String validation_textbox){
 		
@@ -731,6 +704,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
     
+	
     //Group Details Updattion
 	public void groupDetailsUpdate(){
 		
@@ -749,6 +723,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
 
+	
     //Feature Settings UI Verification
 	public void featureSettingsUI(){
 		
@@ -1259,7 +1234,268 @@ public class GroupsAndUserPage extends TestBase {
     	softassert.assertAll();
     }
 	
-	    
+    
+    //Sub-group section UI
+    public void subGroupUI() {
+    	
+    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	
+    	//Add Sub-group button
+    	logger.log(LogStatus.INFO, "Verifying if Add Sub-group button is displayed");
+    	softassert.assertTrue(add_subgroup_button.isDisplayed(),"Add Sub-group button is not displayed or locator changed");
+    	softassert.assertTrue(add_subgroup_button.isEnabled(),"Add Sub-group button is not clickable");    	
+
+    	//Export Sub-group button
+    	logger.log(LogStatus.INFO, "Verifying if Export Sub-group button is displayed");
+    	softassert.assertTrue(export_groups_button.isDisplayed(),"Export Sub-group button is not displayed or locator changed");
+    	softassert.assertTrue(export_groups_button.isEnabled(),"Add Sub-group button is not clickable");
+    	
+    	//SUb group section columns
+    	logger.log(LogStatus.INFO, "Verifying columns of Sub Group section-------");
+    	
+    	for(int i=0;i<sub_group_columns.size();i++) {
+    		
+    		for(int j=0;j<expected_sub_group_columns_names.length;j++) {
+    			
+    			if(sub_group_columns.get(i).getText().equals(expected_sub_group_columns_names[j])) {
+    		    	logger.log(LogStatus.INFO, "Verifying if Column "+expected_sub_group_columns_names[j]+" is diaplayed");    				
+    				softassert.assertTrue(sub_group_columns.get(i).getText().equals(expected_sub_group_columns_names[j]),"Column "+expected_sub_group_columns_names[j]+" is not diaplayed");
+    			}
+    		}
+    	}
+    	
+    	
+    }
+    
+    
+    //Sub-group section Pagination Tool-box
+	public void subGroupPagiantionToolbox() {
+
+    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	
+		//verification of buttons in top pagination Tool-box
+		String dbCount = Util.readingFromDB("SELECT COUNT(*) as count FROM org_unit WHERE org_unit_parent_id="+TestBase.getOrg_unit_id()+"" );
+		
+		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+		wait.until(ExpectedConditions.visibilityOf(groups_topNextPagination_Button));
+		
+		softassert.assertTrue(groups_topNextPagination_Button.isDisplayed(),"groups_topNextPagination_Button is not present or locator changed");
+		softassert.assertTrue(groups_topPrevPagination_Button.isDisplayed(),"groups_topPrevPagination_Button is not present or locator changed");	
+		softassert.assertTrue(groups_topFirstPagination_Button.isDisplayed(),"groups_topFirstPagination_count is not present or locator changed");	
+		softassert.assertTrue(groups_topLastPagination_Button.isDisplayed(),"groups_topLastPagination_count is not present or locator changed");	
+	
+		//Next-100 Button and last Button
+		if(Integer.parseInt(dbCount)>100) {
+			softassert.assertFalse(groups_topLastPagination_Button.getAttribute("class").endsWith("disabled"),"Top Last Pagination button is not clickable");	
+			softassert.assertFalse(groups_topNextPagination_Button.getAttribute("class").endsWith("disabled"),"Top Next Pagination button is not clickable");
+		}
+		
+	}
+    
+	
+	//Sub-group pagination count verification
+	public void subGroupPaginationCount() {
+		
+    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	
+		//verification of count of groups in top pagination tool-box with db	
+		String dbCount = Util.readingFromDB("SELECT COUNT(*) as count FROM org_unit WHERE org_unit_parent_id="+TestBase.getOrg_unit_id()+"" );
+		String countOnUI_pagination = groups_topPagination_count.getText().substring(groups_topPagination_count.getText().indexOf('f')+2);
+	
+		logger.log(LogStatus.INFO, "Verifying groups count displeyed in top pagination toolbox with db count");
+		softassert.assertEquals(dbCount, countOnUI_pagination,"Count in top pagination toolbox is mismatching with db count");
+
+		//verification of count of groups displayed in grid with db
+		int final_groups_count=groups_countOf_groups.size()+0;
+		
+		if(!groups_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
+			
+			groups_topNextPagination_Button.click();
+			final_groups_count=final_groups_count+groups_countOf_groups.size();
+		}
+
+		logger.log(LogStatus.INFO, "Verifying count of listed groups in grid with db count");
+		softassert.assertEquals(dbCount, String.valueOf(final_groups_count),"Count  of listed groups in grid is mismatching with db count");
+		softassert.assertAll();
+		
+		//Navigating back to first page
+		if(!groups_topFirstPagination_Button.getAttribute("class").endsWith("disabled")) {
+			groups_topFirstPagination_Button.click();
+		}
+	}
+	
+
+	//Sub-group grid count verification	
+	public void subGroupGridCount() {
+		
+    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	
+		//verification of count of groups displayed in grid with db
+		int final_groups_count=groups_countOf_groups.size()+0;
+		String dbCount = Util.readingFromDB("SELECT COUNT(*) as count FROM org_unit WHERE org_unit_parent_id="+TestBase.getOrg_unit_id()+"" );
+		
+		if(!groups_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
+			
+			groups_topNextPagination_Button.click();
+			final_groups_count=final_groups_count+groups_countOf_groups.size();
+		}
+
+		logger.log(LogStatus.INFO, "Verifying count of listed groups in grid with db count");
+		softassert.assertEquals(dbCount, String.valueOf(final_groups_count),"Count  of listed groups in grid is mismatching with db count");
+		softassert.assertAll();
+		
+		//Navigating back to first page
+		if(!groups_topFirstPagination_Button.getAttribute("class").endsWith("disabled")) {
+			groups_topFirstPagination_Button.click();
+		}
+	}	
+	
+	
+	//Sub-group Validation
+	public void subGroupFormValidation(String field) {
+		
+    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	add_subgroup_button.click();
+    	
+    	if(field.equals("group_name_textbox")) {
+    		subgroup_name_textbox.clear();
+    		subgroup_name_textbox.sendKeys("test");
+    	}
+    	else if ((field.equals("group_name_textbox"))){	
+    		subgroup_name_textbox.clear();
+    		
+    		Select industry=new Select(subgroup_industry_listbox);
+    		industry.selectByVisibleText("Advertising: Digital");
+    		
+    	}
+    	
+    	//Saving sub-group
+    	save_subgroup_button.click();
+    	logger.log(LogStatus.INFO, "Verifying if appropriate alert is dispalyed for missing field "+field);
+		Assert.assertTrue(saveSubGroupDetails_alert.isDisplayed(),"appropriate alert is not dispalyed for missing field "+field);
+		
+		//existing from sub-group creation section
+		cancel_subgroup_button.click();
+	
+	}
+
+	
+    //Sub-group Cancel button feature
+	public void cancelSubGroup() {
+
+	   	expandSection(Constants.GroupsAndUser.sub_groups);
+    	add_subgroup_button.click();
+    	
+    	//Entering Sub-group details
+    	subgroup_name_textbox.clear();
+		subgroup_name_textbox.sendKeys("test");
+		Select industry=new Select(subgroup_industry_listbox);
+		industry.selectByVisibleText("Advertising: Digital");
+		
+		//existing from sub-group creation section
+		cancel_subgroup_button.click();
+		
+		logger.log(LogStatus.INFO, "Verifying if sub-group is not created");
+		try {
+			Assert.assertTrue(subgroup_creation_success_message.isDisplayed());
+			Assert.fail();
+		}
+		catch(Exception e) {
+			logger.log(LogStatus.PASS, "");
+		}
+		
+		
+	}
+
+	//Sub-group creation
+	public void createSubGroup(String groupName) throws InterruptedException{
+    	
+		expandSection(Constants.GroupsAndUser.sub_groups);
+		
+    	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
+    	add_subgroup_button.click();
+    	
+    	//Entering sub-group details
+    	subgroup_name_textbox.sendKeys(groupName);
+    	Select select=new Select(subgroup_industry_listbox);
+    	Thread.sleep(2000);
+    	select.selectByIndex(3);  
+    	
+    	//Saving sub-group details 
+        save_subgroup_button.click();
+    	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
+
+    	logger.log(LogStatus.INFO, "Verifying if Subgroup creation success message is displayed");
+    	Assert.assertTrue(subgroup_creation_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
+      	
+    }
+	
+	
+	//Sub-group updation
+	public void updateSubGroup(String subGroup) throws InterruptedException {
+
+		expandSection(Constants.GroupsAndUser.sub_groups);
+		
+		//Editing sub-group to be updated
+		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_edit_button);
+		
+		//Updating sub-group details
+    	subgroup_name_textbox.sendKeys(groupName);
+    	
+    	//Saving sub-group details 
+        save_subgroup_button.click();
+        
+    	String expected_save_sub_group_success_message="Sub-group "+groupName+" is updated successfully.";
+    	logger.log(LogStatus.INFO, "Verifying if Subgroup updation success message is displayed");
+    	Assert.assertTrue(subgroup_updation_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not updated successfully.");
+	
+	}
+	
+	
+	//Sub-group deletion
+	public void subGroupDeletion(String subGroup) {
+		
+        expandSection(Constants.GroupsAndUser.sub_groups);
+		
+		//Deleting sub-group 
+		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_delete_button);
+		
+		//Verification
+		logger.log(LogStatus.INFO, "Verifying if sub-group deleted successfully");
+		wait.until(ExpectedConditions.visibilityOf(subgroup_deletion_success_message));
+		Assert.assertTrue(subgroup_deletion_success_message.isDisplayed(),"Sub-group not deleted successfully");
+	}
+	
+	
+	//Sub-group navigation
+	public void subGroupNavigation(String subGroup) {
+		
+		 expandSection(Constants.GroupsAndUser.sub_groups);
+			
+		//Editing sub-group to be updated
+		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_select_button);
+	
+	
+	}
+	
+	
+	//to get action button of desired group
+    public void clickActionSubGroup(String group_name,String button_name){
+		
+		WebElement subGroup = driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		
+		//Clicking on desired action button
+		subGroup.click();
+		
+		//sub-group deletion pop-up
+		if(button_name.contains("Delete")) {
+			driver.switchTo().activeElement();
+			ok_button_subgroup_deletion_popup.click();
+		}
+		
+	}
+	
+	
 	//to get check-box of required custom source
 	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
 		
@@ -1277,13 +1513,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	
     
-	//to get action button of desired group
-    public WebElement getgroup(String group_name,String button_name){
-		
-		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
-		return webelement;
-	}
-	
+
     //to get action button of desired user
     public WebElement getUser(String user_email,String button_name){
 		
@@ -1291,6 +1521,8 @@ public class GroupsAndUserPage extends TestBase {
 		return webelement;
 	}
     
+    
+    //To expand desired section-------------------
     public void expandSection(String section_name){
     	
     	WebElement strip;
@@ -1313,7 +1545,9 @@ public class GroupsAndUserPage extends TestBase {
 	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("false"),section_name+" is not expandable");
 		}
     }
+
     
+    //To collapse desired section-------------------
     public void collpaseSection(String section_name){
  
     	WebElement strip;
@@ -1337,25 +1571,7 @@ public class GroupsAndUserPage extends TestBase {
 		}
 	}
  
-   
-    
-    public void createGroup(String groupName) throws InterruptedException{
-    	Util.scrollFunction(add_subgroup_button);
-    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)", "");
-    	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
-    	add_subgroup_button.click();
-    	subgroup_name_textbox.sendKeys(groupName);
-    	
-    	Select select=new Select(subgroup_industry_listbox);
-    	Thread.sleep(2000);
-    	select.selectByIndex(3);           
-        save_subgroup.click();
-    	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
 
-    	logger.log(LogStatus.INFO, "Verifying if Subgroup creation success message is displayed");
-    	Assert.assertTrue(subgroup_creation_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
-      	
-    }
     
     public void createUser(String firstname,String lastname,String email_id,String role) throws InterruptedException{
     	
@@ -1431,7 +1647,24 @@ public class GroupsAndUserPage extends TestBase {
     
     
     
-    
+	//verification of count in top pagination toolbox	
+//	dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70135 AND role_id !=4" );
+//	countOnUI_pagination=users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
+//	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+//	Assert1.assertEquals(dbCount, users_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
+//	
+//	logger.log(LogStatus.INFO, "verifying count of listed groups");
+//	Assert1.assertEquals(dbCount, String.valueOf(users_countOf_groups.size()),"count  of listed users is mismatching with db count");
+	   //verification of buttons in top pagination toolbox
+//	   logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+//	   wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
+//	   
+//	   softassert.assertTrue(users_topNextPagination_Button.isDisplayed(),"users_topNextPagination_Button is not present or locator changed");
+//	   softassert.assertTrue(users_topPrevPagination_Button.isDisplayed(),"users_topPrevPagination_Button is not present or locator changed");	
+//	   softassert.assertTrue(users_topFirstPagination_Button.isDisplayed(),"users_topFirstPagination_count is not present or locator changed");	
+//	   softassert.assertTrue(users_topLastPagination_Button.isDisplayed(),"users_topLastPagination_count is not present or locator changed");			
+//	
+//	   softassert.assertAll();    
     
     
     
