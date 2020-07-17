@@ -159,8 +159,10 @@ public class Constants {
     	public static final String standard_role="Standard";    	
     	public static final String readonly_role="Read-Only";    	
     	
-    	//
-    	
+    	//Sub-Group Section
+    	public static final String sub_group_edit_button="Edit";
+    	public static final String sub_group_delete_button="Delete";    	
+    	public static final String sub_group_select_button="Select";    	    	
     	
 	}
     
