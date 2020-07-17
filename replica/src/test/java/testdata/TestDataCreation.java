@@ -37,7 +37,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		gp.expandSection(Constants.GroupsAndUser.sub_groups);
-		gp.createGroup(account);
+		gp.createSubGroup(account);
 //		Thread.sleep(2000);
 		hp.clickAction(Constants.HomePage.home_page);
 		
