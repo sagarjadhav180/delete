@@ -417,7 +417,7 @@ public class GroupsAndUserPage extends TestBase {
 	private static WebElement groups_topPagination_count;
 
 	@FindBy(xpath="//table[@id='table_sub_group']//tbody//tr")
-	private static List<WebElement> groups_countOf_groups;
+	private static List<WebElement> groups_count_in_grid;
 
 	@FindBy(xpath="//div[contains(text(),'created successfully.')]")
 	private WebElement subgroup_creation_success_message;	
@@ -564,7 +564,7 @@ public class GroupsAndUserPage extends TestBase {
 	private static WebElement users_topPagination_count;
 
 	@FindBy(xpath="//table[@id='table_group_user']//tbody//tr")
-	private static WebElement users_countOf_groups;
+	private static List<WebElement> users_count_in_grid;
 			
 	WebDriver driver;	
 	
@@ -1305,23 +1305,6 @@ public class GroupsAndUserPage extends TestBase {
 		logger.log(LogStatus.INFO, "Verifying groups count displeyed in top pagination toolbox with db count");
 		softassert.assertEquals(dbCount, countOnUI_pagination,"Count in top pagination toolbox is mismatching with db count");
 
-		//verification of count of groups displayed in grid with db
-		int final_groups_count=groups_countOf_groups.size()+0;
-		
-		if(!groups_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
-			
-			groups_topNextPagination_Button.click();
-			final_groups_count=final_groups_count+groups_countOf_groups.size();
-		}
-
-		logger.log(LogStatus.INFO, "Verifying count of listed groups in grid with db count");
-		softassert.assertEquals(dbCount, String.valueOf(final_groups_count),"Count  of listed groups in grid is mismatching with db count");
-		softassert.assertAll();
-		
-		//Navigating back to first page
-		if(!groups_topFirstPagination_Button.getAttribute("class").endsWith("disabled")) {
-			groups_topFirstPagination_Button.click();
-		}
 	}
 	
 
@@ -1331,13 +1314,13 @@ public class GroupsAndUserPage extends TestBase {
     	expandSection(Constants.GroupsAndUser.sub_groups);
     	
 		//verification of count of groups displayed in grid with db
-		int final_groups_count=groups_countOf_groups.size()+0;
+		int final_groups_count=groups_count_in_grid.size()+0;
 		String dbCount = Util.readingFromDB("SELECT COUNT(*) as count FROM org_unit WHERE org_unit_parent_id="+TestBase.getOrg_unit_id()+"" );
 		
 		if(!groups_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
 			
 			groups_topNextPagination_Button.click();
-			final_groups_count=final_groups_count+groups_countOf_groups.size();
+			final_groups_count=final_groups_count+groups_count_in_grid.size();
 		}
 
 		logger.log(LogStatus.INFO, "Verifying count of listed groups in grid with db count");
@@ -1479,7 +1462,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	
 	
-	//to get action button of desired group
+	//To click action button of desired group
     public void clickActionSubGroup(String group_name,String button_name){
 		
 		WebElement subGroup = driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
@@ -1495,12 +1478,79 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
 	
-	
-	//to get check-box of required custom source
-	public WebElement getCheckboxOfCustomSource(String csa,String custom_source_type){
+    
+    //User section- Pagination tool-box
+    public void userpaginationToolbox() {
+    	
+        expandSection(Constants.GroupsAndUser.user_settings);
+    	
+		//verification of buttons in top pagination Tool-box
+		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
 		
-		WebElement webelement = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+csa+"]/..//preceding-sibling::input"));
-		return webelement;
+		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
+		wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
+		
+		softassert.assertTrue(users_topNextPagination_Button.isDisplayed(),"Users Top Next Pagination Button is not present or locator changed");
+		softassert.assertTrue(users_topPrevPagination_Button.isDisplayed(),"Users Top Previous Pagination Button is not present or locator changed");	
+		softassert.assertTrue(users_topFirstPagination_Button.isDisplayed(),"Users Top First Pagination count is not present or locator changed");	
+		softassert.assertTrue(users_topLastPagination_Button.isDisplayed(),"Users Top Last Pagination count is not present or locator changed");	
+	
+		//Next-100 Button and last Button
+		if(Integer.parseInt(dbCount)>100) {
+			softassert.assertFalse(users_topLastPagination_Button.getAttribute("class").endsWith("disabled"),"Top Last Pagination button is not clickable");	
+			softassert.assertFalse(users_topNextPagination_Button.getAttribute("class").endsWith("disabled"),"Top Next Pagination button is not clickable");
+		}
+    	
+    }
+    
+	
+    //User section - pagination count verification
+  	public void usersPaginationCount() {
+  		
+      	expandSection(Constants.GroupsAndUser.user_settings);
+      	
+  		//Verification of count of users in top pagination tool-box with db	
+  		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
+  		String countOnUI_pagination = users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
+  	
+  		logger.log(LogStatus.INFO, "Verifying users count displeyed in top pagination toolbox with db count");
+  		softassert.assertEquals(dbCount, countOnUI_pagination,"Count in top pagination toolbox is mismatching with db count");
+
+  	}
+
+  	
+    //Users section - grid count verification	
+  	public void usersGridCount() {
+  		
+      	expandSection(Constants.GroupsAndUser.user_settings);
+      	
+  		//verification of count of users displayed in grid with db
+  		int final_groups_count=users_count_in_grid.size()+0;
+  		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
+  		
+  		if(!users_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
+  			
+  			users_topNextPagination_Button.click();
+  			final_groups_count=final_groups_count+users_count_in_grid.size();
+  		}
+
+  		logger.log(LogStatus.INFO, "Verifying count of listed users in grid with db count");
+  		softassert.assertEquals(dbCount, String.valueOf(final_groups_count),"Count  of listed users in grid is mismatching with db count");
+  		softassert.assertAll();
+  		
+  		//Navigating back to first page
+  		if(!users_topFirstPagination_Button.getAttribute("class").endsWith("disabled")) {
+  			users_topFirstPagination_Button.click();
+  		}
+  	}	
+  
+  	
+  	
+	//to click check-box of required custom source
+	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
+		
+		WebElement custom_source = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+custom_source_name+"]/..//preceding-sibling::input"));
+		custom_source.click();
 	}
 	
 	
