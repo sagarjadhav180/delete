@@ -460,10 +460,21 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement agent_id_textbox;	
 	
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
-	private WebElement roles_listbox;	
+	private WebElement user_roles_listbox;	
 	
-	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[@class='btn btn-sm btn-primary'][contains(text(),'Save')]")
+	String[] epxected_roles= {"Admin","Standard","Read-Only"};
+
+	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[2]")
+	private WebElement user_status_listbox;	
+	
+	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
 	private WebElement save_user_button;
+
+	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Cancel')]")
+	private WebElement cancel_user_button;
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement user_creation_alert;
 	
 	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'successfully created.')]")
 	private WebElement user_creation_success_message;
@@ -1525,17 +1536,17 @@ public class GroupsAndUserPage extends TestBase {
       	expandSection(Constants.GroupsAndUser.user_settings);
       	
   		//verification of count of users displayed in grid with db
-  		int final_groups_count=users_count_in_grid.size()+0;
+  		int final_users_count=users_count_in_grid.size()+0;
   		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
   		
   		if(!users_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
   			
   			users_topNextPagination_Button.click();
-  			final_groups_count=final_groups_count+users_count_in_grid.size();
+  			final_users_count=final_users_count+users_count_in_grid.size();
   		}
 
   		logger.log(LogStatus.INFO, "Verifying count of listed users in grid with db count");
-  		softassert.assertEquals(dbCount, String.valueOf(final_groups_count),"Count  of listed users in grid is mismatching with db count");
+  		softassert.assertEquals(dbCount, String.valueOf(final_users_count),"Count  of listed users in grid is mismatching with db count");
   		softassert.assertAll();
   		
   		//Navigating back to first page
@@ -1545,7 +1556,248 @@ public class GroupsAndUserPage extends TestBase {
   	}	
   
   	
+    //To check User Roles
+  	public void userRoles() {
+  		
+  	  	expandSection(Constants.GroupsAndUser.user_settings);
+  	  
+  	  	add_user_button.click();
+  	  	
+  	  	logger.log(LogStatus.INFO, "Verifying User Roles");
+  	  	
+  	  	Select roles=new Select(user_roles_listbox);
+  	  	
+  	  	for(int i=1;i<roles.getOptions().size();i++) {
+  	  		
+  	  		for(int j=0;j<epxected_roles.length;j++) {
+  	  			
+  	  			if(roles.getOptions().get(i).equals(epxected_roles[j])) {
+  	  				
+  	  				softassert.assertTrue(roles.getOptions().get(i).equals(epxected_roles[j]),"Role - "+epxected_roles[j]+" is not present");
+  	  				
+  	  			}
+  	  		}
+  	  	}
+  	  	
+  	  	softassert.assertAll();
+  	  	cancel_user_button.click();
+  	}
   	
+  	
+  	//To check if Inactive status is not displayed at the time of user creation
+  	public void userStatus() {
+  		
+  		expandSection(Constants.GroupsAndUser.user_settings);
+    	  
+  	  	add_user_button.click();
+  	  	
+  	  	Select status=new Select(user_status_listbox);
+  	  	
+  	  	for(int i=0;i<status.getOptions().size();i++) {
+  	  		
+  	  		softassert.assertFalse(status.getOptions().get(i).equals("Inactive"));
+  	  	}
+  	  	
+  	  	softassert.assertAll();
+  	  	cancel_user_button.click();
+  	  	
+  	}
+  	
+  	
+  	//User creation form validation
+  	public void userCreationFormValidation(String field) {
+  		
+  		expandSection(Constants.GroupsAndUser.user_settings);
+  	  
+  	  	add_user_button.click();
+  		
+  	  	//Entering User details
+  	  	first_name_textbox.clear();
+  	    first_name_textbox.sendKeys("Automation-Test_user_firstName");
+  	  	
+  	    last_name_textbox.clear();
+  	    last_name_textbox.sendKeys("Automation-Test_user_lastName");
+  	    
+  	    email_id_textbox.clear();
+  	    email_id_textbox.sendKeys("Automation_Test_user@moentek.com");
+ 
+	    Select roles=new Select(user_roles_listbox);
+	    roles.selectByVisibleText("Admin");
+  	    
+  	    //Clearing field
+  	    if(field.equals("first_name_textbox")) {
+  	    	first_name_textbox.clear();
+  	  	}
+  	    
+  	  	else if(field.equals("last_name_textbox")) {
+  	  	    last_name_textbox.clear();
+	  	}
+  	    
+  	  	else if(field.equals("email_id_textbox")) {
+  	    	email_id_textbox.clear();
+	  	}
+  	    
+  	    else if(field.equals("role_listbox")) {
+  	    	roles.selectByVisibleText("--Select--");
+	  	}
+  	  	
+  	    //Saving User details
+  	    save_user_button.click();
+  	    
+  	    logger.log(LogStatus.INFO, "Verifying if Appropriate alert is displayed for "+field);
+  	    wait.until(ExpectedConditions.visibilityOf(user_creation_alert));
+  	    Assert.assertTrue(user_creation_alert.isDisplayed(),"Appropriate alert is not dispalyed for "+field);
+  	    
+  	    cancel_user_button.click();
+  	}
+  	
+  	
+  	//User section - Cancel feature
+  	public void userCancelFeature() {
+  		
+  		expandSection(Constants.GroupsAndUser.user_settings);
+    	  
+  	  	add_user_button.click();
+  		
+  	  	//Entering User details
+  	  	first_name_textbox.clear();
+  	    first_name_textbox.sendKeys("Automation-Test_user_firstName");
+  	  	
+  	    last_name_textbox.clear();
+  	    last_name_textbox.sendKeys("Automation-Test_user_lastName");
+  	    
+  	    email_id_textbox.clear();
+  	    email_id_textbox.sendKeys("Automation_Test_user@moentek.com");
+  	    
+	    Select roles=new Select(user_roles_listbox);
+	    roles.selectByVisibleText("Admin");
+  	    
+  	    //Canceling User details
+  	    cancel_user_button.click();
+  	    
+  	    logger.log(LogStatus.INFO, "Verifying if User creation success message is not displayed");    
+  	
+  	    try {
+  	  	    Assert.assertTrue(user_creation_alert.isDisplayed());
+  	  	    Assert.fail("User creation success message is displayed");
+  	    }
+  	    catch(Exception e){
+  	    	logger.log(LogStatus.PASS, "");
+  	    }
+  	  
+  	}
+  	
+  	
+  	//User creation
+    public void createUser(String firstname,String lastname,String email_id,String role) throws InterruptedException{
+    	
+    	expandSection(Constants.GroupsAndUser.user_settings);
+  	  
+    	wait.until(ExpectedConditions.visibilityOf(add_user_button));
+    	add_user_button.click();
+    	
+    	//Entering User details
+  	  	first_name_textbox.clear();
+  	    first_name_textbox.sendKeys(firstname);
+  	  	
+  	    last_name_textbox.clear();
+  	    last_name_textbox.sendKeys(lastname);
+  	    
+  	    email_id_textbox.clear();
+  	    email_id_textbox.sendKeys(email_id);
+  	    
+	    Select roles=new Select(user_roles_listbox);
+	    roles.selectByVisibleText(role);
+    	
+	    //Saving User Details   
+    	save_user_button.click();
+    	
+    	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
+    	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
+    	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
+    }
+
+    
+    //User Updation
+  	public void updateUser(String user_id,String updated_user_id) {
+  		
+  		expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_edit_button);
+  		
+     	//Entering User details
+  	    email_id_textbox.clear();
+  	    email_id_textbox.sendKeys(updated_user_id);
+
+  	    //Saving User Details   
+    	save_user_button.click();
+    	
+    	wait.until(ExpectedConditions.visibilityOf(user_updation_success_message));
+    	logger.log(LogStatus.INFO, "Verifying if User updation success message is displayed");
+    	Assert.assertTrue(user_updation_success_message.isDisplayed(),"User not updated successfully");
+  	   
+  	}
+    
+  	
+  	//User Deletion
+  	public void deleteUser(String user_id) {
+  		
+        expandSection(Constants.GroupsAndUser.user_settings);
+  		
+        //Deleting user
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_delete_button);
+  		
+  		//verification
+  		logger.log(LogStatus.INFO, "Verifying if User is geting deleted successfully");
+  		Assert.assertTrue(user_deletion_success_message.isDisplayed(),"User not deleted successfully");
+  	}
+  	
+  	
+  	//User section - Change Password window UI
+  	public void changePasswordWindow() {
+  		
+  		expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  		//Opening Change Password window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
+  		
+  		//UI Verification
+  		logger.log(LogStatus.INFO, "Verifying if Change Password label is present");
+  		softassert.assertTrue(change_password_label.isDisplayed(),"Change Password label is not present");
+
+  		logger.log(LogStatus.INFO, "Verifying if Password text-box is present");
+  		softassert.assertTrue(change_password_textbox.isDisplayed(),"Password text-box is not present");
+
+  		logger.log(LogStatus.INFO, "Verifying if Change Password OK button is present");
+  		softassert.assertTrue(change_password_ok_button.isDisplayed(),"Change Password OK button is not present");
+  		
+  		logger.log(LogStatus.INFO, "Verifying if Change Password Cancel button is present");
+  		softassert.assertTrue(change_password_cancel_button.isDisplayed(),"Change Password Cancel button is not present");
+  		
+  		softassert.assertAll();
+  	}
+
+
+  	
+  	//To click action button of desired user
+    public void clickActionUser(String user_email,String button_name){
+		
+		WebElement button = driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		
+		wait.until(ExpectedConditions.visibilityOf(button));
+		button.click();
+		
+		//Deletion pop-up
+		if(button_name.contains("Delete")) {
+			
+			driver.switchTo().activeElement();
+			user_deletion_confiramtion_popup_textbox.sendKeys("yes");
+			user_deletion_confiramtion_popup_ok_button.click();
+		
+		}	
+	
+    }
+    
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
 		
@@ -1564,12 +1816,8 @@ public class GroupsAndUserPage extends TestBase {
 	
     
 
-    //to get action button of desired user
-    public WebElement getUser(String user_email,String button_name){
-		
-		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
-		return webelement;
-	}
+    
+    
     
     
     //To expand desired section-------------------
@@ -1621,28 +1869,6 @@ public class GroupsAndUserPage extends TestBase {
 		}
 	}
  
-
-    
-    public void createUser(String firstname,String lastname,String email_id,String role) throws InterruptedException{
-    	
-    	Util.scrollFunction(add_user_button);
-    	Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-100)", "");
-    	wait.until(ExpectedConditions.visibilityOf(add_user_button));
-    	add_user_button.click();
-    	
-    	first_name_textbox.sendKeys(firstname);
-    	last_name_textbox.sendKeys(lastname);
-    	email_id_textbox.sendKeys(email_id);
-    	
-    	Select select=new Select(roles_listbox);
-    	select.selectByVisibleText(role);
-    	
-    	save_user_button.click();
-    	
-    	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
-    	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
-    }
-
     
     public void updateTNSettings() throws InterruptedException{
     	
@@ -1694,27 +1920,6 @@ public class GroupsAndUserPage extends TestBase {
     }
     
 
-    
-    
-    
-	//verification of count in top pagination toolbox	
-//	dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70135 AND role_id !=4" );
-//	countOnUI_pagination=users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
-//	logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
-//	Assert1.assertEquals(dbCount, users_countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
-//	
-//	logger.log(LogStatus.INFO, "verifying count of listed groups");
-//	Assert1.assertEquals(dbCount, String.valueOf(users_countOf_groups.size()),"count  of listed users is mismatching with db count");
-	   //verification of buttons in top pagination toolbox
-//	   logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
-//	   wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
-//	   
-//	   softassert.assertTrue(users_topNextPagination_Button.isDisplayed(),"users_topNextPagination_Button is not present or locator changed");
-//	   softassert.assertTrue(users_topPrevPagination_Button.isDisplayed(),"users_topPrevPagination_Button is not present or locator changed");	
-//	   softassert.assertTrue(users_topFirstPagination_Button.isDisplayed(),"users_topFirstPagination_count is not present or locator changed");	
-//	   softassert.assertTrue(users_topLastPagination_Button.isDisplayed(),"users_topLastPagination_count is not present or locator changed");			
-//	
-//	   softassert.assertAll();    
     
     
     
