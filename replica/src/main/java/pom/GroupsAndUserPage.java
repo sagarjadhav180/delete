@@ -772,7 +772,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Tracking Number Setting UI Validation
 	@SuppressWarnings("unlikely-arg-type")
-	public void TNSettingsUI(){
+	public void tnSettingsUI(){
 			
 			for (int i=0; i<tn_settings_labels.size(); i++) {
 				
@@ -990,8 +990,7 @@ public class GroupsAndUserPage extends TestBase {
 
 	
     // Custom Source UI Validation
-    
-	public void Custom_Source_UI_Validation(){
+	public void custom_Source_UI_Validation(){
 		
 		for (int i=0; i<custom_sources_labels.size(); i++) {
 			
@@ -1022,8 +1021,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	
 	// Custom Source Add New Source Validation
-	
-	public void Custom_Source_Add_New_Source(){
+	public void custom_Source_Add_New_Source(){
 		
 		for(int i=1; i<=5; i++) {
 			addCustomSource(String.valueOf(i), "CStextbox" + i);
@@ -1035,8 +1033,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	
 	//Custom Source Delete Source Validation
-	
-	public void Custom_Source_Delete_Source(){
+	public void custom_Source_Delete_Source(){
 		
 		for(int i=1; i<=5; i++) {
 			clickCheckboxOfCustomSource("CStextbox", String.valueOf(i));
@@ -1552,6 +1549,27 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
 	
+    //User section UI Validation
+    public void users_UI_Validation(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying User Section UI");
+    	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
+    	softassert.assertTrue(export_users_button.isEnabled(), "Export Users button is not enabled");
+    	
+    	for(int i=0; i<users_columns_names.size(); i++) {
+    		for(int j=0; j<expected_users_columns_names.length; j++) {
+    			
+    			if(users_columns_names.get(i).getText().equalsIgnoreCase(expected_users_columns_names[j])) {
+    				logger.log(LogStatus.INFO, "Verifying User Page Column labels");
+    				softassert.assertTrue(users_columns_names.get(i).getText().equalsIgnoreCase(expected_users_columns_names[j]), expected_users_columns_names + "is not present");	
+    				}
+    		}
+    	}
+
+
+		softassert.assertAll();
+}
+
     
     //User section- Pagination tool-box
     public void userpaginationToolbox() {
