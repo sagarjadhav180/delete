@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -779,7 +780,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Tracking Number Setting UI Validation
 	@SuppressWarnings("unlikely-arg-type")
-	public void TNSettingsUI(){
+	public void tnSettingsUI(){
 			
 			for (int i=0; i<tn_settings_labels.size(); i++) {
 				
@@ -995,6 +996,65 @@ public class GroupsAndUserPage extends TestBase {
 		updateTNSettings();
 	}
 
+	
+    // Custom Source UI Validation
+	public void custom_Source_UI_Validation(){
+		
+		for (int i=0; i<custom_sources_labels.size(); i++) {
+			
+			for(int j=0; j<customsources_labels.length; j++) {
+							
+				if(custom_sources_labels.get(i).getText().equals(customsources_labels[i])) {
+					softassert.assertTrue(custom_sources_labels.get(i).getText().equals(customsources_labels[i]), customsources_labels[i] + "is not present");
+				}
+			}
+		}
+		
+		//softassert.assertTrue(.addCustomSource(custom_source_type, cs_name);, message);
+		//Custom Source_Add New SOurce Textbox validation
+		
+		for(int i=1; i<=5; i++) {
+			WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+			logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+			softassert.assertTrue(cs_textbox.isEnabled(), "Add a new source textbox no. " + i +" is not enabled");
+		}
+		
+		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+		softassert.assertTrue(custom_source_clear_button.isDisplayed(), "Clear button is not present");	
+		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+		softassert.assertTrue(custom_source_delete_button.isDisplayed(),"Delete button is not present");
+				
+		softassert.assertAll();
+		
+	}
+	
+	// Custom Source Add New Source Validation
+	public void custom_Source_Add_New_Source(){
+		
+		for(int i=1; i<=5; i++) {
+			addCustomSource(String.valueOf(i), "CStextbox" + i);
+			logger.log(LogStatus.INFO, "verifying Add New Custom Source functionality & Success Message");
+		//  Validating Success Message for each column
+			softassert.assertTrue(add_custom_source_success_message.isDisplayed(), "Source added Success Message Not displayed");
+		}		
+		softassert.assertAll();
+	}
+	
+	//Custom Source Delete Source Validation
+	public void custom_Source_Delete_Source(){
+		
+		for(int i=1; i<=5; i++) {
+			clickCheckboxOfCustomSource("CStextbox", String.valueOf(i));
+			custom_source_delete_button.click();
+			logger.log(LogStatus.INFO, "verifying Custom Source Deletion Confirmation & Success Messages");
+			softassert.assertTrue(custom_source_deletion_confiramtion_message.isDisplayed(), "Custom Source Deletion Confirmation Message not popped up");
+			softassert.assertTrue(custom_source_deletion_ok_button.isDisplayed(), "Custom Source Deletion OK button Not present");
+			softassert.assertTrue(custom_source_deletion_cancel_button.isDisplayed(), "Custom Source Deletion Cancel button Not present");
+			softassert.assertTrue(custom_source_deletion_success_message.isDisplayed(), "Source Not deleted successfully");
+					}		
+		softassert.assertAll();
+	}
+    
 	
 	//Call Action section UI Verification
 	@SuppressWarnings("unlikely-arg-type")
@@ -1497,6 +1557,27 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
 	
+    //User section UI Validation
+    public void users_UI_Validation(){
+    	
+    	logger.log(LogStatus.INFO, "Verifying User Section UI");
+    	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
+    	softassert.assertTrue(export_users_button.isEnabled(), "Export Users button is not enabled");
+    	
+    	for(int i=0; i<users_columns_names.size(); i++) {
+    		for(int j=0; j<expected_users_columns_names.length; j++) {
+    			
+    			if(users_columns_names.get(i).getText().equalsIgnoreCase(expected_users_columns_names[j])) {
+    				logger.log(LogStatus.INFO, "Verifying User Page Column labels");
+    				softassert.assertTrue(users_columns_names.get(i).getText().equalsIgnoreCase(expected_users_columns_names[j]), expected_users_columns_names + "is not present");	
+    				}
+    		}
+    	}
+
+
+		softassert.assertAll();
+}
+
     
     //User section- Pagination tool-box
     public void userpaginationToolbox() {
