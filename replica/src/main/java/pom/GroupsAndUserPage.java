@@ -512,6 +512,9 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Password updated successfully.']")
 	private WebElement change_password_success_message;	
+
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
+	private WebElement change_password_alert;
 	
 	//User Permissions window
 	@FindBy(xpath="//div[@class='modal-header']//h4[text()='User Permissions']")
@@ -549,8 +552,13 @@ public class GroupsAndUserPage extends TestBase {
 	
 	@FindBy(xpath="//ul[@class='tree-view-wrapper ng-scope']//input")
 	private List<WebElement> user_permissions_reports_checkboxes;	
+
+	@FindBy(xpath="//div[starts-with(@class,'Permissions')]//button[text()='Cancel']")
+	private WebElement user_permissions_cancel_button;	
+
+	@FindBy(xpath="//div[starts-with(@class,'Permissions')]//button[text()='Save']")
+	private WebElement user_permissions_save_button;
 	
-    //------------------------------------------------------------------------------//
 	@FindBy(xpath="(//span[text()='Export Users'])[1]//parent::button")
 	private WebElement export_users_button;	
 
@@ -1754,7 +1762,7 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User section - Change Password window UI
-  	public void changePasswordWindow() {
+  	public void changePasswordWindow(String user_id) {
   		
   		expandSection(Constants.GroupsAndUser.user_settings);
   		
@@ -1775,9 +1783,158 @@ public class GroupsAndUserPage extends TestBase {
   		softassert.assertTrue(change_password_cancel_button.isDisplayed(),"Change Password Cancel button is not present");
   		
   		softassert.assertAll();
+  		
+  	    //Closing Change Password window
+  		change_password_cancel_button.click();
+  	}
+  	
+  	
+  	//User Section - Change password form validation
+  	public void changePasswordFormValidation(String user_id) {
+  		
+        expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  		//Opening Change Password window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
+  		
+  		change_password_textbox.clear();
+  		change_password_ok_button.click();
+  	
+  		//Verification
+  		logger.log(LogStatus.INFO, "Verifying if appropriate alert is displayed if password is not entered");
+  		Assert.assertTrue(change_password_alert.isDisplayed(),"Appropriate alert is not displayed if password is not entered");
+  	
+  	    //Closing Change Password window
+  		change_password_cancel_button.click();
   	}
 
+  	
+  	//User Section - Change password cancel feature
+  	public void changePasswordCancel(String user_id) {
+  		
+        expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  		//Opening Change Password window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
+  		
+  		change_password_textbox.clear();
+  		change_password_textbox.sendKeys("lmc2demo");
+  		
+  	    //Closing Change Password window
+  		change_password_cancel_button.click();
+  		
+  		//Verification
+  		logger.log(LogStatus.INFO, "Verifying if Change password success message is not displayed ");
+  		try {
+  	  		Assert.assertTrue(change_password_success_message.isDisplayed());
+  	  		Assert.fail("Password is changed successfully on clicking cancel button");
+  		}
+  		catch(Exception e) {
+  			logger.log(LogStatus.PASS, "");
+  		}
+  		
+  	}
+  	
+  	
+    //User Section - Change password feature
+  	public void changePassword(String user_id) {
+  		
+        expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  		//Opening Change Password window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
+  		
+  		change_password_textbox.clear();
+  		change_password_textbox.sendKeys("lmc2demo");
+  		change_password_ok_button.click();
+  		
+  	    //Verification
+  		logger.log(LogStatus.INFO, "Verifying if Change password is working");
+  		Assert.assertTrue(change_password_success_message.isDisplayed(),"Password not changed successfully");
+  	}
+  	
+  	
+  	//User section - User Permission window UI
+  	public void userPermissionUI(String user_id) {
+  		
+        expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  		//Opening User Permission window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
+  		
+  		logger.log(LogStatus.INFO, "Verifying if User Permissions label is present");
+  		softassert.assertTrue(user_permissions_window_label.isDisplayed(),"User Permissions label is not present");
+  		
+  		logger.log(LogStatus.INFO, "Verifying if Access Audio label is present");
+  		softassert.assertTrue(user_permissions_access_audio_label.isDisplayed(),"Access Audio label is not present");
+  		
+  		logger.log(LogStatus.INFO, "Verifying if Access Audio toggle is present");
+  		softassert.assertTrue(user_permissions_access_audio_toggle.isDisplayed(),"Access Audio toggle is not present");  		
+  		
+  		logger.log(LogStatus.INFO, "Verifying if Score Call label is present");
+  		softassert.assertTrue(user_permissions_score_calls_label.isDisplayed(),"Score Call label is not present");
+  	
+  		logger.log(LogStatus.INFO, "Verifying if Score Call toggle is present");
+  		softassert.assertTrue(user_permissions_score_calls_toggle.isDisplayed(),"Score Call toggle is not present");
 
+  		logger.log(LogStatus.INFO, "Verifying if Groups Access label is present");
+  		softassert.assertTrue(user_permissions_group_access_label.isDisplayed(),"Groups Access label is not present");
+ 
+ 		logger.log(LogStatus.INFO, "Verifying if Reporting Access label is present");
+  		softassert.assertTrue(user_permissions_reporting_access_label.isDisplayed(),"Reporting Access label is not present");
+  		
+ 		logger.log(LogStatus.INFO, "Verifying if cancel button is present");
+  		softassert.assertTrue(user_permissions_cancel_button.isDisplayed(),"Cancel button is not present");
+
+ 		logger.log(LogStatus.INFO, "Verifying if Save button is present");
+  		softassert.assertTrue(user_permissions_save_button.isDisplayed(),"Save button is not present");
+  
+  		softassert.assertAll();
+  		user_permissions_cancel_button.click();
+  		
+  	}
+  	
+  	
+  	//User Section - User permission cancel feature
+  	public void userPermissionCancelFeature(String user_id) {
+  		
+  	    expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  	    //Opening User Permission window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
+  		
+  		user_permissions_access_audio_toggle.click();
+  		
+  		user_permissions_cancel_button.click();
+  	
+ 		logger.log(LogStatus.INFO, "Verifying if User permissions does not update on clicking cancel button");	
+  		try {
+  			Assert.assertTrue(user_permissions_update_success_message.isDisplayed());
+  			Assert.fail("User permissions updated on clicking cancel button");
+  		}
+  		catch(Exception e) {
+  			logger.log(LogStatus.PASS, "");
+  		}
+  		
+  	}
+  	
+
+  	//User Section - Update User permission
+  	public void updateUserPermissions(String user_id) {
+  		
+  	    expandSection(Constants.GroupsAndUser.user_settings);
+  		
+  	    //Opening User Permission window
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
+  		
+  		user_permissions_access_audio_toggle.click();
+  		user_permissions_save_button.click();
+
+ 		logger.log(LogStatus.INFO, "Verifying if User permissions gets updated");	
+  		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions updated successfully");
+  		
+  	}
+  	
   	
   	//To click action button of desired user
     public void clickActionUser(String user_email,String button_name){
@@ -1797,6 +1954,22 @@ public class GroupsAndUserPage extends TestBase {
 		}	
 	
     }
+    
+    
+    /*User Section - Clean up Activity
+     *use user_email -- delete_automation_user in Test class
+     */
+    public void cleanUpUsers(String user_email) {
+
+        expandSection(Constants.GroupsAndUser.user_settings);
+    	
+        clickActionUser(user_email,"Delete");
+        
+        logger.log(LogStatus.INFO, "User section clean up activity");
+        Assert.assertTrue(user_deletion_success_message.isDisplayed());
+    	
+    }
+    
     
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
@@ -1870,6 +2043,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
  
     
+    //Part of Test Data creation------------------------------
     public void updateTNSettings() throws InterruptedException{
     	
     	Util.scrollFunction(configure_voicemail_greetings_textbox);
