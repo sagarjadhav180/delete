@@ -630,7 +630,7 @@ public class GroupsAndUserPage extends TestBase {
     }
 
     
-    //Group Details UI verification
+    //Group Details UI verification ----------------------------------------------
     public void groupDetailsUI(){
     	
 		expandSection(Constants.GroupsAndUser.group_details);    	
@@ -744,7 +744,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 
 	
-    //Feature Settings UI Verification
+    //Feature Settings UI Verification -------------------------------------------
 	public void featureSettingsUI(){
 		
 		expandSection(Constants.GroupsAndUser.feature_settings);
@@ -778,7 +778,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 
 	
-	//Tracking Number Setting UI Validation
+	//Tracking Number Setting UI Validation ----------------------------------------
 	@SuppressWarnings("unlikely-arg-type")
 	public void tnSettingsUI(){
 			
@@ -890,7 +890,7 @@ public class GroupsAndUserPage extends TestBase {
    }
 	
 		
-   //DNI and Instant Insights section form validation-------------
+   //DNI and Instant Insights section form validation
    public void dniAndIntantInsightsFormValidations(String section_name) {
 		
 		expandSection(Constants.GroupsAndUser.tn_settings);
@@ -936,7 +936,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	    
    
-	//TN settings form validation-------------------
+	//TN settings form validation
 	public void tnSettingsFormValidation(String fieldName) throws InterruptedException {
 
 		//Expanding TN settings section
@@ -997,7 +997,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 
 	
-    // Custom Source UI Validation
+    // Custom Source UI Validation ------------------------------------------------
 	public void custom_Source_UI_Validation(){
 		
 		for (int i=0; i<custom_sources_labels.size(); i++) {
@@ -1010,25 +1010,24 @@ public class GroupsAndUserPage extends TestBase {
 			}
 		}
 		
-		//softassert.assertTrue(.addCustomSource(custom_source_type, cs_name);, message);
-		//Custom Source_Add New SOurce Textbox validation
-		
+		//Custom Source_Add New SOurce Textbox validation		
 		for(int i=1; i<=5; i++) {
 			WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
-			logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+			logger.log(LogStatus.INFO, "verifying if Add Custom source text box is enabled");
 			softassert.assertTrue(cs_textbox.isEnabled(), "Add a new source textbox no. " + i +" is not enabled");
 		}
 		
-		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+		logger.log(LogStatus.INFO, "Verifying if Clear button is present");
 		softassert.assertTrue(custom_source_clear_button.isDisplayed(), "Clear button is not present");	
-		logger.log(LogStatus.INFO, "verifying count in top pagination toolbox");
+		logger.log(LogStatus.INFO, "Verifying if Delete button is present");
 		softassert.assertTrue(custom_source_delete_button.isDisplayed(),"Delete button is not present");
 				
 		softassert.assertAll();
 		
 	}
 	
-	// Custom Source Add New Source Validation
+	
+	//Custom Source Add New Source Validation
 	public void custom_Source_Add_New_Source(){
 		
 		for(int i=1; i<=5; i++) {
@@ -1039,6 +1038,7 @@ public class GroupsAndUserPage extends TestBase {
 		}		
 		softassert.assertAll();
 	}
+	
 	
 	//Custom Source Delete Source Validation
 	public void custom_Source_Delete_Source(){
@@ -1056,7 +1056,24 @@ public class GroupsAndUserPage extends TestBase {
 	}
     
 	
-	//Call Action section UI Verification
+	//to click check-box of required custom source
+	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
+			
+		WebElement custom_source = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+custom_source_name+"]/..//preceding-sibling::input"));
+		custom_source.click();
+	}
+		
+		
+	public void addCustomSource(String custom_source_type,String cs_name){
+			
+		WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
+		WebElement cs_list = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
+		cs_textbox.sendKeys(cs_name);
+			
+	}
+	
+	    
+	//Call Action section UI Verification -----------------------------------------
 	@SuppressWarnings("unlikely-arg-type")
 	public void callActionSectionUI() {
 		
@@ -1314,7 +1331,7 @@ public class GroupsAndUserPage extends TestBase {
     }
 	
     
-    //Sub-group section UI
+    //Sub-group section UI ------------------------------------------------------------
     public void subGroupUI() {
     	
     	expandSection(Constants.GroupsAndUser.sub_groups);
@@ -1557,7 +1574,8 @@ public class GroupsAndUserPage extends TestBase {
 		
 	}
 	
-    //User section UI Validation
+    //User section ---------------------------------------------
+    //UI Validation
     public void users_UI_Validation(){
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
@@ -1576,7 +1594,7 @@ public class GroupsAndUserPage extends TestBase {
 
 
 		softassert.assertAll();
-}
+    }
 
     
     //User section- Pagination tool-box
@@ -2050,28 +2068,6 @@ public class GroupsAndUserPage extends TestBase {
         Assert.assertTrue(user_deletion_success_message.isDisplayed());
     	
     }
-    
-    
-	//to click check-box of required custom source
-	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
-		
-		WebElement custom_source = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+custom_source_name+"]/..//preceding-sibling::input"));
-		custom_source.click();
-	}
-	
-	
-    public void addCustomSource(String custom_source_type,String cs_name){
-		
-		WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
-		WebElement cs_list = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
-		cs_textbox.sendKeys(cs_name);
-		
-	}
-	
-    
-
-    
-    
     
     
     //To expand desired section-------------------
