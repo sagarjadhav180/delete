@@ -586,7 +586,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//table[@id='table_group_user']//tbody//tr")
 	private static List<WebElement> users_count_in_grid;
 			
-	WebDriver driver;	
+//	WebDriver driver;	
 	
 	public GroupsAndUserPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
@@ -621,7 +621,7 @@ public class GroupsAndUserPage extends TestBase {
     //Strips verification
     public void Strip(String stripName){
     	
-    	WebElement strip = driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
+    	WebElement strip = TestBase.driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
 	
     	wait.until(ExpectedConditions.visibilityOf(strip));
     	
@@ -1012,7 +1012,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 		//Custom Source_Add New SOurce Textbox validation		
 		for(int i=1; i<=5; i++) {
-			WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+			WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
 			logger.log(LogStatus.INFO, "verifying if Add Custom source text box is enabled");
 			softassert.assertTrue(cs_textbox.isEnabled(), "Add a new source textbox no. " + i +" is not enabled");
 		}
@@ -1059,15 +1059,15 @@ public class GroupsAndUserPage extends TestBase {
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
 			
-		WebElement custom_source = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+custom_source_name+"]/..//preceding-sibling::input"));
+		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+custom_source_name+"]/..//preceding-sibling::input"));
 		custom_source.click();
 	}
 		
 		
 	public void addCustomSource(String custom_source_type,String cs_name){
 			
-		WebElement cs_textbox = driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
-		WebElement cs_list = driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
+		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
+		WebElement cs_list = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
 		cs_textbox.sendKeys(cs_name);
 			
 	}
@@ -1270,28 +1270,28 @@ public class GroupsAndUserPage extends TestBase {
     	for(int i=1;i<=10;i++){
     		
     		//Rule
-    		WebElement rule = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[2]"));
+    		WebElement rule = TestBase.driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[2]"));
     		Select rules=new Select(rule);
     		rules.selectByVisibleText("duration");
     		
     		//operator
-    		WebElement operator = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[3]"));
+    		WebElement operator = TestBase.driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//select)[3]"));
     		Select operators=new Select(operator);
     		operators.selectByVisibleText("=");
     		
     		//rule value
-    		WebElement rule_value = driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//input)[1]"));
+    		WebElement rule_value = TestBase.driver.findElement(By.xpath("((//h3[text()='If']//ancestor::div[@class='timeline-content'])["+i+"]//input)[1]"));
     		rule_value.clear();
     		rule_value.sendKeys("10");
     		
     		//action
-    		WebElement action = driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[9]"));
+    		WebElement action = TestBase.driver.findElement(By.xpath("((//h3[text()='Then']//ancestor::div[@class='timeline-content'])["+i+"]//select)[9]"));
     		Select actions=new Select(action);
     		actions.selectByVisibleText("Flag for call back");
     		
     		//add action button
     		if(i<10){
-    			WebElement add_action_button = driver.findElement(By.xpath("(//a[text()='Add Action'])["+i+"]"));
+    			WebElement add_action_button = TestBase.driver.findElement(By.xpath("(//a[text()='Add Action'])["+i+"]"));
         		add_action_button.click();
         		Thread.sleep(2000);
     		}
@@ -1300,7 +1300,7 @@ public class GroupsAndUserPage extends TestBase {
 				logger.log(LogStatus.INFO, "Verifing if Add action button is not dispalyed after adding 10 call actions");
     			
 				try{
-        			add_action_button = driver.findElement(By.xpath("(//a[text()='Add Action'])["+i+"]"));
+        			add_action_button = TestBase.driver.findElement(By.xpath("(//a[text()='Add Action'])["+i+"]"));
         		    Assert.fail("Add Button is dispalyed to add 11th call action");	
     			}
     			catch(Exception e) {
@@ -1316,7 +1316,7 @@ public class GroupsAndUserPage extends TestBase {
     //Cleanup activity for call actions
     public void deleteAllCations(){
     	
-    	List<WebElement> delete_icons = driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
+    	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
 
     	for(int i=0;i<delete_icons.size();i++){
     		delete_icons.get(i).click();
@@ -1561,7 +1561,7 @@ public class GroupsAndUserPage extends TestBase {
 	//To click action button of desired group
     public void clickActionSubGroup(String group_name,String button_name){
 		
-		WebElement subGroup = driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		WebElement subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		//Clicking on desired action button
 		subGroup.click();
@@ -1577,6 +1577,8 @@ public class GroupsAndUserPage extends TestBase {
     //User section ---------------------------------------------
     //UI Validation
     public void users_UI_Validation(){
+
+        expandSection(Constants.GroupsAndUser.user_settings);
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
@@ -2038,7 +2040,7 @@ public class GroupsAndUserPage extends TestBase {
   	//To click action button of desired user
     public void clickActionUser(String user_email,String button_name){
 		
-		WebElement button = driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		wait.until(ExpectedConditions.visibilityOf(button));
 		button.click();
@@ -2078,12 +2080,13 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
 
-    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	else{
-    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	
     	if(strip_state.getAttribute("aria-hidden").equals("true")){
@@ -2103,12 +2106,12 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
 
-    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	else{
-    		strip_state = driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
-    		strip = driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	
     	if(strip_state.getAttribute("aria-hidden").equals("false")){
