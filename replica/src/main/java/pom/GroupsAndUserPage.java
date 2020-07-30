@@ -41,7 +41,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 	//Group Details------------------------------------------------------------------
 	@FindBy(xpath="(//label[@class='control-label'])[position()>1 and position()<9]")
-	private List<WebElement> group_details_labels;
+	private List<WebElement> group_details_strip_labels;
 	
 	String[] expected_groupDetailsLabels={"Name","External ID","Industry","Phone","City","State/Province","Zip/Postal Code"};
 	
@@ -633,17 +633,17 @@ public class GroupsAndUserPage extends TestBase {
     //Group Details UI verification ----------------------------------------------
     public void groupDetailsUI(){
     	
-		expandSection(Constants.GroupsAndUser.group_details);    	
+		expandSection(Constants.GroupsAndUser.group_details_strip);    	
     	
 		
-    	for(int i=0;i<group_details_labels.size();i++){
+    	for(int i=0;i<group_details_strip_labels.size();i++){
     		
     		for(int j=0;j<expected_groupDetailsLabels.length;j++){
     			
-    			if(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j])){
+    			if(group_details_strip_labels.get(i).getText().equals(expected_groupDetailsLabels[j])){
 
     				logger.log(LogStatus.INFO, "Verifying if "+expected_groupDetailsLabels[j]+" is displayed");
-    				softassert.assertTrue(group_details_labels.get(i).getText().equals(expected_groupDetailsLabels[j]),expected_groupDetailsLabels[j]+" is not displayed");    				
+    				softassert.assertTrue(group_details_strip_labels.get(i).getText().equals(expected_groupDetailsLabels[j]),expected_groupDetailsLabels[j]+" is not displayed");    				
     			}    
     		}	
     	}
@@ -701,7 +701,7 @@ public class GroupsAndUserPage extends TestBase {
     //Group Details Form Validation    
 	public void groupDetailsFormValidation(String validation_textbox){
 		
-		expandSection(Constants.GroupsAndUser.group_details);
+		expandSection(Constants.GroupsAndUser.group_details_strip);
 		
 		if(validation_textbox.equals("group_name_textbox")){
 			String group = groupName_textbox.getAttribute("value");
@@ -728,7 +728,7 @@ public class GroupsAndUserPage extends TestBase {
     //Group Details Updattion
 	public void groupDetailsUpdate(){
 		
-		expandSection(Constants.GroupsAndUser.group_details);
+		expandSection(Constants.GroupsAndUser.group_details_strip);
 		
 		String external_id = "ext_id"+Util.generateRandomNumber();
 		externalID_textbox.clear();
@@ -747,7 +747,7 @@ public class GroupsAndUserPage extends TestBase {
     //Feature Settings UI Verification -------------------------------------------
 	public void featureSettingsUI(){
 		
-		expandSection(Constants.GroupsAndUser.feature_settings);
+		expandSection(Constants.GroupsAndUser.feature_settings_strip);
 		
 		//CA 
 		logger.log(LogStatus.INFO, "Verifying UI of Call Analytics section");
@@ -893,7 +893,7 @@ public class GroupsAndUserPage extends TestBase {
    //DNI and Instant Insights section form validation
    public void dniAndIntantInsightsFormValidations(String section_name) {
 		
-		expandSection(Constants.GroupsAndUser.tn_settings);
+		expandSection(Constants.GroupsAndUser.tn_settings_strip);
 		
 		if (section_name.equals("dni_section")) {
 			
@@ -940,7 +940,7 @@ public class GroupsAndUserPage extends TestBase {
 	public void tnSettingsFormValidation(String fieldName) throws InterruptedException {
 
 		//Expanding TN settings section
-        expandSection(Constants.GroupsAndUser.tn_settings);
+        expandSection(Constants.GroupsAndUser.tn_settings_strip);
         
         //Reseting all settings
         updateTNSettings();
@@ -1077,7 +1077,7 @@ public class GroupsAndUserPage extends TestBase {
 	@SuppressWarnings("unlikely-arg-type")
 	public void callActionSectionUI() {
 		
-		expandSection(Constants.GroupsAndUser.call_actions);
+		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		
 		logger.log(LogStatus.INFO, "Verifying if Action label is present");
 		softassert.assertTrue(action_label.isDisplayed(),"Action label is not displayed");
@@ -1198,7 +1198,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Call Action Form Validation
 	public void callActionFormValidation(String section) {
 
-		expandSection(Constants.GroupsAndUser.call_actions);
+		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		call_action_reset_button.click();
 		
 		if(section.equals("rule")) {
@@ -1238,7 +1238,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Call Actions Reset function
 	public void resetCallAction() {
 		
-		expandSection(Constants.GroupsAndUser.call_actions);
+		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		call_action_reset_button.click();
 		
 		//Input for Rule Condition
@@ -1334,7 +1334,7 @@ public class GroupsAndUserPage extends TestBase {
     //Sub-group section UI ------------------------------------------------------------
     public void subGroupUI() {
     	
-    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	expandSection(Constants.GroupsAndUser.sub_groups_strip);
     	
     	//Add Sub-group button
     	logger.log(LogStatus.INFO, "Verifying if Add Sub-group button is displayed");
@@ -1367,7 +1367,7 @@ public class GroupsAndUserPage extends TestBase {
     //Sub-group section Pagination Tool-box
 	public void subGroupPagiantionToolbox() {
 
-    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	expandSection(Constants.GroupsAndUser.sub_groups_strip);
     	
 		//verification of buttons in top pagination Tool-box
 		String dbCount = Util.readingFromDB("SELECT COUNT(*) as count FROM org_unit WHERE org_unit_parent_id="+TestBase.getOrg_unit_id()+"" );
@@ -1392,7 +1392,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group pagination count verification
 	public void subGroupPaginationCount() {
 		
-    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	expandSection(Constants.GroupsAndUser.sub_groups_strip);
     	
 		//verification of count of groups in top pagination tool-box with db	
 		String dbCount = Util.readingFromDB("SELECT COUNT(*) as count FROM org_unit WHERE org_unit_parent_id="+TestBase.getOrg_unit_id()+"" );
@@ -1407,7 +1407,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group grid count verification	
 	public void subGroupGridCount() {
 		
-    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	expandSection(Constants.GroupsAndUser.sub_groups_strip);
     	
 		//verification of count of groups displayed in grid with db
 		int final_groups_count=groups_count_in_grid.size()+0;
@@ -1433,7 +1433,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group Validation
 	public void subGroupFormValidation(String field) {
 		
-    	expandSection(Constants.GroupsAndUser.sub_groups);
+    	expandSection(Constants.GroupsAndUser.sub_groups_strip);
     	add_subgroup_button.click();
     	
     	if(field.equals("group_name_textbox")) {
@@ -1462,7 +1462,7 @@ public class GroupsAndUserPage extends TestBase {
     //Sub-group Cancel button feature
 	public void cancelSubGroup() {
 
-	   	expandSection(Constants.GroupsAndUser.sub_groups);
+	   	expandSection(Constants.GroupsAndUser.sub_groups_strip);
     	add_subgroup_button.click();
     	
     	//Entering Sub-group details
@@ -1489,7 +1489,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group creation
 	public void createSubGroup(String groupName) throws InterruptedException{
     	
-		expandSection(Constants.GroupsAndUser.sub_groups);
+		expandSection(Constants.GroupsAndUser.sub_groups_strip);
 		
     	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
     	add_subgroup_button.click();
@@ -1513,7 +1513,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group updation
 	public void updateSubGroup(String subGroup) throws InterruptedException {
 
-		expandSection(Constants.GroupsAndUser.sub_groups);
+		expandSection(Constants.GroupsAndUser.sub_groups_strip);
 		
 		//Editing sub-group to be updated
 		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_edit_button);
@@ -1534,7 +1534,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group deletion
 	public void subGroupDeletion(String subGroup) {
 		
-        expandSection(Constants.GroupsAndUser.sub_groups);
+        expandSection(Constants.GroupsAndUser.sub_groups_strip);
 		
 		//Deleting sub-group 
 		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_delete_button);
@@ -1549,7 +1549,7 @@ public class GroupsAndUserPage extends TestBase {
 	//Sub-group navigation
 	public void subGroupNavigation(String subGroup) {
 		
-		 expandSection(Constants.GroupsAndUser.sub_groups);
+		 expandSection(Constants.GroupsAndUser.sub_groups_strip);
 			
 		//Editing sub-group to be updated
 		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_select_button);
@@ -1578,7 +1578,7 @@ public class GroupsAndUserPage extends TestBase {
     //UI Validation
     public void users_UI_Validation(){
 
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
@@ -1602,7 +1602,7 @@ public class GroupsAndUserPage extends TestBase {
     //User section- Pagination tool-box
     public void userpaginationToolbox() {
     	
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
     	
 		//verification of buttons in top pagination Tool-box
 		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
@@ -1627,7 +1627,7 @@ public class GroupsAndUserPage extends TestBase {
     //User section - pagination count verification
   	public void usersPaginationCount() {
   		
-      	expandSection(Constants.GroupsAndUser.user_settings);
+      	expandSection(Constants.GroupsAndUser.user_settings_strip);
       	
   		//Verification of count of users in top pagination tool-box with db	
   		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
@@ -1642,7 +1642,7 @@ public class GroupsAndUserPage extends TestBase {
     //Users section - grid count verification	
   	public void usersGridCount() {
   		
-      	expandSection(Constants.GroupsAndUser.user_settings);
+      	expandSection(Constants.GroupsAndUser.user_settings_strip);
       	
   		//verification of count of users displayed in grid with db
   		int final_users_count=users_count_in_grid.size()+0;
@@ -1668,7 +1668,7 @@ public class GroupsAndUserPage extends TestBase {
     //To check User Roles
   	public void userRoles() {
   		
-  	  	expandSection(Constants.GroupsAndUser.user_settings);
+  	  	expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  
   	  	add_user_button.click();
   	  	
@@ -1696,7 +1696,7 @@ public class GroupsAndUserPage extends TestBase {
   	//To check if Inactive status is not displayed at the time of user creation
   	public void userStatus() {
   		
-  		expandSection(Constants.GroupsAndUser.user_settings);
+  		expandSection(Constants.GroupsAndUser.user_settings_strip);
     	  
   	  	add_user_button.click();
   	  	
@@ -1716,7 +1716,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User creation form validation
   	public void userCreationFormValidation(String field) {
   		
-  		expandSection(Constants.GroupsAndUser.user_settings);
+  		expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  
   	  	add_user_button.click();
   		
@@ -1764,7 +1764,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User section - Cancel feature
   	public void userCancelFeature() {
   		
-  		expandSection(Constants.GroupsAndUser.user_settings);
+  		expandSection(Constants.GroupsAndUser.user_settings_strip);
     	  
   	  	add_user_button.click();
   		
@@ -1800,7 +1800,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User creation
     public void createUser(String firstname,String lastname,String email_id,String role) throws InterruptedException{
     	
-    	expandSection(Constants.GroupsAndUser.user_settings);
+    	expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  
     	wait.until(ExpectedConditions.visibilityOf(add_user_button));
     	add_user_button.click();
@@ -1830,7 +1830,7 @@ public class GroupsAndUserPage extends TestBase {
     //User Updation
   	public void updateUser(String user_id,String updated_user_id) {
   		
-  		expandSection(Constants.GroupsAndUser.user_settings);
+  		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		clickActionUser(user_id,Constants.GroupsAndUser.user_edit_button);
   		
@@ -1851,7 +1851,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User Deletion
   	public void deleteUser(String user_id) {
   		
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
         //Deleting user
   		clickActionUser(user_id,Constants.GroupsAndUser.user_delete_button);
@@ -1865,7 +1865,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User section - Change Password window UI
   	public void changePasswordWindow(String user_id) {
   		
-  		expandSection(Constants.GroupsAndUser.user_settings);
+  		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
@@ -1893,7 +1893,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User Section - Change password form validation
   	public void changePasswordFormValidation(String user_id) {
   		
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
@@ -1913,7 +1913,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User Section - Change password cancel feature
   	public void changePasswordCancel(String user_id) {
   		
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
@@ -1940,7 +1940,7 @@ public class GroupsAndUserPage extends TestBase {
     //User Section - Change password feature
   	public void changePassword(String user_id) {
   		
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
@@ -1958,7 +1958,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User section - User Permission window UI
   	public void userPermissionUI(String user_id) {
   		
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
@@ -1999,7 +1999,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User Section - User permission cancel feature
   	public void userPermissionCancelFeature(String user_id) {
   		
-  	    expandSection(Constants.GroupsAndUser.user_settings);
+  	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
@@ -2023,7 +2023,7 @@ public class GroupsAndUserPage extends TestBase {
   	//User Section - Update User permission
   	public void updateUserPermissions(String user_id) {
   		
-  	    expandSection(Constants.GroupsAndUser.user_settings);
+  	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
@@ -2062,7 +2062,7 @@ public class GroupsAndUserPage extends TestBase {
      */
     public void cleanUpUsers(String user_email) {
 
-        expandSection(Constants.GroupsAndUser.user_settings);
+        expandSection(Constants.GroupsAndUser.user_settings_strip);
     	
         clickActionUser(user_email,"Delete");
         

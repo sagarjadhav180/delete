@@ -36,7 +36,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		hp.clickAction(Constants.HomePage.group_User_page);
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		gp.expandSection(Constants.GroupsAndUser.sub_groups);
+		gp.expandSection(Constants.GroupsAndUser.sub_groups_strip);
 		gp.createSubGroup(account);
 //		Thread.sleep(2000);
 		hp.clickAction(Constants.HomePage.home_page);
@@ -54,7 +54,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		hp.clickAction(Constants.HomePage.group_User_page);
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		gp.expandSection(Constants.GroupsAndUser.user_settings);
+		gp.expandSection(Constants.GroupsAndUser.user_settings_strip);
 		gp.createUser(f_name, l_name, userID, Constants.GroupsAndUser.admin_role);;
 	    Thread.sleep(2000);
 	    hp.clickAction(Constants.HomePage.home_page);
@@ -66,7 +66,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		hp.clickActionNewAccount(Constants.HomePage.group_User_page);
 		
 		GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		gp.expandSection(Constants.GroupsAndUser.tn_settings);
+		gp.expandSection(Constants.GroupsAndUser.tn_settings_strip);
 		gp.updateTNSettings();
 		hp.clickAction(Constants.HomePage.home_page);		
 	}
