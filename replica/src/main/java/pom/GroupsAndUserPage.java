@@ -621,8 +621,16 @@ public class GroupsAndUserPage extends TestBase {
     //Strips verification
     public void Strip(String stripName){
     	
-    	WebElement strip = TestBase.driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
-	
+    	WebElement strip ;
+    	if(!(stripName.startsWith("Users") || stripName.startsWith("Sub-Groups") || stripName.startsWith("Call Actions"))){
+
+    		strip = TestBase.driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName.toUpperCase()+"')]"));
+    	}
+    	
+    	else {
+    		strip = TestBase.driver.findElement(By.xpath("//h4[starts-with(text(),'"+stripName+"')]"));
+    	}
+    		
     	wait.until(ExpectedConditions.visibilityOf(strip));
     	
 		logger.log(LogStatus.INFO, "Verifying if "+stripName+"is displayed");
@@ -699,12 +707,13 @@ public class GroupsAndUserPage extends TestBase {
 
     
     //Group Details Form Validation    
-	public void groupDetailsFormValidation(String validation_textbox){
+	public void groupDetailsFormValidation(String validation_textbox) throws InterruptedException{
 		
 		expandSection(Constants.GroupsAndUser.group_details_strip);
 		
 		if(validation_textbox.equals("group_name_textbox")){
 			String group = groupName_textbox.getAttribute("value");
+			wait.until(ExpectedConditions.visibilityOf(groupName_textbox));
 			groupName_textbox.clear();
 			saveGroupDetails_button.click();
 	
@@ -718,6 +727,7 @@ public class GroupsAndUserPage extends TestBase {
 			saveGroupDetails_button.click();
 
 			logger.log(LogStatus.INFO, "Verifying if Save Group Details alert is displayed");
+			wait.until(ExpectedConditions.visibilityOf(saveGroupDetails_alert));
 			Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
 			phone_textbox.clear();
 		}
@@ -780,7 +790,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Tracking Number Setting UI Validation ----------------------------------------
 	@SuppressWarnings("unlikely-arg-type")
-	public void tnSettingsUI(){
+	public void tnSettingsUI() throws InterruptedException{
 			
 			for (int i=0; i<tn_settings_labels.size(); i++) {
 				
@@ -817,7 +827,7 @@ public class GroupsAndUserPage extends TestBase {
             
 			//DNI Reffering Website dropdown
 			Select select=new Select(reffering_website_dropdown);
-			for(int j=0;j<select.getOptions().size();j++) {
+			for(int j=1;j<select.getOptions().size()-1;j++) {
 				
 				for(int k=0;k<expected_reffering_website_dropdown.length;k++) {
 					if(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j])) {
@@ -829,29 +839,30 @@ public class GroupsAndUserPage extends TestBase {
 			
 			//DNI type dropdown
 			Select select1=new Select(dni_type_dropdown);
-			for(int j=0;j<select1.getOptions().size();j++) {
+			for(int j=1;j<=select1.getOptions().size()-1;j++) {
 				
 				for(int k=0;k<expected_dni_types.length;k++) {
-					if(select1.getOptions().get(j).equals(expected_dni_types[j])) {
-						logger.log(LogStatus.INFO, "Verifying if "+expected_dni_types[j]+" is not present");
-						softassert.assertTrue(select1.getOptions().get(j).equals(expected_dni_types[j]),expected_dni_types[j]+" is not present");
+					if(select1.getOptions().get(j).equals(expected_dni_types[k])) {
+						logger.log(LogStatus.INFO, "Verifying if "+expected_dni_types[k]+" is not present");
+						softassert.assertTrue(select1.getOptions().get(j).equals(expected_dni_types[k]),expected_dni_types[k]+" is not present");
 					}
 				}
 			}
 			
 			//DNI Custom Parameters popup
 			if(!DNI_checkbox.isSelected()) {
+				Thread.sleep(5000);
 				DNI_checkbox.click();
 			}
 				custom_parameters.click();
 				
 				driver.switchTo().activeElement();
 				logger.log(LogStatus.INFO, "Verifying UI of DNI Custom Parameters popup");
-				softassert.assertTrue(dni_custom_parameters_label.isDisplayed(),"DNI custom parameters label");
-				softassert.assertTrue(dni_custom_parameters_note.isDisplayed(),"DNI custom parameters note");
-				softassert.assertTrue(dni_custom_parameters_textbox.isDisplayed(),"DNI custom parameters textbox");
-				softassert.assertTrue(dni_custom_parameters_save_button.isDisplayed(),"DNI custom parameters Save button");
-				softassert.assertTrue(dni_custom_parameters_cancel_button.isDisplayed(),"DNI custom parameters Cancel button");
+				softassert.assertTrue(dni_custom_parameters_label.isDisplayed(),"DNI custom parameters label is not present");
+				softassert.assertTrue(dni_custom_parameters_note.isDisplayed(),"DNI custom parameters note is not present");
+				softassert.assertTrue(dni_custom_parameters_textbox.isDisplayed(),"DNI custom parameters textbox is not present");
+				softassert.assertTrue(dni_custom_parameters_save_button.isDisplayed(),"DNI custom parameters Save button is not present");
+				softassert.assertTrue(dni_custom_parameters_cancel_button.isDisplayed(),"DNI custom parameters Cancel button is not present");
 				dni_custom_parameters_cancel_button.click();
 				
 			if(DNI_checkbox.isSelected()) {
