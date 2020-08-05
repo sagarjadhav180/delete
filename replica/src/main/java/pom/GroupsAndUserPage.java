@@ -792,6 +792,9 @@ public class GroupsAndUserPage extends TestBase {
 	@SuppressWarnings("unlikely-arg-type")
 	public void tnSettingsUI() throws InterruptedException{
 			
+		
+		expandSection(Constants.GroupsAndUser.tn_settings_strip);
+		
 			for (int i=0; i<tn_settings_labels.size(); i++) {
 				
 				for(int j=0; j<expected_tn_settings_labels.length; j++) {
