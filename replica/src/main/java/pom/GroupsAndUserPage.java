@@ -798,10 +798,6 @@ public class GroupsAndUserPage extends TestBase {
 	@SuppressWarnings("unlikely-arg-type")
 	public void tnSettingsUI() throws InterruptedException{
 			
-<<<<<<< HEAD
-		
-=======
->>>>>>> b32d6468e6a07c6fa68d665e3b8c080ced508136
 		expandSection(Constants.GroupsAndUser.tn_settings_strip);
 		
 			for (int i=0; i<tn_settings_labels.size(); i++) {
@@ -976,7 +972,6 @@ public class GroupsAndUserPage extends TestBase {
 			
 			Util.click(DNI_checkbox);
 			//DNI_checkbox.click();
-			Thread.sleep(3000);
 			hostDomain_textbox.clear();
 			htmlclass_textbox.clear();
 		}
@@ -2155,7 +2150,7 @@ public class GroupsAndUserPage extends TestBase {
     //Part of Test Data creation------------------------------
     public void updateTNSettings() throws InterruptedException{
     	
-    	Util.scrollFunction(configure_voicemail_greetings_textbox);
+//    	Util.scrollFunction(configure_voicemail_greetings_textbox);
     	Thread.sleep(5000);
     	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
     	
@@ -2188,8 +2183,8 @@ public class GroupsAndUserPage extends TestBase {
 		instant_insights_checkbox.click();
     	
 		//DNI section
-		if(DNI_checkbox.isSelected()) {
-		    DNI_checkbox.click();	
+		if(instant_insights_checkbox.isSelected()) {
+		    Util.click(DNI_checkbox);	
 		}
 		
 		//Ring to number
