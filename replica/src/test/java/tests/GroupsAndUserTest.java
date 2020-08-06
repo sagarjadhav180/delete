@@ -95,7 +95,7 @@ public class GroupsAndUserTest extends TestBase
 		@Test(priority=6)
 		public void groupDetails_GroupName_alert_messages() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details alert messages for Group Name & Phone Number verification..");
+	        logger=extent.startTest("Group Details alert messages for Group Name verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsFormValidation("group_name_textbox");
@@ -105,7 +105,7 @@ public class GroupsAndUserTest extends TestBase
 		@Test(priority=7)
 		public void groupDetails_PhoneNumber_alert_messages() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details alert messages for Group Name & Phone Number verification..");
+	        logger=extent.startTest("Group Details alert messages for Phone Number verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsFormValidation("phone_number_textbox");
@@ -208,6 +208,7 @@ public class GroupsAndUserTest extends TestBase
 	        logger=extent.startTest("TN settings DNI Section verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        Thread.sleep(3000);
 	        gp.dniAndIntantInsightsFormValidations("dni_section");
 		}
 		
@@ -228,7 +229,7 @@ public class GroupsAndUserTest extends TestBase
 	        logger=extent.startTest("TN settings instant insigts checkbox alert verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-	        gp.dniAndIntantInsightsFormValidations("instant_insights_section");
+	        gp.tnSettingsFormValidation("instant_insights_section");
 		}
 		
 		//Check if appropriate alert is displayed if DNI details are missing
@@ -238,7 +239,7 @@ public class GroupsAndUserTest extends TestBase
 	        logger=extent.startTest("TN settings DNI checkbox alert verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-	        gp.dniAndIntantInsightsFormValidations("dni_section");
+	        gp.tnSettingsFormValidation("dni_section");
 		}
 		
 		//Check if appropriate alert is displayed if voice prompt message is missing
@@ -315,7 +316,7 @@ public class GroupsAndUserTest extends TestBase
 		
 		
 		//Check UI of Users section
-		@Test(priority=50)
+		@Test(priority=24)
 		public void userSectionUIVerification() throws InterruptedException{
 			
 	        logger=extent.startTest("User Section UI Verification verification..");

@@ -724,12 +724,18 @@ public class GroupsAndUserPage extends TestBase {
 		else if(validation_textbox.equals("phone_number_textbox")){
 			phone_textbox.clear();
 			phone_textbox.sendKeys("22");
-			saveGroupDetails_button.click();
+			try {
+				saveGroupDetails_button.click();			
+			}
+			catch(Exception e){
+				logger.log(LogStatus.INFO, "Verifying if Save Group Details alert is displayed");
+				wait.until(ExpectedConditions.visibilityOf(saveGroupDetails_alert));
+				Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
+				phone_textbox.clear();
+			}
 
-			logger.log(LogStatus.INFO, "Verifying if Save Group Details alert is displayed");
-			wait.until(ExpectedConditions.visibilityOf(saveGroupDetails_alert));
-			Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
-			phone_textbox.clear();
+
+
 		}
 		
 	}
@@ -792,6 +798,8 @@ public class GroupsAndUserPage extends TestBase {
 	@SuppressWarnings("unlikely-arg-type")
 	public void tnSettingsUI() throws InterruptedException{
 			
+		expandSection(Constants.GroupsAndUser.tn_settings_strip);
+		
 			for (int i=0; i<tn_settings_labels.size(); i++) {
 				
 				for(int j=0; j<expected_tn_settings_labels.length; j++) {
@@ -825,7 +833,7 @@ public class GroupsAndUserPage extends TestBase {
 			softassert.assertTrue(dni_type_dropdown.isDisplayed(),"DNI Type dropdown is not present");
 			softassert.assertTrue(htmlclass_textbox.isDisplayed(),"HTML Class textbox is not present");
             
-			//DNI Reffering Website dropdown
+			//DNI Referring Website dropdown
 			Select select=new Select(reffering_website_dropdown);
 			for(int j=1;j<select.getOptions().size()-1;j++) {
 				
@@ -854,7 +862,8 @@ public class GroupsAndUserPage extends TestBase {
 				Thread.sleep(5000);
 				DNI_checkbox.click();
 			}
-				custom_parameters.click();
+				//custom_parameters.click();
+				Util.click(custom_parameters);
 				
 				driver.switchTo().activeElement();
 				logger.log(LogStatus.INFO, "Verifying UI of DNI Custom Parameters popup");
@@ -902,7 +911,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 		
    //DNI and Instant Insights section form validation
-   public void dniAndIntantInsightsFormValidations(String section_name) {
+   public void dniAndIntantInsightsFormValidations(String section_name) throws InterruptedException {
 		
 		expandSection(Constants.GroupsAndUser.tn_settings_strip);
 		
@@ -911,16 +920,16 @@ public class GroupsAndUserPage extends TestBase {
 			if(!DNI_checkbox.isSelected()) {
 				
 				logger.log(LogStatus.INFO, "Verifying HostDomain textbox is not enabled");
-				softassert.assertTrue(hostDomain_textbox.getAttribute("aria-diabled").equals("true"),"hostDomain_textbox is enabled");
+				softassert.assertTrue(hostDomain_textbox.getAttribute("aria-disabled").equals("true"),"hostDomain_textbox is enabled");
 
 				logger.log(LogStatus.INFO, "Verifying Htmlclass textbox is not enabled");
-				softassert.assertTrue(htmlclass_textbox.getAttribute("aria-diabled").equals("true"),"htmlclass_textbox is enabled");				
+				softassert.assertTrue(htmlclass_textbox.getAttribute("aria-disabled").equals("true"),"htmlclass_textbox is enabled");				
 				
 				logger.log(LogStatus.INFO, "Verifying Reffering Website dropdown is not enabled");				
-				softassert.assertTrue(reffering_website_dropdown.getAttribute("aria-diabled").equals("true"),"reffering_website_dropdown is enabled");
+				softassert.assertTrue(reffering_website_dropdown.getAttribute("aria-disabled").equals("true"),"reffering_website_dropdown is enabled");
 
 				logger.log(LogStatus.INFO, "Verifying DNI type dropdown is not enabled");
-				softassert.assertTrue(dni_type_dropdown.getAttribute("aria-diabled").equals("true"),"dni_type_dropdown is enabled");
+				softassert.assertTrue(dni_type_dropdown.getAttribute("aria-disabled").equals("true"),"dni_type_dropdown is enabled");
 				
 			}
 		}
@@ -929,16 +938,18 @@ public class GroupsAndUserPage extends TestBase {
 			
 			if(!instant_insights_checkbox.isSelected()) {
 				
-				instant_insights_checkbox.click();
-				Select select = new Select(instant_insights_dropdown); 
-				select.deselectByVisibleText("Call Outcome (Conversion type)");
-				instant_insights_checkbox.click();				
+				/*
+				 * instant_insights_checkbox.click(); Select select = new
+				 * Select(instant_insights_dropdown);
+				 * select.selectByVisibleText("Call Outcome (Conversion type)");
+				 * Thread.sleep(2000); instant_insights_checkbox.click();
+				 */			
 
 				logger.log(LogStatus.INFO, "Verifying Voice prompt for call outcome textbox is not enabled");
-				softassert.assertTrue(voice_prompt_for_call_outcome_textbox.getAttribute("aria-diabled").equals("true"),"Voice prompt for call outcome textbox is enabled");
+				softassert.assertTrue(voice_prompt_for_call_outcome_textbox.getAttribute("aria-disabled").equals("true"),"Voice prompt for call outcome textbox is enabled");
 
 				logger.log(LogStatus.INFO, "Verifying if Sale amount voice prompt textbox is not enabled");
-				softassert.assertTrue(sale_amount_voice_prompt_textbox.getAttribute("aria-diabled").equals("true"),"Sale amount voice prompt textbox is enabled");				
+				softassert.assertTrue(sale_amount_voice_prompt_textbox.getAttribute("aria-disabled").equals("true"),"Sale amount voice prompt textbox is enabled");				
 				
 			}
 		}
@@ -959,7 +970,9 @@ public class GroupsAndUserPage extends TestBase {
         //DNI section
 		if (fieldName.equals("dni_section")) {
 			
-			DNI_checkbox.click();
+			Util.click(DNI_checkbox);
+			//DNI_checkbox.click();
+			Thread.sleep(3000);
 			hostDomain_textbox.clear();
 			htmlclass_textbox.clear();
 		}
@@ -993,12 +1006,13 @@ public class GroupsAndUserPage extends TestBase {
 		//Ring to number text-box
 		else if(fieldName.equals("ring_to_phone_number_textbox")) {
 			
+			wait.until(ExpectedConditions.visibilityOf(ring_to_number_textbox));
 			ring_to_number_textbox.clear();
 			ring_to_number_textbox.sendKeys("22");
 		}
 		
 		tracking_number_settings_details_save_Button.click();
-		wait.until(ExpectedConditions.invisibilityOf(tn_settings_alert));
+		wait.until(ExpectedConditions.visibilityOf(tn_settings_alert));
 		
 		logger.log(LogStatus.INFO, "Verifying if alert is displayed for "+fieldName);
 		Assert.assertTrue(tn_settings_alert.isDisplayed(),"Appropriate alert is not displayed for "+fieldName);
@@ -2166,7 +2180,7 @@ public class GroupsAndUserPage extends TestBase {
 			instant_insights_checkbox.click();
 		}
 		Select select = new Select(instant_insights_dropdown); 
-		select.deselectByVisibleText("Call Outcome (Conversion type)");
+		select.selectByVisibleText("Call Outcome (Conversion type)");
 		instant_insights_checkbox.click();
     	
 		//DNI section
