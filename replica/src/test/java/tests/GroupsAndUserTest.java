@@ -272,8 +272,9 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("ring_to_phone_number_textbox");
 		}
 		
+		//Check if Custom source strip is displayed
 		@Test(priority=23)
-		public void custom_source_setting_strip() throws InterruptedException{
+		public void custom_source_strip() throws InterruptedException{
 			
 	        logger=extent.startTest("Custom Source Setting Strip display verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
@@ -282,31 +283,55 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 		
-		// check if the Custom Soyu settings Strip is Collapsible & expandable
-		/*
-		 * @Test(priority=23) public void tn_Setting_Strip_Collapsible_Expandable()
-		 * throws InterruptedException{
-		 * 
-		 * logger=extent.
-		 * startTest("TN Settings Strip Collapsible & expandable verification..");
-		 * logger.assignCategory(Constants.groups_and_user_category); GroupsAndUserPage
-		 * gp=new GroupsAndUserPage(driver);
-		 * gp.expandSection(Constants.GroupsAndUser.tn_settings_strip);
-		 * gp.collpaseSection(Constants.GroupsAndUser.tn_settings_strip); }
-		 * 
-		 * //UI verification of TN settings section //Verify options displayed in
-		 * referring website listbox //Verify options displayed in DNI type //Check if
-		 * DNI Custom Parameters pop up is displayed when clicked in custom parameters
-		 * //Check UI of DNI Custom Parameters pop up //Check options displayed in
-		 * instant insights type listbox
-		 * 
-		 * @Test(priority=13) public void tn_settings_UI_verification() throws
-		 * InterruptedException{
-		 * 
-		 * logger=extent.startTest("TN settings section UI verification..");
-		 * logger.assignCategory(Constants.groups_and_user_category); GroupsAndUserPage
-		 * gp=new GroupsAndUserPage(driver); gp.tnSettingsUI(); }
-		 */
+		//check if the Custom Sources settings Strip is Collapsible & expandable
+		
+		@Test(priority=24)
+		public void custom_source_Strip_Collapsible_Expandable() throws InterruptedException{
+			
+	        logger=extent.startTest("custom source Strip Collapsible & expandable verification..");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	        gp.collpaseSection(Constants.GroupsAndUser.custom_sources_strip);
+	        
+		}
+
+		//UI verification of custom source section 
+		
+		@Test(priority=25)
+		public void custom_source_UI_verification() throws InterruptedException{
+			
+	        logger=extent.startTest("custom source section UI verification..");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.custom_Source_UI_Validation();
+   
+		}  
+
+		//Check if able to add new custom source in every column 
+		
+		@Test(priority=26)
+		public void custom_source_add_new_source() throws InterruptedException{
+			
+	        logger=extent.startTest("custom source section add new source verification..");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.custom_Source_Add_New_Source();
+   
+		}  
+
+		//Check if able to add new custom source in every column 
+		
+		@Test(priority=25)
+		public void custom_source_delete_source() throws InterruptedException{
+			
+	        logger=extent.startTest("custom source section delete source verification..");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.custom_Source_Delete_Source();
+   
+		}
+		 
 			
 		
 		

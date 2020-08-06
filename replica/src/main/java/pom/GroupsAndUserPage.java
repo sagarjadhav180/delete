@@ -838,9 +838,9 @@ public class GroupsAndUserPage extends TestBase {
 			for(int j=1;j<select.getOptions().size()-1;j++) {
 				
 				for(int k=0;k<expected_reffering_website_dropdown.length;k++) {
-					if(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j])) {
-						logger.log(LogStatus.INFO, "Verifying if "+expected_reffering_website_dropdown[j]+" is present");			
-						softassert.assertTrue(select.getOptions().get(j).equals(expected_reffering_website_dropdown[j]),expected_reffering_website_dropdown[j]+" is not present");
+					if(select.getOptions().get(j).equals(expected_reffering_website_dropdown[k])) {
+						logger.log(LogStatus.INFO, "Verifying if "+expected_reffering_website_dropdown[k]+" is present");			
+						softassert.assertTrue(select.getOptions().get(j).equals(expected_reffering_website_dropdown[k]),expected_reffering_website_dropdown[k]+" is not present");
 					}
 				}
 			}
@@ -1024,6 +1024,9 @@ public class GroupsAndUserPage extends TestBase {
     // Custom Source UI Validation ------------------------------------------------
 	public void custom_Source_UI_Validation(){
 		
+		//Expanding Custom Source section
+        expandSection(Constants.GroupsAndUser.custom_sources_strip);
+		
 		for (int i=0; i<custom_sources_labels.size(); i++) {
 			
 			for(int j=0; j<customsources_labels.length; j++) {
@@ -1034,7 +1037,7 @@ public class GroupsAndUserPage extends TestBase {
 			}
 		}
 		
-		//Custom Source_Add New SOurce Textbox validation		
+		//Custom Source_Add New Source Textbox validation		
 		for(int i=1; i<=5; i++) {
 			WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
 			logger.log(LogStatus.INFO, "verifying if Add Custom source text box is enabled");
@@ -1052,7 +1055,11 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//Custom Source Add New Source Validation
+	
 	public void custom_Source_Add_New_Source(){
+		
+		//Expanding Custom Source section
+        expandSection(Constants.GroupsAndUser.custom_sources_strip);
 		
 		for(int i=1; i<=5; i++) {
 			addCustomSource(String.valueOf(i), "CStextbox" + i);
@@ -1067,6 +1074,9 @@ public class GroupsAndUserPage extends TestBase {
 	//Custom Source Delete Source Validation
 	public void custom_Source_Delete_Source(){
 		
+		//Expanding Custom Source section
+        expandSection(Constants.GroupsAndUser.custom_sources_strip);
+        
 		for(int i=1; i<=5; i++) {
 			clickCheckboxOfCustomSource("CStextbox", String.valueOf(i));
 			custom_source_delete_button.click();
@@ -1093,6 +1103,8 @@ public class GroupsAndUserPage extends TestBase {
 		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
 		WebElement cs_list = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
 		cs_textbox.sendKeys(cs_name);
+		WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a"));
+		add_source_click.click();
 			
 	}
 	
