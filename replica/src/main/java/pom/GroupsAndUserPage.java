@@ -1,5 +1,6 @@
 package pom;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1056,36 +1057,52 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Custom Source Add New Source Validation
 	
-	public void custom_Source_Add_New_Source(){
+	String[] custom_sources=new String[6];
+	public void custom_Source_Add_New_Source() throws InterruptedException{
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
-		
+        Thread.sleep(4000);
+        
 		for(int i=1; i<=5; i++) {
-			addCustomSource(String.valueOf(i), "CStextbox" + i);
+			String cs_to_add="cs-delete"+Util.generateRandomNumber();
+			custom_sources[i]=cs_to_add;
+			addCustomSource(String.valueOf(i), cs_to_add);
 			logger.log(LogStatus.INFO, "verifying Add New Custom Source functionality & Success Message");
 		//  Validating Success Message for each column
+			wait.until(ExpectedConditions.visibilityOf(add_custom_source_success_message));
 			softassert.assertTrue(add_custom_source_success_message.isDisplayed(), "Source added Success Message Not displayed");
+			Thread.sleep(2000);
 		}		
 		softassert.assertAll();
 	}
 	
 	
 	//Custom Source Delete Source Validation
-	public void custom_Source_Delete_Source(){
+	public void custom_Source_Delete_Source() throws InterruptedException{
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
+        Thread.sleep(4000);
         
 		for(int i=1; i<=5; i++) {
-			clickCheckboxOfCustomSource("CStextbox", String.valueOf(i));
+			
+			clickCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));
 			custom_source_delete_button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_confiramtion_message));
 			logger.log(LogStatus.INFO, "verifying Custom Source Deletion Confirmation & Success Messages");
 			softassert.assertTrue(custom_source_deletion_confiramtion_message.isDisplayed(), "Custom Source Deletion Confirmation Message not popped up");
 			softassert.assertTrue(custom_source_deletion_ok_button.isDisplayed(), "Custom Source Deletion OK button Not present");
 			softassert.assertTrue(custom_source_deletion_cancel_button.isDisplayed(), "Custom Source Deletion Cancel button Not present");
+			
+			driver.switchTo().activeElement();
+			custom_source_deletion_ok_button.click();
+			
+			wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_success_message));
 			softassert.assertTrue(custom_source_deletion_success_message.isDisplayed(), "Source Not deleted successfully");
-					}		
+		    Thread.sleep(2000);
+		}		
 		softassert.assertAll();
 	}
     
@@ -1093,7 +1110,7 @@ public class GroupsAndUserPage extends TestBase {
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
 			
-		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[text()="+custom_source_name+"]/..//preceding-sibling::input"));
+		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'cs-delete')]/..//preceding-sibling::input"));
 		custom_source.click();
 	}
 		
@@ -1101,9 +1118,9 @@ public class GroupsAndUserPage extends TestBase {
 	public void addCustomSource(String custom_source_type,String cs_name){
 			
 		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
-		WebElement cs_list = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
+//		WebElement cs_list = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
 		cs_textbox.sendKeys(cs_name);
-		WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a"));
+		WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]"));
 		add_source_click.click();
 			
 	}
