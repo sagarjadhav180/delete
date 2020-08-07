@@ -1057,13 +1057,14 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Custom Source Add New Source Validation
 	
-	public void custom_Source_Add_New_Source(){
+	public void custom_Source_Add_New_Source() throws InterruptedException{
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
 		
 		for(int i=1; i<=5; i++) {
 			addCustomSource(String.valueOf(i), "CStextbox" + i);
+			Thread.sleep(3000);
 			logger.log(LogStatus.INFO, "verifying Add New Custom Source functionality & Success Message");
 		//  Validating Success Message for each column
 			softassert.assertTrue(add_custom_source_success_message.isDisplayed(), "Source added Success Message Not displayed");
