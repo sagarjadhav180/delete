@@ -24,9 +24,9 @@ public class TrackingNumberBuilderPage extends TestBase {
     
 	SoftAssert softassert=new SoftAssert();
 	
-	Set<String> set=new HashSet<String>();
+//	Set<String> set=new HashSet<String>();
 	
-	List<String> list=new ArrayList<String>(); 
+	static List<String> list=new ArrayList<String>(); 
 		
 	//Tracking number list
 	
@@ -2215,11 +2215,11 @@ public class TrackingNumberBuilderPage extends TestBase {
     public void unprovisionNumbers(){
     		
 		System.out.println("------------------------unprovision--------------");       	
-    	Iterator<String> its = set.iterator();
+//    	Iterator<String> its = set.iterator();
 
 		for( String one:list){
-//    		System.out.println(one);
-    		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
+    		System.out.println(one);
+    		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+one+"' AND number_status='suspended'");
 		}
     	
     	
