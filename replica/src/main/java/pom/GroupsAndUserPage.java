@@ -1057,7 +1057,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Custom Source Add New Source Validation
 	
-	String[] custom_sources=new String[6];
+	static String[] custom_sources=new String[6];
 	public void custom_Source_Add_New_Source() throws InterruptedException{
 		
 		//Expanding Custom Source section
@@ -1110,7 +1110,7 @@ public class GroupsAndUserPage extends TestBase {
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
 			
-		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'cs-delete')]/..//preceding-sibling::input"));
+		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_source_name+"')]/..//preceding-sibling::input"));
 		custom_source.click();
 	}
 		
