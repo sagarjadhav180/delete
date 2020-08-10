@@ -310,7 +310,7 @@ public class GroupsAndUserTest extends TestBase
 
 		//Check if able to add new custom source in every column 
 		
-		@Test(priority=25)
+		@Test(priority=26)
 		public void custom_source_add_new_source() throws InterruptedException{
 			
 	        logger=extent.startTest("custom source section add new source verification..");
@@ -322,7 +322,7 @@ public class GroupsAndUserTest extends TestBase
 
 		//Check if able to add new custom source in every column 
 		
-		@Test(priority=26)
+		@Test(priority=27,dependsOnMethods="custom_source_add_new_source")
 		public void custom_source_delete_source() throws InterruptedException{
 			
 	        logger=extent.startTest("custom source section delete source verification..");
@@ -341,7 +341,7 @@ public class GroupsAndUserTest extends TestBase
 		
 		
 		//Check UI of Users section
-		@Test(priority=24)
+//		@Test(priority=24)
 		public void userSectionUIVerification() throws InterruptedException{
 			
 	        logger=extent.startTest("User Section UI Verification verification..");
