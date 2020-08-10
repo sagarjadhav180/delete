@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="10" passed="10">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Automation Suite-1" duration-ms="1093951" started-at="2020-07-01T08:49:43Z" finished-at="2020-07-01T09:07:57Z">
+    <groups>
+    </groups>
+    <test name="chrome test-1" duration-ms="1093951" started-at="2020-07-01T08:49:43Z" finished-at="2020-07-01T09:07:57Z">
+      <class name="tests.LookerCallerActivityReportTest">
+        <test-method status="PASS" signature="testSetUp()[pri:0, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="testSetUp" is-config="true" duration-ms="20" started-at="2020-07-01T14:19:43Z" finished-at="2020-07-01T14:19:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetUp -->
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="setUp" is-config="true" duration-ms="47221" started-at="2020-07-01T14:19:43Z" finished-at="2020-07-01T14:20:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[https://stag-5-cmo-1.convirza.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="goToLookerReports()[pri:0, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="goToLookerReports" is-config="true" duration-ms="952974" started-at="2020-07-01T14:20:30Z" finished-at="2020-07-01T14:36:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToLookerReports -->
+        <test-method status="PASS" signature="runButtonVerification()[pri:1, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="runButtonVerification" duration-ms="221" started-at="2020-07-01T14:36:41Z" finished-at="2020-07-01T14:36:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runButtonVerification -->
+        <test-method status="PASS" signature="headerLabelVerification()[pri:2, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="headerLabelVerification" duration-ms="74" started-at="2020-07-01T14:36:49Z" finished-at="2020-07-01T14:36:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- headerLabelVerification -->
+        <test-method status="PASS" signature="presenceOfGearIconVerification()[pri:3, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="presenceOfGearIconVerification" duration-ms="77" started-at="2020-07-01T14:36:51Z" finished-at="2020-07-01T14:36:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- presenceOfGearIconVerification -->
+        <test-method status="PASS" signature="gearIconOptionsVerification()[pri:4, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="gearIconOptionsVerification" duration-ms="2602" started-at="2020-07-01T14:36:52Z" finished-at="2020-07-01T14:36:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gearIconOptionsVerification -->
+        <test-method status="PASS" signature="presenceOfTimeZoneVerification()[pri:5, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="presenceOfTimeZoneVerification" duration-ms="74" started-at="2020-07-01T14:37:05Z" finished-at="2020-07-01T14:37:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- presenceOfTimeZoneVerification -->
+        <test-method status="PASS" signature="presenceOfTopCallersTimeLineLabelVerification()[pri:6, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="presenceOfTopCallersTimeLineLabelVerification" duration-ms="69" started-at="2020-07-01T14:37:07Z" finished-at="2020-07-01T14:37:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- presenceOfTopCallersTimeLineLabelVerification -->
+        <test-method status="PASS" signature="presenceOfTopCallersTimeLineGraphVerification()[pri:7, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="presenceOfTopCallersTimeLineGraphVerification" duration-ms="85" started-at="2020-07-01T14:37:09Z" finished-at="2020-07-01T14:37:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- presenceOfTopCallersTimeLineGraphVerification -->
+        <test-method status="PASS" signature="topCallersTimeLineTableColumnVerification()[pri:8, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="topCallersTimeLineTableColumnVerification" duration-ms="10340" started-at="2020-07-01T14:37:10Z" finished-at="2020-07-01T14:37:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- topCallersTimeLineTableColumnVerification -->
+        <test-method status="PASS" signature="filterButtonTest()[pri:9, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="filterButtonTest" duration-ms="148" started-at="2020-07-01T14:37:22Z" finished-at="2020-07-01T14:37:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- filterButtonTest -->
+        <test-method status="PASS" signature="filterButtonElementsTest()[pri:10, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="filterButtonElementsTest" duration-ms="3566" started-at="2020-07-01T14:37:24Z" finished-at="2020-07-01T14:37:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- filterButtonElementsTest -->
+        <test-method status="PASS" signature="loggingOut()[pri:0, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="loggingOut" is-config="true" duration-ms="7091" started-at="2020-07-01T14:37:28Z" finished-at="2020-07-01T14:37:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loggingOut -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="tearDown" is-config="true" duration-ms="1037" started-at="2020-07-01T14:37:56Z" finished-at="2020-07-01T14:37:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="close_connection()[pri:0, instance:tests.LookerCallerActivityReportTest@71ba6d4e]" name="close_connection" is-config="true" duration-ms="7217" started-at="2020-07-01T14:38:26Z" finished-at="2020-07-01T14:38:33Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close_connection -->
+      </class> <!-- tests.LookerCallerActivityReportTest -->
+    </test> <!-- chrome test-1 -->
+  </suite> <!-- Automation Suite-1 -->
+</testng-results>
