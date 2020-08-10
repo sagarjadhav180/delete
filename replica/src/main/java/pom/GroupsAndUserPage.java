@@ -859,9 +859,9 @@ public class GroupsAndUserPage extends TestBase {
 			}
 			
 			//DNI Custom Parameters popup
-			if(!DNI_checkbox.isSelected()) {
-				Thread.sleep(5000);
-				DNI_checkbox.click();
+			if(!DNI_checkbox.getAttribute("aria-checked").equals("true")) {
+				Thread.sleep(2000);
+				Util.click(DNI_checkbox);
 			}
 				//custom_parameters.click();
 				Util.click(custom_parameters);
@@ -875,8 +875,9 @@ public class GroupsAndUserPage extends TestBase {
 				softassert.assertTrue(dni_custom_parameters_cancel_button.isDisplayed(),"DNI custom parameters Cancel button is not present");
 				dni_custom_parameters_cancel_button.click();
 				
-			if(DNI_checkbox.isSelected()) {
-			   DNI_checkbox.click();
+			if(DNI_checkbox.getAttribute("aria-checked").equals("true")) {
+//			   DNI_checkbox.click();
+			   Util.click(DNI_checkbox);
 			}
 			
 			//TNSettings--Instant Insights section control validation
@@ -918,7 +919,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 		if (section_name.equals("dni_section")) {
 			
-			if(!DNI_checkbox.isSelected()) {
+			if(!DNI_checkbox.getAttribute("aria-checked").equals("true")) {
 				
 				logger.log(LogStatus.INFO, "Verifying HostDomain textbox is not enabled");
 				softassert.assertTrue(hostDomain_textbox.getAttribute("aria-disabled").equals("true"),"hostDomain_textbox is enabled");
@@ -2213,7 +2214,7 @@ public class GroupsAndUserPage extends TestBase {
 		instant_insights_checkbox.click();
     	
 		//DNI section
-		if(instant_insights_checkbox.isSelected()) {
+		if(DNI_checkbox.getAttribute("aria-checked").equals("true")) {
 		    Util.click(DNI_checkbox);	
 		}
 		
