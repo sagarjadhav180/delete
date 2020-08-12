@@ -1058,8 +1058,10 @@ public class GroupsAndUserPage extends TestBase {
 	
 	//Custom Source Add New Source Validation
 	
-	public void custom_Source_Add_New_Source() throws InterruptedException{
 	static String[] custom_sources=new String[6];
+	
+	public void custom_Source_Add_New_Source() throws InterruptedException{
+
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
@@ -1107,7 +1109,101 @@ public class GroupsAndUserPage extends TestBase {
 		}		
 		softassert.assertAll();
 	}
-    
+	
+	// Custom Source verification if duplicate record can be added
+	
+	  static String[] custom_sources_duplicate=new String[6];
+	  
+	  public void custom_Source_Add_Duplicate_Source() throws InterruptedException{
+	  
+	  //Expanding Custom Source section
+	  expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	  Thread.sleep(4000);
+	  
+	  for(int i=1; i<=5; i++) { 
+		  String cs_to_add="cs-delete"+Util.generateRandomNumber();
+		  custom_sources_duplicate[i]=cs_to_add; 
+		  WebElement cs_textbox =TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+		  cs_textbox.sendKeys(custom_sources_duplicate[i]); 
+		  WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]")); 
+		  add_source_click.click();
+	  
+	  //Adding same source again Thread.sleep(4000);
+	  cs_textbox.sendKeys(custom_sources_duplicate[i]); 
+	  logger.log(LogStatus.PASS,"verifying if duplicate Custom Source getting added"); 
+	  try {
+	  add_source_click.click();
+	  } 
+	  catch(Exception e) {
+	  System.out.println("Duplicate source isn't getting added"); 
+	  }
+	  
+	  } softassert.assertAll(); }
+	 
+		 
+	/*
+	 * static String[] custom_sources_duplicate=new String[6];
+	 * 
+	 * public void custom_Source_Add_Duplicate_Source() throws InterruptedException{
+	 * 
+	 * //Expanding Custom Source section
+	 * expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	 * Thread.sleep(4000);
+	 * 
+	 * for(int i=1; i<=5; i++) { String
+	 * cs_to_add="cs-delete"+Util.generateRandomNumber();
+	 * custom_sources_duplicate[i]=cs_to_add; WebElement cs_textbox
+	 * =TestBase.driver.findElement(By.
+	 * xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+	 * cs_textbox.sendKeys(custom_sources_duplicate[i]); List <WebElement>
+	 * add_source_click = TestBase.driver.findElements(By.
+	 * xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]"
+	 * )); add_source_click.get(0).click();
+	 * 
+	 * //Adding same source again Thread.sleep(4000);
+	 * cs_textbox.sendKeys(custom_sources_duplicate[i]); logger.log(LogStatus.
+	 * INFO,"verifying if duplicate Custom Source getting added");
+	 * if(add_source_click.size()==1) {
+	 * logger.log(LogStatus.PASS,"Duplicate source isn't getting added"); } else
+	 * if(add_source_click.size()>1) {
+	 * logger.log(LogStatus.FAIL,"Duplicate source isn't getting added"); }
+	 * 
+	 * } softassert.assertAll(); }
+	 */
+	
+	// Check if able to clear selected custom source checkbox
+		
+		  static String[] custom_sources_checkbox=new String[6];
+		  
+		  public void custom_Source_Clear_checkbox() throws InterruptedException{
+		  
+		  //Expanding Custom Source section
+		  expandSection(Constants.GroupsAndUser.custom_sources_strip);
+		  Thread.sleep(4000);
+		  
+		  for(int i=1; i<=5; i++) { 
+			  String cs_to_add="cs-delete"+Util.generateRandomNumber();
+			  custom_sources_duplicate[i]=cs_to_add; 
+			  WebElement cs_textbox =TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+			  cs_textbox.sendKeys(custom_sources_duplicate[i]); 
+			  WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]")); 
+			  wait.until(ExpectedConditions.visibilityOf(add_source_click));
+			  add_source_click.click();
+			  clickCheckboxOfCustomSource(custom_sources_checkbox[i],String.valueOf(i));
+			  }
+		  custom_source_clear_button.click();
+		  // Verifying the checkboxes of custom sources
+		  
+		  logger.log(LogStatus.INFO,"verifying if custom source checkboxes are getting cleared after clicking clear button");
+		  for(int i=1; i<=5;i++) {
+			  WebElement custom_source_1 = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+String.valueOf(i)+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_sources_checkbox[i]+"')]/..//preceding-sibling::input"));
+			  Assert.assertFalse(custom_source_1.isSelected(), "Custome Source checkbox " + i + " isn't cleared"); 
+			  
+		  }
+		  
+		  softassert.assertAll(); 
+		}
+		
 	
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
@@ -1116,7 +1212,8 @@ public class GroupsAndUserPage extends TestBase {
 		custom_source.click();
 	}
 		
-		
+	
+	
 	public void addCustomSource(String custom_source_type,String cs_name){
 			
 		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));

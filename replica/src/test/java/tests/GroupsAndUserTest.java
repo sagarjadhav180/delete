@@ -320,9 +320,22 @@ public class GroupsAndUserTest extends TestBase
    
 		}  
 
-		//Check if able to add new custom source in every column 
 		
-		@Test(priority=27,dependsOnMethods="custom_source_add_new_source")
+		//Check if duplicate custom source is not allowed to add
+		
+		@Test(priority=27)
+		public void custom_source_add_duplicate_source() throws InterruptedException{
+			
+	        logger=extent.startTest("verifying if duplicate Custom Source getting added..");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.custom_Source_Add_Duplicate_Source();
+   
+		} 
+		
+		//Check if able to delete newly added custom source 
+		
+		@Test(priority=28,dependsOnMethods="custom_source_add_new_source")
 		public void custom_source_delete_source() throws InterruptedException{
 			
 	        logger=extent.startTest("custom source section delete source verification..");
@@ -332,7 +345,17 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		 
+		//Check if able to delete newly added custom source 
+		
+		@Test(priority=29)
+		public void custom_source_clear_button_verification() throws InterruptedException{
 			
+	        logger=extent.startTest("custom source section delete source verification..");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.custom_Source_Clear_checkbox();
+   
+		}		
 		
 		
 		
