@@ -1796,7 +1796,7 @@ public class GroupsAndUserPage extends TestBase {
       	expandSection(Constants.GroupsAndUser.user_settings_strip);
       	
   		//Verification of count of users in top pagination tool-box with db	
-  		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
+  		String dbCount = Util.readingFromDB("SELECT count(*) AS COUNT FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4 AND user_status NOT IN ('deleted')");
   		String countOnUI_pagination = users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
   	
   		logger.log(LogStatus.INFO, "Verifying users count displeyed in top pagination toolbox with db count");
@@ -1812,7 +1812,7 @@ public class GroupsAndUserPage extends TestBase {
       	
   		//verification of count of users displayed in grid with db
   		int final_users_count=users_count_in_grid.size()+0;
-  		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
+  		String dbCount = Util.readingFromDB("SELECT count(*) AS COUNT  FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4 AND user_status NOT IN ('deleted')");
   		
   		if(!users_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
   			
