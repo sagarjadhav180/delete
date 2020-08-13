@@ -18,8 +18,9 @@ import pom.LoginPage;
 public class GroupsAndUserTest extends TestBase
 {
 	
-	    String groupName="SJSG-1";
-	    String groupName_updated="SJSG-1(delete)";	    
+	   
+ 	    static String groupName="";
+	    static String groupName_updated="SJSG-1(delete)";	    
 	
 	    //Logging In
 		@BeforeClass
@@ -33,14 +34,14 @@ public class GroupsAndUserTest extends TestBase
 			try {
 				hp.clickAction(Constants.HomePage.group_User_page);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				 // TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 			
 		}
 		
 		
-		//Check if Group and User label is displayed
+		 //Check if Group and User label is displayed
 		@Test(priority=1)
 		public void groupsAndUserPageLabel() throws InterruptedException{
 			
@@ -51,7 +52,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.groupsAndUserHeaderLabel();
 		}
 		
-		//Check if export groups and user button is present and is clickable
+		 //Check if export groups and user button is present and is clickable
 		@Test(priority=2)
 		public void exportgroupAndUserButton() throws InterruptedException{
 			
@@ -62,7 +63,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.exportGroupsAndUserButton();
 		}
 		
-		//Check if Group details strip is present
+		 //Check if Group details strip is present
 		@Test(priority=3)
 		public void groupDetailsStripVerification() throws InterruptedException{
 			
@@ -72,7 +73,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.Strip(Constants.GroupsAndUser.user_settings_strip);
 		}
 		
-		// check if the Group Details Strip is Collapsible & expandable
+		 // check if the Group Details Strip is Collapsible & expandable
 		@Test(priority=4)
 		public void groupDetailsStripCollapsible_Expandable() throws InterruptedException{
 			
@@ -84,7 +85,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 
-		//UI verification of Group Details section
+		 //UI verification of Group Details section
 		@Test(priority=5)
 		public void groupDetailsUIverification() throws InterruptedException{
 			
@@ -94,7 +95,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.groupDetailsUI();
 		}	
 		
-		//Check if appropriate alert is displayed if group name is empty
+		 //Check if appropriate alert is displayed if group name is empty
 		@Test(priority=6)
 		public void groupDetails_GroupName_alert_messages() throws InterruptedException{
 			
@@ -104,7 +105,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.groupDetailsFormValidation("group_name_textbox");
 		}
 		
-		//Check if appropriate alert is displayed if phone number is not 10 digit
+		 //Check if appropriate alert is displayed if phone number is not 10 digit
 		@Test(priority=7)
 		public void groupDetails_PhoneNumber_alert_messages() throws InterruptedException{
 			
@@ -114,7 +115,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.groupDetailsFormValidation("phone_number_textbox");
 		}
 		
-		//Check if updated group details are displayed
+		 //Check if updated group details are displayed
 		@Test(priority=8)
 		public void groupDetails_updated_details() throws InterruptedException{
 			
@@ -125,7 +126,7 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 		
-		//Check if feature settings strip is displayed
+		 //Check if feature settings strip is displayed
 		@Test(priority=9)
 		public void feature_setting_strip() throws InterruptedException{
 			
@@ -136,7 +137,7 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 		
-		// check if the feature settings Strip is Collapsible & expandable
+		 // check if the feature settings Strip is Collapsible & expandable
 		@Test(priority=10)
 		public void feature_Setting_Strip_Collapsible_Expandable() throws InterruptedException{
 			
@@ -147,7 +148,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.collapseSection(Constants.GroupsAndUser.feature_settings_strip);
 		}
 		
-		//UI verification of feature settings section
+		 //UI verification of feature settings section
 		@Test(priority=11)
 		public void feature_settings_UI_verification() throws InterruptedException{
 			
@@ -157,7 +158,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.featureSettingsUI();
 		}
 		
-		//Check if TN settings strip is displayed
+		 //Check if TN settings strip is displayed
 		@Test(priority=12)
 		public void tn_setting_strip() throws InterruptedException{
 			
@@ -168,7 +169,7 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 		
-		// check if the TN settings Strip is Collapsible & expandable
+		 // check if the TN settings Strip is Collapsible & expandable
 		@Test(priority=13)
 		public void tn_Setting_Strip_Collapsible_Expandable() throws InterruptedException{
 			
@@ -179,12 +180,12 @@ public class GroupsAndUserTest extends TestBase
 	        gp.collapseSection(Constants.GroupsAndUser.tn_settings_strip);
 		}
 		
-		//UI verification of TN settings section
-		//Verify options displayed in referring website listbox
-		//Verify options displayed in DNI type
-		//Check if DNI Custom Parameters pop up is displayed when clicked in custom parameters
-		//Check UI of DNI Custom Parameters pop up
-		//Check options displayed in instant insights type listbox
+		 //UI verification of TN settings section
+		 //Verify options displayed in referring website listbox
+		 //Verify options displayed in DNI type
+		 //Check if DNI Custom Parameters pop up is displayed when clicked in custom parameters
+		 //Check UI of DNI Custom Parameters pop up
+		 //Check options displayed in instant insights type listbox
 		@Test(priority=14)
 		public void tn_settings_UI_verification() throws InterruptedException{
 			
@@ -194,7 +195,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsUI();
 		}
 	
-		//Check if appropriate alert is displayed if ring to number is not 10 digit
+		 //Check if appropriate alert is displayed if ring to number is not 10 digit
 		@Test(priority=15)
 		public void tn_settings_RingToNumber_verification() throws InterruptedException{
 			
@@ -204,7 +205,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("ring_to_phone_number_textbox");
 		}
 	
-		//Check if dni fields are not enabled unless dni checkbox is checked
+		 //Check if dni fields are not enabled unless dni checkbox is checked
 		@Test(priority=16)
 		public void tn_settings_DNI_checkbox_verification() throws InterruptedException{
 			
@@ -215,7 +216,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.dniAndIntantInsightsFormValidations("dni_section");
 		}
 		
-		//Check if instant insights fields are not enabled unless instant insights checkbox is checked
+		 //Check if instant insights fields are not enabled unless instant insights checkbox is checked
 		@Test(priority=17)
 		public void tn_settings_instant_insights_checkbox_verification() throws InterruptedException{
 			
@@ -225,7 +226,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.dniAndIntantInsightsFormValidations("instant_insights_section");
 		}
 		
-		//Check if appropriate alert is displayed if instant insights details are missing
+		 //Check if appropriate alert is displayed if instant insights details are missing
 		@Test(priority=18)
 		public void tn_settings_instant_insights_checkbox_alert_verification() throws InterruptedException{
 			
@@ -235,7 +236,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("instant_insights_section");
 		}
 		
-		//Check if appropriate alert is displayed if DNI details are missing
+		 //Check if appropriate alert is displayed if DNI details are missing
 		@Test(priority=19)
 		public void tn_settings_Dynamic_Number_checkbox_alert_verification() throws InterruptedException{
 			
@@ -245,7 +246,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("dni_section");
 		}
 		
-		//Check if appropriate alert is displayed if voice prompt message is missing
+		 //Check if appropriate alert is displayed if voice prompt message is missing
 		@Test(priority=20)
 		public void tn_settings_voice_prompt_alert_verification() throws InterruptedException{
 			
@@ -255,7 +256,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("play_voice_prompt_textbox");
 		}
 		
-		//Check if appropriate alert is displayed if whisper message is missing
+		 //Check if appropriate alert is displayed if whisper message is missing
 		@Test(priority=21)
 		public void tn_settings_whisper_message_alert_verification() throws InterruptedException{
 			
@@ -265,7 +266,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("play_whisper_message_before_connecting_textbox");
 		}
 		
-		//Check if appropriate alert is displayed if ring to number is invalid(less than 10 digits) is missing
+		 //Check if appropriate alert is displayed if ring to number is invalid(less than 10 digits) is missing
 		@Test(priority=22)
 		public void tn_settings_Ring_To_Number_alert_verification() throws InterruptedException{
 			
@@ -275,7 +276,7 @@ public class GroupsAndUserTest extends TestBase
 	        gp.tnSettingsFormValidation("ring_to_phone_number_textbox");
 		}
 		
-		//Check if Custom source strip is displayed
+		 //Check if Custom source strip is displayed
 		@Test(priority=23)
 		public void custom_source_strip() throws InterruptedException{
 			
@@ -286,7 +287,7 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 		
-		//check if the Custom Sources settings Strip is Collapsible & expandable
+		 //check if the Custom Sources settings Strip is Collapsible & expandable
 		
 		@Test(priority=24)
 		public void custom_source_Strip_Collapsible_Expandable() throws InterruptedException{
@@ -299,7 +300,7 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 
-		//UI verification of custom source section 
+		 //UI verification of custom source section 
 		
 		@Test(priority=25)
 		public void custom_source_UI_verification() throws InterruptedException{
@@ -311,7 +312,7 @@ public class GroupsAndUserTest extends TestBase
    
 		}  
 
-		//Check if able to add new custom source in every column 
+		 //Check if able to add new custom source in every column 
 		
 		@Test(priority=26)
 		public void custom_source_add_new_source() throws InterruptedException{
@@ -336,7 +337,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-		//Check if able to add new custom source in every column 	
+		 //Check if able to add new custom sgit ource in every column 	
 		@Test(priority=28,dependsOnMethods="custom_source_add_new_source")
 		public void custom_source_delete_source() throws InterruptedException{
 			
@@ -348,7 +349,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 	
 			
-		//Check if Call Action strip is displayed
+		 //Check if Call Action strip is displayed
 		@Test(priority=28)
 		public void call_action_strip() throws InterruptedException{
 			
@@ -360,7 +361,7 @@ public class GroupsAndUserTest extends TestBase
 		}	
 		
 		
-		//Check if Call Action strip is expandable and collapsible
+		 //Check if Call Action strip is expandable and collapsible
 		@Test(priority=29)
 		public void call_action_strip_expandable_collapsible() throws InterruptedException{
 			
@@ -373,23 +374,23 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 	
-		//Check UI of Call Action section
-//		Check operators displayed for repeat call condition
-//		Check operators displayed for duration condition
-//		Check operators displayed for disposition condition
-//		Check operators displayed for caller id condition
-//		Check operators displayed for missed opportunity condition
-//		Check operators displayed for sales inquiry condition
-//		Check operators displayed for conversion condition
-//		Check operators displayed for lead quality condition
-//		Check operators displayed for reffering source condition
-//		Check operators displayed for reffering type condition
-//		Check operators displayed for UTM campaign condition
-//		Check operators displayed for UTM source condition
-//		Check operators displayed for UTM medium condition
-//		Check operators displayed for send to voicemail condition
-//		Check if AND/OR operator is present
-//		Check options displayed in Then listbox
+		 //Check UI of Call Action section
+	 //Check operators displayed for repeat call condition
+	 //Check operators displayed for duration condition
+	 //Check operators displayed for disposition condition
+	 //Check operators displayed for caller id condition
+	 //Check operators displayed for missed opportunity condition
+	 //Check operators displayed for sales inquiry condition
+	 //Check operators displayed for conversion condition
+	 //Check operators displayed for lead quality condition
+	 //Check operators displayed for reffering source condition
+	 //Check operators displayed for reffering type condition
+	 //Check operators displayed for UTM campaign condition
+	 //Check operators displayed for UTM source condition
+	 //Check operators displayed for UTM medium condition
+	 //Check operators displayed for send to voicemail condition
+	 //Check if AND/OR operator is present
+	 //Check options displayed in Then listbox
 		@Test(priority=30)
 		public void call_action_Section_UI_Verification() throws InterruptedException{
 			
@@ -401,7 +402,7 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 
-//		Check if appropriate alert is displayed if user try to add call action without rule field
+	 //Check if appropriate alert is displayed if user try to add call action without rule field
 		@Test(priority=31)
 		public void call_action_form_validation_rule_field() throws InterruptedException{
 			
@@ -414,7 +415,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 		
-//		Check if appropriate alert is displayed if user try to add call action without action field
+	 //Check if appropriate alert is displayed if user try to add call action without action field
 		@Test(priority=31)
 		public void call_action_form_validation_action_field() throws InterruptedException{
 			
@@ -426,7 +427,7 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-//		Check if all filled data is reset after clicking on Reset button
+	 //Check if all filled data is reset after clicking on Reset button
 		@Test(priority=32)
 		public void call_action_reset_button_feature() throws InterruptedException{
 			
@@ -438,7 +439,7 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-//		Check if user is not able to add call actions more than 10
+	 //Check if user is not able to add call actions more than 10
 		@Test(priority=33)
 		public void call_action_10_actions() throws InterruptedException{
 			
@@ -452,7 +453,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if user is not able to delete call actions
+	 //Check if user is not able to delete call actions
 		@Test(priority=34)
 		public void call_action_delete() throws InterruptedException{
 			
@@ -465,7 +466,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 		
-//		Check if Sub Groups strip is displayed
+	 //Check if Sub Groups strip is displayed
 		@Test(priority=35)
 		public void sub_group_strip() throws InterruptedException{
 			
@@ -478,7 +479,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if Sub Groups strip is expandable and collapsible
+	 //Check if Sub Groups strip is expandable and collapsible
 		@Test(priority=36)
 		public void sub_group_strip_expandable_collapsible() throws InterruptedException{
 			
@@ -491,7 +492,7 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-//		Check UI of Sub Groups section
+	 //Check UI of Sub Groups section
 		@Test(priority=37)
 		public void sub_group_UI_Verification() throws InterruptedException{
 			
@@ -503,7 +504,7 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-//		Check UI of pagination toolbox of sub groups section
+	 //Check UI of pagination toolbox of sub groups section
 		@Test(priority=37)
 		public void sub_group_pagination_toolbox() throws InterruptedException{
 			
@@ -516,7 +517,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 		
-//		Check if pagination count is mataching with db count
+	 //Check if pagination count is mataching with db count
 		@Test(priority=38)
 		public void sub_group_pagination_count() throws InterruptedException{
 			
@@ -529,7 +530,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if pagination count is mataching with db count
+	 //Check if pagination count is mataching with db count
 		@Test(priority=39)
 		public void sub_group_grid_count() throws InterruptedException{
 			
@@ -542,7 +543,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if appropriate alert is displayed while saving subgroup if subgroup name is missing 
+	 //Check if appropriate alert is displayed while saving subgroup if subgroup name is missing 
 		@Test(priority=40)
 		public void sub_group_form_validation_for_name() throws InterruptedException{
 			
@@ -555,7 +556,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 
-//		Check if appropriate alert is displayed while saving subgroup if industry is missing 
+	 //Check if appropriate alert is displayed while saving subgroup if industry is missing 
 		@Test(priority=41)
 		public void sub_group_form_validation_for_industry() throws InterruptedException{
 			
@@ -568,7 +569,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if sub group is not created if clicked on cancel button after entering all details
+	 //Check if sub group is not created if clicked on cancel button after entering all details
 		@Test(priority=42)
 		public void sub_group_cancel_feature() throws InterruptedException{
 			
@@ -581,7 +582,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if able to create new subgroup
+	 //Check if able to create new subgroup
 		@Test(priority=43)
 		public void sub_group_creation() throws InterruptedException{
 			
@@ -594,7 +595,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 	
 		
-//		Check if able to update newly created subgroup
+	    //Check if able to update newly created subgroup
 		@Test(priority=44)
 		public void sub_group_updation() throws InterruptedException{
 			
@@ -607,7 +608,7 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-//		Check if able to delete newly created subgroup
+	    //Check if able to delete newly created subgroup
 		@Test(priority=45)
 		public void sub_group_deletion() throws InterruptedException{
 			
@@ -618,10 +619,26 @@ public class GroupsAndUserTest extends TestBase
 	        gp.subGroupDeletion(this.groupName_updated);
    
 		}
+
+		
+	    //Check if able to delete newly created subgroup
+		@Test(priority=45)
+		public void sub_group_clear_feature() throws InterruptedException{
+			
+	        logger=extent.startTest("sub_group_clear_feature");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+
+	        this.groupName="SJSG-1"+Util.generateRandomNumber();
+	        gp.createSubGroup(this.groupName);
+	        gp.subGroupNavigation(this.groupName);
+	        gp.subGroupDeletion(this.groupName);	        
+   
+		}
 		
 		
-		//Check UI of Users section
-//		@Test(priority=24)
+	   //Check UI of Users section
+       //@Test(priority=24)
 		public void userSectionUIVerification() throws InterruptedException{
 			
 	        logger=extent.startTest("User Section UI Verification verification..");
@@ -633,7 +650,7 @@ public class GroupsAndUserTest extends TestBase
 		
 		
 		
-		//Logging Out
+		 //Logging Out
 		@AfterClass
 		public void goToHomePage(){
 	        
@@ -642,7 +659,7 @@ public class GroupsAndUserTest extends TestBase
 	        try {
 				hp.clickAction("Home");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				 // TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	        LoginPage lp=new LoginPage(driver);
