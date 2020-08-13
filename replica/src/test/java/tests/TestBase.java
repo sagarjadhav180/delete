@@ -124,7 +124,7 @@ public class TestBase
 			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 		    
 		}
-		 else if (browser.equals("headless")) {
+		 else if (browser.equals("chrome")) {
 			
 			 String chromeDriverPath = ".//chromedriver" ;
 			 System.setProperty("webdriver.chrome.driver", chromeDriverPath);

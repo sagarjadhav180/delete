@@ -474,7 +474,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
 	private WebElement user_roles_listbox;	
 	
-	String[] epxected_roles= {"Admin","Standard","Read-Only"};
+	String[] expected_roles= {"Admin","Standard","Read-Only"};
 
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[2]")
 	private WebElement user_status_listbox;	
@@ -1832,23 +1832,31 @@ public class GroupsAndUserPage extends TestBase {
   
   	
     //To check User Roles
-  	public void userRoles() {
+  	public void userRoles() throws InterruptedException {
   		
   	  	expandSection(Constants.GroupsAndUser.user_settings_strip);
+  	  	collapseSection(Constants.GroupsAndUser.sub_groups_strip);
+  	  	
+  	  	//wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
+  	  	
+  	  	Thread.sleep(3000);
   	  
   	  	add_user_button.click();
+  	  	
   	  	
   	  	logger.log(LogStatus.INFO, "Verifying User Roles");
   	  	
   	  	Select roles=new Select(user_roles_listbox);
   	  	
+  	  	Util.scrollFunction(user_roles_listbox);
+  	  	
   	  	for(int i=1;i<roles.getOptions().size();i++) {
   	  		
-  	  		for(int j=0;j<epxected_roles.length;j++) {
+  	  		for(int j=0;j<expected_roles.length;j++) {
   	  			
-  	  			if(roles.getOptions().get(i).equals(epxected_roles[j])) {
+  	  			if(roles.getOptions().get(i).equals(expected_roles[j])) {
   	  				
-  	  				softassert.assertTrue(roles.getOptions().get(i).equals(epxected_roles[j]),"Role - "+epxected_roles[j]+" is not present");
+  	  				softassert.assertTrue(roles.getOptions().get(i).equals(expected_roles[j]),"Role - "+expected_roles[j]+" is not present");
   	  				
   	  			}
   	  		}
@@ -2246,18 +2254,19 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
 
-    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[1]"));
     		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	else{
 
     		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
     		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    		Util.scrollFunction(strip);
     	}
     	
     	if(strip_state.getAttribute("aria-hidden").equals("true")){
-			strip.click();
 			wait.until(ExpectedConditions.elementToBeClickable(strip));
+			strip.click();
 	    	logger.log(LogStatus.INFO, "Verifying if "+section_name+" is expandable");			
 	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("false"),section_name+" is not expandable");
 		}
