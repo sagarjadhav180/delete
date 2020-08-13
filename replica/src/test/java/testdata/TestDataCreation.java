@@ -46,7 +46,7 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 	public void navigateToGroup() throws InterruptedException {
 		
 		Breadcrumb bc=new Breadcrumb(driver);
-		bc.goToGroup(account);
+		bc.goToGroup(account,Constants.groupHeirarchyCompany);
 	}
 	
 	public void createUser(String f_name,String l_name,String userID) throws InterruptedException {
