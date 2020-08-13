@@ -1164,8 +1164,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 		Boolean cs_state = null;
 		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_source_name+"')]/..//preceding-sibling::input"));
-		
-		
+			
 		try {
 			if(custom_source.getAttribute("checked").equals("checked")) {
 				cs_state=true;
@@ -1699,13 +1698,25 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//Sub-group navigation
-	public void subGroupNavigation(String subGroup) {
+	public void subGroupNavigation(String subGroup) throws InterruptedException {
 		
 		 expandSection(Constants.GroupsAndUser.sub_groups_strip);
 			
-		//Editing sub-group to be updated
+		//Selecting newly created group
 		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_select_button);
+	    Thread.sleep(5000);
 	
+		try {
+			String strip = TestBase.driver.findElement(By.xpath("//h4[text()='GROUP DETAILS FOR "+subGroup+"']")).toString();
+			logger.log(LogStatus.PASS, "Navigated to selected group successfully");
+		}catch(Exception e) {
+			Assert.fail("Did not navigate to selected group");
+		}
+
+		//Navigating back to the previous group
+		Breadcrumb bc=new Breadcrumb(driver);
+		bc.goToGroup(TestBase.account,Constants.groupHeirarchyAgency);
+		Thread.sleep(5000);
 	
 	}
 	
@@ -1716,7 +1727,9 @@ public class GroupsAndUserPage extends TestBase {
 		WebElement subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		//Clicking on desired action button
-		subGroup.click();
+        wait.until(ExpectedConditions.visibilityOf(subGroup));
+//		subGroup.click();
+		Util.click(subGroup);
 		
 		//sub-group deletion pop-up
 		if(button_name.contains("Delete")) {
