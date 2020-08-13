@@ -8,6 +8,12 @@ import tests.TestBase;
 
 public class Constants {
 
+
+	public static final String groupHeirarchyAgency="1";
+	public static final String groupHeirarchyCompany="2";
+	public static final String groupHeirarchyLocation="3";
+	
+	
 	public static final String call_logs_category="Call Logs Report Suite";
 	public static final String call_back_category="Call Back Report Suite";
 	public static final String account_details_category="Account Details Report Suite";
