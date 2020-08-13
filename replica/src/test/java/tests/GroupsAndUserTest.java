@@ -323,19 +323,31 @@ public class GroupsAndUserTest extends TestBase
    
 		}  
 
-		//Check if able to add new custom source in every column 
 		
+        //Check if able to clear selected custom source checkbox
 		@Test(priority=27,dependsOnMethods="custom_source_add_new_source")
+		public void custom_source_clear_source() throws InterruptedException{
+			
+	        logger=extent.startTest("custom_source_clear_source");
+			logger.assignCategory(Constants.groups_and_user_category);
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.custom_Source_clear_Source();
+   
+		}
+		
+		
+		//Check if able to add new custom source in every column 	
+		@Test(priority=28,dependsOnMethods="custom_source_add_new_source")
 		public void custom_source_delete_source() throws InterruptedException{
 			
 	        logger=extent.startTest("custom source section delete source verification..");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-	        gp.custom_Source_Delete_Source();
+	        gp.custom_Source_delete_Source();
    
 		}
-		 
-		
+	
+			
 		//Check if Call Action strip is displayed
 		@Test(priority=28)
 		public void call_action_strip() throws InterruptedException{
