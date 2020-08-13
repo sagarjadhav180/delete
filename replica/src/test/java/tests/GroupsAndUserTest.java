@@ -649,6 +649,34 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
+		   //Check if grid count is matching with db count
+		
+	       @Test(priority=52)
+			public void user_section_gridcount_dbcount_match() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if grid count is matching with db count..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.usersGridCount();
+			}
+		
+		   //Check roles displayed in roles listbox
+			
+	       @Test(priority=53)
+			public void user_section_roles_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if roles displayed in roles listbox..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.userRoles();
+			}	
+		
+		
+		
+		
+		
 		
 		 //Logging Out
 		@AfterClass
