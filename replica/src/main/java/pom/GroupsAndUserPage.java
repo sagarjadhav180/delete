@@ -1092,8 +1092,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	
 	
-	//Custom Source Delete Source Validation
-	public void custom_Source_Delete_Source() throws InterruptedException{
+	public void custom_Source_delete_Source() throws InterruptedException{
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
@@ -1102,30 +1101,81 @@ public class GroupsAndUserPage extends TestBase {
 		for(int i=1; i<=5; i++) {
 			
 			clickCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));
-			custom_source_delete_button.click();
 			
-			wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_confiramtion_message));
-			logger.log(LogStatus.INFO, "verifying Custom Source Deletion Confirmation & Success Messages");
-			softassert.assertTrue(custom_source_deletion_confiramtion_message.isDisplayed(), "Custom Source Deletion Confirmation Message not popped up");
-			softassert.assertTrue(custom_source_deletion_ok_button.isDisplayed(), "Custom Source Deletion OK button Not present");
-			softassert.assertTrue(custom_source_deletion_cancel_button.isDisplayed(), "Custom Source Deletion Cancel button Not present");
-			
-			driver.switchTo().activeElement();
-			custom_source_deletion_ok_button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_success_message));
-			softassert.assertTrue(custom_source_deletion_success_message.isDisplayed(), "Source Not deleted successfully");
-		    Thread.sleep(2000);
-		}		
+		}	
+		
+		custom_source_delete_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_confiramtion_message));
+		logger.log(LogStatus.INFO, "verifying Custom Source Deletion Confirmation & Success Messages");
+		softassert.assertTrue(custom_source_deletion_confiramtion_message.isDisplayed(), "Custom Source Deletion Confirmation Message not popped up");
+		softassert.assertTrue(custom_source_deletion_ok_button.isDisplayed(), "Custom Source Deletion OK button Not present");
+		softassert.assertTrue(custom_source_deletion_cancel_button.isDisplayed(), "Custom Source Deletion Cancel button Not present");
+		
+		driver.switchTo().activeElement();
+		custom_source_deletion_ok_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_success_message));
+		softassert.assertTrue(custom_source_deletion_success_message.isDisplayed(), "Source Not deleted successfully");
+	    Thread.sleep(2000);
+		
+		
 		softassert.assertAll();
 	}
     
 	
+	public void custom_Source_clear_Source() throws InterruptedException{
+			
+		//Expanding Custom Source section
+	    expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	    Thread.sleep(4000);
+	        
+	    for(int i=1; i<=5; i++) {
+				
+			clickCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));
+				
+		}	
+	    
+		logger.log(LogStatus.INFO, "verifying if Custom Source clear");			
+		custom_source_clear_button.click();
+		
+		for(int i=1; i<=5; i++) {
+			
+			Boolean state = stateOfCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));	
+			String expected_state="false";
+			softassert.assertTrue(state.equals(Boolean.parseBoolean(expected_state)),custom_sources[i]+" checkbox is not cleared");
+		}	
+		
+		softassert.assertAll();
+		
+	}
+	
+		
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
 			
 		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_source_name+"')]/..//preceding-sibling::input"));
 		custom_source.click();
+	}
+	
+	
+	//to click check-box of required custom source
+	public Boolean stateOfCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
+		
+		Boolean cs_state = null;
+		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_source_name+"')]/..//preceding-sibling::input"));
+		
+		
+		try {
+			if(custom_source.getAttribute("checked").equals("checked")) {
+				cs_state=true;
+			}	
+		}
+		catch(Exception e) {
+			cs_state=false;			
+		}
+
+		return cs_state;
 	}
 		
 		
