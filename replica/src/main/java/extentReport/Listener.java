@@ -51,7 +51,6 @@ import tests.Util;
 				try {
 					System.out.println("In fail");
 					Thread.sleep(1200);
-					failedtests.add(result.getMethod());
 					logger.log(LogStatus.FAIL, "" + result.getThrowable().getMessage() + "");
 					logger.log(LogStatus.FAIL, "Failed.");
 					methodName = result.getName();
