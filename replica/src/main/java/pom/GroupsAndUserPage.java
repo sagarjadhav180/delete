@@ -28,6 +28,16 @@ public class GroupsAndUserPage extends TestBase {
 	
 	SoftAssert softassert=new SoftAssert();
 	
+	//------ Temporary Xpaths Start-------
+	
+	@FindBy(xpath="/html/body/header/ul/li[2]/a/span")
+	private WebElement user_btn;
+	
+	@FindBy(xpath="/html/body/header/ul/li[2]/ul/li/ul/li[6]/a")
+	private WebElement logout;
+	
+	//------ Temporary Xpaths End-------
+	
 	@FindBy(xpath="//div[@class='panel-body collapse in table-responsive ng-isolate-scope']")
 	private WebElement window;
 	
@@ -1835,13 +1845,15 @@ public class GroupsAndUserPage extends TestBase {
   	public void userRoles() throws InterruptedException {
   		
   	  	expandSection(Constants.GroupsAndUser.user_settings_strip);
-  	  	collapseSection(Constants.GroupsAndUser.sub_groups_strip);
+  	  	//collapseSection(Constants.GroupsAndUser.sub_groups_strip);
   	  	
   	  	//wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
   	  	
   	  	Thread.sleep(3000);
   	  
   	  	add_user_button.click();
+  	  	Util.click(add_action_button);
+  	 
   	  	
   	  	
   	  	logger.log(LogStatus.INFO, "Verifying User Roles");
@@ -1868,11 +1880,14 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//To check if Inactive status is not displayed at the time of user creation
-  	public void userStatus() {
+  	public void userStatus() throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
+  		//collapseSection(Constants.GroupsAndUser.sub_groups_strip);
+  		
+  		//Thread.sleep(3000);
     	  
-  	  	add_user_button.click();
+  	  	Util.click(add_user_button);
   	  	
   	  	Select status=new Select(user_status_listbox);
   	  	
@@ -1888,11 +1903,12 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User creation form validation
-  	public void userCreationFormValidation(String field) {
+  	public void userCreationFormValidation(String field) throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
-  	  
-  	  	add_user_button.click();
+
+
+  	  	Util.click(add_user_button);
   		
   	  	//Entering User details
   	  	first_name_textbox.clear();
@@ -1925,13 +1941,17 @@ public class GroupsAndUserPage extends TestBase {
 	  	}
   	  	
   	    //Saving User details
-  	    save_user_button.click();
+  	    Util.click(save_user_button);
   	    
   	    logger.log(LogStatus.INFO, "Verifying if Appropriate alert is displayed for "+field);
   	    wait.until(ExpectedConditions.visibilityOf(user_creation_alert));
   	    Assert.assertTrue(user_creation_alert.isDisplayed(),"Appropriate alert is not dispalyed for "+field);
   	    
-  	    cancel_user_button.click();
+  	    //Thread.sleep(5000);
+  	    
+
+  	    Util.click(cancel_user_button);
+  	    //cancel_user_button.click();
   	}
   	
   	
@@ -2261,7 +2281,7 @@ public class GroupsAndUserPage extends TestBase {
 
     		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
     		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
-    		Util.scrollFunction(strip);
+    		//Util.scrollFunction(strip);
     	}
     	
     	if(strip_state.getAttribute("aria-hidden").equals("true")){

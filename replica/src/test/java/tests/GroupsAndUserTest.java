@@ -673,9 +673,53 @@ public class GroupsAndUserTest extends TestBase
 		        gp.userRoles();
 			}	
 		
+		   //Check 'Inactive' status is not displayed at the time of creating new user
+			
+	       @Test(priority=54)
+			public void user_section_inactive_status_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if 'Inactive' status is not displaying at the time of creating new user..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.userStatus();
+			}	
 		
-		
-		
+		   //Check if appropriate alert is displayed while creating new userif firstname is missing
+			
+	       @Test(priority=55)
+			public void user_section_firstname_alert_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if appropriate alert is displayed while creating new userif firstname is missing..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.userCreationFormValidation("first_name_textbox");
+			}
+	       
+			
+	       @Test(priority=56)
+			public void user_section_lastname_alert_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if appropriate alert is displayed while creating new userif firstname is missing..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.userCreationFormValidation("last_name_textbox");
+			}	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
 		
 		
 		 //Logging Out
