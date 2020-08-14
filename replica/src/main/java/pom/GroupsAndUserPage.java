@@ -1956,11 +1956,12 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User section - Cancel feature
-  	public void userCancelFeature() {
+  	public void userCancelFeature() throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
     	  
-  	  	add_user_button.click();
+  	  	Util.click(add_user_button);
+  	  	Thread.sleep(3000);
   		
   	  	//Entering User details
   	  	first_name_textbox.clear();
@@ -1976,7 +1977,7 @@ public class GroupsAndUserPage extends TestBase {
 	    roles.selectByVisibleText("Admin");
   	    
   	    //Canceling User details
-  	    cancel_user_button.click();
+  	    Util.click(cancel_user_button);
   	    
   	    logger.log(LogStatus.INFO, "Verifying if User creation success message is not displayed");    
   	
@@ -1997,7 +1998,8 @@ public class GroupsAndUserPage extends TestBase {
     	expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  
     	wait.until(ExpectedConditions.visibilityOf(add_user_button));
-    	add_user_button.click();
+    	Util.click(add_user_button);
+    	//add_user_button.click();
     	
     	//Entering User details
   	  	first_name_textbox.clear();
@@ -2012,8 +2014,9 @@ public class GroupsAndUserPage extends TestBase {
 	    Select roles=new Select(user_roles_listbox);
 	    roles.selectByVisibleText(role);
     	
-	    //Saving User Details   
-    	save_user_button.click();
+	    //Saving User Details 
+	    Util.click(save_user_button);
+    	//save_user_button.click();
     	
     	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
     	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");

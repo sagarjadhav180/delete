@@ -697,6 +697,8 @@ public class GroupsAndUserTest extends TestBase
 		        gp.userCreationFormValidation("first_name_textbox");
 			}
 	       
+	       
+	       // Check if appropriate alert is displayed while creating new user if lastname is missing
 			
 	       @Test(priority=56)
 			public void user_section_lastname_alert_verification() throws InterruptedException{
@@ -708,14 +710,65 @@ public class GroupsAndUserTest extends TestBase
 		        gp.userCreationFormValidation("last_name_textbox");
 			}	       
 	       
+	       // Check if appropriate alert is displayed while creating new user if mail id is missing
+			
+	       @Test(priority=57)
+			public void user_section_mail_ID_alert_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if appropriate alert is displayed while creating new user if mail ID is missing..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.userCreationFormValidation("email_id_textbox");
+			}	       
+	
+	       // Check if able to create new user with role Admin
+			
+	       @Test(priority=58)
+			public void user_sectio_create_user_with_Admin_role() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if able to create new user with role Admin..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.createUser("fname", "lname", "test1@test.com", "Admin");
+			}
 	       
+	       // Check if able to create new user with role Standard
+			
+	       @Test(priority=59)
+			public void user_sectio_create_user_with_Standard_role() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if able to create new user with role Standard..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.createUser("fname", "lname", "test2@test.com", "Standard");
+			}
 	       
+	       // Check if able to create new user with role Read Only
+			
+	       @Test(priority=60)
+			public void user_sectio_create_user_with_Read_Only_role() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if able to create new user with role Read Only..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.createUser("fname", "lname", "test3@test.com", "Read-Only");
+			}      
 	       
-	       
-	       
-	       
-	       
-	       
+	       // Check if user is not created if clicked on cancel button
+			
+	       @Test(priority=61)
+			public void user_sectio_cancel_user_creation() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if user is not created if clicked on cancel button..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        gp.userCancelFeature();
+			}        
 	       
 	       
 	       
