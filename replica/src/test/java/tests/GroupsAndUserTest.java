@@ -725,7 +725,7 @@ public class GroupsAndUserTest extends TestBase
 	       // Check if able to create new user with role Admin
 			
 	       @Test(priority=58)
-			public void user_sectio_create_user_with_Admin_role() throws InterruptedException{
+			public void user_section_create_user_with_Admin_role() throws InterruptedException{
 				
 		        logger=extent.startTest("Checking if able to create new user with role Admin..");
 				logger.assignCategory(Constants.groups_and_user_category);
@@ -737,7 +737,7 @@ public class GroupsAndUserTest extends TestBase
 	       // Check if able to create new user with role Standard
 			
 	       @Test(priority=59)
-			public void user_sectio_create_user_with_Standard_role() throws InterruptedException{
+			public void user_section_create_user_with_Standard_role() throws InterruptedException{
 				
 		        logger=extent.startTest("Checking if able to create new user with role Standard..");
 				logger.assignCategory(Constants.groups_and_user_category);
@@ -749,7 +749,7 @@ public class GroupsAndUserTest extends TestBase
 	       // Check if able to create new user with role Read Only
 			
 	       @Test(priority=60)
-			public void user_sectio_create_user_with_Read_Only_role() throws InterruptedException{
+			public void user_section_create_user_with_Read_Only_role() throws InterruptedException{
 				
 		        logger=extent.startTest("Checking if able to create new user with role Read Only..");
 				logger.assignCategory(Constants.groups_and_user_category);
@@ -761,7 +761,7 @@ public class GroupsAndUserTest extends TestBase
 	       // Check if user is not created if clicked on cancel button
 			
 	       @Test(priority=61)
-			public void user_sectio_cancel_user_creation() throws InterruptedException{
+			public void user_section_cancel_user_creation() throws InterruptedException{
 				
 		        logger=extent.startTest("Checking if user is not created if clicked on cancel button..");
 				logger.assignCategory(Constants.groups_and_user_category);
@@ -769,6 +769,76 @@ public class GroupsAndUserTest extends TestBase
 		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 		        gp.userCancelFeature();
 			}        
+
+	       
+	       // Check if able to update user details 
+			
+	       @Test(priority=62)
+			public void user_section_update_user_detail() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if able to update user details ..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        String tempmail = "test" + Util.generateRandomNumber() + "@yopmail.com";
+		        gp.createUser("fname", "lname", tempmail, "Standard");
+		        gp.updateUser(tempmail, "test11@yopmail.com");
+			}  
+	       
+	       // Check if able to delete newly created user
+			
+	       @Test(priority=63)
+			public void user_section_delete_user_detail() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if user is not created if clicked on cancel button..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        String tempmail = "test" + Util.generateRandomNumber() + "@yopmail.com";
+		        gp.createUser("fname", "lname", tempmail, "Standard");
+		        gp.deleteUser(tempmail);
+			} 	       
+	       
+	       // Check UI of User permission window
+			
+	       @Test(priority=64)
+			public void user_section_User_Permission_UI_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking UI of User permission window..");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        
+		        String emailtemp = "test" + Util.generateRandomNumber() + "@yopmail.com";
+		        gp.createUser("fname", "lname", emailtemp, "Admin");
+		        Thread.sleep(3000);
+		        gp.userPermissionUI(emailtemp);
+			}        
+	       
+	       // Check if able to update user permissions
+			
+	       @Test(priority=65)
+			public void user_section_User_Permission_Update_verification() throws InterruptedException{
+				
+		        logger=extent.startTest("Checking if able to update user permissions...");
+				logger.assignCategory(Constants.groups_and_user_category);
+				
+		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		        
+		        String emailtemp = "test" + Util.generateRandomNumber() + "@yopmail.com";
+		        gp.createUser("fname", "lname", emailtemp, "Admin");
+		        Thread.sleep(3000);
+		        gp.updateUserPermissions(emailtemp);
+			} 	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
 	       
 	       
 	       
