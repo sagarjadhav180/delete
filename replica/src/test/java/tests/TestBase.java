@@ -106,7 +106,7 @@ public class TestBase
 		String sc = null ;
 		if(browser.contains("chrome")){
 
-			System.setProperty("webdriver.chrome.driver",".//chromedriver");
+			System.setProperty("webdriver.chrome.driver",".//chromedriver_linux");
 		    driver=new ChromeDriver();
 
 		    
@@ -124,7 +124,7 @@ public class TestBase
 			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 		    
 		}
-		 else if (browser.equals("chrome")) {
+		 else if (browser.equals("headless")) {
 			
 			 String chromeDriverPath = ".//chromedriver" ;
 			 System.setProperty("webdriver.chrome.driver", chromeDriverPath);
