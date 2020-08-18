@@ -489,10 +489,10 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[2]")
 	private WebElement user_status_listbox;	
 	
-	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
+	@FindBy(xpath="//table[@id='table_group_user']//form[@aria-hidden='false']//button[contains(text(),'Save')]")
 	private WebElement save_user_button;
 
-	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Cancel')]")
+	@FindBy(xpath="//table[@id='table_group_user']//form[@aria-hidden='false']//button[contains(text(),'Cancel')]")
 	private WebElement cancel_user_button;
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
