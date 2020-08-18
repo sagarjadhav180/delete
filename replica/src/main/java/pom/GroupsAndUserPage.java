@@ -28,6 +28,16 @@ public class GroupsAndUserPage extends TestBase {
 	
 	SoftAssert softassert=new SoftAssert();
 	
+	//------ Temporary Xpaths Start-------
+	
+	@FindBy(xpath="/html/body/header/ul/li[2]/a/span")
+	private WebElement user_btn;
+	
+	@FindBy(xpath="/html/body/header/ul/li[2]/ul/li/ul/li[6]/a")
+	private WebElement logout;
+	
+	//------ Temporary Xpaths End-------
+	
 	@FindBy(xpath="//div[@class='panel-body collapse in table-responsive ng-isolate-scope']")
 	private WebElement window;
 	
@@ -474,15 +484,15 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
 	private WebElement user_roles_listbox;	
 	
-	String[] epxected_roles= {"Admin","Standard","Read-Only"};
+	String[] expected_roles= {"Admin","Standard","Read-Only"};
 
 	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[2]")
 	private WebElement user_status_listbox;	
 	
-	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Save')]")
+	@FindBy(xpath="//table[@id='table_group_user']//form[@aria-hidden='false']//button[contains(text(),'Save')]")
 	private WebElement save_user_button;
 
-	@FindBy(xpath="//form[@class='form-buttons form-inline ng-pristine ng-valid']//button[contains(text(),'Cancel')]")
+	@FindBy(xpath="//table[@id='table_group_user']//form[@aria-hidden='false']//button[contains(text(),'Cancel')]")
 	private WebElement cancel_user_button;
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
@@ -1095,8 +1105,7 @@ public class GroupsAndUserPage extends TestBase {
 	}
 	
 	
-	//Custom Source Delete Source Validation
-	public void custom_Source_Delete_Source() throws InterruptedException{
+	public void custom_Source_delete_Source() throws InterruptedException{
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
@@ -1105,21 +1114,25 @@ public class GroupsAndUserPage extends TestBase {
 		for(int i=1; i<=5; i++) {
 			
 			clickCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));
-			custom_source_delete_button.click();
 			
-			wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_confiramtion_message));
-			logger.log(LogStatus.INFO, "verifying Custom Source Deletion Confirmation & Success Messages");
-			softassert.assertTrue(custom_source_deletion_confiramtion_message.isDisplayed(), "Custom Source Deletion Confirmation Message not popped up");
-			softassert.assertTrue(custom_source_deletion_ok_button.isDisplayed(), "Custom Source Deletion OK button Not present");
-			softassert.assertTrue(custom_source_deletion_cancel_button.isDisplayed(), "Custom Source Deletion Cancel button Not present");
-			
-			driver.switchTo().activeElement();
-			custom_source_deletion_ok_button.click();
-			
-			wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_success_message));
-			softassert.assertTrue(custom_source_deletion_success_message.isDisplayed(), "Source Not deleted successfully");
-		    Thread.sleep(2000);
-		}		
+		}	
+		
+		custom_source_delete_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_confiramtion_message));
+		logger.log(LogStatus.INFO, "verifying Custom Source Deletion Confirmation & Success Messages");
+		softassert.assertTrue(custom_source_deletion_confiramtion_message.isDisplayed(), "Custom Source Deletion Confirmation Message not popped up");
+		softassert.assertTrue(custom_source_deletion_ok_button.isDisplayed(), "Custom Source Deletion OK button Not present");
+		softassert.assertTrue(custom_source_deletion_cancel_button.isDisplayed(), "Custom Source Deletion Cancel button Not present");
+		
+		driver.switchTo().activeElement();
+		custom_source_deletion_ok_button.click();
+		
+		wait.until(ExpectedConditions.visibilityOf(custom_source_deletion_success_message));
+		softassert.assertTrue(custom_source_deletion_success_message.isDisplayed(), "Source Not deleted successfully");
+	    Thread.sleep(2000);
+		
+		
 		softassert.assertAll();
 	}
 	
@@ -1218,11 +1231,57 @@ public class GroupsAndUserPage extends TestBase {
 		}
 		
 	
+	public void custom_Source_clear_Source() throws InterruptedException{
+			
+		//Expanding Custom Source section
+	    expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	    Thread.sleep(4000);
+	        
+	    for(int i=1; i<=5; i++) {
+				
+			clickCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));
+				
+		}	
+	    
+		logger.log(LogStatus.INFO, "verifying if Custom Source clear");			
+		custom_source_clear_button.click();
+		
+		for(int i=1; i<=5; i++) {
+			
+			Boolean state = stateOfCheckboxOfCustomSource(custom_sources[i],String.valueOf(i));	
+			String expected_state="false";
+			softassert.assertTrue(state.equals(Boolean.parseBoolean(expected_state)),custom_sources[i]+" checkbox is not cleared");
+		}	
+		
+		softassert.assertAll();
+		
+	}
+	
+		
 	//to click check-box of required custom source
 	public void clickCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
 			
 		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_source_name+"')]/..//preceding-sibling::input"));
 		custom_source.click();
+	}
+	
+	
+	//to click check-box of required custom source
+	public Boolean stateOfCheckboxOfCustomSource(String custom_source_name,String custom_source_type){
+		
+		Boolean cs_state = null;
+		WebElement custom_source = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_source_name+"')]/..//preceding-sibling::input"));
+			
+		try {
+			if(custom_source.getAttribute("checked").equals("checked")) {
+				cs_state=true;
+			}	
+		}
+		catch(Exception e) {
+			cs_state=false;			
+		}
+
+		return cs_state;
 	}
 		
 	
@@ -1747,13 +1806,25 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//Sub-group navigation
-	public void subGroupNavigation(String subGroup) {
+	public void subGroupNavigation(String subGroup) throws InterruptedException {
 		
 		 expandSection(Constants.GroupsAndUser.sub_groups_strip);
 			
-		//Editing sub-group to be updated
+		//Selecting newly created group
 		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_select_button);
+	    Thread.sleep(5000);
 	
+		try {
+			String strip = TestBase.driver.findElement(By.xpath("//h4[text()='GROUP DETAILS FOR "+subGroup+"']")).toString();
+			logger.log(LogStatus.PASS, "Navigated to selected group successfully");
+		}catch(Exception e) {
+			Assert.fail("Did not navigate to selected group");
+		}
+
+		//Navigating back to the previous group
+		Breadcrumb bc=new Breadcrumb(driver);
+		bc.goToGroup(TestBase.account,Constants.groupHeirarchyAgency);
+		Thread.sleep(5000);
 	
 	}
 	
@@ -1764,7 +1835,9 @@ public class GroupsAndUserPage extends TestBase {
 		WebElement subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		//Clicking on desired action button
-		subGroup.click();
+        wait.until(ExpectedConditions.visibilityOf(subGroup));
+//		subGroup.click();
+		Util.click(subGroup);
 		
 		//sub-group deletion pop-up
 		if(button_name.contains("Delete")) {
@@ -1831,8 +1904,12 @@ public class GroupsAndUserPage extends TestBase {
       	expandSection(Constants.GroupsAndUser.user_settings_strip);
       	
   		//Verification of count of users in top pagination tool-box with db	
+
   		//String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
-  		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70045 AND role_id !=4");
+  		//String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70045 AND role_id !=4");
+
+  		String dbCount = Util.readingFromDB("SELECT count(*) AS COUNT FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4 AND user_status NOT IN ('deleted')");
+
   		String countOnUI_pagination = users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
   	
   		logger.log(LogStatus.INFO, "Verifying users count displeyed in top pagination toolbox with db count");
@@ -1850,7 +1927,7 @@ public class GroupsAndUserPage extends TestBase {
       	
   		//verification of count of users displayed in grid with db
   		int final_users_count=users_count_in_grid.size()+0;
-  		String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
+  		String dbCount = Util.readingFromDB("SELECT count(*) AS COUNT  FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4 AND user_status NOT IN ('deleted')");
   		
   		if(!users_topNextPagination_Button.getAttribute("class").endsWith("disabled")) {
   			
@@ -1870,23 +1947,33 @@ public class GroupsAndUserPage extends TestBase {
   
   	
     //To check User Roles
-  	public void userRoles() {
+  	public void userRoles() throws InterruptedException {
   		
   	  	expandSection(Constants.GroupsAndUser.user_settings_strip);
+  	  	//collapseSection(Constants.GroupsAndUser.sub_groups_strip);
+  	  	
+  	  	//wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
+  	  	
+  	  	Thread.sleep(3000);
   	  
   	  	add_user_button.click();
+  	  	Util.click(add_action_button);
+  	 
+  	  	
   	  	
   	  	logger.log(LogStatus.INFO, "Verifying User Roles");
   	  	
   	  	Select roles=new Select(user_roles_listbox);
   	  	
+  	  	Util.scrollFunction(user_roles_listbox);
+  	  	
   	  	for(int i=1;i<roles.getOptions().size();i++) {
   	  		
-  	  		for(int j=0;j<epxected_roles.length;j++) {
+  	  		for(int j=0;j<expected_roles.length;j++) {
   	  			
-  	  			if(roles.getOptions().get(i).equals(epxected_roles[j])) {
+  	  			if(roles.getOptions().get(i).equals(expected_roles[j])) {
   	  				
-  	  				softassert.assertTrue(roles.getOptions().get(i).equals(epxected_roles[j]),"Role - "+epxected_roles[j]+" is not present");
+  	  				softassert.assertTrue(roles.getOptions().get(i).equals(expected_roles[j]),"Role - "+expected_roles[j]+" is not present");
   	  				
   	  			}
   	  		}
@@ -1898,11 +1985,14 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//To check if Inactive status is not displayed at the time of user creation
-  	public void userStatus() {
+  	public void userStatus() throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
+  		//collapseSection(Constants.GroupsAndUser.sub_groups_strip);
+  		
+  		//Thread.sleep(3000);
     	  
-  	  	add_user_button.click();
+  	  	Util.click(add_user_button);
   	  	
   	  	Select status=new Select(user_status_listbox);
   	  	
@@ -1918,11 +2008,12 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User creation form validation
-  	public void userCreationFormValidation(String field) {
+  	public void userCreationFormValidation(String field) throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
-  	  
-  	  	add_user_button.click();
+
+
+  	  	Util.click(add_user_button);
   		
   	  	//Entering User details
   	  	first_name_textbox.clear();
@@ -1955,24 +2046,29 @@ public class GroupsAndUserPage extends TestBase {
 	  	}
   	  	
   	    //Saving User details
-  	    save_user_button.click();
+  	    Util.click(save_user_button);
   	    
   	    logger.log(LogStatus.INFO, "Verifying if Appropriate alert is displayed for "+field);
   	    wait.until(ExpectedConditions.visibilityOf(user_creation_alert));
   	    Assert.assertTrue(user_creation_alert.isDisplayed(),"Appropriate alert is not dispalyed for "+field);
   	    
-  	    cancel_user_button.click();
+  	    //Thread.sleep(5000);
+  	    
+
+  	    Util.click(cancel_user_button);
+  	    //cancel_user_button.click();
   	}
   	
   	
   	//User section - Cancel feature
-  	public void userCancelFeature() {
+  	public void userCancelFeature() throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
     	  
-  	  	add_user_button.click();
+  	  	Util.click(add_user_button);
+  	  	Thread.sleep(3000);
   		
-  	  	//Entering User details
+  	  	//Entering User detailsxxxxxx
   	  	first_name_textbox.clear();
   	    first_name_textbox.sendKeys("Automation-Test_user_firstName");
   	  	
@@ -1986,7 +2082,7 @@ public class GroupsAndUserPage extends TestBase {
 	    roles.selectByVisibleText("Admin");
   	    
   	    //Canceling User details
-  	    cancel_user_button.click();
+  	    Util.click(cancel_user_button);
   	    
   	    logger.log(LogStatus.INFO, "Verifying if User creation success message is not displayed");    
   	
@@ -2007,7 +2103,8 @@ public class GroupsAndUserPage extends TestBase {
     	expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  
     	wait.until(ExpectedConditions.visibilityOf(add_user_button));
-    	add_user_button.click();
+    	Util.click(add_user_button);
+    	//add_user_button.click();
     	
     	//Entering User details
   	  	first_name_textbox.clear();
@@ -2022,8 +2119,9 @@ public class GroupsAndUserPage extends TestBase {
 	    Select roles=new Select(user_roles_listbox);
 	    roles.selectByVisibleText(role);
     	
-	    //Saving User Details   
-    	save_user_button.click();
+	    //Saving User Details 
+	    Util.click(save_user_button);
+    	//save_user_button.click();
     	
     	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
     	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
@@ -2032,7 +2130,7 @@ public class GroupsAndUserPage extends TestBase {
 
     
     //User Updation
-  	public void updateUser(String user_id,String updated_user_id) {
+  	public void updateUser(String user_id,String updated_user_id) throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2053,7 +2151,7 @@ public class GroupsAndUserPage extends TestBase {
     
   	
   	//User Deletion
-  	public void deleteUser(String user_id) {
+  	public void deleteUser(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2067,7 +2165,7 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User section - Change Password window UI
-  	public void changePasswordWindow(String user_id) {
+  	public void changePasswordWindow(String user_id) throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2095,7 +2193,7 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User Section - Change password form validation
-  	public void changePasswordFormValidation(String user_id) {
+  	public void changePasswordFormValidation(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2115,7 +2213,7 @@ public class GroupsAndUserPage extends TestBase {
 
   	
   	//User Section - Change password cancel feature
-  	public void changePasswordCancel(String user_id) {
+  	public void changePasswordCancel(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2142,7 +2240,7 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
     //User Section - Change password feature
-  	public void changePassword(String user_id) {
+  	public void changePassword(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2160,12 +2258,14 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User section - User Permission window UI
-  	public void userPermissionUI(String user_id) {
+  	public void userPermissionUI(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
+
+  		Thread.sleep(4000);
   		
   		logger.log(LogStatus.INFO, "Verifying if User Permissions label is present");
   		softassert.assertTrue(user_permissions_window_label.isDisplayed(),"User Permissions label is not present");
@@ -2201,7 +2301,7 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User Section - User permission cancel feature
-  	public void userPermissionCancelFeature(String user_id) {
+  	public void userPermissionCancelFeature(String user_id) throws InterruptedException {
   		
   	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2225,15 +2325,20 @@ public class GroupsAndUserPage extends TestBase {
   	
 
   	//User Section - Update User permission
-  	public void updateUserPermissions(String user_id) {
+  	public void updateUserPermissions(String user_id) throws InterruptedException {
   		
   	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
   		
+  		Thread.sleep(3000);
+  		//driver.switchTo()
+  		
   		user_permissions_access_audio_toggle.click();
+  		Thread.sleep(3000);
   		user_permissions_save_button.click();
+  		Thread.sleep(3000);
 
  		logger.log(LogStatus.INFO, "Verifying if User permissions gets updated");	
   		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions updated successfully");
@@ -2242,12 +2347,13 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//To click action button of desired user
-    public void clickActionUser(String user_email,String button_name){
+    public void clickActionUser(String user_email,String button_name) throws InterruptedException{
 		
 		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		wait.until(ExpectedConditions.visibilityOf(button));
-		button.click();
+		
+		Util.click(button);
 		
 		//Deletion pop-up
 		if(button_name.contains("Delete")) {
@@ -2257,14 +2363,14 @@ public class GroupsAndUserPage extends TestBase {
 			user_deletion_confiramtion_popup_ok_button.click();
 		
 		}	
-	
+
     }
     
     
     /*User Section - Clean up Activity
      *use user_email -- delete_automation_user in Test class
      */
-    public void cleanUpUsers(String user_email) {
+    public void cleanUpUsers(String user_email) throws InterruptedException {
 
         expandSection(Constants.GroupsAndUser.user_settings_strip);
     	
@@ -2284,18 +2390,19 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
 
-    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[1]"));
     		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	else{
 
     		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
     		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
+    		//Util.scrollFunction(strip);
     	}
     	
     	if(strip_state.getAttribute("aria-hidden").equals("true")){
-			strip.click();
 			wait.until(ExpectedConditions.elementToBeClickable(strip));
+			strip.click();
 	    	logger.log(LogStatus.INFO, "Verifying if "+section_name+" is expandable");			
 	    	Assert.assertTrue(strip_state.getAttribute("aria-hidden").equals("false"),section_name+" is not expandable");
 		}
