@@ -41,43 +41,45 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-		 //Check if Group and User label is displayed
+		//Check if Group and User label is displayed
 		@Test(priority=1)
 		public void groupsAndUserPageLabel() throws InterruptedException{
 			
-	        logger=extent.startTest("Groups And User Page Label verification..");
+	        logger=extent.startTest("groupsAndUserPageLabel");
 			logger.assignCategory(Constants.groups_and_user_category);
 			
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupsAndUserHeaderLabel();
 		}
 		
-		 //Check if export groups and user button is present and is clickable
+		//Check if export groups and user button is present and is clickable
 		@Test(priority=2)
 		public void exportgroupAndUserButton() throws InterruptedException{
 			
-	        logger=extent.startTest("export groups and user button verification..");
+	        logger=extent.startTest("exportgroupAndUserButton");
 			logger.assignCategory(Constants.groups_and_user_category);
 			
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.exportGroupsAndUserButton();
 		}
 		
-		 //Check if Group details strip is present
+		 
+		//Check if Group details strip is present
 		@Test(priority=3)
 		public void groupDetailsStripVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details Strip verification..");
+	        logger=extent.startTest("groupDetailsStripVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.Strip(Constants.GroupsAndUser.user_settings_strip);
 		}
 		
-		 // check if the Group Details Strip is Collapsible & expandable
+		
+		// check if the Group Details Strip is Collapsible & expandable
 		@Test(priority=4)
 		public void groupDetailsStripCollapsible_Expandable() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details Strip Collapsible & expandable verification..");
+	        logger=extent.startTest("groupDetailsStripCollapsible_Expandable");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.expandSection(Constants.GroupsAndUser.group_details_strip);
@@ -85,214 +87,232 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 
-		 //UI verification of Group Details section
+		//UI verification of Group Details section
 		@Test(priority=5)
 		public void groupDetailsUIverification() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details section UI verification..");
+	        logger=extent.startTest("groupDetailsUIverification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsUI();
 		}	
 		
-		 //Check if appropriate alert is displayed if group name is empty
+		
+		//Check if appropriate alert is displayed if group name is empty
 		@Test(priority=6)
-		public void groupDetails_GroupName_alert_messages() throws InterruptedException{
+		public void groupDetailsFormValidationForGroupName() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details alert messages for Group Name verification..");
+	        logger=extent.startTest("groupDetailsFormValidationForGroupName");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsFormValidation("group_name_textbox");
 		}
 		
-		 //Check if appropriate alert is displayed if phone number is not 10 digit
+		
+		//Check if appropriate alert is displayed if phone number is not 10 digit
 		@Test(priority=7)
-		public void groupDetails_PhoneNumber_alert_messages() throws InterruptedException{
+		public void groupDetailsFormValidationForPhoneNumber() throws InterruptedException{
 			
-	        logger=extent.startTest("Group Details alert messages for Phone Number verification..");
+	        logger=extent.startTest("");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsFormValidation("phone_number_textbox");
 		}
 		
-		 //Check if updated group details are displayed
+		
+		//Check if updated group details are displayed
 		@Test(priority=8)
-		public void groupDetails_updated_details() throws InterruptedException{
+		public void groupDetailsUpdate() throws InterruptedException{
 			
-	        logger=extent.startTest("Updated Group Details display verification..");
+	        logger=extent.startTest("groupDetailsUpdate");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsUpdate();
 	        
 		}
 		
-		 //Check if feature settings strip is displayed
+		
+		//Check if feature settings strip is displayed
 		@Test(priority=9)
-		public void feature_setting_strip() throws InterruptedException{
+		public void featureSettingStrip() throws InterruptedException{
 			
-	        logger=extent.startTest("Fetaure Setting Strip display verification..");
+	        logger=extent.startTest("featureSettingStrip");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.Strip(Constants.GroupsAndUser.feature_settings_strip);
 	        
 		}
 		
-		 // check if the feature settings Strip is Collapsible & expandable
+		
+		//check if the feature settings Strip is Collapsible & expandable
 		@Test(priority=10)
-		public void feature_Setting_Strip_Collapsible_Expandable() throws InterruptedException{
+		public void featureSSettingStripCollapsibleExpandable() throws InterruptedException{
 			
-	        logger=extent.startTest("Feature Settings Strip Collapsible & expandable verification..");
+	        logger=extent.startTest("featureSSettingStripCollapsibleExpandable");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.expandSection(Constants.GroupsAndUser.feature_settings_strip);
 	        gp.collapseSection(Constants.GroupsAndUser.feature_settings_strip);
 		}
 		
-		 //UI verification of feature settings section
+		 
+		//UI verification of feature settings section
 		@Test(priority=11)
-		public void feature_settings_UI_verification() throws InterruptedException{
+		public void featureSettingsUIVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("feature settings section UI verification..");
+	        logger=extent.startTest("featureSettingsUIVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.featureSettingsUI();
 		}
 		
-		 //Check if TN settings strip is displayed
+		
+		//Check if TN settings strip is displayed
 		@Test(priority=12)
-		public void tn_setting_strip() throws InterruptedException{
+		public void tnSettingStrip() throws InterruptedException{
 			
-	        logger=extent.startTest("TN Setting Strip display verification..");
+	        logger=extent.startTest("tnSettingStrip");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.Strip(Constants.GroupsAndUser.tn_settings_strip);
 	        
 		}
 		
-		 // check if the TN settings Strip is Collapsible & expandable
+		
+		// check if the TN settings Strip is Collapsible & expandable
 		@Test(priority=13)
-		public void tn_Setting_Strip_Collapsible_Expandable() throws InterruptedException{
+		public void tnSettingStripCollapsibleExpandable() throws InterruptedException{
 			
-	        logger=extent.startTest("TN Settings Strip Collapsible & expandable verification..");
+	        logger=extent.startTest("tnSettingStripCollapsibleExpandable");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.expandSection(Constants.GroupsAndUser.tn_settings_strip);
 	        gp.collapseSection(Constants.GroupsAndUser.tn_settings_strip);
 		}
 		
-		 //UI verification of TN settings section
-		 //Verify options displayed in referring website listbox
-		 //Verify options displayed in DNI type
-		 //Check if DNI Custom Parameters pop up is displayed when clicked in custom parameters
-		 //Check UI of DNI Custom Parameters pop up
-		 //Check options displayed in instant insights type listbox
+		
+		//UI verification of TN settings section
+		//Verify options displayed in referring website listbox
+		//Verify options displayed in DNI type
+		//Check if DNI Custom Parameters pop up is displayed when clicked in custom parameters
+		//Check UI of DNI Custom Parameters pop up
+		//Check options displayed in instant insights type listbox
 		@Test(priority=14)
-		public void tn_settings_UI_verification() throws InterruptedException{
+		public void tnSettingsUIVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings section UI verification..");
+	        logger=extent.startTest("tnSettingsUIVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsUI();
 		}
 	
-		 //Check if appropriate alert is displayed if ring to number is not 10 digit
+		
+		//Check if appropriate alert is displayed if ring to number is not 10 digit
 		@Test(priority=15)
-		public void tn_settings_RingToNumber_verification() throws InterruptedException{
+		public void tnSettingsRingToNumberVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings Ring To Number verification..");
+	        logger=extent.startTest("tnSettingsRingToNumberVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsFormValidation("ring_to_phone_number_textbox");
 		}
 	
-		 //Check if dni fields are not enabled unless dni checkbox is checked
+		
+		//Check if dni fields are not enabled unless dni checkbox is checked
 		@Test(priority=16)
-		public void tn_settings_DNI_checkbox_verification() throws InterruptedException{
+		public void tnSettingsDNICheckboxVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings DNI Section verification..");
+	        logger=extent.startTest("tnSettingsDNICheckboxVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        Thread.sleep(3000);
 	        gp.dniAndIntantInsightsFormValidations("dni_section");
 		}
 		
-		 //Check if instant insights fields are not enabled unless instant insights checkbox is checked
+		
+		//Check if instant insights fields are not enabled unless instant insights checkbox is checked
 		@Test(priority=17)
-		public void tn_settings_instant_insights_checkbox_verification() throws InterruptedException{
+		public void tnSettingsInstantInsightsCheckboxVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings instant insigts checkbox verification..");
+	        logger=extent.startTest("tnSettingsInstantInsightsCheckboxVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.dniAndIntantInsightsFormValidations("instant_insights_section");
 		}
 		
-		 //Check if appropriate alert is displayed if instant insights details are missing
+		
+		//Check if appropriate alert is displayed if instant insights details are missing
 		@Test(priority=18)
-		public void tn_settings_instant_insights_checkbox_alert_verification() throws InterruptedException{
+		public void tnSettingsInstantInsightsCheckboxAlertVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings instant insigts checkbox alert verification..");
+	        logger=extent.startTest("tnSettingsInstantInsightsCheckboxAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsFormValidation("instant_insights_section");
 		}
 		
-		 //Check if appropriate alert is displayed if DNI details are missing
+		
+		//Check if appropriate alert is displayed if DNI details are missing
 		@Test(priority=19)
-		public void tn_settings_Dynamic_Number_checkbox_alert_verification() throws InterruptedException{
+		public void tnSettingsDynamicNumberCheckboxAlertVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings DNI checkbox alert verification..");
+	        logger=extent.startTest("tnSettingsDynamicNumberCheckboxAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsFormValidation("dni_section");
 		}
 		
-		 //Check if appropriate alert is displayed if voice prompt message is missing
+		
+		//Check if appropriate alert is displayed if voice prompt message is missing
 		@Test(priority=20)
-		public void tn_settings_voice_prompt_alert_verification() throws InterruptedException{
+		public void tnSettingsVoicePromptAlertVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings voice prompt alert verification..");
+	        logger=extent.startTest("tnSettingsVoicePromptAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsFormValidation("play_voice_prompt_textbox");
 		}
 		
-		 //Check if appropriate alert is displayed if whisper message is missing
+		
+		//Check if appropriate alert is displayed if whisper message is missing
 		@Test(priority=21)
-		public void tn_settings_whisper_message_alert_verification() throws InterruptedException{
+		public void tnSettingsWhisperMessageAlertVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings whisper message alert verification..");
+	        logger=extent.startTest("tnSettingsWhisperMessageAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsFormValidation("play_whisper_message_before_connecting_textbox");
 		}
 		
-		 //Check if appropriate alert is displayed if ring to number is invalid(less than 10 digits) is missing
+		
+		//Check if appropriate alert is displayed if ring to number is invalid(less than 10 digits) is missing
 		@Test(priority=22)
-		public void tn_settings_Ring_To_Number_alert_verification() throws InterruptedException{
+		public void tnSettingsRingToNumberAlertVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("TN settings Ring To Number alert verification..");
+	        logger=extent.startTest("tnSettingsRingToNumberAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.tnSettingsFormValidation("ring_to_phone_number_textbox");
 		}
 		
-		 //Check if Custom source strip is displayed
+		
+		//Check if Custom source strip is displayed
 		@Test(priority=23)
-		public void custom_source_strip() throws InterruptedException{
+		public void customSourceStrip() throws InterruptedException{
 			
-	        logger=extent.startTest("Custom Source Setting Strip display verification..");
+	        logger=extent.startTest("customSourceStrip");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.Strip(Constants.GroupsAndUser.custom_sources_strip);
 	        
 		}
 		
-		 //check if the Custom Sources settings Strip is Collapsible & expandable
 		
+		//check if the Custom Sources settings Strip is Collapsible & expandable	
 		@Test(priority=24)
-		public void custom_source_Strip_Collapsible_Expandable() throws InterruptedException{
+		public void customSourceStripCollapsibleExpandable() throws InterruptedException{
 			
-	        logger=extent.startTest("custom source Strip Collapsible & expandable verification..");
+	        logger=extent.startTest("customSourceStripCollapsibleExpandable");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.expandSection(Constants.GroupsAndUser.custom_sources_strip);
@@ -300,24 +320,24 @@ public class GroupsAndUserTest extends TestBase
 	        
 		}
 
-		 //UI verification of custom source section 
 		
+		//UI verification of custom source section 
 		@Test(priority=25)
-		public void custom_source_UI_verification() throws InterruptedException{
+		public void customSourceUIVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("custom source section UI verification..");
+	        logger=extent.startTest("customSourceUIVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.custom_Source_UI_Validation();
    
 		}  
 
-		 //Check if able to add new custom source in every column 
 		
+		//Check if able to add new custom source in every column 
 		@Test(priority=26)
-		public void custom_source_add_new_source() throws InterruptedException{
+		public void customSourceAddNewSource() throws InterruptedException{
 			
-	        logger=extent.startTest("custom source section add new source verification..");
+	        logger=extent.startTest("customSourceAddNewSource");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.custom_Source_Add_New_Source();
@@ -327,9 +347,9 @@ public class GroupsAndUserTest extends TestBase
 		
         //Check if able to clear selected custom source checkbox
 		@Test(priority=27,dependsOnMethods="custom_source_add_new_source")
-		public void custom_source_clear_source() throws InterruptedException{
+		public void customSourceClearSource() throws InterruptedException{
 			
-	        logger=extent.startTest("custom_source_clear_source");
+	        logger=extent.startTest("customSourceClearSource");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.custom_Source_clear_Source();
@@ -337,11 +357,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-		 //Check if able to add new custom sgit ource in every column 	
+		//Check if able to add new custom sgit ource in every column 	
 		@Test(priority=28,dependsOnMethods="custom_source_add_new_source")
-		public void custom_source_delete_source() throws InterruptedException{
+		public void customSourceDeleteSource() throws InterruptedException{
 			
-	        logger=extent.startTest("custom source section delete source verification..");
+	        logger=extent.startTest("customSourceDeleteSource");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.custom_Source_delete_Source();
@@ -349,11 +369,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 	
 			
-		 //Check if Call Action strip is displayed
-		@Test(priority=28)
-		public void call_action_strip() throws InterruptedException{
+		//Check if Call Action strip is displayed
+		@Test(priority=29)
+		public void callActionStrip() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_strip");
+	        logger=extent.startTest("callActionStrip");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.Strip(Constants.GroupsAndUser.call_actions_strip);
@@ -361,11 +381,11 @@ public class GroupsAndUserTest extends TestBase
 		}	
 		
 		
-		 //Check if Call Action strip is expandable and collapsible
-		@Test(priority=29)
-		public void call_action_strip_expandable_collapsible() throws InterruptedException{
+		//Check if Call Action strip is expandable and collapsible
+		@Test(priority=30)
+		public void callActionStripExpandableCollapsible() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_strip_expandable_collapsible");
+	        logger=extent.startTest("callActionStripExpandableCollapsible");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.expandSection(Constants.GroupsAndUser.call_actions_strip);
@@ -374,39 +394,41 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 	
-		 //Check UI of Call Action section
-	 //Check operators displayed for repeat call condition
-	 //Check operators displayed for duration condition
-	 //Check operators displayed for disposition condition
-	 //Check operators displayed for caller id condition
-	 //Check operators displayed for missed opportunity condition
-	 //Check operators displayed for sales inquiry condition
-	 //Check operators displayed for conversion condition
-	 //Check operators displayed for lead quality condition
-	 //Check operators displayed for reffering source condition
-	 //Check operators displayed for reffering type condition
-	 //Check operators displayed for UTM campaign condition
-	 //Check operators displayed for UTM source condition
-	 //Check operators displayed for UTM medium condition
-	 //Check operators displayed for send to voicemail condition
-	 //Check if AND/OR operator is present
-	 //Check options displayed in Then listbox
-		@Test(priority=30)
-		public void call_action_Section_UI_Verification() throws InterruptedException{
+	    /*Check UI of Call Action section
+	    Check operators displayed for repeat call condition
+	    Check operators displayed for duration condition
+	    Check operators displayed for disposition condition
+	    Check operators displayed for caller id condition
+	    Check operators displayed for missed opportunity condition
+	    Check operators displayed for sales inquiry condition
+	    Check operators displayed for conversion condition
+	    Check operators displayed for lead quality condition
+   	    Check operators displayed for reffering source condition
+	    Check operators displayed for reffering type condition
+	    Check operators displayed for UTM campaign condition
+	    Check operators displayed for UTM source condition
+	    Check operators displayed for UTM medium condition
+	    Check operators displayed for send to voicemail condition
+	    Check if AND/OR operator is present
+	    Check options displayed in Then listbox
+		*/
+		@Test(priority=31)
+		public void callActionSectionUIVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_Section_UI_Verification");
+	        logger=extent.startTest("callActionSectionUIVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
 	        gp.callActionSectionUI();
    
 		}
+		
 
-	 //Check if appropriate alert is displayed if user try to add call action without rule field
-		@Test(priority=31)
-		public void call_action_form_validation_rule_field() throws InterruptedException{
+	    //Check if appropriate alert is displayed if user try to add call action without rule field
+		@Test(priority=32)
+		public void callActionFormValidationRuleField() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_form_validation_rule_field");
+	        logger=extent.startTest("callActionFormValidationRuleField");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -415,11 +437,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 		
-	 //Check if appropriate alert is displayed if user try to add call action without action field
-		@Test(priority=31)
-		public void call_action_form_validation_action_field() throws InterruptedException{
+	    //Check if appropriate alert is displayed if user try to add call action without action field
+		@Test(priority=33)
+		public void callActionFormValidationActionField() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_form_validation_action_field");
+	        logger=extent.startTest("callActionFormValidationActionField");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -427,11 +449,12 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-	 //Check if all filled data is reset after clicking on Reset button
-		@Test(priority=32)
-		public void call_action_reset_button_feature() throws InterruptedException{
+		
+	    //Check if all filled data is reset after clicking on Reset button
+		@Test(priority=34)
+		public void callActionResetButtonFeature() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_reset_button_feature");
+	        logger=extent.startTest("callActionResetButtonFeature");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -439,11 +462,12 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-	 //Check if user is not able to add call actions more than 10
-		@Test(priority=33)
-		public void call_action_10_actions() throws InterruptedException{
+		
+	    //Check if user is not able to add call actions more than 10
+		@Test(priority=35)
+		public void callActionAdd10Actions() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_10_actions");
+	        logger=extent.startTest("callActionAdd10Actions");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -453,11 +477,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	 //Check if user is not able to delete call actions
-		@Test(priority=34)
-		public void call_action_delete() throws InterruptedException{
+	    //Check if user is not able to delete call actions
+		@Test(priority=36)
+		public void callActionDelete() throws InterruptedException{
 			
-	        logger=extent.startTest("call_action_delete");
+	        logger=extent.startTest("callActionDelete");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -466,11 +490,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 		
-	 //Check if Sub Groups strip is displayed
-		@Test(priority=35)
-		public void sub_group_strip() throws InterruptedException{
+	    //Check if Sub Groups strip is displayed
+		@Test(priority=37)
+		public void subGroupStrip() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_strip");
+	        logger=extent.startTest("subGroupStrip");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -479,11 +503,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	 //Check if Sub Groups strip is expandable and collapsible
-		@Test(priority=36)
-		public void sub_group_strip_expandable_collapsible() throws InterruptedException{
+	    //Check if Sub Groups strip is expandable and collapsible
+		@Test(priority=38)
+		public void subGroupStripExpandableCollapsible() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_strip_expandable_collapsible");
+	        logger=extent.startTest("subGroupStripExpandableCollapsible");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -492,11 +516,12 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-	 //Check UI of Sub Groups section
-		@Test(priority=37)
-		public void sub_group_UI_Verification() throws InterruptedException{
+		
+	    //Check UI of Sub Groups section
+		@Test(priority=39)
+		public void subGroupUIVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_UI_Verification");
+	        logger=extent.startTest("subGroupUIVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -504,11 +529,12 @@ public class GroupsAndUserTest extends TestBase
    
 		}
 		
-	 //Check UI of pagination toolbox of sub groups section
-		@Test(priority=37)
-		public void sub_group_pagination_toolbox() throws InterruptedException{
+		
+	    //Check UI of pagination toolbox of sub groups section
+		@Test(priority=40)
+		public void subGroupPaginationToolbox() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_pagination_toolbox");
+	        logger=extent.startTest("subGroupPaginationToolbox");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -517,11 +543,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 
 		
-	 //Check if pagination count is mataching with db count
-		@Test(priority=38)
-		public void sub_group_pagination_count() throws InterruptedException{
+	    //Check if pagination count is matching with db count
+		@Test(priority=41)
+		public void subGroupPaginationCount() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_pagination_count");
+	        logger=extent.startTest("subGroupPaginationCount");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -530,11 +556,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	 //Check if pagination count is mataching with db count
-		@Test(priority=39)
-		public void sub_group_grid_count() throws InterruptedException{
+	    //Check if pagination count is mataching with db count
+		@Test(priority=42)
+		public void subGroupGridCount() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_grid_count");
+	        logger=extent.startTest("subGroupGridCount");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -543,11 +569,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	 //Check if appropriate alert is displayed while saving subgroup if subgroup name is missing 
-		@Test(priority=40)
-		public void sub_group_form_validation_for_name() throws InterruptedException{
+	    //Check if appropriate alert is displayed while saving subgroup if subgroup name is missing 
+		@Test(priority=43)
+		public void subGroupFormValidationForName() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_form_validation_for_name");
+	        logger=extent.startTest("subGroupFormValidationForName");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -556,11 +582,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 
-	 //Check if appropriate alert is displayed while saving subgroup if industry is missing 
-		@Test(priority=41)
-		public void sub_group_form_validation_for_industry() throws InterruptedException{
+	    //Check if appropriate alert is displayed while saving subgroup if industry is missing 
+		@Test(priority=44)
+		public void subGroupFormValidationForIndustry() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_form_validation_for_industry");
+	        logger=extent.startTest("subGroupFormValidationForIndustry");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -569,11 +595,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	 //Check if sub group is not created if clicked on cancel button after entering all details
-		@Test(priority=42)
-		public void sub_group_cancel_feature() throws InterruptedException{
+	    //Check if sub group is not created if clicked on cancel button after entering all details
+		@Test(priority=45)
+		public void subGroupCancelFeature() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_cancel_feature");
+	        logger=extent.startTest("subGroupCancelFeature");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -582,11 +608,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	 //Check if able to create new subgroup
-		@Test(priority=43)
-		public void sub_group_creation() throws InterruptedException{
+	    //Check if able to create new subgroup
+		@Test(priority=46)
+		public void subGroupCreation() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_creation");
+	        logger=extent.startTest("subGroupCreation");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -596,10 +622,10 @@ public class GroupsAndUserTest extends TestBase
 	
 		
 	    //Check if able to update newly created subgroup
-		@Test(priority=44)
-		public void sub_group_updation() throws InterruptedException{
+		@Test(priority=47)
+		public void subGroupUpdation() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_updation");
+	        logger=extent.startTest("subGroupUpdation");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -609,10 +635,10 @@ public class GroupsAndUserTest extends TestBase
 		
 		
 	    //Check if able to delete newly created subgroup
-		@Test(priority=45)
-		public void sub_group_deletion() throws InterruptedException{
+		@Test(priority=48)
+		public void subGroupDeletion() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_deletion");
+	        logger=extent.startTest("subGroupDeletion");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -622,10 +648,10 @@ public class GroupsAndUserTest extends TestBase
 
 		
 	    //Check if able to delete newly created subgroup
-		@Test(priority=45)
-		public void sub_group_clear_feature() throws InterruptedException{
+		@Test(priority=49)
+		public void subGroupClearFeature() throws InterruptedException{
 			
-	        logger=extent.startTest("sub_group_clear_feature");
+	        logger=extent.startTest("subGroupClearFeature");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -637,11 +663,11 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-	   //Check UI of Users section
-       //@Test(priority=24)
+	    //Check UI of Users section
+        @Test(priority=50)
 		public void userSectionUIVerification() throws InterruptedException{
 			
-	        logger=extent.startTest("User Section UI Verification verification..");
+	        logger=extent.startTest("userSectionUIVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 			
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
@@ -649,133 +675,137 @@ public class GroupsAndUserTest extends TestBase
 		}
 		
 		
-		   //Check if grid count is matching with db count
+		//Check if grid count is matching with db count
+	    @Test(priority=51)
+		public void useSectionGridcountVerification() throws InterruptedException{
+				
+	        logger=extent.startTest("useSectionGridcountVerification");
+			logger.assignCategory(Constants.groups_and_user_category);
+				
+		    GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		    gp.usersGridCount();
+		}
 		
-	       @Test(priority=52)
-			public void user_section_gridcount_dbcount_match() throws InterruptedException{
+	       
+		//Check roles displayed in roles listbox
+        @Test(priority=52)
+		public void userSectionRolesVerification() throws InterruptedException{
 				
-		        logger=extent.startTest("Checking if grid count is matching with db count..");
-				logger.assignCategory(Constants.groups_and_user_category);
+	        logger=extent.startTest("userSectionRolesVerification");
+	        logger.assignCategory(Constants.groups_and_user_category);
 				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.usersGridCount();
-			}
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		    gp.userRoles();
 		
-		   //Check roles displayed in roles listbox
-			
-	       @Test(priority=53)
-			public void user_section_roles_verification() throws InterruptedException{
-				
-		        logger=extent.startTest("Checking if roles displayed in roles listbox..");
-				logger.assignCategory(Constants.groups_and_user_category);
-				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.userRoles();
-			}	
+        }	
 		
-		   //Check 'Inactive' status is not displayed at the time of creating new user
-			
-	       @Test(priority=54)
-			public void user_section_inactive_status_verification() throws InterruptedException{
+        
+		//Check 'Inactive' status is not displayed at the time of creating new user	
+	    @Test(priority=53)
+		public void userSectionInactiveStatusVerification() throws InterruptedException{
+	    	
+	    	logger=extent.startTest("userSectionInactiveStatusVerification");
+			logger.assignCategory(Constants.groups_and_user_category);
 				
-		        logger=extent.startTest("Checking if 'Inactive' status is not displaying at the time of creating new user..");
-				logger.assignCategory(Constants.groups_and_user_category);
-				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.userStatus();
-			}	
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.userStatus();
+
+	    }	
 		
-		   //Check if appropriate alert is displayed while creating new userif firstname is missing
-			
-	       @Test(priority=55)
-			public void user_section_firstname_alert_verification() throws InterruptedException{
+	    
+	    //Check if appropriate alert is displayed while creating new userif firstname is missing
+	    @Test(priority=54)
+		public void userSectionFirstnameAlertVerification() throws InterruptedException{
 				
-		        logger=extent.startTest("Checking if appropriate alert is displayed while creating new userif firstname is missing..");
-				logger.assignCategory(Constants.groups_and_user_category);
+	    	logger=extent.startTest("userSectionFirstnameAlertVerification");
+			logger.assignCategory(Constants.groups_and_user_category);
 				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.userCreationFormValidation("first_name_textbox");
-			}
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.userCreationFormValidation("first_name_textbox");
+	        
+		}
 	       
 	       
-	       // Check if appropriate alert is displayed while creating new user if lastname is missing
+	    // Check if appropriate alert is displayed while creating new user if lastname is missing
+	    @Test(priority=55)
+		public void userSectionLastnameAlertVerification() throws InterruptedException{
+				
+	        logger=extent.startTest("userSectionLastnameAlertVerification");
+			logger.assignCategory(Constants.groups_and_user_category);
+				
+	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.userCreationFormValidation("last_name_textbox");
 			
-	       @Test(priority=56)
-			public void user_section_lastname_alert_verification() throws InterruptedException{
-				
-		        logger=extent.startTest("Checking if appropriate alert is displayed while creating new userif firstname is missing..");
-				logger.assignCategory(Constants.groups_and_user_category);
-				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.userCreationFormValidation("last_name_textbox");
-			}	       
+	    }	       
 	       
-	       // Check if appropriate alert is displayed while creating new user if mail id is missing
-			
-	       @Test(priority=57)
-			public void user_section_mail_ID_alert_verification() throws InterruptedException{
+	    
+	    // Check if appropriate alert is displayed while creating new user if mail id is missing	
+        @Test(priority=56)
+        public void userSectionMailIDAlertVerification() throws InterruptedException{
 				
-		        logger=extent.startTest("Checking if appropriate alert is displayed while creating new user if mail ID is missing..");
-				logger.assignCategory(Constants.groups_and_user_category);
+            logger=extent.startTest("userSectionMailIDAlertVerification");
+ 
+            logger.assignCategory(Constants.groups_and_user_category);
 				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.userCreationFormValidation("email_id_textbox");
-			}	       
+            GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+            gp.userCreationFormValidation("email_id_textbox");
+		
+        }	       
 	
-	       // Check if able to create new user with role Admin
+        
+	    // Check if able to create new user with role Admin		
+	    @Test(priority=57)
+	   	public void userSectionCreateUserWithAdminRole() throws InterruptedException{
+				
+	        logger=extent.startTest("userSectionCreateUserWithAdminRole");
+			logger.assignCategory(Constants.groups_and_user_category);
+				
+			GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+			gp.createUser("fname", "lname", "test1@test.com", "Admin");
 			
-	       @Test(priority=58)
-			public void user_sectio_create_user_with_Admin_role() throws InterruptedException{
-				
-		        logger=extent.startTest("Checking if able to create new user with role Admin..");
-				logger.assignCategory(Constants.groups_and_user_category);
-				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.createUser("fname", "lname", "test1@test.com", "Admin");
-			}
+	    }
 	       
-	       // Check if able to create new user with role Standard
+	    
+	    // Check if able to create new user with role Standard	  
+	    @Test(priority=58)
+	    public void userSectionCreateUserWithStandardRole() throws InterruptedException{
+				
+	    	logger=extent.startTest("userSectionCreateUserWithStandardRole");
+	    	logger.assignCategory(Constants.groups_and_user_category);
+				 
+	    	GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+		   	gp.createUser("fname", "lname", "test2@test.com", "Standard");
 			
-	       @Test(priority=59)
-			public void user_sectio_create_user_with_Standard_role() throws InterruptedException{
-				
-		        logger=extent.startTest("Checking if able to create new user with role Standard..");
-				logger.assignCategory(Constants.groups_and_user_category);
-				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.createUser("fname", "lname", "test2@test.com", "Standard");
-			}
+	    }
 	       
-	       // Check if able to create new user with role Read Only
+	       
+	    // Check if able to create new user with role Read Only	
+	    @Test(priority=59)
+		public void userSectioCreateUserWithReadOnlyRole() throws InterruptedException{
+				
+	        logger=extent.startTest("userSectioCreateUserWithReadOnlyRole");
+			logger.assignCategory(Constants.groups_and_user_category);
 			
-	       @Test(priority=60)
-			public void user_sectio_create_user_with_Read_Only_role() throws InterruptedException{
-				
-		        logger=extent.startTest("Checking if able to create new user with role Read Only..");
-				logger.assignCategory(Constants.groups_and_user_category);
-				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.createUser("fname", "lname", "test3@test.com", "Read-Only");
-			}      
-	       
-	       // Check if user is not created if clicked on cancel button
+    	    GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.createUser("fname", "lname", "test3@test.com", "Read-Only");
 			
-	       @Test(priority=61)
-			public void user_sectio_cancel_user_creation() throws InterruptedException{
+	    }      
+	       
+	     
+	    // Check if user is not created if clicked on cancel button	
+	    @Test(priority=60)
+		public void userSectionCancelButtonVerification() throws InterruptedException{
 				
-		        logger=extent.startTest("Checking if user is not created if clicked on cancel button..");
-				logger.assignCategory(Constants.groups_and_user_category);
+	        logger=extent.startTest("userSectionCancelUserCreation");
+	        logger.assignCategory(Constants.groups_and_user_category);
 				
-		        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		        gp.userCancelFeature();
-			}        
+		    GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.userCancelFeature();
+	
+	    }        
 	       
 	       
-	       
-	       
-		
-		
-		 //Logging Out
+		//Logging Out
 		@AfterClass
 		public void goToHomePage(){
 	        
