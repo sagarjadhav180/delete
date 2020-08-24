@@ -113,7 +113,7 @@ public class GroupsAndUserTest extends TestBase
 		@Test(priority=7)
 		public void groupDetailsFormValidationForPhoneNumber() throws InterruptedException{
 			
-	        logger=extent.startTest("");
+	        logger=extent.startTest("groupDetailsFormValidationForPhoneNumber");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.groupDetailsFormValidation("phone_number_textbox");
@@ -346,7 +346,7 @@ public class GroupsAndUserTest extends TestBase
 
 		
         //Check if able to clear selected custom source checkbox
-		@Test(priority=27,dependsOnMethods="custom_source_add_new_source")
+		@Test(priority=27)
 		public void customSourceClearSource() throws InterruptedException{
 			
 	        logger=extent.startTest("customSourceClearSource");
@@ -358,7 +358,7 @@ public class GroupsAndUserTest extends TestBase
 		
 		
 		//Check if able to add new custom sgit ource in every column 	
-		@Test(priority=28,dependsOnMethods="custom_source_add_new_source")
+		@Test(priority=28)
 		public void customSourceDeleteSource() throws InterruptedException{
 			
 	        logger=extent.startTest("customSourceDeleteSource");
@@ -616,6 +616,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
+	        this.groupName="SJSG-1"+Util.generateRandomNumber();
 	        gp.createSubGroup(this.groupName);
    
 		}
@@ -649,9 +650,9 @@ public class GroupsAndUserTest extends TestBase
 		
 	    //Check if able to delete newly created subgroup
 		@Test(priority=49)
-		public void subGroupClearFeature() throws InterruptedException{
+		public void subGroupSelectFeature() throws InterruptedException{
 			
-	        logger=extent.startTest("subGroupClearFeature");
+	        logger=extent.startTest("subGroupSelectFeature");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
@@ -753,7 +754,11 @@ public class GroupsAndUserTest extends TestBase
         }	       
 	
         
-	    // Check if able to create new user with role Admin		
+        String fname="";
+        String lname="";
+        String[] email=new String[4];
+        
+	    //Check if able to create new user with role Admin		
 	    @Test(priority=57)
 	   	public void userSectionCreateUserWithAdminRole() throws InterruptedException{
 				
@@ -761,12 +766,17 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 				
 			GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-			gp.createUser("fname", "lname", "test1@test.com", "Admin");
+			
+			fname="Admin"+Util.generateRandomNumber();
+			lname="User"+Util.generateRandomNumber();
+			email[0]="admin"+Util.generateRandomNumber()+"@yopmail.com.com";
+			
+			gp.createUser(fname, lname, email[0], "Admin");
 			
 	    }
 	       
 	    
-	    // Check if able to create new user with role Standard	  
+	    //Check if able to create new user with role Standard	  
 	    @Test(priority=58)
 	    public void userSectionCreateUserWithStandardRole() throws InterruptedException{
 				
@@ -774,7 +784,12 @@ public class GroupsAndUserTest extends TestBase
 	    	logger.assignCategory(Constants.groups_and_user_category);
 				 
 	    	GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-		   	gp.createUser("fname", "lname", "test2@test.com", "Standard");
+	    	
+			fname="Standard"+Util.generateRandomNumber();
+			lname="User"+Util.generateRandomNumber();
+			email[1]="standard"+Util.generateRandomNumber()+"@yopmail.com.com";
+	    	
+	    	gp.createUser(fname, lname, email[1], "Standard");
 			
 	    }
 	       
@@ -787,8 +802,13 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 			
     	    GroupsAndUserPage gp=new GroupsAndUserPage(driver);
-	        gp.createUser("fname", "lname", "test3@test.com", "Read-Only");
-			
+
+			fname="RO"+Util.generateRandomNumber();
+			lname="User"+Util.generateRandomNumber();
+			email[2]="ro"+Util.generateRandomNumber()+"@yopmail.com.com";
+    	    
+    	    gp.createUser(fname, lname, email[2], "Read-Only");
+			Thread.sleep(5000);
 	    }      
 	       
 	     
@@ -796,7 +816,7 @@ public class GroupsAndUserTest extends TestBase
 	    @Test(priority=60)
 		public void userSectionCancelButtonVerification() throws InterruptedException{
 				
-	        logger=extent.startTest("userSectionCancelUserCreation");
+	        logger=extent.startTest("userSectionCancelButtonVerification");
 	        logger.assignCategory(Constants.groups_and_user_category);
 				
 		    GroupsAndUserPage gp=new GroupsAndUserPage(driver);
@@ -804,7 +824,141 @@ public class GroupsAndUserTest extends TestBase
 	
 	    }        
 	       
+	    
+	    //Check if able to update user details
+	    @Test(priority=61)
+	    public void userSectionUpdateUserDetail() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionUpdateUserDetail");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	       
+	       String temp_mail = "test" + Util.generateRandomNumber() + "@yopmail.com";
+	       gp.createUser("fname", "lname", temp_mail, "Standard");
+	       
+	       email[3]=Util.generateRandomNumber()+temp_mail;
+	       
+	       gp.updateUser(temp_mail, email[3]);
+	    }  
+	     
+	    	      
+	    //Check UI of User permission window
+        @Test(priority=62)
+	    public void userSectionUserPermissionUIVerification() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionUserPermissionUIVerification");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       gp.userPermissionUI(email[3]);
+	    }        
+	  
+        
+	    //Check if able to update user permissions
+        @Test(priority=63)
+	    public void userSectionUserPermissionUpdate() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionUserPermissionUpdate");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       Thread.sleep(3000);
+	       gp.updateUserPermissions(email[1]);
+	    } 
+
+        
+	    //Check if user permissions are not updated if click on cancel button
+        @Test(priority=64)
+	    public void userSectionUserPermissionUpdateCancelFeature() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionUserPermissionUpdateCancelFeature");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       Thread.sleep(3000);
+	       gp.userCancelFeature();
+	    } 
+	      
+        
+        //Check UI of change password pop up
+        @Test(priority=65)
+	    public void userSectionChangePasswordUI() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionChangePasswordUI");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       Thread.sleep(3000);
+	       gp.changePasswordWindow(email[3]);
+	    } 
+        
+        
+        //Check if appropriate alert is displayed if password field left blank
+        @Test(priority=66)
+	    public void userSectionChangePasswordFormValidationForpassword() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionChangePasswordFormValidationForpassword");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       Thread.sleep(3000);
+	       gp.changePasswordFormValidation(email[1]);
+	    } 
+        
+        
+        //Check if password is not changed if clicked on cancel button
+        @Test(priority=67)
+	    public void userSectionChangePasswordCancelFeature() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionChangePassword");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       Thread.sleep(3000);
+	       gp.changePasswordCancel(email[3]);
+	    }
+        
+        
+        //Check if able to change the password
+        @Test(priority=68)
+	    public void userSectionChangePassword() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionChangePassword");
+	       logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       
+	       Thread.sleep(3000);
+	       gp.changePassword(email[3]);
+	    } 
+        
+               
+	    //Check if able to delete newly created user
+	    @Test(priority=69)
+	    public void userSectionDeleteUser() throws InterruptedException{
+
+	       logger=extent.startTest("userSectionDeleteUser");
+           logger.assignCategory(Constants.groups_and_user_category);
+
+	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	       String tempmail = "test" + Util.generateRandomNumber() + "@yopmail.com";
+	       gp.createUser("fname", "lname", tempmail, "Standard");
+	       
+	       for(String mail:email) {
+		       gp.deleteUser(mail);	    	   
+	       }
+	       
+
+	    }      
+        
+	    
 		//Logging Out
 		@AfterClass
 		public void goToHomePage(){
