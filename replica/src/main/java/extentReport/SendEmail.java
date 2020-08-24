@@ -81,7 +81,7 @@ public class SendEmail extends TestBase {
 				+ "<br> <b><span style='color:black;font-size:13px;font-family:sans-serif'> Number of Test Cases Skipped: </b>"
 				+ totalSkipedTestCases + " </span><br/><br/>" + "<img src=" + pie_chart_link + "/>" + "<br><br><br>"
 				+ "<br/><br/> <b style='font-size:13.5px;font-family:open sans-serif;padding-left:5px'>Thanks,</b><br/> <b style='font-size:13.5px;font-family:open sans-serif;padding-left:5px'>QA Team</b><br/></body> </html>";
-		SendEmail.sendMail("CFAAppAutomation@gmail.com", "cfauiautomation@123", "smtp.gmail.com", "465", "true", "true", true,
+		SendEmail.sendMail("CFAAppAutomation@gmail.com", "CFAAppAutomation@123", "smtp.gmail.com", "465", "true", "true", true,
 				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "CFA App Automation Test Result", writer,
 				".//Extent.html", "Automation_Report.html", "");
 		
