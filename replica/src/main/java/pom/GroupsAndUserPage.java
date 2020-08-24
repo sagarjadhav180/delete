@@ -387,22 +387,22 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement call_actions_settings_success_message;
 	
 	//sub group section------------------------------------------------------
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[1]")
+	@FindBy(xpath="(//div[starts-with(@class,'editable-controls form-group')]//input)[1]")
 	private WebElement subgroup_name_textbox;
 
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[2]")
+	@FindBy(xpath="(//div[starts-with(@class,'editable-controls form-group')]//input)[2]")
 	private WebElement subgroup_external_id_textbox;
 	
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//select)[1]")
+	@FindBy(xpath="(//div[starts-with(@class,'editable-controls form-group')]//select)[1]")
 	private WebElement subgroup_industry_listbox;
 
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[3]")
+	@FindBy(xpath="(//div[starts-with(@class,'editable-controls form-group')]//input)[3]")
 	private WebElement subgroup_phone_textbox;
 
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	@FindBy(xpath="(//div[starts-with(@class,'editable-controls form-group')]//input)[4]")
 	private WebElement subgroup_city_textbox;
 
-	@FindBy(xpath="(//div[@class='editable-controls form-group']//input)[4]")
+	@FindBy(xpath="(//div[starts-with(@class,'editable-controls form-group')]//input)[5]")
 	private WebElement subgroup_zip_code_textbox;
 	
 	@FindBy(xpath="//table[@id='table_sub_group']//form[@aria-hidden='false']//button[contains(text(),'Save')]")
@@ -545,7 +545,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-body']//p[text()='Access Audio ']")
 	private WebElement user_permissions_access_audio_label;		
 
-	@FindBy(xpath="(//div[@class='modal-body']//div[starts-with(@class,'switch-animate switch')])[1]")
+	@FindBy(xpath="(//div[@class='modal-body']//div[starts-with(@class,'switch-animate switch')])[1]/span")
 	private WebElement user_permissions_access_audio_toggle;
 
 	@FindBy(xpath="//div[@class='modal-body']//p[text()='Score Calls']")
@@ -560,7 +560,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-body']//span[text()='Reporting Access']")
 	private WebElement user_permissions_reporting_access_label;	
 
-	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='User's permission updated successfully']")
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'permission updated successfully')]")
 	private WebElement user_permissions_update_success_message;	
 	
 	@FindBy(xpath="//li[@ng-repeat='group in groupsList']//label")
@@ -882,6 +882,7 @@ public class GroupsAndUserPage extends TestBase {
 			if(!DNI_checkbox.getAttribute("aria-checked").equals("true")) {
 				Thread.sleep(2000);
 				Util.click(DNI_checkbox);
+//				DNI_checkbox.click();
 			}
 				//custom_parameters.click();
 				Util.click(custom_parameters);
@@ -1000,8 +1001,8 @@ public class GroupsAndUserPage extends TestBase {
 		
 		//Instant Insights section
 		else if (fieldName.equals("instant_insights_section")) {
-			
-			instant_insights_checkbox.click();
+			Util.click(instant_insights_checkbox);
+//			instant_insights_checkbox.click();
 			voice_prompt_for_call_outcome_textbox.clear();
 			sale_amount_voice_prompt_textbox.clear();
 		}
@@ -1472,7 +1473,7 @@ public class GroupsAndUserPage extends TestBase {
                 wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
                 logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
                 softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
-                Thread.sleep(1000);
+                Thread.sleep(4000);
     		}
         	
         	softassert.assertAll();
@@ -1655,16 +1656,23 @@ public class GroupsAndUserPage extends TestBase {
 //    	add_subgroup_button.click();
     	Util.click(add_subgroup_button);
     	
-    	//Entering sub-group details
-    	subgroup_name_textbox.sendKeys(groupName);
-    	Select select=new Select(subgroup_industry_listbox);
-    	Thread.sleep(2000);
-    	select.selectByIndex(3);  
+    	try {
     	
-    	//Saving sub-group details 
-        save_subgroup_button.click();
-    	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";
+    		//Entering sub-group details
+        	subgroup_name_textbox.sendKeys(groupName);
+        	Select select=new Select(subgroup_industry_listbox);
+        	Thread.sleep(2000);
+        	select.selectByIndex(3);  
+        	
+        	//Saving sub-group details 
+            save_subgroup_button.click();
 
+    		
+    	}catch(Exception e) {
+    		cancel_subgroup_button.click();
+    	}
+    	
+    	String expected_save_sub_group_success_message="Sub-group "+groupName+" is created successfully.";    	
     	logger.log(LogStatus.INFO, "Verifying if Subgroup creation success message is displayed");
     	Assert.assertTrue(subgroup_creation_success_message.getText().equals(expected_save_sub_group_success_message),"Sub group not created successfully.");
       	
@@ -1679,12 +1687,18 @@ public class GroupsAndUserPage extends TestBase {
 		//Editing sub-group to be updated
 		clickActionSubGroup(subGroup,Constants.GroupsAndUser.sub_group_edit_button);
 		
-		//Updating sub-group details
-		subgroup_name_textbox.clear();
-    	subgroup_name_textbox.sendKeys(updated_name);
-    	
-    	//Saving sub-group details 
-        save_subgroup_button.click();
+		try {
+			//Updating sub-group details
+			subgroup_name_textbox.clear();
+	    	subgroup_name_textbox.sendKeys(updated_name);
+	    	
+	    	//Saving sub-group details 
+	        save_subgroup_button.click();
+			
+		}catch(Exception e) {
+			cancel_subgroup_button.click();
+		}
+		
         
     	logger.log(LogStatus.INFO, "Verifying if Subgroup updation success message is displayed");
     	Assert.assertTrue(subgroup_updation_success_message.isDisplayed(),"Sub group not updated successfully.");
@@ -1745,6 +1759,7 @@ public class GroupsAndUserPage extends TestBase {
 		if(button_name.contains("Delete")) {
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
 			ok_button_subgroup_deletion_popup.click();
 		}
 		
@@ -1847,20 +1862,18 @@ public class GroupsAndUserPage extends TestBase {
   	  	expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  	//collapseSection(Constants.GroupsAndUser.sub_groups_strip);
   	  	
-  	  	//wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
+  	  	wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
   	  	
   	  	Thread.sleep(3000);
   	  
-  	  	add_user_button.click();
-  	  	Util.click(add_action_button);
-  	 
-  	  	
-  	  	
+//  	  	add_user_button.click();
+  	  	Util.click(add_user_button);
+  	   	  	
   	  	logger.log(LogStatus.INFO, "Verifying User Roles");
   	  	
   	  	Select roles=new Select(user_roles_listbox);
   	  	
-  	  	Util.scrollFunction(user_roles_listbox);
+//  	  	Util.scrollFunction(user_roles_listbox);
   	  	
   	  	for(int i=1;i<roles.getOptions().size();i++) {
   	  		
@@ -2021,17 +2034,19 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
     	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
     	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
+    	
     }
 
     
     //User Updation
-  	public void updateUser(String user_id,String updated_user_id) {
+  	public void updateUser(String user_id,String updated_user_id) throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		clickActionUser(user_id,Constants.GroupsAndUser.user_edit_button);
   		
      	//Entering User details
+    	wait.until(ExpectedConditions.visibilityOf(email_id_textbox));  		
   	    email_id_textbox.clear();
   	    email_id_textbox.sendKeys(updated_user_id);
 
@@ -2046,7 +2061,7 @@ public class GroupsAndUserPage extends TestBase {
     
   	
   	//User Deletion
-  	public void deleteUser(String user_id) {
+  	public void deleteUser(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2054,13 +2069,14 @@ public class GroupsAndUserPage extends TestBase {
   		clickActionUser(user_id,Constants.GroupsAndUser.user_delete_button);
   		
   		//verification
+  		wait.until(ExpectedConditions.visibilityOf(user_deletion_success_message));
   		logger.log(LogStatus.INFO, "Verifying if User is geting deleted successfully");
   		Assert.assertTrue(user_deletion_success_message.isDisplayed(),"User not deleted successfully");
   	}
   	
   	
   	//User section - Change Password window UI
-  	public void changePasswordWindow(String user_id) {
+  	public void changePasswordWindow(String user_id) throws InterruptedException {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2068,6 +2084,7 @@ public class GroupsAndUserPage extends TestBase {
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
   		
   		//UI Verification
+ 		wait.until(ExpectedConditions.visibilityOf(change_password_label)); 		
   		logger.log(LogStatus.INFO, "Verifying if Change Password label is present");
   		softassert.assertTrue(change_password_label.isDisplayed(),"Change Password label is not present");
 
@@ -2088,13 +2105,14 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User Section - Change password form validation
-  	public void changePasswordFormValidation(String user_id) {
+  	public void changePasswordFormValidation(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
   		
+  		driver.switchTo().activeElement();
   		change_password_textbox.clear();
   		change_password_ok_button.click();
   	
@@ -2108,13 +2126,14 @@ public class GroupsAndUserPage extends TestBase {
 
   	
   	//User Section - Change password cancel feature
-  	public void changePasswordCancel(String user_id) {
+  	public void changePasswordCancel(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
-  		
+  
+  		driver.switchTo().activeElement();
   		change_password_textbox.clear();
   		change_password_textbox.sendKeys("lmc2demo");
   		
@@ -2135,13 +2154,14 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
     //User Section - Change password feature
-  	public void changePassword(String user_id) {
+  	public void changePassword(String user_id) throws InterruptedException {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
   		
+  		driver.switchTo().activeElement();
   		change_password_textbox.clear();
   		change_password_textbox.sendKeys("lmc2demo");
   		change_password_ok_button.click();
@@ -2158,8 +2178,14 @@ public class GroupsAndUserPage extends TestBase {
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening User Permission window
-  		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
+  		try {
+			clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  		
   		
+  		wait.until(ExpectedConditions.visibilityOf(user_permissions_window_label));
   		logger.log(LogStatus.INFO, "Verifying if User Permissions label is present");
   		softassert.assertTrue(user_permissions_window_label.isDisplayed(),"User Permissions label is not present");
   		
@@ -2194,8 +2220,8 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User Section - User permission cancel feature
-  	public void userPermissionCancelFeature(String user_id) {
-  		
+  	public void userPermissionCancelFeature(String user_id) throws InterruptedException {
+
   	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
@@ -2218,30 +2244,35 @@ public class GroupsAndUserPage extends TestBase {
   	
 
   	//User Section - Update User permission
-  	public void updateUserPermissions(String user_id) {
+  	public void updateUserPermissions(String user_id) throws InterruptedException {
   		
   	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
   		
-  		user_permissions_access_audio_toggle.click();
+  		wait.until(ExpectedConditions.visibilityOf(user_permissions_access_audio_toggle));
+//  		user_permissions_access_audio_toggle.click();
+  		Util.click(user_permissions_access_audio_toggle);
   		user_permissions_save_button.click();
 
+		wait.until(ExpectedConditions.visibilityOf(user_permissions_update_success_message));
  		logger.log(LogStatus.INFO, "Verifying if User permissions gets updated");	
-  		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions updated successfully");
+  		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions not updated successfully");
   		
   	}
   	
   	
   	//To click action button of desired user
-    public void clickActionUser(String user_email,String button_name){
+    public void clickActionUser(String user_email,String button_name) throws InterruptedException{
 		
 		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		wait.until(ExpectedConditions.visibilityOf(button));
-		button.click();
-		
+//		button.click();
+		Util.click(button);
+		Thread.sleep(3000);
+	
 		//Deletion pop-up
 		if(button_name.contains("Delete")) {
 			
@@ -2257,7 +2288,7 @@ public class GroupsAndUserPage extends TestBase {
     /*User Section - Clean up Activity
      *use user_email -- delete_automation_user in Test class
      */
-    public void cleanUpUsers(String user_email) {
+    public void cleanUpUsers(String user_email) throws InterruptedException {
 
         expandSection(Constants.GroupsAndUser.user_settings_strip);
     	
@@ -2277,7 +2308,7 @@ public class GroupsAndUserPage extends TestBase {
     	
     	if(!(section_name.startsWith("Users") || section_name.startsWith("Sub-Groups") || section_name.startsWith("Call Actions"))){
 
-    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[1]"));
+    		strip_state = TestBase.driver.findElement(By.xpath("(//h4[starts-with(text(),'"+section_name.toUpperCase()+"')]//ancestor::div[@class='panel panel-midnightblue']//div)[2]"));
     		strip = TestBase.driver.findElement(By.xpath("//h4[contains(@class,'ng-binding')][starts-with(text(),'"+section_name.toUpperCase()+"')]//parent::div//i[starts-with(@class,'pull-right')]"));
     	}
     	else{
@@ -2351,12 +2382,13 @@ public class GroupsAndUserPage extends TestBase {
     	
     	//Instant insights section
     	if(!instant_insights_checkbox.isSelected()) {
-			instant_insights_checkbox.click();
+//			instant_insights_checkbox.click();
+			Util.click(instant_insights_checkbox);
 		}
 		Select select = new Select(instant_insights_dropdown); 
 		select.selectByVisibleText("Call Outcome (Conversion type)");
-		instant_insights_checkbox.click();
-    	
+//		instant_insights_checkbox.click();
+		Util.click(instant_insights_checkbox);    	
 		//DNI section
 		if(DNI_checkbox.getAttribute("aria-checked").equals("true")) {
 		    Util.click(DNI_checkbox);	
@@ -2370,6 +2402,8 @@ public class GroupsAndUserPage extends TestBase {
     	
     	logger.log(LogStatus.INFO, "Verifying if TN settings updation success message is displayed");
     	Assert.assertTrue(tn_settings_success_message.isDisplayed(),"TN settings updation success message is not displayed");
+    	Thread.sleep(4000);
+    	
     }
     
 
