@@ -545,7 +545,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-body']//p[text()='Access Audio ']")
 	private WebElement user_permissions_access_audio_label;		
 
-	@FindBy(xpath="(//div[@class='modal-body']//div[starts-with(@class,'switch-animate switch')])[1]/span")
+	@FindBy(xpath="(//div[@class='modal-body']//div[starts-with(@class,'switch-animate switch')])[1]")
 	private WebElement user_permissions_access_audio_toggle;
 
 	@FindBy(xpath="//div[@class='modal-body']//p[text()='Score Calls']")
@@ -560,7 +560,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='modal-body']//span[text()='Reporting Access']")
 	private WebElement user_permissions_reporting_access_label;	
 
-	@FindBy(xpath="//div[@class='ui-pnotify-text'][contains(text(),'permission updated successfully')]")
+	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='User's permission updated successfully']")
 	private WebElement user_permissions_update_success_message;	
 	
 	@FindBy(xpath="//li[@ng-repeat='group in groupsList']//label")
@@ -1862,12 +1862,13 @@ public class GroupsAndUserPage extends TestBase {
   	  	expandSection(Constants.GroupsAndUser.user_settings_strip);
   	  	//collapseSection(Constants.GroupsAndUser.sub_groups_strip);
   	  	
-  	  	wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
+  	  	//wait.until(ExpectedConditions.elementToBeClickable(add_user_button));
   	  	
   	  	Thread.sleep(3000);
   	  
-//  	  	add_user_button.click();
+  	  	add_user_button.click();
   	  	Util.click(add_user_button);
+//  	  	Util.click(add_action_button);
   	   	  	
   	  	logger.log(LogStatus.INFO, "Verifying User Roles");
   	  	
@@ -2034,19 +2035,17 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
     	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
     	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
-    	
     }
 
     
     //User Updation
-  	public void updateUser(String user_id,String updated_user_id) throws InterruptedException {
+  	public void updateUser(String user_id,String updated_user_id) {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		clickActionUser(user_id,Constants.GroupsAndUser.user_edit_button);
   		
      	//Entering User details
-    	wait.until(ExpectedConditions.visibilityOf(email_id_textbox));  		
   	    email_id_textbox.clear();
   	    email_id_textbox.sendKeys(updated_user_id);
 
@@ -2061,7 +2060,7 @@ public class GroupsAndUserPage extends TestBase {
     
   	
   	//User Deletion
-  	public void deleteUser(String user_id) throws InterruptedException {
+  	public void deleteUser(String user_id) {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2069,14 +2068,13 @@ public class GroupsAndUserPage extends TestBase {
   		clickActionUser(user_id,Constants.GroupsAndUser.user_delete_button);
   		
   		//verification
-  		wait.until(ExpectedConditions.visibilityOf(user_deletion_success_message));
   		logger.log(LogStatus.INFO, "Verifying if User is geting deleted successfully");
   		Assert.assertTrue(user_deletion_success_message.isDisplayed(),"User not deleted successfully");
   	}
   	
   	
   	//User section - Change Password window UI
-  	public void changePasswordWindow(String user_id) throws InterruptedException {
+  	public void changePasswordWindow(String user_id) {
   		
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
@@ -2084,7 +2082,6 @@ public class GroupsAndUserPage extends TestBase {
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
   		
   		//UI Verification
- 		wait.until(ExpectedConditions.visibilityOf(change_password_label)); 		
   		logger.log(LogStatus.INFO, "Verifying if Change Password label is present");
   		softassert.assertTrue(change_password_label.isDisplayed(),"Change Password label is not present");
 
@@ -2105,14 +2102,13 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User Section - Change password form validation
-  	public void changePasswordFormValidation(String user_id) throws InterruptedException {
+  	public void changePasswordFormValidation(String user_id) {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
   		
-  		driver.switchTo().activeElement();
   		change_password_textbox.clear();
   		change_password_ok_button.click();
   	
@@ -2126,14 +2122,13 @@ public class GroupsAndUserPage extends TestBase {
 
   	
   	//User Section - Change password cancel feature
-  	public void changePasswordCancel(String user_id) throws InterruptedException {
+  	public void changePasswordCancel(String user_id) {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
-  
-  		driver.switchTo().activeElement();
+  		
   		change_password_textbox.clear();
   		change_password_textbox.sendKeys("lmc2demo");
   		
@@ -2154,14 +2149,13 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
     //User Section - Change password feature
-  	public void changePassword(String user_id) throws InterruptedException {
+  	public void changePassword(String user_id) {
   		
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening Change Password window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_change_password_button);
   		
-  		driver.switchTo().activeElement();
   		change_password_textbox.clear();
   		change_password_textbox.sendKeys("lmc2demo");
   		change_password_ok_button.click();
@@ -2178,14 +2172,8 @@ public class GroupsAndUserPage extends TestBase {
         expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   		//Opening User Permission window
-  		try {
-			clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  		
+  		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
   		
-  		wait.until(ExpectedConditions.visibilityOf(user_permissions_window_label));
   		logger.log(LogStatus.INFO, "Verifying if User Permissions label is present");
   		softassert.assertTrue(user_permissions_window_label.isDisplayed(),"User Permissions label is not present");
   		
@@ -2220,8 +2208,8 @@ public class GroupsAndUserPage extends TestBase {
   	
   	
   	//User Section - User permission cancel feature
-  	public void userPermissionCancelFeature(String user_id) throws InterruptedException {
-
+  	public void userPermissionCancelFeature(String user_id) {
+  		
   	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
@@ -2244,35 +2232,30 @@ public class GroupsAndUserPage extends TestBase {
   	
 
   	//User Section - Update User permission
-  	public void updateUserPermissions(String user_id) throws InterruptedException {
+  	public void updateUserPermissions(String user_id) {
   		
   	    expandSection(Constants.GroupsAndUser.user_settings_strip);
   		
   	    //Opening User Permission window
   		clickActionUser(user_id,Constants.GroupsAndUser.user_permissions_button);  		
   		
-  		wait.until(ExpectedConditions.visibilityOf(user_permissions_access_audio_toggle));
-//  		user_permissions_access_audio_toggle.click();
-  		Util.click(user_permissions_access_audio_toggle);
+  		user_permissions_access_audio_toggle.click();
   		user_permissions_save_button.click();
 
-		wait.until(ExpectedConditions.visibilityOf(user_permissions_update_success_message));
  		logger.log(LogStatus.INFO, "Verifying if User permissions gets updated");	
-  		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions not updated successfully");
+  		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions updated successfully");
   		
   	}
   	
   	
   	//To click action button of desired user
-    public void clickActionUser(String user_email,String button_name) throws InterruptedException{
+    public void clickActionUser(String user_email,String button_name){
 		
 		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
 		
 		wait.until(ExpectedConditions.visibilityOf(button));
-//		button.click();
-		Util.click(button);
-		Thread.sleep(3000);
-	
+		button.click();
+		
 		//Deletion pop-up
 		if(button_name.contains("Delete")) {
 			
@@ -2288,7 +2271,7 @@ public class GroupsAndUserPage extends TestBase {
     /*User Section - Clean up Activity
      *use user_email -- delete_automation_user in Test class
      */
-    public void cleanUpUsers(String user_email) throws InterruptedException {
+    public void cleanUpUsers(String user_email) {
 
         expandSection(Constants.GroupsAndUser.user_settings_strip);
     	
