@@ -8,14 +8,11 @@
 		<classes>
 
             
-			<class name="tests.GroupsAndUserTest">
+			<class name="tests.LookerCallLogsTest">
+			
+			
 
-<methods>
 
-			<include name="custom_source_add_new_source"/>
-			<include name="custom_source_clear_source"/>			
-			<include name="custom_source_delete_source"/>	
-</methods>
 
 
 </class>

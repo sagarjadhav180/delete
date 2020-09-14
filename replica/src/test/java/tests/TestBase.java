@@ -139,7 +139,9 @@ public class TestBase
 		driver.manage().window().maximize();
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
+		String URL="https://convirza.awsapps.com/auth/?client_id=06919f4fd8ed324e&redirect_uri=https%3A%2F%2Fconvirza.awsapps.com%2Fconnect%2Fauth%2Fcode";
 	    driver.get(url_to_hit);
+//		driver.get(URL);
 //	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
 	}
