@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import tests.TestBase;
+import tests.Util;
 
 public class Calling extends TestBase
 {
@@ -27,7 +28,7 @@ public class Calling extends TestBase
 
     String user="ggarde";
     String pass="ChangeMe1";
-    String number="3852931821";
+    
     
     
 	
@@ -44,14 +45,17 @@ public class Calling extends TestBase
 	@FindBy(xpath="//span[contains(text(),'Dial number')]")
 	private WebElement dial_button;
 
-	@FindBy(xpath="//input[@id='numberRealInput']")
+	@FindBy(xpath="//span[text()='Enter a phone number']/preceding-sibling::input")
 	private WebElement number_textbox;
 
-	@FindBy(xpath="//span[@class='dialButtonText ng-scope']")
+	@FindBy(xpath="//button[starts-with(@class,'SoftphoneButton')][2]")
 	private WebElement dial;
 	
-	@FindBy(xpath="//button[@class='largeButton disconnectButton ng-scope']")
+	@FindBy(xpath="//span[text()='End call']/../..")
 	private WebElement disconnect;
+	
+	@FindBy(xpath="//span[text()='Number pad']/../..")
+	private WebElement number_pad;
     
 	public WebDriverWait wait;	
 	WebDriver driver;
@@ -62,11 +66,8 @@ public class Calling extends TestBase
         	this.wait=wait1;
 	}
 
-            
-        public void test1() throws InterruptedException {
-       		
-//    	wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='a-box a-color-offset-background']"))));
-    	
+    
+    public void launchAWS() throws InterruptedException {
     	Thread.sleep(5000);
 
     	System.out.println("username "+username);    	
@@ -78,19 +79,21 @@ public class Calling extends TestBase
 
     	wait.until(ExpectedConditions.visibilityOf(login_button));
     	login_button.click();
-
-
-    	wait.until(ExpectedConditions.visibilityOf(dial_button));
-    	dial_button.click();
     	
-
-    	wait.until(ExpectedConditions.visibilityOf(number_textbox));
+    	wait.until(ExpectedConditions.visibilityOf(number_pad));
+    	number_pad.click();    
+    }
+            
+        public void call(String number) throws InterruptedException {
+       		
+//    	wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='a-box a-color-offset-background']"))));
     	
-    	number_textbox.sendKeys(number);
-    	
-
-    	wait.until(ExpectedConditions.visibilityOf(dial));
- 	    	
+         	
+       	 String call_started = Util.getDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "0");
+       	 
+       	wait.until(ExpectedConditions.visibilityOf(number_textbox)); 
+       	number_textbox.sendKeys(number);
+       	 
     	logger.log(LogStatus.INFO, "Phone number is "+number);
     	logger.log(LogStatus.INFO, "Ring to number is "+"8018786943");
     	
@@ -107,10 +110,12 @@ public class Calling extends TestBase
     	 String password="hyPdua14GAu6";
     	 Connection connection=null;
     	 Statement stmpt=null;
-    	
-    	 String query="SELECT call_id as call_id FROM call WHERE tracking='3852931821' AND call_started>'2020-09-09 23:59' ORDER BY call_started ASC LIMIT 1" ;
+    	    	 
+    	 String query="SELECT * FROM call WHERE tracking='"+number+"' AND call_started>'"+call_started+"' ORDER BY call_started ASC LIMIT 1" ;
     	 
     	String call_id = null;
+    	String disposition = null;
+    	String duration = null;
 		try{
 			
 			Class.forName("org.postgresql.Driver");
@@ -121,15 +126,31 @@ public class Calling extends TestBase
 			
 			ResultSet result = stmpt.executeQuery(query);
 		
-		while(result.next()){
-//			Array campaign_count = result.getArray("count");
-			 call_id = result.getString("call_id");
-			System.out.println(call_id);
-			
-			logger.log(LogStatus.PASS, "Call got conneccted successfully");
-			logger.log(LogStatus.PASS, "Call entry is dispalyed in DB");
-			logger.log(LogStatus.PASS, "Call_id is "+call_id);
-		}
+//			try {
+//				call_id = result.getString("call_id");
+//			}catch(Exception e) {
+//				Assert.fail("No records found in db");
+//				
+//			}
+
+				while(result.next()){
+//					Array campaign_count = result.getArray("count");
+					
+						call_id = result.getString("call_id");
+						 disposition = result.getString("disposition");
+						 duration = result.getString("duration");
+
+						 System.out.println(call_id);
+						
+						logger.log(LogStatus.PASS, "Call got conneccted successfully");
+						logger.log(LogStatus.PASS, "Call entry is dispalyed in DB");
+						logger.log(LogStatus.PASS, "Call_id is "+call_id);
+						logger.log(LogStatus.PASS, "disposition is "+disposition);
+						logger.log(LogStatus.PASS, "duration is "+duration);	
+					
+					
+				}
+	
 		
 		
 		}

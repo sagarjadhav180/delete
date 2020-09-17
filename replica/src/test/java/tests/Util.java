@@ -8,9 +8,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.TimeZone;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
@@ -207,11 +211,12 @@ public class Util extends TestBase{
 	
 		
 	public static String getDate(String Format,String days){
-		DateFormat dateFormat = new SimpleDateFormat(Format);
-		
+		SimpleDateFormat dateFormat = new SimpleDateFormat(Format);
+		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, Integer.valueOf(days));
-	    
+		
 		Date todate1 = cal.getTime();
 	    String date = dateFormat.format(todate1);
 

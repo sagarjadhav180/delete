@@ -67,6 +67,7 @@ public class SendEmail extends TestBase {
 		// src='http://i.imgur.com/PkLRdkY.png' width = '150px'/></body>
 		// </html>";
 		// Image path = "http://i.imgur.com/PkLRdkY.png"
+		
 		String pie_chart_link = Util.createpiechart(totalPassedTestCase, totalFailedTestCase,
 				totalSkipedTestCases);
 		String writer = "<!DOCTYPE html> <html> <head></head> <body> <p style='color:black;font-size:13px;font-family:sans-serif'>Hi All,<br><br> This is automated mail from QA Automation Team. Please find the below automation script result and also find the attachment for the log result.</p>"
@@ -81,9 +82,14 @@ public class SendEmail extends TestBase {
 				+ "<br> <b><span style='color:black;font-size:13px;font-family:sans-serif'> Number of Test Cases Skipped: </b>"
 				+ totalSkipedTestCases + " </span><br/><br/>" + "<img src=" + pie_chart_link + "/>" + "<br><br><br>"
 				+ "<br/><br/> <b style='font-size:13.5px;font-family:open sans-serif;padding-left:5px'>Thanks,</b><br/> <b style='font-size:13.5px;font-family:open sans-serif;padding-left:5px'>QA Team</b><br/></body> </html>";
+		
 		SendEmail.sendMail("CFAAppAutomation@gmail.com", "CFAAppAutomation@123", "smtp.gmail.com", "465", "true", "true", true,
 				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "CFA App Automation Test Result", writer,
-				".//Extent.html", "Automation_Report.html", "");
+				".//Extent.html", "Automation_Report.html", "");			
+		
+//		SendEmail.sendMail("CFAAppAutomation@gmail.com", "CFAAppAutomation@123", "smtp.gmail.com", "465", "true", "true", true,
+//				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "CFA App Automation Test Result", writer,
+//				".//Extent.html", "Automation_Report.html", "");
 		
 	}
 
