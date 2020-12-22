@@ -20,7 +20,7 @@ pipeline {
 	    
         stage('Test Execution') {
             steps {
-				sh "mvn clean install test -DsuiteXmlFile=${XML} --file replica/pom.xml -DEnvironment=${ENV} -Durl=${URL} -Dusername=${USERNAME} -Dpassword=${PASSWORD}"
+				sh "mvn clean install test -DsuiteXmlFile=${XML} --file replica/pom.xml -DEnvironment=${ENV} -Durl=${APP_URL} -Dusername=${USERNAME} -Dpassword=${PASSWORD}"
             }
         }
     }
