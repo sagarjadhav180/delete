@@ -91,9 +91,9 @@ public class TestBase
 		prop.setProperty("username", System.getProperty("username"));
 		prop.setProperty("password", System.getProperty("password"));
 		prop.setProperty("Environment", System.getProperty("Environment"));
-		prop.setProperty("reservenumberendpoint", System.getProperty("reservenumberendpoint"));
-		prop.setProperty("authtokenendpoint", System.getProperty("authtokenendpoint"));
-		prop.setProperty("getnumberendpoint", System.getProperty("getnumberendpoint"));
+//		prop.setProperty("reservenumberendpoint", System.getProperty("reservenumberendpoint"));
+//		prop.setProperty("authtokenendpoint", System.getProperty("authtokenendpoint"));
+//		prop.setProperty("getnumberendpoint", System.getProperty("getnumberendpoint"));
 		prop.setProperty("url", System.getProperty("url"));
 
 		FileOutputStream fis=new FileOutputStream(new File(".//property"));
