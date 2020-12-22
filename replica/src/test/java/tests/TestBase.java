@@ -115,7 +115,6 @@ public class TestBase
 	@BeforeTest
 	public void setUp(String browser,String url) throws Exception{
 		
-		url_to_hit=url;
 		String sf = null;
 		String sc = null ;
 		if(browser.contains("chrome")){
@@ -159,7 +158,8 @@ public class TestBase
 		
 		FileInputStream file=new FileInputStream(".//property");
 		prop.load(file);
-		driver.get(prop.getProperty("url"));
+		url_to_hit=prop.getProperty("url");			
+		driver.get(url_to_hit);
 //		driver.get(URL);
 //	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
