@@ -2,7 +2,9 @@ package tests;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +62,8 @@ public class TestBase
 	public static String first_last_name="Autmation Account";
 	public static String first_name="Autmation";	
 	public static String last_name="Account";
-	public static String user_id="automation_account@yopmail.com";
-	public static String password="lmc2demo";
+	public static String user_id="";
+	public static String password="";
 	public static String env="stag-5";
 	public static String Base_Url = "https://"+env+"-cmo-1.convirza.com";
 	public static ExtentTest logger;
@@ -78,6 +80,7 @@ public class TestBase
 //	public static String methodName;
 	String url_to_hit;
 	
+	
 	@BeforeSuite
 	public void testSetUp() throws Exception{
         
@@ -85,17 +88,27 @@ public class TestBase
 		
 		FileInputStream file=new FileInputStream(".//property");
 		prop.load(file);
+		prop.setProperty("username", System.getProperty("username"));
+		prop.setProperty("password", System.getProperty("password"));
+		prop.setProperty("Environment", System.getProperty("Environment"));
+		prop.setProperty("reservenumberendpoint", System.getProperty("reservenumberendpoint"));
+		prop.setProperty("authtokenendpoint", System.getProperty("authtokenendpoint"));
+		prop.setProperty("getnumberendpoint", System.getProperty("getnumberendpoint"));
+
+		FileOutputStream fis=new FileOutputStream(new File(".//property"));
+		prop.store(fis, "Env");
+		
 		String user=prop.getProperty("username");
 		TestBase.setUser_id(user);
 		String pass=prop.getProperty("password");
 		TestBase.setPassword(pass);
 		String environment = prop.getProperty("Environment");
 		TestBase.setEnv(environment);
+//		TestBase.setUser_id(System.getProperty("username"));
+//		TestBase.setPassword(System.getProperty("password"));
+//		TestBase.setEnv(System.getProperty("Environment"));
 
-		
 	}
-	
-
 	
 	@Parameters({"browser","url"})
 	@BeforeTest
@@ -140,7 +153,7 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 		String URL="https://convirza.awsapps.com/auth/?client_id=06919f4fd8ed324e&redirect_uri=https%3A%2F%2Fconvirza.awsapps.com%2Fconnect%2Fauth%2Fcode";
-	    driver.get(url_to_hit);
+	    driver.get(System.getProperty("url"));
 //		driver.get(URL);
 //	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
