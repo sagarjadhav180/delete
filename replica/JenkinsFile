@@ -1,14 +1,29 @@
 pipeline {
     agent any
     
+    environment {
+        GIT_CREDENTIAL = credentials('GIT_CREDENTIAL')
+    }
     
+    tools {
+    	maven 'Maven-3.6.0'
+    	git 'Default'
+    }
     stages {
-		
+		stage('Checkout Project') {
+		  steps {
+			  git branch: '${BRANCH}', 
+			  credentialsId: 'GIT_CREDENTIAL',
+			  url: 'https://github.com/ContactPoint/UI_Automation.git'
+		  }  
+		}
+	    
         stage('Test Execution') {
             steps {
-				sh "sudo ldconfig -v"
+				sh "mvn clean install test -DsuiteXmlFile=${XML} --file replica/pom.xml -DEnvironment=${ENV} -Durl=${URL} -Dusername=${USERNAME} -Dpassword=${PASSWORD}"
             }
         }
     }
+
 
 }
