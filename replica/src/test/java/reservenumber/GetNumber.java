@@ -37,7 +37,9 @@ public class GetNumber {
 		Properties prop=new Properties();
 		FileInputStream file=new FileInputStream(".//property");
 		prop.load(file);
-		String url = prop.getProperty("getnumberendpoint");
+		
+		String stag = prop.getProperty("Environment").replaceAll("\\D", "");
+		String url = prop.getProperty("https://stag-"+stag+"-cfaapi-1.convirza.com/v2/number/search");
 		
 		HttpGet httpget=new HttpGet(url);
 

@@ -45,7 +45,8 @@ public class GetAuthToken{
 		Properties prop=new Properties();
 		FileInputStream file=new FileInputStream(".//property");
 		prop.load(file);
-		String url = prop.getProperty("authtokenendpoint");
+		String stag = prop.getProperty("Environment").replaceAll("\\D", "");
+		String url = "https://stag-"+stag+"-cfaapi-1.convirza.com/oauth/token";
 		String username = prop.getProperty("username");
 		String password = prop.getProperty("password");		
 		HttpPost httppost=new HttpPost(url);

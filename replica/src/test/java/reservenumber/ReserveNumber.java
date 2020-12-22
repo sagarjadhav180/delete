@@ -52,7 +52,9 @@ public class ReserveNumber {
 		Properties prop=new Properties();
 		FileInputStream file=new FileInputStream(".//property"); 
 		prop.load(file);
-		String url = prop.getProperty("reservenumberendpoint");
+		
+		String stag = prop.getProperty("Environment").replaceAll("D\\", "");
+		String url = prop.getProperty("https://stag-"+stag+"-cfaapi-1.convirza.com/v2/number/reserve");
 		
 		HttpPost httppost=new HttpPost(url); 
 
