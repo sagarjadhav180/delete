@@ -181,8 +181,7 @@
 						<useSystemClassLoader>false</useSystemClassLoader>
 						<suiteXmlFiles>
 							<!-- TestNG suite XML files -->
-							<suiteXmlFile>testng_temp.xml</suiteXmlFile>
-							<suiteXmlFile>testng.xml</suiteXmlFile>
+							<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 						</suiteXmlFiles>
 					</configuration>
 				</plugin>
