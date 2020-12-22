@@ -94,6 +94,7 @@ public class TestBase
 		prop.setProperty("reservenumberendpoint", System.getProperty("reservenumberendpoint"));
 		prop.setProperty("authtokenendpoint", System.getProperty("authtokenendpoint"));
 		prop.setProperty("getnumberendpoint", System.getProperty("getnumberendpoint"));
+		prop.setProperty("url", System.getProperty("url"));
 
 		FileOutputStream fis=new FileOutputStream(new File(".//property"));
 		prop.store(fis, "Env");
@@ -153,7 +154,12 @@ public class TestBase
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 		String URL="https://convirza.awsapps.com/auth/?client_id=06919f4fd8ed324e&redirect_uri=https%3A%2F%2Fconvirza.awsapps.com%2Fconnect%2Fauth%2Fcode";
-	    driver.get(System.getProperty("url"));
+	    
+		Properties prop=new Properties();
+		
+		FileInputStream file=new FileInputStream(".//property");
+		prop.load(file);
+		driver.get(prop.getProperty("url"));
 //		driver.get(URL);
 //	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
