@@ -44,7 +44,6 @@ import testdata.TestData;
 @Listeners(extentReport.Listener.class)
 public class TestBase
 {
-
 	//Environment Variables
 	public static final String billing_id="70045";
 	public static final String account="Automation Account";
@@ -73,11 +72,6 @@ public class TestBase
 	static int totalFailedTestCases;
 	static int totalPassedTestCases;
 	static int totalSkipedTestCases;
-
-//	List<ITestNGMethod> passedtests = new ArrayList<ITestNGMethod>();
-//	List<ITestNGMethod> failedtests = new ArrayList<ITestNGMethod>();
-//	List<ITestNGMethod> skippedtests = new ArrayList<ITestNGMethod>();
-//	public static String methodName;
 	String url_to_hit;
 	
 	
@@ -91,9 +85,6 @@ public class TestBase
 		prop.setProperty("username", System.getProperty("username"));
 		prop.setProperty("password", System.getProperty("password"));
 		prop.setProperty("Environment", System.getProperty("Environment"));
-//		prop.setProperty("reservenumberendpoint", System.getProperty("reservenumberendpoint"));
-//		prop.setProperty("authtokenendpoint", System.getProperty("authtokenendpoint"));
-//		prop.setProperty("getnumberendpoint", System.getProperty("getnumberendpoint"));
 		prop.setProperty("url", System.getProperty("url"));
 
 		FileOutputStream fis=new FileOutputStream(new File(".//property"));
@@ -105,10 +96,6 @@ public class TestBase
 		TestBase.setPassword(pass);
 		String environment = prop.getProperty("Environment");
 		TestBase.setEnv(environment);
-//		TestBase.setUser_id(System.getProperty("username"));
-//		TestBase.setPassword(System.getProperty("password"));
-//		TestBase.setEnv(System.getProperty("Environment"));
-
 	}
 	
 	@Parameters({"browser","url"})
@@ -155,80 +142,14 @@ public class TestBase
 //		String URL="https://convirza.awsapps.com/auth/?client_id=06919f4fd8ed324e&redirect_uri=https%3A%2F%2Fconvirza.awsapps.com%2Fconnect%2Fauth%2Fcode";
 	    
 		Properties prop=new Properties();
-		
 		FileInputStream file=new FileInputStream(".//property");
 		prop.load(file);
 		url_to_hit=prop.getProperty("url");			
 		driver.get(url_to_hit);
 //		driver.get(URL);
-//	    TestData.createData();			    
+	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
 	}
-
-
-//	@AfterMethod
-//	public void tearDown(ITestResult result) throws Exception {
-//
-//		if (result.getStatus() == ITestResult.FAILURE) {
-//
-//			try {
-//				System.out.println("In fail");
-//				Thread.sleep(1200);
-//				failedtests.add(result.getMethod());
-//				logger.log(LogStatus.FAIL, "" + result.getThrowable().getMessage() + "");
-//				logger.log(LogStatus.FAIL, "Failed.");
-//				methodName = result.getName();
-//				String image_path = Util.createScreenshot(driver, methodName);
-//				String img = Util.image_upload(image_path);
-//				System.out.println("Failure Method" + methodName);
-//				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
-//				
-////				driver.findElement(By.xpath("//div/nav/div/ul/li/a/span")).click();
-////				Thread.sleep(2000);
-//				Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
-//				if(methodName.startsWith("campaign")){
-//					driver.navigate().refresh();
-//					
-//					Thread.sleep(3000);
-//					HomePage hp=new HomePage(driver);
-//					hp.left_hand_navigation_bar_click();
-//					CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
-//				    ct.clickAction("list");
-//				}
-//				else if(result.getTestClass().getRealClass().getSimpleName().startsWith("Looker")){
-//					
-//				}
-//				else{
-//					driver.navigate().refresh();
-//					
-//					Thread.sleep(3000);
-//					HomePage hp=new HomePage(driver);
-//					hp.left_hand_navigation_bar_click();
-//				}
-//				
-//			} catch (Exception e) {
-//				System.out.println("In Catch");
-//				e.printStackTrace();
-//			}
-//
-//		}
-//
-//		else if (result.getStatus() == ITestResult.SUCCESS) {
-//			System.out.println("In Pass");
-//			logger.log(LogStatus.PASS, "Success.");
-//			passedtests.add(result.getMethod());
-//		}
-//
-//		else {
-//			System.out.println("In skip");
-//			logger.log(LogStatus.SKIP, "Test case skipped.");
-//			skippedtests.add(result.getMethod());
-//
-//		}
-//		extent.endTest(logger);
-//		extent.flush();
-//
-//	}
 
 	public static String getUser_id() {
 		return user_id;
@@ -303,6 +224,7 @@ public class TestBase
 		TestBase.campaign_ou_id = campaign_ou_id;
 	}
 
+	
 	@AfterTest
 	public void tearDown() throws Exception{
 		if(driver!=null){
