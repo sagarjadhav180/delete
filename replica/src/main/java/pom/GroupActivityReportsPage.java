@@ -477,20 +477,22 @@ public class GroupActivityReportsPage extends TestBase {
 		}		
 	}
     
-    public void tableCount(){
+    public void tableCount() throws InterruptedException{
     	
     	SoftAssert softassert=new SoftAssert();
 
     	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')");
-
+        System.out.println("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')");
+    	
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
 		if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
-
-			Util.click(next_100_button);
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			final_count=final_count+table_call_count.size();
 		
+			do {
+				Util.click(next_100_button);
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				final_count=final_count+table_call_count.size();
+			}while(!(next_100_button.getAttribute("class").endsWith("disabled")));
 		}
 		
 		System.out.println("dbCount is "+dbCount);
@@ -499,7 +501,11 @@ public class GroupActivityReportsPage extends TestBase {
 		logger.log(LogStatus.INFO, "verifying count of listed groups");
 		softassert.assertEquals(dbCount, String.valueOf(final_count),"count of listed groups is mismtching with db count");
 		softassert.assertAll();
-	    
+		if(Integer.parseInt(dbCount)>100) {
+			first_button.click();
+		    Thread.sleep(4000);	
+		}
+		
 	}
     
     public void allColumnPickerOptions(){
@@ -655,42 +661,32 @@ public class GroupActivityReportsPage extends TestBase {
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
 				index=i;
-			}
-		}
-		
-			List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
-			for(int j=0;j<values.size();j++){
-			if(index==j){
-				
-				filter_value=values.get(j).getText();
 				break;
 			}
 		}
+		
+		List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
+		for(int j=0;j<values.size();j++){
+		if(index==j){				
+			filter_value=values.get(j).getText();
+			break;
+		}
+		}
 			
-			basic_search_textbox.clear();
-			basic_search_textbox.sendKeys(filter_value);
-			Util.click(basic_search_button);
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			Thread.sleep(4000);
-			String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
-			List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		basic_search_textbox.clear();
+		basic_search_textbox.sendKeys(filter_value);
+		Util.click(basic_search_button);
+//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+		Thread.sleep(4000);
+		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));		
+		List<String> actual_values =  new ArrayList<String>();
 			
-			for(int k=0;k<rows.size();k++){
-				List<WebElement> filtered_value;
-				
-				filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-				
-//				List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-				for(int l=0;l<filtered_value.size();l++){
-					
-					String actual_value = filtered_value.get(l).getText();
-					String expected_value=filter_value;
-					softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-					Thread.sleep(2000);
-				}		
-			}
-
-
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
+		}
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
 		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
 		softassert.assertAll();
 			
@@ -702,19 +698,18 @@ public class GroupActivityReportsPage extends TestBase {
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
     	}catch(Exception e){
  		   	}
-
+    	
 		SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
 		
-		for(int i=0;i<actual_column_names.size();i++){
-		    
-			if(filterelement.startsWith("Group")){
+		for(int i=0;i<actual_column_names.size();i++){   
+	     	if(filterelement.startsWith("Group")){
 				if(actual_column_names.get(i).getText().equals("Group")){
 					index=i;	
 					break;
 			    }
-			}
+	    	}
 			
 			else if(actual_column_names.get(i).getText().equals(filterelement)){
 			index=i;
@@ -722,7 +717,6 @@ public class GroupActivityReportsPage extends TestBase {
 			break;
 			}
 
-			
 		}
 		
 		List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
@@ -739,8 +733,7 @@ public class GroupActivityReportsPage extends TestBase {
 		advanced_filter_button.click();
 		Select select=new Select(advance_filter_elements_listbox);
 		select.selectByVisibleText(filterelement);
-//		advance_filter_textbox.clear();
-        
+
 		if(filterelement.equals("Group Name") || filterelement.equals("Group Ext ID")){
 			advance_filter_textbox_for_groupname_and_groupextid.sendKeys(filter_value);
 		}
@@ -751,29 +744,17 @@ public class GroupActivityReportsPage extends TestBase {
 		Util.click(apply_button);
 		Util.getJavascriptExecutor().executeScript("window.scrollBy", "0,200");
 		Thread.sleep(3000);
-		//		try{
-//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//			
-//		}
-//		catch(Exception e){
-//				
-//		}
 		
 		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
-		List<WebElement> rows = driver.findElements(By.xpath(xPath));
-		
-		for(int k=0;k<rows.size();k++){
-		   List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-		     for(int l=0;l<filtered_value.size();l++){
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+		List<String> actual_values =  new ArrayList<String>();
 			
-					String actual_value = filtered_value.get(l).getText();
-					String expected_value=filter_value;
-					softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
-			 }
-			
-					
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
 		}
-
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
+		
 		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
 		softassert.assertAll();
 		
