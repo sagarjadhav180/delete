@@ -589,6 +589,7 @@ public class CallDetailsReport_Page extends TestBase{
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
 				index=i;
+				break;
 			}
 		}
 		
@@ -597,9 +598,10 @@ public class CallDetailsReport_Page extends TestBase{
 			if(index==j){
 				filter_value=values.get(j).getText();
 				if(filterelement.equals("Line Type")){
-					if(filter_value.equals("") || filter_value.equals("null")){
+					if(filter_value.equals(" ") || filter_value.equals("null")){
 					filter_value="NonFixedVOIP";
 					}
+					break;
 				}
 			}
 		}
@@ -611,22 +613,26 @@ public class CallDetailsReport_Page extends TestBase{
 		advance_filter_textbox.sendKeys(filter_value);
 		Util.click(apply_button);
 		
-		wait.until(ExpectedConditions.visibilityOf(showing_label));
-		
-		String xPath="//table[@id='calldetailstable']//tbody//tr";
-		List<WebElement> rows = driver.findElements(By.xpath(xPath));
-		
-		for(int k=0;k<rows.size();k++){
+		try {
+			wait.until(ExpectedConditions.visibilityOf(showing_label));
 			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+			String xPath="//table[@id='calldetailstable']//tbody//tr";
+			List<WebElement> rows = driver.findElements(By.xpath(xPath));
+			
+			for(int k=0;k<rows.size();k++){
+				
+				List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+				for(int l=0;l<filtered_value.size();l++){
+					String actual_value = filtered_value.get(l).getText();
+					String expected_value=filter_value;
+					softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+				}		
 			}		
+		}catch(Exception e) {
+			System.out.println("No data found for applied filter value");
+			logger.log(LogStatus.INFO, "No data found for applied filter value");				
 		}
-
-
+	
 //		Util.click(cancel_button);
 //		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
