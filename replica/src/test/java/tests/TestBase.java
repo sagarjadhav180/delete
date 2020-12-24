@@ -46,7 +46,7 @@ public class TestBase
 {
 	//Environment Variables
 	public static final String billing_id="70045";
-	public static final String account="Automation Account";
+	public static final String account="QA automation";
 	public static final String campaignToBeEdited="00000SJC-1";
 	public static final String tracking_number="SJ TN-1";
 	public static final String geo_location="do_not_delete_location(automation)";
@@ -55,9 +55,9 @@ public class TestBase
 	public static final String account_timezone="America/New_York";
 	
 	
-	public static String org_unit_id="70045"; 
-    public static String campaign_id = "46";
-	public static String campaign_ou_id="70045";
+	public static String org_unit_id=""; 
+    public static String campaign_id = "";
+	public static String campaign_ou_id="";
 	public static String first_last_name="Autmation Account";
 	public static String first_name="Autmation";	
 	public static String last_name="Account";
