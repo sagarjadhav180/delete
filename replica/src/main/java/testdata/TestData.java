@@ -28,7 +28,7 @@ public class TestData extends TestBase{
 		if(group!=null){
 			TestBase.setOrg_unit_id(group);
 		    TestBase.setCampaign_ou_id(group);
-		}
+		}  
 		else{
 			System.out.println("creating group");
 			rd.createGroup();
@@ -106,11 +106,16 @@ public class TestData extends TestBase{
 		System.out.println("voice_prompt_checkbox "+voice_prompt_checkbox);
 		System.out.println("whisper_checkbox "+whisper_checkbox);
 		
-        if(!(record_call_checkbox.equals("t") && voice_prompt_checkbox.equals("f") && whisper_checkbox.equals("f"))){
-        	
+		if(record_call_checkbox!=null) {
+			if(!(record_call_checkbox.equals("t") && voice_prompt_checkbox.equals("f") && whisper_checkbox.equals("f"))){	
     		System.out.println("updating default tn settings");
         	rd.trackingNumberSettings();        	
         }
+		}else {
+			System.out.println("updating default tn settings");
+        	rd.trackingNumberSettings();	
+		}
+        
         
         //Time zone settings
 		String time_zone=Util.readingFromDB("SELECT timezone as count FROM ct_user_detail WHERE ct_user_id=(SELECT ct_user_id FROM ct_user WHERE username LIKE '"+user_id+"')");
