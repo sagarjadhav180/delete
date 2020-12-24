@@ -4,22 +4,15 @@
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
 		<parameter name="browser" value="headless" />
-		<parameter name="url" value="https://stag-7-cmo-1.convirza.com" />
+		<parameter name="url"
+			value="https://stag-7-cmo-1.convirza.com" />
+		
 		<classes>
-
-            
-			<class name="tests.LoginTest">
-			<methods>
-			<include name="validLogin"></include>
-			</methods>
+			<class name="tests.GroupActivityReportTest">
 			
-			
-
-
-
-
-</class>
+			</class>
 		</classes>
+		
 	</test>
 
 
