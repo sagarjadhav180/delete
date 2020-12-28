@@ -1,5 +1,6 @@
 package pom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -402,16 +403,25 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 		
 		String xPath="//table[@id='classflowDataTable']//tbody//tr";
 		List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+		List<String> actual_values =  new ArrayList<String>();
 		
-		for(int k=0;k<rows.size();k++){
-			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-			}		
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
 		}
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
+		
+		
+//		for(int k=0;k<rows.size();k++){
+//			
+//			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+//			for(int l=0;l<filtered_value.size();l++){
+//				String actual_value = filtered_value.get(l).getText();
+//				String expected_value=filter_value;
+//				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
+//			}		
+//		}
 
 //		basic_search_textbox.clear();
 //		Util.click(basic_search_button);
@@ -467,16 +477,23 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 		
 		String xPath="//table[@id='classflowDataTable']//tbody//tr";
 		List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+        List<String> actual_values =  new ArrayList<String>();
 		
-		for(int k=0;k<rows.size();k++){
-			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-			}		
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
 		}
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
+//		for(int k=0;k<rows.size();k++){
+//			
+//			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+//			for(int l=0;l<filtered_value.size();l++){
+//				String actual_value = filtered_value.get(l).getText();
+//				String expected_value=filter_value;
+//				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
+//			}		
+//		}
 
 
 //		Util.click(cancel_button);
