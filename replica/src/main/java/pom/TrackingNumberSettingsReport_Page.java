@@ -1,6 +1,8 @@
 package pom;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -54,7 +56,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	@FindBy(xpath="//i[@class='fa fa-columns']")
 	private static WebElement column_Picker_button;
 	
-	@FindBy(xpath="//table[@id='classflowDataTable']//thead//tr//th")
+	@FindBy(xpath="//table[@id='classflowDataTable']//thead//tr[1]//th")
 	private static List<WebElement> actual_column_names;
 	
 	String[] expected_column_names={" ID"," Tracking Number Name"," Tracking Number"," Type"," Ring-to Phone Number"," Ad Source"," Status"," Group Name"," Campaign name"," DNI"," Record Call"," Play Disclaimer"," Voice Prompt"," Whisper Message"};
@@ -107,7 +109,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	@FindBy(xpath="//ul[@id='columnpicker']//li//input")
 	private static List<WebElement> column_picker_options_checkboxes;
 	
-	String[] expected_all_column_picker_options={"ID","Tracking Number Name","Tracking Number","Type","Hunt Type","Ring-to Phone Number","Ad Source","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Status","Group Name","Campaign name","DNI","Host Domain","Referring Website","HTML Class","Custom Params","Record Call","Play Disclaimer","Voice Prompt","Whisper Message","Pre-Call Webhook","Voicemail"};
+	String[] expected_all_column_picker_options={"Instant Insights", "Instant Insights Config","ID","Tracking Number Name","Tracking Number","Type","Hunt Type","Ring-to Phone Number","Ad Source","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Status","Group Name","Campaign name","DNI","Host Domain","Referring Website","HTML Class","Custom Params","Record Call","Play Disclaimer","Voice Prompt","Whisper Message","Pre-Call Webhook","Voicemail"};
 	
 	String[] expected_default_checked_column_picker_options={"ID","Tracking Number Name","Tracking Number","Type","Ring-to Phone Number","Ad Source","Status","Group Name","Campaign name","DNI","Record Call","Play Disclaimer","Voice Prompt","Whisper Message"};
 	
@@ -223,16 +225,25 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     public void allColumnPickerOptions(){
 		Util.click(column_Picker_button);
 		SoftAssert softassert=new SoftAssert();
+		List<String> act_columns = new ArrayList<String>();
+		List<String> exp_columns = new ArrayList<String>(Arrays.asList(expected_all_column_picker_options));
 		
 		for(int i=0;i<all_actual_column_picker_options_labels.size();i++){
-			for(int j=0;j<expected_all_column_picker_options.length;j++){
-				
-				if(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j])){
-					logger.log(LogStatus.INFO, "Verifying if "+expected_all_column_picker_options[j]+" is present ");
-					softassert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
-				}
-			}
+			act_columns.add(all_actual_column_picker_options_labels.get(i).getText());
 		}
+		Collections.sort(act_columns);
+		Collections.sort(exp_columns);
+		
+		softassert.assertEquals(act_columns, exp_columns);
+//		for(int i=0;i<all_actual_column_picker_options_labels.size();i++){
+//			for(int j=0;j<expected_all_column_picker_options.length;j++){
+//				
+//				if(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j])){
+//					logger.log(LogStatus.INFO, "Verifying if "+expected_all_column_picker_options[j]+" is present ");
+//					softassert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
+//				}
+//			}
+//		}
 		softassert.assertAll();
 		Util.click(column_Picker_button);
 	}
@@ -259,20 +270,31 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     	SoftAssert softassert=new SoftAssert();
         logger.log(LogStatus.INFO, "verifying column names in Tracking Number Settings Report table");
 		
-		for(int i=0;i<actual_column_names.size();i++){
-			
-			for(int j=0;j<expected_all_column_picker_options.length;j++){
-
-	
-				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
-					
-					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
-					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
-					break;					
-				}
-
-			}
-		}
+        List<String> act_columns = new ArrayList<String>();
+        List<String> exp_columns = new ArrayList<String>(Arrays.asList(expected_all_column_picker_options));
+        
+        for(int i=0;i<actual_column_names.size();i++) {
+        	act_columns.add(actual_column_names.get(i).getText());
+        }
+        
+		Collections.sort(act_columns);
+		Collections.sort(exp_columns);
+		
+		softassert.assertEquals(act_columns, exp_columns);
+//		for(int i=0;i<actual_column_names.size();i++){
+//			
+//			for(int j=0;j<expected_all_column_picker_options.length;j++){
+//
+//	
+//				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
+//					
+//					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
+//					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
+//					break;					
+//				}
+//
+//			}
+//		}
 		softassert.assertAll();
 	}
     
