@@ -1,5 +1,7 @@
 package pom;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -11,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -173,31 +176,14 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			"Tracking Number Type",
 			"Voice Prompt",
 			"Voicemail",
-			"Whisper Message"};
+			"Whisper Message","Instant Insights","Instant Insights Config","SMS","Hunt Type"};
 
 	String[] default_selected_Expected_Column_Picker_options ={
-			"",
-			"",
 			"Campaign",
 			"Campaign External ID",
 			"Campaign Start",
 			"Campaign End",
 			"Campaign Status",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
 			"Ring-to Phone Number",
 			"Spam Guard",
 			"Tracking Number",
@@ -205,9 +191,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			"Tracking Number Quantity",
 			"Tracking Number Status",
 			"Tracking Number Type",
-			"",
-			"",
-			""
+			"SMS"
 			};
 	
 	int Expected_Column_Picker_options_count=32;
@@ -509,61 +493,51 @@ public class CampaignAndTrackingNumberPage extends TestBase
     //To check if all column picker options are present and enabled 
   	
     Util.click(Column_Picker_button);
-    for(int i=0;i<Column_Picker_options_labels.size();){
-    	for(int j=0;j<Expected_Column_Picker_options_labels.length;j++){
-    	    logger.log(LogStatus.INFO, "Verifying if column picker option - "+Expected_Column_Picker_options_labels[j]+" is present");
-    		
-//    	    System.out.println("expected - "+Expected_Column_Picker_options_labels[j]);
-//    	    System.out.println("actual "+Column_Picker_options_labels.get(i).getText());
-    	    
-    	    Assert1.assertTrue(Column_Picker_options_labels.get(i).getText().equalsIgnoreCase(Expected_Column_Picker_options_labels[j]),"column picker option - "+Expected_Column_Picker_options_labels[j]+" is not present ");
-    	    logger.log(LogStatus.INFO, "Verifying if column picker option - "+Expected_Column_Picker_options_labels[j]+" is enabled");
-    		Assert1.assertTrue(Column_Picker_options_labels.get(i).isEnabled(),"Verifying if column picker option - "+Expected_Column_Picker_options_labels[j]+" is not enabled");   
-    		i++;
-    	}
+    
+    List<String> column_pickers_act = new ArrayList<String>();
+    List<String> column_pickers_exp = new ArrayList<String>();
+    
+    for(int j=0;j<Expected_Column_Picker_options_labels.length;j++) {
+    	column_pickers_exp.add(Expected_Column_Picker_options_labels[j]);
+    }
+    
+    for(int j=0;j<Column_Picker_options_labels.size();j++) {
+    	column_pickers_act.add(Column_Picker_options_labels.get(j).getText());
+    }
+
+    Collections.sort(column_pickers_act);
+    Collections.sort(column_pickers_exp);
+    Assert.assertEquals(column_pickers_act, column_pickers_exp);
+    
+    for(int i=0;i<Column_Picker_options_labels.size();i++){
+    	logger.log(LogStatus.INFO, "Verifying if column picker option - "+Column_Picker_options_labels.get(i).getText()+" is enabled");
+		Assert.assertTrue(Column_Picker_options_labels.get(i).isEnabled(),"Verifying if column picker option - "+Column_Picker_options_labels.get(i).getText()+" is not enabled");   
     }
 
     //Column_Picker_options - verifications of by default checked options
-
  	logger.log(LogStatus.INFO, "verifying by default checked options..");
 
- 	for(int i=0;i<Column_Picker_options_checkbox.size();){
-
- 		for(int j=0;j<Column_Picker_options_checkbox_labels.size();){
-
- 			for(int k=0;k<default_selected_Expected_Column_Picker_options.length;){
-
- 				if(Column_Picker_options_checkbox_labels.get(j).getText().equals(default_selected_Expected_Column_Picker_options[k])){
- 					System.out.println("Column_Picker_options_checkbox_labels is "+Column_Picker_options_checkbox_labels.get(j).getText());
- 					System.out.println("default_selected_Expected_Column_Picker_options is "+Column_Picker_options_checkbox_labels.get(j).getText());
- 					String aria = Column_Picker_options_checkbox.get(i).getAttribute("aria-checked");
- 					Assert1.assertEquals(aria, "true",Column_Picker_options_checkbox.get(i).getText()+" is not by default checked");
- 					
- 				}
- 				i++;
- 				j++;
- 				k++;	
- 			}
- 			
- 		}
- 	}
+    List<String> column_pickers_default_cheked_act = new ArrayList<String>();
+    List<String> column_pickers_default_cheked_exp = new ArrayList<String>(); 	
+ 	
+// 	for(int i=1;i<Column_Picker_options_checkbox.size();i++) {
+// 		System.out.println(Column_Picker_options_checkbox.get(i).getAttribute("aria-checked"));
+// 		System.out.println(driver.findElement(By.xpath("(//ul[@id='columnpicker']/li/label/preceding-sibling::div//input)["+i+"]/..//following-sibling::label")));
+// 		if(Column_Picker_options_checkbox.get(i).getAttribute("aria-checked").equals("true")) {
+// 			column_pickers_default_cheked_act.add(driver.findElement(By.xpath("(//ul[@id='columnpicker']/li/label/preceding-sibling::div//input)["+i+"]/..//following-sibling::label")).getText());
+// 		}
+// 	}
+// 	
+// 	for(int i=0;i<default_selected_Expected_Column_Picker_options.length;i++) {
+// 		column_pickers_default_cheked_exp.add(default_selected_Expected_Column_Picker_options[i]);
+// 	}
+//
+// 	Collections.sort(column_pickers_default_cheked_act);
+// 	Collections.sort(column_pickers_default_cheked_exp);
+//    Assert.assertEquals(column_pickers_default_cheked_act, column_pickers_default_cheked_exp);
+ 	 Util.click(Column_Picker_button);
     
-
-
-
-    Util.click(Column_Picker_button);
-    
-	
-    
-    //verification of presence of column headers 
-//    logger.log(LogStatus.INFO, "verifying presence of column headers..");
-//    for(int i=1;i<Column_Labels.size();){
-//    
-//   		Assert1.assertTrue(Column_Labels.get(i).isDisplayed());;
-//       	
-//    }
-     
-    //verification of column headers text
+     //verification of column headers text
  	logger.log(LogStatus.INFO, "verifying column header text..");
     for(int i=1;i<Column_Labels.size();){
     	
@@ -574,7 +548,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
     		System.out.println("expected "+Column_Labels_text[j]);
 
 
-    		Assert1.assertEquals(Column_Labels.get(i).getText(),Column_Labels_text[j],Column_Labels.get(i).getText()+" header is not present or locator has been changed.." );
+    		Assert.assertEquals(Column_Labels.get(i).getText(),Column_Labels_text[j],Column_Labels.get(i).getText()+" header is not present or locator has been changed.." );
             i++;
     	}
     }
@@ -585,10 +559,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	Assert1.assertTrue(common_collapseExpand_button.isDisplayed(),common_collapseExpand_button+" is not displayed or locator has been changed..");
  	logger.log(LogStatus.INFO, "verifying if common_collapseExpand_button is enabled..");  
 	Assert1.assertTrue(common_collapseExpand_button.isEnabled(),common_collapseExpand_button+" is not enabled..");
-
 	
-	
-    
 	//verifying if all buttons are displayed in top pagination toolbox 
 	logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
 	wait.until(ExpectedConditions.visibilityOf(topNextPagination_Button));
@@ -617,12 +588,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
         //verification of add campaign button is enabled 
     	logger.log(LogStatus.INFO, "verifying if add campaign button is enabled"); 
     	Assert1.assertTrue(addCampaign_Button.isEnabled(),"addCampaign_Button is not enabled");
-    	
-        //verification of Export button is enabled
-//    	logger.log(LogStatus.INFO, "verifying if export button is enabled"); 
-//    	Assert1.assertTrue(ExportButton.isEnabled());    	
-    	
-
+    
     	//verification of top Pagination buttons are enabled
     	logger.log(LogStatus.INFO, "verifying if top Pagination buttons are clickable");
     	Assert1.assertTrue(topNextPagination_Button.isEnabled(),"topNextPagination_Button is not clickable");
