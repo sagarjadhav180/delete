@@ -116,7 +116,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(updated_tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}		
 		
 	
@@ -170,7 +170,7 @@ public class TrackingNumberTest extends TestBase{
 			tn = createInstance();
 
 		    tn.clickAction(updated_tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}	
 		
 		//create reserve number
@@ -211,7 +211,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(updated_tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}	
 		
         //GeoRoute creation
@@ -240,7 +240,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}
 		
         //percent route creation
@@ -268,7 +268,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}
 		
         //outbound route creation
@@ -297,7 +297,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}		
 		
         //hangup route creation
@@ -326,7 +326,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}		
 		
         //voicemail route creation
@@ -354,7 +354,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}		
 		
        
@@ -386,7 +386,7 @@ public class TrackingNumberTest extends TestBase{
 			    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}
 		
 		 //IVR route creation
@@ -417,7 +417,7 @@ public class TrackingNumberTest extends TestBase{
 					    
 		    tn=new TrackingNumberBuilderPage(driver);
 		    tn.clickAction(tracking_number_name, "Delete");
-		    Thread.sleep(2000);
+		    Thread.sleep(4000);
 		}
 			
 		@AfterClass
