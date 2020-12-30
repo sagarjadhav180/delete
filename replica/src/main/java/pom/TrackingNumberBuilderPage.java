@@ -853,12 +853,18 @@ public class TrackingNumberBuilderPage extends TestBase {
      	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
      	tracking_number_name_textbox.sendKeys(tracking_number_name);
      	
-     	wait.until(ExpectedConditions.visibilityOf(ad_source_dropdown));
+//     	wait.until(ExpectedConditions.visibilityOf(ad_source_dropdown));
      	wait.until(ExpectedConditions.attributeContains(ad_source_dropdown, "aria-disabled", "false"));
+     	try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
      	Select selct_ad_source=new Select(ad_source_dropdown);
-     	selct_ad_source.selectByIndex(4);
-     	
-     	 area_code_textbox.sendKeys("201");
+     	selct_ad_source.selectByIndex(4);	
+     
+     	area_code_textbox.sendKeys("201");
      	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
      	
      	for(int i=0;i<area_codes_list_for_385.size();i++){
