@@ -1,7 +1,9 @@
 package reservenumber;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,17 +20,21 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class GetNumber {
 	
 	
-	public  static List<String> getNumberToReserve(String access_token) throws ParseException, IOException{
+	public  static String getNumberToReserve(String access_token) throws ParseException, IOException, org.json.simple.parser.ParseException{
     
 		System.out.println("compiler entered into request method");
-		
+		String number = null;
 		
 		//connection created
 		CloseableHttpClient httpclients = HttpClients.createDefault();
@@ -39,7 +45,7 @@ public class GetNumber {
 		prop.load(file);
 		
 		String stag = prop.getProperty("Environment").replaceAll("\\D", "");
-		String url = prop.getProperty("https://stag-"+stag+"-cfaapi-1.convirza.com/v2/number/search");
+		String url = "https://stag-"+stag+"-cfaapi-1.convirza.com/v2/number/search";
 		
 		HttpGet httpget=new HttpGet(url);
 
@@ -56,65 +62,26 @@ public class GetNumber {
 			httpget.addHeader(entry.getKey(),entry.getValue());
 			
 		}
-		CloseableHttpResponse httpresponse;
 		
 		//hitting POST request and storing response 
-		httpresponse= httpclients.execute(httpget);
-			
-        int statuscode = httpresponse.getStatusLine().getStatusCode();
+		CloseableHttpResponse response= httpclients.execute(httpget);
+		Assert.assertTrue(!(response.getStatusLine().getStatusCode() == 500 || response.getStatusLine().getStatusCode() == 401), "Invalid status code is displayed. "+ "Returned Status: "+response.getStatusLine().getStatusCode()+" "+response.getStatusLine().getReasonPhrase());
 		
-		
-		HttpEntity httpentity = httpresponse.getEntity();
-		String responsestring = EntityUtils.toString(httpentity);
-		
-		System.out.println(responsestring);
-	
-		JSONObject ja = new JSONObject();
-//		ja.put(responsestring, new JSONObject(responsestring));
-		
-		System.out.println("=========================Auth token began===============================");
-		
-		
-         System.out.println("Response code is "+statuscode);
-		
-		
-		
-		
-		
-//		System.out.println(ja );
-//		
-		String utilresponse = GetAuthToken.getValueByJpath(new JSONObject(responsestring),"data");
-		
-		System.out.println(utilresponse);
-		
-	
-		JSONArray json=new JSONArray(utilresponse);
-//		json.put(stringresponse);
-		System.out.println("sagar "+(json));
-        
-		JSONObject jo = null;
-		String number = null ;
-        List<String> numbers=new ArrayList<String>();
-		
-		for(int i=0;i<json.length();i++){
-
-               jo=json.optJSONObject(i);
-               number=GetAuthToken.getValueByJpath(jo,"number");
-               numbers.add((number));
-               
-		    
-			
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		String line = "";
+	    
+		while ((line = rd.readLine()) != null) {
+			   // Convert response to JSON object
+			   JSONParser parser = new JSONParser();
+			   JSONObject json = (JSONObject) parser.parse(line);
+			   String success = json.get("result").toString();
+			   Assert.assertTrue(success.equals("success"),"api did not retun success");
+			   Assert.assertNull(json.get("err"),"api returned err "+json.get("err"));	
+			   JSONArray json_arr = (JSONArray) json.get("data");
+			   JSONObject json_obj = (JSONObject) json_arr.get(0);
+			   number = json_obj.get("number").toString();
 		}
-		
-
-
-		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-		
-        for(String num:numbers){
-        	System.out.println("number is "+num);
-        }
-        return numbers;
+        return number;
 		
 	}
 
