@@ -11,7 +11,7 @@
 			<class name="tests.LoginTest" />
 		</classes>
 	</test>
-
+ 
 	<test name="HomeTest" preserve-order="true" parallel="false">
 		<parameter name="browser" value="headless" />
 		<parameter name="url"
