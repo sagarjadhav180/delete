@@ -4,26 +4,84 @@
 <suite name="Automation Suite-1" parallel="tests" thread-count="1">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
-		
 		<parameter name="browser" value="headless" />
-		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
-		
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
 		<classes>
-			
 			<class name="tests.LoginTest" />
-			<class name="tests.HomeTest" />
-			<class name="tests.CamapignUIVerificationTest" />
-			<class name="tests.CampaignTests" />
-			<class name="tests.TrackingNumberTest" />
-			<class name="tests.CallDetailReportTest" />
-			<class name="tests.TrackingNumberSettingsTest" />
-			<class name="tests.GroupActivityReportTest" />
-			<class name="tests.LegacyScheduledReportTest" />
-
-	        
 		</classes>
-
 	</test>
 
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.HomeTest" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.CamapignUIVerificationTest" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.CampaignTests" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.TrackingNumberTest" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.CallDetailReportTest" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.TrackingNumberSettingsTest" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.GroupActivityReportTest" />
+		</classes>
+	</test>
+
+	<test name="chrome test-1" preserve-order="true" parallel="false">
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+		<classes>
+			<class name="tests.LegacyScheduledReportTest" />
+		</classes>
+	</test>
 
 </suite> <!-- Suite -->
