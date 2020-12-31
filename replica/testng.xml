@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Automation Suite-1" >
+<suite name="Automation Suite-1">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
 
@@ -20,11 +20,12 @@
 			<class name="tests.TrackingNumberSettingsTest" />
 			<class name="tests.GroupActivityReportTest" />
 			<class name="tests.LegacyScheduledReportTest" />
+			<class name="tests.GroupsAndUserTest" />
 
 
 		</classes>
 
 	</test>
 
-	
+
 </suite> <!-- Suite -->
