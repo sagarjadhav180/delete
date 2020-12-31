@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
  
 <suite name="Automation Suite-1" parallel="tests" thread-count="1">
-
+ 
 	<test name="LoginTest" preserve-order="true" parallel="false">
 		<parameter name="browser" value="headless" />
 		<parameter name="url"
