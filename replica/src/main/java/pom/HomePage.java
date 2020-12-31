@@ -127,6 +127,12 @@ public class HomePage extends TestBase {
 	public void click_subLink(String linkToBeClicked){
 		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
 			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				left_hand_navigation_bar_sub_links.get(i).click();
 				break;
 			}
