@@ -128,12 +128,13 @@ public class HomePage extends TestBase {
 		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
 			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
 				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
+					wait.until(ExpectedConditions.visibilityOf(left_hand_navigation_bar_sub_links.get(i)));
+					left_hand_navigation_bar_sub_links.get(i).click();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					left_hand_navigation_bar_sub_links.get(i).click();
 					e.printStackTrace();
 				}
-				left_hand_navigation_bar_sub_links.get(i).click();
 				break;
 			}
 		}
