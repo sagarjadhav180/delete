@@ -225,7 +225,7 @@ public class TestBase
 	}
 
 	
-	@AfterTest
+//	@AfterTest
 	public void tearDown() throws Exception{
 		if(driver!=null){
 		driver.quit();
@@ -236,6 +236,9 @@ public class TestBase
 	@AfterSuite
 	public void close_connection() throws Exception {
 
+		if(driver!=null){
+			driver.quit();
+			}
 		int[] result = extentReport.Listener.count_of_test();
 		totalPassedTestCases = result[0];
 		totalFailedTestCases = result[1];
