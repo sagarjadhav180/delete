@@ -950,7 +950,14 @@ public class TrackingNumberBuilderPage extends TestBase {
     }
     
     public void instantInsightsSection(){
-        voice_prompt_for_call_outcome_textbox.sendKeys("test tn");
+        
+    	if(instant_insights_checkbox.getAttribute("aria-checked").equals("false")) {
+    		Util.Action().moveToElement(instant_insights_checkbox).click().perform();
+        		
+    	}
+    	Select select1=new Select(instant_insights_dropdown);
+    	select1.selectByVisibleText("Call Outcome (Conversion type)");	
+    	voice_prompt_for_call_outcome_textbox.sendKeys("test tn");
     	
     	sale_amount_voice_prompt_textbox.sendKeys("test sale");
     }

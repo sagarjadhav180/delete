@@ -254,7 +254,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			
 		}
 		else if(buttonName.contains("update")){
-            Thread.sleep(30000);
+            Thread.sleep(5000);
             WebElement edit = null;
             if(topNextPagination_Button.isEnabled()){
             	try{
