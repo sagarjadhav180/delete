@@ -507,6 +507,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 			
 		}
 		else{
+			wait.until(ExpectedConditions.visibilityOf(webelement));
 			webelement.click();
 		}
 	}
