@@ -10,6 +10,7 @@
 
 		<classes>
 			<class name="tests.TrackingNumberSettingsTest" />
+			<class name="tests.TrackingNumberTest" />
 
 		</classes>
 
