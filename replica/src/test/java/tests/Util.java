@@ -13,7 +13,10 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.io.FileUtils;
@@ -55,6 +58,7 @@ public class Util extends TestBase{
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;
 	static Statement stmpt=null;
+	private static JavascriptExecutor executor;
 //	static Actions actions;
 	
 	public static void elementHighlight(WebElement element){
@@ -245,7 +249,15 @@ public class Util extends TestBase{
 //		
 //	}
 	
-
+	public static void addStyleToElement(WebDriver driver, WebElement element, Map<String,String> style) {
+		executor = (JavascriptExecutor) driver;
+		Set<Map.Entry<String, String>> mapEntry = style.entrySet();
+		Iterator<Map.Entry<String, String>> itr = mapEntry.iterator();
+		while(itr.hasNext()) {
+			Map.Entry<String, String> entry = itr.next();
+			executor.executeScript("arguments[0].setAttribute('style', '"+entry.getKey()+": "+entry.getValue()+";')", element);
+		}
+	}
 
 			  
 	}
