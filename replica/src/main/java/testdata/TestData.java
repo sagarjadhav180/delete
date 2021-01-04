@@ -22,43 +22,49 @@ public class TestData extends TestBase{
 		//logging in 
 		rd.login();
 		
-		//group
-		String group=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND org_unit_status='active'");
+		//setting group_id
+		String group=Util.readingFromDB("SELECT ct_user_ou_id AS count FROM ct_user WHERE username LIKE '"+TestBase.getUser_id()+"'");
 		System.out.println("group "+group);
-		if(group!=null){
-			TestBase.setOrg_unit_id(group);
-		    TestBase.setCampaign_ou_id(group);
-		}  
-		else{
-			System.out.println("creating group");
-			rd.createGroup();
-			rd.navigateToGroup();
-			String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND top_ou_id='"+org_unit_id+"' AND org_unit_status='active'");
-		    TestBase.setOrg_unit_id(orgUnitID);
-		    TestBase.setCampaign_ou_id(orgUnitID);
-		}
+		TestBase.setOrg_unit_id(group);
+		TestBase.setCampaign_ou_id(group);
+		
+		//group
+//		String group=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND org_unit_status='active'");
+//		System.out.println("group "+group);
+//		if(group!=null){
+//			TestBase.setOrg_unit_id(group);
+//		    TestBase.setCampaign_ou_id(group);
+//		}  
+//		else{
+//			System.out.println("creating group");
+//			rd.createGroup();
+//			rd.navigateToGroup();
+//			String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND top_ou_id='"+org_unit_id+"' AND org_unit_status='active'");
+//		    TestBase.setOrg_unit_id(orgUnitID);
+//		    TestBase.setCampaign_ou_id(orgUnitID);
+//		}
 		
 		//user
-		String user=Util.readingFromDB("SELECT count(*) as count FROM ct_user WHERE username LIKE '"+user_name+"'");
-		System.out.println("user "+user);		
-		if(user!=null){
-
-			TestBase.setFirst_name(first_name);
-			TestBase.setLast_name(last_name);
-			TestBase.setFirst_last_name(first_last_name);
-		}
-		else{
-			System.out.println("creating user");
-			rd.createUser(first_name,last_name,user_name);
-			TestBase.setUser_id(user_name);
-			TestBase.setFirst_name(first_name);
-			TestBase.setLast_name(last_name);
-			TestBase.setFirst_last_name(first_last_name);
-			
-			TestDataCreation tc=new TestDataCreation();
-			tc.logOut();
-			tc.login();
-		}
+//		String user=Util.readingFromDB("SELECT count(*) as count FROM ct_user WHERE username LIKE '"+user_name+"'");
+//		System.out.println("user "+user);		
+//		if(user!=null){
+//
+//			TestBase.setFirst_name(first_name);
+//			TestBase.setLast_name(last_name);
+//			TestBase.setFirst_last_name(first_last_name);
+//		}
+//		else{
+//			System.out.println("creating user");
+//			rd.createUser(first_name,last_name,user_name);
+//			TestBase.setUser_id(user_name);
+//			TestBase.setFirst_name(first_name);
+//			TestBase.setLast_name(last_name);
+//			TestBase.setFirst_last_name(first_last_name);
+//			
+//			TestDataCreation tc=new TestDataCreation();
+//			tc.logOut();
+//			tc.login();
+//		}
 		
 		//campaign
 		System.out.println("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"'");
@@ -72,28 +78,27 @@ public class TestData extends TestBase{
 			String campaignID=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
 		    TestBase.setCampaign_id(campaignID);
 		}
-
-		//tracking number
-		String tracking_number=Util.readingFromDB("SELECT count(*) as count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active')");
-		System.out.println("tracking_number "+tracking_number);
-		if(tracking_number.equals("0") ){
-			rd.createWebhook();
-			rd.createGeoLoaction();
-			rd.createTrackingNumber();
-		}
-
+		
 		//geo location
-		String geoLocation=Util.readingFromDB("SELECT count(*) as count FROM location WHERE location_name='"+geo_location+"' AND org_unit_id='"+TestBase.getOrg_unit_id()+"'");
+		String geoLocation=Util.readingFromDB("SELECT count(*) as count FROM location WHERE location_name='"+geo_location+"' AND org_unit_id='"+TestBase.getOrg_unit_id()+"' AND location_active='t'");
 		System.out.println("geoLocation "+geoLocation);
 		if(geoLocation.equals("0") ){
 			rd.createGeoLoaction();
-		}
+		}System.out.println();
 		
 		//webhook
 		String webHook=Util.readingFromDB("SELECT count(*) as count FROM webhook WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"' AND webhook_name LIKE '"+webhook+"'");
 		System.out.println("webHook "+webHook);
 		if(webHook.equals("0")){
 			rd.createWebhook();
+		}
+
+		
+		//tracking number
+		String tracking_number=Util.readingFromDB("SELECT count(*) as count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active')");
+		System.out.println("tracking_number "+tracking_number);
+		if((tracking_number.equals("0"))){
+			rd.createTrackingNumber();	
 		}
 
 		//groups n user settings
