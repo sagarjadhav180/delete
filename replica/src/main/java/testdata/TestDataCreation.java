@@ -131,6 +131,9 @@ public class TestDataCreation extends TestBase implements TestDataFunctions {
 		
 		GeoRouteLocationsPage geo=new GeoRouteLocationsPage(driver);
 		geo.addMainLocation(geo_location);
+		Thread.sleep(2000);
+		geo.addSubLocation(geo_location);			
+		
 		hp.clickAction(Constants.HomePage.home_page);				
 		Thread.sleep(2000);
 	}
