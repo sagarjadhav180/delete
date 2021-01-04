@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Automation Suite-1" parallel="false">
+<suite name="Automation Suite-1" >
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
 
@@ -8,25 +8,15 @@
 		<parameter name="url"
 			value="https://stag-7-cmo-1.convirza.com" />
 
-		<classes>
-			<class name="tests.TrackingNumberSettingsTest" />
+	<classes>
+		<class name="tests.TrackingNumberSettingsTest" />
+		<class name="tests.TrackingNumberTest" />
 
-		</classes>
-
-	</test>
-
-
-	<test name="chrome test-2" preserve-order="true" parallel="false">
-
-		<parameter name="browser" value="headless" />
-		<parameter name="url"
-			value="https://stag-7-cmo-1.convirza.com" />
-
-		<classes>
-			<class name="tests.TrackingNumberTest" />
-
-		</classes>
+	</classes>
 
 	</test>
+
+
+
 
 </suite> <!-- Suite -->
