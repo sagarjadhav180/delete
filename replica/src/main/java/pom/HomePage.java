@@ -129,6 +129,7 @@ public class HomePage extends TestBase {
 			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
 				try {
 					wait.until(ExpectedConditions.visibilityOf(left_hand_navigation_bar_sub_links.get(i)));
+					Thread.sleep(2000);
 					left_hand_navigation_bar_sub_links.get(i).click();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -156,6 +157,7 @@ public class HomePage extends TestBase {
 						
 				else{
 				link.click();
+				Thread.sleep(2000);
 				}
 				break;
 			}

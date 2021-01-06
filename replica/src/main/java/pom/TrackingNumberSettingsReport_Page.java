@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,7 +54,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-default btn-block btn-adv'][text()='Advanced Filter']")
 	private static WebElement advanced_filter_button;	
 	
-	@FindBy(xpath="//i[@class='fa fa-columns']")
+	@FindBy(xpath="//div[@class='btn-group dropdown']//i[@class='fa fa-columns']")
 	private static WebElement column_Picker_button;
 	
 	@FindBy(xpath="//table[@id='classflowDataTable']//thead//tr[1]//th")
@@ -208,18 +209,26 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);
-		if(next_100_button.isEnabled()){
-			Util.click(next_100_button);
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			final_count=final_count+table_call_count.size();
+		
+		if(Integer.parseInt(dbCount)>100) {
+			do {
+				Util.click(next_100_button);
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				final_count=final_count+table_call_count.size();
+			}
+			while(!next_100_button.getAttribute("class").endsWith("disabled"));	
+		
+		}else {
+			final_count=table_call_count.size()+0;
 		}
+		
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+final_count);
 				
 		logger.log(LogStatus.INFO, "verifying count of tracking numbers in table");
 		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed tracking numbers is mismatching with db count");
 		softassert.assertAll();
-	    	    
+	    Util.click(first_button);	    
 	}
 
     public void allColumnPickerOptions(){
@@ -245,7 +254,8 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 //			}
 //		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 
     
@@ -308,7 +318,8 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 			
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
     
     public void checkAllColumnPickerOptions(){
@@ -320,7 +331,8 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 				Util.click(column_picker_options_checkboxes.get(i));
 			}
 		}
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();		
 	}    
     
     public void advancedFilter(){
