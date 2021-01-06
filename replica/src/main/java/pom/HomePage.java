@@ -148,32 +148,16 @@ public class HomePage extends TestBase {
 				
 				if(link.getText().contains("Campaign")){
 					link.click();
-
 					try{
 					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 					
 					}catch(Exception e){}
-//					driver.switchTo().activeElement();
-//					Util.click(pendo_close_button);
-//					Thread.sleep(1000);					
 				}
-				
-				
-				
-				
-				
+						
 				else{
 				link.click();
-				try{
-//					driver.switchTo().activeElement();
-//					Util.click(pendo_close_button);
-//					Thread.sleep(2000);
-					}
-					catch(Exception e){}
-					
 				}
-
-
+				break;
 			}
 		}
 		
