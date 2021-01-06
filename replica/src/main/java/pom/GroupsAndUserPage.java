@@ -97,7 +97,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Conversation Analytics')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement CA_toggle;	
 
-	@FindBy(xpath="//label[contains(text(),'Spam Guard')][1]")
+	@FindBy(xpath="//label[contains(text(),'Spam Guard') and @aria-hidden='false']")
 	private WebElement spamGuard_label;	
 	
 	@FindBy(xpath="//label[contains(text(),'Spam Guard')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
@@ -206,7 +206,7 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement custom_parameters;
 	
 	//DNI custom parameters-----------------------------------------------------------------
-	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
+	@FindBy(xpath="//div[@class='modal-content']//h3[text()='DNI Custom Parameters']")
 	private WebElement dni_custom_parameters_label;
 
 	@FindBy(xpath="//label[@class='control-label ng-binding'][starts-with(text(),'Capture Custom')]")
@@ -518,6 +518,12 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']") 	
 	private WebElement user_deletion_confiramtion_popup_cancel_button;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message_for_main_location_creation;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message_for_main_location_creation;
 
 	//Change password popup-------------------------------------------
 	@FindBy(xpath="//h3[@class='modal-title'][text()='Change Password']")
@@ -763,7 +769,7 @@ public class GroupsAndUserPage extends TestBase {
     
 	
     //Group Details Updattion
-	public void groupDetailsUpdate(){
+	public void groupDetailsUpdate() throws InterruptedException{
 		
 		expandSection(Constants.GroupsAndUser.group_details_strip);
 		
@@ -772,6 +778,7 @@ public class GroupsAndUserPage extends TestBase {
 		externalID_textbox.sendKeys(external_id);
 		phone_textbox.clear();
 		phone_textbox.sendKeys("8018786943");
+		Thread.sleep(2000);
 		saveGroupDetails_button.click();
 		wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));
 		
@@ -1757,6 +1764,7 @@ public class GroupsAndUserPage extends TestBase {
 		
 		//sub-group deletion pop-up
 		if(button_name.contains("Delete")) {
+			subGroup = TestBase.driver.findElement(By.xpath("//a[contains(text(),'Delete')]"));
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
@@ -2034,7 +2042,15 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
     	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
     	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
-    	
+    	Map<String,String> map = new HashMap<String,String>();
+    	map.put("visibility", "visible");
+		Util.addStyleToElement(driver, pause_button_success_message_for_main_location_creation, map);
+		Util.addStyleToElement(driver, close_button_success_message_for_main_location_creation, map);		
+    	Util.Action().moveToElement(pause_button_success_message_for_main_location_creation);
+    	pause_button_success_message_for_main_location_creation.click();
+    	Util.Action().moveToElement(close_button_success_message_for_main_location_creation);
+    	close_button_success_message_for_main_location_creation.click();
+    	   	
     }
 
     
