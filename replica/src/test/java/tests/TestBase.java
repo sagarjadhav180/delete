@@ -129,14 +129,14 @@ public class TestBase
 			 String chromeDriverPath = ".//chromedriver_linux" ;
 			 System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 			 ChromeOptions options = new ChromeOptions();
-			 options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
+			 options.addArguments("--headless", "--disable-gpu","--ignore-certificate-errors");
 			 driver = new ChromeDriver(options);
 			 
 			}
 
 		wait= new WebDriverWait(driver,60);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-//		driver.manage().window().maximize();
+		driver.manage().window().maximize();
 		//to delete cookies
 	    driver.manage().deleteAllCookies();
 //		String URL="https://convirza.awsapps.com/auth/?client_id=06919f4fd8ed324e&redirect_uri=https%3A%2F%2Fconvirza.awsapps.com%2Fconnect%2Fauth%2Fcode";
