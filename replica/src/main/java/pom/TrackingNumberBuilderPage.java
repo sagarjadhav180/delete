@@ -903,7 +903,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	}
 //     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_tn));
        Select select_tracking_number=new Select(tracking_number_dropdown);
-       select_tracking_number.selectByIndex(4);
+       select_tracking_number.selectByIndex(2);
        wait.until(ExpectedConditions.elementToBeClickable(ring_to_phone_number_textbox));
        ring_to_phone_number_textbox.clear();
    	   ring_to_phone_number_textbox.sendKeys("1234567890");
@@ -1797,12 +1797,12 @@ public class TrackingNumberBuilderPage extends TestBase {
 		System.out.println("------------------------unprovision--------------");       	
 //    	Iterator<String> its = set.iterator();
 
-		for( String one:list){
-    		System.out.println(one);
-    		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+one+"' AND number_status='suspended'");
-		}
+//		for( String one:list){
+//    		System.out.println(one);
+//    		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+one+"' AND number_status='suspended'");
+//		}
     	
-    	
+//		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+one+"' AND number_status='suspended'");
 //		while(its.hasNext()){
 //			System.out.println(its.next());
 //		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
