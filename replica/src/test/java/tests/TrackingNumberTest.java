@@ -32,8 +32,8 @@ public class TrackingNumberTest extends TestBase{
 	        logger.log(LogStatus.INFO, "verifying login with valid username_and_password. ");
 	        logger.assignCategory(Constants.login_page_category);
 	        lp.validLogin();
-	        HomePage hp=new HomePage(driver);
 	        
+	        HomePage hp=new HomePage(driver);
 			try {
 				hp.clickAction(Constants.HomePage.campaign_tracking_number_page);
 			} catch (InterruptedException e) {
@@ -43,17 +43,16 @@ public class TrackingNumberTest extends TestBase{
 			
 		}
 	
-
-		  public CampaignAndTrackingNumberPage createInstanceCampaignAndTrackingNumberPage(){
+		public CampaignAndTrackingNumberPage createInstanceCampaignAndTrackingNumberPage(){
                 
 			  if(counter_b==0){
 			    cp=new CampaignAndTrackingNumberPage(driver);
 			    counter_b++;
 			  }
 			    return cp;		  
-		  }
+		}
 		  
-		  public TrackingNumberBuilderPage createInstance(){
+		public TrackingNumberBuilderPage createInstance(){
               
 			  if(counter_a==0){
 			    tn=new TrackingNumberBuilderPage(driver);
