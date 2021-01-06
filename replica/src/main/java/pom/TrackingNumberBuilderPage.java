@@ -1400,6 +1400,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	instantInsightsSection();
 
     	//saving tn form
+    	Util.scrollFunction(save_button);
     	save_button.click();
     	
         trackingNumberCreationVerification();
