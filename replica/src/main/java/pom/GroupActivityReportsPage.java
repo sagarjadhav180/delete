@@ -77,7 +77,7 @@ public class GroupActivityReportsPage extends TestBase {
 	@FindBy(xpath="//input[@id='simpleChart']//parent::div//button[2]")
 	private static WebElement basic_search_cancel_button;
 
-	@FindBy(xpath="//i[@class='fa fa-columns']")
+	@FindBy(xpath="//div[@class='btn-group dropdown']//i[@class='fa fa-columns']")
 	private static WebElement column_Picker_button;
 
 	@FindBy(xpath="//table[@id='groupActivityReportDataGrid']//thead//tr[1]//th")
