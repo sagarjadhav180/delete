@@ -891,7 +891,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	Select selct_ad_source=new Select(ad_source_dropdown);
      	selct_ad_source.selectByIndex(4);	
      
-     	area_code_textbox.sendKeys("201");
+     	area_code_textbox.sendKeys("551");
      	wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_area_code));
      	
      	for(int i=0;i<area_codes_list_for_385.size();i++){
@@ -1802,7 +1802,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 //    		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+one+"' AND number_status='suspended'");
 //		}
     	
-//		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+one+"' AND number_status='suspended'");
+		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str LIKE '551%' AND number_status='suspended'");
 //		while(its.hasNext()){
 //			System.out.println(its.next());
 //		Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str='"+its.next()+"' AND number_status='suspended'");
