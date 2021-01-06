@@ -2275,6 +2275,14 @@ public class GroupsAndUserPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(user_permissions_update_success_message));
  		logger.log(LogStatus.INFO, "Verifying if User permissions gets updated");	
   		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions not updated successfully");
+  		Map<String,String> map = new HashMap<String,String>();
+    	map.put("visibility", "visible");
+		Util.addStyleToElement(driver, pause_button_success_message_for_main_location_creation, map);
+		Util.addStyleToElement(driver, close_button_success_message_for_main_location_creation, map);		
+    	Util.Action().moveToElement(pause_button_success_message_for_main_location_creation);
+    	pause_button_success_message_for_main_location_creation.click();
+    	Util.Action().moveToElement(close_button_success_message_for_main_location_creation);
+    	close_button_success_message_for_main_location_creation.click();
   		
   	}
   	
