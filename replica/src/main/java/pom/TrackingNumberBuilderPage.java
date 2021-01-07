@@ -1165,7 +1165,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     
 	
     
-    public void createOutboundRoute(String tracking_number_name) throws Throwable{
+    public void createOutboundRoute(String tracking_number_name) throws InterruptedException {
     	
          //BASIC SECTION       
     	basicSection(tracking_number_name);
