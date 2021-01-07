@@ -528,11 +528,13 @@ public class CallDetailsReport_Page extends TestBase{
 		SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
-		
+		System.out.println(filterelement);
 		for(int i=0;i<actual_column_names.size();i++){
+		System.out.println(actual_column_names.get(i).getText());
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
 				index=i;
+				break;
 			}
 		}
 		
