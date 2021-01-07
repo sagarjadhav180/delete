@@ -67,8 +67,8 @@ public class TestData extends TestBase{
 //		}
 		
 		//campaign
-		System.out.println("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"'");
-		String campaign=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"'");
+		System.out.println("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"' AND campaign_status='active'");
+		String campaign=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"' AND campaign_status='active'");
 		System.out.println("campaign "+campaign);
 		if(campaign!=null){
 			TestBase.setCampaign_id(campaign);			
