@@ -911,7 +911,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 
     }
     
-    public void advancedSection(String route){
+    public void advancedSection(String route) throws InterruptedException{
         call_value_textbox.clear();
      	call_value_textbox.sendKeys("32");
      	repeat_interval_textbox.clear();
@@ -934,6 +934,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	
          Util.click(webhook_checkbox);
          Select we=new Select(webhook_dropdown);
+         Thread.sleep(2000);
          we.selectByVisibleText(webhook);
     }
     
@@ -995,7 +996,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	//Assert.assertAll();
     }
     
-    public void createIVRRoute(String tracking_number_name){
+    public void createIVRRoute(String tracking_number_name) throws InterruptedException{
 
     	basicSection(tracking_number_name);
     	
@@ -1177,7 +1178,12 @@ public class TrackingNumberBuilderPage extends TestBase {
         
         
         Util.scrollFunction(save_button);
-        wait.until(ExpectedConditions.elementToBeClickable(save_button));
+        try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         save_button.click();
 
         trackingNumberCreationVerification();
@@ -1193,7 +1199,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         
  
     
-    public void createScheduleRoute(String tracking_number_name){
+    public void createScheduleRoute(String tracking_number_name) throws InterruptedException{
 
          //BASIC SECTION       
     	basicSection(tracking_number_name);     	
@@ -1286,7 +1292,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	
     }
     
-    public void createPercentRoute(String tracking_number_name){
+    public void createPercentRoute(String tracking_number_name) throws InterruptedException{
 
     	//BASIC SECTION       
         basicSection(tracking_number_name);     	
@@ -1340,7 +1346,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         
     }
     
-    public void createGeoRoute(String tracking_number_name){
+    public void createGeoRoute(String tracking_number_name) throws InterruptedException{
 
          //BASIC SECTION       
         basicSection(tracking_number_name);     	
@@ -1352,10 +1358,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         
         Select locations=new Select(location_list_dropdown);
         locations.selectByVisibleText("do_not_delete_location(automation)");
-        
-        
-      
-       
+               
     	//ADVANCED SECTION
         advancedSection("geo");
         
@@ -1401,6 +1404,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 
     	//saving tn form
     	Util.scrollFunction(save_button);
+    	Thread.sleep(3000);
     	save_button.click();
     	
         trackingNumberCreationVerification();
@@ -1599,8 +1603,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 
      	 
      	Util.scrollFunction(save_button);
-       
-     	wait.until(ExpectedConditions.elementToBeClickable(save_button));
+     	Thread.sleep(2000);
      	save_button.click();
      	
      	logger.log(LogStatus.INFO, "Verifying if tracking number is updated");
@@ -1674,6 +1677,7 @@ public class TrackingNumberBuilderPage extends TestBase {
         play_whisper_message_textbox.sendKeys("test whisper");
         Util.click(webhook_checkbox);
         Select we=new Select(webhook_dropdown);
+        Thread.sleep(2000);
         we.selectByVisibleText(webhook);
         
         
