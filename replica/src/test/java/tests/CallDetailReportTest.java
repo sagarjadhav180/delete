@@ -19,8 +19,7 @@ public class CallDetailReportTest extends TestBase{
 	CallDetailsReport_Page cdr;
 	HomePage hp;
 	
-	
-	
+
 	@BeforeClass
 	public void goToCallDetailsReportPage() throws InterruptedException, IOException{
 	
