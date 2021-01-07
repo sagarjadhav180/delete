@@ -72,6 +72,7 @@ public class TrackingNumberTest extends TestBase{
        cp.clickAction("update",campaignToBeEdited);
        tn=createInstance();
        tn.uiVerification();
+       Thread.sleep(5000);
 				    
 	}		
 		
@@ -118,9 +119,6 @@ public class TrackingNumberTest extends TestBase{
 		    Thread.sleep(4000);
 		}		
 		
-	
-	
-
 
      	//create number pool
      	@Test(priority=5)
