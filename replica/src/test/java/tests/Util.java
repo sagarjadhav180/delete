@@ -41,7 +41,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.googlecode.charts4j.Color;
 import com.googlecode.charts4j.GCharts;
@@ -243,11 +245,17 @@ public class Util extends TestBase{
 		return currentDate;
 	}
 	
-//	public static void waitTillPageLoad(){
-//	    wait.until(jse.executeScript("return document.readyState").equals("complete"));
-//	    wait.until(ExpectedConditions.jsReturnsValue(javaScript));
-//		
-//	}
+
+	public static void waitForLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(pageLoadCondition);
+    }
 	
 	public static void addStyleToElement(WebDriver driver, WebElement element, Map<String,String> style) {
 		executor = (JavascriptExecutor) driver;
@@ -260,4 +268,4 @@ public class Util extends TestBase{
 	}
 
 			  
-	}
+}

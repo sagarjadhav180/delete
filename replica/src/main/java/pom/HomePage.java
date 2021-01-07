@@ -139,6 +139,7 @@ public class HomePage extends TestBase {
 				break;
 			}
 		}
+		Util.waitForLoad(driver);
 	}
 	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
