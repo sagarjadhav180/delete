@@ -10,7 +10,7 @@
 
 		<classes>
 
-			<class name="tests.CallDetailReportTest" >
+			<class name="tests.TrackingNumberTest" >
 			
 			
 			</class>
