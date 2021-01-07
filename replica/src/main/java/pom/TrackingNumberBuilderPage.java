@@ -991,8 +991,15 @@ public class TrackingNumberBuilderPage extends TestBase {
 
     public void trackingNumberCreationVerification(){
     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
-        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
-    	Assert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
+    	for(int i=0;i<5;i++) {
+    	    if(wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message)).equals(true)) {
+        	    Assert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");    	    
+        	    break;
+    	    }else continue;
+    	
+    	}
+//        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+//    	Assert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
     	//Assert.assertAll();
     }
     
