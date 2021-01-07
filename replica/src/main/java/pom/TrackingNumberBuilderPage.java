@@ -555,7 +555,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 //        	}
 //        	i++;
 //        }
-//        
+        
 		System.out.println("SELECT count(*) as count FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='"+TestBase.getCampaign_id()+"') AND status NOT IN ('suspended')");
         String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE provisioned_route_id IN (SELECT provisioned_route_id FROM campaign_provisioned_route  WHERE campaign_id='"+TestBase.getCampaign_id()+"') AND status NOT IN ('suspended')" );
         
@@ -1399,9 +1399,15 @@ public class TrackingNumberBuilderPage extends TestBase {
 
     	//saving tn form
     	Util.scrollFunction(save_button);
-    	save_button.click();
-    	
-    	Thread.sleep(5000);
+ 
+//    	wait.until(ExpectedConditions.attributeContains(save_button, "aria-disabled", "true"));
+    	for(int i=0;i<5;i++) {
+    		if(save_button.getAttribute("aria-disabled").equals("false")) {
+    			save_button.click();
+    			break;
+    		}else continue;
+    	}
+    	Thread.sleep(2000);
         trackingNumberCreationVerification();
 //    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
 //    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");

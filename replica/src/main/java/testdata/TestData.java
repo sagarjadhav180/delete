@@ -75,7 +75,7 @@ public class TestData extends TestBase{
 		}
 		else{
 			rd.createCampaign();
-			String campaignID=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"'");
+			String campaignID=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name='"+campaignToBeEdited+"' AND campaign_ou_id='"+org_unit_id+"' AND campaign_status='active'");
 		    TestBase.setCampaign_id(campaignID);
 		}
 		
