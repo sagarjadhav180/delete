@@ -1165,7 +1165,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     
 	
     
-    public void createOutboundRoute(String tracking_number_name){
+    public void createOutboundRoute(String tracking_number_name) throws Throwable{
     	
          //BASIC SECTION       
     	basicSection(tracking_number_name);
@@ -1178,14 +1178,9 @@ public class TrackingNumberBuilderPage extends TestBase {
         
         
         Util.scrollFunction(save_button);
-        try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        Thread.sleep(5000);
         save_button.click();
-
+		Thread.sleep(5000);
         trackingNumberCreationVerification();
         //Assert.assertAll();
 //        String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
