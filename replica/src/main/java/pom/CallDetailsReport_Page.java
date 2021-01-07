@@ -688,30 +688,36 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 		}
 		
-		
-
 		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
         
-		System.out.println("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		if(!(dbCount.equals("0"))){
-			int final_count=table_call_count.size()+0;
-			
-			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
-				Util.scrollFunction(next_100_button);
-				Util.click(next_100_button);
-				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-				final_count=final_count+table_call_count.size();
-				
-		}
+		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
 		System.out.println("dbCount is "+dbCount);
-		System.out.println("table_call_count is "+final_count);	
-		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
-		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed calls is mismatching with db count");
-		}
-		else{
-		logger.log(LogStatus.INFO, "verifying if no data found label displayed since no call count is there for date range "+dateRange);			
-		softassert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
-		}
+		System.out.println("countOnUI_pagination is "+countOnUI_pagination);
+
+		logger.log(LogStatus.INFO, "verifying count in  pagination toolbox");
+		softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");
+		
+		
+//		System.out.println("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+//		if(!(dbCount.equals("0"))){
+//			int final_count=table_call_count.size()+0;
+//			
+//			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
+//				Util.scrollFunction(next_100_button);
+//				Util.click(next_100_button);
+//				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//				final_count=final_count+table_call_count.size();
+//				
+//		}
+//		System.out.println("dbCount is "+dbCount);
+//		System.out.println("table_call_count is "+final_count);	
+//		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
+//		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed calls is mismatching with db count");
+//		}
+//		else{
+//		logger.log(LogStatus.INFO, "verifying if no data found label displayed since no call count is there for date range "+dateRange);			
+//		softassert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
+//		}
 		softassert.assertAll();
 		
 		
