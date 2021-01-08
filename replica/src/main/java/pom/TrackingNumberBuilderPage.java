@@ -32,6 +32,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 	static List<String> list=new ArrayList<String>(); 
 		
 	//Tracking number list
+
+	@FindBy(xpath="//img[@class='ProgressLoader-img']")
+	private static WebElement progress_loader_add_tn;
 	
 	@FindBy(xpath="//h4[contains(text(),'TRACKING NUMBERS FOR')]")
 	private static WebElement header;
@@ -874,10 +877,10 @@ public class TrackingNumberBuilderPage extends TestBase {
     public void basicSection(String tracking_number_name){
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
  		
-        Util.scrollFunction(header);  
+//        Util.scrollFunction(header);  
         add_tracking_number_button.click();
+        wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
      	
-
          //BASIC SECTION       
      	wait.until(ExpectedConditions.visibilityOf(tracking_number_name_textbox));
      	tracking_number_name_textbox.sendKeys(tracking_number_name);
