@@ -1416,7 +1416,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     			break;
     		}else continue;
     	}
-    	Thread.sleep(20000);
+//    	Thread.sleep(20000);
         trackingNumberCreationVerification();
 //    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
 //    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
