@@ -957,6 +957,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     }
 
     public void customSourcesSection(){
+    	wait.until(ExpectedConditions.visibilityOf(custom_source1_dropdown));
     	Select cs1=new Select(custom_source1_dropdown);
 //    	cs1.selectByVisibleText(custom_source1); 
     	cs1.selectByIndex(1);
