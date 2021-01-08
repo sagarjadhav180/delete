@@ -1756,19 +1756,21 @@ public class GroupsAndUserPage extends TestBase {
     public void clickActionSubGroup(String group_name,String button_name){
 		
 		WebElement subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
-		
-		//Clicking on desired action button
-        wait.until(ExpectedConditions.visibilityOf(subGroup));
-//		subGroup.click();
-		Util.click(subGroup);
-		
+	
 		//sub-group deletion pop-up
 		if(button_name.contains("Delete")) {
 			subGroup = TestBase.driver.findElement(By.xpath("//a[contains(text(),'Delete')]"));
+			Util.click(subGroup);
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
 			ok_button_subgroup_deletion_popup.click();
+		}else {
+			//Clicking on desired action button
+	        wait.until(ExpectedConditions.visibilityOf(subGroup));
+//			subGroup.click();
+			Util.click(subGroup);
+				
 		}
 		
 	}
