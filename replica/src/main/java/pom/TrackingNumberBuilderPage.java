@@ -861,6 +861,8 @@ public class TrackingNumberBuilderPage extends TestBase {
         }
         Collections.sort(opt_act);
         Collections.sort(opt_exp);
+        cancel_button.click();
+        wait.until(ExpectedConditions.visibilityOf(add_tracking_number_button));
 //        Assert.assertEquals(opt_act,opt_exp,"number_of_digits_in_agent_Id_dropdown does not have 1 to 9 digits");
         
 //        select1.selectByVisibleText("Call Outcome (Conversion type)");
