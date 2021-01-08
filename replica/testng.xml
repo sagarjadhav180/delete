@@ -25,11 +25,7 @@
 			</class>
 
 			<class name="tests.TrackingNumberTest">
-				<methods>
-					<exclude name="simpleTrakingNumberCreation"></exclude>
-					<exclude name="simpleTrakingNumberUpdation"></exclude>
-					<exclude name="simpleTrakingNumberDeletion"></exclude>
-				</methods>
+			
 			</class>
 			<class name="tests.CallDetailReportTest">
 				<methods>
