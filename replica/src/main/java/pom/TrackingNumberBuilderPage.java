@@ -1462,9 +1462,9 @@ public class TrackingNumberBuilderPage extends TestBase {
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
-        Util.scrollFunction(header);  
+//        Util.scrollFunction(header);  
         add_tracking_number_button.click();
-        
+        wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
         wait.until(ExpectedConditions.visibilityOf(number_pool_button));
         try{
         Util.click(number_pool_button);
@@ -1587,12 +1587,12 @@ public class TrackingNumberBuilderPage extends TestBase {
 
      	Assert.assertTrue(tn_creation_success_message.isDisplayed(),"number pool is not created successfully..");
      	
-     	String pool_id = Util.readingFromDB("SELECT pool_id as count FROM phone_pool WHERE pool_name LIKE '"+tracking_number_name+"'");
-     	String number_pool = Util.readingFromDB("SELECT phone_number as count FROM phone_pool_number WHERE pool_id='"+pool_id+"'");
+//     	String pool_id = Util.readingFromDB("SELECT pool_id as count FROM phone_pool WHERE pool_name LIKE '"+tracking_number_name+"'");
+//     	String number_pool = Util.readingFromDB("SELECT phone_number as count FROM phone_pool_number WHERE pool_id='"+pool_id+"'");
      	
 //     	set.add(number_pool);
-        list.add(number_pool);
-     	System.out.println("number pool "+number_pool);
+//        list.add(number_pool);
+//     	System.out.println("number pool "+number_pool);
 
      	    
 
@@ -1645,9 +1645,9 @@ public class TrackingNumberBuilderPage extends TestBase {
         wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
-        Util.scrollFunction(header);  
+//        Util.scrollFunction(header);  
         add_tracking_number_button.click();
-        
+        wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
         wait.until(ExpectedConditions.visibilityOf(reserved_number_button));
         try{
         Util.click(reserved_number_button);

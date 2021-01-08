@@ -64,8 +64,8 @@ import tests.Util;
 					Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
 					if(methodName.startsWith("campaign")){
 						driver.navigate().refresh();
-						
-						Thread.sleep(10000);
+						Util.waitForLoad(driver);
+						Thread.sleep(5000);
 						HomePage hp=new HomePage(driver);
 						hp.left_hand_navigation_bar_click();
 						CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
@@ -76,8 +76,8 @@ import tests.Util;
 					}
 					else{
 						driver.navigate().refresh();
-						
-						Thread.sleep(10000);
+						Util.waitForLoad(driver);
+						Thread.sleep(5000);
 						HomePage hp=new HomePage(driver);
 						hp.left_hand_navigation_bar_click();
 					}
