@@ -1512,7 +1512,6 @@ public class GroupsAndUserPage extends TestBase {
 		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		Thread.sleep(4000);
     	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
-
     	
     	if(delete_icons.size()>1) {
     	
@@ -1819,7 +1818,9 @@ public class GroupsAndUserPage extends TestBase {
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
-			ok_button_subgroup_deletion_popup.click();
+			Thread.sleep(2000);
+			ok_button_subgroup_deletion_popup.click();				
+
 //			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 		}
 		else {
