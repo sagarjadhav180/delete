@@ -1807,8 +1807,8 @@ public class GroupsAndUserPage extends TestBase {
 			Util.click(subGroup);
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
-//			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
-//			ok_button_subgroup_deletion_popup.click();
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
+			ok_button_subgroup_deletion_popup.click();
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 			
 		}
@@ -1817,8 +1817,8 @@ public class GroupsAndUserPage extends TestBase {
 			Util.click(subGroup);
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
-//			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
-//			ok_button_subgroup_deletion_popup.click();
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
+			ok_button_subgroup_deletion_popup.click();
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 		}
 		else {
