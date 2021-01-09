@@ -659,7 +659,7 @@ public class GroupsAndUserTest extends TestBase
 	        this.groupName="SJSG-1"+Util.generateRandomNumber();
 	        gp.createSubGroup(this.groupName);
 	        gp.subGroupNavigation(this.groupName);
-	        gp.subGroupDeletion(this.groupName);	        
+	        gp.clickActionSubGroup(this.groupName,"delete_from_selected_group");	        
    
 		}
 		
@@ -916,7 +916,7 @@ public class GroupsAndUserTest extends TestBase
         @Test(priority=67)
 	    public void userSectionChangePasswordCancelFeature() throws InterruptedException{
 
-	       logger=extent.startTest("userSectionChangePassword");
+	       logger=extent.startTest("userSectionChangePasswordCancelFeature");
 	       logger.assignCategory(Constants.groups_and_user_category);
 
 	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);

@@ -13,6 +13,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
@@ -267,5 +268,15 @@ public class Util extends TestBase{
 		}
 	}
 
+	public static void closeBootstrapPopup(WebElement pause_button_success_message, WebElement close_button_success_message) {
+		Map<String,String> map = new HashMap<String,String>();
+    	map.put("visibility", "visible");
+		Util.addStyleToElement(driver, pause_button_success_message, map);
+		Util.addStyleToElement(driver, close_button_success_message, map);		
+    	Util.Action().moveToElement(pause_button_success_message);
+    	pause_button_success_message.click();
+    	Util.Action().moveToElement(close_button_success_message);
+    	close_button_success_message.click();
+	}
 			  
 }
