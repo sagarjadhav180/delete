@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -2056,7 +2057,7 @@ public class GroupsAndUserPage extends TestBase {
   	    logger.log(LogStatus.INFO, "Verifying if User creation success message is not displayed");    
   	
   	    try {
-  	  	    Assert.assertTrue(user_creation_alert.isDisplayed());
+  	    	Assert.assertTrue(user_creation_alert.isDisplayed());
   	  	    Assert.fail("User creation success message is displayed");
   	    }
   	    catch(Exception e){
@@ -2134,6 +2135,7 @@ public class GroupsAndUserPage extends TestBase {
   		wait.until(ExpectedConditions.visibilityOf(user_deletion_success_message));
   		logger.log(LogStatus.INFO, "Verifying if User is geting deleted successfully");
   		Assert.assertTrue(user_deletion_success_message.isDisplayed(),"User not deleted successfully");
+  		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
   	}
   	
   	

@@ -836,7 +836,7 @@ public class GroupsAndUserTest extends TestBase
 	       
 	       String temp_mail = "test" + Util.generateRandomNumber() + "@yopmail.com";
 	       gp.createUser("fname", "lname", temp_mail, "Standard");
-	       
+	       Thread.sleep(3000);
 	       email[3]=Util.generateRandomNumber()+temp_mail;
 	       
 	       gp.updateUser(temp_mail, email[3]);
