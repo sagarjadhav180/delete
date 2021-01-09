@@ -10,9 +10,9 @@
 
 		<classes>
 
-			<class name="tests.TrackingNumberTest" >
-			
-			
+			<class name="tests.GroupsAndUserTest">
+				
+
 			</class>
 
 
