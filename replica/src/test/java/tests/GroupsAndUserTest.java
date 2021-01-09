@@ -808,7 +808,7 @@ public class GroupsAndUserTest extends TestBase
 			email[2]="ro"+Util.generateRandomNumber()+"@yopmail.com.com";
     	    
     	    gp.createUser(fname, lname, email[2], "Read-Only");
-			Thread.sleep(5000);
+//			Thread.sleep(5000);
 	    }      
 	       
 	     
@@ -951,8 +951,12 @@ public class GroupsAndUserTest extends TestBase
 	       String tempmail = "test" + Util.generateRandomNumber() + "@yopmail.com";
 	       gp.createUser("fname", "lname", tempmail, "Standard");
 	       
-	       for(String mail:email) {
-		       gp.deleteUser(mail);	    	   
+//	       for(String mail:email) {
+//		       gp.deleteUser(mail);	    	   
+//	       }
+	       for(int i=0;i<email.length;i++) {
+	    	   gp.deleteUser(email[i]);
+	    	   Thread.sleep(2000);
 	       }
 	       
 

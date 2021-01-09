@@ -461,6 +461,7 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[text()='Group deleted.']")
 	private WebElement subgroup_deletion_success_message;	
+	
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement saveSubGroupDetails_alert;
@@ -1757,7 +1758,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//Sub-group deletion
-	public void subGroupDeletion(String subGroup) {
+	public void subGroupDeletion(String subGroup) throws InterruptedException {
 		
         expandSection(Constants.GroupsAndUser.sub_groups_strip);
 		
@@ -1796,7 +1797,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//To click action button of desired group
-    public void clickActionSubGroup(String group_name,String button_name){
+    public void clickActionSubGroup(String group_name,String button_name) throws InterruptedException{
 		
 		WebElement subGroup;
 	
@@ -1806,16 +1807,19 @@ public class GroupsAndUserPage extends TestBase {
 			Util.click(subGroup);
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
-			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
-			ok_button_subgroup_deletion_popup.click();
+//			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
+//			ok_button_subgroup_deletion_popup.click();
+			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+			
 		}
 		else if(button_name.equals("delete_from_selected_group")) {
 			subGroup = TestBase.driver.findElement(By.xpath("//a[contains(text(),'Delete')]"));
 			Util.click(subGroup);
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
-			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
-			ok_button_subgroup_deletion_popup.click();			
+//			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
+//			ok_button_subgroup_deletion_popup.click();
+			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 		}
 		else {
 			//Clicking on desired action button
