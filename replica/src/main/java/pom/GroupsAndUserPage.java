@@ -1809,7 +1809,7 @@ public class GroupsAndUserPage extends TestBase {
 			textbox_subgroup_deletion_popup.sendKeys("yes");
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
 			ok_button_subgroup_deletion_popup.click();
-			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+//			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 			
 		}
 		else if(button_name.equals("delete_from_selected_group")) {
@@ -1819,7 +1819,7 @@ public class GroupsAndUserPage extends TestBase {
 			textbox_subgroup_deletion_popup.sendKeys("yes");
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
 			ok_button_subgroup_deletion_popup.click();
-			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+//			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 		}
 		else {
 			//Clicking on desired action button
@@ -1828,7 +1828,8 @@ public class GroupsAndUserPage extends TestBase {
 //			subGroup.click();
 			Util.click(subGroup);			
 		}
-		
+//		wait.until(ExpectedConditions.visibilityOf(saveSubGroupDetails_alert));
+		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);		
 	}
 	
     //User section ---------------------------------------------
