@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -44,6 +45,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.googlecode.charts4j.Color;
@@ -268,15 +271,25 @@ public class Util extends TestBase{
 		}
 	}
 
-	public static void closeBootstrapPopup(WebElement pause_button_success_message, WebElement close_button_success_message) {
+	public static void closeBootstrapPopup(WebElement pause_button_success_message, WebElement close_button_success_message) throws InterruptedException {
 		Map<String,String> map = new HashMap<String,String>();
     	map.put("visibility", "visible");
 		Util.addStyleToElement(driver, pause_button_success_message, map);
 		Util.addStyleToElement(driver, close_button_success_message, map);		
     	Util.Action().moveToElement(pause_button_success_message);
     	pause_button_success_message.click();
+    	Thread.sleep(500);
     	Util.Action().moveToElement(close_button_success_message);
     	close_button_success_message.click();
+    	Thread.sleep(2000);
 	}
-			  
+	
+	public static void customWait(WebElement element, int timeOut) {
+		 Wait WebDriverWait = new FluentWait(driver)
+				 .withTimeout(Duration.ofMillis(200))
+				 .pollingEvery(Duration.ofMillis(50))
+				 .ignoring(Exception.class);;
+		 WebDriverWait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
 }

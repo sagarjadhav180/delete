@@ -1524,7 +1524,7 @@ public class GroupsAndUserPage extends TestBase {
                 logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
                 softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
                 Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
-                Thread.sleep(2000);
+                Thread.sleep(500);
     		}
         	
         	softassert.assertAll();
@@ -1839,6 +1839,7 @@ public class GroupsAndUserPage extends TestBase {
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
+    	wait.until(ExpectedConditions.attributeToBe(export_users_button, "aria-disabled", "false"));
     	softassert.assertTrue(export_users_button.isEnabled(), "Export Users button is not enabled");
     	
     	for(int i=0; i<users_columns_names.size(); i++) {
