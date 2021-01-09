@@ -61,7 +61,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//button[contains(text(),'Save Group Details')]")
 	private WebElement saveGroupDetails_button;	
 
-	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Automation Account updated.']")
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement update_groupDetails_success_message;	
 	
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
@@ -70,7 +70,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//select[@id='source'][contains(@validate-blur-forza,'State')]")
 	private WebElement state_dropdown;	
 
-	String[] expected_states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
+	String[] expected_states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","Missouri","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
 	
 	@FindBy(xpath="//select[@ng-model='industry']")
 	private WebElement industry_dropdown;
@@ -797,9 +797,6 @@ public class GroupsAndUserPage extends TestBase {
 				Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
 				phone_textbox.clear();
 			}
-
-
-
 		}
 		
 	}
@@ -815,18 +812,13 @@ public class GroupsAndUserPage extends TestBase {
 		externalID_textbox.sendKeys(external_id);
 		phone_textbox.clear();
 		phone_textbox.sendKeys("8018786943");
+		logger.log(LogStatus.INFO, "Verifying if Update group Details success message is displayed");
 		try {
 			saveGroupDetails_button.click();
 			wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));
-			Thread.sleep(2000);
-			logger.log(LogStatus.INFO, "Verifying if Update group Details success message is displayed");
 			Assert.assertTrue(update_groupDetails_success_message.isDisplayed(),"group details not updated successfully");
 		}catch(Exception e) {
-			Util.click(saveGroupDetails_button);
-			wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));	
-			Thread.sleep(2000);
-			logger.log(LogStatus.INFO, "Verifying if Update group Details success message is displayed");
-			Assert.assertTrue(update_groupDetails_success_message.isDisplayed(),"group details not updated successfully");
+			e.printStackTrace();
 		}
 	
 	}
