@@ -1501,6 +1501,7 @@ public class GroupsAndUserPage extends TestBase {
     		}
     	}
     	driver.navigate().refresh();
+    	Util.waitForLoad(driver);
     	
     }
     
@@ -1829,7 +1830,7 @@ public class GroupsAndUserPage extends TestBase {
 			Util.click(subGroup);			
 		}
 //		wait.until(ExpectedConditions.visibilityOf(saveSubGroupDetails_alert));
-		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);		
+//		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);		
 	}
 	
     //User section ---------------------------------------------
