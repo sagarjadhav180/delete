@@ -10,7 +10,7 @@
 
 		<classes>
 
-			<class name="tests.GroupActivityReportTest">
+			<class name="tests.GroupsAndUserTest">
 
 
 			</class>
