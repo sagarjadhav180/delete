@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -318,7 +319,8 @@ public class GroupActivityReportsPage extends TestBase {
 		select.selectByVisibleText("None");
 		Thread.sleep(3000);
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 	
 	public void secondaryGroupingColumn(String groupingOption) throws InterruptedException{
@@ -522,7 +524,8 @@ public class GroupActivityReportsPage extends TestBase {
 			}
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 
     public void defaultColumns(){
@@ -553,7 +556,8 @@ public class GroupActivityReportsPage extends TestBase {
 				Util.click(column_picker_options_checkboxes.get(i));
 			}
 		}
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();	
 	}
 	
 	public void allColumnPickerCheckboxes(){
@@ -568,7 +572,8 @@ public class GroupActivityReportsPage extends TestBase {
 
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
     
 		
