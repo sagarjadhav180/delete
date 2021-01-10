@@ -518,7 +518,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 
 	//verification of count in top pagination toolbox	
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id='"+campaign_ou_id+"' AND campaign_status NOT IN ('deleted')" );
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id='"+TestBase.getCampaign_ou_id()+"' AND campaign_status NOT IN ('deleted')" );
 
 
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);

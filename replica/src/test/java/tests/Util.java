@@ -225,6 +225,16 @@ public class Util extends TestBase{
 		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
 		Calendar cal = Calendar.getInstance();
+		
+		String name = cal.getTimeZone().getDisplayName();
+	      System.out.println("Current Time Zone:" + name );
+	      TimeZone tz = TimeZone.getTimeZone("EST");
+
+	      // set the time zone with the given time zone value 
+	      // and print it
+	      cal.setTimeZone(tz);
+	      System.out.println(cal.getTimeZone().getDisplayName());
+		
 		cal.add(Calendar.DATE, Integer.valueOf(days));
 		
 		Date todate1 = cal.getTime();

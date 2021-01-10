@@ -106,7 +106,7 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-default btn-block btn-adv'][text()='Advanced Filter']")
 	private static WebElement advanced_filter_button;	
 	
-	@FindBy(xpath="//i[@class='fa fa-columns']")
+	@FindBy(xpath="//div[starts-with(@class,'btn-group dropdown')]//i")
 	private static WebElement column_Picker_button;
 
 	@FindBy(xpath="//table[@id='calldetailstable']//thead//tr//th")
@@ -346,7 +346,7 @@ public class CallDetailsReport_Page extends TestBase{
 	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+"' AND '"+endDateToBeUsed+"'");
 
 		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
 		System.out.println("dbCount is "+dbCount);
