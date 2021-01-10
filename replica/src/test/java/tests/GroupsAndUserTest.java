@@ -809,7 +809,7 @@ public class GroupsAndUserTest extends TestBase
 			email[2]="ro"+Util.generateRandomNumber()+"@yopmail.com.com";
     	    
     	    gp.createUser(fname, lname, email[2], "Read-Only");
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 	    }      
 	       
 	     

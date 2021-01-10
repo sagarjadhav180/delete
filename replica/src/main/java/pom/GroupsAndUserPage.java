@@ -1516,6 +1516,7 @@ public class GroupsAndUserPage extends TestBase {
     	if(delete_icons.size()>1) {
     	
     		for(int i=0;i<delete_icons.size();i++){
+    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
         		delete_icons.get(i).click();
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
@@ -1836,9 +1837,10 @@ public class GroupsAndUserPage extends TestBase {
 	
     //User section ---------------------------------------------
     //UI Validation
-    public void users_UI_Validation(){
+    public void users_UI_Validation() throws InterruptedException{
 
         expandSection(Constants.GroupsAndUser.user_settings_strip);
+        Thread.sleep(4000);
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
