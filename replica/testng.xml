@@ -29,7 +29,6 @@
 			</class>
 			<class name="tests.CallDetailReportTest">
 				<methods>
-					<exclude name="uiVerification"></exclude>
 					<exclude name="paginationUI"></exclude>
 					<exclude name="dateRangeFilterForToday"></exclude>
 					<exclude name="dateRangeFilterForYesterday"></exclude>
