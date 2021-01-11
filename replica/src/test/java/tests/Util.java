@@ -291,6 +291,7 @@ public class Util extends TestBase{
     	Thread.sleep(500);
     	Util.Action().moveToElement(close_button_success_message);
     	close_button_success_message.click();
+    	wait.until(ExpectedConditions.invisibilityOf(close_button_success_message));
     	Thread.sleep(2000);
 	}
 	

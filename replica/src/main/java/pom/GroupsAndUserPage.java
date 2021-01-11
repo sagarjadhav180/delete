@@ -1528,8 +1528,8 @@ public class GroupsAndUserPage extends TestBase {
     	if(delete_icons.size()>1) {
     	
     		for(int i=0;i<delete_icons.size();i++){
-//    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
     			Util.customWait(delete_icons.get(i));
+    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
         		delete_icons.get(i).click();
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
@@ -1856,7 +1856,9 @@ public class GroupsAndUserPage extends TestBase {
         Thread.sleep(4000);
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
+    	Util.customWait(add_user_button);
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
+    	Util.customWait(export_users_button);
     	wait.until(ExpectedConditions.attributeToBe(export_users_button, "aria-disabled", "false"));
     	softassert.assertTrue(export_users_button.isEnabled(), "Export Users button is not enabled");
     	
