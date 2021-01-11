@@ -1255,6 +1255,7 @@ public class GroupsAndUserPage extends TestBase {
 			
 		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
 //		WebElement cs_list = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
+		Util.customWait(cs_textbox);
 		cs_textbox.sendKeys(cs_name);
 		WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]"));
 		add_source_click.click();
@@ -1530,10 +1531,13 @@ public class GroupsAndUserPage extends TestBase {
     		for(int i=0;i<delete_icons.size();i++){
     			Util.customWait(delete_icons.get(i));
     			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
+//    			Util.scrollFunction(delete_icons.get(i));
         		delete_icons.get(i).click();
+        		Util.click(delete_icons.get(i));
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
-        		delete_call_action_ok_button.click();
+        		Util.click(delete_call_action_ok_button);
+//        		delete_call_action_ok_button.click();
                 wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
                 logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
                 softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
@@ -1856,9 +1860,9 @@ public class GroupsAndUserPage extends TestBase {
         Thread.sleep(4000);
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
-    	Util.customWait(add_user_button);
+//    	Util.customWait(add_user_button);
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
-    	Util.customWait(export_users_button);
+//    	Util.customWait(export_users_button);
     	wait.until(ExpectedConditions.attributeToBe(export_users_button, "aria-disabled", "false"));
     	softassert.assertTrue(export_users_button.isEnabled(), "Export Users button is not enabled");
     	
