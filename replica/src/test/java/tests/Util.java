@@ -36,6 +36,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -284,16 +285,16 @@ public class Util extends TestBase{
 	public static void closeBootstrapPopup(WebElement pause_button_success_message, WebElement close_button_success_message) throws InterruptedException {
 		Map<String,String> map = new HashMap<String,String>();
     	map.put("visibility", "visible");
-		Util.addStyleToElement(driver, pause_button_success_message, map);
-		Util.addStyleToElement(driver, close_button_success_message, map);		
+		
+    	Util.addStyleToElement(driver, pause_button_success_message, map);	
     	Util.Action().moveToElement(pause_button_success_message).perform();
-//    	Util.click(pause_button_success_message);
     	pause_button_success_message.click();
     	Thread.sleep(500);
+    	
+		Util.addStyleToElement(driver, close_button_success_message, map);	
     	Util.Action().moveToElement(close_button_success_message).perform();
-//        Util.click(close_button_success_message);
     	close_button_success_message.click();
-    	wait.until(ExpectedConditions.invisibilityOf(close_button_success_message));
+//    	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
     	Thread.sleep(2000);
 	}
 	

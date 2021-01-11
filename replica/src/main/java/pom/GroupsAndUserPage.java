@@ -181,8 +181,8 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement tn_settings_alert;
 
-	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
-	private WebElement tn_settings_alert_close_button;
+//	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
+//	private WebElement tn_settings_alert_close_button;
 	
 	//DNI-------------------------------------------------------
 	@FindBy(xpath="//span[contains(text(),'Dynamic Number')]/..//following-sibling::div//md-checkbox")
@@ -1101,8 +1101,8 @@ public class GroupsAndUserPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(tn_settings_alert));
 		Assert.assertTrue(tn_settings_alert.isDisplayed(),"Appropriate alert is not displayed for "+fieldName);
 		
-		driver.switchTo().activeElement();
-		Util.click(tn_settings_alert_close_button);
+//		driver.switchTo().activeElement();
+//		Util.click(tn_settings_alert_close_button);
 		
 		//Reseting all settings
 		updateTNSettings();
