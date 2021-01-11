@@ -1522,8 +1522,8 @@ public class GroupsAndUserPage extends TestBase {
     //Cleanup activity for call actions
     public void deleteAllCations() throws InterruptedException{
     	
-    	driver.navigate().refresh();
-    	Util.waitForLoad(driver);
+//    	driver.navigate().refresh();
+//    	Util.waitForLoad(driver);
 		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		Thread.sleep(4000);
     	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
@@ -1533,6 +1533,7 @@ public class GroupsAndUserPage extends TestBase {
     		for(int i=0;i<delete_icons.size();i++){
     			Util.customWait(delete_icons.get(i));
     			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
+    			Util.Action().moveToElement(delete_icons.get(i)).perform();
         		Util.click(delete_icons.get(i));
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
