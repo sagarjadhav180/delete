@@ -211,7 +211,7 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
-    @Test(priority=19)
+//    @Test(priority=19)
 	public void advancedFilterForLineType(){
 		
 		logger=extent.startTest("Advanced Filter for Line Type");
