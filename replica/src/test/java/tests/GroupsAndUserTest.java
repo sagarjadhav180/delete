@@ -365,6 +365,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.custom_Source_delete_Source();
+	        Thread.sleep(5000);
    
 		}
 	
@@ -660,7 +661,8 @@ public class GroupsAndUserTest extends TestBase
 	        this.groupName="SJSG-1"+Util.generateRandomNumber();
 	        gp.createSubGroup(this.groupName);
 	        gp.subGroupNavigation(this.groupName);
-	        gp.clickActionSubGroup(this.groupName,"delete_from_selected_group");	        
+	        gp.clickActionSubGroup(this.groupName,"delete_from_selected_group");	
+	        Thread.sleep(5000);
    
 		}
 		
@@ -951,7 +953,7 @@ public class GroupsAndUserTest extends TestBase
 	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	       String tempmail = "test" + Util.generateRandomNumber() + "@yopmail.com";
 	       gp.createUser("fname", "lname", tempmail, "Standard");
-	       
+	       Thread.sleep(4000);
 //	       for(String mail:email) {
 //		       gp.deleteUser(mail);	    	   
 //	       }

@@ -1522,6 +1522,8 @@ public class GroupsAndUserPage extends TestBase {
     //Cleanup activity for call actions
     public void deleteAllCations() throws InterruptedException{
     	
+    	driver.navigate().refresh();
+    	Util.waitForLoad(driver);
 		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		Thread.sleep(4000);
     	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
@@ -1853,6 +1855,8 @@ public class GroupsAndUserPage extends TestBase {
     //UI Validation
     public void users_UI_Validation() throws InterruptedException{
 
+    	driver.navigate().refresh();
+    	Util.waitForLoad(driver);
         expandSection(Constants.GroupsAndUser.user_settings_strip);
         Thread.sleep(4000);
     	
@@ -2066,7 +2070,7 @@ public class GroupsAndUserPage extends TestBase {
   			
   		}finally {
   			if(alerts>0) {
-  				wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-pnotify-text")));
+  				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
   			}
   		}
 
