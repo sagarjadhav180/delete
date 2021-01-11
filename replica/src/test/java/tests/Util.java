@@ -286,10 +286,12 @@ public class Util extends TestBase{
     	map.put("visibility", "visible");
 		Util.addStyleToElement(driver, pause_button_success_message, map);
 		Util.addStyleToElement(driver, close_button_success_message, map);		
-    	Util.Action().moveToElement(pause_button_success_message);
-    	pause_button_success_message.click();
+    	Util.Action().moveToElement(pause_button_success_message).perform();
+    	Util.click(pause_button_success_message);
+//    	pause_button_success_message.click();
     	Thread.sleep(500);
-    	Util.Action().moveToElement(close_button_success_message);
+    	Util.Action().moveToElement(close_button_success_message).perform();
+        Util.click(close_button_success_message);
     	close_button_success_message.click();
     	wait.until(ExpectedConditions.invisibilityOf(close_button_success_message));
     	Thread.sleep(2000);

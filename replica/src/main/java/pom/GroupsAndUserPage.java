@@ -1536,8 +1536,8 @@ public class GroupsAndUserPage extends TestBase {
         		Util.click(delete_icons.get(i));
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
-        		Util.click(delete_call_action_ok_button);
-//        		delete_call_action_ok_button.click();
+//        		Util.click(delete_call_action_ok_button);
+        		delete_call_action_ok_button.click();
                 wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
                 logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
                 softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
