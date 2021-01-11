@@ -2062,6 +2062,17 @@ public class GroupsAndUserPage extends TestBase {
   	//User section - Cancel feature
   	public void userCancelFeature() throws InterruptedException {
   		
+  		int alerts = 0;
+  		try {
+  			alerts = driver.findElements(By.xpath("//div[@class='ui-pnotify-text']")).size();  		
+  		}catch(Exception e) {
+  			
+  		}finally {
+  			if(alerts>0) {
+  				wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-pnotify-text")));
+  			}
+  		}
+
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
     	  
   	  	Util.click(add_user_button);
