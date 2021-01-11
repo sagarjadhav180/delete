@@ -718,7 +718,12 @@ public class GroupsAndUserPage extends TestBase {
     	Select select=new Select(industry_dropdown);
     	List<String> act_industry_options = new ArrayList<String>();
     	List<String> exp_industry_options = new ArrayList<String>(Arrays.asList(expected_industry_dropdown));
-    	List<WebElement> act_options = select.getOptions();
+    	List<WebElement> act_options = new ArrayList<WebElement>();
+    	
+    	do {
+    		act_options = select.getOptions();
+    	}while(select.getOptions().size()==0);
+    	
     	for(WebElement act_option:act_options) {
     		if(!act_option.getText().equals("-- Select Industry--")) {
         		act_industry_options.add(act_option.getText().trim());	
@@ -746,7 +751,11 @@ public class GroupsAndUserPage extends TestBase {
     	Select select1=new Select(state_dropdown);
     	List<String> act_state_options = new ArrayList<String>();
     	List<String> exp_state_options = new ArrayList<String>(Arrays.asList(expected_states));
-    	List<WebElement> act_stat_options = select1.getOptions();
+    	List<WebElement> act_stat_options = new ArrayList<WebElement>();
+    	do {
+    		act_stat_options = select1.getOptions();
+    	}while(select1.getOptions().size()==0);
+    	
     	for(WebElement act_stat_option:act_stat_options) {
     		if(!act_stat_option.getText().equals("--Select--")) {
         		act_state_options.add(act_stat_option.getText().trim());	
@@ -927,14 +936,17 @@ public class GroupsAndUserPage extends TestBase {
 			if(!DNI_checkbox.getAttribute("aria-checked").equals("true")) {
 				Thread.sleep(2000);
 				try {
+				    Util.customWait(DNI_checkbox);
 					Util.click(DNI_checkbox);					
 				}catch(Exception e) {
+				    Util.customWait(DNI_checkbox);
 					DNI_checkbox.click();	
 				}
 
 //				DNI_checkbox.click();
 			}
 				//custom_parameters.click();
+			    Util.customWait(custom_parameters);
 				Util.click(custom_parameters);
 				
 				driver.switchTo().activeElement();
@@ -1516,7 +1528,8 @@ public class GroupsAndUserPage extends TestBase {
     	if(delete_icons.size()>1) {
     	
     		for(int i=0;i<delete_icons.size();i++){
-    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
+//    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
+    			Util.customWait(delete_icons.get(i));
         		delete_icons.get(i).click();
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));

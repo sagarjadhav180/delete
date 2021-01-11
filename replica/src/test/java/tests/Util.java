@@ -294,12 +294,14 @@ public class Util extends TestBase{
     	Thread.sleep(2000);
 	}
 	
-	public static void customWait(WebElement element, int timeOut) {
-		 Wait WebDriverWait = new FluentWait(driver)
-				 .withTimeout(Duration.ofMillis(200))
-				 .pollingEvery(Duration.ofMillis(50))
+	public static void customWait(WebElement element) {
+		 Wait<WebDriver> WebDriverWait = new FluentWait<WebDriver>(driver)
+				 .withTimeout(Duration.ofSeconds(30))
+				 .pollingEvery(Duration.ofSeconds(5))
 				 .ignoring(Exception.class);;
 		 WebDriverWait.until(ExpectedConditions.visibilityOf(element));
 	}
+
+	
 	
 }
