@@ -1532,7 +1532,7 @@ public class GroupsAndUserPage extends TestBase {
     			Util.customWait(delete_icons.get(i));
     			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
 //    			Util.scrollFunction(delete_icons.get(i));
-        		delete_icons.get(i).click();
+//        		delete_icons.get(i).click();
         		Util.click(delete_icons.get(i));
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
