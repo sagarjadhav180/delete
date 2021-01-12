@@ -225,8 +225,7 @@ public class Util extends TestBase{
 		SimpleDateFormat dateFormat = new SimpleDateFormat(Format);
 		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-		Calendar cal = Calendar.getInstance();
-		
+		Calendar cal = Calendar.getInstance();		
 		String name = cal.getTimeZone().getDisplayName();
 	      System.out.println("Current Time Zone:" + name );
 	      TimeZone tz = TimeZone.getTimeZone("EST");

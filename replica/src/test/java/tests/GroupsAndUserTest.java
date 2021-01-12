@@ -248,7 +248,9 @@ public class GroupsAndUserTest extends TestBase
 	        logger=extent.startTest("tnSettingsInstantInsightsCheckboxAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.updateTNSettings();
 	        gp.tnSettingsFormValidation("instant_insights_section");
+	        gp.updateTNSettings();
 		}
 		
 		

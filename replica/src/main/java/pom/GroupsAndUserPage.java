@@ -722,7 +722,7 @@ public class GroupsAndUserPage extends TestBase {
     	
     	do {
     		act_options = select.getOptions();
-    	}while(select.getOptions().size()==0);
+    	}while(select.getOptions().size()<1);
     	
     	for(WebElement act_option:act_options) {
     		if(!act_option.getText().equals("-- Select Industry--")) {
@@ -754,7 +754,7 @@ public class GroupsAndUserPage extends TestBase {
     	List<WebElement> act_stat_options = new ArrayList<WebElement>();
     	do {
     		act_stat_options = select1.getOptions();
-    	}while(select1.getOptions().size()==0);
+    	}while(select1.getOptions().size()<1);
     	
     	for(WebElement act_stat_option:act_stat_options) {
     		if(!act_stat_option.getText().equals("--Select--")) {
@@ -1050,7 +1050,7 @@ public class GroupsAndUserPage extends TestBase {
         expandSection(Constants.GroupsAndUser.tn_settings_strip);
         
         //Reseting all settings
-        updateTNSettings();
+//        updateTNSettings();
         
         //DNI section
 		if (fieldName.equals("dni_section")) {
@@ -1105,7 +1105,7 @@ public class GroupsAndUserPage extends TestBase {
 //		Util.click(tn_settings_alert_close_button);
 		
 		//Reseting all settings
-		updateTNSettings();
+//		updateTNSettings();
 	}
 
 	
@@ -2468,7 +2468,7 @@ public class GroupsAndUserPage extends TestBase {
     
     //Part of Test Data creation------------------------------
     public void updateTNSettings() throws InterruptedException{
-    	
+    	expandSection(Constants.GroupsAndUser.tn_settings_strip);
 //    	Util.scrollFunction(configure_voicemail_greetings_textbox);
     	Thread.sleep(5000);
     	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
