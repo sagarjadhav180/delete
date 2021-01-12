@@ -1526,23 +1526,28 @@ public class GroupsAndUserPage extends TestBase {
 //    	Util.waitForLoad(driver);
 		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		Thread.sleep(4000);
-    	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
+    	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a[@aria-hidden='false']/i"));
     	
     	if(delete_icons.size()>1) {
     	
     		for(int i=0;i<delete_icons.size();i++){
-    			Util.customWait(delete_icons.get(i));
-    			Util.Action().moveToElement(delete_icons.get(i)).perform();
-    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
-        		Util.click(delete_icons.get(i));
-        		driver.switchTo().activeElement();
-        		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
-        		delete_call_action_ok_button.click();
-                wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
-                logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
-                softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
-                Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
-                Thread.sleep(500);
+    			if(i==(delete_icons.size()-1)) {
+    				call_action_reset_button.click();
+    			}else {
+    				Util.customWait(delete_icons.get(i));
+        			Util.Action().moveToElement(delete_icons.get(i)).perform();
+        			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
+            		Util.click(delete_icons.get(i));
+            		driver.switchTo().activeElement();
+            		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
+            		delete_call_action_ok_button.click();
+                    wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
+                    logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
+                    softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
+                    Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+                    Thread.sleep(500);	
+    			}
+    			
     		}
         	
         	softassert.assertAll();
