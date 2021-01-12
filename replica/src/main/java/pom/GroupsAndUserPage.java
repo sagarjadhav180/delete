@@ -1513,8 +1513,8 @@ public class GroupsAndUserPage extends TestBase {
 
     		}
     	}
-    	driver.navigate().refresh();
-    	Util.waitForLoad(driver);
+//    	driver.navigate().refresh();
+//    	Util.waitForLoad(driver);
     	
     }
     
