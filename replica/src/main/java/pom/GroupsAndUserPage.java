@@ -1532,8 +1532,8 @@ public class GroupsAndUserPage extends TestBase {
     	
     		for(int i=0;i<delete_icons.size();i++){
     			Util.customWait(delete_icons.get(i));
-    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
     			Util.Action().moveToElement(delete_icons.get(i)).perform();
+    			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
         		Util.click(delete_icons.get(i));
         		driver.switchTo().activeElement();
         		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
@@ -2071,7 +2071,8 @@ public class GroupsAndUserPage extends TestBase {
   			
   		}finally {
   			if(alerts>0) {
-  				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
+//  				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
+  				Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
   			}
   		}
 
