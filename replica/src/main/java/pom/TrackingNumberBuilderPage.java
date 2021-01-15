@@ -511,8 +511,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 			driver.switchTo().activeElement();
             wait.until(ExpectedConditions.visibilityOf(ok_button_tn_deletion_alert));
 			Util.Action().moveToElement(ok_button_tn_deletion_alert).click().perform();
-			wait.until(ExpectedConditions.visibilityOf(tn_deletion_success_message));
+//			wait.until(ExpectedConditions.visibilityOf(tn_deletion_success_message));
 			logger.log(LogStatus.INFO, "Verifying if tracking number is deleted successfully..");
+			Util.customWait(tn_deletion_success_message);
 			Assert.assertTrue(tn_deletion_success_message.isDisplayed(),"tracking number not deleted successfully");
             //Assert.assertAll();
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
