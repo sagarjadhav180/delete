@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Automation Suite-1">
+<suite name="Automation Suite-1" preserve-order="true">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
 
 		<parameter name="browser" value="headless" />
 		<parameter name="url"
 			value="https://stag-7-cmo-1.convirza.com" />
-
 		<classes>
-
-			<class name="tests.GroupsAndUserTest">
-			
-
+	
+			<class name="tests.TrackingNumberTest">
+	
 			</class>
-
-
 		</classes>
 
 	</test>
+
 
 
 
