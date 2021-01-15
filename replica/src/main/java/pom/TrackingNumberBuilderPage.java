@@ -33,6 +33,12 @@ public class TrackingNumberBuilderPage extends TestBase {
 		
 	//Tracking number list
 
+	@FindBy(xpath="//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
+	
 	@FindBy(xpath="//img[@class='ProgressLoader-img']")
 	private static WebElement progress_loader_add_tn;
 	
@@ -492,7 +498,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 	}
 	
 	//to get action button of desired tracking number
-    public void clickAction(String tracking_number_name,String button_name){
+    public void clickAction(String tracking_number_name,String button_name) throws InterruptedException{
 		
 		WebElement webelement = driver.findElement(By.xpath("//span[contains(text(),'"+tracking_number_name+"')]//ancestor::tr//div//button[contains(text(),'"+button_name+"')]"));
 		System.out.println(webelement);
@@ -509,7 +515,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 			logger.log(LogStatus.INFO, "Verifying if tracking number is deleted successfully..");
 			Assert.assertTrue(tn_deletion_success_message.isDisplayed(),"tracking number not deleted successfully");
             //Assert.assertAll();
-
+			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 //            Util.readingFromDB("UPDATE phone_number SET number_status='unprovisioned' WHERE number_str LIKE ('2%') AND number_status='suspended'");
 			
 		}
@@ -936,7 +942,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      		play_whisper_message_textbox.clear(); 
          	play_whisper_message_textbox.sendKeys("test whisper");
      	}
-     	
+     	Util.Action().moveToElement(webhook_checkbox).perform();
          Util.click(webhook_checkbox);
          Select we=new Select(webhook_dropdown);
          Thread.sleep(2000);
@@ -960,7 +966,9 @@ public class TrackingNumberBuilderPage extends TestBase {
     }
 
     public void customSourcesSection(){
-    	wait.until(ExpectedConditions.visibilityOf(custom_source1_dropdown));
+    	Util.Action().moveToElement(custom_source1_dropdown).perform();
+    	Util.customWait(custom_source1_dropdown);
+//    	wait.until(ExpectedConditions.visibilityOf(custom_source1_dropdown));
     	Select cs1=new Select(custom_source1_dropdown);
 //    	cs1.selectByVisibleText(custom_source1); 
     	cs1.selectByIndex(1);
@@ -995,7 +1003,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	sale_amount_voice_prompt_textbox.sendKeys("test sale");
     }
 
-    public void trackingNumberCreationVerification(){
+    public void trackingNumberCreationVerification() throws InterruptedException{
     	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
     	for(int i=0;i<50;i++) {
     	    if(wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message)).equals(true)) {
@@ -1004,6 +1012,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     	    }else continue;
     	
     	}
+		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 //        wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
 //    	Assert.assertTrue(tn_creation_success_message.isDisplayed(),"tracking number is not created successfully..");
     	//Assert.assertAll();
@@ -1139,7 +1148,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     }
     
     
-    public void createVoicemailRoute(String tracking_number_name) {
+    public void createVoicemailRoute(String tracking_number_name) throws InterruptedException {
 
      //BASIC SECTION       
     basicSection(tracking_number_name); 	
@@ -1156,7 +1165,7 @@ public class TrackingNumberBuilderPage extends TestBase {
     
  
     
-    public void createHangupRoute(String tracking_number_name){
+    public void createHangupRoute(String tracking_number_name) throws InterruptedException{
     
     	//BASIC SECTION       
     	basicSection(tracking_number_name);
@@ -1451,7 +1460,7 @@ public class TrackingNumberBuilderPage extends TestBase {
      	logger.log(LogStatus.INFO, "Verifying if tracking number is updated");
          wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
      	Assert.assertTrue(tn_updation_success_message.isDisplayed(),"tracking number is not updated successfully..");
-     	
+     	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
      	//Assert.assertAll();
      	
   }
@@ -1463,7 +1472,9 @@ public class TrackingNumberBuilderPage extends TestBase {
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
 //        Util.scrollFunction(header);  
-        add_tracking_number_button.click();
+    	Util.scrollFunction(add_tracking_number_button);
+    	wait.until(ExpectedConditions.visibilityOf(add_tracking_number_button));
+    	add_tracking_number_button.click();
         wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
         wait.until(ExpectedConditions.visibilityOf(number_pool_button));
         try{
@@ -1646,6 +1657,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
 //        Util.scrollFunction(header);  
+        Util.Action().moveToElement(add_tracking_number_button).perform();
         add_tracking_number_button.click();
         wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
         wait.until(ExpectedConditions.visibilityOf(reserved_number_button));
