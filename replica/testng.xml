@@ -19,24 +19,12 @@
 			</class>
 			<class name="tests.CamapignUIVerificationTest" />
 			<class name="tests.CampaignTests">
-				<methods>
-					<exclude name="campaignCreationWithPastTime"></exclude>
-				</methods>
 			</class>
 
 			<class name="tests.TrackingNumberTest">
 			
 			</class>
 			<class name="tests.CallDetailReportTest">
-				<methods>
-					<exclude name="paginationUI"></exclude>
-					<exclude name="dateRangeFilterForToday"></exclude>
-					<exclude name="dateRangeFilterForYesterday"></exclude>
-					<exclude name="paginationCount"></exclude>
-					<exclude name="tableCount"></exclude>
-					<exclude name="dateRangeFilterForLast7days"></exclude>
-					<exclude name="dateRangeFilterForLast30days"></exclude>
-				</methods>
 			</class>
 			<class name="tests.TrackingNumberSettingsTest">
 				<methods>
