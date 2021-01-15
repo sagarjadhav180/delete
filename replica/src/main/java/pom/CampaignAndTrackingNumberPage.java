@@ -134,7 +134,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//button[@class='btn btn-block btn-default dropdown-toggle']")
 	private static WebElement campaignList;
 	
-	@FindBy(xpath="//button[@class='btn btn-primary']")
+	@FindBy(xpath="//div[@class='modal-footer']//button[@class='btn btn-primary']")
 	private static WebElement ok_button_in_archive_alert;	
 	
 
