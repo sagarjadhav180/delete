@@ -60,7 +60,6 @@ public class CampaignTests extends TestBase {
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);	
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		
-		
 		cp.clickAction("add","");
 		cb.campaignBuilderPageUIVerification();
 		cb.collapseExpand_collapsible_strip();
