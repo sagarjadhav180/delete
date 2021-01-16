@@ -11,7 +11,11 @@
 
 		<classes>
 
-			<class name="tests.LoginTest" />
+			<class name="tests.LoginTest">
+				<methods>
+					<exclude name="reset_password"></exclude>
+				</methods>
+			</class>
 			<class name="tests.HomeTest">
 				<methods>
 					<exclude name="tiles_count_verification_UI"></exclude>
@@ -22,7 +26,7 @@
 			</class>
 
 			<class name="tests.TrackingNumberTest">
-			
+
 			</class>
 			<class name="tests.CallDetailReportTest">
 			</class>
