@@ -970,24 +970,35 @@ public class TrackingNumberBuilderPage extends TestBase {
     	Util.Action().moveToElement(custom_source1_dropdown).perform();
     	Util.customWait(custom_source1_dropdown);
 //    	wait.until(ExpectedConditions.visibilityOf(custom_source1_dropdown));
-    	Select cs1=new Select(custom_source1_dropdown);
-//    	cs1.selectByVisibleText(custom_source1); 
-    	cs1.selectByIndex(1);
+    	Select cs1;
+    	Select cs2;
+    	Select cs3;
+    	Select cs4;
+    	Select cs5;
+    	do {
+    		cs1=new Select(custom_source1_dropdown);	
+    	}while(cs1.getOptions().size()>1);
+    	
+    	do {
+    		cs2=new Select(custom_source2_dropdown);	
+    	}while(cs2.getOptions().size()>1);
+    	
+    	do {
+    		cs3=new Select(custom_source3_dropdown);	
+    	}while(cs3.getOptions().size()>1);    	
 
-    	Select cs2=new Select(custom_source2_dropdown);
-//    	cs2.selectByVisibleText(custom_source2);
+    	do {
+    		cs4=new Select(custom_source4_dropdown);	
+    	}while(cs4.getOptions().size()>1);
+    	
+    	do {
+    		cs5=new Select(custom_source5_dropdown);	
+    	}while(cs5.getOptions().size()>1);
+    	
+    	cs1.selectByIndex(1);
         cs2.selectByIndex(1); 
-    	
-        Select cs3=new Select(custom_source3_dropdown);
-//    	cs3.selectByVisibleText(custom_source3);
     	cs3.selectByIndex(1);
-    	
-    	Select cs4=new Select(custom_source4_dropdown);
-//    	cs4.selectByVisibleText(custom_source4);
     	cs4.selectByIndex(1);
-    	
-    	Select cs5=new Select(custom_source5_dropdown);
-//    	cs5.selectByVisibleText(custom_source5);
     	cs5.selectByIndex(1);
 
     }
