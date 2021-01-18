@@ -751,7 +751,7 @@ public class CampaignBuilderPage extends TestBase {
 			int startdate;
 			String startDateToBeSelected;
 			
-			startdate =pastStartDate-1;
+			startdate =pastStartDate-2;
 			startDateToBeSelected=String.valueOf(startdate);
 			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
 			
