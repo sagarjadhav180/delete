@@ -505,7 +505,7 @@ public class TrackingNumberBuilderPage extends TestBase {
 		Util.scrollFunction(webelement);
 		
 		if(button_name.contains("Delete")){
-			Util.scrollFunction(webelement);
+//			Util.scrollFunction(webelement);
 //			wait.until(ExpectedConditions.visibilityOf(webelement));
 			Util.click(webelement);
 			driver.switchTo().activeElement();
