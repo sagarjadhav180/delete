@@ -195,7 +195,7 @@ public class TrackingNumberTest extends TestBase{
 			tn = createInstance(); 
 		    tn.clickAction(tracking_number_name, "Edit");
 		    updated_tracking_number_name=tracking_number_name.concat(" updated");
-		    tn.editNumberPool(updated_tracking_number_name);
+		    tn.editReserveNumber(updated_tracking_number_name);
 		    Thread.sleep(2000);
 
 		}
