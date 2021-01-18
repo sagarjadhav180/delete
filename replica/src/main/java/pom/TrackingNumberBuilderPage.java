@@ -977,23 +977,23 @@ public class TrackingNumberBuilderPage extends TestBase {
     	Select cs5;
     	do {
     		cs1=new Select(custom_source1_dropdown);	
-    	}while(cs1.getOptions().size()>1);
+    	}while(cs1.getOptions().size()<1);
     	
     	do {
     		cs2=new Select(custom_source2_dropdown);	
-    	}while(cs2.getOptions().size()>1);
+    	}while(cs2.getOptions().size()<1);
     	
     	do {
     		cs3=new Select(custom_source3_dropdown);	
-    	}while(cs3.getOptions().size()>1);    	
+    	}while(cs3.getOptions().size()<1);    	
 
     	do {
     		cs4=new Select(custom_source4_dropdown);	
-    	}while(cs4.getOptions().size()>1);
+    	}while(cs4.getOptions().size()<1);
     	
     	do {
     		cs5=new Select(custom_source5_dropdown);	
-    	}while(cs5.getOptions().size()>1);
+    	}while(cs5.getOptions().size()<1);
     	
     	cs1.selectByIndex(1);
         cs2.selectByIndex(1); 
