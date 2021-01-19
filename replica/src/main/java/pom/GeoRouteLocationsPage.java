@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -157,15 +158,13 @@ public class GeoRouteLocationsPage extends TestBase {
     	locationsButton.click();
     	wait.until(ExpectedConditions.visibilityOf(sub_location_add_button));
     	sub_location_add_button.click();
-    	Thread.sleep(1000);
+    	Thread.sleep(3000);
     	
     	try {
-    		sub_location_add_button.click();
     		//adding sub location details
     		fillSubLocationDeatils();
         	//submitting form
         	sub_location_save_button.click();
-        	wait.until(ExpectedConditions.visibilityOf(success_message_for_sub_location_creation));    		
     	}catch(Exception e) {
     		sub_location_add_button.click();
         	Thread.sleep(2000);	
@@ -173,8 +172,8 @@ public class GeoRouteLocationsPage extends TestBase {
     		fillSubLocationDeatils();
         	//submitting form
         	sub_location_save_button.click();
-        	wait.until(ExpectedConditions.visibilityOf(success_message_for_sub_location_creation));    	
     	}finally {
+        	wait.until(ExpectedConditions.visibilityOf(success_message_for_sub_location_creation));    		
         	Assert.assertTrue(success_message_for_sub_location_creation.isDisplayed(),"sub location not created"); 
     	}
     }
@@ -202,10 +201,8 @@ public class GeoRouteLocationsPage extends TestBase {
     	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_phone_textbox));
        	Util.Action().moveToElement(sub_location_phone_textbox).perform();
-//    	sub_location_phone_textbox.sendKeys(loc_phone_number);
-    	Util.enterText(sub_location_phone_textbox, loc_phone_number);
-    	
-    	System.out.println(sub_location_phone_textbox.getAttribute("value"));
+    	sub_location_phone_textbox.sendKeys(Keys.END, loc_phone_number);
+//    	Util.enterText(sub_location_phone_textbox, loc_phone_number);
     	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_claimed_state_textbox));
        	Util.Action().moveToElement(sub_location_claimed_state_textbox).perform();
