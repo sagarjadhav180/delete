@@ -42,6 +42,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -311,6 +312,10 @@ public class Util extends TestBase{
 		jse.executeScript("arguments[0].value='"+text+"';", textbox);	
 	}
 	
+	public static void setAttribute(String attribute, String attribute_value, WebElement element) {
 	
+		jse = getJavascriptExecutor();
+		jse.executeScript("arguments[0].setAttribute('"+attribute+"', '"+attribute_value+"')", element);	
+	}
 	
 }
