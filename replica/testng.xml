@@ -12,9 +12,7 @@
 		<classes>
 
 			<class name="tests.LoginTest">
-				<methods>
-					<exclude name="reset_password"></exclude>
-				</methods>
+				
 			</class>
 			<class name="tests.HomeTest">
 				<methods>
@@ -31,10 +29,6 @@
 			<class name="tests.CallDetailReportTest">
 			</class>
 			<class name="tests.TrackingNumberSettingsTest">
-				<methods>
-					<exclude name="paginationCount"></exclude>
-					<exclude name="tableCount"></exclude>
-				</methods>
 			</class>
 			<class name="tests.GroupActivityReportTest" />
 			<class name="tests.LegacyScheduledReportTest" />
