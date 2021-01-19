@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import tests.TestBase;
@@ -103,6 +104,16 @@ public class GeoRouteLocationsPage extends TestBase {
 	private WebElement success_message_for_sub_location_creation;
 	
 	
+	//sub location details
+	String loc_name = "Olathe";
+	String loc_address = "15208 West 119th Street";
+	String loc_city = "Olathe";
+	String loc_state = "KS";
+	String loc_zip = "66062";
+	String loc_phone_number = "(111) 111-1111";
+	String loc_claimed_state = "SC,UT";
+	String loc_claimed_zip = "84116";
+	
 	public GeoRouteLocationsPage(WebDriver driver) {
 
 		PageFactory.initElements(driver, this);
@@ -130,14 +141,8 @@ public class GeoRouteLocationsPage extends TestBase {
 //    	driver.switchTo().activeElement();
 //    	pause_button_success_message_for_main_location_creation.click();
 //    	close_button_success_message_for_main_location_creation.click();
-    	Map<String,String> map = new HashMap<String, String>();
-		map.put("visibility", "visible");
-		Util.addStyleToElement(driver, pause_button_success_message_for_main_location_creation, map);
-		Util.addStyleToElement(driver, close_button_success_message_for_main_location_creation, map);		
-    	Util.Action().moveToElement(pause_button_success_message_for_main_location_creation);
-    	pause_button_success_message_for_main_location_creation.click();
-    	Util.Action().moveToElement(close_button_success_message_for_main_location_creation);
-    	close_button_success_message_for_main_location_creation.click();
+    	
+    	Util.closeBootstrapPopup(pause_button_success_message_for_main_location_creation, close_button_success_message_for_main_location_creation);
     	
 //    	Util.click(close_button_success_message_for_main_location_creation);
 //    	close_button_success_message_for_main_location_creation.click();
@@ -152,40 +157,63 @@ public class GeoRouteLocationsPage extends TestBase {
     	locationsButton.click();
     	wait.until(ExpectedConditions.visibilityOf(sub_location_add_button));
     	sub_location_add_button.click();
+    	Thread.sleep(1000);
     	
-    	//sub location details
-    	String loc_name = "Olathe";
-    	String loc_address = "15208 West 119th Street";
-    	String loc_city = "Olathe";
-    	String loc_state = "KS";
-    	String loc_zip = "66062";
-    	String loc_phone_number = "(111) 111-1111";
-    	String loc_claimed_state = "SC,UT";
-    	String loc_claimed_zip = "84116";
-    	
-    	//adding sub location details
-//    	wait.until(ExpectedConditions.visibilityOf(sub_location_name_textbox));
+    	try {
+    		sub_location_add_button.click();
+    		//adding sub location details
+    		fillSubLocationDeatils();
+        	//submitting form
+        	sub_location_save_button.click();
+        	wait.until(ExpectedConditions.visibilityOf(success_message_for_sub_location_creation));    		
+    	}catch(Exception e) {
+    		sub_location_add_button.click();
+        	Thread.sleep(2000);	
+        	//adding sub location details
+    		fillSubLocationDeatils();
+        	//submitting form
+        	sub_location_save_button.click();
+        	wait.until(ExpectedConditions.visibilityOf(success_message_for_sub_location_creation));    	
+    	}finally {
+        	Assert.assertTrue(success_message_for_sub_location_creation.isDisplayed(),"sub location not created"); 
+    	}
+    }
+    
+    public void fillSubLocationDeatils() {
+    	wait.until(ExpectedConditions.visibilityOf(sub_location_name_textbox));
+    	Util.Action().moveToElement(sub_location_name_textbox).perform();
     	sub_location_name_textbox.sendKeys(loc_name);
+    	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_address_textbox));
+    	Util.Action().moveToElement(sub_location_address_textbox).perform();
     	sub_location_address_textbox.sendKeys(loc_address);
+    	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_city_textbox));
+    	Util.Action().moveToElement(sub_location_city_textbox).perform();
     	sub_location_city_textbox.sendKeys(loc_city);
+    	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_state_textbox));
+       	Util.Action().moveToElement(sub_location_state_textbox).perform();
     	sub_location_state_textbox.sendKeys(loc_state);
+    	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_zip_textbox));
+       	Util.Action().moveToElement(sub_location_zip_textbox).perform();
     	sub_location_zip_textbox.sendKeys(loc_zip);
+    	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_phone_textbox));
-    	sub_location_phone_textbox.sendKeys(loc_phone_number);
+       	Util.Action().moveToElement(sub_location_phone_textbox).perform();
+//    	sub_location_phone_textbox.sendKeys(loc_phone_number);
+    	Util.enterText(sub_location_phone_textbox, loc_phone_number);
+    	
+    	System.out.println(sub_location_phone_textbox.getAttribute("value"));
+    	
 //    	wait.until(ExpectedConditions.visibilityOf(sub_location_claimed_state_textbox));
+       	Util.Action().moveToElement(sub_location_claimed_state_textbox).perform();
     	sub_location_claimed_state_textbox.sendKeys(loc_claimed_state);
-    	wait.until(ExpectedConditions.visibilityOf(sub_location_claimed_zip_textbox));
-    	sub_location_claimed_zip_textbox.sendKeys(loc_claimed_zip);
     	
-    	
-    	//submitting form
-    	sub_location_save_button.click();
-    	wait.until(ExpectedConditions.visibilityOf(success_message_for_sub_location_creation));    	
-    	Assert.assertTrue(success_message_for_sub_location_creation.isDisplayed(),"sub location not created"); 	
+//    	wait.until(ExpectedConditions.visibilityOf(sub_location_claimed_zip_textbox));
+       	Util.Action().moveToElement(sub_location_claimed_zip_textbox).perform();
+    	sub_location_claimed_zip_textbox.sendKeys(loc_claimed_zip);		
     }
 
 }
