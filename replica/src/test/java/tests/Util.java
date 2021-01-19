@@ -306,5 +306,11 @@ public class Util extends TestBase{
 	}
 
 	
+	public static void enterText(WebElement textbox, String text) {
+		jse = getJavascriptExecutor();
+		jse.executeScript("arguments[0].value='"+text+"';", textbox);	
+	}
+	
+	
 	
 }
