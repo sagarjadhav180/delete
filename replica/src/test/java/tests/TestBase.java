@@ -134,7 +134,7 @@ public class TestBase
 			 
 			}
 
-		wait= new WebDriverWait(driver,60);
+		wait= new WebDriverWait(driver,120);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		//to delete cookies
@@ -225,7 +225,7 @@ public class TestBase
 	}
 
 	
-	@AfterTest
+//	@AfterTest
 	public void tearDown() throws Exception{
 		if(driver!=null){
 		driver.quit();
