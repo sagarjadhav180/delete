@@ -722,7 +722,7 @@ public class GroupsAndUserPage extends TestBase {
     	
     	do {
     		act_options = select.getOptions();
-    	}while(select.getOptions().size()<1);
+    	}while(select.getOptions().size()<2);
     	
     	for(WebElement act_option:act_options) {
     		if(!act_option.getText().equals("-- Select Industry--")) {
@@ -754,7 +754,7 @@ public class GroupsAndUserPage extends TestBase {
     	List<WebElement> act_stat_options = new ArrayList<WebElement>();
     	do {
     		act_stat_options = select1.getOptions();
-    	}while(select1.getOptions().size()<1);
+    	}while(select1.getOptions().size()<2);
     	
     	for(WebElement act_stat_option:act_stat_options) {
     		if(!act_stat_option.getText().equals("--Select--")) {
@@ -947,7 +947,15 @@ public class GroupsAndUserPage extends TestBase {
 			}
 				//custom_parameters.click();
 			    Util.customWait(custom_parameters);
-				Util.click(custom_parameters);
+			    try {
+					Util.click(custom_parameters);	
+					Util.customWait(dni_custom_parameters_label);
+			    }catch(Exception e) {
+			    	Thread.sleep(2000);
+					Util.click(custom_parameters);	
+			    }finally {
+					Util.customWait(dni_custom_parameters_label);
+			    }
 				
 				driver.switchTo().activeElement();
 				logger.log(LogStatus.INFO, "Verifying UI of DNI Custom Parameters popup");
