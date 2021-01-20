@@ -2240,8 +2240,13 @@ public class GroupsAndUserPage extends TestBase {
   		logger.log(LogStatus.INFO, "Verifying if appropriate alert is displayed if password is not entered");
   		Assert.assertTrue(change_password_alert.isDisplayed(),"Appropriate alert is not displayed if password is not entered");
   	
+  		Thread.sleep(2000);
   	    //Closing Change Password window
-  		change_password_cancel_button.click();
+  		try {
+  	  		change_password_cancel_button.click();	
+  		}catch(Exception e) {
+  	  		change_password_cancel_button.click();	  			
+  		}
   	}
 
   	
