@@ -1210,12 +1210,19 @@ public class TrackingNumberBuilderPage extends TestBase {
         pin_textbox_for_outbound.clear();
         pin_textbox_for_outbound.sendKeys("2343");
         
-        
-        Util.scrollFunction(save_button);
-        Thread.sleep(5000);
-        save_button.click();
+        Util.Action().moveToElement(save_button).perform();
+//        Util.scrollFunction(save_button);
+        Thread.sleep(2000);
+        try {
+            save_button.click();	
+            trackingNumberCreationVerification();  
+        }catch(Exception e) {
+            save_button.click();	        	
+        }finally {
+            trackingNumberCreationVerification();
+        }
 		Thread.sleep(5000);
-        trackingNumberCreationVerification();
+
         //Assert.assertAll();
 //        String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
 //    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
@@ -1466,11 +1473,17 @@ public class TrackingNumberBuilderPage extends TestBase {
 
      	 
 //     	Util.scrollFunction(save_button);
+     	Util.Action().moveToElement(save_button).perform();
         wait.until(ExpectedConditions.elementToBeClickable(save_button));
-     	save_button.click();
+        try {
+         	save_button.click();        	
+            wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+        }catch(Exception e) {
+         	save_button.click();        	
+            wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
+        }
      	
      	logger.log(LogStatus.INFO, "Verifying if tracking number is updated");
-         wait.until(ExpectedConditions.visibilityOf(tn_updation_success_message));
      	Assert.assertTrue(tn_updation_success_message.isDisplayed(),"tracking number is not updated successfully..");
      	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
      	//Assert.assertAll();
@@ -1479,13 +1492,14 @@ public class TrackingNumberBuilderPage extends TestBase {
     
     public void createNumberPool(String tracking_number_name) throws InterruptedException{
     	
-
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
 //        Util.scrollFunction(header);  
-    	Util.scrollFunction(add_tracking_number_button);
-    	wait.until(ExpectedConditions.visibilityOf(add_tracking_number_button));
+//    	Util.scrollFunction(add_tracking_number_button);
+//    	Util.Action().moveToElement(add_tracking_number_button).perform();
+    	Util.getJavascriptExecutor().executeScript("window.scrollBy(353,300)", "");
+//    	wait.until(ExpectedConditions.visibilityOf(add_tracking_number_button));
     	add_tracking_number_button.click();
         wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
         wait.until(ExpectedConditions.visibilityOf(number_pool_button));
@@ -1600,12 +1614,13 @@ public class TrackingNumberBuilderPage extends TestBase {
      	
      	logger.log(LogStatus.INFO, "Verifying if tracking number is created");
         try{
-        	
         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));        	
         }catch(Exception e){
-        	driver.switchTo().activeElement();
-            Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
-         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+//        	driver.switchTo().activeElement();
+//            Util.Action().moveToElement(ok_button_number_pool_label_create_alert).click().perform();
+         	save_button.click();
+        }finally {
+        	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
         }
 
      	Assert.assertTrue(tn_creation_success_message.isDisplayed(),"number pool is not created successfully..");
@@ -1669,7 +1684,8 @@ public class TrackingNumberBuilderPage extends TestBase {
 //      Util.getJavascriptExecutor().executeScript("window.scrollBy(0,900)"); 
      		
 //        Util.scrollFunction(header);  
-        Util.Action().moveToElement(add_tracking_number_button).perform();
+//        Util.Action().moveToElement(add_tracking_number_button).perform();
+    	Util.getJavascriptExecutor().executeScript("window.scrollBy(353,300)", "");
         add_tracking_number_button.click();
         wait.until(ExpectedConditions.invisibilityOf(progress_loader_add_tn));
         wait.until(ExpectedConditions.visibilityOf(reserved_number_button));
@@ -1767,20 +1783,17 @@ public class TrackingNumberBuilderPage extends TestBase {
     	
     	sale_amount_voice_prompt_textbox.sendKeys("test sale");
 
+    	Thread.sleep(2000);
+     	Util.Action().moveToElement(save_button).perform();
      	
-     	
-     	save_button.click();
-     	Thread.sleep(2000);
      	logger.log(LogStatus.INFO, "Verifying if reserve number is created");
         try{
+        	save_button.click();
         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));  
      	
         }catch(Exception e){
-
-        	driver.switchTo().activeElement();
-        	wait.until(ExpectedConditions.visibilityOf(ok_button_number_pool_label_create_alert));
-        	Util.click(ok_button_number_pool_label_create_alert);
-         	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));
+        	save_button.click();
+        	wait.until(ExpectedConditions.visibilityOf(tn_creation_success_message));  
         }
 //    	set.add(tn);
      	Assert.assertTrue(tn_creation_success_message.isDisplayed(),"reserve number is not created successfully..");
