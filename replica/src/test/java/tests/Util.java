@@ -283,19 +283,24 @@ public class Util extends TestBase{
 	}
 
 	public static void closeBootstrapPopup(WebElement pause_button_success_message, WebElement close_button_success_message) throws InterruptedException {
-		Map<String,String> map = new HashMap<String,String>();
-    	map.put("visibility", "visible");
 		
-    	Util.addStyleToElement(driver, pause_button_success_message, map);	
-    	Util.Action().moveToElement(pause_button_success_message).perform();
-    	pause_button_success_message.click();
-    	Thread.sleep(500);
-    	
-		Util.addStyleToElement(driver, close_button_success_message, map);	
-    	Util.Action().moveToElement(close_button_success_message).perform();
-    	close_button_success_message.click();
-//    	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
-    	Thread.sleep(2000);
+    	try {
+    		Map<String,String> map = new HashMap<String,String>();
+        	map.put("visibility", "visible");
+    		
+        	Util.addStyleToElement(driver, pause_button_success_message, map);	
+        	Util.Action().moveToElement(pause_button_success_message).perform();
+        	pause_button_success_message.click();
+        	Thread.sleep(500);
+        	
+    		Util.addStyleToElement(driver, close_button_success_message, map);	
+        	Util.Action().moveToElement(close_button_success_message).perform();
+        	close_button_success_message.click();
+//        	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
+        	Thread.sleep(2000);	
+    	}catch(Exception e) {
+    		
+    	}
 	}
 	
 	public static void customWait(WebElement element) {
