@@ -1218,7 +1218,6 @@ public class TrackingNumberBuilderPage extends TestBase {
             trackingNumberCreationVerification();  
         }catch(Exception e) {
             save_button.click();	        	
-        }finally {
             trackingNumberCreationVerification();
         }
 		Thread.sleep(5000);
