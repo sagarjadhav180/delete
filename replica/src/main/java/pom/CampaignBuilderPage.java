@@ -363,6 +363,7 @@ public class CampaignBuilderPage extends TestBase {
 	public void edit(String campaign_name_updated) throws InterruptedException{
 			
 		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+		wait.until(ExpectedConditions.visibilityOf(campaignOwner_DropDown));
 
 		Thread.sleep(3000);
 		System.out.println(campaignName_TextBox);
