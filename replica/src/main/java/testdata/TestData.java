@@ -2,6 +2,7 @@ package testdata;
 
 import java.util.Objects;
 
+import apiEndpoints.CallUpload;
 import tests.TestBase;
 import tests.Util;
 
@@ -100,6 +101,10 @@ public class TestData extends TestBase{
 		if((tracking_number.equals("0"))){
 			rd.createTrackingNumber();	
 		}
+		
+		//call upload
+		CallUpload callUpload = new CallUpload();
+		callUpload.uploadCalls();
 
 		//groups n user settings
 		String record_call_checkbox=Util.readingFromDB("SELECT record_call as count FROM default_provisioned_route WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'");
