@@ -1,5 +1,8 @@
 package pom;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -33,36 +36,42 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//strong[text()='Comments']")
 	private WebElement comments_column;	
 	
-	@FindBy(xpath="(//span[text()='Call Logs - Enhanced'])[1]")
+	@FindBy(xpath="//h1[text()='Call Logs - Enhanced']")
 	private WebElement call_logs_enhanced_label;	
 
-	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span")
+	@FindBy(xpath="//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']")
 	private List<WebElement> tiles_names;	
 	
-	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Detailed View']")
+	@FindBy(xpath="//div[@class='Box-sc-5738oh-0 sc-dvCyap ceoGuo']//p[text()='Detailed View']")
 	private WebElement detailed_view_tile;
 
-	@FindBy(xpath="//span[text()='Detailed View']//../..//preceding-sibling::div//a")
+	@FindBy(xpath="//div[@class='Box-sc-5738oh-0 sc-dvCyap ceoGuo']//a")
 	private WebElement detailed_view_button;
 	
 	@FindBy(xpath="//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='Detailed View']")
 	private WebElement loading_wheel_detailed_view;
 
-	@FindBy(xpath="(//span[text()='Call Logs Extended - Enhanced'])[1]")
+	@FindBy(xpath="(//h1[text()='Call Logs Extended - Enhanced'])[1]")
 	private WebElement detailed_view_header;
 
 	@FindBy(xpath="//p[text()='This report is intended for download and/or scheduling. Due to the amount of data available, it may take longer than usual to load. To increase loading speed, the amount of logs available here has been reduced to 100 logs. The full set of logs will be available on the downloaded or scheduled version.']")
 	private WebElement detailed_view_header_note;
 
-	@FindBy(xpath="//span[text()='Default Report']")
+	@FindBy(xpath="//p[text()='Default Report']")
 	private WebElement default_view_tile;
 	
 	@FindBy(xpath="//div[@class='ag-root-wrapper-body ag-layout-normal']")
 	private WebElement detailed_view_table;
 	
-	@FindBy(xpath="//button[@class='btn run-button embed-view btn-primary'][text()='Run']")
+	@FindBy(xpath="(//div[@class='Space-zsz5hl-0 hzbCpE']//div[starts-with(@class,'Icon-sc')])[1]")
 	private WebElement run_button;
 
+	@FindBy(xpath="(//div[@class='Space-zsz5hl-0 hzbCpE']//div[starts-with(@class,'Icon-sc')])[1]//parent::button//div[text()='Cancel']")
+	private WebElement cancel_button;
+
+	@FindBy(xpath="(//div[@class='Space-zsz5hl-0 hzbCpE']//div[starts-with(@class,'Icon-sc')])[1]//parent::button//div[text()='Reload']")
+	private WebElement reload_button;
+	
 	@FindBy(xpath="//div[@class='dropdown-toggle button-xs']/i")
 	private WebElement gear_icon;
 
@@ -74,13 +83,13 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//span[@class='timezone']")
 	private WebElement timezone;
 	
-	@FindBy(xpath="(//div[@class='vis-container'])[8]")
+	@FindBy(xpath="(//div[@class='sc-kZmsYB kurzqW vis-container'])[2]")
 	private WebElement total_calls_graph;		
 	
-	@FindBy(xpath="(//div[@class='vis-container'])[9]")
+	@FindBy(xpath="(//div[@class='sc-kZmsYB kurzqW vis-container'])[1]")
 	private WebElement unique_calls_graph;		
 	
-	String[] expceted_tile_names={"Total Calls","Unique Calls","Answered Calls","Average Call Duration","Detailed View","Total Leads 0% Of Total Calls","Total Conversion 0% Of Total Calls"};
+	String[] expceted_tile_names={"Total Calls","Unique Calls","Answered Calls","Average Call Duration","Detailed View","Total Leads%of Total Analyzed Calls","Total Conversion%of Total Analyzed Calls"};
 	
 	@FindBy(xpath="//div[@class='ag-header-row']//strong")
 	private List<WebElement> table_column_labels;	
@@ -93,7 +102,7 @@ public class CallLogsReportPage extends TestBase {
 	
 	String[] expeted_table_column_labels={"Actions","Play Call","Duration","Date/Time","Group","Campaign","Tracking Number Name","Tracking Number","Tracking Number Type","Hunt Type","Ad Source","Ring-to Name","Ring to Phone Number","Caller ID","Disposition","Voicemail","Identified Agent","Tags","Comments"};
 	
-	@FindBy(xpath="//div [@class='body-text text-muted']")
+	@FindBy(xpath="//div[@class='Box-sc-5738oh-0 sc-gmeYpB iUqrxf']//p")
 	private WebElement footer_note;	
 
 	
@@ -101,16 +110,19 @@ public class CallLogsReportPage extends TestBase {
 	@FindBy(xpath="//div[@class='filters clearfix']")
 	private WebElement filter_section;		
 	
-	@FindBy(xpath="//strong[@class='filter-section-title']//i")
+	@FindBy(xpath="(//div[@class='Space-zsz5hl-0 hzbCpE']//div[starts-with(@class,'Icon-sc')])[2]")
 	private WebElement filter_button;	
+
+	@FindBy(xpath="(//div[@class='Space-zsz5hl-0 hzbCpE']//div[starts-with(@class,'Icon-sc')])[3]")
+	private WebElement dashboard_actions_button;	
 	
 	@FindBy(xpath="//div[@class='title no-overflow']//strong//parent::span")
 	private List<WebElement> filter_elements_before_expanding;
 
-	@FindBy(xpath="//table[@class='explore-filters clearfix']//tbody//tr//td[@class='filter-name']")
+	@FindBy(xpath="//div[@aria-label='Filters Section']//h6")
 	private List<WebElement> filter_elements_after_expanding;
 	
-	String[] expected_filter_elements={"Date Range","Show Columns By","Stack Columns By","Ad Source","Call Back","Call ID","Campaign","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Duration","Group","Indicator Name","Indicator Type","Ring-to Name","Ring-to Phone Number","Send to Voicemail","Tags","Tracking Number Name","Tracking Number","Tracking Number Type","User"};
+	String[] expected_filter_elements={"Date Range","Show Columns By","Stack Columns By","Ad Source","Call Back","Call ID","Caller Id","Campaign","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Disposition","Duration","Group","Hunt Type","Indicator Name","Indicator Type","Ring-to Name","Ring-to Phone Number","Send to Voicemail","Tags","Tracking Number Name","Tracking Number","Tracking Number Type","User"};
 
 	@FindBy(xpath="//iframe[@id='looker']")
 	private WebElement reports_iframe;
@@ -204,40 +216,58 @@ public class CallLogsReportPage extends TestBase {
     
 	public void tilesVerification() throws InterruptedException{
 
-		Thread.sleep(7000);
-		for(int i=0;i<tiles_names.size();){
-			for(int j=0;j<expceted_tile_names.length;j++){
-
-				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
-					
-					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
-					Thread.sleep(1000);
-					System.out.println("we -"+tiles_names.get(i).getText());
-					System.out.println("array -"+expceted_tile_names[j]);
-					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
-				
-			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
-				}
-			}
-			i++;
+//		Thread.sleep(7000);
+//		for(int i=0;i<tiles_names.size();){
+//			for(int j=0;j<expceted_tile_names.length;j++){
+//
+//				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
+//					
+//					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
+//					Thread.sleep(1000);
+//					System.out.println("we -"+tiles_names.get(i).getText());
+//					System.out.println("array -"+expceted_tile_names[j]);
+//					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
+//				
+//			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
+//				}
+//			}
+//			i++;
+//		}
+		
+		List<String> exp_tiles = new ArrayList<String>(Arrays.asList(expceted_tile_names));
+		List<String> act_tiles = new ArrayList<String>();
+		
+		for(WebElement tiles_name:tiles_names) {
+			act_tiles.add(tiles_name.getText().replaceAll("\\d", ""));
 		}
+		
+		Collections.sort(exp_tiles);
+		Collections.sort(act_tiles);
+		
+		Assert.assertEquals(act_tiles, exp_tiles);
 		
 	}
 	
     public void tileValueVerificationForDefault7DaysFilter(String tile_name){
 		
-    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+    	String endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-6");
 
-		String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND repeat_call='false'");
-		String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59' AND disposition IN ('ANSWERED')");
-		String avg_call_duration_from_db = Util.readingFromDB("SELECT AVG(duration) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='51'");
-		String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59') AND indicator_id='18'");		
-		
-		String tile_values=driver.findElement(By.xpath("//div[@class='vis-single-value-title']//div[@class='looker-vis-context-title']/span[text()='"+tile_name+"']//parent::Div//parent::div/preceding-sibling::div//a")).getText();
+		String tile_values = null;
 	
+		if(tile_name.equals("Total Leads") || tile_name.equals("Total Conversion")) {
+			tile_values = driver.findElement(By.xpath("//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']//span[starts-with(text(),'"+tile_name+"')]")).getText();
+		}else {
+			tile_values = driver.findElement(By.xpath("//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']//p[text()='"+tile_name+"']")).getText();			
+		}
+
+		String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
+		String unique_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00' AND repeat_call='false'");
+		String answered_calls_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00' AND disposition IN ('ANSWERED')");
+		String avg_call_duration_from_db = Util.readingFromDB("SELECT AVG(duration) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
+		String total_leads_from_db = Util.readingFromDB("SELECT count(*) as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00') AND indicator_id='51'");
+		String total_conversion_from_db = Util.readingFromDB("SELECT score_value as count FROM indicator_score WHERE call_id IN (SELECT call_id FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00') AND indicator_id='18'");		
+		
 		if(tile_name.equals("Total Calls")){
 			
 			logger.log(LogStatus.INFO, "Verifying tile count for "+tile_name);
@@ -413,27 +443,40 @@ public class CallLogsReportPage extends TestBase {
 
 	public void filterElements(){
     
-	Util.click(filter_button);
+//	Util.click(filter_button);
+	expandFilterSection();
     
-    for(int k=0;k<filter_elements_after_expanding.size();){
-    	for(int j=0;j<expected_filter_elements.length;j++){
-
-    		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
-	    			    			    		
-    		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
-    		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
-    		System.out.println("array-"+expected_filter_elements[j]);		
-    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
-    	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
-    		}
-    		}
-    	k++;
-    }
+//    for(int k=0;k<filter_elements_after_expanding.size();){
+//    	for(int j=0;j<expected_filter_elements.length;j++){
+//
+//    		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
+//	    			    			    		
+//    		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
+//    		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
+//    		System.out.println("array-"+expected_filter_elements[j]);		
+//    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
+//    	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
+//    		}
+//    		}
+//    	k++;
+//    }
 	
-    softassert.assertAll();
+    List<String> exp_filter_elements = new ArrayList<String>(Arrays.asList(expected_filter_elements));
+    List<String> act_filter_elements = new ArrayList<String>();
+    
+    for(WebElement filter_element_after_expanding:filter_elements_after_expanding) {
+    	act_filter_elements.add(filter_element_after_expanding.getText());
+    }
+    
+    Collections.sort(exp_filter_elements);
+    Collections.sort(act_filter_elements);
+    
+    Assert.assertEquals(act_filter_elements, exp_filter_elements);
+    
+//    softassert.assertAll();
 	//collapsing filter section
-	Util.click(filter_button);
-
+//	Util.click(filter_button);
+	collpaseFilterSection();
 		
 	}
 	
@@ -465,6 +508,8 @@ public class CallLogsReportPage extends TestBase {
 		
 		wait.until(ExpectedConditions.visibilityOf(detailed_view_button));
 		detailed_view_button.click();
+		waitTillReportLoad();
+		collpaseFilterSection();
 		
 		wait.until(ExpectedConditions.visibilityOf(detailed_view_header));
 		logger.log(LogStatus.INFO, "Verifying if report header label is displayed");
@@ -569,140 +614,24 @@ public class CallLogsReportPage extends TestBase {
 
 	}
 	
-//	public void uiVerification() throws InterruptedException{
-//		
-//		driver.switchTo().frame(reports_iframe);
-//		
-//
-//		wait.until(ExpectedConditions.visibilityOf(call_logs_enhanced_label));
-//		logger.log(LogStatus.INFO, "verifying if call_logs_enhanced_label is present");
-//		softassert.assertTrue(call_logs_enhanced_label.isDisplayed(),"call_logs_enhanced_label is not displayed or locator has been chamged..");
-//
-//		System.out.println("----------------------------------------tiles_names---------------------------------------");
-//		
-//		try{
-//			Thread.sleep(3000);
-//		for(int i=0;i<tiles_names.size();){
-//			for(int j=0;j<expceted_tile_names.length;j++){
-//
-//				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
-//					
-//					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
-//					System.out.println("we -"+tiles_names.get(i).getText());
-//					System.out.println("array -"+expceted_tile_names[j]);
-//					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
-//				
-//			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
-//				}
-//			}
-//			i++;
-//		}}
-//		catch(Exception e){
-//			driver.navigate().refresh();
-//			Thread.sleep(7000);
-//			}
-//		finally{
-//			for(int i=0;i<tiles_names.size();){
-//				for(int j=0;j<expceted_tile_names.length;j++){
-//
-//					if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
-//						
-//						wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
-//						System.out.println("we -"+tiles_names.get(i).getText());
-//						System.out.println("array -"+expceted_tile_names[j]);
-//						logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
-//					
-//				    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
-//					}
-//				}
-//				i++;
-//			}
-//		}
-//		
-//		Util.scrollFunction(total_calls_graph);
-//		logger.log(LogStatus.INFO, "verifying if total calls graph is present");
-//		softassert.assertTrue(total_calls_graph.isDisplayed(),"total calls graph is not displayed or locator has been chamged..");
-//
-//		logger.log(LogStatus.INFO, "verifying if unique calls graph is present");
-//		softassert.assertTrue(unique_calls_graph.isDisplayed(),"unique calls graph is not displayed or locator has been chamged..");
-//		
-//		System.out.println("-------------------------------table-columns------------------------------------------------");
-//
-//		
-////		Util.scrollFunction(call_logs_scroll);
-//
-//		for(int i=0;i<table_column_labels.size();){
-//			for(int j=0;j<expeted_table_column_labels.length;j++){
-//				if(table_column_labels.get(i).getText().equals(expeted_table_column_labels[j])){
-//					wait.until(ExpectedConditions.visibilityOf(table_column_labels.get(i)));
-//					System.out.println("we-"+table_column_labels.get(i).getText());
-//					System.out.println("array-"+expeted_table_column_labels[j]);
-//            	logger.log(LogStatus.INFO, "verifying if "+expeted_table_column_labels[j]+" column is present");
-//			    softassert.assertEquals(table_column_labels.get(i).getText(), expeted_table_column_labels[j],expeted_table_column_labels[j]+" is not present");				
-//				}
-//			}
-//			i++;
-//
-//		}
-//		Util.getJavascriptExecutor().executeScript("window.scrollBy(500,0)","");
-//
-//
-//		
-//		
-//	    wait.until(ExpectedConditions.visibilityOf(filter_button));
-//	    logger.log(LogStatus.INFO, "verifying if filter_button is present");
-//	    softassert.assertTrue(filter_button.isDisplayed(), "filter_button is not present");
-//	
-//	    
-//	    logger.log(LogStatus.INFO, "verifying if filter_button is enabled");
-//	    softassert.assertTrue(filter_button.isEnabled(), "filter_button is not enabled");	    
-//	
-////	    for(int i=0;i<filter_elements_before_expanding.size();){
-////	    	for(int j=0;j<expected_filter_elements.length;j++){
-////
-////	    		if(filter_elements_before_expanding.get(i).getText().equals(expected_filter_elements[j])){
-////		    		System.out.println("we - "+filter_elements_before_expanding.get(i).getText());
-////		    		System.out.println("array -"+expected_filter_elements[j]);
-////	    			wait.until(ExpectedConditions.visibilityOf(filter_elements_before_expanding.get(i)));
-////	    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" is present");
-////	    	    softassert.assertEquals(filter_elements_before_expanding.get(i).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
-////	    		}
-////	    		}
-////	    	i++;
-////	    }
-//		System.out.println("------------------------filter-element-after-expanding-------------------------------------------------------");	    
-//	    //expanding filter section
-//	    Util.click(filter_button);
-//	    
-//	    for(int k=0;k<filter_elements_after_expanding.size();){
-//	    	for(int j=0;j<expected_filter_elements.length;j++){
-//
-//	    		if(filter_elements_after_expanding.get(k).getText().equals(expected_filter_elements[j])){
-//		    			    			    		
-//	    		wait.until(ExpectedConditions.visibilityOf(filter_elements_after_expanding.get(k)));	    		
-//	    		System.out.println("we-"+filter_elements_after_expanding.get(k).getText());
-//	    		System.out.println("array-"+expected_filter_elements[j]);		
-//	    		logger.log(LogStatus.INFO,"verifying if "+expected_filter_elements[j]+" filter is present");
-//	    	    softassert.assertEquals(filter_elements_after_expanding.get(k).getText(),expected_filter_elements[j],expected_filter_elements[j]+" filter element is npt present");
-//	    		}
-//	    		}
-//	    	k++;
-//	    }
-//		System.out.println("-------------------------------------------------------------------------------");
-//	    
-////		//collapsing filter section
-//		Util.click(filter_button);
-//
-//		Util.scrollFunction(footer_note);
-//		
-//	    wait.until(ExpectedConditions.visibilityOf(footer_note));
-//		logger.log(LogStatus.INFO, "verifying if footer note is present");
-//	    softassert.assertTrue(footer_note.isDisplayed(), "footer note is not present");
-//	    
-//	    softassert.assertAll();
-//	}
+	
+	public void expandFilterSection() {
+		if(filter_button.getAttribute("class").endsWith("kqUKfT")) {
+			filter_button.click();
+		}
+	}
 	
 	
+	public void collpaseFilterSection() {
+		if(filter_button.getAttribute("class").endsWith("OSCdE")) {
+			filter_button.click();
+		}
+	}
 	
+	public void waitTillReportLoad() {
+		
+		wait.until(ExpectedConditions.visibilityOf(reload_button));
+		
+	}
 	
 }
