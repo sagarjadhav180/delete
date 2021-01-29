@@ -43,7 +43,15 @@ public class LookerCallBackReportTest extends TestBase {
         Thread.sleep(7000);
 		cb.switchToIFrame();
 	}
-
+	
+	@Test(priority=0)
+	public void reportLoad() throws IOException, InterruptedException{
+		
+        cb=new CallBackReportPage(driver);
+		cb.waitTillReportLoad();
+		cb.collpaseFilterSection();
+	}
+	
 	@Test(priority=1)
 	public void runButtonVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Run Button Verification Test"); 
@@ -60,7 +68,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.headerLabel();
 	}
 	
-	@Test(priority=3)
+//	@Test(priority=3) -- feature removed
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -68,7 +76,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.presenceOfGearIcon();
 	}
 
-	@Test(priority=4)
+//	@Test(priority=4) -- feature removed
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -76,7 +84,7 @@ public class LookerCallBackReportTest extends TestBase {
         cb.gearIconOptions();
 	}
 	
-	@Test(priority=5)
+//	@Test(priority=5) -- feature removed
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -92,7 +100,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.tilesVerification();
 	}
 	
-	@Test(priority=7)
+//	@Test(priority=7)
 	public void toalCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Toal Calls Count Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -100,7 +108,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.tileValueVerification(Constants.LookerCallBackReport.total_calls_tile);
 	}
 	
-	@Test(priority=8)
+//	@Test(priority=8)
 	public void AnsweredCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Answered Calls Count Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -108,7 +116,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.tileValueVerification(Constants.LookerCallBackReport.answered_calls_tile);
 	}
 	
-	@Test(priority=9)
+//	@Test(priority=9)
 	public void avgCallDurationVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Avg Call Duration Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -116,7 +124,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.tileValueVerification(Constants.LookerCallBackReport.average_calls_duration_tile);
 	}
 	
-	@Test(priority=10)
+//	@Test(priority=10)
 	public void missedOppCallsCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Missed Opp Calls Count Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -124,7 +132,7 @@ public class LookerCallBackReportTest extends TestBase {
 		cb.tileValueVerification(Constants.LookerCallBackReport.missed_opportunity_tile);
 	}
 	
-	@Test(priority=11)
+//	@Test(priority=11)
 	public void taggedAsCallBackCountVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Tagged As Call Back Count Verification Test"); 
 		logger.assignCategory(Constants.call_back_category);
@@ -230,34 +238,34 @@ public class LookerCallBackReportTest extends TestBase {
 	
 	@Test(priority=24)
 	public void filterFeatureForTaggedGroupTest() throws IOException, InterruptedException{
-		logger=extent.startTest("Filter Feature For Missed Opp Group Test"); 
+		logger=extent.startTest("filterFeatureForTaggedGroupTest"); 
 		logger.assignCategory(Constants.call_back_category);
         cb=new CallBackReportPage(driver);
-        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.group_filter);
+        cb.filterFeatureForTaggedAsCallBack(Constants.LookerCallBackReport.group_filter);
 	}
 	
 	@Test(priority=25)
 	public void filterFeatureForTaggedCampaignTest() throws IOException, InterruptedException{
-		logger=extent.startTest("Filter Feature For Missed Opp Campaign Test"); 
+		logger=extent.startTest("filterFeatureForTaggedCampaignTest"); 
 		logger.assignCategory(Constants.call_back_category);
         cb=new CallBackReportPage(driver);
-        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.campaign_filter);
+        cb.filterFeatureForTaggedAsCallBack(Constants.LookerCallBackReport.campaign_filter);
 	}
 	
 	@Test(priority=26)
 	public void filterFeatureForTaggedTrackingNumberNameTest() throws IOException, InterruptedException{
-		logger=extent.startTest("Filter Feature For Missed Opp Tracking Number Name Test"); 
+		logger=extent.startTest("filterFeatureForTaggedTrackingNumberNameTest"); 
 		logger.assignCategory(Constants.call_back_category);
         cb=new CallBackReportPage(driver);
-        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.tracking_number_name_filter);
+        cb.filterFeatureForTaggedAsCallBack(Constants.LookerCallBackReport.tracking_number_name_filter);
 	}
 	
 	@Test(priority=27)
 	public void filterFeatureForTaggedTrackingNumberTest() throws IOException, InterruptedException{
-		logger=extent.startTest("Filter Feature For Missed Opp Tracking Number Test"); 
+		logger=extent.startTest("filterFeatureForTaggedTrackingNumberTest"); 
 		logger.assignCategory(Constants.call_back_category);
         cb=new CallBackReportPage(driver);
-        cb.filterFeatureForMissedOppSummary(Constants.LookerCallBackReport.tracking_number_filter);
+        cb.filterFeatureForTaggedAsCallBack(Constants.LookerCallBackReport.tracking_number_filter);
 	}
 	
 	@AfterClass
