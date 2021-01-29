@@ -505,75 +505,73 @@ public class CallBackReportPage extends TestBase{
         		logger.log(LogStatus.INFO, "Verifying if no results label is displayed since there is no data to filter");
         		Assert.assertTrue(no_results_label_for_missed_opportunity_summary_table.isDisplayed(),"no results label is not displayed or locator changed");    			
     		}else {
-    	
+    			//getting value from grid
+        		int index=0;
+                String filterValue;
+        		for(int i=0;i<tagged_as_callback_table_columns.size();i++){
+        			
+        			if(filterName.equals(tagged_as_callback_table_columns.get(i).getText())){
+        				
+        				index=i+1;
+        				break;
+        			}
+        		}
+        		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
+        		filterValue=value_to_be_filtered.get(0).getText();
+        		
+        		//expanding filter section
+        		expandFilterSection();
+        		
+        		//applying filter value
+        		WebElement filter_link = driver.findElement(By.xpath("x")); 
+        		wait.until(ExpectedConditions.visibilityOf(filter_link));
+                Util.Action().moveToElement(filter_link).perform();
+                Util.Action().click().perform();
+                Util.enterText(filter_text_box, filterValue);
+                
+                //re running for applied filter
+        		run_button.click();
+        		
+        		//collapsing filter section
+        		collpaseFilterSection();
+        		waitTillReportLoad();
+
+        		//checking populated values
+        		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
+        		System.out.println("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
+        		for(int j=0;j<filtered_values.size();j++){
+        			
+        			System.out.println(filtered_values.get(j).getText());
+        			System.out.println(filterValue);
+        			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
+        			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
+        		}
+        		
+        		softassert.assertAll();
+
+        		//expanding filter
+        		expandFilterSection();
+        		
+        		//clearing applied filter
+        		filter_link = driver.findElement(By.xpath("//h6[text()='"+filterName+"']//parent::div//following-sibling::span"));
+        		Util.customWait(filter_link);
+                Util.Action().moveToElement(filter_link).perform();
+                Util.Action().click().perform();
+                Thread.sleep(1000);
+                Util.Action().moveToElement(filter_text_box).perform();
+        	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+                Util.Action().sendKeys(Keys.BACK_SPACE).perform();
+        		Util.Action().sendKeys(Keys.ESCAPE).perform();	
+        	
+        		//collapsing filter section
+        		collpaseFilterSection();
     		}
 
     	}
     
     	else{
-//    		logger.log(LogStatus.INFO, "Verifying if no results label is displayed since there is no data to filter");
-//    		Assert.assertTrue(no_results_label_for_missed_opportunity_summary_table.isDisplayed(),"no results label is not displayed or locator changed");   
-    		
-    		//getting value from grid
-    		int index=0;
-            String filterValue;
-    		for(int i=0;i<tagged_as_callback_table_columns.size();i++){
-    			
-    			if(filterName.equals(tagged_as_callback_table_columns.get(i).getText())){
-    				
-    				index=i+1;
-    				break;
-    			}
-    		}
-    		List<WebElement> value_to_be_filtered = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));		
-    		filterValue=value_to_be_filtered.get(0).getText();
-    		
-    		//expanding filter section
-    		expandFilterSection();
-    		
-    		//applying filter value
-    		WebElement filter_link = driver.findElement(By.xpath("x")); 
-    		wait.until(ExpectedConditions.visibilityOf(filter_link));
-            Util.Action().moveToElement(filter_link).perform();
-            Util.Action().click().perform();
-            Util.enterText(filter_text_box, filterValue);
-            
-            //re running for applied filter
-    		run_button.click();
-    		
-    		//collapsing filter section
-    		collpaseFilterSection();
-    		waitTillReportLoad();
-
-    		//checking populated values
-    		List<WebElement> filtered_values = driver.findElements(By.xpath("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]"));
-    		System.out.println("//div[@class='ag-center-cols-container']/div/div["+String.valueOf(index)+"]");
-    		for(int j=0;j<filtered_values.size();j++){
-    			
-    			System.out.println(filtered_values.get(j).getText());
-    			System.out.println(filterValue);
-    			logger.log(LogStatus.INFO, "Verifying if "+filtered_values.get(j).getText()+" is matching with "+filterValue);
-    			softassert.assertTrue(filtered_values.get(j).getText().equals(filterValue),"value "+filtered_values.get(j).getText()+" is not filtered value");
-    		}
-    		
-    		softassert.assertAll();
-
-    		//expanding filter
-    		expandFilterSection();
-    		
-    		//clearing applied filter
-    		filter_link = driver.findElement(By.xpath("//h6[text()='"+filterName+"']//parent::div//following-sibling::span"));
-    		Util.customWait(filter_link);
-            Util.Action().moveToElement(filter_link).perform();
-            Util.Action().click().perform();
-            Thread.sleep(1000);
-            Util.Action().moveToElement(filter_text_box).perform();
-    	    Util.Action().sendKeys(Keys.BACK_SPACE).perform();
-            Util.Action().sendKeys(Keys.BACK_SPACE).perform();
-    		Util.Action().sendKeys(Keys.ESCAPE).perform();	
-    	
-    		//collapsing filter section
-    		collpaseFilterSection();
+    		logger.log(LogStatus.INFO, "Verifying if no results label is displayed since there is no data to filter");
+    		Assert.assertTrue(no_results_label_for_missed_opportunity_summary_table.isDisplayed(),"no results label is not displayed or locator changed");   
     	}
     	
 	}
