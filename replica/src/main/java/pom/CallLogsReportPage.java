@@ -35,6 +35,14 @@ public class CallLogsReportPage extends TestBase {
 	
 	@FindBy(xpath="//strong[text()='Comments']")
 	private WebElement comments_column;	
+
+	@FindBy(xpath="//div[text()='Dashboard actions']//parent::button")
+	private WebElement dashboard_actions_link;	
+	
+	@FindBy(xpath="//ul[@class='MenuList-sc-1m0jggd-0 dQxuQg']//li//button[@role='menuitem']/span")
+	private List<WebElement> dashboard_actions_pup_up_options;	
+	
+	String[] expected_dashboard_actions_pup_up_options = {"Clear cache and refresh","Download","Schedule delivery"};
 	
 	@FindBy(xpath="//h1[text()='Call Logs - Enhanced']")
 	private WebElement call_logs_enhanced_label;	
@@ -214,25 +222,31 @@ public class CallLogsReportPage extends TestBase {
 		Assert.assertTrue(timezone.isDisplayed(),"Time Zone is not present or locator has been changed.");
 	}
     
+    public void presenceOfDashboardActionsLink() {
+    	wait.until(ExpectedConditions.visibilityOf(dashboard_actions_link));
+		logger.log(LogStatus.INFO, "Verifying if dashboard_actions_link is present");    	
+    }
+    
+    public void dashboardActionsPopupOptions() {
+    	wait.until(ExpectedConditions.visibilityOf(dashboard_actions_button));
+    	dashboard_actions_button.click();
+		logger.log(LogStatus.INFO, "Verifying if dashboard_actions popup options are present");
+		
+		List<String> act_dashboard_actions_options = new ArrayList<String>();
+		List<String> exp_dashboard_actions_options = new ArrayList<String>(Arrays.asList(expected_dashboard_actions_pup_up_options));
+		
+		for( WebElement dashboard_actions_pup_up_option:dashboard_actions_pup_up_options) {
+			act_dashboard_actions_options.add(dashboard_actions_pup_up_option.getText());
+		}
+		
+		Collections.sort(act_dashboard_actions_options);
+		Collections.sort(exp_dashboard_actions_options);
+		
+		Assert.assertEquals(act_dashboard_actions_options, exp_dashboard_actions_options);
+		dashboard_actions_button.click();
+    }
+    
 	public void tilesVerification() throws InterruptedException{
-
-//		Thread.sleep(7000);
-//		for(int i=0;i<tiles_names.size();){
-//			for(int j=0;j<expceted_tile_names.length;j++){
-//
-//				if(tiles_names.get(i).getText().equals(expceted_tile_names[j])){
-//					
-//					wait.until(ExpectedConditions.visibilityOf(tiles_names.get(i)));
-//					Thread.sleep(1000);
-//					System.out.println("we -"+tiles_names.get(i).getText());
-//					System.out.println("array -"+expceted_tile_names[j]);
-//					logger.log(LogStatus.INFO, "verifying if "+expceted_tile_names[j]+" tile is present");
-//				
-//			    softassert.assertEquals(tiles_names.get(i).getText(), expceted_tile_names[j],expceted_tile_names[j]+" is not present");
-//				}
-//			}
-//			i++;
-//		}
 		
 		List<String> exp_tiles = new ArrayList<String>(Arrays.asList(expceted_tile_names));
 		List<String> act_tiles = new ArrayList<String>();
@@ -256,9 +270,9 @@ public class CallLogsReportPage extends TestBase {
 		String tile_values = null;
 	
 		if(tile_name.equals("Total Leads") || tile_name.equals("Total Conversion")) {
-			tile_values = driver.findElement(By.xpath("//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']//span[starts-with(text(),'"+tile_name+"')]")).getText();
+			tile_values = driver.findElement(By.xpath("//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']//span[starts-with(text(),'"+tile_name+"')]//ancestor::div[@class='Box-sc-5738oh-0 sc-dvCyap ceoGuo']//p/span")).getText();
 		}else {
-			tile_values = driver.findElement(By.xpath("//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']//p[text()='"+tile_name+"']")).getText();			
+			tile_values = driver.findElement(By.xpath("//div[@class='react-grid-layout']//div[@data-testid='test-single-value-container']//div[@overflow='hidden']//p[text()='"+tile_name+"']//parent::div//parent::div//parent::div//span")).getText();			
 		}
 
 		String total_call_count_from_db = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
