@@ -73,6 +73,25 @@ public class LookerCallLogsTest extends TestBase{
 	}
 	
 	
+//	--new feature 
+	@Test(priority=3)  
+	public void presenceOfDashboardActionsLinkVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("presenceOfDashboardActionsLinkVerification"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.presenceOfDashboardActionsLink();
+	}
+
+	
+//	--new feature 
+	@Test(priority=4)  
+	public void dashboardActionsOptionsVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("dashboardActionsOptionsVerification"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.dashboardActionsPopupOptions();
+	}
+	
 //	@Test(priority=4) -- feature changed
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
@@ -97,7 +116,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tilesVerification();
 	}
 
-	@Test(priority=7)
+//	@Test(priority=7)
 	public void totalCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -105,7 +124,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.total_calls_tile);
 	}
 	
-	@Test(priority=8)
+//	@Test(priority=8)
 	public void uniqueCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Unique Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -113,7 +132,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.unique_calls_tile);
 	}
 	
-	@Test(priority=9)
+//	@Test(priority=9)
 	public void answeredCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Answered Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -121,7 +140,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.answered_calls_tile);
 	}
 	
-	@Test(priority=10)
+//	@Test(priority=10)
 	public void averageCallsDurationTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Average Calls Duration Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -129,7 +148,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.average_calls_duration_tile);
 	}
 	
-	@Test(priority=11)
+//	@Test(priority=11)
 	public void totalLeadsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Leads Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -137,7 +156,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.leads_tile);
 	}
 	
-	@Test(priority=12)
+//	@Test(priority=12)
 	public void totalConversionTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Conversion Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
