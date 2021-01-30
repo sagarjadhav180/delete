@@ -103,8 +103,8 @@ public class TestData extends TestBase{
 		}
 		
 		//call upload
-		CallUpload callUpload = new CallUpload();
-		callUpload.uploadCalls();
+//		CallUpload callUpload = new CallUpload();
+//		callUpload.uploadCalls();
 
 		//groups n user settings
 		String record_call_checkbox=Util.readingFromDB("SELECT record_call as count FROM default_provisioned_route WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'");
