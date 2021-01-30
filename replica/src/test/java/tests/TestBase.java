@@ -86,6 +86,7 @@ public class TestBase
 		prop.setProperty("password", System.getProperty("password"));
 		prop.setProperty("Environment", System.getProperty("Environment"));
 		prop.setProperty("url", System.getProperty("url"));
+		prop.setProperty("api_url", System.getProperty("api_url"));
 
 		FileOutputStream fis=new FileOutputStream(new File(".//property"));
 		prop.store(fis, "Env");
