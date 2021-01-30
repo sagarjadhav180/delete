@@ -48,7 +48,7 @@ public class HelperClass {
 		String api_url = HelperClass.get_api_url();
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		URI uri = new URIBuilder()
-				.setScheme("http")
+				.setScheme("https")
 				.setHost(api_url)
 				.setPath("/oauth/token")
 				.build();
