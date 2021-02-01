@@ -369,11 +369,15 @@ public class Constants {
     	public static final String calls_with_instant_insights_tile="Calls with Instant Insights";    	
     	public static final String calls_with_agent_id_tile="Calls with Agent ID";    	
     	public static final String calls_with_call_outcome_tile="Calls with Call Outcome";        	
-    	
-   	
+  	
     }
     
+    public static class ManageScorecardPage{	
+    	//Action Buttons
+    	public static final String edit_scorecard_button = "Edit";
+    	public static final String archive_scorecard_button = "Archive";
     
+    }
     
     
     
