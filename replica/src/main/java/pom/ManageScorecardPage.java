@@ -8,14 +8,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import tests.TestBase;
+import tests.Util;
 
 public class ManageScorecardPage extends TestBase {
 	
 	@FindBy(xpath="//div[@ class='pageProgressLoader']")
 	private WebElement loadingWheel;
 
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
+	
 	@FindBy(xpath="//h1[contains(text(),'Scorecards')]")
 	private WebElement scorecard_header_label;
 
@@ -220,11 +228,27 @@ public class ManageScorecardPage extends TestBase {
 		PageFactory.initElements(driver,this);
 	}
 	
-	//to get action button of desired score-card 
-    public WebElement getScoreacrd(String scorecard_name,String button_name){
+	//to click on desired action button of desired score-card 
+    public void clickActionButton(String scorecard_name,String button_name) throws InterruptedException{
 		
 		WebElement webelement = driver.findElement(By.xpath("//table//tbody//tr//td[text()='"+scorecard_name+"']//ancestor::tr//child::button[contains(text(),'"+button_name+"')]"));
-		return webelement;
+		Util.Action().moveToElement(webelement).perform();
+		webelement.click();
+		
+		switch(button_name) {
+		case "Edit" :
+			Util.customWait(create_scorecard_header_label);
+			break;
+		case "Archive" :
+			driver.switchTo().activeElement();
+			Util.Action().moveToElement(scorecard_deletion_alert_ok_button).perform();	
+			scorecard_deletion_alert_ok_button.click();
+			Util.customWait(success_message_scorecard_deletion);
+			Assert.assertTrue(success_message_scorecard_deletion.isDisplayed(),"Scorecard not deleted successfully");
+			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+			break;
+		}		
+
 	}
     
     
