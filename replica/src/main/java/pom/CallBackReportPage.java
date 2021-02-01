@@ -72,7 +72,7 @@ public class CallBackReportPage extends TestBase{
 	@FindBy(xpath="//div[text()='Missed Opportunity Summary']")
 	private WebElement missed_opportunity_summary_label;
 	
-	@FindBy(xpath="(//div[@class='ag-header-container'])[2]//strong")
+	@FindBy(xpath="//div[text()='Missed Opportunity Summary']//ancestor::div[starts-with(@class,'CardContent-sc-21xesl-0 leFvbf')]//div[@class='ag-header-container']//strong")
 	private List<WebElement> missed_opportunity_summary_table_columns;
 	
 	String[] expected_missed_opportunity_summary_table_columns={"Play Call","Caller Id","Date/Time","Duration","Repeat Call","Group","Group External Id","Campaign","Campaign External Id","Tracking Number Name","Tracking Number","Ad Source","Ring-to Name","Ring-to Number","Number Of Repeat Calls"};
@@ -86,7 +86,7 @@ public class CallBackReportPage extends TestBase{
 	@FindBy(xpath="//div[text()='Tagged as Call Back']")
 	private WebElement tagged_as_callback_table_label;
 
-	@FindBy(xpath="(//div[@class='ag-header-container'])[2]//strong")
+	@FindBy(xpath="//div[text()='Tagged as Call Back']//ancestor::div[starts-with(@class,'CardContent-sc-21xesl-0 leFvbf')]//div[@class='ag-header-container']//strong")
 	private List<WebElement> tagged_as_callback_table_columns;
 	
 	String[] expected_tagged_as_callback_table_columns={"Actions","Play Call","Caller Id","Date/Time","Type","Group","Group External Id","Campaign","Campaign External Id","Ad Source","Tracking Number Name","Tracking Number","Duration","Identified Agent","Tags","Comment"};
