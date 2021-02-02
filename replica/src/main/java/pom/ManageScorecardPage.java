@@ -235,19 +235,19 @@ public class ManageScorecardPage extends TestBase {
 		Util.Action().moveToElement(webelement).perform();
 		webelement.click();
 		
-		switch(button_name) {
-		case "Edit" :
-			Util.customWait(create_scorecard_header_label);
-			break;
-		case "Archive" :
-			driver.switchTo().activeElement();
-			Util.Action().moveToElement(scorecard_deletion_alert_ok_button).perform();	
-			scorecard_deletion_alert_ok_button.click();
-			Util.customWait(success_message_scorecard_deletion);
-			Assert.assertTrue(success_message_scorecard_deletion.isDisplayed(),"Scorecard not deleted successfully");
-			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
-			break;
-		}		
+//		switch(button_name) {
+//		case "Edit" :
+//			Util.customWait(create_scorecard_header_label);
+//			break;
+//		case "Archive" :
+//			driver.switchTo().activeElement();
+//			Util.Action().moveToElement(scorecard_deletion_alert_ok_button).perform();	
+//			scorecard_deletion_alert_ok_button.click();
+//			Util.customWait(success_message_scorecard_deletion);
+//			Assert.assertTrue(success_message_scorecard_deletion.isDisplayed(),"Scorecard not deleted successfully");
+//			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+//			break;
+//		}		
 
 	}
     
