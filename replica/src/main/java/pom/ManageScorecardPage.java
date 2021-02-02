@@ -53,7 +53,10 @@ public class ManageScorecardPage extends TestBase {
 	
 	//-----------------------------------------------------
 //	static String index = null;
-//	@FindBy(xpath="//table/tbody//td["+index+"]")
+//	@FindBy(xpath="//table[@id='scorecardtable']//thead//tr[1]//th")
+//	private WebElement index;
+	
+//	@FindBy(xpath="//table[@id='scorecardtable']/tbody//td["+index+"]")
 //	private WebElement actual_column_values;
 	//--------------------------------------
 	
