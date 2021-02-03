@@ -135,18 +135,30 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//strong[contains(text(),'Criteria :')]")
 	private WebElement criteria_label;	
 
-	@FindBy(xpath="//div[@class='container-fluid']//ul//li//div[@aria-hidden='false']//div[contains(@id,'passcheck')]//input")
-	private List<WebElement> pass_checkboxes;	
+	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='false']//ancestor::li//div[@aria-hidden='false']//div[contains(@id,'passcheck')]//input")
+	private List<WebElement> pass_checkboxes_mandatory;	
 
-	@FindBy(xpath="//div[@class='container-fluid']//ul//li//div[@aria-hidden='false']//div[contains(@id,'failCheck')]//input")
-	private List<WebElement> fail_checkboxes;
+	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='true']//ancestor::li//div[@aria-hidden='false']//div[contains(@id,'passcheck')]//input")
+	private List<WebElement> pass_checkboxes_optional;
+	
+	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='false']//ancestor::li//div[@aria-hidden='false']//div[contains(@id,'failCheck')]//input")
+	private List<WebElement> fail_checkboxes_mandatory;
+	
+	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='true']//ancestor::li//div[@aria-hidden='false']//div[contains(@id,'failCheck')]//input")
+	private List<WebElement> fail_checkboxes_optional;
 
-	@FindBy(xpath="//div[@class='container-fluid']//ul//li//div[@aria-hidden='false']//div[contains(@id,'naCheck')]//input")
-	private List<WebElement> na_checkboxes;
+	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='false']//ancestor::li//div[@aria-hidden='false']//div[contains(@id,'naCheck')]//input")
+	private List<WebElement> na_checkboxes_mandatory;
+	
+	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='true']//ancestor::li//div[@aria-hidden='false']//div[contains(@id,'naCheck')]//input")
+	private List<WebElement> na_checkboxes_optional;
 
 	//--------------------scale checkboxes----------------------
-//	@FindBy(xpath="//div[@class='container-fluid']//ul//li//div[@aria-hidden='false']//div[contains(@class,'radio-inline')]//label[contains(text(),'"+scale_value+"')]/..//input")
-//	private List<WebElement> scale_checkboxes;
+//	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='true']//ancestor::li//div[@aria-hidden='false']//div[contains(@class,'radio-inline')]//label[contains(text(),'"+scale_value+"')]/..//input")
+//	private List<WebElement> scale_checkboxes_optional;
+	
+//	@FindBy(xpath="//div[@class='container-fluid']//ul//li//span[text()='*' and @aria-hidden='false']//ancestor::li//div[@aria-hidden='false']//div[contains(@class,'radio-inline')]//label[contains(text(),'"+scale_value+"')]/..//input")
+//	private List<WebElement> scale_checkboxes_mandatory;
 	//--------------------------------------------------------
 	
 	@FindBy(xpath="//strong[contains(text(),'Outcome')]")
