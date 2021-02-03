@@ -378,8 +378,12 @@ public class Constants {
     	public static final String archive_scorecard_button = "Archive";
     
     }
+        
+    public static class SelectAndScorePage{	
+    	//Action Buttons
+
     
-    
+    }
     
     
 }
