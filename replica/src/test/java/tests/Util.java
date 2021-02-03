@@ -12,10 +12,14 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -50,6 +54,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.googlecode.charts4j.Color;
 import com.googlecode.charts4j.GCharts;
@@ -311,6 +317,21 @@ public class Util extends TestBase{
 		 WebDriverWait.until(ExpectedConditions.visibilityOf(element));
 	}
 
+	public static void waitExecutorForVisibilityOfElement(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(element));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void waitExecutorForInVisibilityOfElement(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.invisibilityOf(element));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
 	
 	public static void enterText(WebElement textbox, String text) {
 		jse = getJavascriptExecutor();
@@ -321,6 +342,32 @@ public class Util extends TestBase{
 	
 		jse = getJavascriptExecutor();
 		jse.executeScript("arguments[0].setAttribute('"+attribute+"', '"+attribute_value+"')", element);	
+	}
+	
+	public static Boolean collectionComarator(String[] expectedObjects, List<WebElement> actualObjects) {
+		Boolean flag = null;
+		
+		List<String> exp_objects = new ArrayList<String>(Arrays.asList(expectedObjects));
+	    List<String> act_objects = new ArrayList<String>();
+	    
+	    for(WebElement actualObject:actualObjects) {
+	    	act_objects.add(actualObject.getText().trim());
+	    }
+	    
+	    Collections.sort(exp_objects);
+	    Collections.sort(act_objects);
+
+	    if(exp_objects.equals(act_objects)) {
+	    	flag = true;
+	    }else 
+	    	flag = false;
+
+		return flag;	
+	}
+	
+	public static SoftAssert softAssert() {
+		SoftAssert softassert = new SoftAssert();
+		return softassert;
 	}
 	
 }
