@@ -1,8 +1,10 @@
 package constants;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import io.Directory;
 
 import tests.TestBase;
 
@@ -12,6 +14,17 @@ public class Constants {
 	public static final String groupHeirarchyAgency="1";
 	public static final String groupHeirarchyCompany="2";
 	public static final String groupHeirarchyLocation="3";
+	public static final String PROJECT_DIR = System.getProperty("user.dir") + File.separator;
+	public static final String TEST_DATA_DIR = "TestData";
+	public static final String RESOURCES = "resources";
+	public static final String CONF_DIR = "conf";
+	public static final String DYNAMIC_TD_FILE = "DynamicTestData";
+	public static final String CALLFLOW_TEMPLETE = "CallFlowTemplete.yaml";
+	public static final String POSTGRES_CONFIG = "PostgresConfig.properties";
+	public static final String DRIVER = "driver";
+	public static final String CHROME_DRIVER = "chromedriver";
+	public static final String PHANTOM_DRIVER = "phantomjs";
+	public static final String HTTPS = "https://";
 	
 	
 	public static final String call_logs_category="Call Logs Report Suite";
@@ -384,7 +397,19 @@ public class Constants {
 
     
     }
+ 
+    public static String getPostgresConfigFile() {
+		String filePath = Directory.confDir() + Constants.POSTGRES_CONFIG;
+		return filePath;
+	}
     
+    public static class PostGresConfigConstants {
+		public static final String CONNECTION_URL = "connection_url";
+		public static final String DATABASE = "database";
+		public static final String USERNAME = "username";
+		public static final String PASSWORD = "password";
+		public static final String DRIVER = "driver";
+	}
     
 }
 
