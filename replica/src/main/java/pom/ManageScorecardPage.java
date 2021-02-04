@@ -1,6 +1,9 @@
 package pom;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,13 +13,26 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import PostgresConfig.PropertiesReader;
+import constants.Constants;
+import dbUtil.GroupDBUtil;
+import dbUtil.ScorecardDBUtil;
+import dbUtil.UserDBUtil;
 import tests.TestBase;
 import tests.Util;
 
 public class ManageScorecardPage extends TestBase {
+	
+	//score-card data set
+	String scorecardTitle = "SJS-"+Util.generateRandomNumber();
+	String instructions = "test scorecard";
+	String outcomeLabel = "test- call";
+	String criteriaTitle = "Criteria-"+Util.generateRandomNumber();
+	String helpText = "test";
 	
 	@FindBy(xpath="//div[@ class='pageProgressLoader']")
 	private WebElement loadingWheel;
@@ -345,9 +361,11 @@ public class ManageScorecardPage extends TestBase {
 	public void paginationButtonsVerificationForLessThan100Records() {
 		
 		//query to check records count
-		String scorecad_count = null;
-		
-		if(Integer.parseInt(scorecad_count)<100) {
+		String username = TestBase.getUser_id();;
+    	String userId = UserDBUtil.getCTUserId(username);
+    	int scorecad_count = ScorecardDBUtil.getScorecardsRecords(userId);
+    	
+		if(scorecad_count<100) {
 			nextButtonEnable("no");
 			lastButtonEnable("no");
 		}else {
@@ -359,9 +377,11 @@ public class ManageScorecardPage extends TestBase {
 	public void paginationButtonsVerificationForMoreThan100Records() {
 		
 		//query to check records count
-		String scorecad_count = null;
+		String username = TestBase.getUser_id();
+    	String userId = UserDBUtil.getCTUserId(username);
+    	int scorecad_count = ScorecardDBUtil.getScorecardsRecords(userId);
 		
-		if(Integer.parseInt(scorecad_count)>100) {
+		if(scorecad_count>100) {
 			nextButtonEnable("yes");
 			lastButtonEnable("yes");
 		}else {
@@ -391,105 +411,263 @@ public class ManageScorecardPage extends TestBase {
     }
     
     //create score card UI
-    public void createAndConfigureScoreacrdSectionUI() {	
+    public void createAndConfigureScoreacrdSectionUI() {
+    	
+    	SoftAssert softAssert = Util.softAssert();
+    	
     	logger.log(LogStatus.INFO, "Verifying if create_scorecard_header_label is displayed");
-    	Util.softAssert().assertTrue(create_scorecard_header_label.isDisplayed(), "create_scorecard_header_label is not dispalyed");
+    	softAssert.assertTrue(create_scorecard_header_label.isDisplayed(), "create_scorecard_header_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if scorecard_title_label is displayed");
-    	Util.softAssert().assertTrue(scorecard_title_label.isDisplayed(), "scorecard_title_label is not dispalyed");    	
+    	softAssert.assertTrue(scorecard_title_label.isDisplayed(), "scorecard_title_label is not dispalyed");    	
     	
     	logger.log(LogStatus.INFO, "Verifying if scorecard_title_textbox is displayed");
-    	Util.softAssert().assertTrue(scorecard_title_textbox.isDisplayed(), "scorecard_title_textbox is not dispalyed");    	
+    	softAssert.assertTrue(scorecard_title_textbox.isDisplayed(), "scorecard_title_textbox is not dispalyed");    	
     	
     	logger.log(LogStatus.INFO, "Verifying if instructions_label is displayed");
-    	Util.softAssert().assertTrue(instructions_label.isDisplayed(), "instructions_label is not dispalyed");
+    	softAssert.assertTrue(instructions_label.isDisplayed(), "instructions_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if instructions_textbox is displayed");
-    	Util.softAssert().assertTrue(instructions_textbox.isDisplayed(), "instructions_textbox is not dispalyed");
+    	softAssert.assertTrue(instructions_textbox.isDisplayed(), "instructions_textbox is not dispalyed");
      	
     	logger.log(LogStatus.INFO, "Verifying if outcome_label_label is displayed");
-    	Util.softAssert().assertTrue(outcome_label_label.isDisplayed(), "outcome_label_label is not dispalyed"); 	
+    	softAssert.assertTrue(outcome_label_label.isDisplayed(), "outcome_label_label is not dispalyed"); 	
     	
     	logger.log(LogStatus.INFO, "Verifying if outcome_label_textbox is displayed");
-    	Util.softAssert().assertTrue(outcome_label_textbox.isDisplayed(), "outcome_label_textbox is not dispalyed");
+    	softAssert.assertTrue(outcome_label_textbox.isDisplayed(), "outcome_label_textbox is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if available_to_label is displayed");
-    	Util.softAssert().assertTrue(available_to_label.isDisplayed(), "available_to_label is not dispalyed");
+    	softAssert.assertTrue(available_to_label.isDisplayed(), "available_to_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if available_to_options");
     	Boolean flag_available_to_options = Util.collectionComarator(exp_available_to_groups_check_uncheck_options, available_to_groups_check_uncheck_options);
-    	Util.softAssert().assertEquals(String.valueOf(flag_available_to_options), "true", "available_to_options are not matching");
+    	softAssert.assertEquals(String.valueOf(flag_available_to_options), "true", "available_to_options are not matching");
 
     	logger.log(LogStatus.INFO, "Verifying if actions_label is displayed");
-    	Util.softAssert().assertTrue(actions_label.isDisplayed(), "actions_label is not dispalyed");
+    	softAssert.assertTrue(actions_label.isDisplayed(), "actions_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if actions_options");
     	Select actions_options = new Select(actions_listbox);
     	List<WebElement> act_actions_options = actions_options.getOptions();
     	Boolean flag_actions_options = Util.collectionComarator(expected_actions_listbox, act_actions_options);
-    	Util.softAssert().assertEquals(String.valueOf(flag_actions_options), "true", "actions options are not matching");
+    	softAssert.assertEquals(String.valueOf(flag_actions_options), "true", "actions options are not matching");
 
     	logger.log(LogStatus.INFO, "Verifying if criteria_title_label  is displayed");
-    	Util.softAssert().assertTrue(criteria_title_label.isDisplayed(), "criteria_title_label is not dispalyed");
+    	softAssert.assertTrue(criteria_title_label.isDisplayed(), "criteria_title_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if criteria_title_textbox  is displayed");
-    	Util.softAssert().assertTrue(criteria_title_textbox.isDisplayed(), "criteria_title_textbox is not dispalyed");
+    	softAssert.assertTrue(criteria_title_textbox.isDisplayed(), "criteria_title_textbox is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if help_text_label  is displayed");
-    	Util.softAssert().assertTrue(help_text_label.isDisplayed(), "help_text_label is not dispalyed");
+    	softAssert.assertTrue(help_text_label.isDisplayed(), "help_text_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if help_text_textbox  is displayed");
-    	Util.softAssert().assertTrue(help_text_textbox.isDisplayed(), "help_text_textbox is not dispalyed");
+    	softAssert.assertTrue(help_text_textbox.isDisplayed(), "help_text_textbox is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if criteria_type_label  is displayed");
-    	Util.softAssert().assertTrue(criteria_type_label.isDisplayed(), "criteria_type_label is not dispalyed");
+    	softAssert.assertTrue(criteria_type_label.isDisplayed(), "criteria_type_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying criteria_type options");
     	Select criteria_type_options = new Select(criteria_listbox);
     	Boolean flag_criteria_type_options = Util.collectionComarator(expected_criteria_listbox, criteria_type_options.getOptions());
-    	Util.softAssert().assertEquals(String.valueOf(flag_criteria_type_options), "true", "criteria_type options are not matching");
+    	softAssert.assertEquals(String.valueOf(flag_criteria_type_options), "true", "criteria_type options are not matching");
     	
     	logger.log(LogStatus.INFO, "Verifying if importance_label  is displayed");
-    	Util.softAssert().assertTrue(importance_label.isDisplayed(), "importance_label is not dispalyed");
+    	softAssert.assertTrue(importance_label.isDisplayed(), "importance_label is not dispalyed");
    
     	logger.log(LogStatus.INFO, "Verifying importance options");
     	Select importance_listbox_options = new Select(importance_listbox);
     	Boolean importance_listbox_flag = Util.collectionComarator(expected_importance_listbox_options, importance_listbox_options.getOptions());
-    	Util.softAssert().assertEquals(String.valueOf(importance_listbox_flag), "true", "importance_listbox_options  are not matching");
+    	softAssert.assertEquals(String.valueOf(importance_listbox_flag), "true", "importance_listbox_options  are not matching");
     	
     	logger.log(LogStatus.INFO, "Verifying if make_this_rerequired_question_label  is displayed");
-    	Util.softAssert().assertTrue(make_this_rerequired_question_label.isDisplayed(), "make_this_rerequired_question_label is not dispalyed");    	
+    	softAssert.assertTrue(make_this_rerequired_question_label.isDisplayed(), "make_this_rerequired_question_label is not dispalyed");    	
     	
     	logger.log(LogStatus.INFO, "Verifying if make_this_rerequired_question_checkbox  is displayed");
-    	Util.softAssert().assertTrue(make_this_rerequired_question_checkbox.isDisplayed(), "make_this_rerequired_question_checkbox is not dispalyed");    	
+    	softAssert.assertTrue(make_this_rerequired_question_checkbox.isDisplayed(), "make_this_rerequired_question_checkbox is not dispalyed");    	
     	
     	logger.log(LogStatus.INFO, "Verifying if pass_label  is displayed");
-    	Util.softAssert().assertTrue(pass_label.isDisplayed(), "pass_label is not dispalyed");  
+    	softAssert.assertTrue(pass_label.isDisplayed(), "pass_label is not dispalyed");  
     	
     	logger.log(LogStatus.INFO, "Verifying if pass_checkbox  is displayed");
-    	Util.softAssert().assertTrue(pass_checkbox.isDisplayed(), "pass_checkbox is not dispalyed");  
+    	softAssert.assertTrue(pass_checkbox.isDisplayed(), "pass_checkbox is not dispalyed");  
 
     	logger.log(LogStatus.INFO, "Verifying if fail_label  is displayed");
-    	Util.softAssert().assertTrue(fail_label.isDisplayed(), "fail_label is not dispalyed");  
+    	softAssert.assertTrue(fail_label.isDisplayed(), "fail_label is not dispalyed");  
 
     	logger.log(LogStatus.INFO, "Verifying if fail_checkbox  is displayed");
-    	Util.softAssert().assertTrue(fail_checkbox.isDisplayed(), "fail_checkbox is not dispalyed");  
+    	softAssert.assertTrue(fail_checkbox.isDisplayed(), "fail_checkbox is not dispalyed");  
     	
     	logger.log(LogStatus.INFO, "Verifying if add_criteria_button  is displayed");
-    	Util.softAssert().assertTrue(add_criteria_button.isDisplayed(), "add_criteria_button is not dispalyed");  
+    	softAssert.assertTrue(add_criteria_button.isDisplayed(), "add_criteria_button is not dispalyed");  
     	
     	logger.log(LogStatus.INFO, "Verifying if save_configure_scorecard_button  is displayed");
-    	Util.softAssert().assertTrue(save_configure_scorecard_button.isDisplayed(), "save_configure_scorecard_button is not dispalyed");  
+    	softAssert.assertTrue(save_configure_scorecard_button.isDisplayed(), "save_configure_scorecard_button is not dispalyed");  
     	
     	logger.log(LogStatus.INFO, "Verifying if cancel_configure_scorecard_button  is displayed");
-    	Util.softAssert().assertTrue(cancel_configure_scorecard_button.isDisplayed(), "cancel_configure_scorecard_button is not dispalyed");  
+    	softAssert.assertTrue(cancel_configure_scorecard_button.isDisplayed(), "cancel_configure_scorecard_button is not dispalyed");  
     	
+    	softAssert.assertAll();
     }
     
+    //To check available to groups are as per DAM
+    public void availableToGroupsDAMCheck() {
+       	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//getting available_to_groups from UI
+    	List<String> ui_available_to_groups = new ArrayList<String>();
+    	List<String> db_available_to_groups = new ArrayList<String>();
+    	
+    	for(WebElement available_to_group:available_to_groups) {
+    		ui_available_to_groups.add(available_to_group.getText().trim());
+    	}
+    	
+    	//getting available_to_groups from db
+    	db_available_to_groups = GroupDBUtil.getChildGroups(TestBase.getOrg_unit_id());
+    	
+    	//verification
+    	Collections.sort(ui_available_to_groups);
+    	Collections.sort(db_available_to_groups);
+        Boolean flag = ui_available_to_groups.equals(db_available_to_groups);
+    	Assert.assertEquals(String.valueOf(flag), "true", "Groups dispalyed in available to list are not as per DAM");
+    }
     
+    //Score card creation  
+    public void createScorecard(String type) throws InterruptedException {
+    	
+    	switch(type) {
+    	case "basic":
+    		basicScorecard();
+    		break;
+    	}
+    } 
     
+    //Basic score card
+    public void basicScorecard() throws InterruptedException {
+    	
+    	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//Entering score card details
+    	scorecard_title_textbox.sendKeys(scorecardTitle);
+    	instructions_textbox.sendKeys(instructions);
+    	outcome_label_textbox.sendKeys(outcomeLabel);
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	addCriteria(1);
+    	
+    	//submitting form
+        save_configure_scorecard_button.click();
+        Assert.assertTrue(success_message_scorecard_creation.isDisplayed(), "scorecard not created successfully");
+        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    }
     
+    //criteria data set
+    public void addCriteria(int noOfCriteria) {
+    	
+    	Integer[] indexes =  {1,2,3};
+    	Integer[] importance = {1,2,3,4,5,6,7,8,9,10};
+    	
+    	for(int i=0;i<noOfCriteria;i++) {
+        	int index = Util.getRandomNumber(indexes);
+        	
+        	//criteria title
+    		criteria_title_textbox.sendKeys(criteriaTitle);
+            
+    		//help text
+    		help_text_textbox.sendKeys(helpText);    
+        	Select select = new Select(criteria_listbox);
+            
+        	//criteria type
+        	if(i==0 || i%2==0) {
+            	select.selectByVisibleText("Pass/Fail");
+            }else {
+            	if(index == 1) {
+                	select.selectByVisibleText("Scale 0-5");	
+            	}else if(index == 2) {
+                	select.selectByVisibleText("Scale 0-3");
+            	}else {
+                	select.selectByVisibleText("Scale 0-10");
+            	}
+            }
+            
+        	//importance
+        	int index_imp = Util.getRandomNumber(importance);
+        	Select imp = new Select(importance_listbox);
+        	imp.selectByVisibleText(String.valueOf(importance[index_imp]));
+        	
+        	//clicking on add criteria button
+            if(noOfCriteria>1 && i<noOfCriteria) {
+            	add_criteria_button.click();
+            }
+    	}
+    } 
     
+    //update score-card
+    public void updateScorecard() throws InterruptedException {
+    	//Opening score-card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//Updating score-card details
+    	scorecard_title_textbox.sendKeys("updated "+scorecardTitle);
+    	
+    	//submitting form
+        save_configure_scorecard_button.click();
+        Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated successfully");
+        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    }
+    
+    //delete score-card
+    public void deleteScorecard(String scorecard_name) throws InterruptedException {
+    	
+    	logger.log(LogStatus.INFO, "Verifying a sccorecard is getting archived");
+    	clickActionButton(scorecard_name, Constants.ManageScorecardPage.archive_scorecard_button);
+    }
+    
+    //cancel score-card creation
+    public void cancelScorecardFeature() {
+    	//Opening score-card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//Entering score-card details
+    	scorecard_title_textbox.sendKeys("");
+    	instructions_textbox.sendKeys("");
+    	outcome_label_textbox.sendKeys("");
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+        criteria_title_textbox.sendKeys("");
+        help_text_textbox.sendKeys("");
+    	
+    	//submitting form
+        cancel_configure_scorecard_button.click();
+        try {
+        	Util.customWait(success_message_scorecard_creation);       	
+        }catch(Exception e) {
+        	logger.log(LogStatus.PASS, "");
+        }
+
+    }
+    
+   
     
     
     
