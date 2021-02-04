@@ -35,6 +35,7 @@ import org.testng.annotations.Parameters;
 import com.relevantcodes.extentreports.*;
 
 import extentReport.*;
+import io.EnvironmentHelper;
 import pom.CampaignAndTrackingNumberPage;
 import pom.CampaignBuilderPage;
 import pom.HomePage;
@@ -76,27 +77,10 @@ public class TestBase
 	
 	
 	@BeforeSuite
-	public void testSetUp() throws Exception{
-        
-		Properties prop=new Properties();
-		
-		FileInputStream file=new FileInputStream(".//property");
-		prop.load(file);
-		prop.setProperty("username", System.getProperty("username"));
-		prop.setProperty("password", System.getProperty("password"));
-		prop.setProperty("Environment", System.getProperty("Environment"));
-		prop.setProperty("url", System.getProperty("url"));
-		prop.setProperty("api_url", System.getProperty("api_url"));
-
-		FileOutputStream fis=new FileOutputStream(new File(".//property"));
-		prop.store(fis, "Env");
-		
-		String user=prop.getProperty("username");
-		TestBase.setUser_id(user);
-		String pass=prop.getProperty("password");
-		TestBase.setPassword(pass);
-		String environment = prop.getProperty("Environment");
-		TestBase.setEnv(environment);
+	public void testSetUp() throws Exception{       		
+		EnvironmentHelper environmentHelper = new EnvironmentHelper();
+		environmentHelper.updateAppConfig();
+		environmentHelper.updateDBConfig();
 	}
 	
 	@Parameters({"browser","url"})
