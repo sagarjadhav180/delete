@@ -227,6 +227,11 @@ public class Util extends TestBase{
 		return number;
 	}
 	
+	public static int getRandomNumber(Integer[] arr){
+		Random randomNumber=new Random();
+		int random_index = randomNumber.nextInt(arr.length);
+		return random_index;
+	}
 		
 	public static String getDate(String Format,String days){
 		SimpleDateFormat dateFormat = new SimpleDateFormat(Format);
