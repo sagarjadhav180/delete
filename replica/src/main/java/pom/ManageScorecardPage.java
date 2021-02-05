@@ -3,21 +3,17 @@ package pom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import PostgresConfig.PropertiesReader;
 import constants.Constants;
 import dbUtil.GroupDBUtil;
 import dbUtil.ScorecardDBUtil;
@@ -64,6 +60,9 @@ public class ManageScorecardPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Successfully Archived Scorecard']")
 	private WebElement success_message_scorecard_deletion;
 
+	@FindBy(xpath="//div[@class='ui-pnotify ']//h4[text()='Scorecard Details Form']")
+	private WebElement alert_message_scorecard_creation;
+	
 	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
 	private WebElement scorecard_deletion_alert_ok_button;
 
@@ -157,6 +156,9 @@ public class ManageScorecardPage extends TestBase {
 	private static List<WebElement> available_to_groups_check_uncheck_options;
 	String[] exp_available_to_groups_check_uncheck_options = {"Check All","Uncheck All"};
 
+	@FindBy(xpath="//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span//ancestor::li//input")
+	private static List<WebElement> available_to_group_checkboxes;
+	
 	//-------------------------------------------------------------------------------------------
 //	@FindBy(xpath="//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span[text()='"+group_name+"']//ancestor::li//input")
 //	private static List<WebElement> available_to_group_checkbox;
@@ -540,13 +542,19 @@ public class ManageScorecardPage extends TestBase {
     	
     	switch(type) {
     	case "basic":
-    		basicScorecard();
+    		scorecard(1);
+    		break;
+    	case "all criteria":
+    		scorecard(4);
+    		break;
+    	case "60 criteria":
+    		scorecard(60);
     		break;
     	}
     } 
     
-    //Basic score card
-    public void basicScorecard() throws InterruptedException {
+    //score card
+    public void scorecard(int criteria) throws InterruptedException {
     	
     	//Opening score card section
     	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
@@ -564,7 +572,7 @@ public class ManageScorecardPage extends TestBase {
         		available_to_groups_check_uncheck_option.click();	
         		break;
     	}
-    	addCriteria(1);
+    	addCriteria(criteria);
     	
     	//submitting form
         save_configure_scorecard_button.click();
@@ -667,16 +675,121 @@ public class ManageScorecardPage extends TestBase {
 
     }
     
-   
+    //create score card Validation -- score card creation without mandatory fields 
+    public void scorecardCreationWithoutMandatoryFields() throws InterruptedException {
+    	
+    	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//Entering score card details
+//    	scorecard_title_textbox.sendKeys(scorecardTitle);
+    	instructions_textbox.sendKeys(instructions);
+    	outcome_label_textbox.sendKeys(outcomeLabel);
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	addCriteria(1);
+    	
+    	//submitting form
+        save_configure_scorecard_button.click();
+        Assert.assertTrue(alert_message_scorecard_creation.isDisplayed(), "alert_message_scorecard_creation is not dispalyed");
+        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    }
     
+    //create score card Validation 
+    public void createScorecardValidations(String validation) throws InterruptedException {
+    	
+    	switch(validation) {
+    	case "cancelFeature":
+    		cancelScorecardFeature();
+    		break;
+    	case "checkaAllGroups":
+    		checkAllGroups();
+    		break;
+    	case "uncheckAllGroups":
+    		uncheckAllGroups();
+    		break;
+    	case "skipMandatoryFields":
+    		scorecardCreationWithoutMandatoryFields();
+    		break;
+    	}
+    }
     
+    //create score card Validation -- to verify check all groups in available to 
+    public void checkAllGroups() {
+    	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//checking all groups
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	
+    	//verifying if all groups are checked
+    	int checkCounter = 0;
+    	for(WebElement available_to_group_checkbox:available_to_group_checkboxes) {
+    		if(!available_to_group_checkbox.getAttribute("checked").trim().equals("checked")) {
+    			checkCounter++;
+    			break;
+    		}else continue;
+    	}
+    	
+    	Assert.assertTrue(checkCounter<1,"All groups are not checked");
+    }
     
+    //create score card Validation -- to verify uncheck all groups in available to 
+    public void uncheckAllGroups() {
+    	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//checking all groups
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	
+    	//Unchecking all groups
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Uncheck All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	
+    	//verifying if all groups are checked
+    	int checkCounter = 0;
+    	for(WebElement available_to_group_checkbox:available_to_group_checkboxes) {
+    		if(available_to_group_checkbox.getAttribute("checked").trim().equals("checked")) {
+    			checkCounter++;
+    			break;
+    		}else continue;
+    	}
+    	
+    	Assert.assertTrue(checkCounter<1,"All groups are not unchecked");
+    }
     
-    
-    
-    
-    
-    
+    //create score card Validation -- to verify deleting criteria 
+    public void deleteCriteria() {
+    	
+    }
     
     
 }
