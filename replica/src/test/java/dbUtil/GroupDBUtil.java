@@ -28,5 +28,23 @@ private static PostgresConnection postgres;
 		}
 		return groups;	
 	}
+
+	@SuppressWarnings("unused")
+	public static String getGroupName(String org_unit_id) {
+		String group= null;
+		postgres = new PostgresConnection();
+		Connection con = postgres.getConnection();
+			
+		ResultSet resultSet = postgres.getResultSet("SELECT * FROM org_unit WHERE org_unit_id = '"+org_unit_id+"'");
+
+		try {
+    	while(resultSet.next()) {
+			group = resultSet.getArray("org_unit_name").toString();			
+		}
+    	}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return group;	
+	}
 	
 }
