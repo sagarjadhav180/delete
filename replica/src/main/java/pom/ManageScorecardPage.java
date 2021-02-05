@@ -151,6 +151,9 @@ public class ManageScorecardPage extends TestBase {
 
 	@FindBy(xpath="//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span[text()]")
 	private static List<WebElement> available_to_groups;
+
+	@FindBy(xpath="//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span//ancestor::li//input[@checked='checked']//parent::label//span[text()]")
+	private static List<WebElement> checked_groups;
 	
 	@FindBy(xpath="(//ul[starts-with(@class,'dropdown-menu dropdown')]//a)[position()>0 and position()<3]")
 	private static List<WebElement> available_to_groups_check_uncheck_options;
@@ -230,6 +233,9 @@ public class ManageScorecardPage extends TestBase {
 	
 	@FindBy(xpath="//i[@ class='fa fa-times']")
 	private static WebElement delete_criteria_button;
+	
+	@FindBy(xpath="//i[@ class='fa fa-times']")
+	private static List<WebElement> delete_criteria_icons;
 
 	@FindBy(xpath="//button[text()=' Add Criteria']")
 	private static WebElement add_criteria_button;
@@ -239,7 +245,19 @@ public class ManageScorecardPage extends TestBase {
 
 	@FindBy(xpath="//button[text()='Save']")
 	private static WebElement save_configure_scorecard_button;
+
+	@FindBy(xpath="//ul[@class='timeline']//div[@class='timeline-icon']")
+	private static List<WebElement> criteria_present_in_scorecard;
 	
+	//AssignedGroups popup
+	@FindBy(xpath="//h3[text()='Assigned Groups']")
+	private static WebElement assigned_groups_header_label;
+	
+	@FindBy(xpath="//h3[text()='Assigned Groups']//following-sibling::button")
+	private static WebElement assigned_groups_pop_up_close_button;
+	
+	@FindBy(xpath="//div[@class='modal-body modalbody panel-body']//div[3]//div[@title]")
+	private static List<WebElement> assigned_groups;
 	
 	public ManageScorecardPage(WebDriver driver){
 		PageFactory.initElements(driver,this);
@@ -363,7 +381,7 @@ public class ManageScorecardPage extends TestBase {
 	public void paginationButtonsVerificationForLessThan100Records() {
 		
 		//query to check records count
-		String username = TestBase.getUser_id();;
+		String username = TestBase.getUser_id();
     	String userId = UserDBUtil.getCTUserId(username);
     	int scorecad_count = ScorecardDBUtil.getScorecardsRecords(userId);
     	
@@ -389,6 +407,49 @@ public class ManageScorecardPage extends TestBase {
 		}else {
 			logger.log(LogStatus.INFO, "records are less than 100");
 		}
+	}
+	
+	//pagination tool box count verification
+	public void paginationToolBoxCount() {
+		
+		String dbCount = null;
+		String uiCount = null;
+		//count from DB
+		String username = TestBase.getUser_id();
+    	String userId = UserDBUtil.getCTUserId(username);
+    	int scorecard_count = ScorecardDBUtil.getScorecardsRecords(userId);
+    	dbCount = String.valueOf(scorecard_count);
+    	
+    	//count from UI
+    	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')).trim();
+    	
+    	//verify
+    	Assert.assertEquals(uiCount, dbCount, "uiCount is not matching with dbCount");
+	}
+	
+	//grid count verification
+	public void gridCount(){
+		String dbCount = null;
+		String uiCount = null;
+		//count from DB
+		String username = TestBase.getUser_id();
+    	String userId = UserDBUtil.getCTUserId(username);
+    	int scorecard_count = ScorecardDBUtil.getScorecardsRecords(userId);
+    	dbCount = String.valueOf(scorecard_count);
+    	
+    	//count from ui
+    	int finalCount = scorecards_count_in_table.size()+0;
+    	
+    	if(Integer.parseInt(dbCount)>100) {
+    		do {
+        		top_next_button.click();
+        		finalCount = finalCount + scorecards_count_in_table.size();
+        	}while(!top_next_button.getAttribute("class").endsWith("disabled"));	
+    	}
+    	
+    	//verify
+    	Assert.assertEquals(uiCount, dbCount, "uiCount is not matching with dbCount");
+    	top_first_button.click();
 	}
 	
 	//To check if available score-card strip is present
@@ -550,6 +611,9 @@ public class ManageScorecardPage extends TestBase {
     	case "60 criteria":
     		scorecard(60);
     		break;
+    	case "uncheckSelfGroup":
+    		scorecardWithoutSelfGroup(1);
+    		break;
     	}
     } 
     
@@ -572,6 +636,109 @@ public class ManageScorecardPage extends TestBase {
         		available_to_groups_check_uncheck_option.click();	
         		break;
     	}
+    	available_to_dropdown.click();
+    	
+    	//adding criteria
+    	addCriteria(criteria);
+    	
+    	//submitting form
+        save_configure_scorecard_button.click();
+        Assert.assertTrue(success_message_scorecard_creation.isDisplayed(), "scorecard not created successfully");
+        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    }
+    
+    //score card for updation
+    public String scorecardForUpdation(int criteria) throws InterruptedException {
+    	
+    	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//Entering score card details
+    	String scorecardTitleToEnter = this.scorecardTitle;
+    	scorecard_title_textbox.sendKeys(scorecardTitleToEnter);
+    	instructions_textbox.sendKeys(instructions);
+    	outcome_label_textbox.sendKeys(outcomeLabel);
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	available_to_dropdown.click();
+    	
+    	//adding criteria
+    	addCriteria(criteria);
+    	
+    	//submitting form
+        save_configure_scorecard_button.click();
+        Assert.assertTrue(success_message_scorecard_creation.isDisplayed(), "scorecard not created successfully");
+        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+		return scorecardTitleToEnter;
+    }
+    
+    //To check available to groups feature
+    public void availableToGroupsFeature() throws InterruptedException {
+
+    	List<String> checkedGroups = new ArrayList<String>();
+    	List<String> assigneedGroups = new ArrayList<String>();
+    	
+    	//creating new score card
+    	String scorecardName = scorecardForUpdation(1);
+
+    	//getting checked groups
+    	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
+    	available_to_dropdown.click();
+    	for( WebElement checked_group:checked_groups) {
+    		checkedGroups.add(checked_group.getText().trim());
+    	}
+    	configure_scorecard_close_button.click();
+    	
+    	//getting assigned groups
+    	WebElement availableToGroupsLink = driver.findElement(By.xpath("//table//tbody//tr//td[text()='"+scorecardName+"']//parent::tr//td//a[contains(text(),'more')]"));
+    	Util.Action().moveToElement(availableToGroupsLink).perform();
+    	availableToGroupsLink.click();
+    	for( WebElement assigneedGroup:assigned_groups) {
+    		assigneedGroups.add(assigneedGroup.getText().trim());
+    	}
+    	assigned_groups_pop_up_close_button.click();
+    	
+    	//checking checked groups and assigned groups 
+    	Collections.sort(checkedGroups);
+    	Collections.sort(assigneedGroups);
+    	Assert.assertEquals(checkedGroups, assigneedGroups, "checkedGroups are not matching with assigned groups displayed");
+
+    }
+    
+    //without adding self group in available to list
+    public void scorecardWithoutSelfGroup(int criteria) throws InterruptedException {
+    	
+    	//Opening score card section
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//Entering score card details
+    	scorecard_title_textbox.sendKeys(scorecardTitle);
+    	instructions_textbox.sendKeys(instructions);
+    	outcome_label_textbox.sendKeys(outcomeLabel);
+    	available_to_dropdown.click();
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	//removing self group
+    	String groupToRemove = dbUtil.GroupDBUtil.getGroupName(TestBase.getOrg_unit_id());
+    	WebElement checkbox = driver.findElement(By.xpath("//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span[text()='"+groupToRemove+"']//ancestor::li//input"));
+    	Util.Action().moveToElement(checkbox).perform();
+    	checkbox.click();
+    	available_to_dropdown.click();
+    	
+    	//adding criteria
     	addCriteria(criteria);
     	
     	//submitting form
@@ -623,10 +790,12 @@ public class ManageScorecardPage extends TestBase {
     
     //update score-card
     public void updateScorecard() throws InterruptedException {
-    	//Opening score-card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//creating new score card
+    	String scorecardName = scorecardForUpdation(1);
+
+    	//editing score card
+    	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
     	
     	//Updating score-card details
     	scorecard_title_textbox.sendKeys("updated "+scorecardTitle);
@@ -788,7 +957,24 @@ public class ManageScorecardPage extends TestBase {
     
     //create score card Validation -- to verify deleting criteria 
     public void deleteCriteria() {
+    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
+    	add_scorecard_button.click();
+    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
     	
+    	//adding criteria
+    	addCriteria(4);
+    	final int totalCriteriaBefore = criteria_present_in_scorecard.size();
+    	
+    	//removing criteria
+    	for(int i=0;i<delete_criteria_icons.size();i++) {
+    		Util.Action().moveToElement(delete_criteria_icons.get(i)).perform();
+    		delete_criteria_icons.get(i).click();
+    		break;
+    	}
+    	
+    	//verifying if criteria is removed
+    	final int totalCriteriaAfter = criteria_present_in_scorecard.size();
+    	Assert.assertTrue(totalCriteriaBefore>totalCriteriaAfter, "criteria is not getting removed");
     }
     
     
