@@ -40,7 +40,6 @@ public class EnvironmentHelper {
 		prop.setProperty("username", DBConnectionParameters.read_and_write_user);
 		prop.setProperty("password", DBConnectionParameters.read_and_write_password);
 		prop.setProperty("driver", DBConnectionParameters.pg_driver);
-		prop.setProperty("username", DBConnectionParameters.staging_db);
 		prop.setProperty("connection_url", "jdbc:postgresql://"+TestBase.getEnv()+"-pg-1.convirza.com:5432");
 		
 		FileOutputStream fis=new FileOutputStream(new File(".//PostgresConfig.properties"));
