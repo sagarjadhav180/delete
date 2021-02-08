@@ -17,7 +17,7 @@ public class UserDBUtil {
 
 			try {
 				while(resultSet.next()) {
-					ctUserId = resultSet.getString("scorecards_count");
+					ctUserId = resultSet.getString("ct_user_id");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
