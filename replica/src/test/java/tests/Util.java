@@ -322,6 +322,14 @@ public class Util extends TestBase{
 		 WebDriverWait.until(ExpectedConditions.visibilityOf(element));
 	}
 
+	public static void waitExecutorForClickabilityOfElement(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(element));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
 	public static void waitExecutorForVisibilityOfElement(WebElement element) {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(element));	
