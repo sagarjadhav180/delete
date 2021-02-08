@@ -945,7 +945,10 @@ public class TrackingNumberBuilderPage extends TestBase {
      	}
      	Util.Action().moveToElement(webhook_checkbox).perform();
          Util.click(webhook_checkbox);
-         Select we=new Select(webhook_dropdown);
+         Select we;
+         do {
+        	 we = new Select(webhook_dropdown);
+         }while(we.getOptions().size()<2);
          Thread.sleep(2000);
          we.selectByVisibleText(webhook);
     }
