@@ -54,6 +54,7 @@ public class Constants {
 	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
 	public static final String webhook_category="Webhook Suite";
+	public static final String manage_scorecard_category="Manage Scorecard Suite";
 	
     public static class LookerReports{
     	
@@ -128,7 +129,7 @@ public class Constants {
 		public static final String campaign_tracking_number_page="Campaign & Tracking Number";
 		public static final String group_User_page="Group & User";
 		public static final String settings_section="Settings";
-		    	
+		public static final String scoreacrd_page="Scorecard";		    	
     	
     	//sub tabs
 		public static final String call_details_report="Call Details";
@@ -148,6 +149,8 @@ public class Constants {
 		public static final String data_append="Data Append";
 		public static final String double_click="DoubleClick";
 		public static final String google_analytics="Google Analytics";
+		public static final String manage_scoreacrd_page="Manage Scorecard";
+		public static final String select_and_score_page="Select & Score";
 	
 	}
     
@@ -399,7 +402,7 @@ public class Constants {
     }
  
     public static String getPostgresConfigFile() {
-		String filePath = Directory.confDir() + Constants.POSTGRES_CONFIG;
+		String filePath = Directory.projectDir + Constants.POSTGRES_CONFIG;
 		return filePath;
 	}
     
