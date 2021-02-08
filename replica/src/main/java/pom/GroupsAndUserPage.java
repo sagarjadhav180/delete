@@ -1071,6 +1071,8 @@ public class GroupsAndUserPage extends TestBase {
 		
 		//Instant Insights section
 		else if (fieldName.equals("instant_insights_section")) {
+			Util.customWait(instant_insights_checkbox);
+			Util.Action().moveToElement(instant_insights_checkbox).perform();
 			Util.click(instant_insights_checkbox);
 //			instant_insights_checkbox.click();
 			voice_prompt_for_call_outcome_textbox.clear();
