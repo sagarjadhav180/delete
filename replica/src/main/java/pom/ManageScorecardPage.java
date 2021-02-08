@@ -2,12 +2,16 @@ package pom;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -169,10 +173,13 @@ public class ManageScorecardPage extends TestBase {
 	
 	@FindBy(xpath="//div[@class='modal-body modalbody panel-body']//label[text()='Actions']")
 	private static WebElement actions_label;
+
+	@FindBy(xpath="")
+	private static WebElement actions_listbox_link;
 	
 	@FindBy(xpath="//div[@class='modal-body modalbody panel-body']//label[text()='Actions']//following-sibling::div//select")
 	private static WebElement actions_listbox;
-	String[] expected_actions_listbox = {"Export", "Import"};
+	String[] expected_actions_listbox = {"-- More Actions --", "Export", "Import"};
 	
 	@FindBy(xpath="//div[@class='modal-body modalbody panel-body']//label[text()='Instructions']")
 	private static WebElement instructions_label;
@@ -293,7 +300,7 @@ public class ManageScorecardPage extends TestBase {
     }
     
     //To check if add score-card button is displayed and clickable
-    public void scorecardButton() {
+    public void addScorecardButton() {
     	//visibility of button
        	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
     	logger.log(LogStatus.INFO, "Verifying if add_scorecard_button is present");
@@ -301,6 +308,7 @@ public class ManageScorecardPage extends TestBase {
     	
     	//clickable
     	logger.log(LogStatus.INFO, "Verifying if add_scorecard_button is clickable");
+    	Util.waitExecutorForClickabilityOfElement(add_scorecard_button);
     	Assert.assertTrue(add_scorecard_button.isEnabled(), "add_scorecard_button is not clickable");       	
     }
     
@@ -378,34 +386,14 @@ public class ManageScorecardPage extends TestBase {
 	}
 	
 	//To check if top and bottom level next and last buttons are disabled when records are less than 100
-	public void paginationButtonsVerificationForLessThan100Records() {
+	public void paginationButtonsInabilityCheck(Boolean _100Records) {
 		
-		//query to check records count
-		String username = TestBase.getUser_id();
-    	String userId = UserDBUtil.getCTUserId(username);
-    	int scorecad_count = ScorecardDBUtil.getScorecardsRecords(userId);
-    	
-		if(scorecad_count<100) {
-			nextButtonEnable("no");
-			lastButtonEnable("no");
-		}else {
-			logger.log(LogStatus.INFO, "records are more than 100");
-		}
-	}
-	
-	//To check if top and bottom level next and last buttons are enabled when records are more than 100
-	public void paginationButtonsVerificationForMoreThan100Records() {
-		
-		//query to check records count
-		String username = TestBase.getUser_id();
-    	String userId = UserDBUtil.getCTUserId(username);
-    	int scorecad_count = ScorecardDBUtil.getScorecardsRecords(userId);
-		
-		if(scorecad_count>100) {
+		if(_100Records == true) {
 			nextButtonEnable("yes");
 			lastButtonEnable("yes");
 		}else {
-			logger.log(LogStatus.INFO, "records are less than 100");
+			nextButtonEnable("no");
+			lastButtonEnable("no");
 		}
 	}
 	
@@ -466,19 +454,23 @@ public class ManageScorecardPage extends TestBase {
     	Assert.assertEquals(String.valueOf(flag), "true", "scorecard table columns are not matching");
     }
     
-    //Add scorecard button
-    public void addScorecardButton() {
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
+    //Add score card button
+    public void addScorecardButtonCheck() {
+        addScorecardClick();
+    	Util.customWait(create_scorecard_header_label);
     	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "add_scorecard_button is not working");
+    	configure_scorecard_close_button.click();
     }
     
     //create score card UI
     public void createAndConfigureScoreacrdSectionUI() {
+   
+    	//opening create score card section
+    	addScorecardClick();
     	
     	SoftAssert softAssert = Util.softAssert();
     	
-    	logger.log(LogStatus.INFO, "Verifying if create_scorecard_header_label is displayed");
+    	Util.customWait(create_scorecard_header_label);
     	softAssert.assertTrue(create_scorecard_header_label.isDisplayed(), "create_scorecard_header_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if scorecard_title_label is displayed");
@@ -503,9 +495,11 @@ public class ManageScorecardPage extends TestBase {
     	softAssert.assertTrue(available_to_label.isDisplayed(), "available_to_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if available_to_options");
+    	available_to_dropdown.click();
     	Boolean flag_available_to_options = Util.collectionComarator(exp_available_to_groups_check_uncheck_options, available_to_groups_check_uncheck_options);
     	softAssert.assertEquals(String.valueOf(flag_available_to_options), "true", "available_to_options are not matching");
-
+    	available_to_dropdown.click();
+    	
     	logger.log(LogStatus.INFO, "Verifying if actions_label is displayed");
     	softAssert.assertTrue(actions_label.isDisplayed(), "actions_label is not dispalyed");
     	
@@ -525,7 +519,8 @@ public class ManageScorecardPage extends TestBase {
     	softAssert.assertTrue(help_text_label.isDisplayed(), "help_text_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if help_text_textbox  is displayed");
-    	softAssert.assertTrue(help_text_textbox.isDisplayed(), "help_text_textbox is not dispalyed");
+    	
+//    	softAssert.assertTrue(help_text_textbox.isDisplayed(), "help_text_textbox is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if criteria_type_label  is displayed");
     	softAssert.assertTrue(criteria_type_label.isDisplayed(), "criteria_type_label is not dispalyed");
@@ -571,6 +566,8 @@ public class ManageScorecardPage extends TestBase {
     	softAssert.assertTrue(cancel_configure_scorecard_button.isDisplayed(), "cancel_configure_scorecard_button is not dispalyed");  
     	
     	softAssert.assertAll();
+    	//closing create score card section
+    	configure_scorecard_close_button.click();
     }
     
     //To check available to groups are as per DAM
@@ -977,5 +974,27 @@ public class ManageScorecardPage extends TestBase {
     	Assert.assertTrue(totalCriteriaBefore>totalCriteriaAfter, "criteria is not getting removed");
     }
     
+    
+    public Boolean scorecards100Records() {
+    	
+    	Boolean _100Records;
+    	//query to get records count
+		String username = TestBase.getUser_id();
+    	String userId = UserDBUtil.getCTUserId(username);
+    	int scorecad_count = ScorecardDBUtil.getScorecardsRecords(userId);
+    	
+    	if(scorecad_count>100)
+    		_100Records = true;
+    	else
+    		_100Records = false;
+    	
+		return _100Records;
+    } 
+    
+    public void addScorecardClick() {
+    	Util.customWait(add_scorecard_button);
+    	wait.until(ExpectedConditions.attributeContains(add_scorecard_button, "aria-disabled", "false"));
+    	add_scorecard_button.click();
+    }
     
 }
