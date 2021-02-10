@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -122,8 +123,26 @@ public class ManageScorecardTest extends TestBase{
 	}
 	
 	
-	//To check if configure score card pop up is opening on add score card button click
+	//To Verify Pagination count with DB
 	@Test(priority=9)
+	public void paginationCountVerification() {
+		logger=extent.startTest("paginationCountVerification", "To Verify Pagination count with DB");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.paginationToolBoxCount();
+	}
+	
+	
+	//To Verify grid count with DB
+	@Test(priority=10)
+	public void gridCountVerification() {
+		logger=extent.startTest("gridCountVerification", "To Verify grid count with DB");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.gridCount();
+	}
+
+	
+	//To check if configure score card pop up is opening on add score card button click
+	@Test(priority=11)
 	public void addScorecardButtonCheck() throws InterruptedException {
 		logger=extent.startTest("addScorecardButtonCheck", "To check if configure score card pop up is opening on add score card button click");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -133,7 +152,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check if UI of configure score card section 
-	@Test(priority=10)
+	@Test(priority=12)
 	public void addScorecardUIVerification() throws InterruptedException {
 		logger=extent.startTest("addScorecardUIVerification", "To check if UI of configure score card section ");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -143,7 +162,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check if groups displayed in Available to list box are as per DAM
-	@Test(priority=11)
+	@Test(priority=13)
 	public void availableToGroupsDAMCheck() throws InterruptedException {
 		logger=extent.startTest("availableToGroupsDAMCheck", "To check if groups displayed in Available to list box are as per DAM");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -153,7 +172,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check if able to create score card 
-	@Test(priority=12)
+	@Test(priority=14)
 	public void createScorecardVerification() throws InterruptedException {
 		logger=extent.startTest("createScorecardVerification", "To check if able to create score card");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -163,7 +182,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check if able to update score card 
-	@Test(priority=13)
+	@Test(priority=15)
 	public void updateScorecardVerification() throws InterruptedException {
 		logger=extent.startTest("updateScorecardVerification", "To check if able to update score card ");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -173,7 +192,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check if able to archive score card 
-	@Test(priority=14)
+	@Test(priority=16)
 	public void deleteScorecardVerification() throws InterruptedException {
 		logger=extent.startTest("deleteScorecardVerification", "To check if able to archive score card ");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -185,7 +204,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check if able to delete criteria 
-	@Test(priority=15)
+	@Test(priority=17)
 	public void deleteScorecardCriteriaVerification() throws InterruptedException {
 		logger=extent.startTest("deleteScorecardCriteriaVerification", "To check if able to delete criteria");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -195,7 +214,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//Verify if alert is displayed if mandatory fields are not entered while creating scoreacrd
-	@Test(priority=16)
+	@Test(priority=18)
 	public void createScorecardWithoutMandatoryFields() throws InterruptedException {
 		logger=extent.startTest("createScorecardWithoutMandatoryFields", "Verify if alert is dispalyed if mandatory fields are not entered while creating scoreacrd");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -205,7 +224,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check Available to feature for uncheck all
-	@Test(priority=17)
+	@Test(priority=19)
 	public void unCheckAllFeatureVerification() throws InterruptedException {
 		logger=extent.startTest("unCheckAllFeatureVerification", "To check Available to feature for un check all");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -215,7 +234,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//To check Available to feature for check all
-	@Test(priority=18)
+	@Test(priority=20)
 	public void checkAllFeatureVerification() throws InterruptedException {
 		logger=extent.startTest("checkAllFeatureVerification", "To check Available to feature for check all");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -225,7 +244,7 @@ public class ManageScorecardTest extends TestBase{
 	
 	
 	//Verify Cancel Feature 
-	@Test(priority=19)
+	@Test(priority=21)
 	public void cancelFeatureVerification() throws InterruptedException {
 		logger=extent.startTest("cancelFeatureVerification", "Verify Cancel Feature ");
 		logger.assignCategory(Constants.manage_scorecard_category);
@@ -234,16 +253,58 @@ public class ManageScorecardTest extends TestBase{
 	}
 	
 	
+	//Verify Available to Feature -- defect on staging 7(only unique groups are displayed in assigned to)
+	@Test(priority=22)
+	public void availableToFeatureVerification() throws InterruptedException {
+		logger=extent.startTest("availableToFeatureVerification", "Verify Available to Feature ");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.availableToGroupsFeature();
+		Thread.sleep(2000);
+	}
 	
 	
+	//Verify if user is able to add 60 criteria
+	@Test(priority=23)
+	public void scorecardWith60Criteria() throws InterruptedException {
+		logger=extent.startTest("scorecardWith60Criteria", "Verify if user is able to add 60 criteria");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecard(Constants.ManageScorecardPage.__60_criteria_scorecard);
+		Thread.sleep(2000);
+	}
 	
 	
+	//Verify if user is not able to add more than 60 criteria
+	@Test(priority=24)
+	public void scorecardWithMoreThan60Criteria() throws InterruptedException {
+		logger=extent.startTest("scorecardWithMoreThan60Criteria", "Verify if user is not able to add more than 60 criteria");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecardValidations(Constants.ManageScorecardPage.__61_criteria_scorecard);
+		Thread.sleep(2000);
+	}
 	
 	
+	//Verify if able to create scorecard without adding self group in available to list
+	@Test(priority=25)
+	public void scorecardCreationWithoutSelfGroup() throws InterruptedException {
+		logger=extent.startTest("scorecardCreationWithoutSelfGroup", "Verify if able to create scorecard without adding self group in available to list");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecard(Constants.ManageScorecardPage.scorecard_without_self_group);
+		Thread.sleep(2000);
+	}
+	
+	
+	//Cleanup Activity
+	public void cleanUp() throws InterruptedException {
+		logger=extent.startTest("cleanUp", "Cleanup Activity");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.cleanUpScorecards();
+		Thread.sleep(2000);
+	}
 	
 	
 	@AfterClass //logging out
-	public void logOut() {
+	public void logOut() throws InterruptedException {
+		cleanUp();
 		LoginPage lp=new LoginPage(driver);
 		logger.log(LogStatus.INFO, "loggin out.. ");
 		lp.logOut();
