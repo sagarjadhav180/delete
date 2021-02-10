@@ -66,6 +66,9 @@ public class ManageScorecardPage extends TestBase {
 
 	@FindBy(xpath="//div[@class='ui-pnotify ']")
 	private WebElement alert_message_scorecard_creation;
+
+	@FindBy(xpath="//div[text()='cannot add more than 60']")
+	private WebElement alert_message_scorecard_creation_61_criteria;
 	
 	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
 	private WebElement scorecard_deletion_alert_ok_button;
@@ -409,7 +412,7 @@ public class ManageScorecardPage extends TestBase {
     	dbCount = String.valueOf(scorecard_count);
     	
     	//count from UI
-    	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')).trim();
+    	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+1).trim();
     	
     	//verify
     	Assert.assertEquals(uiCount, dbCount, "uiCount is not matching with dbCount");
@@ -433,11 +436,13 @@ public class ManageScorecardPage extends TestBase {
         		top_next_button.click();
         		finalCount = finalCount + scorecards_count_in_table.size();
         	}while(!top_next_button.getAttribute("class").endsWith("disabled"));	
-    	}
+    	}else
+    		uiCount = String.valueOf(finalCount);
     	
     	//verify
     	Assert.assertEquals(uiCount, dbCount, "uiCount is not matching with dbCount");
-    	top_first_button.click();
+    	if(scorecard_count>100)
+        	top_first_button.click();
 	}
 	
 	//To check if available score-card strip is present
@@ -628,6 +633,7 @@ public class ManageScorecardPage extends TestBase {
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
+    	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -691,6 +697,7 @@ public class ManageScorecardPage extends TestBase {
     		checkedGroups.add(checked_group.getText().trim());
     	}
     	configure_scorecard_close_button.click();
+        Thread.sleep(2000);
     	
     	//getting assigned groups
     	WebElement availableToGroupsLink = driver.findElement(By.xpath("//table//tbody//tr//td[text()='"+scorecardName+"']//parent::tr//td//a[contains(text(),'more')]"));
@@ -712,15 +719,14 @@ public class ManageScorecardPage extends TestBase {
     public void scorecardWithoutSelfGroup(int criteria) throws InterruptedException {
     	
     	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//Entering score card details
     	scorecard_title_textbox.sendKeys(scorecardTitle);
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
+    	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -752,40 +758,42 @@ public class ManageScorecardPage extends TestBase {
     	for(int i=0;i<noOfCriteria;i++) {
         	int index = Util.getRandomNumber(indexes);
         	
-        	//criteria title
-        	WebElement criteria_title_textbox_to_enter = driver.findElement(By.xpath("//label//b[text()='Criteria Title']//parent::label//following-sibling::div//input[@type='text'][@aria-required='true']"));
-        	criteria_title_textbox_to_enter.sendKeys(criteriaTitle);
-            
-    		//help text
-//    		help_text_textbox.sendKeys(helpText);    
-    		
-        	//criteria type
-    		WebElement criteria_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'available')])["+(i+1)+"]"));
-        	Select select = new Select(criteria_listbox_to_select);
-            
-    		if(i==0 || i%2==0) {
-            	select.selectByVisibleText("Pass/Fail");
-            }else {
-            	if(index == 1) {
-                	select.selectByVisibleText("Scale 0-5");	
-            	}else if(index == 2) {
-                	select.selectByVisibleText("Scale 0-3");
-            	}else {
-                	select.selectByVisibleText("Scale 0-10");
-            	}
-            }
-            
-        	//importance
-    		WebElement importance_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'importance')])["+(i+1)+"]"));
-        	int index_imp = Util.getRandomNumber(importance);
-        	Select imp = new Select(importance_listbox_to_select);
-        	imp.selectByVisibleText(String.valueOf(importance[index_imp]));
-        	
-        	//clicking on add criteria button
-            if(noOfCriteria>1 && i<noOfCriteria-1) {
-            	Util.Action().moveToElement(add_criteria_button).click().perform();
-//            	add_criteria_button.click();
-            }
+        	if(i<60) {
+        		//criteria title
+            	WebElement criteria_title_textbox_to_enter = driver.findElement(By.xpath("//label//b[text()='Criteria Title']//parent::label//following-sibling::div//input[@type='text'][@aria-required='true']"));
+            	criteria_title_textbox_to_enter.sendKeys(criteriaTitle);
+                
+        		//help text
+//        		help_text_textbox.sendKeys(helpText);    
+        		
+            	//criteria type
+        		WebElement criteria_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'available')])["+(i+1)+"]"));
+            	Select select = new Select(criteria_listbox_to_select);
+                
+        		if(i==0 || i%2==0) {
+                	select.selectByVisibleText("Pass/Fail");
+                }else {
+                	if(index == 1) {
+                    	select.selectByVisibleText("Scale 0-5");	
+                	}else if(index == 2) {
+                    	select.selectByVisibleText("Scale 0-3");
+                	}else {
+                    	select.selectByVisibleText("Scale 0-10");
+                	}
+                }
+                
+            	//importance
+        		WebElement importance_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'importance')])["+(i+1)+"]"));
+            	int index_imp = Util.getRandomNumber(importance);
+            	Select imp = new Select(importance_listbox_to_select);
+            	imp.selectByVisibleText(String.valueOf(importance[index_imp]));
+            	
+            	//clicking on add criteria button
+                if(noOfCriteria>1 && i<noOfCriteria-1) {
+                	Util.Action().moveToElement(add_criteria_button).click().perform();
+                }
+        	}else 
+        		break;
     	}
     } 
     
@@ -816,7 +824,7 @@ public class ManageScorecardPage extends TestBase {
     }
     
     //cancel score-card creation
-    public void cancelScorecardFeature() {
+    public void cancelScorecardFeature() throws InterruptedException {
     	//Opening score-card section
     	addScorecardClick();
     	
@@ -825,6 +833,7 @@ public class ManageScorecardPage extends TestBase {
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
+    	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -856,12 +865,14 @@ public class ManageScorecardPage extends TestBase {
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
+    	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
         		available_to_groups_check_uncheck_option.click();	
         		break;
     	}
+    	available_to_dropdown.click();
     	addCriteria(1);
     	
     	//submitting form
@@ -874,6 +885,36 @@ public class ManageScorecardPage extends TestBase {
     	configure_scorecard_close_button.click();
     }
     
+  //create score card Validation -- score card creation with more than 60 criteria 
+    public void scorecardCreationWith61Criteria() throws InterruptedException {
+    	
+    	//Opening score card section
+    	addScorecardClick();
+    	
+    	//Entering score card details
+    	scorecard_title_textbox.sendKeys(scorecardTitle);
+    	instructions_textbox.sendKeys(instructions);
+    	outcome_label_textbox.sendKeys(outcomeLabel);
+    	available_to_dropdown.click();
+    	Thread.sleep(2000);
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	addCriteria(61);
+    	
+    	//alert verification
+    	Util.waitExecutorForVisibilityOfElement(alert_message_scorecard_creation_61_criteria);
+    	Assert.assertTrue(alert_message_scorecard_creation_61_criteria.isDisplayed(), "alert not dispalayed for more than 60 criteria");
+        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+        
+    	//closing score card section
+    	configure_scorecard_close_button.click();
+    }
+    
+
     //create score card Validation 
     public void createScorecardValidations(String validation) throws InterruptedException {
     	
@@ -893,16 +934,20 @@ public class ManageScorecardPage extends TestBase {
     	case "deleteCriteria":
     		deleteCriteria();
     		break;
+    	case "61 criteria":
+    		scorecardCreationWith61Criteria();
+    		break;
     	}
     }
     
     //create score card Validation -- to verify check all groups in available to 
-    public void checkAllGroups() {
+    public void checkAllGroups() throws InterruptedException {
     	//Opening score card section
     	addScorecardClick();
     	
     	//checking all groups
     	available_to_dropdown.click();
+    	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -926,12 +971,13 @@ public class ManageScorecardPage extends TestBase {
     }
     
     //create score card Validation -- to verify uncheck all groups in available to 
-    public void uncheckAllGroups() {
+    public void uncheckAllGroups() throws InterruptedException {
     	//Opening score card section
     	addScorecardClick();
     	
     	//checking all groups
     	available_to_dropdown.click();
+    	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -1009,6 +1055,18 @@ public class ManageScorecardPage extends TestBase {
     	wait.until(ExpectedConditions.attributeContains(add_scorecard_button, "aria-disabled", "false"));
     	Util.Action().moveToElement(add_scorecard_button).click().perform();
     	Util.waitExecutorForVisibilityOfElement(create_scorecard_header_label);
+    }
+    
+    public void cleanUpScorecards() throws InterruptedException {
+    	
+    	List<WebElement> scorecardsToBeDeleted = driver.findElements(By.xpath("//table//tbody//tr//td[text()][1]"));
+    	
+    	for(int i=0;i<scorecardsToBeDeleted.size();i++) {
+    		String scorecard_name = scorecardsToBeDeleted.get(i).getText().trim();
+    		if(scorecard_name.startsWith("SJ") || scorecard_name.startsWith("updated SJ"))
+    		clickActionButton(scorecard_name, Constants.ManageScorecardPage.archive_scorecard_button);
+    	}
+    	
     }
     
 }
