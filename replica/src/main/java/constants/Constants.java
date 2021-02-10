@@ -395,6 +395,7 @@ public class Constants {
     	//score card creation
     	public static final String basic_scorecard = "basic";
     	public static final String __60_criteria_scorecard = "60 criteria";
+    	public static final String __61_criteria_scorecard = "61 criteria";
     	public static final String all_criteria_scorecard = "all criteria";
     	public static final String scorecard_without_self_group = "uncheckSelfGroup";
     	//score card creation validations
