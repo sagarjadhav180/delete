@@ -64,7 +64,7 @@ public class ManageScorecardPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Successfully Archived Scorecard']")
 	private WebElement success_message_scorecard_deletion;
 
-	@FindBy(xpath="//div[@class='ui-pnotify ']//h4[text()='Scorecard Details Form']")
+	@FindBy(xpath="//div[@class='ui-pnotify ']")
 	private WebElement alert_message_scorecard_creation;
 	
 	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
@@ -210,7 +210,7 @@ public class ManageScorecardPage extends TestBase {
 	@FindBy(xpath="//label/b[text()='Help Text']")
 	private static WebElement help_text_label;
 
-	@FindBy(xpath="//label/b[text()='Help Text']/..//parent::div//textarea")
+	@FindBy(xpath="//div[contains(@id,'TextElement')]")
 	private static WebElement help_text_textbox;
 	
 	@FindBy(xpath="//label//b[text()='Criteria Type']")
@@ -283,7 +283,7 @@ public class ManageScorecardPage extends TestBase {
 			break;
 		case "Archive" :
 			driver.switchTo().activeElement();
-			Util.Action().moveToElement(scorecard_deletion_alert_ok_button).perform();	
+			Util.waitExecutorForVisibilityOfElement(scorecard_deletion_alert_ok_button);
 			scorecard_deletion_alert_ok_button.click();
 			Util.customWait(success_message_scorecard_deletion);
 			Assert.assertTrue(success_message_scorecard_deletion.isDisplayed(),"Scorecard not deleted successfully");
@@ -455,9 +455,9 @@ public class ManageScorecardPage extends TestBase {
     }
     
     //Add score card button
-    public void addScorecardButtonCheck() {
+    public void addScorecardButtonCheck() throws InterruptedException {
         addScorecardClick();
-    	Util.customWait(create_scorecard_header_label);
+        Thread.sleep(1000);
     	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "add_scorecard_button is not working");
     	configure_scorecard_close_button.click();
     }
@@ -470,7 +470,6 @@ public class ManageScorecardPage extends TestBase {
     	
     	SoftAssert softAssert = Util.softAssert();
     	
-    	Util.customWait(create_scorecard_header_label);
     	softAssert.assertTrue(create_scorecard_header_label.isDisplayed(), "create_scorecard_header_label is not dispalyed");
     	
     	logger.log(LogStatus.INFO, "Verifying if scorecard_title_label is displayed");
@@ -573,14 +572,14 @@ public class ManageScorecardPage extends TestBase {
     //To check available to groups are as per DAM
     public void availableToGroupsDAMCheck() {
        	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//getting available_to_groups from UI
     	List<String> ui_available_to_groups = new ArrayList<String>();
     	List<String> db_available_to_groups = new ArrayList<String>();
     	
+    	Util.waitExecutorForVisibilityOfElement(available_to_dropdown);
+    	available_to_dropdown.click();
     	for(WebElement available_to_group:available_to_groups) {
     		ui_available_to_groups.add(available_to_group.getText().trim());
     	}
@@ -593,6 +592,9 @@ public class ManageScorecardPage extends TestBase {
     	Collections.sort(db_available_to_groups);
         Boolean flag = ui_available_to_groups.equals(db_available_to_groups);
     	Assert.assertEquals(String.valueOf(flag), "true", "Groups dispalyed in available to list are not as per DAM");
+    	
+    	//Closing score card section
+    	configure_scorecard_close_button.click();
     }
     
     //Score card creation  
@@ -618,9 +620,8 @@ public class ManageScorecardPage extends TestBase {
     public void scorecard(int criteria) throws InterruptedException {
     	
     	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
+    	Thread.sleep(2000);
     	
     	//Entering score card details
     	scorecard_title_textbox.sendKeys(scorecardTitle);
@@ -645,12 +646,10 @@ public class ManageScorecardPage extends TestBase {
     }
     
     //score card for updation
-    public String scorecardForUpdation(int criteria) throws InterruptedException {
+    public String createScorecardForUpdation(int criteria) throws InterruptedException {
     	
     	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//Entering score card details
     	String scorecardTitleToEnter = this.scorecardTitle;
@@ -683,7 +682,7 @@ public class ManageScorecardPage extends TestBase {
     	List<String> assigneedGroups = new ArrayList<String>();
     	
     	//creating new score card
-    	String scorecardName = scorecardForUpdation(1);
+    	String scorecardName = createScorecardForUpdation(1);
 
     	//getting checked groups
     	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
@@ -754,14 +753,17 @@ public class ManageScorecardPage extends TestBase {
         	int index = Util.getRandomNumber(indexes);
         	
         	//criteria title
-    		criteria_title_textbox.sendKeys(criteriaTitle);
+        	WebElement criteria_title_textbox_to_enter = driver.findElement(By.xpath("//label//b[text()='Criteria Title']//parent::label//following-sibling::div//input[@type='text'][@aria-required='true']"));
+        	criteria_title_textbox_to_enter.sendKeys(criteriaTitle);
             
     		//help text
-    		help_text_textbox.sendKeys(helpText);    
-        	Select select = new Select(criteria_listbox);
-            
+//    		help_text_textbox.sendKeys(helpText);    
+    		
         	//criteria type
-        	if(i==0 || i%2==0) {
+    		WebElement criteria_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'available')])["+(i+1)+"]"));
+        	Select select = new Select(criteria_listbox_to_select);
+            
+    		if(i==0 || i%2==0) {
             	select.selectByVisibleText("Pass/Fail");
             }else {
             	if(index == 1) {
@@ -774,13 +776,15 @@ public class ManageScorecardPage extends TestBase {
             }
             
         	//importance
+    		WebElement importance_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'importance')])["+(i+1)+"]"));
         	int index_imp = Util.getRandomNumber(importance);
-        	Select imp = new Select(importance_listbox);
+        	Select imp = new Select(importance_listbox_to_select);
         	imp.selectByVisibleText(String.valueOf(importance[index_imp]));
         	
         	//clicking on add criteria button
-            if(noOfCriteria>1 && i<noOfCriteria) {
-            	add_criteria_button.click();
+            if(noOfCriteria>1 && i<noOfCriteria-1) {
+            	Util.Action().moveToElement(add_criteria_button).click().perform();
+//            	add_criteria_button.click();
             }
     	}
     } 
@@ -789,12 +793,13 @@ public class ManageScorecardPage extends TestBase {
     public void updateScorecard() throws InterruptedException {
     	
     	//creating new score card
-    	String scorecardName = scorecardForUpdation(1);
+    	String scorecardName = createScorecardForUpdation(1);
 
     	//editing score card
     	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
     	
     	//Updating score-card details
+    	scorecard_title_textbox.clear();
     	scorecard_title_textbox.sendKeys("updated "+scorecardTitle);
     	
     	//submitting form
@@ -813,14 +818,12 @@ public class ManageScorecardPage extends TestBase {
     //cancel score-card creation
     public void cancelScorecardFeature() {
     	//Opening score-card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//Entering score-card details
-    	scorecard_title_textbox.sendKeys("");
-    	instructions_textbox.sendKeys("");
-    	outcome_label_textbox.sendKeys("");
+    	scorecard_title_textbox.sendKeys(scorecardTitle);
+    	instructions_textbox.sendKeys(instructions);
+    	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
@@ -828,13 +831,14 @@ public class ManageScorecardPage extends TestBase {
         		available_to_groups_check_uncheck_option.click();	
         		break;
     	}
-        criteria_title_textbox.sendKeys("");
-        help_text_textbox.sendKeys("");
+    	available_to_dropdown.click();
+        addCriteria(1);
+//        help_text_textbox.sendKeys("");
     	
     	//submitting form
         cancel_configure_scorecard_button.click();
         try {
-        	Util.customWait(success_message_scorecard_creation);       	
+        	Assert.assertTrue(success_message_scorecard_creation.isDisplayed());
         }catch(Exception e) {
         	logger.log(LogStatus.PASS, "");
         }
@@ -845,9 +849,7 @@ public class ManageScorecardPage extends TestBase {
     public void scorecardCreationWithoutMandatoryFields() throws InterruptedException {
     	
     	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//Entering score card details
 //    	scorecard_title_textbox.sendKeys(scorecardTitle);
@@ -864,8 +866,12 @@ public class ManageScorecardPage extends TestBase {
     	
     	//submitting form
         save_configure_scorecard_button.click();
+        Util.waitExecutorForVisibilityOfElement(alert_message_scorecard_creation);
         Assert.assertTrue(alert_message_scorecard_creation.isDisplayed(), "alert_message_scorecard_creation is not dispalyed");
         Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+        
+    	//closing score card section
+    	configure_scorecard_close_button.click();
     }
     
     //create score card Validation 
@@ -884,15 +890,16 @@ public class ManageScorecardPage extends TestBase {
     	case "skipMandatoryFields":
     		scorecardCreationWithoutMandatoryFields();
     		break;
+    	case "deleteCriteria":
+    		deleteCriteria();
+    		break;
     	}
     }
     
     //create score card Validation -- to verify check all groups in available to 
     public void checkAllGroups() {
     	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//checking all groups
     	available_to_dropdown.click();
@@ -912,15 +919,16 @@ public class ManageScorecardPage extends TestBase {
     		}else continue;
     	}
     	
-    	Assert.assertTrue(checkCounter<1,"All groups are not checked");
+    	Assert.assertTrue(checkCounter>0,"All groups are not checked");
+    	
+    	//Closing score card section
+    	configure_scorecard_close_button.click();
     }
     
     //create score card Validation -- to verify uncheck all groups in available to 
     public void uncheckAllGroups() {
     	//Opening score card section
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	addScorecardClick();
     	
     	//checking all groups
     	available_to_dropdown.click();
@@ -932,7 +940,6 @@ public class ManageScorecardPage extends TestBase {
     	}
     	
     	//Unchecking all groups
-    	available_to_dropdown.click();
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Uncheck All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -940,7 +947,7 @@ public class ManageScorecardPage extends TestBase {
         		break;
     	}
     	
-    	//verifying if all groups are checked
+    	//verifying if all groups are unchecked
     	int checkCounter = 0;
     	for(WebElement available_to_group_checkbox:available_to_group_checkboxes) {
     		if(available_to_group_checkbox.getAttribute("checked").trim().equals("checked")) {
@@ -950,13 +957,16 @@ public class ManageScorecardPage extends TestBase {
     	}
     	
     	Assert.assertTrue(checkCounter<1,"All groups are not unchecked");
+    	
+    	//close score card section
+    	configure_scorecard_close_button.click();
     }
     
     //create score card Validation -- to verify deleting criteria 
     public void deleteCriteria() {
-    	Util.waitExecutorForVisibilityOfElement(add_scorecard_button);
-    	add_scorecard_button.click();
-    	Assert.assertTrue(create_scorecard_header_label.isDisplayed(), "Scorecard creation window not opened");
+    	
+    	//opening score card section
+    	addScorecardClick();
     	
     	//adding criteria
     	addCriteria(4);
@@ -972,6 +982,9 @@ public class ManageScorecardPage extends TestBase {
     	//verifying if criteria is removed
     	final int totalCriteriaAfter = criteria_present_in_scorecard.size();
     	Assert.assertTrue(totalCriteriaBefore>totalCriteriaAfter, "criteria is not getting removed");
+    	
+    	//close score card section
+    	configure_scorecard_close_button.click();
     }
     
     
@@ -994,7 +1007,8 @@ public class ManageScorecardPage extends TestBase {
     public void addScorecardClick() {
     	Util.customWait(add_scorecard_button);
     	wait.until(ExpectedConditions.attributeContains(add_scorecard_button, "aria-disabled", "false"));
-    	add_scorecard_button.click();
+    	Util.Action().moveToElement(add_scorecard_button).click().perform();
+    	Util.waitExecutorForVisibilityOfElement(create_scorecard_header_label);
     }
     
 }
