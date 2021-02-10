@@ -124,20 +124,119 @@ public class ManageScorecardTest extends TestBase{
 	
 	//To check if configure score card pop up is opening on add score card button click
 	@Test(priority=9)
-	public void addScorecardButtonCheck() {
+	public void addScorecardButtonCheck() throws InterruptedException {
 		logger=extent.startTest("addScorecardButtonCheck", "To check if configure score card pop up is opening on add score card button click");
 		logger.assignCategory(Constants.manage_scorecard_category);
 		manageScorecardPage.addScorecardButtonCheck();
+		Thread.sleep(2000);
 	}
 	
 	
 	//To check if UI of configure score card section 
 	@Test(priority=10)
-	public void addScorecardUIVerification() {
+	public void addScorecardUIVerification() throws InterruptedException {
 		logger=extent.startTest("addScorecardUIVerification", "To check if UI of configure score card section ");
 		logger.assignCategory(Constants.manage_scorecard_category);
 		manageScorecardPage.createAndConfigureScoreacrdSectionUI();
+		Thread.sleep(2000);
 	}
+	
+	
+	//To check if groups displayed in Available to list box are as per DAM
+	@Test(priority=11)
+	public void availableToGroupsDAMCheck() throws InterruptedException {
+		logger=extent.startTest("availableToGroupsDAMCheck", "To check if groups displayed in Available to list box are as per DAM");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.availableToGroupsDAMCheck();
+		Thread.sleep(2000);
+	}
+	
+	
+	//To check if able to create score card 
+	@Test(priority=12)
+	public void createScorecardVerification() throws InterruptedException {
+		logger=extent.startTest("createScorecardVerification", "To check if able to create score card");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecard(Constants.ManageScorecardPage.basic_scorecard);
+		Thread.sleep(2000);
+	}
+	
+	
+	//To check if able to update score card 
+	@Test(priority=13)
+	public void updateScorecardVerification() throws InterruptedException {
+		logger=extent.startTest("updateScorecardVerification", "To check if able to update score card ");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.updateScorecard();
+		Thread.sleep(2000);
+	}
+	
+	
+	//To check if able to archive score card 
+	@Test(priority=14)
+	public void deleteScorecardVerification() throws InterruptedException {
+		logger=extent.startTest("deleteScorecardVerification", "To check if able to archive score card ");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		String scorecard_name = manageScorecardPage.createScorecardForUpdation(1);
+		Thread.sleep(2000);
+		manageScorecardPage.deleteScorecard(scorecard_name);
+		Thread.sleep(2000);
+	}
+	
+	
+	//To check if able to delete criteria 
+	@Test(priority=15)
+	public void deleteScorecardCriteriaVerification() throws InterruptedException {
+		logger=extent.startTest("deleteScorecardCriteriaVerification", "To check if able to delete criteria");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecardValidations(Constants.ManageScorecardPage.scorecard_delete_criteria);
+		Thread.sleep(2000);
+	}
+	
+	
+	//Verify if alert is displayed if mandatory fields are not entered while creating scoreacrd
+	@Test(priority=16)
+	public void createScorecardWithoutMandatoryFields() throws InterruptedException {
+		logger=extent.startTest("createScorecardWithoutMandatoryFields", "Verify if alert is dispalyed if mandatory fields are not entered while creating scoreacrd");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecardValidations(Constants.ManageScorecardPage.scorecard_skip_mandatory_fields);
+		Thread.sleep(2000);
+	}
+	
+	
+	//To check Available to feature for uncheck all
+	@Test(priority=17)
+	public void unCheckAllFeatureVerification() throws InterruptedException {
+		logger=extent.startTest("unCheckAllFeatureVerification", "To check Available to feature for un check all");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecardValidations(Constants.ManageScorecardPage.scorecard_uncheck_all_groups);
+		Thread.sleep(2000);
+	}
+	
+	
+	//To check Available to feature for check all
+	@Test(priority=18)
+	public void checkAllFeatureVerification() throws InterruptedException {
+		logger=extent.startTest("checkAllFeatureVerification", "To check Available to feature for check all");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecardValidations(Constants.ManageScorecardPage.scorecard_check_all_groups);
+		Thread.sleep(2000);
+	}
+	
+	
+	//Verify Cancel Feature 
+	@Test(priority=19)
+	public void cancelFeatureVerification() throws InterruptedException {
+		logger=extent.startTest("cancelFeatureVerification", "Verify Cancel Feature ");
+		logger.assignCategory(Constants.manage_scorecard_category);
+		manageScorecardPage.createScorecardValidations(Constants.ManageScorecardPage.scorecard_cancel_feature);
+		Thread.sleep(2000);
+	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -146,7 +245,6 @@ public class ManageScorecardTest extends TestBase{
 	@AfterClass //logging out
 	public void logOut() {
 		LoginPage lp=new LoginPage(driver);
-		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");
 		lp.logOut();
 	}
