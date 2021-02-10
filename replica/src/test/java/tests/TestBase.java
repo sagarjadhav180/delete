@@ -81,6 +81,7 @@ public class TestBase
 		EnvironmentHelper environmentHelper = new EnvironmentHelper();
 		environmentHelper.updateAppConfig();
 		environmentHelper.updateDBConfig();
+		environmentHelper.updateTestBaseProperties();
 	}
 	
 	@Parameters({"browser","url"})
