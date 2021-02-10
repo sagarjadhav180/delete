@@ -24,10 +24,10 @@ public class TestData extends TestBase{
 		rd.login();
 		
 		//setting group_id
-		String group=Util.readingFromDB("SELECT ct_user_ou_id AS count FROM ct_user WHERE username LIKE '"+TestBase.getUser_id()+"'");
-		System.out.println("group "+group);
-		TestBase.setOrg_unit_id(group);
-		TestBase.setCampaign_ou_id(group);
+//		String group=Util.readingFromDB("SELECT ct_user_ou_id AS count FROM ct_user WHERE username LIKE '"+TestBase.getUser_id()+"'");
+//		System.out.println("group "+group);
+//		TestBase.setOrg_unit_id(group);
+//		TestBase.setCampaign_ou_id(group);
 		
 		//group
 //		String group=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND org_unit_status='active'");
