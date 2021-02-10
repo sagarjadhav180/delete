@@ -392,7 +392,17 @@ public class Constants {
     	//Action Buttons
     	public static final String edit_scorecard_button = "Edit";
     	public static final String archive_scorecard_button = "Archive";
-    
+    	//score card creation
+    	public static final String basic_scorecard = "basic";
+    	public static final String __60_criteria_scorecard = "60 criteria";
+    	public static final String all_criteria_scorecard = "all criteria";
+    	public static final String scorecard_without_self_group = "uncheckSelfGroup";
+    	//score card creation validations
+    	public static final String scorecard_cancel_feature = "cancelFeature";
+    	public static final String scorecard_check_all_groups = "checkaAllGroups";
+    	public static final String scorecard_uncheck_all_groups = "uncheckAllGroups";
+    	public static final String scorecard_skip_mandatory_fields = "skipMandatoryFields";
+    	public static final String scorecard_delete_criteria = "deleteCriteria";
     }
         
     public static class SelectAndScorePage{	
