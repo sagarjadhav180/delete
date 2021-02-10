@@ -169,6 +169,7 @@ public class Util extends TestBase{
 	
 	public static void scrollFunction(WebElement element){
         System.out.println("scrolling function called..");
+        jse = getJavascriptExecutor();
 		jse.executeScript("arguments[0].scrollIntoView(true)", element);
 		
 	}
@@ -182,6 +183,7 @@ public class Util extends TestBase{
 	
 	
 	public static void click(WebElement elementToBeClicked){
+		jse = getJavascriptExecutor();
 		jse.executeScript("arguments[0].click();",elementToBeClicked );
 	}
 	
