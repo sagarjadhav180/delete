@@ -75,7 +75,7 @@ public class SendEmail extends TestBase {
 				+ "<span style='color:black;font-size:13px;font-family:sans-serif'><b>Project:</b>Convirza for Advertisers</span><br> <span style='color:black;font-size:13px;font-family:sans-serif'><b>Date of build: </b>"
 				+ new java.util.Date() + "<br>"
 				+ "<span style='color:black;font-size:13px;font-family:sans-serif'><b>Build url: </b>"
-				+ TestBase.Base_Url
+				+ "https://"+System.getProperty("Environment")+"-cmo-1.convirza.com"
 				+ "</span><br><br><br> <b><span style='color:black;font-size:13px;font-family:sans-serif'> Number of Test Cases Failed: </b>"
 				+ totalFailedTestCase + "</span>"
 				+ "<br> <b><span style='color:black;font-size:13px;font-family:sans-serif'> Number of Test Cases Passed: </b>"
