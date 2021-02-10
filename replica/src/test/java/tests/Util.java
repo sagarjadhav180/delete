@@ -258,6 +258,7 @@ public class Util extends TestBase{
 	}
 	
 	public static JavascriptExecutor getJavascriptExecutor(){
+		JavascriptExecutor jse=(JavascriptExecutor)driver;
 		return jse;
 		
 	}
