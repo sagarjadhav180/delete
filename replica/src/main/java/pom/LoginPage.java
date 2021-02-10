@@ -389,7 +389,8 @@ Properties prop=new Properties();
 
 		wait.until(ExpectedConditions.visibilityOf(profileButton));
 		profileButton.click();
-		Util.click(logoutLink);
+		wait.until(ExpectedConditions.visibilityOf(logoutLink));		
+		Util.Action().moveToElement(logoutLink).click().perform();
 		wait.until(ExpectedConditions.visibilityOf(username_Field));
 
 	}
