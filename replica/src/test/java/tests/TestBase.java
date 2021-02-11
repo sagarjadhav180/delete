@@ -211,7 +211,7 @@ public class TestBase
 	}
 
 	
-//	@AfterTest
+	@AfterTest
 	public void tearDown() throws Exception{
 		if(driver!=null){
 		driver.quit();
@@ -227,7 +227,6 @@ public class TestBase
 		totalFailedTestCases = result[1];
 		totalSkipedTestCases = result[2];
 		SendEmail.execute("Extent.html", totalFailedTestCases, totalPassedTestCases, totalSkipedTestCases);
-		driver.quit();
 	}
 
 }
