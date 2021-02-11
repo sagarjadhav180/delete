@@ -23,50 +23,6 @@ public class TestData extends TestBase{
 		//logging in 
 		rd.login();
 		
-		//setting group_id
-//		String group=Util.readingFromDB("SELECT ct_user_ou_id AS count FROM ct_user WHERE username LIKE '"+TestBase.getUser_id()+"'");
-//		System.out.println("group "+group);
-//		TestBase.setOrg_unit_id(group);
-//		TestBase.setCampaign_ou_id(group);
-		
-		//group
-//		String group=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND org_unit_status='active'");
-//		System.out.println("group "+group);
-//		if(group!=null){
-//			TestBase.setOrg_unit_id(group);
-//		    TestBase.setCampaign_ou_id(group);
-//		}  
-//		else{
-//			System.out.println("creating group");
-//			rd.createGroup();
-//			rd.navigateToGroup();
-//			String orgUnitID=Util.readingFromDB("SELECT org_unit_id as count FROM org_unit WHERE org_unit_name LIKE '"+account+"' AND top_ou_id='"+org_unit_id+"' AND org_unit_status='active'");
-//		    TestBase.setOrg_unit_id(orgUnitID);
-//		    TestBase.setCampaign_ou_id(orgUnitID);
-//		}
-		
-		//user
-//		String user=Util.readingFromDB("SELECT count(*) as count FROM ct_user WHERE username LIKE '"+user_name+"'");
-//		System.out.println("user "+user);		
-//		if(user!=null){
-//
-//			TestBase.setFirst_name(first_name);
-//			TestBase.setLast_name(last_name);
-//			TestBase.setFirst_last_name(first_last_name);
-//		}
-//		else{
-//			System.out.println("creating user");
-//			rd.createUser(first_name,last_name,user_name);
-//			TestBase.setUser_id(user_name);
-//			TestBase.setFirst_name(first_name);
-//			TestBase.setLast_name(last_name);
-//			TestBase.setFirst_last_name(first_last_name);
-//			
-//			TestDataCreation tc=new TestDataCreation();
-//			tc.logOut();
-//			tc.login();
-//		}
-		
 		//campaign
 		System.out.println("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"' AND campaign_status='active'");
 		String campaign=Util.readingFromDB("SELECT campaign_id as count FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"' AND campaign_status='active'");
@@ -94,7 +50,6 @@ public class TestData extends TestBase{
 			rd.createWebhook();
 		}
 
-		
 		//tracking number
 		String tracking_number=Util.readingFromDB("SELECT count(*) as count FROM campaign_provisioned_route WHERE campaign_id IN (SELECT campaign_id FROM campaign WHERE campaign_name LIKE '"+campaignToBeEdited+"' AND campaign_ou_id='"+TestBase.getOrg_unit_id()+"') AND provisioned_route_id IN (SELECT provisioned_route_id FROM provisioned_route WHERE provisioned_route_status='active')");
 		System.out.println("tracking_number "+tracking_number);
@@ -102,10 +57,9 @@ public class TestData extends TestBase{
 			rd.createTrackingNumber();	
 		}
 		
-		//call upload
-	//	CallUpload callUpload = new CallUpload();
-
-		//callUpload.uploadCalls();
+//		call upload -- module not installed on staging 7 
+//		CallUpload callUpload = new CallUpload();
+//		callUpload.uploadCalls();
 
 		//groups n user settings
 		String record_call_checkbox=Util.readingFromDB("SELECT record_call as count FROM default_provisioned_route WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'");
@@ -126,7 +80,6 @@ public class TestData extends TestBase{
 			System.out.println("updating default tn settings");
         	rd.trackingNumberSettings();	
 		}
-        
         
         //Time zone settings
 		String time_zone=Util.readingFromDB("SELECT timezone as count FROM ct_user_detail WHERE ct_user_id=(SELECT ct_user_id FROM ct_user WHERE username LIKE '"+user_id+"')");
