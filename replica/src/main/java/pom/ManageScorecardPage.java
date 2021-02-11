@@ -351,7 +351,7 @@ public class ManageScorecardPage extends TestBase {
     	Assert.assertTrue(bottom_next_button.isDisplayed(), "bottom_next_button is not displayed");   
 	}
 	
-	//To check if next button is enabled if records are less than 100
+	//To check if next button is enabled based on records
 	public void nextButtonEnable(String checkForClickable) {
 		switch(checkForClickable) {
 		case "yes" :
@@ -369,7 +369,7 @@ public class ManageScorecardPage extends TestBase {
 		}
 	}
 	
-	//To check if last button is enabled if records are less than 100
+	//To check if last button is enabled based on records 
 	public void lastButtonEnable(String checkForClickable) {
 		
 		switch(checkForClickable) {
