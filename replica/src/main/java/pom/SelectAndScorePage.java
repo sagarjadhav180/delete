@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -37,28 +38,65 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//div[@class='options']//button")
 	private WebElement date_range_filter_button;
 	
-	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft'][2]//button[text()='OK']")
+	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//button[text()='OK']")
 	private WebElement date_range_filter_ok_button;
 
-	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft'][2]//button[text()='Cancel']")
+	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//button[text()='Cancel']")
 	private WebElement date_range_filter_cancel_button;
 	
-	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft'][2]//ul//li")
+	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//ul//li")
 	private List<WebElement> actual_date_filter_elements;		
 	String[] expected_date_filter_elements={"Today","Yesterday","Last 7 Days","Last 30 Days","This Month","Last Month","Custom Range"};
 	
-	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft'][2]//div[@class='calendar left']")
+	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//div[@class='calendar left']")
 	private WebElement date_range_filter_left_calender;
 	
-	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft'][2]//div[@class='calendar right']")
+	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//div[@class='calendar right']")
 	private WebElement date_range_filter_right_calender;
 	
 	@FindBy(xpath="(//span[text()='Export']//parent::button[@aria-hidden='false'])")
 	private WebElement export_button;
 	
+	//notification section
 	@FindBy(xpath="//button[text()=' Notifications']")
 	private WebElement notifications_button;	
 
+	@FindBy(xpath="//h3[@class='modal-title' and text()='Score Notifications']")
+	private WebElement score_notifications_label;
+	
+	@FindBy(xpath="//label[text()='Select action when you want to get a notification']")
+	private WebElement score_notifications_header_note;
+
+	@FindBy(xpath="//div[@class='timeline-header']//span[text()=' Action']")
+	private WebElement score_notifications_action_label;
+	
+	@FindBy(xpath="//h3[text()='If']")
+	private WebElement score_notifications_condition_label;
+	
+	@FindBy(xpath="//h3[text()='If']/..//following-sibling::div//select")
+	private WebElement score_notifications_condition_listbox;
+	
+	@FindBy(xpath="//h3[text()='Then']")
+	private WebElement score_notifications_then_label;
+	
+	@FindBy(xpath="//h3[text()='Then']/..//following-sibling::div//select")
+	private WebElement score_notifications_then_listbox;
+	
+	@FindBy(xpath="//h3[text()='Then']/..//following-sibling::div//div[@aria-hidden='false']//input")
+	private WebElement score_notifications_then_textbox;
+	
+	@FindBy(xpath="//div[@class='timeline-footer text-right']//a[text()='Add Action']")
+	private WebElement score_notifications_add_action_button;
+	
+	@FindBy(xpath="//h3[@class='modal-title']//following-sibling::button")
+	private WebElement score_notifications_condition_close_button;
+
+	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Cancel']")
+	private WebElement score_notifications_cancel_button;
+	
+	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Save']")
+	private WebElement score_notifications_save_button;
+	
 	//status filters
 	@FindBy(xpath="//div[text()='Filter by Status:']")
 	private WebElement filter_status_label;		
@@ -99,9 +137,87 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//button[text()='Advanced filter']")
 	private WebElement advanced_filter_button;
 	
+	//Email call section
+    @FindBy(xpath="//div[contains(text(),'Successfully emailed call')]")
+	private static WebElement success_message_for_mail_call;
+    
+    @FindBy(xpath="//div[@class='modal-content']")
+	private static WebElement email_this_call_window;
+    
+    @FindBy(xpath="//div[@class='modal-content']//h3[text()='Email this call']")
+ 	private static WebElement email_this_call_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='To']")
+ 	private static WebElement email_this_call_to_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='To']//parent::div//following-sibling::div//input")
+ 	private static WebElement email_this_call_to_textbox;
+    
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='From']")
+ 	private static WebElement email_this_call_from_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='From']//parent::div//following-sibling::div//input")
+ 	private static WebElement email_this_call_from_textbox;
+    
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='Message']")
+ 	private static WebElement email_this_call_message_label;
+
+    @FindBy(xpath="//div[@class='modal-content']//label[text()='Message']//parent::div//following-sibling::div//textarea")
+ 	private static WebElement email_this_call_message_textbox;
+
+    @FindBy(xpath="//div[@class='modal-content']//button[text()='Send Now']")
+ 	private static WebElement send_now_mail_button;
+
+    @FindBy(xpath="//div[@class='modal-content']//button[text()='Cancel']")
+ 	private static WebElement cancel_mail_button;
+	
+    //i section
+	@FindBy(xpath="//div[@class='tab-content']")
+	private static WebElement inforamtion_tab;	
+	
+	@FindBy(xpath="//ul[@class='nav nav-tabs']//li//span[text()='Info']")
+	private static WebElement info_button;
+	
+	@FindBy(xpath="//ul[@class='nav nav-tabs']//li//span[text()='Comments']")
+	private static WebElement comments_button;
+	
+	@FindBy(xpath="//ul[@class='nav nav-tabs']//li//span[text()='Tags']")
+	private static WebElement tags_button;
+    
+	//info section
+	@FindBy(xpath="//div[@class='tab-content']//strong")
+	private static List<WebElement> inforamtion_section_labels;
+	String[] expected_inforamtion_section={"Name and Address","Conversation","Session"};
+	
 	@FindBy(xpath="//div[@class='advancedf']//select[1]")
 	private WebElement include_exclude_listbox;
 	String[] exp_include_exclude_listbox_options = {"Include", "Exclude"};
+	
+	//tags section
+	@FindBy(xpath="//form[@name='calltagForm']")
+	private static WebElement tag_section;
+
+	@FindBy(xpath="//form[@name='calltagForm']//div//label[contains(text(),'Select Tags:')]")
+	private static WebElement select_tags_label;
+
+	@FindBy(xpath="//form[@name='calltagForm']//div//input[@title='Save Call Tag Button']")
+	private static WebElement save_tag_button;
+
+	@FindBy(xpath="//form[@name='calltagForm']//div//ul[@class='select2-choices']")
+	private static WebElement tag_textbox;
+
+	//comments section
+	@FindBy(xpath="//form[@id='commentForm']")
+	private static WebElement comment_section;		
+
+	@FindBy(xpath="//form[@id='commentForm']//div//label[contains(text(),'Comment:')]")
+	private static WebElement comment_label;			
+
+	@FindBy(xpath="//form[@id='commentForm']//div//textarea[@name='commenttext']")
+	private static WebElement comment_textbox;
+	
+	@FindBy(xpath="//form[@id='commentForm']//div//input")
+	private static WebElement add_comment_button;
 	
 	//need to handle it when there are multiple conditions in filter
 	@FindBy(xpath="//div[@class='advancedf']//select[2]")
@@ -246,32 +362,6 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr")
 	private static List<WebElement> call_count_in_table;
 		
-	//  verification of buttons in top pagination toolbox
-		
-//		int currentDate = Util.getDate();
-//		   String startDateToBeUsed = String.valueOf(currentDate-7);
-//		   String endDateToBeUsed = String.valueOf(currentDate);
-//		   System.out.println("startDateToBeUsed is "+startDateToBeUsed);
-//		   System.out.println("endDateToBeUsed is "+endDateToBeUsed);
-		
-		
-//		logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
-//		wait.until(ExpectedConditions.visibilityOf(users_topNextPagination_Button));
-//		Assert1.assertTrue(top_first_button.isDisplayed(),"top_first_button is not present or locator changed");
-//		Assert1.assertTrue(top_last_button.isDisplayed(),"top_last_button is not present or locator changed");	
-//		Assert1.assertTrue(top_next_button.isDisplayed(),"top_next_button is not present or locator changed");	
-//		Assert1.assertTrue(top_prev_button.isDisplayed(),"top_prev_button is not present or locator changed");	
-	
-//		dbCount = Util.readingFromDB("SELECT * FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit 
-//      WHERE top_ou_id='70135') AND call_started BETWEEN '2020-01-15 23:59' AND '2020-01-22 23:59'" );
-//	
-//      countOnUI_pagination=top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+2);
-//	logger.log(LogStatus.INFO, "verifying count of calls in top pagination toolbox");
-//	Assert1.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mismatching with db count");
-//	
-//	logger.log(LogStatus.INFO, "verifying count of listed calls");
-//	Assert1.assertEquals(dbCount, String.valueOf(call_count_in_table.size()),"count of listed calls is mismatching with db count");
-		
 		
 	public SelectAndScorePage(WebDriver driver){
 		PageFactory.initElements(driver,this);
@@ -295,7 +385,7 @@ public class SelectAndScorePage extends TestBase {
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td[1]//button[@title='Listen to call'][@aria-disabled='false'])[1]"));
     		action_button.click();
     		break;
-    	case "info":
+    	case "i":
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Toggle Call Info'])[1]"));
     		action_button.click();    		
     		break;
@@ -313,6 +403,13 @@ public class SelectAndScorePage extends TestBase {
     		break;	
     	}
     	
+    }
+    
+    //To click on info section buttons
+    public void infoSectionButtonsClick(String buttonName) throws InterruptedException {
+    	Thread.sleep(1000);
+    	WebElement infSectionButtonsToClick = driver.findElement(By.xpath("//ul[@class='nav nav-tabs']//li//span[text()='"+buttonName+"']"));
+    	Util.Action().moveToElement(infSectionButtonsToClick).click().perform();
     }
     
     //Header label on page
@@ -504,6 +601,245 @@ public class SelectAndScorePage extends TestBase {
     	Util.Action().moveToElement(date_range_filter_cancel_button).click().perform();	
 	}
 	
+	//Score Notifications UI
+	public void scoreNotificationsSectionUI() {
+		
+		SoftAssert softAssert = Util.softAssert();
+		//opening score notification section
+		notifications_button.click();
+
+		//verification
+		logger.log(LogStatus.INFO, "Verifying if tilte is displayed");
+		softAssert.assertTrue(score_notifications_label.isDisplayed(), "score_notifications_label is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if header note is displayed");
+		softAssert.assertTrue(score_notifications_header_note.isDisplayed(), "score_notifications_header_note is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if action label is displayed");
+		softAssert.assertTrue(score_notifications_action_label.isDisplayed(), "score_notifications_action_label is not displayed");
+
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_condition_label is displayed");
+		softAssert.assertTrue(score_notifications_condition_label.isDisplayed(), "score_notifications_condition_label is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_condition_listbox is displayed");
+		softAssert.assertTrue(score_notifications_condition_listbox.isDisplayed(), "score_notifications_condition_listbox is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_then_label is displayed");
+		softAssert.assertTrue(score_notifications_then_label.isDisplayed(), "score_notifications_then_label is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_then_listbox is displayed");
+		softAssert.assertTrue(score_notifications_then_listbox.isDisplayed(), "score_notifications_then_listbox is not displayed");
+
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_add_action_button is displayed");
+		softAssert.assertTrue(score_notifications_add_action_button.isDisplayed(), "score_notifications_add_action_button is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_add_action_button is clickable");
+		softAssert.assertTrue(score_notifications_add_action_button.isEnabled(), "score_notifications_add_action_button is not clickable");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_save_button is displayed");
+		softAssert.assertTrue(score_notifications_save_button.isDisplayed(), "score_notifications_save_button is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_save_button is clickable");
+		softAssert.assertTrue(score_notifications_save_button.isEnabled(), "score_notifications_save_button is not clickable");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_cancel_button is displayed");
+		softAssert.assertTrue(score_notifications_cancel_button.isDisplayed(), "score_notifications_cancel_button is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if score_notifications_cancel_button is clickable");
+		softAssert.assertTrue(score_notifications_cancel_button.isEnabled(), "score_notifications_cancel_button is not clickable");
+		
+		softAssert.assertAll();
+		//closing score notification section
+		score_notifications_cancel_button.click();
+	}
+	
+	//default date range
+	public void defaultDateRangeFilter() {
+    	logger.log(LogStatus.INFO, "Verifying if 7 days filter is applied by default");
+    	for(WebElement actual_date_filter_element:actual_date_filter_elements) {
+    		if(actual_date_filter_element.equals(Constants.SelectAndScorePage.last_7_days))
+        		Assert.assertTrue(actual_date_filter_element.getAttribute("class").equals("active"), "by default 7 days filter not selected");
+    		    break;
+    	}
+	}
+	
+	//audio player UI
+	public void audioPlayerUI() {
+		SoftAssert softAssert = Util.softAssert();
+		
+		//opening audio player strip
+		actionButtonClick(Constants.SelectAndScorePage.play_audio_button);
+		
+    	logger.log(LogStatus.INFO, "Verifying if play_pause_audio_button is displayed");	
+    	Util.waitExecutorForVisibilityOfElement(play_pause_audio_button);
+		softAssert.assertTrue(play_pause_audio_button.isDisplayed(), "play_pause_audio_button is not displayed");
+		
+    	logger.log(LogStatus.INFO, "Verifying if play_pause_audio_button is clickable");			
+		softAssert.assertTrue(play_pause_audio_button.isEnabled(), "play_pause_audio_button is not clickable");
+
+    	logger.log(LogStatus.INFO, "Verifying if mute_unmute_audio_button is displayed");			
+		softAssert.assertTrue(mute_unmute_audio_button.isDisplayed(), "mute_unmute_audio_button is not displayed");
+		
+    	logger.log(LogStatus.INFO, "Verifying if mute_unmute_audio_button is clickable");			
+		softAssert.assertTrue(mute_unmute_audio_button.isEnabled(), "mute_unmute_audio_button is not clickable");
+    	
+		//closing audio player strip
+		actionButtonClick(Constants.SelectAndScorePage.play_audio_button);
+	
+	}
+	
+	//Verifying action buttons
+	public void actionSectionUIVerification(String sectionToVerify) {
+		
+		SoftAssert softAssert = Util.softAssert();
+		
+		switch(sectionToVerify) {
+		case "email":
+			//opening mail section
+			actionButtonClick(Constants.SelectAndScorePage.mail_call_button);
+			
+			//verification
+			logger.log(LogStatus.INFO, "Verifyinf if email this call window is opened");
+			softAssert.assertTrue(email_this_call_window.isDisplayed(),"email thius call window is not opened or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if To label is present");
+			softAssert.assertTrue(email_this_call_to_label.isDisplayed(),"email this call to label is not present or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if from label is present");
+			softAssert.assertTrue(email_this_call_from_label.isDisplayed(),"Email this call from label is not present");
+			
+			logger.log(LogStatus.INFO, "Verifying if Message label is displayed");
+			softAssert.assertTrue(email_this_call_message_label.isDisplayed(),"email this call message label is not present or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if To textbox is present");
+			softAssert.assertTrue(email_this_call_to_textbox.isDisplayed(),"Email this call to text box is not present or locator changed");
+	
+			logger.log(LogStatus.INFO, "Verifying if Message textbox is present");
+			softAssert.assertTrue(email_this_call_message_textbox.isDisplayed(),"Email this call Message text box is not present or locator changed");
+
+//			logger.log(LogStatus.INFO, "Verifying default from mail id is "+email_this_call_from_textbox.getText());
+//			softassert.assertTrue(email_this_call_from_textbox.getText().equals(CallDetailReportTest.default_mail_id_from),"default mail id is incorrect");
+			
+			logger.log(LogStatus.INFO, "Verifying if Send now button is present");
+			softAssert.assertTrue(send_now_mail_button.isDisplayed(),"Email this call send now button is not present or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if cancel button is present");
+			softAssert.assertTrue(cancel_mail_button.isDisplayed(),"Email this call cancel button is not present or locator changed");				
+			
+			//closing mail section
+			Util.click(cancel_mail_button);
+			break;
+		case "i":
+			//opening i section
+			actionButtonClick(Constants.SelectAndScorePage.i_call_button);
+			
+			//verification
+			logger.log(LogStatus.INFO, "Verifying if information section is displayed");
+			softAssert.assertTrue(inforamtion_tab.isDisplayed(),"information section is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if info button is displayed");
+			softAssert.assertTrue(info_button.isDisplayed(),"info button is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if comments button is displayed");
+			softAssert.assertTrue(comments_button.isDisplayed(),"comments  button is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if tags button is displayed");
+			softAssert.assertTrue(tags_button.isDisplayed(),"tags  button is not displayed or locator changed");
+			
+			//closing i section
+			actionButtonClick(Constants.SelectAndScorePage.i_call_button);
+			break;
+		case "download":
+			logger.log(LogStatus.INFO, "Verifying if download button is displayed and clickable");
+			actionButtonClick(Constants.SelectAndScorePage.download_call_button);
+			break;
+		}
+		
+		softAssert.assertAll();
+	}
+	
+	//Verifying info, mail, tags and comment sections from Info icon
+	public void infoSectionUIVerification(String sectionToVerify) throws InterruptedException {
+		
+		SoftAssert softAssert = Util.softAssert();
+		
+		//opening i section
+		actionButtonClick(Constants.SelectAndScorePage.i_call_button);		
+		
+		switch(sectionToVerify) {
+		case "comments":
+			//opening comments section
+	        infoSectionButtonsClick(Constants.SelectAndScorePage.comment_call_button);
+	        
+	        //verification
+	        logger.log(LogStatus.INFO, "Verifying if Comments sectionis opened");
+	        softAssert.assertTrue(comment_section.isDisplayed(),"comment section not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if comment label is displayed");
+			softAssert.assertTrue(comment_label.isDisplayed(),"comment label not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if add comment button is displayed");
+			softAssert.assertTrue(add_comment_button.isDisplayed(),"add comment button is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if comment textbox is present");
+			softAssert.assertTrue(comment_textbox.isDisplayed(),"comment textbox is not displayed or locator changed");
+	        
+			break;
+		case "tags":
+			//opening tags section
+	        infoSectionButtonsClick(Constants.SelectAndScorePage.tag_call_button);
+	        
+	        //verification
+	        logger.log(LogStatus.INFO, "Verifying tags section");
+	        
+			logger.log(LogStatus.INFO, "Verifyig if tags section is opened");
+			softAssert.assertTrue(tag_section.isDisplayed(),"tags section is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "verifying if select tag label is displayed");
+			softAssert.assertTrue(select_tags_label.isDisplayed(),"select tag label is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if tags textbox is displayed");
+			softAssert.assertTrue(tag_textbox.isDisplayed(),"tag textbox is not displayed or locator changed");
+			
+			logger.log(LogStatus.INFO, "Verifying if add tag button is displayed");
+			softAssert.assertTrue(save_tag_button.isDisplayed(),"add tag button is not displayed or locator changed");
+	        
+			break;
+		case "info":
+			//opening info section
+	        infoSectionButtonsClick(Constants.SelectAndScorePage.info_call_button);		
+	        
+	        //verification
+	        logger.log(LogStatus.INFO, "Verifying info section");
+	        Boolean inforSectionLabelsFlag = Util.collectionComarator(expected_inforamtion_section, inforamtion_section_labels);
+	        softAssert.assertEquals(String.valueOf(inforSectionLabelsFlag), "true", "inforamtion_section_labels are not displayed");
+	        break;		
+		}	
+		
+		softAssert.assertAll();
+		//closing i section
+		actionButtonClick(Constants.SelectAndScorePage.i_call_button);		
+	}
+	
+	//Verify mail feature
+	public void emailCallFeature() {
+		//opening mail section
+		actionButtonClick(Constants.SelectAndScorePage.mail_call_button);		
+		
+		//entering details
+		Util.waitExecutorForVisibilityOfElement(email_this_call_to_textbox);
+		email_this_call_to_textbox.sendKeys(Constants.LegacyReports.default_mail_id_to);
+		email_this_call_message_textbox.sendKeys(Constants.LegacyReports.default_mail_id_message);
+		
+		//submit
+		Util.click(send_now_mail_button);
+		
+		//verification
+		Util.waitExecutorForVisibilityOfElement(success_message_for_mail_call);
+		logger.log(LogStatus.INFO, "Verifying if mail is sent successfully");
+		Assert.assertTrue(success_message_for_mail_call.isDisplayed(),"mail was not sent");
+	}
+	
 	//To check if next button is enabled based on records
 	public void nextButtonEnable(String checkForClickable) {
 		switch(checkForClickable) {
@@ -592,6 +928,7 @@ public class SelectAndScorePage extends TestBase {
         	top_first_button.click();
 	}
 
+	//to click in specified date range filter button
 	public void dateRangePickerElementClick(String buttonName) {
 		WebElement dateRangePickerElementButtonToClick = driver.findElement(By.xpath("//div[@class='daterangepicker dropdown-menu opensleft'][2]//ul//li[text()='"+buttonName+"']"));
 		Util.Action().moveToElement(dateRangePickerElementButtonToClick).click().perform();
