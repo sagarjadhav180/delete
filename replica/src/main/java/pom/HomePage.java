@@ -158,7 +158,7 @@ public class HomePage extends TestBase {
 						
 				else{
 				link.click();
-				Thread.sleep(2000);
+				Thread.sleep(10000);
 				}
 				break;
 			}
