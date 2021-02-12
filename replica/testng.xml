@@ -14,11 +14,7 @@
 			<class name="tests.LoginTest">
 				
 			</class>
-			<class name="tests.HomeTest">
-				<methods>
-					<exclude name="tiles_count_verification_UI"></exclude>
-				</methods>
-			</class>
+			
 			<class name="tests.CamapignUIVerificationTest" />
 			<class name="tests.CampaignTests">
 			</class>
