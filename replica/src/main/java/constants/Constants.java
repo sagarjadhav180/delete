@@ -408,7 +408,17 @@ public class Constants {
         
     public static class SelectAndScorePage{	
     	//Action Buttons
-    	
+		public static final String play_audio_button = "play";
+		public static final String i_call_button = "i";
+		public static final String edit_call_button = "edit";
+		public static final String download_call_button = "download";
+		public static final String mail_call_button = "mail";
+		
+		//info section buttons
+		public static final String info_call_button = "Info";
+		public static final String comment_call_button = "Comments";
+		public static final String tag_call_button = "Tags";
+		    	
     	//Date Range picker button
 		public static final String today = "Today";
 		public static final String yesterday = "Yesterday";
