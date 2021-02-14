@@ -163,7 +163,7 @@ public class HomePage extends TestBase {
 				break;
 			}
 		}
-		Util.waitForLoad(driver);	
+//		Util.waitForLoad(driver);	
 	}
 	
     public void clickActionNewAccount(String linkToBeClicked) throws InterruptedException{
