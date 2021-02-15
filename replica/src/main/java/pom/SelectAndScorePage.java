@@ -1,5 +1,8 @@
 package pom;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -230,10 +233,16 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//div[@class='advancedf']//select[3]//following-sibling::input[1]")
 	private WebElement advanced_filter_value_textbox;
 
-	@FindBy(xpath="//span[@id='select2-chosen-4'][contains(text(),'-- Select --')]/..")
+	@FindBy(xpath="(//span[starts-with(@id,'select2-chosen')])[2][contains(text(),'-- Select --')]/..")
 	private WebElement advanced_filter_identified_agent_dropdown;
 
-	@FindBy(xpath="//span[@id='select2-chosen-4'][contains(text(),'-- Select --')]/..")
+	@FindBy(xpath="//ul[@class='select2-results']//li")
+	private List<WebElement> avaialble_identified_agents_list;
+	
+	@FindBy(xpath="//ul[@class='select2-results']//li")
+	private List<WebElement> avaialble_scoredcard_list;
+	
+	@FindBy(xpath="(//span[starts-with(@id,'select2-chosen')])[2][contains(text(),'-- Select --')]/..")
 	private WebElement advanced_filter_scorecard_dropdown;
 
 	@FindBy(xpath="//button[@class='btn btn-gray'][text()=' Add an Advanced Filter']")
@@ -411,6 +420,62 @@ public class SelectAndScorePage extends TestBase {
     	WebElement infSectionButtonsToClick = driver.findElement(By.xpath("//ul[@class='nav nav-tabs']//li//span[text()='"+buttonName+"']"));
     	Util.Action().moveToElement(infSectionButtonsToClick).click().perform();
     }
+    
+    public int getIndexForFilter(String filterElement) {
+    	int index = 0;
+    	
+    	for(int i=0;i<actual_columns_names.size();i++) {
+    		if(actual_columns_names.get(i).getText().trim().equals(filterElement))
+    			index = i;
+    		break;
+    	}
+		return index;
+    }
+    
+    //getting value to be filtered
+    public String getValueToBeFiltered(String filterElement) {
+    	int index = 0;
+    	String valueTobeFiltered = null;
+    	
+    	//getting column index
+    	index = getIndexForFilter(filterElement);
+    	
+    	//getting value to be filtered
+    	List<WebElement> values = driver.findElements(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td["+index+"]"));
+    	if(!values.isEmpty()) {
+    		for(int i=0;i<values.size();i++) {
+    			if(!values.get(i).getText().isEmpty())
+    				valueTobeFiltered = values.get(i).getText().trim();
+    			break;
+    		}
+    	}else
+    		valueTobeFiltered = "null";
+    	
+		return valueTobeFiltered;	
+    }
+    
+    //getting score card status link 
+    public String getScorecardStatusLink(String status) {
+    	String link = null;
+    	
+    	switch(status) {
+    	case "Need Scorecard":
+    		link = "../img/icons/needscorecard.png";
+    		break;
+    	case "Unscored":
+    		link = "../img/icons/unscored.png";
+    		break;
+    	case "Scored":
+    		link = "../img/icons/scored.png";
+    		break;
+    	case "Reviewed":
+    		link = "../img/icons/reviewed.png";
+    		break;
+    	}
+		return link;
+    }
+    
+    //--------------------------------------------------UI---------------------------------------------------------------------------
     
     //Header label on page
     public void pageLabel() {
@@ -591,7 +656,7 @@ public class SelectAndScorePage extends TestBase {
     	softassert.assertTrue(date_range_filter_cancel_button.isEnabled(), "date_range_filter_cancel_button is not clickable");
 
     	//opening date picker box
-    	dateRangePickerElementClick(Constants.SelectAndScorePage.custom_Range);
+    	dateRangePickerElementClick(Constants.SelectAndScorePage.date_range_for_custom_Range);
     	logger.log(LogStatus.INFO, "Verifying if date picker box is opening after clicking on custom range link");
     	softassert.assertTrue(date_range_filter_left_calender.isDisplayed(), "date picker box is not opening");
     	softassert.assertTrue(date_range_filter_right_calender.isDisplayed(), "date picker box is not opening");
@@ -651,16 +716,6 @@ public class SelectAndScorePage extends TestBase {
 		softAssert.assertAll();
 		//closing score notification section
 		score_notifications_cancel_button.click();
-	}
-	
-	//default date range
-	public void defaultDateRangeFilter() {
-    	logger.log(LogStatus.INFO, "Verifying if 7 days filter is applied by default");
-    	for(WebElement actual_date_filter_element:actual_date_filter_elements) {
-    		if(actual_date_filter_element.equals(Constants.SelectAndScorePage.last_7_days))
-        		Assert.assertTrue(actual_date_filter_element.getAttribute("class").equals("active"), "by default 7 days filter not selected");
-    		    break;
-    	}
 	}
 	
 	//audio player UI
@@ -821,6 +876,24 @@ public class SelectAndScorePage extends TestBase {
 		actionButtonClick(Constants.SelectAndScorePage.i_call_button);		
 	}
 	
+	//-------------------------------------------------------UI---------------------------------------------------------------------------
+	
+	
+   
+	//---------------------------------------Functional-----------------------------------------------------------------------------------
+	
+	//To check if top and bottom level next and last buttons are disabled when records are less than 100
+	public void paginationButtonsInabilityCheck(Boolean _100Records) {
+		
+		if(_100Records == true) {
+			nextButtonEnable("yes");
+			lastButtonEnable("yes");
+		}else {
+			nextButtonEnable("no");
+			lastButtonEnable("no");
+		}
+	}
+	
 	//Verify mail feature
 	public void emailCallFeature() {
 		//opening mail section
@@ -876,18 +949,6 @@ public class SelectAndScorePage extends TestBase {
 			break;
 		}	
 	}
-    
-	//To check if top and bottom level next and last buttons are disabled when records are less than 100
-	public void paginationButtonsInabilityCheck(Boolean _100Records) {
-		
-		if(_100Records == true) {
-			nextButtonEnable("yes");
-			lastButtonEnable("yes");
-		}else {
-			nextButtonEnable("no");
-			lastButtonEnable("no");
-		}
-	}
 	
 	//pagination tool box count verification
 	public void paginationToolBoxCount() {
@@ -927,13 +988,147 @@ public class SelectAndScorePage extends TestBase {
     	if(Integer.parseInt(dbCount)>100)
         	top_first_button.click();
 	}
-
-	//to click in specified date range filter button
+	
+	//default date range
+	public void defaultDateRangeFilter() {
+    	logger.log(LogStatus.INFO, "Verifying if 7 days filter is applied by default");
+    	for(WebElement actual_date_filter_element:actual_date_filter_elements) {
+    		if(actual_date_filter_element.equals(Constants.SelectAndScorePage.date_range_for_last_7_days))
+        		Assert.assertTrue(actual_date_filter_element.getAttribute("class").equals("active"), "by default 7 days filter not selected");
+    		    break;
+    	}
+	}
+	
+	//to click on specified date range filter button
 	public void dateRangePickerElementClick(String buttonName) {
 		WebElement dateRangePickerElementButtonToClick = driver.findElement(By.xpath("//div[@class='daterangepicker dropdown-menu opensleft'][2]//ul//li[text()='"+buttonName+"']"));
 		Util.Action().moveToElement(dateRangePickerElementButtonToClick).click().perform();
 	}
 	
+	//Verify date range filter for given range
+    public void dateRangeFilterFeature(String range, String org_unit_id) throws InterruptedException {
+    	
+    	String uiCount = null;
+    	String dbCount = null;
+    	
+    	//getting DB count
+    	switch(range) {
+    	case "Today":
+    		dbCount = dbUtil.CallUtil.getCallRecordsCount(Constants.SelectAndScorePage.date_range_for_today, org_unit_id);
+    		break;
+    	case "Yesterday":
+    		dbCount = dbUtil.CallUtil.getCallRecordsCount(Constants.SelectAndScorePage.date_range_for_yesterday, org_unit_id);
+    		break;
+    	case "Last 7 Days":
+    		dbCount = dbUtil.CallUtil.getCallRecordsCount(Constants.SelectAndScorePage.date_range_for_last_7_days, org_unit_id);
+    		break;
+    	case "Last 30 Days":
+    		dbCount = dbUtil.CallUtil.getCallRecordsCount(Constants.SelectAndScorePage.date_range_for_last_30_days, org_unit_id);
+    		break;
+    	}
+    	
+    	//getting UI count
+    	date_range_filter_button.click();
+    	Thread.sleep(500);
+    	dateRangePickerElementClick(range);
+    	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+1).trim();
+    	
+    	//Verification
+    	logger.log(LogStatus.INFO, "Verifying if data shown on UI is is matching with DB");
+    	Assert.assertEquals(uiCount, dbCount, "UI count is not matching with DB count");
+    }
     
+    //Check data filter as per status
+    public void statusFilterCheck(String status) {
+    	//checking specified status check box
+    	WebElement statusCheckbox = driver.findElement(By.xpath("//div[text()='Filter by Status:']//parent::form//label[text()='"+status+"']/input"));
+    	statusCheckbox.click();
+    	
+    	//get filtered data
+    	List<String> filteredData= getFilteredData("Stauts");
+    	
+    	//verification
+    	String expectedStatus = getScorecardStatusLink(status);
+    	
+    	Boolean verificationFlag;
+    	if(Collections.frequency(filteredData, expectedStatus) == filteredData.size())
+    		verificationFlag = true;
+    	else
+    		verificationFlag = false;
+    	
+    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per status filter applied");
+    	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per status filter applied");
+    }
+
+    //Check data filter as per advance filter
+    public void advanceFilterCheck(String advanceFilterElement) {
+    	//opening advance filter section
+    	advanced_filter_button.click();
+    	
+    	//selecting filter element
+		Select advancedFilterElementListbox = new Select(advanced_filter_element_listbox);
+		advancedFilterElementListbox.selectByVisibleText(advanceFilterElement);
+    	
+    	//entering filter data
+		String valueToBeFiltered = null;
+		if(advanceFilterElement.equals("Duration") || advanceFilterElement.equals("Group") || advanceFilterElement.equals("Score") || advanceFilterElement.equals("Call Titlte") || advanceFilterElement.equals("Tag") || advanceFilterElement.equals("Comments")) {
+    		valueToBeFiltered = getValueToBeFiltered(advanceFilterElement);
+    		if(!valueToBeFiltered.equals("null"))
+    			advanced_filter_value_textbox.sendKeys(valueToBeFiltered);
+    		else
+    			logger.log(LogStatus.INFO, "No data found to filter");
+    			
+    	}else if(advanceFilterElement.equals("Identified Agent")){
+    		Util.Action().moveToElement(advanced_filter_identified_agent_dropdown).click().perform();
+    		Util.Action().moveToElement(avaialble_identified_agents_list.get(1)).click().perform();
+    	}else if (advanceFilterElement.equals("Scorecard")){
+    		Util.Action().moveToElement(advanced_filter_scorecard_dropdown).click().perform();
+    		Util.Action().moveToElement(avaialble_scoredcard_list.get(1)).click().perform();    		
+    	}
+
+    	//submit
+		apply_advanced_filter_button.click();
+		
+		//verification
+		Boolean verificationFlag;
+		List filteredData = getFilteredData(advanceFilterElement);
+		
+    	if(Collections.frequency(filteredData, valueToBeFiltered) == filteredData.size())
+    		verificationFlag = true;
+    	else
+    		verificationFlag = false;
+    	
+    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per filter applied");
+    	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per filter applied");
+		
+    	//closing advance filter section
+    	cancel_advanced_filter_button.click();
+    }
     
+    //get filtered data in grid
+    public List getFilteredData(String filterElement) {
+    	List<String> list = new ArrayList<String>();
+    	int index;
+    	
+    	//getting filter index
+    	index = getIndexForFilter(filterElement);
+    	
+    	//getting filtered values
+    	if(filterElement.equals("Status")) {
+    		List<WebElement> values = driver.findElements(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td[2]//img[@src]"));
+        	for(WebElement value:values) {
+        		list.add(value.getAttribute("src"));
+        	}
+    	}else {
+    		List<WebElement> values = driver.findElements(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td["+index+"]"));
+        	for(WebElement value:values) {
+        		list.add(value.getText());
+        	}	
+    	}
+    	
+		return list;
+    }
+    
+  //------------------------------------------Functional----------------------------------------------------------------------------------
+	
 }
