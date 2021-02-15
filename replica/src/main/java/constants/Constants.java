@@ -420,13 +420,20 @@ public class Constants {
 		public static final String tag_call_button = "Tags";
 		    	
     	//Date Range picker button
-		public static final String today = "Today";
-		public static final String yesterday = "Yesterday";
-		public static final String last_7_days = "Last 7 Days";
-		public static final String last_30_days = "Last 30 Days";
-		public static final String this_month = "This Month";
-		public static final String last_month = "Last Month";
-		public static final String custom_Range = "Custom Range";
+		public static final String date_range_for_today = "Today";
+		public static final String date_range_for_yesterday = "Yesterday";
+		public static final String date_range_for_last_7_days = "Last 7 Days";
+		public static final String date_range_for_last_30_days = "Last 30 Days";
+		public static final String date_range_for_this_month = "This Month";
+		public static final String date_range_for_last_month = "Last Month";
+		public static final String date_range_for_custom_Range = "Custom Range";
+		
+		//Status 
+		public static final String status_checkbox_for_need_scoreacard = "Need Scorecard";
+		public static final String status_checkbox_for_unscored = "Unscored";
+		public static final String status_checkbox_for_scored = "Scored";
+		public static final String status_checkbox_for_reviewed = "Reviewed";
+		
     }
  
     public static String getPostgresConfigFile() {
