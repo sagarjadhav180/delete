@@ -135,11 +135,7 @@ public class SelectAndScorePage extends TestBase {
 
 	@FindBy(xpath="//button[@class='iconButton level3']")
 	private WebElement mute_unmute_audio_button;
-	
-	//advanced filter
-	@FindBy(xpath="//button[text()='Advanced filter']")
-	private WebElement advanced_filter_button;
-	
+		
 	//Email call section
     @FindBy(xpath="//div[contains(text(),'Successfully emailed call')]")
 	private static WebElement success_message_for_mail_call;
@@ -222,7 +218,10 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//form[@id='commentForm']//div//input")
 	private static WebElement add_comment_button;
 	
-	//need to handle it when there are multiple conditions in filter
+	//advanced filter
+	@FindBy(xpath="//button[text()='Advanced filter']")
+	private WebElement advanced_filter_button;
+	
 	@FindBy(xpath="//div[@class='advancedf']//select[2]")
 	private WebElement advanced_filter_element_listbox;
 	String[] exp_advanced_filter_element_listbox_options = {"-- Select --", "Duration", "Group", "Identified Agent", "Scorecard", "Score", "Call Title", "Tag", "Comments"};
@@ -282,6 +281,9 @@ public class SelectAndScorePage extends TestBase {
 	private WebElement success_msg_for_scorecard_update;
 	
 	//scoring section
+	@FindBy(xpath="//div[@class='criteriaProgressLoader']")
+	private WebElement criteria_loader;
+	
 	@FindBy(xpath="//strong[contains(text(),'Score :')]")
 	private WebElement score_label;		
 
@@ -320,8 +322,11 @@ public class SelectAndScorePage extends TestBase {
 //	private List<WebElement> scale_checkboxes_mandatory;
 	//--------------------------------------------------------
 	
-	@FindBy(xpath="//strong[contains(text(),'Outcome')]")
+	@FindBy(xpath="//div[@id='scorecardarea2']//strong")
 	private WebElement outcome_label;
+	
+	@FindBy(xpath="//div[@class='container-fluid']//li//span[starts-with(text(),'Importance')]")
+	private WebElement importance_label;
 
 	@FindBy(xpath="//div[@id='scorecardarea2']//input[1]")
 	private WebElement outcome_yes_checkbox;
@@ -330,10 +335,10 @@ public class SelectAndScorePage extends TestBase {
 	private WebElement outcome_no_checkbox;
 	
 	@FindBy(xpath="//button[text()='Done']")
-	private WebElement done_button;
+	private WebElement done_button_scoring_section;
 
 	@FindBy(xpath="//button[text()='Done']//preceding-sibling::button")
-	private WebElement cancel_button;
+	private WebElement cancel_button_scoring_section;
 	
 	//pagination tool box - top ------------------------
 	@FindBy(xpath="(//button[contains(text(),'First')])[1]")
@@ -370,7 +375,23 @@ public class SelectAndScorePage extends TestBase {
 
 	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr")
 	private static List<WebElement> call_count_in_table;
-		
+
+	//edited call
+	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr//td//select[@name='identifyAgent']")
+	private static WebElement identified_agent_listbox_edited_call;
+	
+	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr//td//select[@name='selectedScorecard']")
+	private static WebElement scorecard_listbox_edited_call;
+
+	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr//td//input[@name='call_title']")
+	private static WebElement call_title_edited_call;
+	
+	@FindBy(xpath="//table[@id='scoredetailtable']//form[starts-with(@class,'form-buttons') and @aria-hidden='false']//button[text()='Save']")
+	private static WebElement save_button_edited_call;
+	
+	@FindBy(xpath="//table[@id='scoredetailtable']//form[starts-with(@class,'form-buttons') and @aria-hidden='false']//button[text()='Cancel']")
+	private static WebElement cancel_button_edited_call;
+	
 		
 	public SelectAndScorePage(WebDriver driver){
 		PageFactory.initElements(driver,this);
@@ -876,6 +897,58 @@ public class SelectAndScorePage extends TestBase {
 		actionButtonClick(Constants.SelectAndScorePage.i_call_button);		
 	}
 	
+	//scoring section UI verification
+	public void scoringSectionUI(String callTitle, String scorecardName) throws InterruptedException {
+		SoftAssert softAssert = Util.softAssert();
+		//open scoring section
+		getCallToPerformAction(callTitle, "scoreCall");
+		
+		//Verification
+		logger.log(LogStatus.INFO, "Verifying if scorecard title is displayed");
+		String actualScorecardTitle = scorecard_title.getText().trim();
+		String expectedScorecardTitle = scorecardName;
+		softAssert.assertEquals(actualScorecardTitle, expectedScorecardTitle, "Scorecard title is not displayed");
+
+		logger.log(LogStatus.INFO, "Verifying if score_label is displayed");
+		softAssert.assertTrue(score_label.isDisplayed(), "score_label is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if download_pdf_link is displayed");
+		softAssert.assertTrue(download_pdf_link.isDisplayed(), "download_pdf_link is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if download_pdf_link is clickable");
+		softAssert.assertTrue(download_pdf_link.isEnabled(), "download_pdf_link is not clickable");
+		
+		logger.log(LogStatus.INFO, "Verifying if criteria_label is displayed");
+		softAssert.assertTrue(criteria_label.isDisplayed(), "criteria_label is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if outcome_label is displayed");
+		softAssert.assertTrue(outcome_label.isDisplayed(), "outcome_label is not displayed");		
+		
+
+		logger.log(LogStatus.INFO, "Verifying if outcome_yes_checkbox is displayed");
+		softAssert.assertTrue(outcome_yes_checkbox.isDisplayed(), "outcome_yes_checkbox is not displayed");	
+		
+		logger.log(LogStatus.INFO, "Verifying if outcome_yes_checkbox is clickable");
+		softAssert.assertTrue(outcome_yes_checkbox.isEnabled(), "outcome_yes_checkbox is not clickable");	
+		
+		logger.log(LogStatus.INFO, "Verifying if done_button_scoring_section is displayed");
+		softAssert.assertTrue(done_button_scoring_section.isDisplayed(), "done_button_scoring_section is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if done_button_scoring_section is clickable");
+		softAssert.assertTrue(done_button_scoring_section.isEnabled(), "done_button_scoring_section is not clickable");
+
+		logger.log(LogStatus.INFO, "Verifying if cancel_button_scoring_section is displayed");
+		softAssert.assertTrue(cancel_button_scoring_section.isDisplayed(), "cancel_button_scoring_section is not displayed");
+		
+		logger.log(LogStatus.INFO, "Verifying if cancel_button_scoring_section is clickable");
+		softAssert.assertTrue(cancel_button_scoring_section.isEnabled(), "cancel_button_scoring_section is not clickable");
+		
+		
+		softAssert.assertAll();
+		//closing scoring section
+		Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
+	}
+	
 	//-------------------------------------------------------UI---------------------------------------------------------------------------
 	
 	
@@ -1127,6 +1200,191 @@ public class SelectAndScorePage extends TestBase {
     	}
     	
 		return list;
+    }
+    
+    //assign agent, score card and call title to the call 
+    public String scorecardAndAgentAssignment(String scorecardName, String identifiedAgnet) {
+    	String callTitle = "call-"+Util.generateRandomNumber();
+    	
+    	//apply status filter for unscored call
+    	statusFilterCheck(Constants.SelectAndScorePage.status_checkbox_for_unscored);
+    	Util.waitExecutorForInVisibilityOfElement(loadingWheel);
+    	
+    	//edit a call
+    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+    	
+    	//assign score card
+    	assignScorecard(scorecardName);
+    	
+    	//assign agent
+    	assignAgent(identifiedAgnet);
+    	
+    	//add call title
+    	addCallTitle(callTitle);
+    	
+    	//submit
+    	save_button_edited_call.click();
+    	
+		return callTitle;
+    }
+    
+    //getting specific call to perform action -- score/review/update score
+    public void getCallToPerformAction(String callTitle, String action) throws InterruptedException {
+    	WebElement callForAction;
+    	
+    	switch(action) {
+    	case "editCall":
+    		callForAction = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//button//i[contains(@class,'edit')]"));
+        	Util.Action().moveToElement(callForAction).click().perform();
+    		break;
+    	case "scoreCall":
+    		callForAction = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//button[text()='Score Now']"));
+        	Util.Action().moveToElement(callForAction).click().perform();
+    		break;	
+    	case "reviewCall":
+    		callForAction = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//button[text()='Review']"));
+        	Util.Action().moveToElement(callForAction).click().perform();
+    		break;		
+    	case "reviewedCall":
+    		callForAction = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//button[text()='Reviewed']"));
+        	Util.Action().moveToElement(callForAction).click().perform();
+    		break;			
+    	}
+        Util.waitExecutorForInVisibilityOfElement(criteria_loader);
+    	Thread.sleep(500);
+    }
+    
+    //getting specific call score 
+    public String getCallScore(String callTitle) {
+    	String score = null;
+    	WebElement callCallScore = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//div[starts-with(@class,'score pull') and @aria-hidden='false']"));
+    	return score = callCallScore.getText().replaceAll("[^a-zA-Z0-9]", "");
+    }
+    
+    //input score 
+    public void scoreInput(String type) {
+    	String[] outcomeArray = {"outcome_no_checkbox", "outcome_yes_checkbox"} ;
+    	String[] passFailArray = {"Pass:", "Fail:","N/A:"};
+    	
+    	//get criteria type
+    	List<WebElement> criteria = driver.findElements(By.xpath("//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false']"));
+    	
+    	//enter inputs for criteria
+    	for(int i =0;i<criteria.size();i++) {
+    		//get criteria type
+    		String critriaType = null;
+    		
+			String passFailCheck = criteria.get(i).getAttribute("ng-show");
+			if(passFailCheck.equals("criteria.ctype != 'Pass/Fail'")) {
+				List<WebElement> typ = driver.findElements(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']"));
+				if(typ.size()==7) 
+					critriaType = "scale_0_5";		
+				else if(typ.size()==5) 
+					critriaType = "scale_0_3";	
+				else if(typ.size()==12) 
+					critriaType = "scale_0_10";	
+			}else 
+				critriaType = "pass_fail";
+			
+			//input based on criteria type
+			if(critriaType == "pass_fail") {
+				 int passFailArrayIndex = Util.getRandomString(passFailArray);
+				 WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//label[text()='"+passFailArray[passFailArrayIndex]+"']/..//input"));
+				 Util.Action().moveToElement(passFailCheckbox).click().perform();
+			}
+            else {
+            	if(critriaType.equals("scale_0_5")) {
+            		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "N/A:"};
+   				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+   				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+   		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+            	}else if(critriaType.equals("scale_0_3")) {
+            		String[] scaleArray = {"0:", "1:", "2:", "3:", "N/A:"};
+   				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+   				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+   		        	Util.Action().moveToElement(passFailCheckbox).click().perform();            		
+            	}else {
+            		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
+   				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+   				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+   		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+            	}            	
+            }
+		}
+    	
+    	//input for outcome
+    	int outcomeArrayIndex = Util.getRandomString(outcomeArray);
+    	if(outcomeArray[outcomeArrayIndex].equals("outcome_yes_checkbox"))
+        	Util.Action().moveToElement(outcome_yes_checkbox).click().perform();
+    	else
+        	Util.Action().moveToElement(outcome_no_checkbox).click().perform();
+    	
+    	//submit
+    	Util.Action().moveToElement(done_button_scoring_section).click().perform();
+    	
+    }
+    
+    //scoring a call
+    public void scoreCall(String callTitle, String type) throws InterruptedException {
+    	//edit call to be scored
+    	getCallToPerformAction(callTitle, "scoreCall");
+    	    	
+    	//score a call
+    	switch(type) {
+    	case "scoreOnlyOptionalCriteria":
+    		scoreInput("scoreOnlyOptionalCriteria");
+    		break;
+    	case "scoreOnlyMandatoryCriteria":
+    		scoreInput("scoreOnlyMandatoryCriteria");
+    		break;	
+    	case "scoreAllCriteria":
+    		scoreInput("scoreAllCriteria");
+    		break;		
+    	
+    	}
+    	
+    	
+    	//submit score 
+    	Util.Action().moveToElement(done_button_scoring_section).click().perform();
+    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
+    	
+    }
+    
+    //update score of already call
+    public void upateScore(String callTitle) throws InterruptedException {
+        //edit call to be scored
+    	getCallToPerformAction(callTitle, "reviewCall");
+    	
+    	//update score 
+    	
+    	//submit score
+    }
+    
+    //review call
+    public void reviewCall(String callTitle) throws InterruptedException {
+        //edit call to be scored
+    	getCallToPerformAction(callTitle, "reviewCall");
+    	
+    	//review a call
+    	
+    	//submit 
+    }
+    
+    //assigning agent to the call
+    public void assignAgent(String agentName) {
+    	Select identifiedAgentListBox = new Select(identified_agent_listbox_edited_call);
+    	identifiedAgentListBox.selectByVisibleText(agentName);    	
+    }
+    
+    //assigning score card to the call
+    public void assignScorecard(String scorecardName) {
+    	Select scoreCardListBox = new Select(scorecard_listbox_edited_call);
+    	scoreCardListBox.selectByVisibleText(scorecardName);
+    }
+    
+    //adding title to the call
+    public void addCallTitle(String callTitle) {
+    	call_title_edited_call.sendKeys(callTitle);
     }
     
   //------------------------------------------Functional----------------------------------------------------------------------------------
