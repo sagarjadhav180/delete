@@ -47,4 +47,22 @@ private static PostgresConnection postgres;
 		return group;	
 	}
 	
+	@SuppressWarnings("unused")
+	public static String getOrgUnitId(String groupName) {
+		String group= null;
+		postgres = new PostgresConnection();
+		Connection con = postgres.getConnection();
+			
+		ResultSet resultSet = postgres.getResultSet("SELECT * FROM org_unit WHERE org_unit_name = '"+groupName+"' AND org_unit_status = 'active'");
+
+		try {
+    	while(resultSet.next()) {
+			group = resultSet.getArray("org_unit_id").toString();			
+		}
+    	}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return group;	
+	}
+	
 }
