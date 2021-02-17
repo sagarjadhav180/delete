@@ -3,6 +3,7 @@ package dbUtil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import dbUtil.PostgresConnection;
 
@@ -27,5 +28,42 @@ private static PostgresConnection postgres;
 			return scorecards;	
 	}
 	
+	@SuppressWarnings("unused")
+	public static List<String> getScorecardsIds(String org_unit_id) {
+		  List<String> scorecardIds = null;
+			postgres = new PostgresConnection();
+			Connection con = postgres.getConnection();
+			
+			ResultSet resultSet = postgres.getResultSet("SELECT * FROM score_cards WHERE '"+org_unit_id+"' = ANY(groups_list) AND scorecard_status = 'active'");
+
+			try {
+				while(resultSet.next()) {
+					String scorecardId = resultSet.getArray("score_card_id").toString();
+					scorecardIds.add(scorecardId);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return scorecardIds;	
+	}
+
+	@SuppressWarnings("unused")
+	public static List<String> getScorecardsNames(String org_unit_id) {
+		  List<String> scorecardNames = null;
+			postgres = new PostgresConnection();
+			Connection con = postgres.getConnection();
+			
+			ResultSet resultSet = postgres.getResultSet("SELECT * FROM score_cards WHERE '"+org_unit_id+"' = ANY(groups_list) AND scorecard_status = 'active'");
+
+			try {
+				while(resultSet.next()) {
+					String scorecardId = resultSet.getArray("score_card_title").toString();
+					scorecardNames.add(scorecardId);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return scorecardNames;	
+	}
 	
 }
