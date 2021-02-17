@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
@@ -364,6 +366,16 @@ public class Util extends TestBase{
 	
 		jse = getJavascriptExecutor();
 		jse.executeScript("arguments[0].setAttribute('"+attribute+"', '"+attribute_value+"')", element);	
+	}
+	
+	public static String getValidMailIdFromString(String randomString) {
+		String validEmailID = null;
+		
+		Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(randomString);
+	    while (m.find()) {
+	    	validEmailID = (m.group());
+	    }
+		return validEmailID;
 	}
 	
 	public static Boolean collectionComarator(String[] expectedObjects, List<WebElement> actualObjects) {
