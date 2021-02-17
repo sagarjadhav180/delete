@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -254,6 +257,12 @@ public class SelectAndScorePage extends TestBase {
 	private WebElement cancel_advanced_filter_button;
 
 	//confirmation messages
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
+	
 	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Identified Agent is added successfully.']")
 	private WebElement success_msg_for_agent_assigned;
 
@@ -279,6 +288,21 @@ public class SelectAndScorePage extends TestBase {
 
 	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Scorecard is updated successfully.']")
 	private WebElement success_msg_for_scorecard_update;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Call record updated successfully.']")
+	private WebElement success_msg_for_call_record_update;
+	
+	@FindBy(xpath="")
+	private WebElement success_msg_for_call_score;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Call Scores updated successfully.']")
+	private WebElement success_msg_for_call_score_update;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Call Reviewed successfully.']")
+	private WebElement success_msg_for_call_score_review;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Please make sure you have answered all mandatory questions before clicking on Done button']")
+	private WebElement alert_msg_for_missing_mandatory_criteria_answeres;
 	
 	//scoring section
 	@FindBy(xpath="//div[@class='criteriaProgressLoader']")
@@ -336,6 +360,12 @@ public class SelectAndScorePage extends TestBase {
 	
 	@FindBy(xpath="//button[text()='Done']")
 	private WebElement done_button_scoring_section;
+	
+	@FindBy(xpath="//button[text()='Update Score']")
+	private WebElement update_score_button_scoring_section;
+	
+	@FindBy(xpath="//div[@class='container-fluid']//button[text()='Review']")
+	private WebElement review_button_scoring_section;
 
 	@FindBy(xpath="//button[text()='Done']//preceding-sibling::button")
 	private WebElement cancel_button_scoring_section;
@@ -476,7 +506,7 @@ public class SelectAndScorePage extends TestBase {
     }
     
     //getting score card status link 
-    public String getScorecardStatusLink(String status) {
+    public String callStatusLink(String status) {
     	String link = null;
     	
     	switch(status) {
@@ -494,6 +524,27 @@ public class SelectAndScorePage extends TestBase {
     		break;
     	}
 		return link;
+    }
+    
+    //getting score card status 
+    public String callStatus(String link) {
+    	String status = null;
+    	
+    	switch(link) {
+    	case "../img/icons/needscorecard.png":
+    		status = "Need Scorecard";
+    		break;
+    	case "../img/icons/unscored.png":
+    		status = "Unscored";
+    		break;
+    	case "../img/icons/scored.png":
+    		status = "Scored";
+    		break;
+    	case "../img/icons/reviewed.png":
+    		status = "Reviewed";
+    		break;
+    	}
+		return status;
     }
     
     //--------------------------------------------------UI---------------------------------------------------------------------------
@@ -1121,7 +1172,7 @@ public class SelectAndScorePage extends TestBase {
     	List<String> filteredData= getFilteredData("Stauts");
     	
     	//verification
-    	String expectedStatus = getScorecardStatusLink(status);
+    	String expectedStatus = callStatusLink(status);
     	
     	Boolean verificationFlag;
     	if(Collections.frequency(filteredData, expectedStatus) == filteredData.size())
@@ -1203,7 +1254,7 @@ public class SelectAndScorePage extends TestBase {
     }
     
     //assign agent, score card and call title to the call 
-    public String scorecardAndAgentAssignment(String scorecardName, String identifiedAgnet) {
+    public String scorecardAndAgentAssignment(String scorecardName, String identifiedAgnet) throws InterruptedException {
     	String callTitle = "call-"+Util.generateRandomNumber();
     	
     	//apply status filter for unscored call
@@ -1224,6 +1275,8 @@ public class SelectAndScorePage extends TestBase {
     	
     	//submit
     	save_button_edited_call.click();
+    	Assert.assertTrue(success_msg_for_call_record_update.isDisplayed(), "call record not updated successfully");
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
     	
 		return callTitle;
     }
@@ -1266,14 +1319,23 @@ public class SelectAndScorePage extends TestBase {
     	String[] outcomeArray = {"outcome_no_checkbox", "outcome_yes_checkbox"} ;
     	String[] passFailArray = {"Pass:", "Fail:","N/A:"};
     	
-    	//get criteria type
+    	//get all criteria 
     	List<WebElement> criteria = driver.findElements(By.xpath("//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false']"));
     	
-    	//enter inputs for criteria
+    	//go through each criteria
     	for(int i =0;i<criteria.size();i++) {
-    		//get criteria type
+    		//get criteria
     		String critriaType = null;
+
+    		//check if criteria is mandatory
+    		Boolean mandatoryCriteria;
+    		WebElement mandatory = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//parent::div[@class='container-fluid']//span[text()='*']"));
+    		if(mandatory.getAttribute("aria-hidden").equals("true"))
+    			mandatoryCriteria = true;
+    		else
+    			mandatoryCriteria = false;
     		
+    		//get criteria type
 			String passFailCheck = criteria.get(i).getAttribute("ng-show");
 			if(passFailCheck.equals("criteria.ctype != 'Pass/Fail'")) {
 				List<WebElement> typ = driver.findElements(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']"));
@@ -1285,31 +1347,88 @@ public class SelectAndScorePage extends TestBase {
 					critriaType = "scale_0_10";	
 			}else 
 				critriaType = "pass_fail";
-			
-			//input based on criteria type
-			if(critriaType == "pass_fail") {
-				 int passFailArrayIndex = Util.getRandomString(passFailArray);
-				 WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//label[text()='"+passFailArray[passFailArrayIndex]+"']/..//input"));
-				 Util.Action().moveToElement(passFailCheckbox).click().perform();
-			}
-            else {
-            	if(critriaType.equals("scale_0_5")) {
-            		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "N/A:"};
-   				    int passFailArrayIndex = Util.getRandomString(scaleArray);
-   				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
-   		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
-            	}else if(critriaType.equals("scale_0_3")) {
-            		String[] scaleArray = {"0:", "1:", "2:", "3:", "N/A:"};
-   				    int passFailArrayIndex = Util.getRandomString(scaleArray);
-   				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
-   		        	Util.Action().moveToElement(passFailCheckbox).click().perform();            		
-            	}else {
-            		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
-   				    int passFailArrayIndex = Util.getRandomString(scaleArray);
-   				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
-   		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
-            	}            	
-            }
+    		
+    		if(type.equals("scoreOnlyOptionalCriteria")) {
+    			if(mandatoryCriteria == false) {
+        			//input based on criteria type
+        			if(critriaType == "pass_fail") {
+        				 int passFailArrayIndex = Util.getRandomString(passFailArray);
+        				 WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//label[text()='"+passFailArray[passFailArrayIndex]+"']/..//input"));
+        				 Util.Action().moveToElement(passFailCheckbox).click().perform();
+        			}
+                    else {
+                    	if(critriaType.equals("scale_0_5")) {
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "N/A:"};
+           				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+           				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+           		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+                    	}else if(critriaType.equals("scale_0_3")) {
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "N/A:"};
+           				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+           				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+           		        	Util.Action().moveToElement(passFailCheckbox).click().perform();            		
+                    	}else {
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
+           				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+           				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+           		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+                    	}            	
+                    }	    				
+    			}
+    		}else if(type.equals("scoreOnlyMandatoryCriteria")){
+    			if(mandatoryCriteria == true) {
+        			//input based on criteria type
+        			if(critriaType == "pass_fail") {
+        				 int passFailArrayIndex = Util.getRandomString(passFailArray);
+        				 WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//label[text()='"+passFailArray[passFailArrayIndex]+"']/..//input"));
+        				 Util.Action().moveToElement(passFailCheckbox).click().perform();
+        			}
+                    else {
+                    	if(critriaType.equals("scale_0_5")) {
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "N/A:"};
+           				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+           				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+           		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+                    	}else if(critriaType.equals("scale_0_3")) {
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "N/A:"};
+           				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+           				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+           		        	Util.Action().moveToElement(passFailCheckbox).click().perform();            		
+                    	}else {
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
+           				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+           				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+           		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+                    	}            	
+                    }	
+        		
+    			}
+    		}else {
+    			//input based on criteria type
+    			if(critriaType == "pass_fail") {
+    				 int passFailArrayIndex = Util.getRandomString(passFailArray);
+    				 WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//label[text()='"+passFailArray[passFailArrayIndex]+"']/..//input"));
+    				 Util.Action().moveToElement(passFailCheckbox).click().perform();
+    			}
+                else {
+                	if(critriaType.equals("scale_0_5")) {
+                		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "N/A:"};
+       				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+       				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+       		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+                	}else if(critriaType.equals("scale_0_3")) {
+                		String[] scaleArray = {"0:", "1:", "2:", "3:", "N/A:"};
+       				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+       				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+       		        	Util.Action().moveToElement(passFailCheckbox).click().perform();            		
+                	}else {
+                		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
+       				    int passFailArrayIndex = Util.getRandomString(scaleArray);
+       				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
+       		        	Util.Action().moveToElement(passFailCheckbox).click().perform();
+                	}            	
+                }	
+    		} 		
 		}
     	
     	//input for outcome
@@ -1318,10 +1437,6 @@ public class SelectAndScorePage extends TestBase {
         	Util.Action().moveToElement(outcome_yes_checkbox).click().perform();
     	else
         	Util.Action().moveToElement(outcome_no_checkbox).click().perform();
-    	
-    	//submit
-    	Util.Action().moveToElement(done_button_scoring_section).click().perform();
-    	
     }
     
     //scoring a call
@@ -1340,24 +1455,44 @@ public class SelectAndScorePage extends TestBase {
     	case "scoreAllCriteria":
     		scoreInput("scoreAllCriteria");
     		break;		
-    	
     	}
-    	
     	
     	//submit score 
     	Util.Action().moveToElement(done_button_scoring_section).click().perform();
-    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
     	
+    	//verification based on given condition
+    	if(type.equals("scoreAllCriteria") || type.equals("scoreOnlyMandatoryCriteria")) {
+    		Util.waitExecutorForVisibilityOfElement(success_msg_for_call_score);
+        	Assert.assertTrue(success_msg_for_call_score.isDisplayed(), "call not scored successfully");	
+    	}else {
+    		Util.waitExecutorForVisibilityOfElement(alert_msg_for_missing_mandatory_criteria_answeres);
+        	Assert.assertTrue(alert_msg_for_missing_mandatory_criteria_answeres.isDisplayed(), "call scored successfully evem after not answering mandatory criteria");	  		
+    	}
+    	
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    	
+    	//closing scoring section
+    	Util.waitExecutorForVisibilityOfElement(cancel_button_scoring_section);
+    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
     }
     
-    //update score of already call
-    public void upateScore(String callTitle) throws InterruptedException {
+    //update score 
+    public void upateScore(String callTitle, String CallStatus) throws InterruptedException {
         //edit call to be scored
-    	getCallToPerformAction(callTitle, "reviewCall");
+    	getCallToPerformAction(callTitle, CallStatus);
     	
     	//update score 
+    	scoreInput("scoreAllCriteria");
     	
     	//submit score
+    	Util.Action().moveToElement(update_score_button_scoring_section).click().perform();
+      	Util.waitExecutorForVisibilityOfElement(success_msg_for_call_score_update);
+    	Assert.assertTrue(success_msg_for_call_score_update.isDisplayed(), "call score not updated successfully");
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    	
+    	//closing scoring section
+    	Util.waitExecutorForVisibilityOfElement(cancel_button_scoring_section);
+    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
     }
     
     //review call
@@ -1366,8 +1501,122 @@ public class SelectAndScorePage extends TestBase {
     	getCallToPerformAction(callTitle, "reviewCall");
     	
     	//review a call
+    	Util.Action().moveToElement(review_button_scoring_section).click().perform();
+    	Util.waitExecutorForVisibilityOfElement(success_msg_for_call_score_review);
+    	Assert.assertTrue(success_msg_for_call_score_review.isDisplayed(), "call not reviewed successfully");
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);  	
+    }
+    
+    //cancel feature -- answer all criteria and cancel
+    public void cancelScoreFeature(String callTitle) throws InterruptedException {
+    	//edit call to be scored
+    	getCallToPerformAction(callTitle, "scoreCall");
+    	    	
+    	//score a call
+    	scoreInput("scoreAllCriteria");
     	
-    	//submit 
+    	//submit score 
+    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
+    	try {
+    		Assert.assertTrue(success_msg_for_call_score.isDisplayed());
+    	}catch(Exception e) {
+	        logger.log(LogStatus.INFO, "call is scored even after clicking on cancel button");
+    	}    	
+    }
+    
+    //get scorer and reviewer details
+    public void scorerReviewerDetails(String callTitle, Map<String,String> details) throws InterruptedException {
+    	SoftAssert softAssert = Util.softAssert();
+    	
+    	//edit call to be scored
+    	getCallToPerformAction(callTitle, "reviewedCall");
+    	
+    	//expected scorer and reviewer details
+    	String expScorer = details.get("expScorer");
+    	String expCallAssigner = expScorer;
+    	String expScoredFor = details.get("expScoredFor");
+    	String expReviewer = details.get("expReviewer");
+    	
+    	//get scorer and reviewer details displayed
+    	String actScorer = null;
+    	String actCallAssigner = actScorer;
+    	String actScoredFor;
+    	String actReviewer;
+    	
+    	actScorer = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Selected By')]")).getText();
+    	actScoredFor = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Scored For')]")).getText();
+    	actReviewer = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Reviewed By')]")).getText();
+    	
+    	//verification
+    	softAssert.assertTrue(actScorer.endsWith(expScorer), "incorrect scorer displayed");
+    	softAssert.assertTrue(actCallAssigner.endsWith(expCallAssigner), "incorrect Call Assigner displayed");
+    	softAssert.assertTrue(actScoredFor.endsWith(expScoredFor), "incorrect Scored For displayed");
+    	softAssert.assertTrue(actReviewer.endsWith(expReviewer), "incorrect Reviewer displayed");
+    	
+    	softAssert.assertAll();
+    	
+    	//closing scoring section
+    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
+    }
+    
+    //check agents displayed in list are as per user permission
+    public void identifiedAgentsDAMCheck() {
+    	List<String> identifiedAgentsFromUI = null;
+    	List<String> identifiedAgentsFromDB;
+    	
+    	//edit call
+    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+    	
+    	//get listed agents from UI
+    	Select identifiedAgentListBox = new Select(identified_agent_listbox_edited_call);
+    	List<WebElement> identifiedAgents = identifiedAgentListBox.getOptions();
+    	for(WebElement identifiedAgent:identifiedAgents) {
+    		if(!identifiedAgent.getAttribute("value").equals("?") &&  !identifiedAgent.getAttribute("value").equals("unassigned")) {
+        		String validMailId = Util.getValidMailIdFromString(identifiedAgent.getText());
+        		identifiedAgentsFromUI.add(validMailId);	
+    		}
+    	}
+    	
+    	//get agents from DB
+    	identifiedAgentsFromDB = dbUtil.UserDBUtil.getChildUsers(TestBase.getOrg_unit_id());
+
+    	//verification
+    	Collections.sort(identifiedAgentsFromUI);
+    	Collections.sort(identifiedAgentsFromDB);
+    	Assert.assertEquals(identifiedAgentsFromUI, identifiedAgentsFromDB, "agents displayed in list are not following DAM");
+    	
+    	//cancel edited call
+    	cancel_button_edited_call.click();
+    }
+    
+    //check score cards displayed in list are as per configured in available to list
+    public void scorecardsAvailabilityCheck() {
+    	List<String> scorecardsAvailableFromUI = null;
+    	List<String> scorecardsAvailableFromDB;
+    	
+    	//edit call
+    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+    	
+    	//get listed scorecards from UI
+    	Select scorecardListBox = new Select(scorecard_listbox_edited_call);
+    	List<WebElement> scorecards = scorecardListBox.getOptions();
+    	for(WebElement scorecard:scorecards) {
+    		if(!scorecard.getAttribute("value").equals("?") &&  !scorecard.getAttribute("value").equals("unassigned"))
+        		scorecardsAvailableFromUI.add(scorecard.getText());
+    	}
+    	
+    	//get scorecards from DB
+    	String groupName = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td//select[@name='selectedScorecard']//ancestor::tr//td[@title]")).getText();
+    	String group_id = dbUtil.GroupDBUtil.getOrgUnitId(groupName);
+        scorecardsAvailableFromDB = dbUtil.ScorecardDBUtil.getScorecardsNames(group_id);
+
+    	//verification
+    	Collections.sort(scorecardsAvailableFromUI);
+    	Collections.sort(scorecardsAvailableFromDB);
+    	Assert.assertEquals(scorecardsAvailableFromUI, scorecardsAvailableFromDB, "scorecards displayed in list are not as per configured in available to list");
+    	
+    	//cancel edited call
+    	cancel_button_edited_call.click();
     }
     
     //assigning agent to the call
@@ -1385,6 +1634,16 @@ public class SelectAndScorePage extends TestBase {
     //adding title to the call
     public void addCallTitle(String callTitle) {
     	call_title_edited_call.sendKeys(callTitle);
+    }
+    
+    //get call status -- unscored/scored/reviewed
+    public String getCallStatus(String callTitle) {
+    	String callStatus = null;
+    	
+    	//getting call status
+    	WebElement statusElement = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//img"));
+    	String statusLink = statusElement.getAttribute("src");
+    	return callStatus = callStatus(statusLink);
     }
     
   //------------------------------------------Functional----------------------------------------------------------------------------------
