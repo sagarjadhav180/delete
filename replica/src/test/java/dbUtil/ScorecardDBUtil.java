@@ -27,6 +27,42 @@ private static PostgresConnection postgres;
 			}
 			return scorecards;	
 	}
+
+	@SuppressWarnings("unused")
+	public static String getCallId(String callTitle) {
+		String callID= null;
+			postgres = new PostgresConnection();
+			Connection con = postgres.getConnection();
+			
+			ResultSet resultSet = postgres.getResultSet("SELECT * FROM call_fields WHERE call_title = '"+callTitle+"' ");
+
+			try {
+				while(resultSet.next()) {
+					callID = resultSet.getString("call_id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return callID;	
+	}
+
+	@SuppressWarnings("unused")
+	public static String getCallScore(String callID) {
+		String callScore= null;
+			postgres = new PostgresConnection();
+			Connection con = postgres.getConnection();
+			
+			ResultSet resultSet = postgres.getResultSet("SELECT * FROM score_card_calls WHERE call_id = '"+callID+"'");
+
+			try {
+				while(resultSet.next()) {
+					callScore = resultSet.getString("final_score");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return callScore;	
+	}
 	
 	@SuppressWarnings("unused")
 	public static List<String> getScorecardsIds(String org_unit_id) {
@@ -65,5 +101,7 @@ private static PostgresConnection postgres;
 			}
 			return scorecardNames;	
 	}
+	
+	
 	
 }
