@@ -44,6 +44,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -404,4 +405,22 @@ public class Util extends TestBase{
 		return softassert;
 	}
 	
+	public static void keyboardActions(String actionTOBePerformed) throws InterruptedException  {
+		switch(actionTOBePerformed) {
+		case "escape":
+			Util.Action().sendKeys(Keys.ESCAPE);
+			break;
+		}
+		Thread.sleep(500);
+	}
+	
+	public static String getStringFromAlphanumeric(String alphaNumbericString) {
+		String aplha;
+		return aplha = alphaNumbericString.replaceAll("\\d", "");
+	}
+	
+    public static String getNumberFromAlphanumeric(String alphaNumbericString) {
+    	String number;
+		return number = alphaNumbericString.replaceAll("\\D", "");
+	} 
 }
