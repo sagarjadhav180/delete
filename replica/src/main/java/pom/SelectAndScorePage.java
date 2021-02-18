@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -91,7 +92,7 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//h3[text()='Then']/..//following-sibling::div//div[@aria-hidden='false']//input")
 	private WebElement score_notifications_then_textbox;
 	
-	@FindBy(xpath="//div[@class='timeline-footer text-right']//a[text()='Add Action']")
+	@FindBy(xpath="//div[@class='timeline-footer text-right']//a[text()='Add Action'][@aria-hidden='false']")
 	private WebElement score_notifications_add_action_button;
 	
 	@FindBy(xpath="//h3[@class='modal-title']//following-sibling::button")
@@ -102,6 +103,9 @@ public class SelectAndScorePage extends TestBase {
 	
 	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Save']")
 	private WebElement score_notifications_save_button;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Notification Actions saved successfully']")
+	private WebElement success_message_notifications;	
 	
 	//status filters
 	@FindBy(xpath="//div[text()='Filter by Status:']")
@@ -421,6 +425,9 @@ public class SelectAndScorePage extends TestBase {
 	
 	@FindBy(xpath="//table[@id='scoredetailtable']//form[starts-with(@class,'form-buttons') and @aria-hidden='false']//button[text()='Cancel']")
 	private static WebElement cancel_button_edited_call;
+	
+	@FindBy(xpath="//div[@class='bootbox-body']")
+	private static WebElement edit_call_alert;
 	
 		
 	public SelectAndScorePage(WebDriver driver){
@@ -1644,6 +1651,96 @@ public class SelectAndScorePage extends TestBase {
     	WebElement statusElement = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//img"));
     	String statusLink = statusElement.getAttribute("src");
     	return callStatus = callStatus(statusLink);
+    }
+    
+    //adding Notifications
+    public void addNotification(int noOfNotifications) throws InterruptedException {
+    	//open notifications section
+    	notifications_button.click();
+    	
+    	//add notifications
+    	scoreNotificationsinput(noOfNotifications);
+    	
+    	//submit and verify
+    	score_notifications_save_button.click();
+    	Util.waitExecutorForVisibilityOfElement(success_message_notifications);
+    	Assert.assertTrue(success_message_notifications.isDisplayed(), "notification not added successfully");
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    }
+    
+    //adding actions for notifications
+    public void scoreNotificationsinput(int noOfNotifications) {
+    	
+    	for(int i=1;i<=noOfNotifications;i++) {
+    		if(i<5) {
+    			//setting if condition
+            	WebElement ifConditionListbox = driver.findElement(By.xpath("(//h3[text()='If']/..//following-sibling::div//select)["+i+"]"));
+            	Select ifConditionList = new Select(ifConditionListbox);
+            	if(i%2 == 0)
+                	ifConditionList.selectByIndex(1);
+            	else
+                	ifConditionList.selectByIndex(2);
+
+            	//setting then action
+            	WebElement thenConditionListbox = driver.findElement(By.xpath("(//h3[text()='Then']/..//following-sibling::div//select)["+i+"]"));
+            	Select thenConditionList = new Select(thenConditionListbox);
+            	if(i%2 == 0)
+                	thenConditionList.selectByIndex(1);
+            	else
+                	thenConditionList.selectByIndex(2);            		
+            	
+            	//adding value for then condition
+            	WebElement thenConditionTextBox = driver.findElement(By.xpath("(//h3[text()='Then']/..//following-sibling::div//div[@aria-hidden='false']//input)["+i+"]"));
+            	if(thenConditionList.getFirstSelectedOption().getText().equals("Send email alert to"))
+                	thenConditionTextBox.sendKeys(TestBase.getUser_id());
+            	else if (thenConditionList.getFirstSelectedOption().getText().equals("Send SMS to"))
+                	thenConditionTextBox.sendKeys("8018786943"); 			
+            	
+            	//add next action
+            	if(i<4) 
+            		score_notifications_add_action_button.click();      
+            	else {
+            		try {
+            			Assert.assertTrue(score_notifications_add_action_button.isDisplayed());
+            			Assert.fail("allowing add to 5th notiifcation");
+            		}catch(Exception e){
+            			logger.log(LogStatus.PASS, "");
+            		}
+            	}
+    		}  		
+    	}
+    }
+    
+    //check if alert is  displayed if while editing a call if already any other edited call is not saved 
+    public void editCallAlert() throws InterruptedException {
+    	//editing a call
+    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+    	
+    	//editing another call
+    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+    	
+    	//verification
+    	Util.waitExecutorForVisibilityOfElement(edit_call_alert);
+    	Assert.assertTrue(edit_call_alert.isDisplayed(), "Appropriate alert not displayed");
+    	
+    	//close popup
+    	Util.keyboardActions("escape");
+    }
+    
+    //check call score with DB
+    public void callScoreCheck(String callTitle) {
+    	String scoreFromUI;
+    	String scoreFromDB;
+    	
+    	//get call score from UI
+    	WebElement scoreElement = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//button[text()='Score Now']/..//following-sibling::div/div[@aria-hidden='false']"));
+    	scoreFromUI = Util.getNumberFromAlphanumeric(scoreElement.getText());
+    	
+    	//get call score from DB
+    	String callID = dbUtil.ScorecardDBUtil.getCallId(callTitle);
+    	scoreFromDB = dbUtil.ScorecardDBUtil.getCallScore(callID);
+    	//verification
+    	Assert.assertEquals(scoreFromUI, scoreFromDB, "score displayed on UI does not match with DB");
     }
     
   //------------------------------------------Functional----------------------------------------------------------------------------------
