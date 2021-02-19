@@ -1768,6 +1768,7 @@ public class SelectAndScorePage extends TestBase {
         	WebElement scorecardElement = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td/span[@e-name='selectedScorecard'][text()='"+scorecardName+"']"));
         
         	//verification	
+        	logger.log(LogStatus.INFO, "Verifying if scoreacard is attached to the call");
         	Assert.assertTrue(scorecardElement.isDisplayed(), "Scorecard association with is broken");
     	}catch(Exception e) {
     		
