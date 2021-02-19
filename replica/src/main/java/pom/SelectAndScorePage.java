@@ -1761,6 +1761,20 @@ public class SelectAndScorePage extends TestBase {
     	Assert.assertEquals(scoreFromUI, scoreFromDB, "score displayed on UI does not match with DB");
     }
     
+    //Check if score card is associated with call
+    public void scorecardAssociationWithCall(String callTitle, String scorecardName) {
+    	try {
+    		//getting scorecard from call
+        	WebElement scorecardElement = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td/span[@e-name='selectedScorecard'][text()='"+scorecardName+"']"));
+        
+        	//verification	
+        	Assert.assertTrue(scorecardElement.isDisplayed(), "Scorecard association with is broken");
+    	}catch(Exception e) {
+    		
+    	}
+    	
+    }
+    
   //------------------------------------------Functional----------------------------------------------------------------------------------
 	
 }
