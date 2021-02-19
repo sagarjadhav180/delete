@@ -55,6 +55,7 @@ public class Constants {
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
 	public static final String webhook_category="Webhook Suite";
 	public static final String manage_scorecard_category="Manage Scorecard Suite";
+	public static final String select_and_score_category="Select and Score Suite";
 	
     public static class LookerReports{
     	
