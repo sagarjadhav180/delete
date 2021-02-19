@@ -1093,6 +1093,7 @@ public class SelectAndScorePage extends TestBase {
     	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+1).trim();
     	
     	//verify
+    	logger.log(LogStatus.INFO, "Verifying if call count shown in pagination toolbox is matching with DB");
     	Assert.assertEquals(uiCount, dbCount, "uiCount is not matching with dbCount");
 	}
 	
@@ -1115,6 +1116,7 @@ public class SelectAndScorePage extends TestBase {
     		uiCount = String.valueOf(finalCount);
     	
     	//verify
+    	logger.log(LogStatus.INFO, "Verifying if call count shown in grid is matching with DB");
     	Assert.assertEquals(uiCount, dbCount, "uiCount is not matching with dbCount");
     	if(Integer.parseInt(dbCount)>100)
         	top_first_button.click();
@@ -1165,8 +1167,8 @@ public class SelectAndScorePage extends TestBase {
     	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+1).trim();
     	
     	//Verification
-    	logger.log(LogStatus.INFO, "Verifying if data shown on UI is is matching with DB");
-    	Assert.assertEquals(uiCount, dbCount, "UI count is not matching with DB count");
+    	logger.log(LogStatus.INFO, "Verifying if data shown on UI is is matching with DB for date range "+range);
+    	Assert.assertEquals(uiCount, dbCount, "UI count is not matching with DB count for range "+range);
     }
     
     //Check data filter as per status
@@ -1187,7 +1189,7 @@ public class SelectAndScorePage extends TestBase {
     	else
     		verificationFlag = false;
     	
-    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per status filter applied");
+    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per status filter "+status);
     	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per status filter applied");
     }
 
@@ -1229,7 +1231,7 @@ public class SelectAndScorePage extends TestBase {
     	else
     		verificationFlag = false;
     	
-    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per filter applied");
+    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is correct for filter "+advanceFilterElement);
     	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per filter applied");
 		
     	//closing advance filter section
@@ -1282,6 +1284,7 @@ public class SelectAndScorePage extends TestBase {
     	
     	//submit
     	save_button_edited_call.click();
+    	logger.log(LogStatus.INFO, "Verifying if call record is getting updated successfully");
     	Assert.assertTrue(success_msg_for_call_record_update.isDisplayed(), "call record not updated successfully");
     	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
     	
@@ -1469,9 +1472,11 @@ public class SelectAndScorePage extends TestBase {
     	
     	//verification based on given condition
     	if(type.equals("scoreAllCriteria") || type.equals("scoreOnlyMandatoryCriteria")) {
+    		logger.log(LogStatus.INFO, "Verifying if call getting scored successfully");
     		Util.waitExecutorForVisibilityOfElement(success_msg_for_call_score);
         	Assert.assertTrue(success_msg_for_call_score.isDisplayed(), "call not scored successfully");	
     	}else {
+    		logger.log(LogStatus.INFO, "Verifying if appropriate alert is displayed if mandatory criteria are not scored");
     		Util.waitExecutorForVisibilityOfElement(alert_msg_for_missing_mandatory_criteria_answeres);
         	Assert.assertTrue(alert_msg_for_missing_mandatory_criteria_answeres.isDisplayed(), "call scored successfully evem after not answering mandatory criteria");	  		
     	}
@@ -1492,6 +1497,7 @@ public class SelectAndScorePage extends TestBase {
     	scoreInput("scoreAllCriteria");
     	
     	//submit score
+    	logger.log(LogStatus.INFO, "Verifying if call score is getting updated successfully");
     	Util.Action().moveToElement(update_score_button_scoring_section).click().perform();
       	Util.waitExecutorForVisibilityOfElement(success_msg_for_call_score_update);
     	Assert.assertTrue(success_msg_for_call_score_update.isDisplayed(), "call score not updated successfully");
@@ -1508,6 +1514,7 @@ public class SelectAndScorePage extends TestBase {
     	getCallToPerformAction(callTitle, "reviewCall");
     	
     	//review a call
+    	logger.log(LogStatus.INFO, "Verifying if call is getting reviewed successfully");
     	Util.Action().moveToElement(review_button_scoring_section).click().perform();
     	Util.waitExecutorForVisibilityOfElement(success_msg_for_call_score_review);
     	Assert.assertTrue(success_msg_for_call_score_review.isDisplayed(), "call not reviewed successfully");
@@ -1523,6 +1530,7 @@ public class SelectAndScorePage extends TestBase {
     	scoreInput("scoreAllCriteria");
     	
     	//submit score 
+    	logger.log(LogStatus.INFO, "Verifying if call is not scored on click of cancel button");
     	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
     	try {
     		Assert.assertTrue(success_msg_for_call_score.isDisplayed());
@@ -1555,9 +1563,13 @@ public class SelectAndScorePage extends TestBase {
     	actReviewer = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Reviewed By')]")).getText();
     	
     	//verification
+    	logger.log(LogStatus.INFO, "Verifying if correct scorer is displayed");
     	softAssert.assertTrue(actScorer.endsWith(expScorer), "incorrect scorer displayed");
+    	logger.log(LogStatus.INFO, "Verifying if correct call assigner is displayed");
     	softAssert.assertTrue(actCallAssigner.endsWith(expCallAssigner), "incorrect Call Assigner displayed");
+    	logger.log(LogStatus.INFO, "Verifying if correct scored for is displayed");
     	softAssert.assertTrue(actScoredFor.endsWith(expScoredFor), "incorrect Scored For displayed");
+    	logger.log(LogStatus.INFO, "Verifying if correct reviewer is displayed");
     	softAssert.assertTrue(actReviewer.endsWith(expReviewer), "incorrect Reviewer displayed");
     	
     	softAssert.assertAll();
@@ -1590,7 +1602,8 @@ public class SelectAndScorePage extends TestBase {
     	//verification
     	Collections.sort(identifiedAgentsFromUI);
     	Collections.sort(identifiedAgentsFromDB);
-    	Assert.assertEquals(identifiedAgentsFromUI, identifiedAgentsFromDB, "agents displayed in list are not following DAM");
+    	logger.log(LogStatus.INFO, "Verifying if agents displayed in list are following user permission");
+    	Assert.assertEquals(identifiedAgentsFromUI, identifiedAgentsFromDB, "agents displayed in list are not following user permission");
     	
     	//cancel edited call
     	cancel_button_edited_call.click();
@@ -1620,6 +1633,7 @@ public class SelectAndScorePage extends TestBase {
     	//verification
     	Collections.sort(scorecardsAvailableFromUI);
     	Collections.sort(scorecardsAvailableFromDB);
+    	logger.log(LogStatus.INFO, "Verifying if scorecards displayed in list are as per configured in available to list");
     	Assert.assertEquals(scorecardsAvailableFromUI, scorecardsAvailableFromDB, "scorecards displayed in list are not as per configured in available to list");
     	
     	//cancel edited call
@@ -1662,6 +1676,7 @@ public class SelectAndScorePage extends TestBase {
     	scoreNotificationsinput(noOfNotifications);
     	
     	//submit and verify
+    	logger.log(LogStatus.INFO, "Verifying if notification is getting added successfully");
     	score_notifications_save_button.click();
     	Util.waitExecutorForVisibilityOfElement(success_message_notifications);
     	Assert.assertTrue(success_message_notifications.isDisplayed(), "notification not added successfully");
@@ -1701,6 +1716,7 @@ public class SelectAndScorePage extends TestBase {
             		score_notifications_add_action_button.click();      
             	else {
             		try {
+            	    	logger.log(LogStatus.INFO, "Verifying if not able to add 5th notification");
             			Assert.assertTrue(score_notifications_add_action_button.isDisplayed());
             			Assert.fail("allowing add to 5th notiifcation");
             		}catch(Exception e){
@@ -1720,6 +1736,7 @@ public class SelectAndScorePage extends TestBase {
     	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
     	
     	//verification
+    	logger.log(LogStatus.INFO, "Verifying if Appropriate alert is displayed when previoulsy edited call is not closed");
     	Util.waitExecutorForVisibilityOfElement(edit_call_alert);
     	Assert.assertTrue(edit_call_alert.isDisplayed(), "Appropriate alert not displayed");
     	
@@ -1740,6 +1757,7 @@ public class SelectAndScorePage extends TestBase {
     	String callID = dbUtil.ScorecardDBUtil.getCallId(callTitle);
     	scoreFromDB = dbUtil.ScorecardDBUtil.getCallScore(callID);
     	//verification
+    	logger.log(LogStatus.INFO, "Verifying if score displayed on UI is matching with DB");
     	Assert.assertEquals(scoreFromUI, scoreFromDB, "score displayed on UI does not match with DB");
     }
     
