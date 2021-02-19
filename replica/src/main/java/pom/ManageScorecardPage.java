@@ -725,7 +725,7 @@ public class ManageScorecardPage extends TestBase {
     	scorecard_title_textbox.sendKeys(scorecardTitle);
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
-    	available_to_dropdown.click();
+    	available_to_dropdown.click(); //-- opening available_to_dropdown box
     	Thread.sleep(2000);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
@@ -733,12 +733,11 @@ public class ManageScorecardPage extends TestBase {
         		available_to_groups_check_uncheck_option.click();	
         		break;
     	}
+    	available_to_dropdown.click(); //-- closing available_to_dropdown box
+    	
     	//removing self group
     	String groupToRemove = dbUtil.GroupDBUtil.getGroupName(TestBase.getOrg_unit_id());
-    	WebElement checkbox = driver.findElement(By.xpath("//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span[text()='"+groupToRemove+"']//ancestor::li//input"));
-    	Util.Action().moveToElement(checkbox).perform();
-    	checkbox.click();
-    	available_to_dropdown.click();
+    	removeGroupFromAvaialbleTo(groupToRemove);
     	
     	//adding criteria
     	addCriteria(criteria);
@@ -747,6 +746,16 @@ public class ManageScorecardPage extends TestBase {
         save_configure_scorecard_button.click();
         Assert.assertTrue(success_message_scorecard_creation.isDisplayed(), "scorecard not created successfully");
         Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    }
+    
+    //removing specified group from available to list
+    public void removeGroupFromAvaialbleTo(String groupToRemove) throws InterruptedException {
+    	available_to_dropdown.click(); //-- opening available_to_dropdown box
+    	Thread.sleep(2000);
+    	WebElement checkbox = driver.findElement(By.xpath("//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span[text()='"+groupToRemove+"']//ancestor::li//input"));
+    	Util.Action().moveToElement(checkbox).perform();
+    	checkbox.click();
+    	available_to_dropdown.click(); //-- closing available_to_dropdown box    	
     }
     
     //criteria data set
