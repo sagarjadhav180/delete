@@ -3,6 +3,7 @@ package pom;
 import java.util.HashSet;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -124,45 +125,75 @@ public class HomePage extends TestBase {
 		
 	}
 	
-	public void click_subLink(String linkToBeClicked){
-		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
-			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
-				try {
-					wait.until(ExpectedConditions.visibilityOf(left_hand_navigation_bar_sub_links.get(i)));
-					Thread.sleep(2000);
-					left_hand_navigation_bar_sub_links.get(i).click();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					left_hand_navigation_bar_sub_links.get(i).click();
-					e.printStackTrace();
-				}
-				break;
-			}
+	public void click_subLink(String linkToBeClicked) throws InterruptedException{
+		
+		WebElement subModuleToBeClicked; 
+		subModuleToBeClicked = driver.findElement(By.xpath("//*[@id='sidebar']/li//ul//li/a/span[1][text()='"+linkToBeClicked+"']"));			
+		Thread.sleep(500);
+		try {
+			subModuleToBeClicked.click();			
+		}catch(Exception e) {
+			
 		}
+
 		Util.waitForLoad(driver);
+		
+//		if(linkToBeClicked.contains("Campaign")) {
+//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));			
+//		}else {
+//			Thread.sleep(10000);			
+//		}
+//		
+//		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
+//			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
+//				try {
+//					wait.until(ExpectedConditions.visibilityOf(left_hand_navigation_bar_sub_links.get(i)));
+//					Thread.sleep(2000);
+//					left_hand_navigation_bar_sub_links.get(i).click();
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					left_hand_navigation_bar_sub_links.get(i).click();
+//					e.printStackTrace();
+//				}
+//				break;
+//			}
+//		}
+//		Util.waitForLoad(driver);
 	}
 	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
 		
-		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
-		WebElement link = left_hand_navigation_bar_links.get(i);
-			if(link.getText().equals(linkToBeClicked)){
-				
-				if(link.getText().contains("Campaign")){
-					link.click();
-					try{
-					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-					
-					}catch(Exception e){}
-				}
-						
-				else{
-				link.click();
-				Thread.sleep(10000);
-				}
-				break;
-			}
+		WebElement moduleToBeClicked; 
+		moduleToBeClicked = driver.findElement(By.xpath("//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']"));			
+		Thread.sleep(500);
+		moduleToBeClicked.click();
+		
+		if(linkToBeClicked.contains("Campaign")) {
+			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));			
+		}else {
+			Thread.sleep(10000);			
 		}
+			
+		
+//		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
+//		WebElement link = left_hand_navigation_bar_links.get(i);
+//			if(link.getText().equals(linkToBeClicked)){
+//				
+//				if(link.getText().contains("Campaign")){
+//					link.click();
+//					try{
+//					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//					
+//					}catch(Exception e){}
+//				}
+//						
+//				else{
+//				link.click();
+//				Thread.sleep(10000);
+//				}
+//				break;
+//			}
+//		}
 //		Util.waitForLoad(driver);	
 	}
 	
