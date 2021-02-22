@@ -633,7 +633,9 @@ public class ManageScorecardPage extends TestBase {
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
-    	Thread.sleep(2000);
+    	do {
+    		Thread.sleep(500);
+    	}while(available_to_groups.size()<1);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
@@ -663,6 +665,9 @@ public class ManageScorecardPage extends TestBase {
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
+    	do {
+    		Thread.sleep(500);
+    	}while(available_to_groups.size()<1);
     	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
     		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
         		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
