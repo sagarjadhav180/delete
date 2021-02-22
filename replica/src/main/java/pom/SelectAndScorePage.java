@@ -602,6 +602,7 @@ public class SelectAndScorePage extends TestBase {
     //To check UI of pagination tool-box at the top
 	public void paginationToolboxTop() {
     	logger.log(LogStatus.INFO, "Verifying if top_first_button button is displayd");
+    	Util.waitExecutorForVisibilityOfElement(top_first_button);
     	Assert.assertTrue(top_first_button.isDisplayed(), "top_first_button is not displayed");
     	logger.log(LogStatus.INFO, "Verifying if top_last_button button is displayd");
     	Assert.assertTrue(top_last_button.isDisplayed(), "top_last_button is not displayed");
@@ -1134,7 +1135,9 @@ public class SelectAndScorePage extends TestBase {
 	
 	//to click on specified date range filter button
 	public void dateRangePickerElementClick(String buttonName) {
-		WebElement dateRangePickerElementButtonToClick = driver.findElement(By.xpath("//div[@class='daterangepicker dropdown-menu opensleft'][2]//ul//li[text()='"+buttonName+"']"));
+		String xPath = "//div[@class='daterangepicker dropdown-menu opensleft']//ul//li[text()='"+buttonName+"']";
+		Util.customWait(driver.findElement(By.xpath(xPath)));
+		WebElement dateRangePickerElementButtonToClick = driver.findElement(By.xpath("//div[@class='daterangepicker dropdown-menu opensleft']//ul//li[text()='"+buttonName+"']"));
 		Util.Action().moveToElement(dateRangePickerElementButtonToClick).click().perform();
 	}
 	
