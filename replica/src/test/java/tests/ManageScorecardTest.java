@@ -20,7 +20,7 @@ public class ManageScorecardTest extends TestBase{
 	ManageScorecardPage manageScorecardPage; 
 	
 	@BeforeClass //logging in
-	public void login() throws IOException {
+	public void login() throws IOException, InterruptedException {
 		//logging in
 		LoginPage loginPage=new LoginPage(driver);
 		loginPage.validLogin();
@@ -33,7 +33,7 @@ public class ManageScorecardTest extends TestBase{
 	}	
 	
 	//navigating to manage score card page 
-	public void navigateToManageScorecardPage() {
+	public void navigateToManageScorecardPage() throws InterruptedException {
         HomePage hp=new HomePage(driver);
 		try {
 			hp.clickAction(Constants.HomePage.scoreacrd_page);
