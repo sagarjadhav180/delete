@@ -409,6 +409,9 @@ public class SelectAndScorePage extends TestBase {
 
 	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr")
 	private static List<WebElement> call_count_in_table;
+	
+	@FindBy(xpath="//table[@id='scoredetailtable']//td[text()='No Data Found']")
+	private static WebElement no_data_found_label;
 
 	//edited call
 	@FindBy(xpath="//table[@id='scoredetailtable']//tbody//tr//td//select[@name='identifyAgent']")
@@ -1163,13 +1166,21 @@ public class SelectAndScorePage extends TestBase {
     	
     	//getting UI count
     	date_range_filter_button.click();
-    	Thread.sleep(500);
     	dateRangePickerElementClick(range);
+    	pageLoadWait();
     	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+1).trim();
     	
     	//Verification
-    	logger.log(LogStatus.INFO, "Verifying if data shown on UI is is matching with DB for date range "+range);
-    	Assert.assertEquals(uiCount, dbCount, "UI count is not matching with DB count for range "+range);
+    	if(Integer.parseInt(dbCount)<1) {
+    		logger.log(LogStatus.INFO, "Verifying if no_data_found_label is displayed on UI since no records are present for givren range "+range);
+    		Assert.assertTrue(no_data_found_label.isDisplayed(), "no_data_found_label is not displayed");	
+    	}
+    	else {
+    		logger.log(LogStatus.INFO, "Verifying if data shown on UI is is matching with DB for date range "+range);
+        	Assert.assertEquals(uiCount, dbCount, "UI count is not matching with DB count for range "+range);
+    	}
+    		
+    	
     }
     
     //Check data filter as per status
