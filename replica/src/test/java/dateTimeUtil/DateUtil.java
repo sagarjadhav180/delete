@@ -19,8 +19,8 @@ public class DateUtil {
 			dateRange.put("startDateToBeUsed", startDateToBeUsedForToday);
 			break;
 		case "Yesterday":
-		    String endDateToBeUsedForYesterday = Util.getDate("yyyy-MM-dd","-1");
-			String startDateToBeUsedForYesterday = Util.getDate("yyyy-MM-dd","0");
+		    String endDateToBeUsedForYesterday = Util.getDate("yyyy-MM-dd","0");
+			String startDateToBeUsedForYesterday = Util.getDate("yyyy-MM-dd","-1");
 			dateRange.put("endDateToBeUsed", endDateToBeUsedForYesterday);
 			dateRange.put("startDateToBeUsed", startDateToBeUsedForYesterday);
 			break;
