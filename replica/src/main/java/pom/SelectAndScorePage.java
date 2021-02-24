@@ -124,7 +124,7 @@ public class SelectAndScorePage extends TestBase {
 	
 	@FindBy(xpath="//table[@id='scoredetailtable']//thead//tr[1]//th")
 	private List<WebElement> actual_columns_names;			
-	String[] expected_columns_names = {"Play Call ","Status ","Date/Time ","Duration ","Group ","Identified Agent ","Call Title ","Scorecard ","Score Date ","Score ","Actions "};
+	String[] expected_columns_names = {"Play Call","Status","Date/Time","Duration","Group","Identified Agent","Call Title","Scorecard","Score Date","Score","Actions"};
 	
 	//-------------------------------------------------------------
 	//get index ==>
@@ -441,35 +441,36 @@ public class SelectAndScorePage extends TestBase {
 		status_checkbox.click();
 	}
     
-	
+	public void pageLoadWait() {
+		Util.waitExecutorForInVisibilityOfElement(loadingWheel);
+	}
+    
 	//To click on action button
     public void actionButtonClick(String button_name) {
     	
     	WebElement action_button = null;
     	
+    	//getting element to click
     	switch(button_name) {
     	case "play":
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td[1]//button[@title='Listen to call'][@aria-disabled='false'])[1]"));
-    		action_button.click();
     		break;
     	case "i":
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Toggle Call Info'])[1]"));
-    		action_button.click();    		
     		break;
     	case "edit":
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button//i[contains(@class,'edit')])[1]"));
-    		action_button.click(); 
     		break;
     	case "download":
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Download Audio File'])[1]"));
-    		action_button.click(); 
     		break;
     	case "mail":
-    		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Email Call'])[1]"));
-    		action_button.click();     		
+    		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Email Call'])[1]"));     		
     		break;	
     	}
     	
+    	//clicking action
+    	Util.click(action_button);
     }
     
     //To click on info section buttons
@@ -515,19 +516,20 @@ public class SelectAndScorePage extends TestBase {
     //getting score card status link 
     public String callStatusLink(String status) {
     	String link = null;
+    	String iconsLib = "https://"+TestBase.getEnv()+"-cmo-1.convirza.com/img/icons";
     	
     	switch(status) {
     	case "Need Scorecard":
-    		link = "../img/icons/needscorecard.png";
+    		link = ""+iconsLib+"/needscorecard.png";
     		break;
     	case "Unscored":
-    		link = "../img/icons/unscored.png";
+    		link = ""+iconsLib+"/unscored.png";
     		break;
     	case "Scored":
-    		link = "../img/icons/scored.png";
+    		link = ""+iconsLib+"/scored.png";
     		break;
     	case "Reviewed":
-    		link = "../img/icons/reviewed.png";
+    		link = ""+iconsLib+"/reviewed.png";
     		break;
     	}
 		return link;
@@ -536,21 +538,17 @@ public class SelectAndScorePage extends TestBase {
     //getting score card status 
     public String callStatus(String link) {
     	String status = null;
+    	String iconsLib = "https://"+TestBase.getEnv()+"-cmo-1.convirza.com/img/icons";
     	
-    	switch(link) {
-    	case "../img/icons/needscorecard.png":
+    	if(link.equals(iconsLib+"/needscorecard.png")) 
     		status = "Need Scorecard";
-    		break;
-    	case "../img/icons/unscored.png":
+    	else if(link.equals(iconsLib+"/unscored.png"))
     		status = "Unscored";
-    		break;
-    	case "../img/icons/scored.png":
+    	else if(link.equals(iconsLib+"/scored.png"))
     		status = "Scored";
-    		break;
-    	case "../img/icons/reviewed.png":
+    	else if (link.equals(iconsLib+"/reviewed.png"))
     		status = "Reviewed";
-    		break;
-    	}
+    	
 		return status;
     }
     
@@ -755,6 +753,7 @@ public class SelectAndScorePage extends TestBase {
 
 		//verification
 		logger.log(LogStatus.INFO, "Verifying if tilte is displayed");
+		Util.waitExecutorForVisibilityOfElement(score_notifications_label);
 		softAssert.assertTrue(score_notifications_label.isDisplayed(), "score_notifications_label is not displayed");
 		
 		logger.log(LogStatus.INFO, "Verifying if header note is displayed");
@@ -1002,10 +1001,9 @@ public class SelectAndScorePage extends TestBase {
 		logger.log(LogStatus.INFO, "Verifying if cancel_button_scoring_section is clickable");
 		softAssert.assertTrue(cancel_button_scoring_section.isEnabled(), "cancel_button_scoring_section is not clickable");
 		
-		
 		softAssert.assertAll();
 		//closing scoring section
-		Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
+		Util.click(cancel_button_scoring_section);
 	}
 	
 	//-------------------------------------------------------UI---------------------------------------------------------------------------
@@ -1177,11 +1175,15 @@ public class SelectAndScorePage extends TestBase {
     //Check data filter as per status
     public void statusFilterCheck(String status) {
     	//checking specified status check box
-    	WebElement statusCheckbox = driver.findElement(By.xpath("//div[text()='Filter by Status:']//parent::form//label[text()='"+status+"']/input"));
-    	statusCheckbox.click();
+    	String xPath = "//div[text()='Filter by Status:']//parent::form//label[text()='"+status+"']//span";
+    	Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
+    	
+    	WebElement statusCheckbox = driver.findElement(By.xpath(xPath));
+    	Util.Action().moveToElement(statusCheckbox).click().perform();
+    	Util.waitExecutorForInVisibilityOfElement(loadingWheel);
     	
     	//get filtered data
-    	List<String> filteredData= getFilteredData("Stauts");
+    	List<String> filteredData= getFilteredData("Status");
     	
     	//verification
     	String expectedStatus = callStatusLink(status);
@@ -1271,7 +1273,6 @@ public class SelectAndScorePage extends TestBase {
     	
     	//apply status filter for unscored call
     	statusFilterCheck(Constants.SelectAndScorePage.status_checkbox_for_unscored);
-    	Util.waitExecutorForInVisibilityOfElement(loadingWheel);
     	
     	//edit a call
     	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
@@ -1646,7 +1647,7 @@ public class SelectAndScorePage extends TestBase {
     //assigning agent to the call
     public void assignAgent(String agentName) {
     	Select identifiedAgentListBox = new Select(identified_agent_listbox_edited_call);
-    	identifiedAgentListBox.selectByVisibleText(agentName);    	
+    	identifiedAgentListBox.selectByValue(dbUtil.UserDBUtil.getCTUserId(agentName));
     }
     
     //assigning score card to the call
@@ -1657,6 +1658,7 @@ public class SelectAndScorePage extends TestBase {
     
     //adding title to the call
     public void addCallTitle(String callTitle) {
+    	call_title_edited_call.clear();
     	call_title_edited_call.sendKeys(callTitle);
     }
     
