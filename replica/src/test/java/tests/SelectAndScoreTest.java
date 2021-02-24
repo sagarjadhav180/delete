@@ -363,6 +363,41 @@ public class SelectAndScoreTest extends TestBase{
 	}
 	
 	
+	@Test(priority=27) //--  Verify date range filter for today  
+	public void dateRangeFilterVerificationForToday() throws InterruptedException {
+		logger=extent.startTest("dateRangeFilterVerificationForToday", "Verify date range filter for today");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.dateRangeFilterFeature(Constants.SelectAndScorePage.date_range_for_today, TestBase.getOrg_unit_id());
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=28) //--  Verify date range filter for Yesterday  
+	public void dateRangeFilterVerificationForYesterDay() throws InterruptedException {
+		logger=extent.startTest("dateRangeFilterVerificationForYesterDay", "Verify date range filter for Yesterday");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.dateRangeFilterFeature(Constants.SelectAndScorePage.date_range_for_yesterday, TestBase.getOrg_unit_id());
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=29) //--  Verify date range filter for last 30 days
+	public void dateRangeFilterVerificationForLast30Days() throws InterruptedException {
+		logger=extent.startTest("dateRangeFilterVerificationForLast30Days", "Verify date range filter for last 30 days");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.dateRangeFilterFeature(Constants.SelectAndScorePage.date_range_for_last_30_days, TestBase.getOrg_unit_id());
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=30) //--  Verify date range filter for last 7 days
+	public void dateRangeFilterVerificationForLast7Days() throws InterruptedException {
+		logger=extent.startTest("dateRangeFilterVerificationForLast7Days", "Verify date range filter for last 7 days");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.dateRangeFilterFeature(Constants.SelectAndScorePage.date_range_for_last_7_days, TestBase.getOrg_unit_id());
+		Thread.sleep(500);
+	}
+	
 	//Cleanup Activity
 	public void cleanUp() throws InterruptedException {
 		logger=extent.startTest("cleanUp", "Cleanup Activity");
