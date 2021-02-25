@@ -96,10 +96,7 @@ import tests.Util;
 		public void onTestSkipped(ITestResult arg0) {
 			
 			try {
-				System.out.println("In fail");
-				Thread.sleep(1200);
-				logger.log(LogStatus.FAIL, "" + arg0.getThrowable().getMessage() + "");
-				logger.log(LogStatus.FAIL, "Failed.");
+				
 				methodName = arg0.getName();
 				String image_path = Util.createScreenshot(driver, methodName);
 				String img = Util.image_upload(image_path);
@@ -130,10 +127,7 @@ import tests.Util;
 		public void onTestSuccess(ITestResult arg0) {
 			
 			try {
-				System.out.println("In fail");
-				Thread.sleep(1200);
-				logger.log(LogStatus.FAIL, "" + arg0.getThrowable().getMessage() + "");
-				logger.log(LogStatus.FAIL, "Failed.");
+				
 				methodName = arg0.getName();
 				String image_path = Util.createScreenshot(driver, methodName);
 				String img = Util.image_upload(image_path);
