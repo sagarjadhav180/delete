@@ -294,14 +294,12 @@ public class LoginPage extends TestBase {
 		Util.click(nextButton);
 		logger.log(LogStatus.INFO, "Verifying if reset password mail is trigerred");
 		
-		System.out.println("--"+resetPasswordSuccessMessage.getText().trim()+"--");
-		System.out.println("--"+resetPasswordSuccessMessage.getText()+"--");
-		
 		Util.waitExecutorForVisibilityOfElement(resetPasswordSuccessMessage);
 		if(driver.findElement(By.xpath("//div[starts-with(@class,'alert ') and @aria-hidden='false']/div/strong")).getText().equals("Successful!")) {
 			wait.until(ExpectedConditions.visibilityOf(resetPasswordSuccessMessage));
 			Assert.assertTrue(resetPasswordSuccessMessage.isDisplayed(),
 					"resetPasswordSuccessMessage is not displayed or locator changed");	
+			Util.click(backButton);
 		}else {
 			Util.click(backButton);
 			Assert.fail("Password not reset successfully");
