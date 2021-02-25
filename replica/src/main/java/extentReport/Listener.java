@@ -46,8 +46,6 @@ import tests.Util;
 			failedtests.add(result.getMethod());
 			System.out.println("Failed:" + result.getMethod());
 			
-			if (result.getStatus() == ITestResult.FAILURE) {
-
 				try {
 					System.out.println("In fail");
 					Thread.sleep(1200);
@@ -87,25 +85,11 @@ import tests.Util;
 					e.printStackTrace();
 				}
 
-			}
-
 			extent.endTest(logger);
 			extent.flush();
 		}
 
 		public void onTestSkipped(ITestResult arg0) {
-			
-			try {
-				
-				methodName = arg0.getName();
-				String image_path = Util.createScreenshot(driver, methodName);
-				String img = Util.image_upload(image_path);
-				System.out.println("Failure Method" + methodName);
-				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
-			}catch(Exception e) {
-				
-			}
-			
 			// TODO Auto-generated method stub
 			skippedtests.add(arg0.getMethod());
 			System.out.println("Skipped:" + arg0.getMethod());
@@ -125,18 +109,6 @@ import tests.Util;
 		}
 
 		public void onTestSuccess(ITestResult arg0) {
-			
-			try {
-				
-				methodName = arg0.getName();
-				String image_path = Util.createScreenshot(driver, methodName);
-				String img = Util.image_upload(image_path);
-				System.out.println("Failure Method" + methodName);
-				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
-			}catch(Exception e) {
-				
-			}
-			
 			// TODO Auto-generated method stub
 			logger.log(LogStatus.PASS, "Success.");
 			passedtests.add(arg0.getMethod());
