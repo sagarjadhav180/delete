@@ -398,6 +398,88 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 	}
 	
+	
+	@Test(priority=31) //--  Verify status filter for need scorecard
+	public void statusFilterVerificationForNeedScorecard() throws InterruptedException {
+		logger=extent.startTest("statusFilterVerificationForNeedScorecard", "Verify status filter for need scorecard");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.statusFilterCheck(Constants.SelectAndScorePage.status_checkbox_for_need_scoreacard);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=32) //--  Verify status filter for UnScored
+	public void statusFilterVerificationForUnScored() throws InterruptedException {
+		logger=extent.startTest("statusFilterVerificationForUnScored", "Verify status filter for UnScored");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.statusFilterCheck(Constants.SelectAndScorePage.status_checkbox_for_unscored);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=33) //--  Verify status filter for Scored
+	public void statusFilterVerificationForScored() throws InterruptedException {
+		logger=extent.startTest("statusFilterVerificationForScored", "Verify status filter for Scored");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.statusFilterCheck(Constants.SelectAndScorePage.status_checkbox_for_scored);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=34) //--  Verify status filter for Reviewed
+	public void statusFilterVerificationForReviewed() throws InterruptedException {
+		logger=extent.startTest("statusFilterVerificationForReviewed", "Verify status filter for Reviewed");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.statusFilterCheck(Constants.SelectAndScorePage.status_checkbox_for_reviewed);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=35) //--  Verify advanced filter feature for duration 
+	public void advanceFilterVerificationForDuration() throws InterruptedException {
+		logger=extent.startTest("advanceFilterVerificationForDuration", "Verify advanced filter feature for duration ");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.advanceFilterCheck(Constants.SelectAndScorePage.advance_filter_for_duration);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=36) //--  Verify advanced filter feature for Group 
+	public void advanceFilterVerificationForGroup() throws InterruptedException {
+		logger=extent.startTest("advanceFilterVerificationForGroup", "Verify advanced filter feature for group ");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.advanceFilterCheck(Constants.SelectAndScorePage.advance_filter_for_group);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=37) //--  Verify advanced filter feature for identified agent 
+	public void advanceFilterVerificationForIdentifiedAgent() throws InterruptedException {
+		logger=extent.startTest("advanceFilterVerificationForIdentifiedAgent", "Verify advanced filter feature for identified agent ");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.advanceFilterCheck(Constants.SelectAndScorePage.advance_filter_for_identified_agent);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=38) //--  Verify advanced filter feature for score 
+	public void advanceFilterVerificationForScore() throws InterruptedException {
+		logger=extent.startTest("advanceFilterVerificationForScore", "Verify advanced filter feature for score");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.advanceFilterCheck(Constants.SelectAndScorePage.advance_filter_for_score);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=39) //--  Verify advanced filter feature for call title 
+	public void advanceFilterVerificationForCallTitle() throws InterruptedException {
+		logger=extent.startTest("advanceFilterVerificationForCallTitle", "Verify advanced filter feature for call title");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.advanceFilterCheck(Constants.SelectAndScorePage.advance_filter_for_call_title);
+		Thread.sleep(500);
+	}
+	
+
 	//Cleanup Activity
 	public void cleanUp() throws InterruptedException {
 		logger=extent.startTest("cleanUp", "Cleanup Activity");
