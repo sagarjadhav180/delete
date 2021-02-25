@@ -520,7 +520,7 @@ public class SelectAndScorePage extends TestBase {
     		String[] seconds = valueTobeFiltered.split(":");
     		int totalSeconds = 0;
     		for(int i=0;i<seconds.length;i++) {
-    			totalSeconds = Integer.parseInt(seconds[i]);
+    			totalSeconds = totalSeconds + Integer.parseInt(seconds[i]);
     		}
     		valueTobeFiltered = String.valueOf(totalSeconds);
     	}else if (filterElement.equals("Score")) {
@@ -528,7 +528,6 @@ public class SelectAndScorePage extends TestBase {
     			valueTobeFiltered = "0";
     		}else
         		valueTobeFiltered = Util.getNumberFromAlphanumeric(valueTobeFiltered);
-
     	}
 
 		return valueTobeFiltered;	
