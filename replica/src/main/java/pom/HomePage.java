@@ -171,7 +171,6 @@ public class HomePage extends TestBase {
 		moduleToBeClicked.click();
 		
 		if(linkToBeClicked.contains("Campaign")) {
-//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
 			wait.until(ExpectedConditions.attributeContains(loading_wheel, "aria-hidden", "false"));
 		}else {
 			Thread.sleep(10000);			
