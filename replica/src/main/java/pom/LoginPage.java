@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,7 +90,7 @@ public class LoginPage extends TestBase {
 
 	@FindBy(xpath = "//div[starts-with(@class,'alert ') and @aria-hidden='false']/div")
 	private static WebElement resetPasswordSuccessMessage;
-	String expected_resetPasswordSuccessMessage = "Check your e-mail for your temporary password";
+	String expected_resetPasswordSuccessMessage = " Check your e-mail for your temporary password";
 
 	@FindBy(xpath = "//div[contains(text(),'Email field can not be empty.. Please enter your e-mail')]")
 	private static WebElement resetPasswordFailureMessage;
@@ -293,7 +294,11 @@ public class LoginPage extends TestBase {
 		Util.click(nextButton);
 		logger.log(LogStatus.INFO, "Verifying if reset password mail is trigerred");
 		
-		if(resetPasswordSuccessMessage.getText().equals(expected_resetPasswordSuccessMessage)) {
+		System.out.println("--"+resetPasswordSuccessMessage.getText().trim()+"--");
+		System.out.println("--"+resetPasswordSuccessMessage.getText()+"--");
+		
+		Util.waitExecutorForVisibilityOfElement(resetPasswordSuccessMessage);
+		if(driver.findElement(By.xpath("//div[starts-with(@class,'alert ') and @aria-hidden='false']/div/strong")).getText().equals("Successful!")) {
 			wait.until(ExpectedConditions.visibilityOf(resetPasswordSuccessMessage));
 			Assert.assertTrue(resetPasswordSuccessMessage.isDisplayed(),
 					"resetPasswordSuccessMessage is not displayed or locator changed");	
