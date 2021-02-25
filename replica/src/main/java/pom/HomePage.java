@@ -126,9 +126,10 @@ public class HomePage extends TestBase {
 	}
 	
 	public void click_subLink(String linkToBeClicked) throws InterruptedException{
-		
+		String xPath = "//*[@id='sidebar']/li//ul//li/a/span[1][text()='"+linkToBeClicked+"']";
+		Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));		
 		WebElement subModuleToBeClicked; 
-		subModuleToBeClicked = driver.findElement(By.xpath("//*[@id='sidebar']/li//ul//li/a/span[1][text()='"+linkToBeClicked+"']"));			
+		subModuleToBeClicked = driver.findElement(By.xpath(xPath));			
 		Thread.sleep(500);
 		try {
 			subModuleToBeClicked.click();			
@@ -163,8 +164,9 @@ public class HomePage extends TestBase {
 	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
 		
-		WebElement moduleToBeClicked; 
-		moduleToBeClicked = driver.findElement(By.xpath("//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']"));			
+		String xPath = "//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']";
+		Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
+		WebElement moduleToBeClicked = driver.findElement(By.xpath(xPath));			
 		Thread.sleep(500);
 		moduleToBeClicked.click();
 		
