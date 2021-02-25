@@ -435,6 +435,15 @@ public class Constants {
 		public static final String status_checkbox_for_scored = "Scored";
 		public static final String status_checkbox_for_reviewed = "Reviewed";
 		
+		//advance filter
+		public static final String advance_filter_for_duration = "Duration";
+		public static final String advance_filter_for_group = "Group";
+		public static final String advance_filter_for_score = "Score";
+		public static final String advance_filter_for_call_title = "Call Title";
+		public static final String advance_filter_for_call_tag = "Tag";
+		public static final String advance_filter_for_Comments = "Comments";	
+		public static final String advance_filter_for_identified_agent = "Identified Agent";	
+		public static final String advance_filter_for_Scorecard = "Scorecard";	
     }
  
     public static String getPostgresConfigFile() {
