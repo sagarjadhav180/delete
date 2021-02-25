@@ -487,9 +487,11 @@ public class SelectAndScorePage extends TestBase {
     	int index = 0;
     	
     	for(int i=0;i<actual_columns_names.size();i++) {
-    		if(actual_columns_names.get(i).getText().trim().equals(filterElement))
-    			index = i;
-    		break;
+    		if(actual_columns_names.get(i).getText().trim().equals(filterElement)) {
+    			index = i+1;	
+    			break;
+    		}
+    		
     	}
 		return index;
     }
@@ -501,18 +503,34 @@ public class SelectAndScorePage extends TestBase {
     	
     	//getting column index
     	index = getIndexForFilter(filterElement);
-    	
+   
     	//getting value to be filtered
     	List<WebElement> values = driver.findElements(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td["+index+"]"));
     	if(!values.isEmpty()) {
     		for(int i=0;i<values.size();i++) {
-    			if(!values.get(i).getText().isEmpty())
+    			if(!values.get(i).getText().isEmpty()) {
     				valueTobeFiltered = values.get(i).getText().trim();
-    			break;
+    			    break;    				
+    			}
     		}
     	}else
     		valueTobeFiltered = "null";
-    	
+
+    	if(filterElement.equals("Duration")) {
+    		String[] seconds = valueTobeFiltered.split(":");
+    		int totalSeconds = 0;
+    		for(int i=0;i<seconds.length;i++) {
+    			totalSeconds = Integer.parseInt(seconds[i]);
+    		}
+    		valueTobeFiltered = String.valueOf(totalSeconds);
+    	}else if (filterElement.equals("Score")) {
+    		if(valueTobeFiltered.equals("Score Now")) {
+    			valueTobeFiltered = "0";
+    		}else
+        		valueTobeFiltered = Util.getNumberFromAlphanumeric(valueTobeFiltered);
+
+    	}
+
 		return valueTobeFiltered;	
     }
     
@@ -1193,20 +1211,29 @@ public class SelectAndScorePage extends TestBase {
     	Util.Action().moveToElement(statusCheckbox).click().perform();
     	Util.waitExecutorForInVisibilityOfElement(loadingWheel);
     	
-    	//get filtered data
-    	List<String> filteredData= getFilteredData("Status");
+    	if(driver.getPageSource().contains("noDataSelector")) {
+        	logger.log(LogStatus.INFO, "Verifying if no data found label is displayed");
+        	Assert.assertTrue(no_data_found_label.isDisplayed(), "no data found label is not displayed");    		
+    	}else {
+    		//get filtered data
+        	List<String> filteredData= getFilteredData("Status");
+        	
+        	//verification
+        	String expectedStatus = callStatusLink(status);
+        	
+        	Boolean verificationFlag;
+        	if(Collections.frequency(filteredData, expectedStatus) == filteredData.size())
+        		verificationFlag = true;
+        	else
+        		verificationFlag = false;
+        	
+        	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per status filter "+status);
+        	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per status filter applied");	
+    	}
     	
-    	//verification
-    	String expectedStatus = callStatusLink(status);
-    	
-    	Boolean verificationFlag;
-    	if(Collections.frequency(filteredData, expectedStatus) == filteredData.size())
-    		verificationFlag = true;
-    	else
-    		verificationFlag = false;
-    	
-    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is as per status filter "+status);
-    	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per status filter applied");
+    	//un-checking status checkbox
+    	Util.Action().moveToElement(statusCheckbox).click().perform();
+    	Util.waitExecutorForInVisibilityOfElement(loadingWheel);
     }
 
     //Check data filter as per advance filter
@@ -1220,7 +1247,7 @@ public class SelectAndScorePage extends TestBase {
     	
     	//entering filter data
 		String valueToBeFiltered = null;
-		if(advanceFilterElement.equals("Duration") || advanceFilterElement.equals("Group") || advanceFilterElement.equals("Score") || advanceFilterElement.equals("Call Titlte") || advanceFilterElement.equals("Tag") || advanceFilterElement.equals("Comments")) {
+		if(advanceFilterElement.equals("Duration") || advanceFilterElement.equals("Group") || advanceFilterElement.equals("Score") || advanceFilterElement.equals("Call Title") || advanceFilterElement.equals("Tag") || advanceFilterElement.equals("Comments")) {
     		valueToBeFiltered = getValueToBeFiltered(advanceFilterElement);
     		if(!valueToBeFiltered.equals("null"))
     			advanced_filter_value_textbox.sendKeys(valueToBeFiltered);
@@ -1229,29 +1256,38 @@ public class SelectAndScorePage extends TestBase {
     			
     	}else if(advanceFilterElement.equals("Identified Agent")){
     		Util.Action().moveToElement(advanced_filter_identified_agent_dropdown).click().perform();
+    		valueToBeFiltered = avaialble_identified_agents_list.get(1).getText();
     		Util.Action().moveToElement(avaialble_identified_agents_list.get(1)).click().perform();
     	}else if (advanceFilterElement.equals("Scorecard")){
     		Util.Action().moveToElement(advanced_filter_scorecard_dropdown).click().perform();
+    		valueToBeFiltered = avaialble_scoredcard_list.get(1).getText();
     		Util.Action().moveToElement(avaialble_scoredcard_list.get(1)).click().perform();    		
     	}
-
+		
     	//submit
 		apply_advanced_filter_button.click();
+		pageLoadWait();
 		
-		//verification
-		Boolean verificationFlag;
-		List filteredData = getFilteredData(advanceFilterElement);
-		
-    	if(Collections.frequency(filteredData, valueToBeFiltered) == filteredData.size())
-    		verificationFlag = true;
-    	else
-    		verificationFlag = false;
-    	
-    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is correct for filter "+advanceFilterElement);
-    	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per filter applied");
+		if(driver.getPageSource().contains("noDataSelector")) {
+        	logger.log(LogStatus.INFO, "Verifying if no data found label is displayed");
+        	Assert.assertTrue(no_data_found_label.isDisplayed(), "no data found label is not displayed");
+		}else {
+			//verification
+			Boolean verificationFlag;
+			List filteredData = getFilteredData(advanceFilterElement);
+			
+	    	if(Collections.frequency(filteredData, valueToBeFiltered) == filteredData.size())
+	    		verificationFlag = true;
+	    	else
+	    		verificationFlag = false;
+	    	
+	    	logger.log(LogStatus.INFO, "Verifying if data shown in grid is correct for filter "+advanceFilterElement);
+	    	Assert.assertEquals(String.valueOf(verificationFlag), "true", "data shown in grid is not as per filter applied");	
+		}
 		
     	//closing advance filter section
     	cancel_advanced_filter_button.click();
+    	pageLoadWait();
     }
     
     //get filtered data in grid
@@ -1271,7 +1307,21 @@ public class SelectAndScorePage extends TestBase {
     	}else {
     		List<WebElement> values = driver.findElements(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td["+index+"]"));
         	for(WebElement value:values) {
-        		list.add(value.getText());
+        		if(filterElement.equals("Duration")) {
+        			if(filterElement.equals("Duration")) {
+        	    		String[] seconds = value.getText().split(":");
+        	    		int totalSeconds = 0;
+        	    		for(int i=0;i<seconds.length;i++) {
+        	    			totalSeconds = Integer.parseInt(seconds[i]);
+        	    		}
+        	    		list.add(String.valueOf(totalSeconds));
+        	    	}
+        		}else if(filterElement.equals("Score")) {
+            		list.add(Util.getNumberFromAlphanumeric(value.getText()));         			
+        		}else{
+            		list.add(value.getText());        			
+        		}
+
         	}	
     	}
     	
