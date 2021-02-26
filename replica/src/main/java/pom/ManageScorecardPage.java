@@ -28,10 +28,10 @@ import tests.Util;
 public class ManageScorecardPage extends TestBase {
 	
 	//score-card data set
-	String scorecardTitle = "SJS-"+Util.generateRandomNumber();
+	String scorecardTitle = "SJS-";
 	String instructions = "test scorecard";
 	String outcomeLabel = "test- call";
-	String criteriaTitle = "Criteria-"+Util.generateRandomNumber();
+	String criteriaTitle = "Criteria-";
 	String helpText = "test";
 	
 	@FindBy(xpath="//div[@ class='pageProgressLoader']")
@@ -271,6 +271,15 @@ public class ManageScorecardPage extends TestBase {
 	
 	public ManageScorecardPage(WebDriver driver){
 		PageFactory.initElements(driver,this);
+	}
+	
+	public static void scoreCardDataSet() {
+		//score-card data set
+		String scorecardTitle = "SJS-"+Util.generateRandomNumber();
+		String instructions = "test scorecard";
+		String outcomeLabel = "test- call";
+		String criteriaTitle = "Criteria-"+Util.generateRandomNumber();
+		String helpText = "test";
 	}
 	
 	//to click on desired action button of desired score-card 
@@ -629,7 +638,7 @@ public class ManageScorecardPage extends TestBase {
     	Thread.sleep(2000);
     	
     	//Entering score card details
-    	scorecard_title_textbox.sendKeys(scorecardTitle);
+    	scorecard_title_textbox.sendKeys(scorecardTitle+Util.generateRandomNumber());
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
     	available_to_dropdown.click();
@@ -660,7 +669,7 @@ public class ManageScorecardPage extends TestBase {
     	addScorecardClick();
     	
     	//Entering score card details
-    	String scorecardTitleToEnter = this.scorecardTitle;
+    	String scorecardTitleToEnter = scorecardTitle+Util.generateRandomNumber();
     	scorecard_title_textbox.sendKeys(scorecardTitleToEnter);
     	instructions_textbox.sendKeys(instructions);
     	outcome_label_textbox.sendKeys(outcomeLabel);
@@ -775,7 +784,7 @@ public class ManageScorecardPage extends TestBase {
         	if(i<60) {
         		//criteria title
             	WebElement criteria_title_textbox_to_enter = driver.findElement(By.xpath("//label//b[text()='Criteria Title']//parent::label//following-sibling::div//input[@type='text'][@aria-required='true']"));
-            	criteria_title_textbox_to_enter.sendKeys(criteriaTitle);
+            	criteria_title_textbox_to_enter.sendKeys(criteriaTitle+Util.generateRandomNumber());
                 
         		//help text
 //        		help_text_textbox.sendKeys(helpText);    
@@ -795,12 +804,17 @@ public class ManageScorecardPage extends TestBase {
                     	select.selectByVisibleText("Scale 0-10");
                 	}
                 }
-                
+                        		
             	//importance
         		WebElement importance_listbox_to_select = driver.findElement(By.xpath("(//label[text()='Importance']//parent::div//select[contains(@id,'importance')])["+(i+1)+"]"));
             	int index_imp = Util.getRandomNumber(importance);
             	Select imp = new Select(importance_listbox_to_select);
             	imp.selectByVisibleText(String.valueOf(importance[index_imp]));
+            	
+        		//mandatory-optional
+        		WebElement mandatoryCheckBox = driver.findElement(By.xpath("(//label/b[text()='Make this a required question']/..//parent::div//input[@name='acceptCheck'])["+(i+1)+"]"));
+        		if(index_imp%2==0) 
+        			mandatoryCheckBox.click();
             	
             	//clicking on add criteria button
                 if(noOfCriteria>1 && i<noOfCriteria-1) {
