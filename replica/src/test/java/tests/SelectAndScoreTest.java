@@ -21,7 +21,7 @@ public class SelectAndScoreTest extends TestBase{
 	SelectAndScorePage selectAndScorePage; 
 	ManageScorecardPage manageScorecardPage;
 	HomePage homePage;
-	String scorecardToUse = "SJS-1098643971";
+	String scorecardToUse = "SJS--1461296089";
 	String scorecard_1_ToDelete;
 	String scorecard_2_ToDelete;
 	
@@ -40,7 +40,7 @@ public class SelectAndScoreTest extends TestBase{
 		collapseLHNB();
 		
 		//creating required scorecards
-//		createScorecard();
+		createScorecard();
 	}
 	
 	//collapsing LHNB
@@ -479,7 +479,58 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 	}
 	
+	
+	@Test(priority=40) //--  Verify email call feature 
+	public void emailCallFeatureVerification() throws InterruptedException {
+		logger=extent.startTest("emailCallFeatureVerification", "Verify email call feature");
+		logger.assignCategory(Constants.select_and_score_category);
+		selectAndScorePage.emailCallFeature();
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=41) //--  Verify if user is able to score call
+	public void scoreCall() throws InterruptedException {
+		logger=extent.startTest("scoreCall", "Verify if user is able to score call");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+	}
 
+	
+	@Test(priority=42) //--  Verify if user is able to update score of already scored call
+	public void updateCallScore() throws InterruptedException {
+		logger=extent.startTest("updateCallScore", "Verify if user is able to update score of already scored call");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		//updating score
+		selectAndScorePage.upateScore(callTitle, "reviewCall");
+	}
+	
+	
+	@Test(priority=43) //--  Verify if user is able to review call
+	public void reviewCallScore() throws InterruptedException {
+		logger=extent.startTest("reviewCallScore", "Verify if user is able to review call");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		//review call
+		selectAndScorePage.reviewCall(callTitle);
+	}
+	
 	//Cleanup Activity
 	public void cleanUp() throws InterruptedException {
 		logger=extent.startTest("cleanUp", "Cleanup Activity");
