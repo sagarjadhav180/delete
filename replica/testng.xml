@@ -5,7 +5,7 @@
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
 
-		<parameter name="browser" value="headless" />
+		<parameter name="browser" value="chrome" />
 		<parameter name="url"
 			value="https://stag-5-cmo-1.convirza.com" />
 
@@ -26,9 +26,7 @@
 			</class>
 			<class name="tests.TrackingNumberSettingsTest">
 			</class>
-			<class name="tests.GroupActivityReportTest" />
-			<class name="tests.LegacyScheduledReportTest" />
-			<class name="tests.GroupsAndUserTest" />
+			
 
 
 		</classes>
