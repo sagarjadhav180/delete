@@ -90,6 +90,16 @@ import tests.Util;
 		}
 
 		public void onTestSkipped(ITestResult arg0) {
+			try {
+				methodName = arg0.getName();
+				String image_path = Util.createScreenshot(driver, methodName);
+				String img = Util.image_upload(image_path);
+				System.out.println("Failure Method" + methodName);
+				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
+			}catch(Exception e) {
+				
+			}
+			
 			// TODO Auto-generated method stub
 			skippedtests.add(arg0.getMethod());
 			System.out.println("Skipped:" + arg0.getMethod());
