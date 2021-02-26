@@ -444,6 +444,11 @@ public class Constants {
 		public static final String advance_filter_for_Comments = "Comments";	
 		public static final String advance_filter_for_identified_agent = "Identified Agent";	
 		public static final String advance_filter_for_Scorecard = "Scorecard";	
+		
+		//score call type
+		public static final String score_call_only_optional_criteria = "scoreOnlyOptionalCriteria";
+		public static final String score_call_only_manadatory_criteria = "scoreOnlyMandatoryCriteria";
+		public static final String score_call_all_criteria = "scoreAllCriteria";
     }
  
     public static String getPostgresConfigFile() {
