@@ -319,6 +319,7 @@ public class CallDetailReportTest extends TestBase{
 		cdr=CallDetailsReport_Page.instance();
 		cdr.actionButtonClick(Constants.LegacyReports.email_call);
 		cdr.actionSectionVerification("email_call", "mail feature");
+		
     }
     
     
