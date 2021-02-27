@@ -33,6 +33,11 @@ public class CallDetailsReport_Page extends TestBase{
     @FindBy(xpath="//div[contains(text(),'No Data Found')]")
 	private static WebElement no_data_found_label;
 
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
     
     //Email call section
 
@@ -726,7 +731,7 @@ public class CallDetailsReport_Page extends TestBase{
 	}
     	
 	
-	public void actionSectionVerification(String button,String sectionToVerify){
+	public void actionSectionVerification(String button,String sectionToVerify) throws InterruptedException{
 	    SoftAssert softassert=new SoftAssert();
 		if(button.contains("play_button")){
 			
@@ -746,6 +751,7 @@ public class CallDetailsReport_Page extends TestBase{
 				wait.until(ExpectedConditions.visibilityOf(success_message_for_mail_call));
 				logger.log(LogStatus.INFO, "Verifying if mail is sent successfully");
 				softassert.assertTrue(success_message_for_mail_call.isDisplayed(),"mail was not sent");
+				Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 				
 			}
 			else if(sectionToVerify.equals("mail call UI")){
@@ -834,11 +840,7 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 			
 		}
-		
-		
-		
-		
-		
+			
 		softassert.assertAll();
 	}
 		
