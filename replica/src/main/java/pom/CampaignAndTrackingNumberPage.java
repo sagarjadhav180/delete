@@ -238,7 +238,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 		}
 		else if(buttonName.contains("update")){
-            Thread.sleep(10000);
+            
             WebElement edit = null;
            
             edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
