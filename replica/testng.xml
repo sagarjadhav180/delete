@@ -12,21 +12,17 @@
 		<classes>
 
 			<class name="tests.LoginTest">
-				
+
 			</class>
-			
+
 			<class name="tests.CamapignUIVerificationTest" />
-			<class name="tests.CampaignTests">
-			</class>
-
-			<class name="tests.TrackingNumberTest">
-
-			</class>
-			<class name="tests.CallDetailReportTest">
-			</class>
-			<class name="tests.TrackingNumberSettingsTest">
-			</class>
-			
+			<class name="tests.CampaignTests"/>
+			<class name="tests.TrackingNumberTest"/>
+			<class name="tests.CallDetailReportTest"/>
+			<class name="tests.TrackingNumberSettingsTest"/>
+			<class name="tests.GroupActivityReportTest" />
+			<class name="tests.LegacyScheduledReportTest"/>
+			<class name="tests.GroupsAndUserTest" />
 
 
 		</classes>
