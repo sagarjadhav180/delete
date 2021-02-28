@@ -22,6 +22,15 @@ public class LegacyScheduledReportsPage extends TestBase {
 	@FindBy(xpath="//div[@ class='pageProgressLoader']")
 	private WebElement loadingWheel;
 	
+	@FindBy(xpath="//div[@class='ui-pnotify ']")
+	private WebElement legacy_scheduled_report_deletion_scucess_message;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
+	
 	@FindBy(xpath="//h1[contains(text(),'Legacy Scheduled Reports')]")
 	private WebElement legacy_scheduled_reports_label;	
 	
@@ -105,6 +114,9 @@ public class LegacyScheduledReportsPage extends TestBase {
     		if(button_name.contains("Delete")){
     			driver.switchTo().activeElement();
     			Util.click(ok_button_scheduled_report_deletion_message);
+    			Util.waitExecutorForVisibilityOfElement(legacy_scheduled_report_deletion_scucess_message);
+    			Assert.assertTrue(legacy_scheduled_report_deletion_scucess_message.isDisplayed());
+    			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
     		}
     		else if(button_name.contains("Send Now")){
     			wait.until(ExpectedConditions.visibilityOf(send_now_confirmation_message));
