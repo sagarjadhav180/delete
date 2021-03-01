@@ -1,6 +1,8 @@
 package tests;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -40,7 +42,7 @@ public class SelectAndScoreTest extends TestBase{
 		collapseLHNB();
 		
 		//creating required scorecards
-		createScorecard();
+//		createScorecard();
 	}
 	
 	//collapsing LHNB
@@ -530,6 +532,117 @@ public class SelectAndScoreTest extends TestBase{
 		//review call
 		selectAndScorePage.reviewCall(callTitle);
 	}
+	
+	
+	@Test(priority=44) //--  Verify status is turning into Unscored after attaching scorecard to it
+	public void statusCheckForUnscored() throws InterruptedException {
+		logger=extent.startTest("statusCheckForUnscored", "Verify status is turning into Unscored after attaching scorecard to it");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//status check
+		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_unscored);
+	}
+	
+	
+	@Test(priority=45) //--  Verify status is turning into scored after scoring the call
+	public void statusCheckForScored() throws InterruptedException {
+		logger=extent.startTest("statusCheckForScored", "Verify status is turning into scored after scoring the call");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		//status check
+		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_scored);
+	}
+	
+	
+	@Test(priority=46) //--  Verify status is turning into reviewed after reviewed the call
+	public void statusCheckForReviewed() throws InterruptedException {
+		logger=extent.startTest("statusCheckForReviewed", "Verify status is turning into reviewed after reviewed the call");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		//review call
+		selectAndScorePage.reviewCall(callTitle);
+		//status check
+		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_reviewed);
+	}
+	
+	
+	@Test(priority=47) //--  Verify scorer and reviewer details are displayed at the bottom of scoring section after call is reviewed
+	public void scorerReviewerDetails() throws InterruptedException {
+		logger=extent.startTest("scorerReviewerDetails", "Verify scorer and reviewer details are displayed at the bottom of scoring section after call is reviewed");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		//review call
+		selectAndScorePage.reviewCall(callTitle);
+		//details check
+		Map<String,String> details = new HashMap<String,String>();
+		details.put("expScorer", TestBase.getUser_id());
+		details.put("expScoredFor", TestBase.getUser_id());
+		details.put("expReviewer", TestBase.getUser_id());
+		selectAndScorePage.scorerReviewerDetails(callTitle, details);
+	}
+	
+	
+//	@Test(priority=48) //--  Verify Cancel feature. -- commenting out since success message issue 
+	public void cancelScoreVerification() throws InterruptedException {
+		logger=extent.startTest("cancelScoreVerification", "Verify Cancel feature.");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//cancel score
+		selectAndScorePage.cancelScoreFeature(callTitle);
+	}
+	
+	
+	@Test(priority=49) //--  Verify if notifications are getting saved 
+	public void notificationsCreationVerification() throws InterruptedException {
+		logger=extent.startTest("notificationsCreationVerification", "Verify if notifications are getting saved");
+		logger.assignCategory(Constants.select_and_score_category);
+		//deleting existing notifications
+		selectAndScorePage.deleteNotifications(4);
+		//adding notifications
+		selectAndScorePage.addNotification(2);
+	}
+	
+	
+	@Test(priority=50) //--  Verify is user can add max 4 notifications for a call  
+	public void maxNotificationsCreationVerification() throws InterruptedException {
+		logger=extent.startTest("maxNotificationsCreationVerification", "Verify is user can add max 4 notifications for a call ");
+		logger.assignCategory(Constants.select_and_score_category);
+		//deleting existing notifications
+		selectAndScorePage.deleteNotifications(4);
+		//adding notifications
+		selectAndScorePage.addNotification(4);
+	}
+	
+	
+	@Test(priority=51) //--  Verify is user can add max 4 notifications for a call  
+	public void notificationsCreationValidation() throws InterruptedException {
+		logger=extent.startTest("notificationsCreationValidation", "Verify is user can not add more than 4 notifications for a call ");
+		logger.assignCategory(Constants.select_and_score_category);
+		//deleting existing notifications
+		selectAndScorePage.deleteNotifications(4);
+		//adding notifications
+		selectAndScorePage.addNotification(5);
+	}
+	
 	
 	//Cleanup Activity
 	public void cleanUp() throws InterruptedException {
