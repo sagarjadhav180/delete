@@ -95,6 +95,18 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//div[@class='timeline-footer text-right']//a[text()='Add Action'][@aria-hidden='false']")
 	private WebElement score_notifications_add_action_button;
 	
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Notification Action deleted successfully']")
+	private WebElement score_notifications_delete_action_success_message;
+	
+	@FindBy(xpath="//a[starts-with(@ng-click,'removeScoreNotifications')]")
+	private List<WebElement> score_notifications_delete_action_button;
+	
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
+	private WebElement score_notifications_delete_action_alert_ok_button;
+	
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']")
+	private WebElement score_notifications_delete_action_alert_cancel_button;
+	
 	@FindBy(xpath="//h3[@class='modal-title']//following-sibling::button")
 	private WebElement score_notifications_condition_close_button;
 
@@ -1630,12 +1642,16 @@ public class SelectAndScorePage extends TestBase {
     	
     	//submit score 
     	logger.log(LogStatus.INFO, "Verifying if call is not scored on click of cancel button");
-    	Util.Action().moveToElement(cancel_button_scoring_section).click().perform();
-    	try {
-    		Assert.assertTrue(success_msg_for_call_score.isDisplayed());
-    	}catch(Exception e) {
-	        logger.log(LogStatus.INFO, "call is scored even after clicking on cancel button");
-    	}    	
+    	Util.click(cancel_button_scoring_section);
+    	
+    	//verification
+        Boolean successMessageFlag;
+    	if(driver.getPageSource().contains(success_msg_for_call_score.getText())) {
+    		successMessageFlag = true;
+    	}else
+    		successMessageFlag = false;
+    	
+    	Assert.assertEquals(String.valueOf(successMessageFlag), "false", "success_msg_for_call_score is dispalyed even after cancel button click");    	
     }
     
     //get scorer and reviewer details
@@ -1652,14 +1668,15 @@ public class SelectAndScorePage extends TestBase {
     	String expReviewer = details.get("expReviewer");
     	
     	//get scorer and reviewer details displayed
-    	String actScorer = null;
-    	String actCallAssigner = actScorer;
+    	String actScorer ;
+    	String actCallAssigner;
     	String actScoredFor;
     	String actReviewer;
     	
     	actScorer = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Selected By')]")).getText();
     	actScoredFor = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Scored For')]")).getText();
     	actReviewer = driver.findElement(By.xpath("//div[@class='container-fluid']//div[starts-with(@ng-show,'item.status') and @aria-hidden='false']//div[starts-with(text(),'Reviewed By')]")).getText();
+    	actCallAssigner = actScorer;
     	
     	//verification
     	logger.log(LogStatus.INFO, "Verifying if correct scorer is displayed");
@@ -1770,17 +1787,30 @@ public class SelectAndScorePage extends TestBase {
     	return callStatus = callStatus(statusLink);
     }
     
+    //Verify status is turning into appropriate value after actions
+    public void callStatusVerification(String callTitle, String expectedStatus) {
+    	//get actual status
+    	String actualCallStatus = getCallStatus(callTitle);
+    	String expecrtedCallStatus = expectedStatus;
+    	
+    	//verification
+    	Assert.assertEquals(actualCallStatus, expecrtedCallStatus, "Status does not change into "+expectedStatus);
+    }
+    
+    
     //adding Notifications
     public void addNotification(int noOfNotifications) throws InterruptedException {
     	//open notifications section
+    	Util.waitExecutorForVisibilityOfElement(notifications_button);
     	notifications_button.click();
+    	Util.waitExecutorForVisibilityOfElement(score_notifications_save_button);
     	
     	//add notifications
     	scoreNotificationsinput(noOfNotifications);
     	
     	//submit and verify
     	logger.log(LogStatus.INFO, "Verifying if notification is getting added successfully");
-    	score_notifications_save_button.click();
+    	Util.click(score_notifications_save_button);
     	Util.waitExecutorForVisibilityOfElement(success_message_notifications);
     	Assert.assertTrue(success_message_notifications.isDisplayed(), "notification not added successfully");
     	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
@@ -1794,6 +1824,7 @@ public class SelectAndScorePage extends TestBase {
     			//setting if condition
             	WebElement ifConditionListbox = driver.findElement(By.xpath("(//h3[text()='If']/..//following-sibling::div//select)["+i+"]"));
             	Select ifConditionList = new Select(ifConditionListbox);
+            	
             	if(i%2 == 0)
                 	ifConditionList.selectByIndex(1);
             	else
@@ -1802,6 +1833,7 @@ public class SelectAndScorePage extends TestBase {
             	//setting then action
             	WebElement thenConditionListbox = driver.findElement(By.xpath("(//h3[text()='Then']/..//following-sibling::div//select)["+i+"]"));
             	Select thenConditionList = new Select(thenConditionListbox);
+            	
             	if(i%2 == 0)
                 	thenConditionList.selectByIndex(1);
             	else
@@ -1815,9 +1847,9 @@ public class SelectAndScorePage extends TestBase {
                 	thenConditionTextBox.sendKeys("8018786943"); 			
             	
             	//add next action
-            	if(i<4) 
+            	if(i<noOfNotifications && i<4) 
             		score_notifications_add_action_button.click();      
-            	else {
+            	else if(i>=4){
             		try {
             	    	logger.log(LogStatus.INFO, "Verifying if not able to add 5th notification");
             			Assert.assertTrue(score_notifications_add_action_button.isDisplayed());
@@ -1828,6 +1860,34 @@ public class SelectAndScorePage extends TestBase {
             	}
     		}  		
     	}
+    }
+    
+    
+    public void deleteNotifications(int count) throws InterruptedException {
+    	
+    	//open notifications section
+    	notifications_button.click();
+    	Util.waitExecutorForVisibilityOfElement(score_notifications_save_button);
+
+    	//getting countof notifications
+    	int totalNotifiactions = (count<=score_notifications_delete_action_button.size()) ? count : (score_notifications_delete_action_button.size());
+    	Thread.sleep(1000);
+    	
+    	for(int i=0;i<totalNotifiactions;i++){
+    		//had to spy this element again here to avoid stale element exception
+    		WebElement deleteActionButton = driver.findElement(By.xpath("(//a[starts-with(@ng-click,'removeScoreNotifications')])[1]//i"));
+    		Util.click(deleteActionButton);
+    		driver.switchTo().activeElement();
+    		Util.waitExecutorForVisibilityOfElement(score_notifications_delete_action_alert_ok_button);
+    		score_notifications_delete_action_alert_ok_button.click();
+    		Util.waitExecutorForVisibilityOfElement(score_notifications_delete_action_success_message);
+    		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    		Thread.sleep(500);
+    	}
+    	
+    	//close notifications section
+    	Util.waitExecutorForVisibilityOfElement(score_notifications_cancel_button);
+    	score_notifications_cancel_button.click();
     }
     
     //check if alert is  displayed if while editing a call if already any other edited call is not saved 
