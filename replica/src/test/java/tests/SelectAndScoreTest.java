@@ -24,8 +24,8 @@ public class SelectAndScoreTest extends TestBase{
 	ManageScorecardPage manageScorecardPage;
 	HomePage homePage;
 	String scorecardToUse = "SJS--1461296089";
-	String scorecard_1_ToDelete;
-	String scorecard_2_ToDelete;
+	String scorecard_1_ToDelete = "SJS-1789842181";
+	String scorecard_2_ToDelete = "SJS-17898421812";
 	
 	@BeforeClass //--logging in
 	public void login() throws IOException, InterruptedException {
@@ -516,6 +516,7 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 		//updating score
 		selectAndScorePage.upateScore(callTitle, "reviewCall");
+		Thread.sleep(500);
 	}
 	
 	
@@ -531,6 +532,7 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 		//review call
 		selectAndScorePage.reviewCall(callTitle);
+		Thread.sleep(500);
 	}
 	
 	
@@ -543,6 +545,7 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 		//status check
 		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_unscored);
+		Thread.sleep(500);
 	}
 	
 	
@@ -558,6 +561,7 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 		//status check
 		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_scored);
+		Thread.sleep(500);
 	}
 	
 	
@@ -575,6 +579,7 @@ public class SelectAndScoreTest extends TestBase{
 		selectAndScorePage.reviewCall(callTitle);
 		//status check
 		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_reviewed);
+		Thread.sleep(500);
 	}
 	
 	
@@ -596,6 +601,7 @@ public class SelectAndScoreTest extends TestBase{
 		details.put("expScoredFor", TestBase.getUser_id());
 		details.put("expReviewer", TestBase.getUser_id());
 		selectAndScorePage.scorerReviewerDetails(callTitle, details);
+		Thread.sleep(500);
 	}
 	
 	
@@ -608,6 +614,7 @@ public class SelectAndScoreTest extends TestBase{
 		Thread.sleep(500);
 		//cancel score
 		selectAndScorePage.cancelScoreFeature(callTitle);
+		Thread.sleep(500);
 	}
 	
 	
@@ -617,8 +624,10 @@ public class SelectAndScoreTest extends TestBase{
 		logger.assignCategory(Constants.select_and_score_category);
 		//deleting existing notifications
 		selectAndScorePage.deleteNotifications(4);
+		Thread.sleep(500);
 		//adding notifications
 		selectAndScorePage.addNotification(2);
+		Thread.sleep(500);
 	}
 	
 	
@@ -628,8 +637,10 @@ public class SelectAndScoreTest extends TestBase{
 		logger.assignCategory(Constants.select_and_score_category);
 		//deleting existing notifications
 		selectAndScorePage.deleteNotifications(4);
+		Thread.sleep(500);
 		//adding notifications
 		selectAndScorePage.addNotification(4);
+		Thread.sleep(500);
 	}
 	
 	
@@ -639,10 +650,217 @@ public class SelectAndScoreTest extends TestBase{
 		logger.assignCategory(Constants.select_and_score_category);
 		//deleting existing notifications
 		selectAndScorePage.deleteNotifications(4);
+		Thread.sleep(500);
 		//adding notifications
 		selectAndScorePage.addNotification(5);
+		Thread.sleep(500);
 	}
 	
+	
+	@Test(priority=52) //--  Verify if notifications are getting deleted  
+	public void notificationsDeletionVerification() throws InterruptedException {
+		logger=extent.startTest("notificationsDeletionVerification", "Verify if notifications are getting deleted");
+		logger.assignCategory(Constants.select_and_score_category);
+		//deleting existing notifications
+		selectAndScorePage.deleteNotifications(4);
+		Thread.sleep(500);
+		//adding notifications
+		selectAndScorePage.addNotification(2);
+		Thread.sleep(500);
+		//deleting existing notifications
+		selectAndScorePage.deleteNotifications(4);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=53) //--  Verify if scorecard association with already scored call is not broken even if group is removed from available to list
+	public void scorecardAssociationCheckAfterGroupRemovalForScoredCall() throws InterruptedException {
+		logger=extent.startTest("scorecardAssociationCheckAfterGroupRemovalForScoredCall", "Verify if scorecard asociation with already scored call is not broken even if group is removed from available to list");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		
+		//remove the group from available to list
+		String groupToBeRemoved = selectAndScorePage.getGroup(callTitle); //getting group to be removed
+		expandLHNB();
+		navigateToManageScorecardPage(); //--navigating to manage scorecard page
+		collapseLHNB();
+
+		Boolean flag = false;
+		try {
+			manageScorecardPage.removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);			
+		}catch(Exception e) {
+			collapseLHNB();
+			flag = true;
+		}finally {
+			if(flag==true)
+				manageScorecardPage.removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
+		}
+		
+		//check if scorecard association is not broken
+		expandLHNB();
+		navigateToSelectScorecardPage(); //--navigating back to select and score page
+		collapseLHNB();
+		selectAndScorePage.scorecardAssociationWithCall(callTitle, scorecardToUse);
+		
+		//add the group in available to list		
+		expandLHNB();
+		navigateToManageScorecardPage(); //--navigating to manage scorecard page
+		collapseLHNB();		
+		manageScorecardPage.addAllGroupsToAvailableToList(scorecardToUse);
+		Thread.sleep(500);
+		
+		expandLHNB();
+		navigateToSelectScorecardPage(); //--navigating back to select and score page
+		collapseLHNB();
+	}
+	
+	
+	@Test(priority=54) //--  Verify if scorecard association with already reviewed call is not broken even if group is removed from available to list
+	public void scorecardAssociationCheckAfterGroupRemovalForReviewedCall() throws InterruptedException {
+		logger=extent.startTest("scorecardAssociationCheckAfterGroupRemovalForReviewedCall", "Verify if scorecard asociation with already reviewed call is not broken even if group is removed from available to list");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		
+		//review call
+		selectAndScorePage.reviewCall(callTitle);
+		Thread.sleep(500);
+		//remove the group from available to list
+		String groupToBeRemoved = selectAndScorePage.getGroup(callTitle); //getting group to be removed
+		expandLHNB();
+		navigateToManageScorecardPage(); //--navigating to manage scorecard page
+		collapseLHNB();
+		manageScorecardPage.removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
+		
+		//check if scorecard association is not broken
+		expandLHNB();
+		navigateToSelectScorecardPage(); //--navigating back to select and score page
+		collapseLHNB();
+		selectAndScorePage.scorecardAssociationWithCall(callTitle, scorecardToUse);
+		
+		//add the group in available to list		
+		expandLHNB();
+		navigateToManageScorecardPage(); //--navigating to manage scorecard page
+		collapseLHNB();		
+		manageScorecardPage.addAllGroupsToAvailableToList(scorecardToUse);
+		Thread.sleep(500);
+		
+		expandLHNB();
+		navigateToSelectScorecardPage(); //--navigating back to select and score page
+		collapseLHNB();
+	}
+	
+	
+	@Test(priority=55) //--  Verify if scorecard association with already scored call is not broken even if scorecard is deleted
+	public void scorecardAssociationCheckAfterGroupDeletionForScoredCall() throws InterruptedException {
+		logger=extent.startTest("scorecardAssociationCheckAfterGroupDeletionForScoredCall", "Verify if scorecard asociation with already scored call is not broken even if scorecard is deleted");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecard_1_ToDelete, TestBase.getUser_id());
+		Thread.sleep(500);
+		
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		
+		//delete scorecard
+		expandLHNB();
+		navigateToManageScorecardPage(); //--navigating to manage scorecard page
+		collapseLHNB();
+		manageScorecardPage.deleteScorecard(scorecard_1_ToDelete);
+		
+		//check if scorecard association is not broken
+		expandLHNB();
+		navigateToSelectScorecardPage(); //--navigating back to select and score page
+		collapseLHNB();
+		selectAndScorePage.scorecardAssociationWithCall(callTitle, scorecard_1_ToDelete);
+		
+	}
+	
+	
+	@Test(priority=56) //--  Verify if scorecard association with already reviewed call is not broken even if scorecard is deleted
+	public void scorecardAssociationCheckAfterGroupDeletionForReviewedCall() throws InterruptedException {
+		logger=extent.startTest("scorecardAssociationCheckAfterGroupDeletionForReviewedCall", "Verify if scorecard asociation with already reviewed call is not broken even if scorecard is deleted");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecard_2_ToDelete, TestBase.getUser_id());
+		Thread.sleep(500);
+		
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+
+		//scoring call
+		selectAndScorePage.reviewCall(callTitle);
+		Thread.sleep(500);
+		
+		//delete scorecard
+		expandLHNB();
+		navigateToManageScorecardPage(); //--navigating to manage scorecard page
+		collapseLHNB();
+		manageScorecardPage.deleteScorecard(scorecard_2_ToDelete);
+		
+		//check if scorecard association is not broken
+		expandLHNB();
+		navigateToSelectScorecardPage(); //--navigating back to select and score page
+		collapseLHNB();
+		selectAndScorePage.scorecardAssociationWithCall(callTitle, scorecard_2_ToDelete);
+	}
+	
+	
+	@Test(priority=57) //-- Verify if appropriate alert is displayed if mandatory criteria are not scored
+	public void scoreCallAlertVerification() throws InterruptedException {
+		logger=extent.startTest("scoreCallAlertVerification", "Verify if appropriate alert is displayed if mandatory criteria are not scored");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_only_optional_criteria);
+		Thread.sleep(500);
+	}
+	
+	@Test(priority=58) //--Verify if call is getting scored successfully if optional criterias are not scored
+	public void scoreCallVerificationWithoutOptionalCriteria() throws InterruptedException {
+		logger=extent.startTest("scoreCallVerificationWithoutOptionalCriteria", "Verify if call is getting scored successfully if optional criterias are not scored");
+		logger.assignCategory(Constants.select_and_score_category);
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_only_manadatory_criteria);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=60) //--Verify users displayed in identified agent drop down are as per user permission access
+	public void userPermissionCheckForAgents() throws InterruptedException {
+		logger=extent.startTest("userPermissionCheckForAgents", "Verify users displayed in identified agent drop down are as per user permission access");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		String group = selectAndScorePage.getGroup(callTitle);
+		
+		selectAndScorePage.editSpecificCall(callTitle);
+		
+		selectAndScorePage.identifiedAgentsDAMCheck(TestBase.getOrg_unit_id(), group);
+		Thread.sleep(500);
+	}
 	
 	//Cleanup Activity
 	public void cleanUp() throws InterruptedException {
