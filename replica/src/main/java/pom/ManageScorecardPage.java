@@ -255,7 +255,16 @@ public class ManageScorecardPage extends TestBase {
 
 	@FindBy(xpath="//button[text()='Save']")
 	private static WebElement save_configure_scorecard_button;
+	
+	@FindBy(xpath="//div[text()='This Scorecard is attached with calls from Groups. Are you sure you want to remove its association with groups?']")
+	private static WebElement save_configure_scorecard_alert_for_associated_group;
 
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']")
+	private static WebElement save_configure_scorecard_alert_cancel_button_for_associated_group;
+	
+	@FindBy(xpath="//div[@class='modal-footer']//button[text()='OK']")
+	private static WebElement save_configure_scorecard_alert_ok_button_for_associated_group;
+	
 	@FindBy(xpath="//ul[@class='timeline']//div[@class='timeline-icon']")
 	private static List<WebElement> criteria_present_in_scorecard;
 	
@@ -286,8 +295,9 @@ public class ManageScorecardPage extends TestBase {
     public void clickActionButton(String scorecard_name,String button_name) throws InterruptedException{
 		
 		WebElement webelement = driver.findElement(By.xpath("//table//tbody//tr//td[text()='"+scorecard_name+"']//ancestor::tr//child::button[contains(text(),'"+button_name+"')]"));
-		Util.Action().moveToElement(webelement).perform();
-		webelement.click();
+		Util.click(webelement);
+//		Util.Action().moveToElement(webelement).perform();
+//		webelement.click();
 		
 		switch(button_name) {
 		case "Edit" :
@@ -764,12 +774,48 @@ public class ManageScorecardPage extends TestBase {
     
     //removing specified group from available to list
     public void removeGroupFromAvaialbleTo(String groupToRemove) throws InterruptedException {
-    	available_to_dropdown.click(); //-- opening available_to_dropdown box
-    	Thread.sleep(2000);
+    	available_to_dropdown.click(); //-- opening available_to_dropdown box    	
+    	Thread.sleep(500);
+    	
     	WebElement checkbox = driver.findElement(By.xpath("//input[@placeholder='Search...']//ancestor::li//following-sibling::li//a//span[text()='"+groupToRemove+"']//ancestor::li//input"));
     	Util.Action().moveToElement(checkbox).perform();
     	checkbox.click();
     	available_to_dropdown.click(); //-- closing available_to_dropdown box    	
+    }
+    
+    public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException {
+    	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
+    	Thread.sleep(2000);
+    	
+		removeGroupFromAvaialbleTo(groupToBeRemoved);
+		Util.click(save_configure_scorecard_button);
+		Thread.sleep(500);
+		
+		Util.customWait(save_configure_scorecard_alert_for_associated_group);
+		Assert.assertTrue(save_configure_scorecard_alert_for_associated_group.isDisplayed(), "alert not displayed for gruop removal");
+		driver.switchTo().activeElement();
+		save_configure_scorecard_alert_ok_button_for_associated_group.click();
+		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+//		save_configure_scorecard_button.click();
+    }
+    
+    public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException {
+    	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
+    	Thread.sleep(500);
+    	
+    	available_to_dropdown.click();
+    	Thread.sleep(500);
+    	
+    	for(WebElement available_to_groups_check_uncheck_option:available_to_groups_check_uncheck_options) {
+    		if(available_to_groups_check_uncheck_option.getText().trim().equals("Check All")) 
+        		Util.Action().moveToElement(available_to_groups_check_uncheck_option).perform();
+        		available_to_groups_check_uncheck_option.click();	
+        		break;
+    	}
+    	available_to_dropdown.click(); //-- closing available_to_dropdown box
+    	Util.click(save_configure_scorecard_button);
+    	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
     }
     
     //criteria data set
