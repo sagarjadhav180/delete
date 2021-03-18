@@ -28,7 +28,7 @@ public class UserDBUtil {
 	}
 	
 	@SuppressWarnings("unused")
-	public static List<String> getChildUsers(String org_unit_id) {
+	public static List<String> getUsers(String org_unit_id) {
 		List<String> users = new ArrayList<String>();
 		postgres = new PostgresConnection();
 		Connection con = postgres.getConnection();
@@ -46,4 +46,22 @@ public class UserDBUtil {
 		return users;	
 	}
 
+	@SuppressWarnings("unused")
+	public static List<String> getChildGroupUsers(String org_unit_id) {
+		List<String> users = new ArrayList<String>();
+		postgres = new PostgresConnection();
+		Connection con = postgres.getConnection();
+			
+		ResultSet resultSet = postgres.getResultSet("SELECT * FROM ct_user WHERE ct_user_ou_id IN (SELECT org_unit_id FROM org_unit WHERE org_unit_parent_id = '"+org_unit_id+"') AND user_status = 'active' AND role_id IN ('1', '2', '3', '8')");
+
+		try {
+    	while(resultSet.next()) {
+			String user = resultSet.getArray("username").toString();
+			users.add(user);
+		}
+    	}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;	
+	}
 }
