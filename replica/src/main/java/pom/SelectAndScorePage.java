@@ -1482,7 +1482,7 @@ public class SelectAndScorePage extends TestBase {
            				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
            		        	Util.click(passFailCheckbox);
                     	}else {
-                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7:", "8:", "9:" ,"10:", "N/A:"};
            				    int passFailArrayIndex = Util.getRandomString(scaleArray);
            				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
            		        	Util.click(passFailCheckbox);
@@ -1511,7 +1511,7 @@ public class SelectAndScorePage extends TestBase {
            				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
            		        	Util.click(passFailCheckbox);
                     	}else {
-                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7", "8:", "9:" ,"10:", "N/A:"};
+                    		String[] scaleArray = {"0:", "1:", "2:", "3:", "4:", "5:", "6:", "7:", "8:", "9:" ,"10:", "N/A:"};
            				    int passFailArrayIndex = Util.getRandomString(scaleArray);
            				    WebElement passFailCheckbox = driver.findElement(By.xpath("(//ul//li[@ng-repeat='criteria in scorecards.criteriaList']//div[@ng-show][@aria-hidden='false'])["+(i+1)+"]//div[@class='radio-inline ng-scope']/label[text()='"+scaleArray[passFailArrayIndex]+"']/..//input"));
            		        	Util.click(passFailCheckbox);
@@ -1695,12 +1695,12 @@ public class SelectAndScorePage extends TestBase {
     }
     
     //check agents displayed in list are as per user permission
-    public void identifiedAgentsDAMCheck() {
-    	List<String> identifiedAgentsFromUI = null;
-    	List<String> identifiedAgentsFromDB;
+    public void identifiedAgentsDAMCheck(String top_org_unit_id, String org_unit_id) {
+    	List<String> identifiedAgentsFromUI = new ArrayList<String>();
+    	List<String> identifiedAgentsFromDB = new ArrayList<String>();
     	
     	//edit call
-    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+//    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
     	
     	//get listed agents from UI
     	Select identifiedAgentListBox = new Select(identified_agent_listbox_edited_call);
@@ -1713,16 +1713,25 @@ public class SelectAndScorePage extends TestBase {
     	}
     	
     	//get agents from DB
-    	identifiedAgentsFromDB = dbUtil.UserDBUtil.getChildUsers(TestBase.getOrg_unit_id());
+    	identifiedAgentsFromDB = dbUtil.UserDBUtil.getUsers(top_org_unit_id);
+    	identifiedAgentsFromDB = dbUtil.UserDBUtil.getUsers(org_unit_id);
+    	identifiedAgentsFromDB = dbUtil.UserDBUtil.getChildGroupUsers(org_unit_id);
 
     	//verification
     	Collections.sort(identifiedAgentsFromUI);
     	Collections.sort(identifiedAgentsFromDB);
     	logger.log(LogStatus.INFO, "Verifying if agents displayed in list are following user permission");
+    	
     	Assert.assertEquals(identifiedAgentsFromUI, identifiedAgentsFromDB, "agents displayed in list are not following user permission");
     	
     	//cancel edited call
     	cancel_button_edited_call.click();
+    }
+    
+    //edit desired call
+    public void editSpecificCall(String callTitle) {
+    	WebElement action_button_of_call = driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td//button//i[contains(@class,'edit')])[1]"));
+    	 Util.click(action_button_of_call);
     }
     
     //check score cards displayed in list are as per configured in available to list
@@ -1801,7 +1810,7 @@ public class SelectAndScorePage extends TestBase {
     //adding Notifications
     public void addNotification(int noOfNotifications) throws InterruptedException {
     	//open notifications section
-    	Util.waitExecutorForVisibilityOfElement(notifications_button);
+    	Util.waitExecutorForAttribute(notifications_button, "aria-disabled", "false");
     	notifications_button.click();
     	Util.waitExecutorForVisibilityOfElement(score_notifications_save_button);
     	
@@ -1841,10 +1850,14 @@ public class SelectAndScorePage extends TestBase {
             	
             	//adding value for then condition
             	WebElement thenConditionTextBox = driver.findElement(By.xpath("(//h3[text()='Then']/..//following-sibling::div//div[@aria-hidden='false']//input)["+i+"]"));
-            	if(thenConditionList.getFirstSelectedOption().getText().equals("Send email alert to"))
-                	thenConditionTextBox.sendKeys(TestBase.getUser_id());
-            	else if (thenConditionList.getFirstSelectedOption().getText().equals("Send SMS to"))
-                	thenConditionTextBox.sendKeys("8018786943"); 			
+            	if(thenConditionList.getFirstSelectedOption().getText().equals("Send email alert to")) {
+            		thenConditionTextBox.clear();
+            		thenConditionTextBox.sendKeys(TestBase.getUser_id());            		
+            	}
+            	else if (thenConditionList.getFirstSelectedOption().getText().equals("Send SMS to")) {
+            		thenConditionTextBox.clear();
+            		thenConditionTextBox.sendKeys("8018786943"); 			            		
+            	}
             	
             	//add next action
             	if(i<noOfNotifications && i<4) 
@@ -1852,10 +1865,9 @@ public class SelectAndScorePage extends TestBase {
             	else if(i>=4){
             		try {
             	    	logger.log(LogStatus.INFO, "Verifying if not able to add 5th notification");
-            			Assert.assertTrue(score_notifications_add_action_button.isDisplayed());
-            			Assert.fail("allowing add to 5th notiifcation");
+            			Assert.assertFalse(score_notifications_add_action_button.isDisplayed());
             		}catch(Exception e){
-            			logger.log(LogStatus.PASS, "");
+            			Assert.fail("allowing add to 5th notiifcation");
             		}
             	}
     		}  		
@@ -1866,22 +1878,28 @@ public class SelectAndScorePage extends TestBase {
     public void deleteNotifications(int count) throws InterruptedException {
     	
     	//open notifications section
+    	Util.waitExecutorForAttribute(notifications_button, "aria-disabled", "false");
     	notifications_button.click();
-    	Util.waitExecutorForVisibilityOfElement(score_notifications_save_button);
+    	Thread.sleep(2000);
 
     	//getting countof notifications
     	int totalNotifiactions = (count<=score_notifications_delete_action_button.size()) ? count : (score_notifications_delete_action_button.size());
     	Thread.sleep(1000);
     	
     	for(int i=0;i<totalNotifiactions;i++){
+    		WebElement ifConditionListbox = driver.findElement(By.xpath("(//h3[text()='If']/..//following-sibling::div//select)[1]"));
+        	int ifConditionListSize = new Select(ifConditionListbox).getOptions().size();
     		//had to spy this element again here to avoid stale element exception
     		WebElement deleteActionButton = driver.findElement(By.xpath("(//a[starts-with(@ng-click,'removeScoreNotifications')])[1]//i"));
     		Util.click(deleteActionButton);
     		driver.switchTo().activeElement();
     		Util.waitExecutorForVisibilityOfElement(score_notifications_delete_action_alert_ok_button);
     		score_notifications_delete_action_alert_ok_button.click();
-    		Util.waitExecutorForVisibilityOfElement(score_notifications_delete_action_success_message);
-    		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+        	
+    		if(ifConditionListSize<3) {
+        		Util.waitExecutorForVisibilityOfElement(score_notifications_delete_action_success_message);
+        		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);    			
+    		}
     		Thread.sleep(500);
     	}
     	
@@ -1933,10 +1951,17 @@ public class SelectAndScorePage extends TestBase {
         	//verification	
         	logger.log(LogStatus.INFO, "Verifying if scoreacard is attached to the call");
         	Assert.assertTrue(scorecardElement.isDisplayed(), "Scorecard association with is broken");
-    	}catch(Exception e) {
-    		
-    	}
+    	}catch(Exception e) {}	
+    }
+    
+    
+    //get group associated with call title
+    public String getGroup(String callTitle) {
+    	String groupName;
     	
+    	//getting scorecard from call
+    	WebElement scorecardElement = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td/span[@e-name='call_title'][text()='"+callTitle+"']//ancestor::tr//td[@class='ng-binding'][3]"));
+    	return groupName = scorecardElement.getText();
     }
     
   //------------------------------------------Functional----------------------------------------------------------------------------------
