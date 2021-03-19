@@ -350,6 +350,14 @@ public class Util extends TestBase{
 		}		
 	}
 	
+	public static void waitExecutorForAttribute(WebElement element, String attribute, String value) {
+		try {
+			wait.until(ExpectedConditions.attributeContains(element, attribute, value));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
 	public static void waitExecutorForInVisibilityOfElement(WebElement element) {
 		try {
 			wait.until(ExpectedConditions.invisibilityOf(element));	
