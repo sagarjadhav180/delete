@@ -1735,12 +1735,12 @@ public class SelectAndScorePage extends TestBase {
     }
     
     //check score cards displayed in list are as per configured in available to list
-    public void scorecardsAvailabilityCheck() {
-    	List<String> scorecardsAvailableFromUI = null;
-    	List<String> scorecardsAvailableFromDB;
+    public void scorecardsAvailabilityCheck(String groupName) {
+    	List<String> scorecardsAvailableFromUI = new ArrayList<String>();
+    	List<String> scorecardsAvailableFromDB = new ArrayList<String>();
     	
     	//edit call
-    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
+//    	actionButtonClick(Constants.SelectAndScorePage.edit_call_button);
     	
     	//get listed scorecards from UI
     	Select scorecardListBox = new Select(scorecard_listbox_edited_call);
@@ -1751,7 +1751,6 @@ public class SelectAndScorePage extends TestBase {
     	}
     	
     	//get scorecards from DB
-    	String groupName = driver.findElement(By.xpath("//table[@id='scoredetailtable']//tbody//tr//td//select[@name='selectedScorecard']//ancestor::tr//td[@title]")).getText();
     	String group_id = dbUtil.GroupDBUtil.getOrgUnitId(groupName);
         scorecardsAvailableFromDB = dbUtil.ScorecardDBUtil.getScorecardsNames(group_id);
 
