@@ -3,6 +3,7 @@ package dbUtil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import dbUtil.PostgresConnection;
@@ -85,7 +86,7 @@ private static PostgresConnection postgres;
 
 	@SuppressWarnings("unused")
 	public static List<String> getScorecardsNames(String org_unit_id) {
-		  List<String> scorecardNames = null;
+		  List<String> scorecardNames = new ArrayList<String>();
 			postgres = new PostgresConnection();
 			Connection con = postgres.getConnection();
 			
