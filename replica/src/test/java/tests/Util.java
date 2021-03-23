@@ -416,7 +416,7 @@ public class Util extends TestBase{
 	public static void keyboardActions(String actionTOBePerformed) throws InterruptedException  {
 		switch(actionTOBePerformed) {
 		case "escape":
-			Util.Action().sendKeys(Keys.ESCAPE);
+			Util.Action().sendKeys(Keys.ESCAPE).perform();
 			break;
 		}
 		Thread.sleep(500);
