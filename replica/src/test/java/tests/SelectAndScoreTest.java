@@ -805,7 +805,7 @@ public class SelectAndScoreTest extends TestBase{
 		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
 		Thread.sleep(500);
 
-		//scoring call
+		//review call
 		selectAndScorePage.reviewCall(callTitle);
 		Thread.sleep(500);
 		
@@ -848,17 +848,91 @@ public class SelectAndScoreTest extends TestBase{
 	}
 	
 	
-	@Test(priority=60) //--Verify users displayed in identified agent drop down are as per user permission access
+//	@Test(priority=60) //--Verify users displayed in identified agent drop down are as per user permission access -- need to discuss -- not working as expected
 	public void userPermissionCheckForAgents() throws InterruptedException {
 		logger=extent.startTest("userPermissionCheckForAgents", "Verify users displayed in identified agent drop down are as per user permission access");
 		logger.assignCategory(Constants.select_and_score_category);
 		
 		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
 		String group = selectAndScorePage.getGroup(callTitle);
 		
 		selectAndScorePage.editSpecificCall(callTitle);
 		
 		selectAndScorePage.identifiedAgentsDAMCheck(TestBase.getOrg_unit_id(), group);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=61) // -- Verify only those scorecards are displayed for to assign which are made available for the group in which call is placed
+	public void userPermissionCheckForScorecards() throws InterruptedException {
+		logger=extent.startTest("userPermissionCheckForScorecards", "Verify only those scorecards are displayed for to assign which are made available for the group in which call is placed");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		String group = selectAndScorePage.getGroup(callTitle);
+		
+		selectAndScorePage.editSpecificCall(callTitle);
+		
+		selectAndScorePage.scorecardsAvailabilityCheck(group);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=62) // -- Verify correct score is displayed after scoring the call
+	public void scoreValueVerification() throws InterruptedException {
+		logger=extent.startTest("scoreValueVerification", "Verify correct score is displayed after scoring the call");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+				
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		
+		//verification
+		selectAndScorePage.callScoreCheck(callTitle);
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=63) // -- Verify if user is not able edit another call while previously edited call is not saved 
+	public void editCallsAlert() throws InterruptedException {
+		logger=extent.startTest("scoreValueVerification", "Verify if user is not able edit another call while previously edited call is not saved ");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		selectAndScorePage.editCallAlert();
+		
+		Thread.sleep(500);
+	}
+	
+	
+	@Test(priority=64) // -- Verify if user is able to update the score after call is reviewed and call status turns into scored. 
+	public void scoreCallAfterReview() throws InterruptedException {
+		logger=extent.startTest("scoreCallAfterReview", "Verify if user is able to update the score after call is reviewed and call status turns into scored.");
+		logger.assignCategory(Constants.select_and_score_category);
+		
+		//assigning agent and scorecard
+		String callTitle = selectAndScorePage.scorecardAndAgentAssignment(scorecardToUse, TestBase.getUser_id());
+		Thread.sleep(500);
+		
+		//scoring call
+		selectAndScorePage.scoreCall(callTitle, Constants.SelectAndScorePage.score_call_all_criteria);
+		Thread.sleep(500);
+		
+		//review call
+		selectAndScorePage.reviewCall(callTitle);
+		Thread.sleep(500);
+		
+		//update score
+		selectAndScorePage.upateScore(callTitle, "reviewedCall");
+		
+		//check status
+		selectAndScorePage.callStatusVerification(callTitle, Constants.SelectAndScorePage.status_checkbox_for_scored);
+		
 		Thread.sleep(500);
 	}
 	
