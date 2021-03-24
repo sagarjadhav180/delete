@@ -1166,9 +1166,9 @@ public class SelectAndScorePage extends TestBase {
 	
 	//to click on specified date range filter button
 	public void dateRangePickerElementClick(String buttonName) {
-		String xPath = "//div[@class='daterangepicker dropdown-menu opensleft']//ul//li[text()='"+buttonName+"']";
+		String xPath = "//div[@class='daterangepicker dropdown-menu opensleft' and @style]//ul//li[text()='"+buttonName+"']";
 		Util.customWait(driver.findElement(By.xpath(xPath)));
-		WebElement dateRangePickerElementButtonToClick = driver.findElement(By.xpath("//div[@class='daterangepicker dropdown-menu opensleft']//ul//li[text()='"+buttonName+"']"));
+		WebElement dateRangePickerElementButtonToClick = driver.findElement(By.xpath("//div[@class='daterangepicker dropdown-menu opensleft' and @style]//ul//li[text()='"+buttonName+"']"));
 		Util.Action().moveToElement(dateRangePickerElementButtonToClick).click().perform();
 	}
 	
@@ -1808,8 +1808,10 @@ public class SelectAndScorePage extends TestBase {
     
     //adding Notifications
     public void addNotification(int noOfNotifications) throws InterruptedException {
+    	
     	//open notifications section
     	Util.waitExecutorForAttribute(notifications_button, "aria-disabled", "false");
+    	Util.scrollFunction(header_label);
     	notifications_button.click();
     	Util.waitExecutorForVisibilityOfElement(score_notifications_save_button);
     	
@@ -1878,7 +1880,9 @@ public class SelectAndScorePage extends TestBase {
     	
     	//open notifications section
     	Util.waitExecutorForAttribute(notifications_button, "aria-disabled", "false");
-    	notifications_button.click();
+//    	notifications_button.click();
+    	Util.scrollFunction(header_label);
+    	Util.click(notifications_button);
     	Thread.sleep(2000);
 
     	//getting countof notifications
