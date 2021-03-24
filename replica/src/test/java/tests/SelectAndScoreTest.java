@@ -23,9 +23,9 @@ public class SelectAndScoreTest extends TestBase{
 	SelectAndScorePage selectAndScorePage; 
 	ManageScorecardPage manageScorecardPage;
 	HomePage homePage;
-	String scorecardToUse = "SJS--1461296089";
-	String scorecard_1_ToDelete = "SJS-1789842181";
-	String scorecard_2_ToDelete = "SJS-17898421812";
+	String scorecardToUse = "SJS--774065396";
+	String scorecard_1_ToDelete = "SJS-1349390088";
+	String scorecard_2_ToDelete = "SJS--265268728";
 	
 	@BeforeClass //--logging in
 	public void login() throws IOException, InterruptedException {
@@ -64,7 +64,8 @@ public class SelectAndScoreTest extends TestBase{
 		try {
 			hp.clickAction(Constants.HomePage.scoreacrd_page);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			expandLHNB();
+			hp.clickAction(Constants.HomePage.scoreacrd_page);
 		}
 		hp.click_subLink(Constants.HomePage.select_and_score_page);
 		try {
@@ -81,7 +82,8 @@ public class SelectAndScoreTest extends TestBase{
         try {
 			hp.clickAction(Constants.HomePage.scoreacrd_page);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+            expandLHNB();
+			hp.clickAction(Constants.HomePage.scoreacrd_page);
 		}
 		hp.click_subLink(Constants.HomePage.manage_scoreacrd_page);
 		try {
