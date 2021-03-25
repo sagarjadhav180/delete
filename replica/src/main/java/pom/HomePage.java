@@ -82,7 +82,7 @@ public class HomePage extends TestBase {
 	
 	@FindBy(xpath="//a[@id='leftmenu-trigger']")
 	private WebElement left_hand_navigation_bar_collapsible_button;	
-
+		
 	@FindBy(xpath="//a[@class='navbar-brand']")
 	private WebElement logo;
 	
@@ -163,12 +163,22 @@ public class HomePage extends TestBase {
 	}
 	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
+
+		try {
+			String xPath = "//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']";
+			Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
+			WebElement moduleToBeClicked = driver.findElement(By.xpath(xPath));			
+			Thread.sleep(500);
+			moduleToBeClicked.click();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		String xPath = "//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']";
-		Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
-		WebElement moduleToBeClicked = driver.findElement(By.xpath(xPath));			
-		Thread.sleep(500);
-		moduleToBeClicked.click();
+//		String xPath = "//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']";
+//		Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
+//		WebElement moduleToBeClicked = driver.findElement(By.xpath(xPath));			
+//		Thread.sleep(500);
+//		moduleToBeClicked.click();
 		
 		if(linkToBeClicked.contains("Campaign")) {
 			wait.until(ExpectedConditions.attributeContains(loading_wheel, "aria-hidden", "false"));
@@ -252,11 +262,23 @@ public class HomePage extends TestBase {
 		
 	}
 	
-	public void left_hand_navigation_bar_click(){
-
-		left_hand_navigation_bar_collapsible_button.click();
+//	public void left_hand_navigation_bar_click(){
+//		left_hand_navigation_bar_collapsible_button.click();
+//	}
+	
+	public void expandLHNB() {
+		WebElement LHNB_status = driver.findElement(By.xpath("//body[starts-with(@class,'ng-scope')]"));
 		
+		if(LHNB_status.getAttribute("class").endsWith("collapse-leftbar"))
+			left_hand_navigation_bar_collapsible_button.click();
 	}
+	
+    public void collapseLHNB() {
+		WebElement LHNB_status = driver.findElement(By.xpath("//body[starts-with(@class,'ng-scope')]"));
+		
+		if(!LHNB_status.getAttribute("class").endsWith("collapse-leftbar"))
+			left_hand_navigation_bar_collapsible_button.click();		
+	} 
 	
 	//UI Verification of Home page
 	public void UIVerification() throws InterruptedException{

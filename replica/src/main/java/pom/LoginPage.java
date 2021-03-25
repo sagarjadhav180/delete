@@ -371,7 +371,7 @@ public class LoginPage extends TestBase {
 			Assert.assertTrue(logged_in_logo.isDisplayed(), "logo not displayed or locator changed");
 		}
 		HomePage hp = new HomePage(driver);
-		hp.left_hand_navigation_bar_click();
+		hp.expandLHNB();
 
 	}
 
