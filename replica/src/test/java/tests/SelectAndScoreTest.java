@@ -955,7 +955,7 @@ public class SelectAndScoreTest extends TestBase{
 	
 	@AfterClass //--logging out
 	public void logOut() throws InterruptedException {
-//		cleanUp();
+		cleanUp();
 		LoginPage lp=new LoginPage(driver);
 		logger.log(LogStatus.INFO, "loggin out.. ");
 		lp.logOut();
