@@ -10,8 +10,9 @@
 		<classes>
 
 
-			<class name="tests.LegacyScheduledReportTest"/>
-				<class name="tests.GroupsAndUserTest"/>
+			<class name="tests.SelectAndScoreTest">
+
+			</class>
 
 		</classes>
 
