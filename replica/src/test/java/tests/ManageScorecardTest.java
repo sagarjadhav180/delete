@@ -28,7 +28,7 @@ public class ManageScorecardTest extends TestBase{
         navigateToManageScorecardPage();
         //closing LHNB
 		HomePage homePage = new HomePage(driver);
-        homePage.left_hand_navigation_bar_click();
+        homePage.collapseLHNB();
         manageScorecardPage = new ManageScorecardPage(driver);
 	}	
 	

@@ -42,19 +42,19 @@ public class SelectAndScoreTest extends TestBase{
 		collapseLHNB();
 		
 		//creating required scorecards
-//		createScorecard();
+		createScorecard();
 	}
 	
 	//collapsing LHNB
 	public void collapseLHNB() {
 		homePage = new HomePage(driver);
-        homePage.left_hand_navigation_bar_click();
+        homePage.collapseLHNB();
 	}
 	
 	//expanding LHNB
 	public void expandLHNB() {
 		homePage = new HomePage(driver);
-        homePage.left_hand_navigation_bar_click();
+        homePage.expandLHNB();
 	}
 	
 	
