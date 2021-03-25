@@ -65,7 +65,7 @@ import tests.Util;
 						Util.waitForLoad(driver);
 						Thread.sleep(5000);
 						HomePage hp=new HomePage(driver);
-						hp.left_hand_navigation_bar_click();
+						hp.collapseLHNB();
 						CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
 					    ct.clickAction("list");
 					}
@@ -77,7 +77,7 @@ import tests.Util;
 						Util.waitForLoad(driver);
 						Thread.sleep(5000);
 						HomePage hp=new HomePage(driver);
-						hp.left_hand_navigation_bar_click();
+						hp.collapseLHNB();
 					}
 					
 				} catch (Exception e) {
