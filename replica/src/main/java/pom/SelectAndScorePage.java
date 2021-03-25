@@ -110,10 +110,10 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//h3[@class='modal-title']//following-sibling::button")
 	private WebElement score_notifications_condition_close_button;
 
-	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Cancel']")
+	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Cancel' and @aria-hidden='false']")
 	private WebElement score_notifications_cancel_button;
 	
-	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Save']")
+	@FindBy(xpath="//div[starts-with(@class,'modal-body')]//button[text()='Save' and @aria-hidden='false']")
 	private WebElement score_notifications_save_button;
 
 	@FindBy(xpath="//div[@class='ui-pnotify ']//div[text()='Notification Actions saved successfully']")
@@ -480,7 +480,7 @@ public class SelectAndScorePage extends TestBase {
     		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Download Audio File'])[1]"));
     		break;
     	case "mail":
-    		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Email Call'])[1]"));     		
+    		action_button= driver.findElement(By.xpath("(//table[@id='scoredetailtable']//tbody//tr//td//button[@title='Email Call' and @aria-disabled='false'])[1]"));     		
     		break;	
     	}
     	
@@ -1591,6 +1591,7 @@ public class SelectAndScorePage extends TestBase {
     		logger.log(LogStatus.INFO, "Verifying if appropriate alert is displayed if mandatory criteria are not scored");
     		Util.waitExecutorForVisibilityOfElement(alert_msg_for_missing_mandatory_criteria_answeres);
         	Assert.assertTrue(alert_msg_for_missing_mandatory_criteria_answeres.isDisplayed(), "call scored successfully evem after not answering mandatory criteria");	  		
+        	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
     	}
     	
     	//commenting out since success message is not displayed for call score
