@@ -788,6 +788,7 @@ public class ManageScorecardPage extends TestBase {
     	Thread.sleep(2000);
     	
 		removeGroupFromAvaialbleTo(groupToBeRemoved);
+		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
 		Thread.sleep(500);
 		
