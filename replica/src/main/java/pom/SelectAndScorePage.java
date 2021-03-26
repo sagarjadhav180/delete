@@ -738,11 +738,12 @@ public class SelectAndScorePage extends TestBase {
 	}
 	
 	//Date Range filter UI
-	public void dateRangeFilterUI() {    	
+	public void dateRangeFilterUI() throws InterruptedException {    	
     	SoftAssert softassert = Util.softAssert();
     	
     	//opening date range filter section
     	Util.Action().moveToElement(date_range_filter_button).click().perform();   
+    	Thread.sleep(2000);
     	
     	logger.log(LogStatus.INFO, "Verifying all date range filter elements are displayed");
     	Boolean actualDateFilterElementsFlag = Util.collectionComarator(expected_date_filter_elements, actual_date_filter_elements);    	
