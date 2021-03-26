@@ -743,7 +743,7 @@ public class SelectAndScorePage extends TestBase {
     	
     	//opening date range filter section
     	Util.Action().moveToElement(date_range_filter_button).click().perform();   
-    	Thread.sleep(2000);
+    	Thread.sleep(5000);
     	
     	logger.log(LogStatus.INFO, "Verifying all date range filter elements are displayed");
     	Boolean actualDateFilterElementsFlag = Util.collectionComarator(expected_date_filter_elements, actual_date_filter_elements);    	
@@ -754,14 +754,12 @@ public class SelectAndScorePage extends TestBase {
     		softassert.assertTrue(actual_date_filter_element.isEnabled(), "");
     	}
     	
-    	Util.waitExecutorForVisibilityOfElement(date_range_filter_ok_button);
     	logger.log(LogStatus.INFO, "Verifying if OK button is displayed");
     	softassert.assertTrue(date_range_filter_ok_button.isDisplayed(), "date_range_filter_ok_button is not displayed");
     	
     	logger.log(LogStatus.INFO, "Verifying if OK button is clickable");
     	softassert.assertTrue(date_range_filter_ok_button.isEnabled(), "date_range_filter_ok_button is not clickable");
 
-    	Util.waitExecutorForVisibilityOfElement(date_range_filter_cancel_button);
     	logger.log(LogStatus.INFO, "Verifying if Cancel button is displayed");
     	softassert.assertTrue(date_range_filter_cancel_button.isDisplayed(), "date_range_filter_cancel_button is not displayed");
     	
