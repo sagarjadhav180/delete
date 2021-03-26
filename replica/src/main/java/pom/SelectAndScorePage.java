@@ -754,12 +754,14 @@ public class SelectAndScorePage extends TestBase {
     		softassert.assertTrue(actual_date_filter_element.isEnabled(), "");
     	}
     	
+    	Util.waitExecutorForVisibilityOfElement(date_range_filter_ok_button);
     	logger.log(LogStatus.INFO, "Verifying if OK button is displayed");
     	softassert.assertTrue(date_range_filter_ok_button.isDisplayed(), "date_range_filter_ok_button is not displayed");
     	
     	logger.log(LogStatus.INFO, "Verifying if OK button is clickable");
     	softassert.assertTrue(date_range_filter_ok_button.isEnabled(), "date_range_filter_ok_button is not clickable");
 
+    	Util.waitExecutorForVisibilityOfElement(date_range_filter_cancel_button);
     	logger.log(LogStatus.INFO, "Verifying if Cancel button is displayed");
     	softassert.assertTrue(date_range_filter_cancel_button.isDisplayed(), "date_range_filter_cancel_button is not displayed");
     	
