@@ -12,6 +12,14 @@
 
 			<class name="tests.SelectAndScoreTest">
 
+				<methods>
+
+
+					
+					<include name="scorecardAssociationCheckAfterGroupRemovalForScoredCall" />
+					
+					
+				</methods>
 
 			</class>
 
