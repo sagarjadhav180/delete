@@ -12,6 +12,16 @@
 
 			<class name="tests.SelectAndScoreTest">
 
+				<methods>
+
+
+					<include name="dateRangeFilterUIVerification" />
+					
+					<include name="scorecardAssociationCheckAfterGroupRemovalForScoredCall" />
+					
+					
+				</methods>
+
 			</class>
 
 		</classes>

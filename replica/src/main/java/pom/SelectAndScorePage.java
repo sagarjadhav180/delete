@@ -51,7 +51,7 @@ public class SelectAndScorePage extends TestBase {
 	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//button[text()='Cancel']")
 	private WebElement date_range_filter_cancel_button;
 	
-	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft']//ul//li")
+	@FindBy(xpath="//div[@class='daterangepicker dropdown-menu opensleft' and @style]//ul//li")
 	private List<WebElement> actual_date_filter_elements;		
 	String[] expected_date_filter_elements={"Today","Yesterday","Last 7 Days","Last 30 Days","This Month","Last Month","Custom Range"};
 	
@@ -1768,8 +1768,8 @@ public class SelectAndScorePage extends TestBase {
     
     //assigning agent to the call
     public void assignAgent(String agentName) {
-    	Select identifiedAgentListBox = new Select(identified_agent_listbox_edited_call);
     	String agentId = dbUtil.UserDBUtil.getCTUserId(agentName);
+    	Select identifiedAgentListBox = new Select(identified_agent_listbox_edited_call);
     	if(!identifiedAgentListBox.getFirstSelectedOption().getAttribute("value").equals(agentId)) 
     		identifiedAgentListBox.selectByValue(agentId);    		
     }
