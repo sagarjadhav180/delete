@@ -800,6 +800,9 @@ public class ManageScorecardPage extends TestBase {
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
 			count++;
 		}catch(Exception e) {
+			driver.navigate().refresh();
+			Util.waitForLoad(driver);
+			new HomePage(driver).collapseLHNB();
 			if(count<3)
 				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
