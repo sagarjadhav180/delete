@@ -791,15 +791,17 @@ public class ManageScorecardPage extends TestBase {
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
 		Thread.sleep(500);
-		
+		int count = 0;
 		try {
 			Util.customWait(save_configure_scorecard_alert_for_associated_group);
 			Assert.assertTrue(save_configure_scorecard_alert_for_associated_group.isDisplayed(), "alert not displayed for gruop removal");
 			driver.switchTo().activeElement();
 			save_configure_scorecard_alert_ok_button_for_associated_group.click();
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
+			count++;
 		}catch(Exception e) {
-			removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
+			if(count<3)
+				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
 		
 //		save_configure_scorecard_button.click();
