@@ -42,7 +42,7 @@ public class SelectAndScoreTest extends TestBase{
 		collapseLHNB();
 		
 		//creating required scorecards
-//		createScorecard();
+		createScorecard();
 	}
 	
 	//collapsing LHNB
