@@ -792,9 +792,9 @@ public class ManageScorecardPage extends TestBase {
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
 
-		String image_path = Util.createScreenshot(driver, "");
+		String image_path = Util.createScreenshot(driver, "removeScorecardForScorecardAssociationCheck");
 		String img = Util.image_upload(image_path);
-		System.out.println("Failure Method" + "");
+		System.out.println("Failure Method" + "removeScorecardForScorecardAssociationCheck");
 		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
 		Thread.sleep(500);
 		int count = 0;
@@ -834,9 +834,9 @@ public class ManageScorecardPage extends TestBase {
     	
     	Util.click(save_configure_scorecard_button);
     	
-		String image_path = Util.createScreenshot(driver, "");
+		String image_path = Util.createScreenshot(driver, "addAllGroupsToAvailableToList");
 		String img = Util.image_upload(image_path);
-		System.out.println("Failure Method" + "");
+		System.out.println("Failure Method" + "addAllGroupsToAvailableToList");
 		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
     	
 		int count = 0;
