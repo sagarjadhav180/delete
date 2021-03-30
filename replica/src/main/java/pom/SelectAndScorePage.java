@@ -743,7 +743,7 @@ public class SelectAndScorePage extends TestBase {
     	
     	//opening date range filter section
     	Util.Action().moveToElement(date_range_filter_button).click().perform();   
-    	Thread.sleep(5000);
+    	Thread.sleep(20000);
     	
     	logger.log(LogStatus.INFO, "Verifying all date range filter elements are displayed");
     	Boolean actualDateFilterElementsFlag = Util.collectionComarator(expected_date_filter_elements, actual_date_filter_elements);    	
