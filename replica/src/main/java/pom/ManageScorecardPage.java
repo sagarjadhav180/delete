@@ -786,7 +786,7 @@ public class ManageScorecardPage extends TestBase {
     
     public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
-    	Thread.sleep(2000);
+    	Thread.sleep(10000);
 
 		removeGroupFromAvaialbleTo(groupToBeRemoved);
 		Thread.sleep(2000);
