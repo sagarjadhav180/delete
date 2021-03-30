@@ -786,7 +786,7 @@ public class ManageScorecardPage extends TestBase {
     
     public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
-    	Thread.sleep(10000);
+    	Thread.sleep(30000);
 
 		removeGroupFromAvaialbleTo(groupToBeRemoved);
 		Thread.sleep(2000);
@@ -798,17 +798,17 @@ public class ManageScorecardPage extends TestBase {
 		Thread.sleep(500);
 		int count = 0;
 		try {
+			count++;
 			Util.customWait(save_configure_scorecard_alert_for_associated_group);
 			Assert.assertTrue(save_configure_scorecard_alert_for_associated_group.isDisplayed(), "alert not displayed for gruop removal");
 			driver.switchTo().activeElement();
 			save_configure_scorecard_alert_ok_button_for_associated_group.click();
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
-			count++;
 		}catch(Exception e) {
 			driver.navigate().refresh();
 			Util.waitForLoad(driver);
 			new HomePage(driver).collapseLHNB();
-			if(count<1)
+			if(count<3)
 				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
 		
@@ -817,7 +817,7 @@ public class ManageScorecardPage extends TestBase {
     
     public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
-    	Thread.sleep(10000);
+    	Thread.sleep(30000);
     	
     	available_to_dropdown.click();
     	Thread.sleep(500);
