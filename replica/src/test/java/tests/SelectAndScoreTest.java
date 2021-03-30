@@ -42,7 +42,7 @@ public class SelectAndScoreTest extends TestBase{
 		collapseLHNB();
 		
 		//creating required scorecards
-		createScorecard();
+//		createScorecard();
 	}
 	
 	//collapsing LHNB
@@ -676,7 +676,7 @@ public class SelectAndScoreTest extends TestBase{
 	
 	
 	@Test(priority=53) //--  Verify if scorecard association with already scored call is not broken even if group is removed from available to list
-	public void scorecardAssociationCheckAfterGroupRemovalForScoredCall() throws InterruptedException {
+	public void scorecardAssociationCheckAfterGroupRemovalForScoredCall() throws InterruptedException, IOException {
 		logger=extent.startTest("scorecardAssociationCheckAfterGroupRemovalForScoredCall", "Verify if scorecard asociation with already scored call is not broken even if group is removed from available to list");
 		logger.assignCategory(Constants.select_and_score_category);
 		
@@ -717,7 +717,7 @@ public class SelectAndScoreTest extends TestBase{
 	
 	
 	@Test(priority=54) //--  Verify if scorecard association with already reviewed call is not broken even if group is removed from available to list
-	public void scorecardAssociationCheckAfterGroupRemovalForReviewedCall() throws InterruptedException {
+	public void scorecardAssociationCheckAfterGroupRemovalForReviewedCall() throws InterruptedException, IOException {
 		logger=extent.startTest("scorecardAssociationCheckAfterGroupRemovalForReviewedCall", "Verify if scorecard asociation with already reviewed call is not broken even if group is removed from available to list");
 		logger.assignCategory(Constants.select_and_score_category);
 		
