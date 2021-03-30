@@ -23,7 +23,7 @@ public class SelectAndScoreTest extends TestBase{
 	SelectAndScorePage selectAndScorePage; 
 	ManageScorecardPage manageScorecardPage;
 	HomePage homePage;
-	String scorecardToUse = "SJS-101959574";
+	String scorecardToUse = "SJS--1655302057";
 	String scorecard_1_ToDelete = "SJS-1349390088";
 	String scorecard_2_ToDelete = "SJS--265268728";
 	
@@ -694,6 +694,7 @@ public class SelectAndScoreTest extends TestBase{
 		navigateToManageScorecardPage(); //--navigating to manage scorecard page
 		collapseLHNB();
 
+		Thread.sleep(5000);
 		manageScorecardPage.removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);			
 		
 		//check if scorecard association is not broken
