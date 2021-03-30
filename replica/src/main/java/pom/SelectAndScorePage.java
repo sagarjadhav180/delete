@@ -743,7 +743,7 @@ public class SelectAndScorePage extends TestBase {
     	
     	//opening date range filter section
     	Util.Action().moveToElement(date_range_filter_button).click().perform();   
-    	Thread.sleep(20000);
+    	Thread.sleep(5000);
     	
     	logger.log(LogStatus.INFO, "Verifying all date range filter elements are displayed");
     	Boolean actualDateFilterElementsFlag = Util.collectionComarator(expected_date_filter_elements, actual_date_filter_elements);    	
@@ -754,6 +754,7 @@ public class SelectAndScorePage extends TestBase {
     		softassert.assertTrue(actual_date_filter_element.isEnabled(), "");
     	}
     	
+    	Thread.sleep(2000);
     	logger.log(LogStatus.INFO, "Verifying if OK button is displayed");
     	softassert.assertTrue(date_range_filter_ok_button.isDisplayed(), "date_range_filter_ok_button is not displayed");
     	
@@ -768,6 +769,7 @@ public class SelectAndScorePage extends TestBase {
 
     	//opening date picker box
     	dateRangePickerElementClick(Constants.SelectAndScorePage.date_range_for_custom_Range);
+    	Thread.sleep(2000);
     	logger.log(LogStatus.INFO, "Verifying if date picker box is opening after clicking on custom range link");
     	softassert.assertTrue(date_range_filter_left_calender.isDisplayed(), "date picker box is not opening");
     	softassert.assertTrue(date_range_filter_right_calender.isDisplayed(), "date picker box is not opening");
