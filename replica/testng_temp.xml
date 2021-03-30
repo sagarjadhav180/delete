@@ -12,6 +12,15 @@
 
 			<class name="tests.SelectAndScoreTest">
 
+				<methods>
+
+
+					
+					<include name="dateRangeFilterUIVerification" />
+					
+					
+				</methods>
+
 			</class>
 
 		</classes>
