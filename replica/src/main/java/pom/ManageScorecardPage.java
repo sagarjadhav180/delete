@@ -817,7 +817,7 @@ public class ManageScorecardPage extends TestBase {
     
     public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
-    	Thread.sleep(500);
+    	Thread.sleep(10000);
     	
     	available_to_dropdown.click();
     	Thread.sleep(500);
