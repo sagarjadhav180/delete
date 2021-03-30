@@ -753,25 +753,29 @@ public class SelectAndScorePage extends TestBase {
     		softassert.assertTrue(actual_date_filter_element.isEnabled(), "");
     	}
     	
-    	logger.log(LogStatus.INFO, "Verifying if OK button is displayed");
-    	softassert.assertTrue(date_range_filter_ok_button.isDisplayed(), "date_range_filter_ok_button is not displayed");
-    	
-    	logger.log(LogStatus.INFO, "Verifying if OK button is clickable");
-    	softassert.assertTrue(date_range_filter_ok_button.isEnabled(), "date_range_filter_ok_button is not clickable");
+    	try {
+    		logger.log(LogStatus.INFO, "Verifying if OK button is displayed");
+        	softassert.assertTrue(date_range_filter_ok_button.isDisplayed(), "date_range_filter_ok_button is not displayed");
+        	
+        	logger.log(LogStatus.INFO, "Verifying if OK button is clickable");
+        	softassert.assertTrue(date_range_filter_ok_button.isEnabled(), "date_range_filter_ok_button is not clickable");
 
-    	logger.log(LogStatus.INFO, "Verifying if Cancel button is displayed");
-    	softassert.assertTrue(date_range_filter_cancel_button.isDisplayed(), "date_range_filter_cancel_button is not displayed");
-    	
-    	logger.log(LogStatus.INFO, "Verifying if Cancel button is clickable");
-    	softassert.assertTrue(date_range_filter_cancel_button.isEnabled(), "date_range_filter_cancel_button is not clickable");
+        	logger.log(LogStatus.INFO, "Verifying if Cancel button is displayed");
+        	softassert.assertTrue(date_range_filter_cancel_button.isDisplayed(), "date_range_filter_cancel_button is not displayed");
+        	
+        	logger.log(LogStatus.INFO, "Verifying if Cancel button is clickable");
+        	softassert.assertTrue(date_range_filter_cancel_button.isEnabled(), "date_range_filter_cancel_button is not clickable");
 
-    	//opening date picker box
-    	dateRangePickerElementClick(Constants.SelectAndScorePage.date_range_for_custom_Range);
-    	logger.log(LogStatus.INFO, "Verifying if date picker box is opening after clicking on custom range link");
-    	softassert.assertTrue(date_range_filter_left_calender.isDisplayed(), "date picker box is not opening");
-    	softassert.assertTrue(date_range_filter_right_calender.isDisplayed(), "date picker box is not opening");
+        	//opening date picker box
+        	dateRangePickerElementClick(Constants.SelectAndScorePage.date_range_for_custom_Range);
+        	logger.log(LogStatus.INFO, "Verifying if date picker box is opening after clicking on custom range link");
+        	softassert.assertTrue(date_range_filter_left_calender.isDisplayed(), "date picker box is not opening");
+        	softassert.assertTrue(date_range_filter_right_calender.isDisplayed(), "date picker box is not opening");	
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
     	
-    	logger.log(LogStatus.INFO, driver.getPageSource());
+  
     	softassert.assertAll();
     	//closing date range filter section
     	Util.Action().moveToElement(date_range_filter_cancel_button).click().perform();	
