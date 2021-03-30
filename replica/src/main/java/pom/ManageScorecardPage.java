@@ -786,7 +786,7 @@ public class ManageScorecardPage extends TestBase {
     public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
     	Thread.sleep(2000);
-    	
+
 		removeGroupFromAvaialbleTo(groupToBeRemoved);
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
@@ -803,7 +803,7 @@ public class ManageScorecardPage extends TestBase {
 			driver.navigate().refresh();
 			Util.waitForLoad(driver);
 			new HomePage(driver).collapseLHNB();
-			if(count<3)
+			if(count<1)
 				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
 		
