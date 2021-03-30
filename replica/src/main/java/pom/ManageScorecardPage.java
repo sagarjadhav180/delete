@@ -806,9 +806,8 @@ public class ManageScorecardPage extends TestBase {
 			save_configure_scorecard_alert_ok_button_for_associated_group.click();
 			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
 		}catch(Exception e) {
-			driver.navigate().refresh();
-			Util.waitForLoad(driver);
-			new HomePage(driver).collapseLHNB();
+			configure_scorecard_close_button.click();
+			Thread.sleep(2000);
 			if(count<10)
 				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
@@ -845,6 +844,8 @@ public class ManageScorecardPage extends TestBase {
         	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
         	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);    		
     	}catch(Exception e) {
+    		configure_scorecard_close_button.click();
+    		Thread.sleep(2000);
     		if(count<10) {
     			addAllGroupsToAvailableToList(scorecardToUse);
     		}
