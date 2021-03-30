@@ -805,7 +805,7 @@ public class ManageScorecardPage extends TestBase {
 			driver.navigate().refresh();
 			Util.waitForLoad(driver);
 			new HomePage(driver).collapseLHNB();
-			if(count<3)
+			if(count<10)
 				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
 		
@@ -826,9 +826,18 @@ public class ManageScorecardPage extends TestBase {
         		break;
     	}
     	available_to_dropdown.click(); //-- closing available_to_dropdown box
-    	Util.click(save_configure_scorecard_button);
-    	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
-    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    	int count = 0;
+    	try {
+    		count++;
+        	Util.click(save_configure_scorecard_button);
+        	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
+        	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);    		
+    	}catch(Exception e) {
+    		if(count<10) {
+    			addAllGroupsToAvailableToList(scorecardToUse);
+    		}
+    	}
+
     }
     
     //criteria data set
