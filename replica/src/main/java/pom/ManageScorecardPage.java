@@ -792,6 +792,10 @@ public class ManageScorecardPage extends TestBase {
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
 
+		String image_path = Util.createScreenshot(driver, "");
+		String img = Util.image_upload(image_path);
+		System.out.println("Failure Method" + "");
+		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
 		Thread.sleep(500);
 		int count = 0;
 		try {
@@ -812,7 +816,7 @@ public class ManageScorecardPage extends TestBase {
 //		save_configure_scorecard_button.click();
     }
     
-    public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException {
+    public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
     	Thread.sleep(30000);//added half minute wait since its failing on jenkins server
     	
@@ -826,10 +830,16 @@ public class ManageScorecardPage extends TestBase {
         		break;
     	}
     	available_to_dropdown.click(); //-- closing available_to_dropdown box
-    	int count = 0;
+    	Util.click(save_configure_scorecard_button);
+    	
+		String image_path = Util.createScreenshot(driver, "");
+		String img = Util.image_upload(image_path);
+		System.out.println("Failure Method" + "");
+		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
+    	
+		int count = 0;
     	try {
     		count++;
-        	Util.click(save_configure_scorecard_button);
         	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
         	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);    		
     	}catch(Exception e) {
