@@ -1,5 +1,6 @@
 package pom;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -783,13 +784,17 @@ public class ManageScorecardPage extends TestBase {
     	available_to_dropdown.click(); //-- closing available_to_dropdown box    	
     }
     
-    public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException {
+    public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
     	Thread.sleep(2000);
 
 		removeGroupFromAvaialbleTo(groupToBeRemoved);
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
+		String image_path = Util.createScreenshot(driver, "test");
+		String img = Util.image_upload(image_path);
+
+		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
 		Thread.sleep(500);
 		int count = 0;
 		try {
