@@ -830,6 +830,8 @@ public class ManageScorecardPage extends TestBase {
         		break;
     	}
     	available_to_dropdown.click(); //-- closing available_to_dropdown box
+    	Thread.sleep(2000);
+    	
     	Util.click(save_configure_scorecard_button);
     	
 		String image_path = Util.createScreenshot(driver, "");
