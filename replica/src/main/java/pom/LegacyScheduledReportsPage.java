@@ -122,6 +122,7 @@ public class LegacyScheduledReportsPage extends TestBase {
     			wait.until(ExpectedConditions.visibilityOf(send_now_confirmation_message));
     			logger.log(LogStatus.INFO, "Verifying if mail is sent");
     			Assert.assertTrue(send_now_confirmation_message.isDisplayed(),"mail is not sent");
+    			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
     		}
     	}
 		
