@@ -786,15 +786,12 @@ public class ManageScorecardPage extends TestBase {
     
     public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
-    	Thread.sleep(30000);
+    	Thread.sleep(30000); //added half minute wait since its failing on jenkins server
 
 		removeGroupFromAvaialbleTo(groupToBeRemoved);
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
-		String image_path = Util.createScreenshot(driver, "test");
-		String img = Util.image_upload(image_path);
 
-		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));
 		Thread.sleep(500);
 		int count = 0;
 		try {
@@ -817,7 +814,7 @@ public class ManageScorecardPage extends TestBase {
     
     public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
-    	Thread.sleep(30000);
+    	Thread.sleep(30000);//added half minute wait since its failing on jenkins server
     	
     	available_to_dropdown.click();
     	Thread.sleep(500);
