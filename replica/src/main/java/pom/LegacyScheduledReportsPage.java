@@ -251,6 +251,13 @@ public class LegacyScheduledReportsPage extends TestBase {
     	
     }
     
+    public void closePopup() {
+    	try {
+    		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
+    	}catch(Exception e) {
+    		
+    	}
+    }
     
     
 

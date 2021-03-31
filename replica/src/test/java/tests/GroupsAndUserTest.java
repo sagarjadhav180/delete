@@ -971,8 +971,9 @@ public class GroupsAndUserTest extends TestBase
 		//Logging Out
 		@AfterClass
 		public void goToHomePage(){
-	        
-			HomePage hp=new HomePage(driver);
+		    GroupsAndUserPage gp=new GroupsAndUserPage(driver);	        
+			gp.closePopup();
+		    HomePage hp=new HomePage(driver);
 	        Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
 	        try {
 				hp.clickAction("Home");

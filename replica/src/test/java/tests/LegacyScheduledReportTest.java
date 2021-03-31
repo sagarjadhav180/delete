@@ -337,6 +337,8 @@ public class LegacyScheduledReportTest extends TestBase {
 	@AfterClass
 	public void logOut(){
 //		Util.readingFromDB("DELETE FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'AND report_name LIKE 'automation%'");
+		ls=LegacyScheduledReportsPage.intanceLegacySchedule();
+		ls.closePopup();
 		LoginPage lp=new LoginPage(driver);
 		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");

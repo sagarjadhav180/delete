@@ -2531,10 +2531,16 @@ public class GroupsAndUserPage extends TestBase {
     	logger.log(LogStatus.INFO, "Verifying if TN settings updation success message is displayed");
     	Assert.assertTrue(tn_settings_success_message.isDisplayed(),"TN settings updation success message is not displayed");
     	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
-    	Thread.sleep(2000);
-    	
+    	Thread.sleep(2000);	
     }
     
+    public void closePopup() {
+    	try {
+    		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
+    	}catch(Exception e) {
+    		
+    	}
+    }
 
     
     
