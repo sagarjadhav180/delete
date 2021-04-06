@@ -1068,8 +1068,17 @@ public class TrackingNumberBuilderPage extends TestBase {
     	instantInsightsSection();
     	
     	save_button.click();
-    	trackingNumberCreationVerification();
-    	
+    	int count = 0;
+    	try {
+    		count++;
+        	trackingNumberCreationVerification();	
+    	}catch(Exception e) {
+    		cancel_button.click();
+    		Thread.sleep(2000);
+    		if(count<5)
+    	    	trackingNumberCreationVerification();
+    	}
+    	 	
 //    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
 //    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
 //      set.add(dnis);
@@ -1451,11 +1460,22 @@ public class TrackingNumberBuilderPage extends TestBase {
     		}else continue;
     	}
 //    	Thread.sleep(20000);
-        trackingNumberCreationVerification();
 //    	String provisioned_route_id = Util.readingFromDB("SELECT provisioned_route_id as count FROM provisioned_route WHERE provisioned_route_name LIKE '"+tracking_number_name+"'");
 //    	String dnis = Util.readingFromDB("SELECT dnis as count FROM ce_call_flows WHERE provisioned_route_id='"+provisioned_route_id+"'");
 //        System.out.println("simple "+dnis);
 //    	list.add(dnis);
+        int count = 0 ;
+        try {
+        	count++;
+            trackingNumberCreationVerification();
+        }catch(Exception e) {
+        	cancel_button.click();
+        	Thread.sleep(2000);
+        	if(count<5)
+        		createSimpleNumber(tracking_number_name);
+        	
+        }
+        
     }
     
     
