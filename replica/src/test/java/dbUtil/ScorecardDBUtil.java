@@ -12,12 +12,12 @@ public class ScorecardDBUtil {
 private static PostgresConnection postgres;
 	
 	@SuppressWarnings("unused")
-	public static int getScorecardsRecords(String ct_user_id) {
+	public static int getScorecardsRecords(String org_unit_id) {
 		  int scorecards= 0;
 			postgres = new PostgresConnection();
 			Connection con = postgres.getConnection();
 			
-			ResultSet resultSet = postgres.getResultSet("SELECT COUNT(*) as scorecards_count FROM score_cards WHERE created_by = '"+ct_user_id+"' AND scorecard_status = 'active'");
+			ResultSet resultSet = postgres.getResultSet("SELECT COUNT(*) AS scorecards_count FROM score_cards WHERE created_by IN (SELECT ct_user_id FROM ct_user WHERE ct_user_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id = '"+org_unit_id+"') AND user_status = 'active') AND scorecard_status = 'active'");
 
 			try {
 				while(resultSet.next()) {
