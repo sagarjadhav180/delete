@@ -426,12 +426,12 @@ public class ManageScorecardPage extends TestBase {
 		String dbCount = null;
 		String uiCount = null;
 		//count from DB
-		String username = TestBase.getUser_id();
-    	String userId = UserDBUtil.getCTUserId(username);
-    	int scorecard_count = ScorecardDBUtil.getScorecardsRecords(userId);
+		String orgunitID = TestBase.getOrg_unit_id();
+    	int scorecard_count = ScorecardDBUtil.getScorecardsRecords(orgunitID);
     	dbCount = String.valueOf(scorecard_count);
     	
     	//count from UI
+    	Util.waitExecutorForVisibilityOfElement(top_pagination_count);
     	uiCount = top_pagination_count.getText().substring(top_pagination_count.getText().indexOf('f')+1).trim();
     	
     	//verify
@@ -443,9 +443,8 @@ public class ManageScorecardPage extends TestBase {
 		String dbCount = null;
 		String uiCount = null;
 		//count from DB
-		String username = TestBase.getUser_id();
-    	String userId = UserDBUtil.getCTUserId(username);
-    	int scorecard_count = ScorecardDBUtil.getScorecardsRecords(userId);
+		String orgunitID = TestBase.getOrg_unit_id();
+    	int scorecard_count = ScorecardDBUtil.getScorecardsRecords(orgunitID);
     	dbCount = String.valueOf(scorecard_count);
     	
     	//count from ui
