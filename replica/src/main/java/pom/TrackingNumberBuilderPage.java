@@ -1071,7 +1071,12 @@ public class TrackingNumberBuilderPage extends TestBase {
     	int count = 0;
     	try {
     		count++;
-        	trackingNumberCreationVerification();	
+    		Util.waitExecutorForVisibilityOfElement(tn_creation_success_message);
+    		if(tn_creation_success_message.isDisplayed())
+            	trackingNumberCreationVerification();	
+    		else
+    			throw new Exception();
+    		
     	}catch(Exception e) {
     		cancel_button.click();
     		Thread.sleep(2000);
@@ -1467,7 +1472,10 @@ public class TrackingNumberBuilderPage extends TestBase {
         int count = 0 ;
         try {
         	count++;
-            trackingNumberCreationVerification();
+        	if(tn_creation_success_message.isDisplayed()) {
+                trackingNumberCreationVerification();        		
+        	}else
+        		throw new Exception();
         }catch(Exception e) {
         	cancel_button.click();
         	Thread.sleep(2000);
