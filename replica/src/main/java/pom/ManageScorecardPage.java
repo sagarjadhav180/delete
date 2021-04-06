@@ -713,14 +713,18 @@ public class ManageScorecardPage extends TestBase {
     	
     	//creating new score card
     	String scorecardName = createScorecardForUpdation(1);
-
-    	//getting checked groups
-    	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
-    	available_to_dropdown.click();
-    	for( WebElement checked_group:checked_groups) {
-    		checkedGroups.add(checked_group.getText().trim());
-    	}
-    	configure_scorecard_close_button.click();
+    	
+    	do {
+    		//getting checked groups
+        	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
+        	available_to_dropdown.click();
+        	Thread.sleep(2000);
+        	for( WebElement checked_group:checked_groups) {
+        		checkedGroups.add(checked_group.getText().trim());
+        	}
+        	configure_scorecard_close_button.click();
+    	}while(checkedGroups.size()<1);
+    	
         Thread.sleep(2000);
     	
     	//getting assigned groups
@@ -832,14 +836,10 @@ public class ManageScorecardPage extends TestBase {
     	
     	Util.click(save_configure_scorecard_button);
     	
-		String image_path = Util.createScreenshot(driver, "addAllGroupsToAvailableToList");
-		String img = Util.image_upload(image_path);
-		System.out.println("Failure Method" + "addAllGroupsToAvailableToList");
-		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
-    	
 		int count = 0;
     	try {
     		count++;
+    		Util.waitExecutorForVisibilityOfElement(success_message_scorecard_updation);
         	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
         	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);    		
     	}catch(Exception e) {
@@ -919,9 +919,21 @@ public class ManageScorecardPage extends TestBase {
     	scorecard_title_textbox.sendKeys("updated "+scorecardTitle);
     	
     	//submitting form
-        save_configure_scorecard_button.click();
-        Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated successfully");
-        Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    	int count = 0;
+    	try {
+    		count++;
+    	   	save_configure_scorecard_button.click();
+    	   	Util.waitExecutorForVisibilityOfElement(success_message_scorecard_updation);
+    		Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated successfully");
+            Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
+    	}catch(Exception e) {
+    		configure_scorecard_close_button.click();
+    		Thread.sleep(2000);
+    		if(count<10) 
+    			updateScorecard();
+    	}
+        
+        
     }
     
     //delete score-card
