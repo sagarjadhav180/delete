@@ -388,11 +388,22 @@ public class LoginPage extends TestBase {
 //			Assert.assertTrue(logged_in_logo.isDisplayed());
 //		}
 
-		wait.until(ExpectedConditions.visibilityOf(profileButton));
-		profileButton.click();
-		wait.until(ExpectedConditions.visibilityOf(logoutLink));
-		Util.Action().moveToElement(logoutLink).click().perform();
-		wait.until(ExpectedConditions.visibilityOf(username_Field));
+		try {
+			wait.until(ExpectedConditions.visibilityOf(profileButton));
+			profileButton.click();
+			wait.until(ExpectedConditions.visibilityOf(logoutLink));
+			Util.Action().moveToElement(logoutLink).click().perform();
+			wait.until(ExpectedConditions.visibilityOf(username_Field));			
+		}catch(Exception e) {
+			wait.until(ExpectedConditions.visibilityOf(profileButton));
+			profileButton.click();
+			wait.until(ExpectedConditions.visibilityOf(logoutLink));
+			Util.Action().moveToElement(logoutLink).click().perform();
+			wait.until(ExpectedConditions.visibilityOf(username_Field));
+		}finally {
+			Assert.assertTrue(username_Field.isDisplayed());
+		}
+
 
 	}
 
