@@ -795,10 +795,6 @@ public class ManageScorecardPage extends TestBase {
 		Thread.sleep(2000);
 		Util.click(save_configure_scorecard_button);
 
-		String image_path = Util.createScreenshot(driver, "removeScorecardForScorecardAssociationCheck");
-		String img = Util.image_upload(image_path);
-		System.out.println("Failure Method" + "removeScorecardForScorecardAssociationCheck");
-		logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
 		Thread.sleep(500);
 		int count = 0;
 		try {
@@ -906,13 +902,11 @@ public class ManageScorecardPage extends TestBase {
     } 
     
     //update score-card
-    public void updateScorecard() throws InterruptedException {
+    public void updateScorecard(String scorecardName) throws InterruptedException {
     	
-    	//creating new score card
-    	String scorecardName = createScorecardForUpdation(1);
-
     	//editing score card
     	clickActionButton(scorecardName, Constants.ManageScorecardPage.edit_scorecard_button);
+    	Thread.sleep(30000);
     	
     	//Updating score-card details
     	scorecard_title_textbox.clear();
@@ -930,7 +924,7 @@ public class ManageScorecardPage extends TestBase {
     		configure_scorecard_close_button.click();
     		Thread.sleep(2000);
     		if(count<10) 
-    			updateScorecard();
+    			updateScorecard(scorecardName);
     	}
         
         

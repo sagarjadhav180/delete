@@ -186,7 +186,9 @@ public class ManageScorecardTest extends TestBase{
 	public void updateScorecardVerification() throws InterruptedException {
 		logger=extent.startTest("updateScorecardVerification", "To check if able to update score card ");
 		logger.assignCategory(Constants.manage_scorecard_category);
-		manageScorecardPage.updateScorecard();
+		String scorecard_name = manageScorecardPage.createScorecardForUpdation(1);
+		Thread.sleep(2000);
+		manageScorecardPage.updateScorecard(scorecard_name);
 		Thread.sleep(2000);
 	}
 	
