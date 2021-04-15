@@ -62,7 +62,7 @@ public class CampaignTests extends TestBase {
 		
 		cp.clickAction("add","");
 		cb.campaignBuilderPageUIVerification();
-		cb.collapseExpand_collapsible_strip();
+//		cb.collapseExpand_collapsible_strip();
 		cb.clickAction("list");	
 //		Thread.sleep(2000);
 
