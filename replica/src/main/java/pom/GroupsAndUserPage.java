@@ -2394,8 +2394,19 @@ public class GroupsAndUserPage extends TestBase {
   	//To click action button of desired user
     public void clickActionUser(String user_email,String button_name) throws InterruptedException{
 		
-		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+//		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		WebElement button = null;
 		
+		for(int i=0;i<100;i++) {
+			try {
+				button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));					
+				break;
+			}catch(Exception e) {
+				Util.click(users_topNextPagination_Button);
+				Thread.sleep(2000);
+			}	
+		}
+	
 		wait.until(ExpectedConditions.visibilityOf(button));
 //		button.click();
 		Util.click(button);
@@ -2403,13 +2414,16 @@ public class GroupsAndUserPage extends TestBase {
 	
 		//Deletion pop-up
 		if(button_name.contains("Delete")) {
-			
 			driver.switchTo().activeElement();
 			user_deletion_confiramtion_popup_textbox.sendKeys("yes");
 			user_deletion_confiramtion_popup_ok_button.click();
-		
 		}	
-	
+		
+		if(!users_topFirstPagination_Button.getAttribute("class").endsWith("disbaled")) {
+			Util.click(users_topFirstPagination_Button);
+			Thread.sleep(4000);
+		}
+		
     }
     
     
