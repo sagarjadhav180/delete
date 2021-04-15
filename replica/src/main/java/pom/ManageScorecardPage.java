@@ -787,6 +787,7 @@ public class ManageScorecardPage extends TestBase {
     	available_to_dropdown.click(); //-- closing available_to_dropdown box    	
     }
     
+	int removeScorecardForScorecardAssociationCheckCount = 0;
     public void removeScorecardForScorecardAssociationCheck(String scorecardToUse, String groupToBeRemoved) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
     	Thread.sleep(30000); //added half minute wait since its failing on jenkins server
@@ -796,9 +797,8 @@ public class ManageScorecardPage extends TestBase {
 		Util.click(save_configure_scorecard_button);
 
 		Thread.sleep(500);
-		int count = 0;
 		try {
-			count++;
+			removeScorecardForScorecardAssociationCheckCount++;
 			Util.customWait(save_configure_scorecard_alert_for_associated_group);
 			Assert.assertTrue(save_configure_scorecard_alert_for_associated_group.isDisplayed(), "alert not displayed for gruop removal");
 			driver.switchTo().activeElement();
@@ -807,13 +807,14 @@ public class ManageScorecardPage extends TestBase {
 		}catch(Exception e) {
 			configure_scorecard_close_button.click();
 			Thread.sleep(2000);
-			if(count<10)
+			if(removeScorecardForScorecardAssociationCheckCount<10)
 				removeScorecardForScorecardAssociationCheck(scorecardToUse, groupToBeRemoved);
 		}
 		
 //		save_configure_scorecard_button.click();
     }
     
+	int addAllGroupsToAvailableToListCount = 0;
     public void addAllGroupsToAvailableToList(String scorecardToUse) throws InterruptedException, IOException {
     	clickActionButton(scorecardToUse, Constants.ManageScorecardPage.edit_scorecard_button);
     	Thread.sleep(30000);//added half minute wait since its failing on jenkins server
@@ -832,16 +833,15 @@ public class ManageScorecardPage extends TestBase {
     	
     	Util.click(save_configure_scorecard_button);
     	
-		int count = 0;
     	try {
-    		count++;
+    		addAllGroupsToAvailableToListCount++;
     		Util.waitExecutorForVisibilityOfElement(success_message_scorecard_updation);
         	Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated");
         	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);    		
     	}catch(Exception e) {
     		configure_scorecard_close_button.click();
     		Thread.sleep(2000);
-    		if(count<10) {
+    		if(addAllGroupsToAvailableToListCount<10) {
     			addAllGroupsToAvailableToList(scorecardToUse);
     		}
     	}
@@ -902,6 +902,7 @@ public class ManageScorecardPage extends TestBase {
     } 
     
     //update score-card
+    int updateScorecardCount = 0;
     public void updateScorecard(String scorecardName) throws InterruptedException {
     	
     	//editing score card
@@ -913,9 +914,8 @@ public class ManageScorecardPage extends TestBase {
     	scorecard_title_textbox.sendKeys("updated "+scorecardTitle);
     	
     	//submitting form
-    	int count = 0;
     	try {
-    		count++;
+    		updateScorecardCount++;
     	   	save_configure_scorecard_button.click();
     	   	Util.waitExecutorForVisibilityOfElement(success_message_scorecard_updation);
     		Assert.assertTrue(success_message_scorecard_updation.isDisplayed(), "scorecard not updated successfully");
@@ -923,7 +923,7 @@ public class ManageScorecardPage extends TestBase {
     	}catch(Exception e) {
     		configure_scorecard_close_button.click();
     		Thread.sleep(2000);
-    		if(count<10) 
+    		if(updateScorecardCount<10) 
     			updateScorecard(scorecardName);
     	}
         
