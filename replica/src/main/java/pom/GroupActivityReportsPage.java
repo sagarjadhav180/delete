@@ -28,12 +28,12 @@ public class GroupActivityReportsPage extends TestBase {
     @FindBy(xpath="//label[text()='Secondary Grouping']")
 	private static WebElement secondary_grouping_label;
  
-    @FindBy(xpath="//div[@id='s2id_autogen1']//span[@class='select2-arrow']")
+    @FindBy(xpath="//label[text()='Secondary Grouping']/..//span[@class='select2-arrow']")
 	private static WebElement secondary_grouping_button;
 
     String[] expected_secondary_grouping_options={"None","Tracking Number","Campaign"};
     
-    @FindBy(xpath="//div[@id='s2id_autogen1']//following-sibling::select")
+    @FindBy(xpath="//label[text()='Secondary Grouping']//following-sibling::select")
 	private static WebElement secondary_grouping_listbox;
     
     @FindBy(xpath="//h1[contains(text(),'Group Activity')]")
