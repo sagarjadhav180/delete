@@ -772,20 +772,20 @@ public class GroupActivityReportsPage extends TestBase {
 		String startDateToBeUsed ="";
 		
 		if(dateRange.equalsIgnoreCase("Last 7 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-6");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
 		}
 		else if(dateRange.equalsIgnoreCase("today")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
+		}
+		else if(dateRange.equalsIgnoreCase("yesterday")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equalsIgnoreCase("yesterday")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
-		}
 		else if(dateRange.equalsIgnoreCase("last 30 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-29");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
 		}
 
         
@@ -803,7 +803,7 @@ public class GroupActivityReportsPage extends TestBase {
 		}
 		
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
         
 		if(!(dbCount=="0" || dbCount==null)){
 		
