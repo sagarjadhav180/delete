@@ -1,15 +1,18 @@
 package tests;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.parser.ParseException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import apiEndpoints.CallUpload;
 import constants.Constants;
 import dbUtil.CallUtil;
 import pom.HomePage;
@@ -28,7 +31,13 @@ public class SelectAndScoreTest extends TestBase{
 	String scorecard_2_ToDelete = "SJS--265268728";
 	
 	@BeforeClass //--logging in
-	public void login() throws IOException, InterruptedException {
+	public void login() throws IOException, InterruptedException, URISyntaxException, ParseException {
+		//upload calls
+		CallUpload callUpload = new CallUpload();
+		for(int i=0;i<11;i++) {
+			callUpload.uploadCalls();			
+		}
+		
 		//logging in
 		LoginPage loginPage=new LoginPage(driver);
 		loginPage.validLogin();
@@ -43,6 +52,7 @@ public class SelectAndScoreTest extends TestBase{
 		
 		//creating required scorecards
 		createScorecard();
+		
 	}
 	
 	//collapsing LHNB
