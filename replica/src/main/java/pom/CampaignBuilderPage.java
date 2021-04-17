@@ -254,14 +254,16 @@ public class CampaignBuilderPage extends TestBase {
 		
 	}
 	
+	
+	//not working
 	public void collapseExpand_collapsible_strip(){
 		wait.until(ExpectedConditions.visibilityOf(collapsible_strip));
 		
 		try{
 			collapsible_strip.click();
-			Assert1.assertFalse(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed or locator changed");
+			Assert1.assertFalse(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is  displayed or locator changed");
 			collapsible_strip.click();			
-			Assert1.assertTrue(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed or locator changed");
+			Assert1.assertTrue(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is  displayed or locator changed");
 		}
 		catch(Exception e){
 			System.out.println("collapsible_strip is not working..");
