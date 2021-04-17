@@ -241,7 +241,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
             
             WebElement edit = null;
            
-            edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
+            edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
 			tests.Util.scrollFunction(edit);
 			tests.Util.click(edit);
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
