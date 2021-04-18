@@ -248,21 +248,21 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		}
 		else if(buttonName.contains("expand")){
 			
-			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
+			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
 			tests.Util.scrollFunction(expand_campaign);
 			tests.Util.click(expand_campaign);
 			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)" );
 		}
 		else if(buttonName.contains("collapse")){
 			
-			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
+			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
 			tests.Util.scrollFunction(collapse);
 			tests.Util.click(collapse);
 			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)" );
 		}
 		else if(buttonName.contains("archive")){				
 			WebElement archive = null;
-            archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
+            archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
 			tests.Util.scrollFunction(archive);
 			tests.Util.click(archive);
 			driver.switchTo().activeElement();
@@ -287,7 +287,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		else if(buttonName.contains("expand")){
 			
 
-			WebElement expand = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
+			WebElement expand = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
 //			wait.until(ExpectedConditions.visibilityOf(expand));
 			tests.Util.scrollFunction(expand);
 			Thread.sleep(1000);
@@ -300,7 +300,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	      else if(buttonName.contains("collapse")){
 			
 
-			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
+			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
 //			wait.until(ExpectedConditions.visibilityOf(expand));
 			
 			Thread.sleep(1000);
