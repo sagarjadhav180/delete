@@ -133,7 +133,7 @@ public class TestBase
 		url_to_hit=prop.getProperty("url");			
 		driver.get(url_to_hit);
 //		driver.get(URL);
-//	    TestData.createData();			    
+	    TestData.createData();			    
 		extent.loadConfig(new File(".//src//main//java//extentReport//extent_config.xml"));
 	}
 
