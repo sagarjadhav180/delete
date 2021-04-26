@@ -1676,6 +1676,7 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
 //    	add_subgroup_button.click();
     	Util.click(add_subgroup_button);
+    	Thread.sleep(2000);
     	
     	if(field.equals("industry")) {
     		subgroup_name_textbox.clear();
@@ -1708,6 +1709,7 @@ public class GroupsAndUserPage extends TestBase {
 	   	Thread.sleep(5000);
 //    	add_subgroup_button.click();
     	Util.click(add_subgroup_button);
+    	Thread.sleep(2000);
     	
     	//Entering Sub-group details
     	subgroup_name_textbox.clear();

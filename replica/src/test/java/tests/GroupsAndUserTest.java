@@ -580,7 +580,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
-	        gp.subGroupFormValidation("industry");
+	        gp.subGroupFormValidation("group_name_textbox");
    
 		}
 		
@@ -593,7 +593,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
-	        gp.subGroupFormValidation("group_name_textbox");
+	        gp.subGroupFormValidation("industry");
    
 		}
 		
