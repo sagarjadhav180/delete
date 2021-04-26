@@ -905,7 +905,7 @@ public class SelectAndScoreTest extends TestBase{
 	
 	@Test(priority=63) // -- Verify if user is not able edit another call while previously edited call is not saved 
 	public void editCallsAlert() throws InterruptedException {
-		logger=extent.startTest("scoreValueVerification", "Verify if user is not able edit another call while previously edited call is not saved ");
+		logger=extent.startTest("editCallsAlert", "Verify if user is not able edit another call while previously edited call is not saved ");
 		logger.assignCategory(Constants.select_and_score_category);
 		
 		selectAndScorePage.editCallAlert();

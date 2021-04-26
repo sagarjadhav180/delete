@@ -754,6 +754,7 @@ public class SelectAndScorePage extends TestBase {
     	}
     	
     	Util.customWait(date_range_filter_ok_button);
+    	Util.setAttribute("visibility", "visible", date_range_filter_ok_button);
     	logger.log(LogStatus.INFO, "Verifying if OK button is displayed");
     	softassert.assertTrue(date_range_filter_ok_button.isDisplayed(), "date_range_filter_ok_button is not displayed");
     	
@@ -1926,6 +1927,7 @@ public class SelectAndScorePage extends TestBase {
     	logger.log(LogStatus.INFO, "Verifying if Appropriate alert is displayed when previoulsy edited call is not closed");
     	Util.waitExecutorForVisibilityOfElement(edit_call_alert);
     	Assert.assertTrue(edit_call_alert.isDisplayed(), "Appropriate alert not displayed");
+    	Thread.sleep(2000);
     	
     	//close popup
     	Util.keyboardActions("escape");
