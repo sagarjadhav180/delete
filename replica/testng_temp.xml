@@ -3,7 +3,6 @@
 <suite name="Automation Suite-1" preserve-order="true">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
-
 		<parameter name="browser" value="headless" />
 		<parameter name="url"
 			value="https://stag-5-cmo-1.convirza.com" />

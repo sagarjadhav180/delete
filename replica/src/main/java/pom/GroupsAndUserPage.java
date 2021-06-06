@@ -1155,7 +1155,9 @@ public class GroupsAndUserPage extends TestBase {
 	//Custom Source Add New Source Validation
 	
 	static String[] custom_sources=new String[6];
+	
 	public void custom_Source_Add_New_Source() throws InterruptedException{
+
 		
 		//Expanding Custom Source section
         expandSection(Constants.GroupsAndUser.custom_sources_strip);
@@ -1165,6 +1167,7 @@ public class GroupsAndUserPage extends TestBase {
 			String cs_to_add="cs-delete"+Util.generateRandomNumber();
 			custom_sources[i]=cs_to_add;
 			addCustomSource(String.valueOf(i), cs_to_add);
+			Thread.sleep(3000);
 			logger.log(LogStatus.INFO, "verifying Add New Custom Source functionality & Success Message");
 		//  Validating Success Message for each column
 			wait.until(ExpectedConditions.visibilityOf(add_custom_source_success_message));
@@ -1205,7 +1208,101 @@ public class GroupsAndUserPage extends TestBase {
 		
 		softassert.assertAll();
 	}
-    
+	
+	// Custom Source verification if duplicate record can be added
+	
+	  static String[] custom_sources_duplicate=new String[6];
+	  
+	  public void custom_Source_Add_Duplicate_Source() throws InterruptedException{
+	  
+	  //Expanding Custom Source section
+	  expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	  Thread.sleep(4000);
+	  
+	  for(int i=1; i<=5; i++) { 
+		  String cs_to_add="cs-delete"+Util.generateRandomNumber();
+		  custom_sources_duplicate[i]=cs_to_add; 
+		  WebElement cs_textbox =TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+		  cs_textbox.sendKeys(custom_sources_duplicate[i]); 
+		  WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]")); 
+		  add_source_click.click();
+	  
+	  //Adding same source again Thread.sleep(4000);
+	  cs_textbox.sendKeys(custom_sources_duplicate[i]); 
+	  logger.log(LogStatus.PASS,"verifying if duplicate Custom Source getting added"); 
+	  try {
+	  add_source_click.click();
+	  } 
+	  catch(Exception e) {
+	  System.out.println("Duplicate source isn't getting added"); 
+	  }
+	  
+	  } softassert.assertAll(); }
+	 
+		 
+	/*
+	 * static String[] custom_sources_duplicate=new String[6];
+	 * 
+	 * public void custom_Source_Add_Duplicate_Source() throws InterruptedException{
+	 * 
+	 * //Expanding Custom Source section
+	 * expandSection(Constants.GroupsAndUser.custom_sources_strip);
+	 * Thread.sleep(4000);
+	 * 
+	 * for(int i=1; i<=5; i++) { String
+	 * cs_to_add="cs-delete"+Util.generateRandomNumber();
+	 * custom_sources_duplicate[i]=cs_to_add; WebElement cs_textbox
+	 * =TestBase.driver.findElement(By.
+	 * xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+	 * cs_textbox.sendKeys(custom_sources_duplicate[i]); List <WebElement>
+	 * add_source_click = TestBase.driver.findElements(By.
+	 * xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]"
+	 * )); add_source_click.get(0).click();
+	 * 
+	 * //Adding same source again Thread.sleep(4000);
+	 * cs_textbox.sendKeys(custom_sources_duplicate[i]); logger.log(LogStatus.
+	 * INFO,"verifying if duplicate Custom Source getting added");
+	 * if(add_source_click.size()==1) {
+	 * logger.log(LogStatus.PASS,"Duplicate source isn't getting added"); } else
+	 * if(add_source_click.size()>1) {
+	 * logger.log(LogStatus.FAIL,"Duplicate source isn't getting added"); }
+	 * 
+	 * } softassert.assertAll(); }
+	 */
+	
+	// Check if able to clear selected custom source checkbox
+		
+		  static String[] custom_sources_checkbox=new String[6];
+		  
+		  public void custom_Source_Clear_checkbox() throws InterruptedException{
+		  
+		  //Expanding Custom Source section
+		  expandSection(Constants.GroupsAndUser.custom_sources_strip);
+		  Thread.sleep(4000);
+		  
+		  for(int i=1; i<=5; i++) { 
+			  String cs_to_add="cs-delete"+Util.generateRandomNumber();
+			  custom_sources_duplicate[i]=cs_to_add; 
+			  WebElement cs_textbox =TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+i+"]"));
+			  cs_textbox.sendKeys(custom_sources_duplicate[i]); 
+			  WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]")); 
+			  wait.until(ExpectedConditions.visibilityOf(add_source_click));
+			  add_source_click.click();
+			  clickCheckboxOfCustomSource(custom_sources_checkbox[i],String.valueOf(i));
+			  }
+		  custom_source_clear_button.click();
+		  // Verifying the checkboxes of custom sources
+		  
+		  logger.log(LogStatus.INFO,"verifying if custom source checkboxes are getting cleared after clicking clear button");
+		  for(int i=1; i<=5;i++) {
+			  WebElement custom_source_1 = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+String.valueOf(i)+"']//parent::div//ul//li//span[starts-with(text(),'"+custom_sources_checkbox[i]+"')]/..//preceding-sibling::input"));
+			  Assert.assertFalse(custom_source_1.isSelected(), "Custome Source checkbox " + i + " isn't cleared"); 
+			  
+		  }
+		  
+		  softassert.assertAll(); 
+		}
+		
 	
 	public void custom_Source_clear_Source() throws InterruptedException{
 			
@@ -1260,7 +1357,8 @@ public class GroupsAndUserPage extends TestBase {
 		return cs_state;
 	}
 		
-		
+	
+	
 	public void addCustomSource(String custom_source_type,String cs_name){
 			
 		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
@@ -1917,7 +2015,7 @@ public class GroupsAndUserPage extends TestBase {
 		softassert.assertTrue(users_topLastPagination_Button.isDisplayed(),"Users Top Last Pagination count is not present or locator changed");	
 	
 		//Next-100 Button and last Button
-		if(Integer.parseInt(dbCount)>100) {
+		if(Integer.parseInt(dbCount)<100) {
 			softassert.assertFalse(users_topLastPagination_Button.getAttribute("class").endsWith("disabled"),"Top Last Pagination button is not clickable");	
 			softassert.assertFalse(users_topNextPagination_Button.getAttribute("class").endsWith("disabled"),"Top Next Pagination button is not clickable");
 		}
@@ -1931,11 +2029,18 @@ public class GroupsAndUserPage extends TestBase {
       	expandSection(Constants.GroupsAndUser.user_settings_strip);
       	
   		//Verification of count of users in top pagination tool-box with db	
+
+  		//String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4");
+  		//String dbCount = Util.readingFromDB("SELECT count(*) FROM ct_user WHERE ct_user_ou_id=70045 AND role_id !=4");
+
   		String dbCount = Util.readingFromDB("SELECT count(*) AS COUNT FROM ct_user WHERE ct_user_ou_id="+TestBase.getOrg_unit_id()+" AND role_id !=4 AND user_status NOT IN ('deleted')");
+
   		String countOnUI_pagination = users_topPagination_count.getText().substring(users_topPagination_count.getText().indexOf('f')+2);
   	
   		logger.log(LogStatus.INFO, "Verifying users count displeyed in top pagination toolbox with db count");
   		softassert.assertEquals(dbCount, countOnUI_pagination,"Count in top pagination toolbox is mismatching with db count");
+  		
+  		softassert.assertAll();
 
   	}
 
@@ -2420,12 +2525,11 @@ public class GroupsAndUserPage extends TestBase {
 			user_deletion_confiramtion_popup_textbox.sendKeys("yes");
 			user_deletion_confiramtion_popup_ok_button.click();
 		}	
-		
-		if(!users_topFirstPagination_Button.getAttribute("class").endsWith("disbaled")) {
+	if(!users_topFirstPagination_Button.getAttribute("class").endsWith("disbaled")) {
 			Util.click(users_topFirstPagination_Button);
 			Thread.sleep(4000);
 		}
-		
+	
     }
     
     

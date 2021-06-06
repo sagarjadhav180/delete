@@ -10,7 +10,6 @@ import tests.TestBase;
 
 public class Constants {
 
-
 	public static final String groupHeirarchyAgency="1";
 	public static final String groupHeirarchyCompany="2";
 	public static final String groupHeirarchyLocation="3";
