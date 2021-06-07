@@ -32,7 +32,7 @@ public class CampaignBuilderPage extends TestBase {
 	@FindBy(xpath="//h1[contains(text(),'Campaign Builder')]")
 	private static WebElement header;
 	
-	@FindBy(xpath="//h4[contains(text(),'"+account+"')]")
+	@FindBy(xpath="//h4[contains(text(),'CAMPAIGN DETAILS FOR')]")
 	private static WebElement collapsible_strip;
 	
 	//active/inactive toggle
@@ -254,14 +254,16 @@ public class CampaignBuilderPage extends TestBase {
 		
 	}
 	
+	
+	//not working
 	public void collapseExpand_collapsible_strip(){
 		wait.until(ExpectedConditions.visibilityOf(collapsible_strip));
 		
 		try{
 			collapsible_strip.click();
-			Assert1.assertFalse(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed or locator changed");
+			Assert1.assertFalse(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is  displayed or locator changed");
 			collapsible_strip.click();			
-			Assert1.assertTrue(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is not displayed or locator changed");
+			Assert1.assertTrue(SaveCampaignDetails_Button.isDisplayed(),"SaveCampaignDetails_Button is  displayed or locator changed");
 		}
 		catch(Exception e){
 			System.out.println("collapsible_strip is not working..");
@@ -289,8 +291,8 @@ public class CampaignBuilderPage extends TestBase {
 
 	public void create(String campaign_name,String externalID,int futureStartDate,int futureEndDate) throws InterruptedException{
 		
-        wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
 		wait.until(ExpectedConditions.attributeContains(campaignName_TextBox, "tabindex", "0"));
+		Thread.sleep(4000);
 
 		campaignName_TextBox.clear();
         campaignName_TextBox.sendKeys(campaign_name);
@@ -363,6 +365,7 @@ public class CampaignBuilderPage extends TestBase {
 	public void edit(String campaign_name_updated) throws InterruptedException{
 			
 		wait.until(ExpectedConditions.visibilityOf(campaignName_TextBox));
+		wait.until(ExpectedConditions.visibilityOf(campaignOwner_DropDown));
 
 		Thread.sleep(3000);
 		System.out.println(campaignName_TextBox);
@@ -751,7 +754,7 @@ public class CampaignBuilderPage extends TestBase {
 			int startdate;
 			String startDateToBeSelected;
 			
-			startdate =pastStartDate-1;
+			startdate =pastStartDate-2;
 			startDateToBeSelected=String.valueOf(startdate);
 			element=driver.findElement(By.xpath("(//sm-date-picker[@id='Start DatePicker']//div//sm-calender[@class='ng-pristine ng-untouched ng-valid ng-isolate-scope']//span[@class='ng-binding ng-scope'][text()="+startDateToBeSelected+"])"));
 			

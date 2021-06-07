@@ -1,6 +1,8 @@
 package pom;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -59,7 +62,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//button[contains(text(),'Save Group Details')]")
 	private WebElement saveGroupDetails_button;	
 
-	@FindBy(xpath="//div[@class='ui-pnotify-text'][text()='Automation Account updated.']")
+	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement update_groupDetails_success_message;	
 	
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
@@ -68,7 +71,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//select[@id='source'][contains(@validate-blur-forza,'State')]")
 	private WebElement state_dropdown;	
 
-	String[] expected_states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
+	String[] expected_states={"Alaska","Hawaii","California","Nevada","Oregon","Washington","Arizona","Colorado","Idaho","Montana","Nebraska","Missouri","New Mexico","North Dakota","Utah","Wyoming","Alabama","Arkansas","Illinois","Iowa","Kansas","Kentucky","Louisiana","Minnesota","Mississippi","Oklahoma","South Dakota","Texas","Tennessee","Wisconsin","Connecticut","Delaware","Florida","Georgia","Indiana","Maine","Maryland","Massachusetts","Michigan","New Hampshire","New Jersey","New York","North Carolina","Ohio","Pennsylvania","Rhode Island","South Carolina","Vermont","Virginia","West Virginia","Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon"};
 	
 	@FindBy(xpath="//select[@ng-model='industry']")
 	private WebElement industry_dropdown;
@@ -97,7 +100,7 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//label[contains(text(),'Conversation Analytics')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
 	private WebElement CA_toggle;	
 
-	@FindBy(xpath="//label[contains(text(),'Spam Guard')][1]")
+	@FindBy(xpath="//label[contains(text(),'Spam Guard') and @aria-hidden='false']")
 	private WebElement spamGuard_label;	
 	
 	@FindBy(xpath="//label[contains(text(),'Spam Guard')]//parent::div//preceding-sibling::div//div[@class='toggle']/div")
@@ -178,8 +181,8 @@ public class GroupsAndUserPage extends TestBase {
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement tn_settings_alert;
 
-	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
-	private WebElement tn_settings_alert_close_button;
+//	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
+//	private WebElement tn_settings_alert_close_button;
 	
 	//DNI-------------------------------------------------------
 	@FindBy(xpath="//span[contains(text(),'Dynamic Number')]/..//following-sibling::div//md-checkbox")
@@ -206,7 +209,7 @@ public class GroupsAndUserPage extends TestBase {
 	private WebElement custom_parameters;
 	
 	//DNI custom parameters-----------------------------------------------------------------
-	@FindBy(xpath="//a[text()='Custom Parameters']//parent::div/a")
+	@FindBy(xpath="//div[@class='modal-content']//h3[text()='DNI Custom Parameters']")
 	private WebElement dni_custom_parameters_label;
 
 	@FindBy(xpath="//label[@class='control-label ng-binding'][starts-with(text(),'Capture Custom')]")
@@ -458,6 +461,7 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[text()='Group deleted.']")
 	private WebElement subgroup_deletion_success_message;	
+	
 
 	@FindBy(xpath="//div[@class='ui-pnotify-text']")
 	private WebElement saveSubGroupDetails_alert;
@@ -518,6 +522,12 @@ public class GroupsAndUserPage extends TestBase {
 
 	@FindBy(xpath="//div[@class='modal-footer']//button[text()='Cancel']") 	
 	private WebElement user_deletion_confiramtion_popup_cancel_button;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+	
+	@FindBy(xpath="//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
 
 	//Change password popup-------------------------------------------
 	@FindBy(xpath="//h3[@class='modal-title'][text()='Change Password']")
@@ -664,18 +674,27 @@ public class GroupsAndUserPage extends TestBase {
     	
 		expandSection(Constants.GroupsAndUser.group_details_strip);    	
     	
-		
-    	for(int i=0;i<group_details_strip_labels.size();i++){
-    		
-    		for(int j=0;j<expected_groupDetailsLabels.length;j++){
-    			
-    			if(group_details_strip_labels.get(i).getText().equals(expected_groupDetailsLabels[j])){
+//    	for(int i=0;i<group_details_strip_labels.size();i++){
+//    		
+//    		for(int j=0;j<expected_groupDetailsLabels.length;j++){
+//    			
+//    			if(group_details_strip_labels.get(i).getText().equals(expected_groupDetailsLabels[j])){
+//
+//    				logger.log(LogStatus.INFO, "Verifying if "+expected_groupDetailsLabels[j]+" is displayed");
+//    				softassert.assertTrue(group_details_strip_labels.get(i).getText().equals(expected_groupDetailsLabels[j]),expected_groupDetailsLabels[j]+" is not displayed");    				
+//    			}    
+//    		}	
+//    	}
+    	    	
+    	List<String> act_group_details_strip_labels = new ArrayList<String>();
+    	List<String> exp_group_details_strip_labels = new ArrayList<String>(Arrays.asList(expected_groupDetailsLabels));
 
-    				logger.log(LogStatus.INFO, "Verifying if "+expected_groupDetailsLabels[j]+" is displayed");
-    				softassert.assertTrue(group_details_strip_labels.get(i).getText().equals(expected_groupDetailsLabels[j]),expected_groupDetailsLabels[j]+" is not displayed");    				
-    			}    
-    		}	
+    	for(WebElement group_details_strip_label:group_details_strip_labels) {
+    		act_group_details_strip_labels.add(group_details_strip_label.getText());
     	}
+    	Collections.sort(act_group_details_strip_labels);
+    	Collections.sort(exp_group_details_strip_labels);
+    	softassert.assertEquals(act_group_details_strip_labels, exp_group_details_strip_labels,"industry dropdowns not matching with expected");
     	
 		logger.log(LogStatus.INFO, "Verifying if groupName textbox is displayed");
     	softassert.assertTrue(groupName_textbox.isDisplayed(),"groupName textbox is not displayed");
@@ -691,37 +710,72 @@ public class GroupsAndUserPage extends TestBase {
 
 		logger.log(LogStatus.INFO, "Verifying if Zip textbox is displayed");
     	softassert.assertTrue(zip_textbox.isDisplayed(),"zip textbox is not displayed");
-    	
+
+    	//Industry
 		logger.log(LogStatus.INFO, "Verifying if Industry dropdown is displayed");
     	softassert.assertTrue(industry_dropdown.isDisplayed(),"Industry dropdown is not displayed");
 
     	Select select=new Select(industry_dropdown);
+    	List<String> act_industry_options = new ArrayList<String>();
+    	List<String> exp_industry_options = new ArrayList<String>(Arrays.asList(expected_industry_dropdown));
+    	List<WebElement> act_options = new ArrayList<WebElement>();
     	
-    	for(int i=0;i<select.getOptions().size();i++){
-    		
-    		for(int j=0;j<expected_industry_dropdown.length;j++){
-    			
-    			if(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j])){
-    				logger.log(LogStatus.INFO, "Verifying if "+expected_industry_dropdown[j]+" is present");
-    				softassert.assertTrue(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j]),expected_industry_dropdown[j]+" is not present");
-    			}	
+    	do {
+    		act_options = select.getOptions();
+    	}while(select.getOptions().size()<2);
+    	
+    	for(WebElement act_option:act_options) {
+    		if(!act_option.getText().equals("-- Select Industry--")) {
+        		act_industry_options.add(act_option.getText().trim());	
     		}
     	}
+    	Collections.sort(act_industry_options);
+    	Collections.sort(exp_industry_options);
+    	softassert.assertEquals(act_industry_options, exp_industry_options,"industry dropdowns not matching with expected");
+    	
+//    	for(int i=0;i<select.getOptions().size();i++){
+//    		
+//    		for(int j=0;j<expected_industry_dropdown.length;j++){
+//    			
+//    			if(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j])){
+//    				logger.log(LogStatus.INFO, "Verifying if "+expected_industry_dropdown[j]+" is present");
+//    				softassert.assertTrue(select.getOptions().get(i).getText().equals(expected_industry_dropdown[j]),expected_industry_dropdown[j]+" is not present");
+//    			}	
+//    		}
+//    	}
 
+    	//States
 		logger.log(LogStatus.INFO, "Verifying if State dropdown is displayed");
     	softassert.assertTrue(state_dropdown.isDisplayed(),"State dropdown is not displayed");
-
+ 
     	Select select1=new Select(state_dropdown);
+    	List<String> act_state_options = new ArrayList<String>();
+    	List<String> exp_state_options = new ArrayList<String>(Arrays.asList(expected_states));
+    	List<WebElement> act_stat_options = new ArrayList<WebElement>();
+    	do {
+    		act_stat_options = select1.getOptions();
+    	}while(select1.getOptions().size()<2);
     	
-    	for(int i=0;i<select1.getOptions().size();i++){
-    		
-    		for(int j=0;j<expected_states.length;j++){
-    			if(select1.getOptions().get(i).getText().equals(expected_states[j])){
-    				logger.log(LogStatus.INFO, "Verifying if "+expected_states[j]+" is present");
-    				softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_states[j]),expected_states[j]+" is not present");    				
-    			}
+    	for(WebElement act_stat_option:act_stat_options) {
+    		if(!act_stat_option.getText().equals("--Select--")) {
+        		act_state_options.add(act_stat_option.getText().trim());	
     		}
     	}
+    	act_state_options.removeAll(Arrays.asList(""));
+    	Collections.sort(act_state_options);
+    	Collections.sort(exp_state_options);
+    	softassert.assertEquals(act_state_options, exp_state_options,"states dropdowns not matching with expected");
+    	
+    	
+//    	for(int i=0;i<select1.getOptions().size();i++){
+//    		
+//    		for(int j=0;j<expected_states.length;j++){
+//    			if(select1.getOptions().get(i).getText().equals(expected_states[j])){
+//    				logger.log(LogStatus.INFO, "Verifying if "+expected_states[j]+" is present");
+//    				softassert.assertTrue(select1.getOptions().get(i).getText().equals(expected_states[j]),expected_states[j]+" is not present");    				
+//    			}
+//    		}
+//    	}
     	
     	softassert.assertAll();
     }
@@ -754,16 +808,13 @@ public class GroupsAndUserPage extends TestBase {
 				Assert.assertTrue(saveGroupDetails_alert.isDisplayed(),"alert for invalid phone number not displayed");
 				phone_textbox.clear();
 			}
-
-
-
 		}
 		
 	}
     
 	
-    //Group Details Updattion
-	public void groupDetailsUpdate(){
+    //Group Details Updation
+	public void groupDetailsUpdate() throws InterruptedException{
 		
 		expandSection(Constants.GroupsAndUser.group_details_strip);
 		
@@ -772,12 +823,15 @@ public class GroupsAndUserPage extends TestBase {
 		externalID_textbox.sendKeys(external_id);
 		phone_textbox.clear();
 		phone_textbox.sendKeys("8018786943");
-		saveGroupDetails_button.click();
-		wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));
-		
 		logger.log(LogStatus.INFO, "Verifying if Update group Details success message is displayed");
-		Assert.assertTrue(update_groupDetails_success_message.isDisplayed(),"group details not updated successfully");
-		
+		try {
+			saveGroupDetails_button.click();
+			wait.until(ExpectedConditions.visibilityOf(update_groupDetails_success_message));
+			Assert.assertTrue(update_groupDetails_success_message.isDisplayed(),"group details not updated successfully");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 
 	
@@ -881,11 +935,27 @@ public class GroupsAndUserPage extends TestBase {
 			//DNI Custom Parameters popup
 			if(!DNI_checkbox.getAttribute("aria-checked").equals("true")) {
 				Thread.sleep(2000);
-				Util.click(DNI_checkbox);
+				try {
+				    Util.customWait(DNI_checkbox);
+					Util.click(DNI_checkbox);					
+				}catch(Exception e) {
+				    Util.customWait(DNI_checkbox);
+					DNI_checkbox.click();	
+				}
+
 //				DNI_checkbox.click();
 			}
 				//custom_parameters.click();
-				Util.click(custom_parameters);
+			    Util.customWait(custom_parameters);
+			    try {
+					Util.click(custom_parameters);	
+					Util.customWait(dni_custom_parameters_label);
+			    }catch(Exception e) {
+			    	Thread.sleep(2000);
+					Util.click(custom_parameters);	
+			    }finally {
+					Util.customWait(dni_custom_parameters_label);
+			    }
 				
 				driver.switchTo().activeElement();
 				logger.log(LogStatus.INFO, "Verifying UI of DNI Custom Parameters popup");
@@ -988,7 +1058,7 @@ public class GroupsAndUserPage extends TestBase {
         expandSection(Constants.GroupsAndUser.tn_settings_strip);
         
         //Reseting all settings
-        updateTNSettings();
+//        updateTNSettings();
         
         //DNI section
 		if (fieldName.equals("dni_section")) {
@@ -1001,6 +1071,8 @@ public class GroupsAndUserPage extends TestBase {
 		
 		//Instant Insights section
 		else if (fieldName.equals("instant_insights_section")) {
+			Util.customWait(instant_insights_checkbox);
+			Util.Action().moveToElement(instant_insights_checkbox).perform();
 			Util.click(instant_insights_checkbox);
 //			instant_insights_checkbox.click();
 			voice_prompt_for_call_outcome_textbox.clear();
@@ -1039,11 +1111,11 @@ public class GroupsAndUserPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(tn_settings_alert));
 		Assert.assertTrue(tn_settings_alert.isDisplayed(),"Appropriate alert is not displayed for "+fieldName);
 		
-		driver.switchTo().activeElement();
-		Util.click(tn_settings_alert_close_button);
+//		driver.switchTo().activeElement();
+//		Util.click(tn_settings_alert_close_button);
 		
 		//Reseting all settings
-		updateTNSettings();
+//		updateTNSettings();
 	}
 
 	
@@ -1291,6 +1363,7 @@ public class GroupsAndUserPage extends TestBase {
 			
 		WebElement cs_textbox = TestBase.driver.findElement(By.xpath("(//input[@placeholder='Add a New Source'])["+custom_source_type+"]"));
 //		WebElement cs_list = TestBase.driver.findElement(By.xpath("//label[text()='Custom Source "+custom_source_type+"']//parent::div//ul//li"));		
+		Util.customWait(cs_textbox);
 		cs_textbox.sendKeys(cs_name);
 		WebElement add_source_click = TestBase.driver.findElement(By.xpath("//*[@id='customized']/ul/li[3]/a[starts-with(text(),'Add custom sources')]"));
 		add_source_click.click();
@@ -1548,7 +1621,8 @@ public class GroupsAndUserPage extends TestBase {
 
     		}
     	}
-    	driver.navigate().refresh();
+//    	driver.navigate().refresh();
+//    	Util.waitForLoad(driver);
     	
     }
     
@@ -1556,22 +1630,32 @@ public class GroupsAndUserPage extends TestBase {
     //Cleanup activity for call actions
     public void deleteAllCations() throws InterruptedException{
     	
+//    	driver.navigate().refresh();
+//    	Util.waitForLoad(driver);
 		expandSection(Constants.GroupsAndUser.call_actions_strip);
 		Thread.sleep(4000);
-    	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a/i"));
-
+    	List<WebElement> delete_icons = TestBase.driver.findElements(By.xpath("//div[@class='timeline-body']/a[@aria-hidden='false']/i"));
     	
     	if(delete_icons.size()>1) {
     	
     		for(int i=0;i<delete_icons.size();i++){
-        		delete_icons.get(i).click();
-        		driver.switchTo().activeElement();
-        		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
-        		delete_call_action_ok_button.click();
-                wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
-                logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
-                softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
-                Thread.sleep(4000);
+    			if(i==(delete_icons.size()-1)) {
+    				call_action_reset_button.click();
+    			}else {
+    				Util.customWait(delete_icons.get(i));
+        			Util.Action().moveToElement(delete_icons.get(i)).perform();
+        			wait.until(ExpectedConditions.elementToBeClickable(delete_icons.get(i)));
+            		Util.click(delete_icons.get(i));
+            		driver.switchTo().activeElement();
+            		wait.until(ExpectedConditions.elementToBeClickable(delete_call_action_ok_button));
+            		delete_call_action_ok_button.click();
+                    wait.until(ExpectedConditions.visibilityOf(delete_call_action_success_message));
+                    logger.log(LogStatus.INFO, "Verifying if Delete call action success message is displayed");
+                    softassert.assertTrue(delete_call_action_success_message.isDisplayed(),"call action not deleted successfully");
+                    Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+                    Thread.sleep(500);	
+    			}
+    			
     		}
         	
         	softassert.assertAll();
@@ -1690,6 +1774,7 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(add_subgroup_button));
 //    	add_subgroup_button.click();
     	Util.click(add_subgroup_button);
+    	Thread.sleep(2000);
     	
     	if(field.equals("industry")) {
     		subgroup_name_textbox.clear();
@@ -1722,6 +1807,7 @@ public class GroupsAndUserPage extends TestBase {
 	   	Thread.sleep(5000);
 //    	add_subgroup_button.click();
     	Util.click(add_subgroup_button);
+    	Thread.sleep(2000);
     	
     	//Entering Sub-group details
     	subgroup_name_textbox.clear();
@@ -1805,7 +1891,7 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//Sub-group deletion
-	public void subGroupDeletion(String subGroup) {
+	public void subGroupDeletion(String subGroup) throws InterruptedException {
 		
         expandSection(Constants.GroupsAndUser.sub_groups_strip);
 		
@@ -1844,33 +1930,57 @@ public class GroupsAndUserPage extends TestBase {
 	
 	
 	//To click action button of desired group
-    public void clickActionSubGroup(String group_name,String button_name){
+    public void clickActionSubGroup(String group_name,String button_name) throws InterruptedException{
 		
-		WebElement subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
-		
-		//Clicking on desired action button
-        wait.until(ExpectedConditions.visibilityOf(subGroup));
-//		subGroup.click();
-		Util.click(subGroup);
-		
+		WebElement subGroup;
+	
 		//sub-group deletion pop-up
 		if(button_name.contains("Delete")) {
+			subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+			Util.click(subGroup);
 			driver.switchTo().activeElement();
 			textbox_subgroup_deletion_popup.sendKeys("yes");
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
 			ok_button_subgroup_deletion_popup.click();
+//			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+			
 		}
-		
+		else if(button_name.equals("delete_from_selected_group")) {
+			subGroup = TestBase.driver.findElement(By.xpath("//a[contains(text(),'Delete')]"));
+			Util.click(subGroup);
+			driver.switchTo().activeElement();
+			textbox_subgroup_deletion_popup.sendKeys("yes");
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button_subgroup_deletion_popup));
+			Thread.sleep(2000);
+			ok_button_subgroup_deletion_popup.click();				
+
+//			Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+		}
+		else {
+			//Clicking on desired action button
+			subGroup = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+group_name+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+	        wait.until(ExpectedConditions.visibilityOf(subGroup));
+//			subGroup.click();
+			Util.click(subGroup);			
+		}
+//		wait.until(ExpectedConditions.visibilityOf(saveSubGroupDetails_alert));
+//		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);		
 	}
 	
     //User section ---------------------------------------------
     //UI Validation
-    public void users_UI_Validation(){
+    public void users_UI_Validation() throws InterruptedException{
 
+    	driver.navigate().refresh();
+    	Util.waitForLoad(driver);
         expandSection(Constants.GroupsAndUser.user_settings_strip);
+        Thread.sleep(4000);
     	
     	logger.log(LogStatus.INFO, "Verifying User Section UI");
+//    	Util.customWait(add_user_button);
     	softassert.assertTrue(add_user_button.isEnabled(), "Add User button is not enabled");
+//    	Util.customWait(export_users_button);
+    	wait.until(ExpectedConditions.attributeToBe(export_users_button, "aria-disabled", "false"));
     	softassert.assertTrue(export_users_button.isEnabled(), "Export Users button is not enabled");
     	
     	for(int i=0; i<users_columns_names.size(); i++) {
@@ -2076,6 +2186,18 @@ public class GroupsAndUserPage extends TestBase {
   	//User section - Cancel feature
   	public void userCancelFeature() throws InterruptedException {
   		
+  		int alerts = 0;
+  		try {
+  			alerts = driver.findElements(By.xpath("//div[@class='ui-pnotify-text']")).size();  		
+  		}catch(Exception e) {
+  			
+  		}finally {
+  			if(alerts>0) {
+//  				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
+  				Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+  			}
+  		}
+
   		expandSection(Constants.GroupsAndUser.user_settings_strip);
     	  
   	  	Util.click(add_user_button);
@@ -2100,7 +2222,7 @@ public class GroupsAndUserPage extends TestBase {
   	    logger.log(LogStatus.INFO, "Verifying if User creation success message is not displayed");    
   	
   	    try {
-  	  	    Assert.assertTrue(user_creation_alert.isDisplayed());
+  	    	Assert.assertTrue(user_creation_alert.isDisplayed());
   	  	    Assert.fail("User creation success message is displayed");
   	    }
   	    catch(Exception e){
@@ -2139,7 +2261,8 @@ public class GroupsAndUserPage extends TestBase {
     	wait.until(ExpectedConditions.visibilityOf(user_creation_success_message));
     	logger.log(LogStatus.INFO, "Verifying if User creation success message is displayed");
     	Assert.assertTrue(user_creation_success_message.isDisplayed(),"User not created successfully");
-    	
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    	   	
     }
 
     
@@ -2177,6 +2300,7 @@ public class GroupsAndUserPage extends TestBase {
   		wait.until(ExpectedConditions.visibilityOf(user_deletion_success_message));
   		logger.log(LogStatus.INFO, "Verifying if User is geting deleted successfully");
   		Assert.assertTrue(user_deletion_success_message.isDisplayed(),"User not deleted successfully");
+  		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
   	}
   	
   	
@@ -2225,8 +2349,13 @@ public class GroupsAndUserPage extends TestBase {
   		logger.log(LogStatus.INFO, "Verifying if appropriate alert is displayed if password is not entered");
   		Assert.assertTrue(change_password_alert.isDisplayed(),"Appropriate alert is not displayed if password is not entered");
   	
+  		Thread.sleep(2000);
   	    //Closing Change Password window
-  		change_password_cancel_button.click();
+  		try {
+  	  		change_password_cancel_button.click();	
+  		}catch(Exception e) {
+  	  		change_password_cancel_button.click();	  			
+  		}
   	}
 
   	
@@ -2364,6 +2493,7 @@ public class GroupsAndUserPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOf(user_permissions_update_success_message));
  		logger.log(LogStatus.INFO, "Verifying if User permissions gets updated");	
   		Assert.assertTrue(user_permissions_update_success_message.isDisplayed(),"User permissions not updated successfully");
+  		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
   		
   	}
   	
@@ -2371,8 +2501,19 @@ public class GroupsAndUserPage extends TestBase {
   	//To click action button of desired user
     public void clickActionUser(String user_email,String button_name) throws InterruptedException{
 		
-		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+//		WebElement button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));
+		WebElement button = null;
 		
+		for(int i=0;i<100;i++) {
+			try {
+				button = TestBase.driver.findElement(By.xpath("//span[contains(text(),'"+user_email+"')]//ancestor::tr//div//button[text()='"+button_name+"']"));					
+				break;
+			}catch(Exception e) {
+				Util.click(users_topNextPagination_Button);
+				Thread.sleep(2000);
+			}	
+		}
+	
 		wait.until(ExpectedConditions.visibilityOf(button));
 //		button.click();
 		Util.click(button);
@@ -2380,12 +2521,14 @@ public class GroupsAndUserPage extends TestBase {
 	
 		//Deletion pop-up
 		if(button_name.contains("Delete")) {
-			
 			driver.switchTo().activeElement();
 			user_deletion_confiramtion_popup_textbox.sendKeys("yes");
 			user_deletion_confiramtion_popup_ok_button.click();
-		
 		}	
+	if(!users_topFirstPagination_Button.getAttribute("class").endsWith("disbaled")) {
+			Util.click(users_topFirstPagination_Button);
+			Thread.sleep(4000);
+		}
 	
     }
     
@@ -2460,7 +2603,7 @@ public class GroupsAndUserPage extends TestBase {
     
     //Part of Test Data creation------------------------------
     public void updateTNSettings() throws InterruptedException{
-    	
+    	expandSection(Constants.GroupsAndUser.tn_settings_strip);
 //    	Util.scrollFunction(configure_voicemail_greetings_textbox);
     	Thread.sleep(5000);
     	wait.until(ExpectedConditions.visibilityOf(record_call_checkbox));
@@ -2507,10 +2650,17 @@ public class GroupsAndUserPage extends TestBase {
     	
     	logger.log(LogStatus.INFO, "Verifying if TN settings updation success message is displayed");
     	Assert.assertTrue(tn_settings_success_message.isDisplayed(),"TN settings updation success message is not displayed");
-    	Thread.sleep(4000);
-    	
+    	Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
+    	Thread.sleep(2000);	
     }
     
+    public void closePopup() {
+    	try {
+    		Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);	
+    	}catch(Exception e) {
+    		
+    	}
+    }
 
     
     

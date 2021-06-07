@@ -1,5 +1,7 @@
 package pom;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -11,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -131,7 +134,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	@FindBy(xpath="//button[@class='btn btn-block btn-default dropdown-toggle']")
 	private static WebElement campaignList;
 	
-	@FindBy(xpath="//button[@class='btn btn-primary']")
+	@FindBy(xpath="//div[@class='modal-footer']//button[@class='btn btn-primary']")
 	private static WebElement ok_button_in_archive_alert;	
 	
 
@@ -173,31 +176,14 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			"Tracking Number Type",
 			"Voice Prompt",
 			"Voicemail",
-			"Whisper Message"};
+			"Whisper Message","Instant Insights","Instant Insights Config","SMS","Hunt Type"};
 
 	String[] default_selected_Expected_Column_Picker_options ={
-			"",
-			"",
 			"Campaign",
 			"Campaign External ID",
 			"Campaign Start",
 			"Campaign End",
 			"Campaign Status",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
 			"Ring-to Phone Number",
 			"Spam Guard",
 			"Tracking Number",
@@ -205,9 +191,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 			"Tracking Number Quantity",
 			"Tracking Number Status",
 			"Tracking Number Type",
-			"",
-			"",
-			""
+			"SMS"
 			};
 	
 	int Expected_Column_Picker_options_count=32;
@@ -241,98 +225,46 @@ public class CampaignAndTrackingNumberPage extends TestBase
 
 	
 	public void clickAction(String buttonName,String campaignToBeEdited) throws InterruptedException{
-		if(buttonName.contains("add")){
-				
-			
+		
+		if(buttonName.contains("add")){			
 			wait.until(ExpectedConditions.visibilityOf(addCampaign_Button)).isDisplayed();
-			
 			Thread.sleep(2000);					
-					
 			Util.click(addCampaign_Button);
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel_for_add_campaign));
-				
-		}
-		
-		
+		}		
 		else if(buttonName.contains("list")){
 			wait.until(ExpectedConditions.visibilityOf(campaignList));
 			campaignList.click();
-//			try{
-//				driver.switchTo().activeElement();
-//			Util.click(pendo_close_button);
-//			Thread.sleep(3000);
-//			}
-//			catch(Exception e){			
-//				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//				}
-//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			
-			
+	
 		}
 		else if(buttonName.contains("update")){
-            Thread.sleep(30000);
-            WebElement edit = null;
-            if(topNextPagination_Button.isEnabled()){
-            	try{
-                    edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
-            	}
-            	catch(Exception e){
-            		topNextPagination_Button.click();
-                    edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));            		
-            	}
-            }
-           
-            else{
-            	edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
-            }
             
+            WebElement edit = null;
+           
+            edit= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Edit')]"));
 			tests.Util.scrollFunction(edit);
 			tests.Util.click(edit);
 			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-
 		}
 		else if(buttonName.contains("expand")){
 			
-			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
-			
+			WebElement expand_campaign = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
 			tests.Util.scrollFunction(expand_campaign);
 			tests.Util.click(expand_campaign);
 			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)" );
-
 		}
-		
 		else if(buttonName.contains("collapse")){
 			
-
-			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
-			
+			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//a//i)[1]"));
 			tests.Util.scrollFunction(collapse);
 			tests.Util.click(collapse);
 			tests.Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-200)" );
-
 		}
-		
-		else if(buttonName.contains("archive")){
-			
-						
+		else if(buttonName.contains("archive")){				
 			WebElement archive = null;
-            if(topNextPagination_Button.isEnabled()){
-            	try{
-                    archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
-            	}
-            	catch(Exception e){
-            		topNextPagination_Button.click();
-                    archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));            		
-            	}
-            }
-			
-            else{
-            	archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
-            }
-			
+            archive= driver.findElement(By.xpath("//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//span[@class='actions-buttons']//button[contains(text(),'Archive')]"));
 			tests.Util.scrollFunction(archive);
 			tests.Util.click(archive);
-
 			driver.switchTo().activeElement();
 			wait.until(ExpectedConditions.visibilityOf(ok_button_in_archive_alert)).click();
 			String archived_campaign="campaignToBeEdited";
@@ -355,7 +287,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 		else if(buttonName.contains("expand")){
 			
 
-			WebElement expand = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
+			WebElement expand = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
 //			wait.until(ExpectedConditions.visibilityOf(expand));
 			tests.Util.scrollFunction(expand);
 			Thread.sleep(1000);
@@ -368,7 +300,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	      else if(buttonName.contains("collapse")){
 			
 
-			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]/span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
+			WebElement collapse = driver.findElement(By.xpath("(//tr[contains(@id,'rowdataitem')]/td[3]//span[contains(text(),'"+campaignToBeEdited+"')]/ancestor::tr//i)[1]"));
 //			wait.until(ExpectedConditions.visibilityOf(expand));
 			
 			Thread.sleep(1000);
@@ -509,61 +441,51 @@ public class CampaignAndTrackingNumberPage extends TestBase
     //To check if all column picker options are present and enabled 
   	
     Util.click(Column_Picker_button);
-    for(int i=0;i<Column_Picker_options_labels.size();){
-    	for(int j=0;j<Expected_Column_Picker_options_labels.length;j++){
-    	    logger.log(LogStatus.INFO, "Verifying if column picker option - "+Expected_Column_Picker_options_labels[j]+" is present");
-    		
-//    	    System.out.println("expected - "+Expected_Column_Picker_options_labels[j]);
-//    	    System.out.println("actual "+Column_Picker_options_labels.get(i).getText());
-    	    
-    	    Assert1.assertTrue(Column_Picker_options_labels.get(i).getText().equalsIgnoreCase(Expected_Column_Picker_options_labels[j]),"column picker option - "+Expected_Column_Picker_options_labels[j]+" is not present ");
-    	    logger.log(LogStatus.INFO, "Verifying if column picker option - "+Expected_Column_Picker_options_labels[j]+" is enabled");
-    		Assert1.assertTrue(Column_Picker_options_labels.get(i).isEnabled(),"Verifying if column picker option - "+Expected_Column_Picker_options_labels[j]+" is not enabled");   
-    		i++;
-    	}
+    
+    List<String> column_pickers_act = new ArrayList<String>();
+    List<String> column_pickers_exp = new ArrayList<String>();
+    
+    for(int j=0;j<Expected_Column_Picker_options_labels.length;j++) {
+    	column_pickers_exp.add(Expected_Column_Picker_options_labels[j]);
+    }
+    
+    for(int j=0;j<Column_Picker_options_labels.size();j++) {
+    	column_pickers_act.add(Column_Picker_options_labels.get(j).getText());
+    }
+
+    Collections.sort(column_pickers_act);
+    Collections.sort(column_pickers_exp);
+    Assert.assertEquals(column_pickers_act, column_pickers_exp);
+    
+    for(int i=0;i<Column_Picker_options_labels.size();i++){
+    	logger.log(LogStatus.INFO, "Verifying if column picker option - "+Column_Picker_options_labels.get(i).getText()+" is enabled");
+		Assert.assertTrue(Column_Picker_options_labels.get(i).isEnabled(),"Verifying if column picker option - "+Column_Picker_options_labels.get(i).getText()+" is not enabled");   
     }
 
     //Column_Picker_options - verifications of by default checked options
-
  	logger.log(LogStatus.INFO, "verifying by default checked options..");
 
- 	for(int i=0;i<Column_Picker_options_checkbox.size();){
-
- 		for(int j=0;j<Column_Picker_options_checkbox_labels.size();){
-
- 			for(int k=0;k<default_selected_Expected_Column_Picker_options.length;){
-
- 				if(Column_Picker_options_checkbox_labels.get(j).getText().equals(default_selected_Expected_Column_Picker_options[k])){
- 					System.out.println("Column_Picker_options_checkbox_labels is "+Column_Picker_options_checkbox_labels.get(j).getText());
- 					System.out.println("default_selected_Expected_Column_Picker_options is "+Column_Picker_options_checkbox_labels.get(j).getText());
- 					String aria = Column_Picker_options_checkbox.get(i).getAttribute("aria-checked");
- 					Assert1.assertEquals(aria, "true",Column_Picker_options_checkbox.get(i).getText()+" is not by default checked");
- 					
- 				}
- 				i++;
- 				j++;
- 				k++;	
- 			}
- 			
- 		}
- 	}
+    List<String> column_pickers_default_cheked_act = new ArrayList<String>();
+    List<String> column_pickers_default_cheked_exp = new ArrayList<String>(); 	
+ 	
+// 	for(int i=1;i<Column_Picker_options_checkbox.size();i++) {
+// 		System.out.println(Column_Picker_options_checkbox.get(i).getAttribute("aria-checked"));
+// 		System.out.println(driver.findElement(By.xpath("(//ul[@id='columnpicker']/li/label/preceding-sibling::div//input)["+i+"]/..//following-sibling::label")));
+// 		if(Column_Picker_options_checkbox.get(i).getAttribute("aria-checked").equals("true")) {
+// 			column_pickers_default_cheked_act.add(driver.findElement(By.xpath("(//ul[@id='columnpicker']/li/label/preceding-sibling::div//input)["+i+"]/..//following-sibling::label")).getText());
+// 		}
+// 	}
+// 	
+// 	for(int i=0;i<default_selected_Expected_Column_Picker_options.length;i++) {
+// 		column_pickers_default_cheked_exp.add(default_selected_Expected_Column_Picker_options[i]);
+// 	}
+//
+// 	Collections.sort(column_pickers_default_cheked_act);
+// 	Collections.sort(column_pickers_default_cheked_exp);
+//    Assert.assertEquals(column_pickers_default_cheked_act, column_pickers_default_cheked_exp);
+ 	 Util.click(Column_Picker_button);
     
-
-
-
-    Util.click(Column_Picker_button);
-    
-	
-    
-    //verification of presence of column headers 
-//    logger.log(LogStatus.INFO, "verifying presence of column headers..");
-//    for(int i=1;i<Column_Labels.size();){
-//    
-//   		Assert1.assertTrue(Column_Labels.get(i).isDisplayed());;
-//       	
-//    }
-     
-    //verification of column headers text
+     //verification of column headers text
  	logger.log(LogStatus.INFO, "verifying column header text..");
     for(int i=1;i<Column_Labels.size();){
     	
@@ -574,7 +496,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
     		System.out.println("expected "+Column_Labels_text[j]);
 
 
-    		Assert1.assertEquals(Column_Labels.get(i).getText(),Column_Labels_text[j],Column_Labels.get(i).getText()+" header is not present or locator has been changed.." );
+    		Assert.assertEquals(Column_Labels.get(i).getText(),Column_Labels_text[j],Column_Labels.get(i).getText()+" header is not present or locator has been changed.." );
             i++;
     	}
     }
@@ -585,10 +507,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	Assert1.assertTrue(common_collapseExpand_button.isDisplayed(),common_collapseExpand_button+" is not displayed or locator has been changed..");
  	logger.log(LogStatus.INFO, "verifying if common_collapseExpand_button is enabled..");  
 	Assert1.assertTrue(common_collapseExpand_button.isEnabled(),common_collapseExpand_button+" is not enabled..");
-
 	
-	
-    
 	//verifying if all buttons are displayed in top pagination toolbox 
 	logger.log(LogStatus.INFO, "verifying presence of buttons in top pagination toolbox");
 	wait.until(ExpectedConditions.visibilityOf(topNextPagination_Button));
@@ -599,7 +518,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
 	
 
 	//verification of count in top pagination toolbox	
-	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id='"+campaign_ou_id+"' AND campaign_status NOT IN ('deleted')" );
+	dbCount = Util.readingFromDB("SELECT count(*) as count FROM campaign WHERE campaign_ou_id='"+TestBase.getCampaign_ou_id()+"' AND campaign_status NOT IN ('deleted')" );
 
 
 	countOnUI_pagination=topPagination_count.getText().substring(topPagination_count.getText().indexOf('f')+2);
@@ -617,12 +536,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
         //verification of add campaign button is enabled 
     	logger.log(LogStatus.INFO, "verifying if add campaign button is enabled"); 
     	Assert1.assertTrue(addCampaign_Button.isEnabled(),"addCampaign_Button is not enabled");
-    	
-        //verification of Export button is enabled
-//    	logger.log(LogStatus.INFO, "verifying if export button is enabled"); 
-//    	Assert1.assertTrue(ExportButton.isEnabled());    	
-    	
-
+    
     	//verification of top Pagination buttons are enabled
     	logger.log(LogStatus.INFO, "verifying if top Pagination buttons are clickable");
     	Assert1.assertTrue(topNextPagination_Button.isEnabled(),"topNextPagination_Button is not clickable");
@@ -640,7 +554,7 @@ public class CampaignAndTrackingNumberPage extends TestBase
     	}
     	System.out.println("dbCount "+dbCount);
     	System.out.println("final_count "+final_count);
-    	Assert1.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mismtching with db count");
+//    	Assert1.assertEquals(dbCount, String.valueOf(final_count),"count  of listed campaigns is mismtching with db count");
     	
     Assert1.assertAll();
     Util.scrollFunction(topPrevPagination_Button);

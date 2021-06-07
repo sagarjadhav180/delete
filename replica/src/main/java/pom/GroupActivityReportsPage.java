@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,12 +28,12 @@ public class GroupActivityReportsPage extends TestBase {
     @FindBy(xpath="//label[text()='Secondary Grouping']")
 	private static WebElement secondary_grouping_label;
  
-    @FindBy(xpath="//div[@id='s2id_autogen1']//span[@class='select2-arrow']")
+    @FindBy(xpath="//label[text()='Secondary Grouping']/..//span[@class='select2-arrow']")
 	private static WebElement secondary_grouping_button;
 
     String[] expected_secondary_grouping_options={"None","Tracking Number","Campaign"};
     
-    @FindBy(xpath="//div[@id='s2id_autogen1']//following-sibling::select")
+    @FindBy(xpath="//label[text()='Secondary Grouping']//following-sibling::select")
 	private static WebElement secondary_grouping_listbox;
     
     @FindBy(xpath="//h1[contains(text(),'Group Activity')]")
@@ -77,7 +78,7 @@ public class GroupActivityReportsPage extends TestBase {
 	@FindBy(xpath="//input[@id='simpleChart']//parent::div//button[2]")
 	private static WebElement basic_search_cancel_button;
 
-	@FindBy(xpath="//i[@class='fa fa-columns']")
+	@FindBy(xpath="//div[@class='btn-group dropdown']//i[@class='fa fa-columns']")
 	private static WebElement column_Picker_button;
 
 	@FindBy(xpath="//table[@id='groupActivityReportDataGrid']//thead//tr[1]//th")
@@ -318,7 +319,8 @@ public class GroupActivityReportsPage extends TestBase {
 		select.selectByVisibleText("None");
 		Thread.sleep(3000);
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 	
 	public void secondaryGroupingColumn(String groupingOption) throws InterruptedException{
@@ -477,20 +479,22 @@ public class GroupActivityReportsPage extends TestBase {
 		}		
 	}
     
-    public void tableCount(){
+    public void tableCount() throws InterruptedException{
     	
     	SoftAssert softassert=new SoftAssert();
 
     	String dbCount = Util.readingFromDB("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')");
-
+        System.out.println("SELECT COUNT(DISTINCT campaign_ou_id) as count FROM campaign WHERE campaign_ou_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"')");
+    	
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
 		if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
-
-			Util.click(next_100_button);
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			final_count=final_count+table_call_count.size();
 		
+			do {
+				Util.click(next_100_button);
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				final_count=final_count+table_call_count.size();
+			}while(!(next_100_button.getAttribute("class").endsWith("disabled")));
 		}
 		
 		System.out.println("dbCount is "+dbCount);
@@ -499,7 +503,11 @@ public class GroupActivityReportsPage extends TestBase {
 		logger.log(LogStatus.INFO, "verifying count of listed groups");
 		softassert.assertEquals(dbCount, String.valueOf(final_count),"count of listed groups is mismtching with db count");
 		softassert.assertAll();
-	    
+		if(Integer.parseInt(dbCount)>100) {
+			first_button.click();
+		    Thread.sleep(4000);	
+		}
+		
 	}
     
     public void allColumnPickerOptions(){
@@ -516,7 +524,8 @@ public class GroupActivityReportsPage extends TestBase {
 			}
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 
     public void defaultColumns(){
@@ -547,7 +556,8 @@ public class GroupActivityReportsPage extends TestBase {
 				Util.click(column_picker_options_checkboxes.get(i));
 			}
 		}
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();	
 	}
 	
 	public void allColumnPickerCheckboxes(){
@@ -562,7 +572,8 @@ public class GroupActivityReportsPage extends TestBase {
 
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
     
 		
@@ -655,42 +666,32 @@ public class GroupActivityReportsPage extends TestBase {
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
 				index=i;
-			}
-		}
-		
-			List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
-			for(int j=0;j<values.size();j++){
-			if(index==j){
-				
-				filter_value=values.get(j).getText();
 				break;
 			}
 		}
+		
+		List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
+		for(int j=0;j<values.size();j++){
+		if(index==j){				
+			filter_value=values.get(j).getText();
+			break;
+		}
+		}
 			
-			basic_search_textbox.clear();
-			basic_search_textbox.sendKeys(filter_value);
-			Util.click(basic_search_button);
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			Thread.sleep(4000);
-			String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
-			List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		basic_search_textbox.clear();
+		basic_search_textbox.sendKeys(filter_value);
+		Util.click(basic_search_button);
+//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+		Thread.sleep(4000);
+		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));		
+		List<String> actual_values =  new ArrayList<String>();
 			
-			for(int k=0;k<rows.size();k++){
-				List<WebElement> filtered_value;
-				
-				filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-				
-//				List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-				for(int l=0;l<filtered_value.size();l++){
-					
-					String actual_value = filtered_value.get(l).getText();
-					String expected_value=filter_value;
-					softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-					Thread.sleep(2000);
-				}		
-			}
-
-
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
+		}
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
 		logger.log(LogStatus.INFO, "Verifying if basic filter feture is working for "+filter_value);	
 		softassert.assertAll();
 			
@@ -702,19 +703,18 @@ public class GroupActivityReportsPage extends TestBase {
     	wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
     	}catch(Exception e){
  		   	}
-
+    	
 		SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
 		
-		for(int i=0;i<actual_column_names.size();i++){
-		    
-			if(filterelement.startsWith("Group")){
+		for(int i=0;i<actual_column_names.size();i++){   
+	     	if(filterelement.startsWith("Group")){
 				if(actual_column_names.get(i).getText().equals("Group")){
 					index=i;	
 					break;
 			    }
-			}
+	    	}
 			
 			else if(actual_column_names.get(i).getText().equals(filterelement)){
 			index=i;
@@ -722,7 +722,6 @@ public class GroupActivityReportsPage extends TestBase {
 			break;
 			}
 
-			
 		}
 		
 		List<WebElement> values = driver.findElements(By.xpath("//table[@id='groupActivityReportDataGrid']//tbody//tr[1]//td"));
@@ -739,8 +738,7 @@ public class GroupActivityReportsPage extends TestBase {
 		advanced_filter_button.click();
 		Select select=new Select(advance_filter_elements_listbox);
 		select.selectByVisibleText(filterelement);
-//		advance_filter_textbox.clear();
-        
+
 		if(filterelement.equals("Group Name") || filterelement.equals("Group Ext ID")){
 			advance_filter_textbox_for_groupname_and_groupextid.sendKeys(filter_value);
 		}
@@ -751,29 +749,17 @@ public class GroupActivityReportsPage extends TestBase {
 		Util.click(apply_button);
 		Util.getJavascriptExecutor().executeScript("window.scrollBy", "0,200");
 		Thread.sleep(3000);
-		//		try{
-//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-//			
-//		}
-//		catch(Exception e){
-//				
-//		}
 		
 		String xPath="//table[@id='groupActivityReportDataGrid']//tbody//tr";
-		List<WebElement> rows = driver.findElements(By.xpath(xPath));
-		
-		for(int k=0;k<rows.size();k++){
-		   List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-		     for(int l=0;l<filtered_value.size();l++){
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+		List<String> actual_values =  new ArrayList<String>();
 			
-					String actual_value = filtered_value.get(l).getText();
-					String expected_value=filter_value;
-					softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
-			 }
-			
-					
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
 		}
-
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
+		
 		logger.log(LogStatus.INFO, "Verifying if advanced filter feture is working for "+filter_value);	
 		softassert.assertAll();
 		
@@ -786,20 +772,20 @@ public class GroupActivityReportsPage extends TestBase {
 		String startDateToBeUsed ="";
 		
 		if(dateRange.equalsIgnoreCase("Last 7 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-6");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
 		}
 		else if(dateRange.equalsIgnoreCase("today")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
+		}
+		else if(dateRange.equalsIgnoreCase("yesterday")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equalsIgnoreCase("yesterday")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
-		}
 		else if(dateRange.equalsIgnoreCase("last 30 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-29");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
 		}
 
         
@@ -817,7 +803,7 @@ public class GroupActivityReportsPage extends TestBase {
 		}
 		
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
         
 		if(!(dbCount=="0" || dbCount==null)){
 		

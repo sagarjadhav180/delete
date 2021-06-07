@@ -35,16 +35,25 @@ public class LookerCallLogsTest extends TestBase{
 		Thread.sleep(7000);
 
 		clr.switchToIFrame();
-
+		clr.collpaseFilterSection();
+		
 	}
 	
+	
+	@Test(priority=0)
+	public void reportLoad() throws IOException, InterruptedException{
+		
+        clr=new CallLogsReportPage(driver);
+		clr.waitTillReportLoad();
+	}
 	
 	@Test(priority=1)
 	public void headerLabelVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Call logs header Label Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
         clr=new CallLogsReportPage(driver);
-		clr.headerLabel();
+//        clr.waitTillReportLoad();
+        clr.headerLabel();
 	}
 	
 	@Test(priority=2)
@@ -55,7 +64,7 @@ public class LookerCallLogsTest extends TestBase{
 		clr.runButton();
 	}
 	
-	@Test(priority=3)
+//	@Test(priority=3) -- feature changed 
 	public void presenceOfTimeZoneVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Time Zone Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -63,7 +72,27 @@ public class LookerCallLogsTest extends TestBase{
 		clr.presenceOfTimeZone();
 	}
 	
-	@Test(priority=4)
+	
+//	--new feature 
+	@Test(priority=3)  
+	public void presenceOfDashboardActionsLinkVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("presenceOfDashboardActionsLinkVerification"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.presenceOfDashboardActionsLink();
+	}
+
+	
+//	--new feature 
+	@Test(priority=4)  
+	public void dashboardActionsOptionsVerification() throws IOException, InterruptedException{
+		logger=extent.startTest("dashboardActionsOptionsVerification"); 
+		logger.assignCategory(Constants.call_logs_category);
+        clr=new CallLogsReportPage(driver);
+		clr.dashboardActionsPopupOptions();
+	}
+	
+//	@Test(priority=4) -- feature changed
 	public void presenceOfGearIconVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Presence Of Gear Icon Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -71,7 +100,7 @@ public class LookerCallLogsTest extends TestBase{
 		clr.presenceOfGearIcon();
 	}
 	
-	@Test(priority=5)
+//	@Test(priority=5) -- feature changed
 	public void gearIconOptionsVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Gear Icon options Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -87,7 +116,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tilesVerification();
 	}
 
-	@Test(priority=7)
+//	@Test(priority=7)
 	public void totalCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -95,7 +124,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.total_calls_tile);
 	}
 	
-	@Test(priority=8)
+//	@Test(priority=8)
 	public void uniqueCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Unique Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -103,7 +132,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.unique_calls_tile);
 	}
 	
-	@Test(priority=9)
+//	@Test(priority=9)
 	public void answeredCallsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Answered Calls Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -111,7 +140,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.answered_calls_tile);
 	}
 	
-	@Test(priority=10)
+//	@Test(priority=10)
 	public void averageCallsDurationTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Average Calls Duration Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -119,7 +148,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.average_calls_duration_tile);
 	}
 	
-	@Test(priority=11)
+//	@Test(priority=11)
 	public void totalLeadsTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Leads Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -127,7 +156,7 @@ public class LookerCallLogsTest extends TestBase{
         clr.tileValueVerificationForDefault7DaysFilter(Constants.CallLogsReport.leads_tile);
 	}
 	
-	@Test(priority=12)
+//	@Test(priority=12)
 	public void totalConversionTileValueVerification() throws IOException, InterruptedException{
 		logger=extent.startTest("Total Conversion Tile Values Verification Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -151,10 +180,10 @@ public class LookerCallLogsTest extends TestBase{
 		logger=extent.startTest("Presence Of Unique Calls Graph Test"); 
 		logger.assignCategory(Constants.call_logs_category);
         clr=new CallLogsReportPage(driver);
-        clr.totalCallsGraph();
+        clr.uniqueCallsGraph();
 	}
 	
-	@Test(priority=15)
+//	@Test(priority=15) -- need to check for solution
 	public void tableColumnsTest() throws IOException, InterruptedException{
 		logger=extent.startTest("Table Columns Test"); 
 		logger.assignCategory(Constants.call_logs_category);
@@ -223,7 +252,7 @@ public class LookerCallLogsTest extends TestBase{
 	public void loggingOut() throws InterruptedException{
 		clr=new CallLogsReportPage(driver);
 		clr.switchToMainWindow();
-		clr.deleteCallRecord();
+//		clr.deleteCallRecord();
         LoginPage lp=new LoginPage(driver);
         logger=extent.startTest("LogOut"); 
         logger.log(LogStatus.INFO, "loggin out.. ");

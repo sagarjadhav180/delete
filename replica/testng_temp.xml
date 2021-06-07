@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Automation Suite-1" parallel="tests" thread-count="1">
+<suite name="Automation Suite-1" preserve-order="true">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
 		<parameter name="browser" value="headless" />
-		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
 		<classes>
 
-			<class name="tests.LookerCallerActivityReportTest"/>
-			
-			
+
+			<class name="tests.SelectAndScoreTest">
+
+				<methods>
+
+
+					
+					<include name="dateRangeFilterUIVerification" />
+					
+					
+				</methods>
+
+			</class>
 
 		</classes>
+
 	</test>
 
 
+
 </suite> <!-- Suite -->
+

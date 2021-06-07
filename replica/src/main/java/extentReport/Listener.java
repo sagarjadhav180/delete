@@ -46,8 +46,6 @@ import tests.Util;
 			failedtests.add(result.getMethod());
 			System.out.println("Failed:" + result.getMethod());
 			
-			if (result.getStatus() == ITestResult.FAILURE) {
-
 				try {
 					System.out.println("In fail");
 					Thread.sleep(1200);
@@ -65,10 +63,10 @@ import tests.Util;
 					Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
 					if(methodName.startsWith("campaign")){
 						driver.navigate().refresh();
-						
-						Thread.sleep(3000);
+						Util.waitForLoad(driver);
+						Thread.sleep(5000);
 						HomePage hp=new HomePage(driver);
-						hp.left_hand_navigation_bar_click();
+						hp.collapseLHNB();
 						CampaignBuilderPage ct=new CampaignBuilderPage(driver,wait);
 					    ct.clickAction("list");
 					}
@@ -77,10 +75,10 @@ import tests.Util;
 					}
 					else{
 						driver.navigate().refresh();
-						
-						Thread.sleep(3000);
+						Util.waitForLoad(driver);
+						Thread.sleep(5000);
 						HomePage hp=new HomePage(driver);
-						hp.left_hand_navigation_bar_click();
+						hp.collapseLHNB();
 					}
 					
 				} catch (Exception e) {
@@ -88,13 +86,21 @@ import tests.Util;
 					e.printStackTrace();
 				}
 
-			}
-
 			extent.endTest(logger);
 			extent.flush();
 		}
 
 		public void onTestSkipped(ITestResult arg0) {
+			try {
+				methodName = arg0.getName();
+				String image_path = Util.createScreenshot(driver, methodName);
+				String img = Util.image_upload(image_path);
+				System.out.println("Failure Method" + methodName);
+				logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture(img));	
+			}catch(Exception e) {
+				
+			}
+			
 			// TODO Auto-generated method stub
 			skippedtests.add(arg0.getMethod());
 			System.out.println("Skipped:" + arg0.getMethod());

@@ -8,9 +8,24 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
@@ -27,14 +42,23 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.googlecode.charts4j.Color;
 import com.googlecode.charts4j.GCharts;
@@ -51,6 +75,7 @@ public class Util extends TestBase{
 	static String password="hyPdua14GAu6";
 	static Connection connection=null;
 	static Statement stmpt=null;
+	private static JavascriptExecutor executor;
 //	static Actions actions;
 	
 	public static void elementHighlight(WebElement element){
@@ -147,6 +172,7 @@ public class Util extends TestBase{
 	
 	public static void scrollFunction(WebElement element){
         System.out.println("scrolling function called..");
+        jse = getJavascriptExecutor();
 		jse.executeScript("arguments[0].scrollIntoView(true)", element);
 		
 	}
@@ -160,6 +186,7 @@ public class Util extends TestBase{
 	
 	
 	public static void click(WebElement elementToBeClicked){
+		jse = getJavascriptExecutor();
 		jse.executeScript("arguments[0].click();",elementToBeClicked );
 	}
 	
@@ -205,13 +232,34 @@ public class Util extends TestBase{
 		return number;
 	}
 	
+	public static int getRandomNumber(Integer[] arr){
+		Random randomNumber=new Random();
+		int random_index = randomNumber.nextInt(arr.length);
+		return random_index;
+	}
+	
+	public static int getRandomString(String[] arr){
+		Random randomNumber=new Random();
+		int random_index = randomNumber.nextInt(arr.length);
+		return random_index;
+	}
 		
 	public static String getDate(String Format,String days){
-		DateFormat dateFormat = new SimpleDateFormat(Format);
+		SimpleDateFormat dateFormat = new SimpleDateFormat(Format);
+		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+		Calendar cal = Calendar.getInstance();		
+		String name = cal.getTimeZone().getDisplayName();
+	      System.out.println("Current Time Zone:" + name );
+	      TimeZone tz = TimeZone.getTimeZone("EST");
+
+	      // set the time zone with the given time zone value 
+	      // and print it
+	      cal.setTimeZone(tz);
+	      System.out.println(cal.getTimeZone().getDisplayName());
 		
-		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, Integer.valueOf(days));
-	    
+		
 		Date todate1 = cal.getTime();
 	    String date = dateFormat.format(todate1);
 
@@ -221,6 +269,7 @@ public class Util extends TestBase{
 	}
 	
 	public static JavascriptExecutor getJavascriptExecutor(){
+		JavascriptExecutor jse=(JavascriptExecutor)driver;
 		return jse;
 		
 	}
@@ -234,13 +283,152 @@ public class Util extends TestBase{
 		return currentDate;
 	}
 	
-//	public static void waitTillPageLoad(){
-//	    wait.until(jse.executeScript("return document.readyState").equals("complete"));
-//	    wait.until(ExpectedConditions.jsReturnsValue(javaScript));
-//		
-//	}
+
+	public static void waitForLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(pageLoadCondition);
+    }
 	
-
-
-			  
+	public static void addStyleToElement(WebDriver driver, WebElement element, Map<String,String> style) {
+		executor = (JavascriptExecutor) driver;
+		Set<Map.Entry<String, String>> mapEntry = style.entrySet();
+		Iterator<Map.Entry<String, String>> itr = mapEntry.iterator();
+		while(itr.hasNext()) {
+			Map.Entry<String, String> entry = itr.next();
+			executor.executeScript("arguments[0].setAttribute('style', '"+entry.getKey()+": "+entry.getValue()+";')", element);
+		}
 	}
+
+	public static void closeBootstrapPopup(WebElement pause_button_success_message, WebElement close_button_success_message) throws InterruptedException {
+		
+    	try {
+    		Map<String,String> map = new HashMap<String,String>();
+        	map.put("visibility", "visible");
+    		
+        	Util.addStyleToElement(driver, pause_button_success_message, map);	
+        	Util.Action().moveToElement(pause_button_success_message).perform();
+        	pause_button_success_message.click();
+        	Thread.sleep(500);
+        	
+    		Util.addStyleToElement(driver, close_button_success_message, map);	
+        	Util.Action().moveToElement(close_button_success_message).perform();
+        	close_button_success_message.click();
+//        	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ui-pnotify-text")));
+        	Thread.sleep(2000);	
+    	}catch(Exception e) {
+    		
+    	}
+	}
+	
+	public static void customWait(WebElement element) {
+		 Wait<WebDriver> WebDriverWait = new FluentWait<WebDriver>(driver)
+				 .withTimeout(Duration.ofSeconds(30))
+				 .pollingEvery(Duration.ofSeconds(5))
+				 .ignoring(Exception.class);;
+		 WebDriverWait.until(ExpectedConditions.visibilityOf(element));
+	}
+
+	public static void waitExecutorForClickabilityOfElement(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(element));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void waitExecutorForVisibilityOfElement(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(element));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void waitExecutorForAttribute(WebElement element, String attribute, String value) {
+		try {
+			wait.until(ExpectedConditions.attributeContains(element, attribute, value));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void waitExecutorForInVisibilityOfElement(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.invisibilityOf(element));	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void enterText(WebElement textbox, String text) {
+		jse = getJavascriptExecutor();
+		jse.executeScript("arguments[0].value='"+text+"';", textbox);	
+	}
+	
+	public static void setAttribute(String attribute, String attribute_value, WebElement element) {
+	
+		jse = getJavascriptExecutor();
+		jse.executeScript("arguments[0].setAttribute('"+attribute+"', '"+attribute_value+"')", element);	
+	}
+	
+	public static String getValidMailIdFromString(String randomString) {
+		String validEmailID = null;
+		
+		Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(randomString);
+	    while (m.find()) {
+	    	validEmailID = (m.group());
+	    }
+		return validEmailID;
+	}
+	
+	public static Boolean collectionComarator(String[] expectedObjects, List<WebElement> actualObjects) {
+		Boolean flag = null;
+		
+		List<String> exp_objects = new ArrayList<String>(Arrays.asList(expectedObjects));
+	    List<String> act_objects = new ArrayList<String>();
+	    
+	    for(WebElement actualObject:actualObjects) {
+	    	act_objects.add(actualObject.getText().trim());
+	    }
+	    
+	    Collections.sort(exp_objects);
+	    Collections.sort(act_objects);
+
+	    if(exp_objects.equals(act_objects)) {
+	    	flag = true;
+	    }else 
+	    	flag = false;
+
+		return flag;	
+	}
+	
+	public static SoftAssert softAssert() {
+		SoftAssert softassert = new SoftAssert();
+		return softassert;
+	}
+	
+	public static void keyboardActions(String actionTOBePerformed) throws InterruptedException  {
+		switch(actionTOBePerformed) {
+		case "escape":
+			Util.Action().sendKeys(Keys.ESCAPE).perform();
+			break;
+		}
+		Thread.sleep(500);
+	}
+	
+	public static String getStringFromAlphanumeric(String alphaNumbericString) {
+		String aplha;
+		return aplha = alphaNumbericString.replaceAll("\\d", "");
+	}
+	
+    public static String getNumberFromAlphanumeric(String alphaNumbericString) {
+    	String number;
+		return number = alphaNumbericString.replaceAll("\\D", "");
+	} 
+}

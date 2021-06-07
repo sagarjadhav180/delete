@@ -330,13 +330,15 @@ public class LegacyScheduledReportTest extends TestBase {
 		logger.assignCategory(Constants.legacy_scheduled_report_category);
 		ls=LegacyScheduledReportsPage.intanceLegacySchedule();
 		ls.clickAction(updated_report_name, Constants.LegacyScheduledReport.delete_scheduled_report_button);
-		
+		Thread.sleep(2000);
 	}
 	
 	
 	@AfterClass
 	public void logOut(){
-		Util.readingFromDB("DELETE FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'AND report_name LIKE 'automation%'");
+//		Util.readingFromDB("DELETE FROM report_sched WHERE org_unit_id='"+TestBase.getOrg_unit_id()+"'AND report_name LIKE 'automation%'");
+		ls=LegacyScheduledReportsPage.intanceLegacySchedule();
+		ls.closePopup();
 		LoginPage lp=new LoginPage(driver);
 		logger=extent.startTest("LogOut"); 
 		logger.log(LogStatus.INFO, "loggin out.. ");

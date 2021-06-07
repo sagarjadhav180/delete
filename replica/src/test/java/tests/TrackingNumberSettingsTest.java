@@ -31,7 +31,7 @@ public class TrackingNumberSettingsTest extends TestBase{
 		hp.clickAction(Constants.HomePage.legacy_reports);
 		
 		hp.click_subLink(Constants.HomePage.tracking_number_settings_report);
-		
+		Thread.sleep(5000);
 	}
 	
 	//ui verification of call details page

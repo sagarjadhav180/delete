@@ -27,7 +27,7 @@ public class WebhookTest extends TestBase {
         logger.assignCategory(Constants.login_page_category);
         lp.validLogin();
         hp=new HomePage(driver);
-        hp.left_hand_navigation_bar_click();
+        hp.collapseLHNB();
 
          
 	}

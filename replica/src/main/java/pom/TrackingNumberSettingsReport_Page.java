@@ -1,8 +1,12 @@
 package pom;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,10 +54,10 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-default btn-block btn-adv'][text()='Advanced Filter']")
 	private static WebElement advanced_filter_button;	
 	
-	@FindBy(xpath="//i[@class='fa fa-columns']")
+	@FindBy(xpath="//div[@class='btn-group dropdown']//i[@class='fa fa-columns']")
 	private static WebElement column_Picker_button;
 	
-	@FindBy(xpath="//table[@id='classflowDataTable']//thead//tr//th")
+	@FindBy(xpath="//table[@id='classflowDataTable']//thead//tr[1]//th")
 	private static List<WebElement> actual_column_names;
 	
 	String[] expected_column_names={" ID"," Tracking Number Name"," Tracking Number"," Type"," Ring-to Phone Number"," Ad Source"," Status"," Group Name"," Campaign name"," DNI"," Record Call"," Play Disclaimer"," Voice Prompt"," Whisper Message"};
@@ -106,7 +110,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 	@FindBy(xpath="//ul[@id='columnpicker']//li//input")
 	private static List<WebElement> column_picker_options_checkboxes;
 	
-	String[] expected_all_column_picker_options={"ID","Tracking Number Name","Tracking Number","Type","Hunt Type","Ring-to Phone Number","Ad Source","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Status","Group Name","Campaign name","DNI","Host Domain","Referring Website","HTML Class","Custom Params","Record Call","Play Disclaimer","Voice Prompt","Whisper Message","Pre-Call Webhook","Voicemail"};
+	String[] expected_all_column_picker_options={"Instant Insights", "Instant Insights Config","ID","Tracking Number Name","Tracking Number","Type","Hunt Type","Ring-to Phone Number","Ad Source","Custom Source 1","Custom Source 2","Custom Source 3","Custom Source 4","Custom Source 5","Status","Group Name","Campaign name","DNI","Host Domain","Referring Website","HTML Class","Custom Params","Record Call","Play Disclaimer","Voice Prompt","Whisper Message","Pre-Call Webhook","Voicemail"};
 	
 	String[] expected_default_checked_column_picker_options={"ID","Tracking Number Name","Tracking Number","Type","Ring-to Phone Number","Ad Source","Status","Group Name","Campaign name","DNI","Record Call","Play Disclaimer","Voice Prompt","Whisper Message"};
 	
@@ -184,7 +188,7 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     	SoftAssert softassert=new SoftAssert();
     	//verification of count in pagination toolbox	
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+TestBase.getOrg_unit_id()+"') AND status='active'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+TestBase.getOrg_unit_id()+"') AND status IN ('active','inactive','referral')");
 
 
 		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
@@ -201,39 +205,57 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     public void tableTrackingNumbersCount(){
 		//verification of count in pagination toolbox	
     	SoftAssert softassert=new SoftAssert();
-		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+TestBase.getOrg_unit_id()+"') AND status='active'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count FROM ce_call_flows WHERE ouid IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id ='"+TestBase.getOrg_unit_id()+"') AND status IN ('active','inactive','referral')");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);
-		if(next_100_button.isEnabled()){
-			Util.click(next_100_button);
-			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-			final_count=final_count+table_call_count.size();
+		
+		if(Integer.parseInt(dbCount)>100) {
+			do {
+				Util.click(next_100_button);
+				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+				final_count=final_count+table_call_count.size();
+			}
+			while(!next_100_button.getAttribute("class").endsWith("disabled"));	
+		
+		}else {
+			final_count=table_call_count.size()+0;
 		}
+		
 		System.out.println("dbCount is "+dbCount);
 		System.out.println("table_call_count is "+final_count);
 				
 		logger.log(LogStatus.INFO, "verifying count of tracking numbers in table");
 		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed tracking numbers is mismatching with db count");
 		softassert.assertAll();
-	    	    
+	    Util.click(first_button);	    
 	}
 
     public void allColumnPickerOptions(){
 		Util.click(column_Picker_button);
 		SoftAssert softassert=new SoftAssert();
+		List<String> act_columns = new ArrayList<String>();
+		List<String> exp_columns = new ArrayList<String>(Arrays.asList(expected_all_column_picker_options));
 		
 		for(int i=0;i<all_actual_column_picker_options_labels.size();i++){
-			for(int j=0;j<expected_all_column_picker_options.length;j++){
-				
-				if(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j])){
-					logger.log(LogStatus.INFO, "Verifying if "+expected_all_column_picker_options[j]+" is present ");
-					softassert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
-				}
-			}
+			act_columns.add(all_actual_column_picker_options_labels.get(i).getText());
 		}
+		Collections.sort(act_columns);
+		Collections.sort(exp_columns);
+		
+		softassert.assertEquals(act_columns, exp_columns);
+//		for(int i=0;i<all_actual_column_picker_options_labels.size();i++){
+//			for(int j=0;j<expected_all_column_picker_options.length;j++){
+//				
+//				if(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j])){
+//					logger.log(LogStatus.INFO, "Verifying if "+expected_all_column_picker_options[j]+" is present ");
+//					softassert.assertTrue(all_actual_column_picker_options_labels.get(i).getText().equals(expected_all_column_picker_options[j]),"column picker option "+expected_all_column_picker_options[j]+" is not displayed or locator changed");
+//				}
+//			}
+//		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 
     
@@ -258,20 +280,31 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
     	SoftAssert softassert=new SoftAssert();
         logger.log(LogStatus.INFO, "verifying column names in Tracking Number Settings Report table");
 		
-		for(int i=0;i<actual_column_names.size();i++){
-			
-			for(int j=0;j<expected_all_column_picker_options.length;j++){
-
-	
-				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
-					
-					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
-					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
-					break;					
-				}
-
-			}
-		}
+        List<String> act_columns = new ArrayList<String>();
+        List<String> exp_columns = new ArrayList<String>(Arrays.asList(expected_all_column_picker_options));
+        
+        for(int i=0;i<actual_column_names.size();i++) {
+        	act_columns.add(actual_column_names.get(i).getText());
+        }
+        
+		Collections.sort(act_columns);
+		Collections.sort(exp_columns);
+		
+		softassert.assertEquals(act_columns, exp_columns);
+//		for(int i=0;i<actual_column_names.size();i++){
+//			
+//			for(int j=0;j<expected_all_column_picker_options.length;j++){
+//
+//	
+//				if(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j])){
+//					
+//					logger.log(LogStatus.INFO, "verifying if "+expected_all_column_picker_options[j]+" is displayed");
+//					softassert.assertTrue(actual_column_names.get(i).getText().equals(expected_all_column_picker_options[j]),"column "+expected_all_column_picker_options+" is not present");
+//					break;					
+//				}
+//
+//			}
+//		}
 		softassert.assertAll();
 	}
     
@@ -285,7 +318,8 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 			
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
     
     public void checkAllColumnPickerOptions(){
@@ -297,7 +331,8 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 				Util.click(column_picker_options_checkboxes.get(i));
 			}
 		}
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();		
 	}    
     
     public void advancedFilter(){
@@ -402,16 +437,25 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 		
 		String xPath="//table[@id='classflowDataTable']//tbody//tr";
 		List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+		List<String> actual_values =  new ArrayList<String>();
 		
-		for(int k=0;k<rows.size();k++){
-			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-			}		
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
 		}
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
+		
+		
+//		for(int k=0;k<rows.size();k++){
+//			
+//			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+//			for(int l=0;l<filtered_value.size();l++){
+//				String actual_value = filtered_value.get(l).getText();
+//				String expected_value=filter_value;
+//				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
+//			}		
+//		}
 
 //		basic_search_textbox.clear();
 //		Util.click(basic_search_button);
@@ -467,16 +511,23 @@ public class TrackingNumberSettingsReport_Page extends TestBase{
 		
 		String xPath="//table[@id='classflowDataTable']//tbody//tr";
 		List<WebElement> rows = driver.findElements(By.xpath(xPath));
+		List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+        List<String> actual_values =  new ArrayList<String>();
 		
-		for(int k=0;k<rows.size();k++){
-			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
-			}		
+		for(WebElement val:filtered_value) {
+			actual_values.add(val.getText());
 		}
+			
+		softassert.assertFalse(!actual_values.contains(filter_value));			
+//		for(int k=0;k<rows.size();k++){
+//			
+//			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+//			for(int l=0;l<filtered_value.size();l++){
+//				String actual_value = filtered_value.get(l).getText();
+//				String expected_value=filter_value;
+//				softassert.assertTrue(actual_value.contains(expected_value),"value "+actual_value+" is not filteredd value");
+//			}		
+//		}
 
 
 //		Util.click(cancel_button);

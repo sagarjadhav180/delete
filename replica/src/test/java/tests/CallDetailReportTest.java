@@ -19,8 +19,7 @@ public class CallDetailReportTest extends TestBase{
 	CallDetailsReport_Page cdr;
 	HomePage hp;
 	
-	
-	
+
 	@BeforeClass
 	public void goToCallDetailsReportPage() throws InterruptedException, IOException{
 	
@@ -212,7 +211,7 @@ public class CallDetailReportTest extends TestBase{
 		
 	}
 	
-    @Test(priority=19)
+//    @Test(priority=19)
 	public void advancedFilterForLineType(){
 		
 		logger=extent.startTest("Advanced Filter for Line Type");
@@ -263,7 +262,7 @@ public class CallDetailReportTest extends TestBase{
 	}
     
     @Test(priority=24)    
-    public void audioPlayerOpen(){
+    public void audioPlayerOpen() throws InterruptedException{
     	logger=extent.startTest("aaudio player opening");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
@@ -272,7 +271,7 @@ public class CallDetailReportTest extends TestBase{
     }
     
     @Test(priority=25)
-    public void informationTagOpen(){
+    public void informationTagOpen() throws InterruptedException{
     	logger=extent.startTest("information tag opening");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
@@ -281,7 +280,7 @@ public class CallDetailReportTest extends TestBase{
     }
     
     @Test(priority=26)
-    public void infoSectionUIVerification(){
+    public void infoSectionUIVerification() throws InterruptedException{
     	logger=extent.startTest("info section ");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
@@ -289,7 +288,7 @@ public class CallDetailReportTest extends TestBase{
     }
     
     @Test(priority=27)
-    public void commentSectionUIVerification(){
+    public void commentSectionUIVerification() throws InterruptedException{
     	logger=extent.startTest("comments section ");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
@@ -297,7 +296,7 @@ public class CallDetailReportTest extends TestBase{
     }
     
     @Test(priority=28)
-    public void tagSectionUIVerification(){
+    public void tagSectionUIVerification() throws InterruptedException{
     	logger=extent.startTest("tags section ");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
@@ -305,7 +304,7 @@ public class CallDetailReportTest extends TestBase{
     }
     
     @Test(priority=29)
-    public void emailCallSectionUIVerification(){
+    public void emailCallSectionUIVerification() throws InterruptedException{
     	logger=extent.startTest("email call section ");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
@@ -314,12 +313,13 @@ public class CallDetailReportTest extends TestBase{
     }
     
     @Test(priority=30)
-    public void emailCallFeature(){
+    public void emailCallFeature() throws InterruptedException{
     	logger=extent.startTest("email call feature ");
 		logger.assignCategory(Constants.call_details_report_category);
 		cdr=CallDetailsReport_Page.instance();
 		cdr.actionButtonClick(Constants.LegacyReports.email_call);
 		cdr.actionSectionVerification("email_call", "mail feature");
+		
     }
     
     

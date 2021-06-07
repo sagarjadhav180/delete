@@ -1,13 +1,31 @@
 package constants;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import io.Directory;
 
 import tests.TestBase;
 
 public class Constants {
 
+	public static final String groupHeirarchyAgency1="1";
+	public static final String groupHeirarchyCompany="2";
+	public static final String groupHeirarchyLocation="3";
+	public static final String PROJECT_DIR = System.getProperty("user.dir") + File.separator;
+	public static final String TEST_DATA_DIR = "TestData";
+	public static final String RESOURCES = "resources";
+	public static final String CONF_DIR = "conf";
+	public static final String DYNAMIC_TD_FILE = "DynamicTestData";
+	public static final String CALLFLOW_TEMPLETE = "CallFlowTemplete.yaml";
+	public static final String POSTGRES_CONFIG = "PostgresConfig.properties";
+	public static final String DRIVER = "driver";
+	public static final String CHROME_DRIVER = "chromedriver";
+	public static final String PHANTOM_DRIVER = "phantomjs";
+	public static final String HTTPS = "https://";
+	
+	
 	public static final String call_logs_category="Call Logs Report Suite";
 	public static final String call_back_category="Call Back Report Suite";
 	public static final String account_details_category="Account Details Report Suite";
@@ -35,7 +53,9 @@ public class Constants {
 	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
 	public static final String webhook_category="Webhook Suite";
-	public static final String groupHeirarchyAgency = null;
+
+	public static final String manage_scorecard_category="Manage Scorecard Suite";
+	public static final String select_and_score_category="Select and Score Suite";
 	
     public static class LookerReports{
     	
@@ -110,7 +130,7 @@ public class Constants {
 		public static final String campaign_tracking_number_page="Campaign & Tracking Number";
 		public static final String group_User_page="Group & User";
 		public static final String settings_section="Settings";
-		    	
+		public static final String scoreacrd_page="Scorecard";		    	
     	
     	//sub tabs
 		public static final String call_details_report="Call Details";
@@ -130,6 +150,8 @@ public class Constants {
 		public static final String data_append="Data Append";
 		public static final String double_click="DoubleClick";
 		public static final String google_analytics="Google Analytics";
+		public static final String manage_scoreacrd_page="Manage Scorecard";
+		public static final String select_and_score_page="Select & Score";
 	
 	}
     
@@ -364,14 +386,83 @@ public class Constants {
     	public static final String calls_with_instant_insights_tile="Calls with Instant Insights";    	
     	public static final String calls_with_agent_id_tile="Calls with Agent ID";    	
     	public static final String calls_with_call_outcome_tile="Calls with Call Outcome";        	
-    	
-   	
+  	
     }
     
+    public static class ManageScorecardPage{	
+    	//Action Buttons
+    	public static final String edit_scorecard_button = "Edit";
+    	public static final String archive_scorecard_button = "Archive";
+    	//score card creation
+    	public static final String basic_scorecard = "basic";
+    	public static final String __60_criteria_scorecard = "60 criteria";
+    	public static final String __61_criteria_scorecard = "61 criteria";
+    	public static final String all_criteria_scorecard = "all criteria";
+    	public static final String scorecard_without_self_group = "uncheckSelfGroup";
+    	//score card creation validations
+    	public static final String scorecard_cancel_feature = "cancelFeature";
+    	public static final String scorecard_check_all_groups = "checkaAllGroups";
+    	public static final String scorecard_uncheck_all_groups = "uncheckAllGroups";
+    	public static final String scorecard_skip_mandatory_fields = "skipMandatoryFields";
+    	public static final String scorecard_delete_criteria = "deleteCriteria";
+    }
+        
+    public static class SelectAndScorePage{	
+    	//Action Buttons
+		public static final String play_audio_button = "play";
+		public static final String i_call_button = "i";
+		public static final String edit_call_button = "edit";
+		public static final String download_call_button = "download";
+		public static final String mail_call_button = "mail";
+		
+		//info section buttons
+		public static final String info_call_button = "Info";
+		public static final String comment_call_button = "Comments";
+		public static final String tag_call_button = "Tags";
+		    	
+    	//Date Range picker button
+		public static final String date_range_for_today = "Today";
+		public static final String date_range_for_yesterday = "Yesterday";
+		public static final String date_range_for_last_7_days = "Last 7 Days";
+		public static final String date_range_for_last_30_days = "Last 30 Days";
+		public static final String date_range_for_this_month = "This Month";
+		public static final String date_range_for_last_month = "Last Month";
+		public static final String date_range_for_custom_Range = "Custom Range";
+		
+		//Status 
+		public static final String status_checkbox_for_need_scoreacard = "Need Scorecard";
+		public static final String status_checkbox_for_unscored = "Unscored";
+		public static final String status_checkbox_for_scored = "Scored";
+		public static final String status_checkbox_for_reviewed = "Reviewed";
+		
+		//advance filter
+		public static final String advance_filter_for_duration = "Duration";
+		public static final String advance_filter_for_group = "Group";
+		public static final String advance_filter_for_score = "Score";
+		public static final String advance_filter_for_call_title = "Call Title";
+		public static final String advance_filter_for_call_tag = "Tag";
+		public static final String advance_filter_for_Comments = "Comments";	
+		public static final String advance_filter_for_identified_agent = "Identified Agent";	
+		public static final String advance_filter_for_Scorecard = "Scorecard";	
+		
+		//score call type
+		public static final String score_call_only_optional_criteria = "scoreOnlyOptionalCriteria";
+		public static final String score_call_only_manadatory_criteria = "scoreOnlyMandatoryCriteria";
+		public static final String score_call_all_criteria = "scoreAllCriteria";
+    }
+ 
+    public static String getPostgresConfigFile() {
+		String filePath = Directory.projectDir + Constants.POSTGRES_CONFIG;
+		return filePath;
+	}
     
-    
-    
-    
+    public static class PostGresConfigConstants {
+		public static final String CONNECTION_URL = "connection_url";
+		public static final String DATABASE = "database";
+		public static final String USERNAME = "username";
+		public static final String PASSWORD = "password";
+		public static final String DRIVER = "driver";
+	}
     
 }
 

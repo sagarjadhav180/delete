@@ -3,6 +3,7 @@ package pom;
 import java.util.HashSet;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -81,7 +82,7 @@ public class HomePage extends TestBase {
 	
 	@FindBy(xpath="//a[@id='leftmenu-trigger']")
 	private WebElement left_hand_navigation_bar_collapsible_button;	
-
+		
 	@FindBy(xpath="//a[@class='navbar-brand']")
 	private WebElement logo;
 	
@@ -124,52 +125,88 @@ public class HomePage extends TestBase {
 		
 	}
 	
-	public void click_subLink(String linkToBeClicked){
-		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
-			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
-				left_hand_navigation_bar_sub_links.get(i).click();
-				break;
-			}
+	public void click_subLink(String linkToBeClicked) throws InterruptedException{
+		String xPath = "//*[@id='sidebar']/li//ul//li/a/span[1][text()='"+linkToBeClicked+"']";
+		Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));		
+		WebElement subModuleToBeClicked; 
+		subModuleToBeClicked = driver.findElement(By.xpath(xPath));			
+		Thread.sleep(500);
+		try {
+			subModuleToBeClicked.click();			
+		}catch(Exception e) {
+			
 		}
+
+		Util.waitForLoad(driver);
+		
+//		if(linkToBeClicked.contains("Campaign")) {
+//			wait.until(ExpectedConditions.invisibilityOf(loading_wheel));			
+//		}else {
+//			Thread.sleep(10000);			
+//		}
+//		
+//		for(int i=0;i<left_hand_navigation_bar_sub_links.size();i++){
+//			if(left_hand_navigation_bar_sub_links.get(i).getText().equals(linkToBeClicked)){
+//				try {
+//					wait.until(ExpectedConditions.visibilityOf(left_hand_navigation_bar_sub_links.get(i)));
+//					Thread.sleep(2000);
+//					left_hand_navigation_bar_sub_links.get(i).click();
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					left_hand_navigation_bar_sub_links.get(i).click();
+//					e.printStackTrace();
+//				}
+//				break;
+//			}
+//		}
+//		Util.waitForLoad(driver);
 	}
 	
 	public void clickAction(String linkToBeClicked) throws InterruptedException{
-		
-		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
-		WebElement link = left_hand_navigation_bar_links.get(i);
-			if(link.getText().equals(linkToBeClicked)){
-				
-				if(link.getText().contains("Campaign")){
-					link.click();
 
-					try{
-					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-					
-					}catch(Exception e){}
-//					driver.switchTo().activeElement();
-//					Util.click(pendo_close_button);
-//					Thread.sleep(1000);					
-				}
-				
-				
-				
-				
-				
-				else{
-				link.click();
-				try{
-//					driver.switchTo().activeElement();
-//					Util.click(pendo_close_button);
-//					Thread.sleep(2000);
-					}
-					catch(Exception e){}
-					
-				}
-
-
-			}
+		try {
+			String xPath = "//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']";
+			Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
+			WebElement moduleToBeClicked = driver.findElement(By.xpath(xPath));			
+			Thread.sleep(500);
+			moduleToBeClicked.click();
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
+//		String xPath = "//*[@id='sidebar']/li/a/i//following-sibling::span[1][text()='"+linkToBeClicked+"']";
+//		Util.waitExecutorForVisibilityOfElement(driver.findElement(By.xpath(xPath)));
+//		WebElement moduleToBeClicked = driver.findElement(By.xpath(xPath));			
+//		Thread.sleep(500);
+//		moduleToBeClicked.click();
+		
+		if(linkToBeClicked.contains("Campaign")) {
+			wait.until(ExpectedConditions.attributeContains(loading_wheel, "aria-hidden", "false"));
+		}else {
+			Thread.sleep(10000);			
+		}
+			
+		
+//		for(int i=0;i<left_hand_navigation_bar_links.size();i++){
+//		WebElement link = left_hand_navigation_bar_links.get(i);
+//			if(link.getText().equals(linkToBeClicked)){
+//				
+//				if(link.getText().contains("Campaign")){
+//					link.click();
+//					try{
+//					wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
+//					
+//					}catch(Exception e){}
+//				}
+//						
+//				else{
+//				link.click();
+//				Thread.sleep(10000);
+//				}
+//				break;
+//			}
+//		}
+//		Util.waitForLoad(driver);	
 	}
 	
     public void clickActionNewAccount(String linkToBeClicked) throws InterruptedException{
@@ -225,11 +262,23 @@ public class HomePage extends TestBase {
 		
 	}
 	
-	public void left_hand_navigation_bar_click(){
-
-		left_hand_navigation_bar_collapsible_button.click();
+//	public void left_hand_navigation_bar_click(){
+//		left_hand_navigation_bar_collapsible_button.click();
+//	}
+	
+	public void expandLHNB() {
+		WebElement LHNB_status = driver.findElement(By.xpath("//body[starts-with(@class,'ng-scope')]"));
 		
+		if(LHNB_status.getAttribute("class").endsWith("collapse-leftbar"))
+			left_hand_navigation_bar_collapsible_button.click();
 	}
+	
+    public void collapseLHNB() {
+		WebElement LHNB_status = driver.findElement(By.xpath("//body[starts-with(@class,'ng-scope')]"));
+		
+		if(!LHNB_status.getAttribute("class").endsWith("collapse-leftbar"))
+			left_hand_navigation_bar_collapsible_button.click();		
+	} 
 	
 	//UI Verification of Home page
 	public void UIVerification() throws InterruptedException{

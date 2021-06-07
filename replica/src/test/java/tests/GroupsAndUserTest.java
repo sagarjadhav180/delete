@@ -248,7 +248,9 @@ public class GroupsAndUserTest extends TestBase
 	        logger=extent.startTest("tnSettingsInstantInsightsCheckboxAlertVerification");
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
+	        gp.updateTNSettings();
 	        gp.tnSettingsFormValidation("instant_insights_section");
+	        gp.updateTNSettings();
 		}
 		
 		
@@ -365,6 +367,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	        gp.custom_Source_delete_Source();
+	        Thread.sleep(5000);
    
 		}
 	
@@ -577,7 +580,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
-	        gp.subGroupFormValidation("industry");
+	        gp.subGroupFormValidation("group_name_textbox");
    
 		}
 		
@@ -590,7 +593,7 @@ public class GroupsAndUserTest extends TestBase
 			logger.assignCategory(Constants.groups_and_user_category);
 	        GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 
-	        gp.subGroupFormValidation("group_name_textbox");
+	        gp.subGroupFormValidation("industry");
    
 		}
 		
@@ -618,7 +621,8 @@ public class GroupsAndUserTest extends TestBase
 
 	        this.groupName="SJSG-1"+Util.generateRandomNumber();
 	        gp.createSubGroup(this.groupName);
-   
+	        Thread.sleep(4000);
+	        
 		}
 	
 		
@@ -659,7 +663,8 @@ public class GroupsAndUserTest extends TestBase
 	        this.groupName="SJSG-1"+Util.generateRandomNumber();
 	        gp.createSubGroup(this.groupName);
 	        gp.subGroupNavigation(this.groupName);
-	        gp.subGroupDeletion(this.groupName);	        
+	        gp.clickActionSubGroup(this.groupName,"delete_from_selected_group");	
+	        Thread.sleep(5000);
    
 		}
 		
@@ -808,7 +813,7 @@ public class GroupsAndUserTest extends TestBase
 			email[2]="ro"+Util.generateRandomNumber()+"@yopmail.com.com";
     	    
     	    gp.createUser(fname, lname, email[2], "Read-Only");
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 	    }      
 	       
 	     
@@ -836,7 +841,7 @@ public class GroupsAndUserTest extends TestBase
 	       
 	       String temp_mail = "test" + Util.generateRandomNumber() + "@yopmail.com";
 	       gp.createUser("fname", "lname", temp_mail, "Standard");
-	       
+	       Thread.sleep(3000);
 	       email[3]=Util.generateRandomNumber()+temp_mail;
 	       
 	       gp.updateUser(temp_mail, email[3]);
@@ -916,7 +921,7 @@ public class GroupsAndUserTest extends TestBase
         @Test(priority=67)
 	    public void userSectionChangePasswordCancelFeature() throws InterruptedException{
 
-	       logger=extent.startTest("userSectionChangePassword");
+	       logger=extent.startTest("userSectionChangePasswordCancelFeature");
 	       logger.assignCategory(Constants.groups_and_user_category);
 
 	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
@@ -950,9 +955,13 @@ public class GroupsAndUserTest extends TestBase
 	       GroupsAndUserPage gp=new GroupsAndUserPage(driver);
 	       String tempmail = "test" + Util.generateRandomNumber() + "@yopmail.com";
 	       gp.createUser("fname", "lname", tempmail, "Standard");
-	       
-	       for(String mail:email) {
-		       gp.deleteUser(mail);	    	   
+	       Thread.sleep(4000);
+//	       for(String mail:email) {
+//		       gp.deleteUser(mail);	    	   
+//	       }
+	       for(int i=0;i<email.length;i++) {
+	    	   gp.deleteUser(email[i]);
+	    	   Thread.sleep(2000);
 	       }
 	       
 
@@ -962,8 +971,9 @@ public class GroupsAndUserTest extends TestBase
 		//Logging Out
 		@AfterClass
 		public void goToHomePage(){
-	        
-			HomePage hp=new HomePage(driver);
+		    GroupsAndUserPage gp=new GroupsAndUserPage(driver);	        
+			gp.closePopup();
+		    HomePage hp=new HomePage(driver);
 	        Util.getJavascriptExecutor().executeScript("window.scrollBy(0,-2000)");	
 	        try {
 				hp.clickAction("Home");

@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Automation Suite-1" parallel="tests" thread-count="1">
+<suite name="Automation Suite-1">
 
 	<test name="chrome test-1" preserve-order="true" parallel="false">
-		
-		<parameter name="browser" value="chrome" />
-		<parameter name="url" value="https://stag-5-cmo-1.convirza.com" />
-		
+
+		<parameter name="browser" value="headless" />
+		<parameter name="url"
+			value="https://stag-5-cmo-1.convirza.com" />
+
 		<classes>
-			
-			<class name="tests.LoginTest" />
-			<class name="tests.HomeTest" />
+
+			<class name="tests.LoginTest">
+
+			</class>
+
 			<class name="tests.CamapignUIVerificationTest" />
 			<class name="tests.CampaignTests" />
 			<class name="tests.TrackingNumberTest" />
-			<class name="tests.CallDetailReportTest" />
+			<class name="tests.CallDetailReportTest" >
+			<methods>
+			<exclude name="emailCallFeature"></exclude>
+			</methods>
+			</class>
 			<class name="tests.TrackingNumberSettingsTest" />
 			<class name="tests.GroupActivityReportTest" />
+			<class name="tests.GroupsAndUserTest" />
+			<class name="tests.ManageScorecardTest" />
+			<class name="tests.SelectAndScoreTest" />
 			<class name="tests.LegacyScheduledReportTest" />
-		    <class name="tests.LookerCallLogsTest" />
-		    <class name="tests.LookerTrackingNumberSettingsReportTest" />
-		    <class name="tests.LookerCallBackReportTest" />
-		    <class name="tests.LookerBlockedCallReportTest" />
-		    <class name="tests.LookerIVRKeypressReportTest" />
-		    <class name="tests.LookerMarketingDashboardTest" />
-		    <class name="tests.LookerCallsByRegionReportTest" />
-		    <class name="tests.LookerCallerActivityReportTest" />
-		    <class name="tests.LookerCallTrendsReportTest" />
-		    <class name="tests.LookerAnalyticsSummaryReportTest" />
-		    <class name="tests.LookerTagsSummaryReportTest" />
-	        <class name="tests.LookerUserLogsReportTest" />
-	        <class name="tests.LookerWebhookReportTest" />
-	        <class name="tests.LookerAccountDetailsReportTest" />
-	        <class name="tests.LookerEmailDigestReportTest" />
-	        
+
 		</classes>
 
 	</test>

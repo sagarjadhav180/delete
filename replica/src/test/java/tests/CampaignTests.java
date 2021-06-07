@@ -60,10 +60,9 @@ public class CampaignTests extends TestBase {
 		CampaignAndTrackingNumberPage cp=new CampaignAndTrackingNumberPage(driver);	
 		CampaignBuilderPage cb=new CampaignBuilderPage(driver, wait);
 		
-		
 		cp.clickAction("add","");
 		cb.campaignBuilderPageUIVerification();
-		cb.collapseExpand_collapsible_strip();
+//		cb.collapseExpand_collapsible_strip();
 		cb.clickAction("list");	
 //		Thread.sleep(2000);
 
@@ -97,7 +96,7 @@ public class CampaignTests extends TestBase {
 		
 		cp.clickAction("add","");
 		number1 = tests.Util.generateRandomNumber();
-		campaign_name = "campaign "+number1;
+		campaign_name = "0SJC "+number1;
 		cb.create(campaign_name,"",0,0);
 		cb.clickAction("list");
 //		cp.campaignCreated(campaign_name);
@@ -146,7 +145,7 @@ public class CampaignTests extends TestBase {
 		
 		cp.clickAction("add", "");
 		 number1 = tests.Util.generateRandomNumber();
-		 campaign_name = "campaign "+number1;
+		 campaign_name = "0SJC "+number1;
 		 number2 = tests.Util.generateRandomNumber();
 		 external_id= "external_id "+number2;
 		
@@ -198,7 +197,7 @@ public class CampaignTests extends TestBase {
 		
 		cp.clickAction("add", "");
 		 number1 = tests.Util.generateRandomNumber();
-		 campaign_name = "campaign "+number1;
+		 campaign_name = "0SJC "+number1;
 		 System.out.println("++++++++++++++++++++++++++++++");
 		 System.err.println(campaign_name);
 		 System.out.println("++++++++++++++++++++++++++++++");		 
@@ -255,7 +254,7 @@ public class CampaignTests extends TestBase {
 		
 		cp.clickAction("add", "");
 		 number1 = tests.Util.generateRandomNumber();
-		 campaign_name = "campaign "+number1;
+		 campaign_name = "0SJC "+number1;
 		 System.out.println("++++++++++++++++++++++++++++++");
 		 System.err.println(campaign_name);
 		 System.out.println("++++++++++++++++++++++++++++++");		 

@@ -3,6 +3,7 @@ package pom;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,11 @@ public class CallDetailsReport_Page extends TestBase{
     @FindBy(xpath="//div[contains(text(),'No Data Found')]")
 	private static WebElement no_data_found_label;
 
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-sticker']")
+	private WebElement pause_button_success_message;
+
+	@FindBy(xpath="//div[@class='ui-pnotify ']//div[@class='ui-pnotify-closer']")
+	private WebElement close_button_success_message;
     
     //Email call section
 
@@ -105,7 +111,7 @@ public class CallDetailsReport_Page extends TestBase{
 	@FindBy(xpath="//button[@class='btn btn-default btn-block btn-adv'][text()='Advanced Filter']")
 	private static WebElement advanced_filter_button;	
 	
-	@FindBy(xpath="//i[@class='fa fa-columns']")
+	@FindBy(xpath="//div[starts-with(@class,'btn-group dropdown')]//i")
 	private static WebElement column_Picker_button;
 
 	@FindBy(xpath="//table[@id='calldetailstable']//thead//tr//th")
@@ -342,10 +348,10 @@ public class CallDetailsReport_Page extends TestBase{
 	public void paginationCallCount(){
 	    SoftAssert softassert=new SoftAssert();
 		//verification of count in pagination toolbox	
-	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-6");
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
 
 		String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
 		System.out.println("dbCount is "+dbCount);
@@ -361,10 +367,10 @@ public class CallDetailsReport_Page extends TestBase{
 	public void tableCallCount(){
 	    SoftAssert softassert=new SoftAssert();
 		//verification of count in pagination toolbox	
-	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
-		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
+	    String endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
+		String startDateToBeUsed = Util.getDate("yyyy-MM-dd","-6");
 
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
 
 		int final_count=table_call_count.size()+0;
 		Util.scrollFunction(next_100_button);		
@@ -399,7 +405,8 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 		}
 		softassert.assertAll();
-		Util.click(column_Picker_button);
+//		Util.click(column_Picker_button);
+		Util.Action().sendKeys(Keys.ESCAPE).perform();
 	}
 	
 	public void defaultColumns(){
@@ -528,11 +535,13 @@ public class CallDetailsReport_Page extends TestBase{
 		SoftAssert softassert=new SoftAssert();
 		int index = 0;
 		String filter_value="";
-		
+		System.out.println(filterelement);
 		for(int i=0;i<actual_column_names.size();i++){
+		System.out.println(actual_column_names.get(i).getText());
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
 				index=i;
+				break;
 			}
 		}
 		
@@ -589,6 +598,7 @@ public class CallDetailsReport_Page extends TestBase{
 		
 			if(actual_column_names.get(i).getText().equals(filterelement)){
 				index=i;
+				break;
 			}
 		}
 		
@@ -597,9 +607,10 @@ public class CallDetailsReport_Page extends TestBase{
 			if(index==j){
 				filter_value=values.get(j).getText();
 				if(filterelement.equals("Line Type")){
-					if(filter_value.equals("") || filter_value.equals("null")){
+					if(filter_value.equals(" ") || filter_value.equals("null")){
 					filter_value="NonFixedVOIP";
 					}
+					break;
 				}
 			}
 		}
@@ -611,22 +622,26 @@ public class CallDetailsReport_Page extends TestBase{
 		advance_filter_textbox.sendKeys(filter_value);
 		Util.click(apply_button);
 		
-		wait.until(ExpectedConditions.visibilityOf(showing_label));
-		
-		String xPath="//table[@id='calldetailstable']//tbody//tr";
-		List<WebElement> rows = driver.findElements(By.xpath(xPath));
-		
-		for(int k=0;k<rows.size();k++){
+		try {
+			wait.until(ExpectedConditions.visibilityOf(showing_label));
 			
-			List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
-			for(int l=0;l<filtered_value.size();l++){
-				String actual_value = filtered_value.get(l).getText();
-				String expected_value=filter_value;
-				softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+			String xPath="//table[@id='calldetailstable']//tbody//tr";
+			List<WebElement> rows = driver.findElements(By.xpath(xPath));
+			
+			for(int k=0;k<rows.size();k++){
+				
+				List<WebElement> filtered_value = driver.findElements(By.xpath(xPath.concat("//td["+String.valueOf(index+1)+"]")));
+				for(int l=0;l<filtered_value.size();l++){
+					String actual_value = filtered_value.get(l).getText();
+					String expected_value=filter_value;
+					softassert.assertTrue(actual_value.equals(expected_value),"value "+actual_value+" is not filteredd value");
+				}		
 			}		
+		}catch(Exception e) {
+			System.out.println("No data found for applied filter value");
+			logger.log(LogStatus.INFO, "No data found for applied filter value");				
 		}
-
-
+	
 //		Util.click(cancel_button);
 //		wait.until(ExpectedConditions.visibilityOf(showing_label));
 		
@@ -643,20 +658,20 @@ public class CallDetailsReport_Page extends TestBase{
 		String startDateToBeUsed ="";
 		
 		if(dateRange.equals("Last 7 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-7");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-6");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
 		}
 		else if(dateRange.equals("Today")){
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
+		}
+		else if(dateRange.equals("Yesterday")){
 			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
 			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
 		}
-		else if(dateRange.equals("Yesterday")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-2");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","-1");
-		}
 		else if(dateRange.equals("Last 30 days")){
-			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-30");
-			endDateToBeUsed = Util.getDate("yyyy-MM-dd","0");
+			startDateToBeUsed = Util.getDate("yyyy-MM-dd","-29");
+			endDateToBeUsed = Util.getDate("yyyy-MM-dd","1");
 		}
 
 //        try{
@@ -682,33 +697,19 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 		}
 		
-		
-
-		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
+		String dbCount = Util.readingFromDB("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 05:00' AND '"+endDateToBeUsed+" 04:00'");
         
-		System.out.println("SELECT count(*) as count  FROM call WHERE org_unit_id IN (SELECT org_unit_id FROM org_unit WHERE top_ou_id='"+TestBase.getOrg_unit_id()+"') AND call_started BETWEEN '"+startDateToBeUsed+" 23:59' AND '"+endDateToBeUsed+" 23:59'");
-		if(!(dbCount.equals("0"))){
-			int final_count=table_call_count.size()+0;
-			
-			if(!(next_100_button.getAttribute("class").endsWith("disabled"))){
-				Util.scrollFunction(next_100_button);
-				Util.click(next_100_button);
-				wait.until(ExpectedConditions.invisibilityOf(loading_wheel));
-				final_count=final_count+table_call_count.size();
-				
-		}
-		System.out.println("dbCount is "+dbCount);
-		System.out.println("table_call_count is "+final_count);	
-		logger.log(LogStatus.INFO, "verifying filtur feature is working for "+dateRange+" date range");
-		softassert.assertEquals(dbCount, String.valueOf(final_count),"count  of listed calls is mismatching with db count");
-		}
-		else{
-		logger.log(LogStatus.INFO, "verifying if no data found label displayed since no call count is there for date range "+dateRange);			
-		softassert.assertTrue(no_data_found_label.isDisplayed(),"no data found label not displayed or locator chamged");
+		logger.log(LogStatus.INFO, "verifying count in  pagination toolbox");
+		if(!dbCount.equals("0")) {
+			String countOnUI_pagination = pagination_call_count_label.getText().substring(pagination_call_count_label.getText().indexOf('f')+2);
+			System.out.println("dbCount is "+dbCount);
+			System.out.println("countOnUI_pagination is "+countOnUI_pagination);
+			softassert.assertEquals(dbCount, countOnUI_pagination,"count in top pagination toolbox is mimatching with db count");			
+		}else {
+			logger.log(LogStatus.INFO, "There are not records for applied range");
 		}
 		softassert.assertAll();
-		
-		
+
 	}
 	
 	
@@ -717,18 +718,20 @@ public class CallDetailsReport_Page extends TestBase{
     	List<WebElement> buttons = driver.findElements(By.xpath("//table[@id='calldetailstable']//tbody//tr//td//button[@title='"+actionButton+"']"));
 		
 		for(int i=0;i<buttons.size();i++){
-			
-			if(buttons.get(i).isEnabled()){
-				
+			if(actionButton.equals("Toggle Call Info")) {
 				Util.click(buttons.get(i));
-				break;
+			}else {
+				if(buttons.get(i).getAttribute("aria-disabled").equals("false")){			
+					Util.click(buttons.get(i));
+					break;
+				}else continue;	
 			}
 		}
     	
 	}
     	
 	
-	public void actionSectionVerification(String button,String sectionToVerify){
+	public void actionSectionVerification(String button,String sectionToVerify) throws InterruptedException{
 	    SoftAssert softassert=new SoftAssert();
 		if(button.contains("play_button")){
 			
@@ -748,6 +751,7 @@ public class CallDetailsReport_Page extends TestBase{
 				wait.until(ExpectedConditions.visibilityOf(success_message_for_mail_call));
 				logger.log(LogStatus.INFO, "Verifying if mail is sent successfully");
 				softassert.assertTrue(success_message_for_mail_call.isDisplayed(),"mail was not sent");
+				Util.closeBootstrapPopup(pause_button_success_message, close_button_success_message);
 				
 			}
 			else if(sectionToVerify.equals("mail call UI")){
@@ -802,6 +806,7 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 			else if(sectionToVerify.contains("comments")){
 				wait.until(ExpectedConditions.visibilityOf(comments_button));
+				wait.until(ExpectedConditions.elementToBeClickable(comments_button));				
 				comments_button.click();
 				logger.log(LogStatus.INFO, "Verifying if Comments sectionis opened");
 				softassert.assertTrue(comment_section.isDisplayed(),"comment section not displayed or locator changed");
@@ -818,6 +823,7 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 			else if(sectionToVerify.contains("tags")){
 				wait.until(ExpectedConditions.visibilityOf(tags_button));				
+				wait.until(ExpectedConditions.elementToBeClickable(tags_button));
 				Util.click(tags_button);
 				logger.log(LogStatus.INFO, "Verifyig if tags section is opened");
 				softassert.assertTrue(tag_section.isDisplayed(),"tags section is not displayed or locator changed");
@@ -834,11 +840,7 @@ public class CallDetailsReport_Page extends TestBase{
 			}
 			
 		}
-		
-		
-		
-		
-		
+			
 		softassert.assertAll();
 	}
 		
