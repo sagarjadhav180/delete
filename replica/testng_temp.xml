@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Suite-1" preserve-order="true">
 
-	<test name="regression test" preserve-order="true" parallel="false">
+	<test name="regression tests suite" preserve-order="true" parallel="false">
 		<parameter name="browser" value="headless" />
 		<parameter name="url"
 			value="https://stag-7-cmo-1.convirza.com" />
