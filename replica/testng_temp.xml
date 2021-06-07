@@ -3,6 +3,9 @@
 <suite name="Automation Suite-1" preserve-order="true">
 
 
+
+
+
 	<test name="regression tests suite" preserve-order="true" parallel="false">
 		<parameter name="browser" value="headless" />
 
