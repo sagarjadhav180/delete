@@ -35,6 +35,7 @@ public class Constants {
 	public static final String tracking_number_settings_report_category="Tracking Number Settings Reports Suite";	
 	public static final String legacy_scheduled_report_category="Legacy Scheduled Report Suite";	
 	public static final String webhook_category="Webhook Suite";
+	public static final String groupHeirarchyAgency = null;
 	
     public static class LookerReports{
     	
