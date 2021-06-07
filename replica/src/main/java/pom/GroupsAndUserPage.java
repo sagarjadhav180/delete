@@ -1837,7 +1837,7 @@ public class GroupsAndUserPage extends TestBase {
 
 		//Navigating back to the previous group
 		Breadcrumb bc=new Breadcrumb(driver);
-		bc.goToGroup(TestBase.account,Constants.groupHeirarchyAgency);
+		bc.goToGroup(TestBase.account);
 		Thread.sleep(5000);
 	
 	}
